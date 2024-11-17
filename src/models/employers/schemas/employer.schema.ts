@@ -3,6 +3,7 @@ import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { generatePasswordHash, verifyPassword } from 'src/common/utils/bcrypt';
 import { Job } from 'src/models/jobs/schemas/job.schema';
+import { Review } from 'src/models/reviews/schemas/review.schema';
 
 export type EmployerDocument = HydratedDocument<Employer>;
 
@@ -116,7 +117,7 @@ export class Employer {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
     default: [],
   })
-  reviews: mongoose.Types.ObjectId[];
+  reviews: Review;
 
   @Prop({ type: Boolean, default: false })
   emailVerified: boolean;
