@@ -1,6 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Employer } from 'src/models/employers/schemas/employer.schema';
+import { Application } from 'src/models/applications/schemas/application.schema';
 
 enum Position {
   REMOTE = 'Remote',
@@ -21,6 +22,8 @@ enum JobLevel {
   SENIOR = 'Senior',
   LEAD = 'Lead',
 }
+
+export type JobDocument = HydratedDocument<Job>;
 
 @Schema({ timestamps: true })
 export class Job {
@@ -111,7 +114,7 @@ export class Job {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Application' }],
     default: [],
   })
-  applications: mongoose.Types.ObjectId[];
+  applications: Application[];
 }
 
 export const JobSchema = SchemaFactory.createForClass(Job);

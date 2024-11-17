@@ -10,6 +10,7 @@ import {
 } from './experience.schema';
 import { Employer } from 'src/models/employers/schemas/employer.schema';
 import { Job } from 'src/models/jobs/schemas/job.schema';
+import { Application } from 'src/models/applications/schemas/application.schema';
 
 export type SeekerDocument = HydratedDocument<Seeker>;
 
@@ -128,7 +129,7 @@ export class Seeker {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Application' }],
     default: [],
   })
-  applications: mongoose.Types.ObjectId[];
+  applications: Application[];
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Employer' }],
