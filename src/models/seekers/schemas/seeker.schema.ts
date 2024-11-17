@@ -1,4 +1,4 @@
-import mongoose, { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { generatePasswordHash, verifyPassword } from 'src/common/utils/bcrypt';
 import { EducationSchema, Education } from './education.schema';
@@ -12,7 +12,12 @@ import { Employer } from 'src/models/employers/schemas/employer.schema';
 import { Job } from 'src/models/jobs/schemas/job.schema';
 import { Application } from 'src/models/applications/schemas/application.schema';
 
-export type SeekerDocument = HydratedDocument<Seeker>;
+export type SeekerDocumentOverride = {
+  education: Types.DocumentArray<Education>;
+  experience: Types.DocumentArray<Experience>;
+};
+
+export type SeekerDocument = HydratedDocument<Seeker, SeekerDocumentOverride>;
 
 @Schema({ timestamps: true })
 export class Seeker {
