@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { CreateApplicationDto } from './dto/create-application.dto';
 import { UpdateApplicationDto } from './dto/update-application.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Application } from './schemas/application.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class ApplicationsService {
+  constructor(
+    @InjectModel(Application.name)
+    private readonly applicationModel: Model<Application>,
+  ) {}
+
   create(createApplicationDto: CreateApplicationDto) {
     return 'This action adds a new application';
   }

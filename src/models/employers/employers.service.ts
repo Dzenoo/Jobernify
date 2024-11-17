@@ -1,9 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { CreateEmployerDto } from './dto/create-employer.dto';
 import { UpdateEmployerDto } from './dto/update-employer.dto';
+import { PasswordService } from 'src/common/services/password.service';
+import { InjectModel } from '@nestjs/mongoose';
+import { Employer } from './schemas/employer.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class EmployersService {
+  constructor(
+    @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
+    private readonly passwordService: PasswordService,
+  ) {}
+
   create(createEmployerDto: CreateEmployerDto) {
     return 'This action adds a new employer';
   }

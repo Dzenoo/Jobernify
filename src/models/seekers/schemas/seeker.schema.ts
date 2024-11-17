@@ -1,6 +1,5 @@
 import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { generatePasswordHash, verifyPassword } from 'src/common/utils/bcrypt';
 import { EducationSchema, Education } from './education.schema';
 import {
   Experience,
@@ -11,6 +10,7 @@ import {
 import { Employer } from 'src/models/employers/schemas/employer.schema';
 import { Job } from 'src/models/jobs/schemas/job.schema';
 import { Application } from 'src/models/applications/schemas/application.schema';
+import { PasswordService } from 'src/common/services/password.service';
 
 export type SeekerDocumentOverride = {
   education: Types.DocumentArray<Education>;
@@ -142,14 +142,18 @@ export class Seeker {
   })
   following: Employer[];
 
+  constructor(private readonly passwordService: PasswordService) {}
+
   async hashPassword(): Promise<void> {
     if (this.password) {
-      this.password = await generatePasswordHash(this.password);
+      this.password = await this.passwordService.generatePasswordHash(
+        this.password,
+      );
     }
   }
 
   async comparePassword(password: string): Promise<boolean> {
-    return await verifyPassword(password, this.password);
+    return await this.passwordService.verifyPassword(password, this.password);
   }
 }
 

@@ -1,9 +1,9 @@
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { generatePasswordHash, verifyPassword } from 'src/common/utils/bcrypt';
 import { Job } from 'src/models/jobs/schemas/job.schema';
 import { Review } from 'src/models/reviews/schemas/review.schema';
+import { PasswordService } from 'src/common/services/password.service';
 
 export type EmployerDocument = HydratedDocument<Employer>;
 
@@ -128,14 +128,18 @@ export class Employer {
   @Prop({ type: Date })
   verificationExpiration: Date;
 
+  constructor(private readonly passwordService: PasswordService) {}
+
   async hashPassword(): Promise<void> {
     if (this.password) {
-      this.password = await generatePasswordHash(this.password);
+      this.password = await this.passwordService.generatePasswordHash(
+        this.password,
+      );
     }
   }
 
   async comparePassword(password: string): Promise<boolean> {
-    return await verifyPassword(password, this.password);
+    return await this.passwordService.verifyPassword(password, this.password);
   }
 }
 
