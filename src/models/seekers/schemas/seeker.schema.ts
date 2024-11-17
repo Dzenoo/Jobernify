@@ -8,6 +8,8 @@ import {
   JobLevel,
   JobType,
 } from './experience.schema';
+import { Employer } from 'src/models/employers/schemas/employer.schema';
+import { Job } from 'src/models/jobs/schemas/job.schema';
 
 export type SeekerDocument = HydratedDocument<Seeker>;
 
@@ -24,7 +26,6 @@ export class Seeker {
     unique: true,
     lowercase: true,
     trim: true,
-    match: [/^\S+@\S+\.\S+$/, 'Invalid email format'],
   })
   email: string;
 
@@ -121,7 +122,7 @@ export class Seeker {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
     default: [],
   })
-  savedJobs: mongoose.Types.ObjectId[];
+  savedJobs: Job[];
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Application' }],
@@ -133,7 +134,7 @@ export class Seeker {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Employer' }],
     default: [],
   })
-  following: mongoose.Types.ObjectId[];
+  following: Employer[];
 
   async hashPassword(): Promise<void> {
     if (this.password) {

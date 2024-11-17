@@ -2,6 +2,7 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { generatePasswordHash, verifyPassword } from 'src/common/utils/bcrypt';
+import { Job } from 'src/models/jobs/schemas/job.schema';
 
 export type EmployerDocument = HydratedDocument<Employer>;
 
@@ -36,54 +37,53 @@ enum CompanySize {
 export class Employer {
   @Prop({
     type: String,
-    required: [true, 'Name is required'],
+    required: true,
     trim: true,
-    minlength: [5, 'Name must be at least 5 characters'],
-    maxlength: [50, 'Name cannot exceed 50 characters'],
+    minlength: 5,
+    maxlength: 50,
     unique: true,
   })
   name: string;
 
   @Prop({
     type: String,
-    required: [true, 'Email is required'],
+    required: true,
     trim: true,
-    minlength: [5, 'Email must be at least 5 characters'],
-    maxlength: [255, 'Email cannot exceed 255 characters'],
+    minlength: 5,
+    maxlength: 255,
     unique: true,
     lowercase: true,
-    match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email address'],
   })
   email: string;
 
   @Prop({
     type: String,
-    required: [true, 'Password is required'],
-    minlength: [10, 'Password must be at least 10 characters'],
+    required: true,
+    minlength: 10,
     select: false,
   })
   password: string;
 
   @Prop({
     type: String,
-    required: [true, 'Industry is required'],
+    required: true,
     enum: Object.values(IndustryType),
   })
   industry: IndustryType;
 
   @Prop({
     type: String,
-    required: [true, 'Company size is required'],
+    required: true,
     enum: Object.values(CompanySize),
   })
   size: CompanySize;
 
   @Prop({
     type: String,
-    required: [true, 'Address is required'],
+    required: true,
     trim: true,
-    minlength: [5, 'Address must be at least 5 characters'],
-    maxlength: [100, 'Address cannot exceed 100 characters'],
+    minlength: 5,
+    maxlength: 100,
   })
   address: string;
 
@@ -104,7 +104,7 @@ export class Employer {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
     default: [],
   })
-  jobs: mongoose.Types.ObjectId[];
+  jobs: Job[];
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker' }],
