@@ -1,30 +1,45 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { generatePasswordHash, verifyPassword } from 'src/common/utils/bcrypt';
+import { EducationSchema, Education } from './education.schema';
+import {
+  Experience,
+  ExperienceSchema,
+  JobLevel,
+  JobType,
+} from './experience.schema';
 
 export type SeekerDocument = HydratedDocument<Seeker>;
 
 @Schema({ timestamps: true })
 export class Seeker {
-  @Prop({ required: true, minlength: 2, maxlength: 15 })
+  @Prop({ required: true, minlength: 2, maxlength: 15, trim: true })
   first_name: string;
 
-  @Prop({ required: true, minlength: 2, maxlength: 15 })
+  @Prop({ required: true, minlength: 2, maxlength: 15, trim: true })
   last_name: string;
 
   @Prop({
     required: true,
     unique: true,
     lowercase: true,
+    trim: true,
+    match: [/^\S+@\S+\.\S+$/, 'Invalid email format'],
   })
   email: string;
 
-  @Prop({ required: true, minlength: 8 })
+  @Prop({
+    required: true,
+    minlength: 8,
+    trim: true,
+    select: false,
+  })
   password: string;
 
-  @Prop({ default: '' })
+  @Prop({ trim: true, default: '' })
   headline: string;
 
-  @Prop({ default: '' })
+  @Prop({ trim: true, default: '' })
   biography: string;
 
   @Prop({
@@ -34,70 +49,111 @@ export class Seeker {
   })
   image: string;
 
-  @Prop({ default: '' })
+  @Prop({
+    trim: true,
+    default: '',
+    match: [
+      /^https?:\/\/(www\.)?[^\s/$.?#].[^\s]*$/,
+      'Invalid portfolio URL format',
+    ],
+  })
   portfolio: string;
 
-  @Prop({ default: '' })
+  @Prop({
+    trim: true,
+    default: '',
+    match: [
+      /^https?:\/\/(www\.)?linkedin\.com\/.*$/,
+      'Invalid LinkedIn URL format',
+    ],
+  })
   linkedin: string;
 
-  @Prop({ default: '' })
+  @Prop({
+    trim: true,
+    default: '',
+    match: [
+      /^https?:\/\/(www\.)?github\.com\/.*$/,
+      'Invalid GitHub URL format',
+    ],
+  })
   github: string;
 
-  @Prop({ type: [String], default: [] })
+  @Prop({
+    type: [String],
+    default: [],
+    set: (skills) => skills.map((s) => s.toLowerCase().trim()),
+  })
   skills: string[];
 
-  @Prop({ type: [Object], default: [] })
-  education: {
-    institution: string;
-    graduationDate: Date;
-    fieldOfStudy: string;
-    degree: string;
-  }[];
+  @Prop({ type: [EducationSchema], default: [] })
+  education: Education[];
 
-  @Prop({ type: [Object], default: [] })
-  experience: {
-    jobTitle: string;
-    companyName: string;
-    startDate: Date;
-    endDate: Date;
-    level: string;
-    type: string;
-    location: string;
-    position: string;
-  }[];
+  @Prop({ type: [ExperienceSchema], default: [] })
+  experience: Experience[];
 
-  @Prop({ type: Object, default: { title: '', type: '', level: '' } })
-  alerts: { title: string; type: string; level: string };
+  @Prop({
+    type: Object,
+    default: { title: '', type: JobType.FULL_TIME, level: JobLevel.JUNIOR },
+  })
+  alerts: { title: string; type: JobType; level: JobLevel };
 
-  @Prop({ default: '' })
+  @Prop({
+    trim: true,
+    default: '',
+    match: [
+      /^https?:\/\/(www\.)?[^\s/$.?#].[^\s]*$/,
+      'Invalid resume URL format',
+    ],
+  })
   resume: string;
 
   @Prop({ default: false })
   emailVerified: boolean;
 
-  @Prop()
+  @Prop({ type: String, select: false })
   verificationToken: string;
 
-  @Prop()
+  @Prop({ type: Date })
   verificationExpiration: Date;
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
     default: [],
   })
-  savedJobs: any[];
+  savedJobs: mongoose.Types.ObjectId[];
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Application' }],
     default: [],
   })
-  applications: any[];
+  applications: mongoose.Types.ObjectId[];
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Employer' }],
     default: [],
   })
-  following: any[];
+  following: mongoose.Types.ObjectId[];
+
+  async hashPassword(): Promise<void> {
+    if (this.password) {
+      this.password = await generatePasswordHash(this.password);
+    }
+  }
+
+  async comparePassword(password: string): Promise<boolean> {
+    return await verifyPassword(password, this.password);
+  }
 }
 
 export const SeekerSchema = SchemaFactory.createForClass(Seeker);
+
+SeekerSchema.pre('save', async function (next) {
+  const seeker = this as SeekerDocument;
+
+  if (seeker.isModified('password')) {
+    await seeker.hashPassword();
+  }
+
+  next();
+});
