@@ -1,34 +1,36 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Query,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { ApplicationsService } from './applications.service';
-import { CreateApplicationDto } from './dto/create-application.dto';
-import { UpdateApplicationDto } from './dto/update-application.dto';
+import { ApplicationStatus } from './schemas/application.schema';
 
-@Controller('applications')
+@Controller('/applications')
 export class ApplicationsController {
   constructor(private readonly applicationsService: ApplicationsService) {}
 
-  @Post()
-  create(@Body() createApplicationDto: CreateApplicationDto) {
-    return this.applicationsService.create(createApplicationDto);
-  }
+  @Post('/:jobId/apply')
+  async create(@Param('jobId') jobId: string) {}
 
-  @Get()
-  findAll() {
-    return this.applicationsService.findAll();
-  }
+  @Patch('/:applicationId/status')
+  async update(
+    @Param('applicationId') applicationId: string,
+    @Body('status') status: ApplicationStatus,
+  ) {}
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.applicationsService.findOne(+id);
-  }
+  @Get('/:jobId')
+  async get(
+    @Param('jobId') jobId: string,
+    @Query('status') status: ApplicationStatus,
+    @Query('page', ParseIntPipe) page: number = 1,
+    @Query('limit', ParseIntPipe) limit: number = 10,
+  ) {}
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateApplicationDto: UpdateApplicationDto) {
-    return this.applicationsService.update(+id, updateApplicationDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.applicationsService.remove(+id);
-  }
+  generateApplicationEmailContent() {}
 }

@@ -5,6 +5,13 @@ import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 
 export type ApplicationDocument = HydratedDocument<Application>;
 
+export enum ApplicationStatus {
+  Rejected = 'Rejected',
+  Pending = 'Pending',
+  Accepted = 'Accepted',
+  Interview = 'Interview',
+}
+
 @Schema({ timestamps: true })
 export class Application {
   @Prop({
@@ -15,9 +22,9 @@ export class Application {
 
   @Prop({
     type: String,
-    enum: ['Rejected', 'Pending', 'Accepted', 'Interview'],
+    enum: ApplicationStatus,
   })
-  status: 'Rejected' | 'Pending' | 'Accepted' | 'Interview';
+  status: ApplicationStatus;
 
   @Prop({
     type: String,
