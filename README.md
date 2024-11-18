@@ -7,6 +7,6 @@ This application is designed to provide a platform for users to find new jobs or
 ## Technologies Used
 
 - **Frontend**: React.js, Next.js, TailwindCSS, Shadcn
-- **Backend**: Node.js, Nest.js, Express.js
+- **Backend**: Node.js, Nest.js
 - **Database**: MongoDB
 - **Other Tools**: Mongoose
