@@ -5,7 +5,7 @@ import { SeekersController } from './seekers.controller';
 import { Seeker, SeekerSchema } from './schemas/seeker.schema';
 import { BcryptModule } from 'src/common/bcrypt/bcrypt.module';
 import { AuthModule } from '../shared/auth/auth.module';
-import { VerificationModule } from '../shared/verification/verification.module';
+import { VerificationModule } from '../shared/auth/verification/verification.module';
 
 @Module({
   imports: [
