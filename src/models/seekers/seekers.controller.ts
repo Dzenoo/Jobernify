@@ -59,6 +59,9 @@ export class SeekersController {
   @Delete('/delete-experience/:experienceId')
   async deleteExperience(@Param('experienceId') experienceId: string) {}
 
+  @Post('/:employerId/follow')
+  async followEmployer(@Param('employerId') employerId: string) {}
+
   @Get('/verify-email')
   async verifyEmail(@Query() token: string) {}
 }

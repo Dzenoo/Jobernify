@@ -6,44 +6,52 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { AuthService } from '../shared/auth/auth.service';
 import { EmployersService } from './employers.service';
-import { CreateEmployerDto } from './dto/create-employer.dto';
+import { SignUpEmployerDto } from './dto/signup-employer.dto';
+import { GetEmployersDto } from './dto/get-employers.dto';
+import { GetProfileDto } from './dto/get-profile.dto';
 import { UpdateEmployerDto } from './dto/update-employer.dto';
 
-@Controller('employers')
+@Controller('/employers')
 export class EmployersController {
   constructor(
     private readonly employersService: EmployersService,
     private readonly authService: AuthService,
   ) {}
 
-  @Post()
-  create(@Body() createEmployerDto: CreateEmployerDto) {
-    return this.employersService.create(createEmployerDto);
-  }
+  @Post('/signup')
+  async signup(@Body() body: SignUpEmployerDto) {}
 
-  @Get()
-  findAll() {
-    return this.employersService.findAll();
-  }
+  @Get('/')
+  async getProfile(@Query() query: GetProfileDto) {}
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.employersService.findOne(+id);
-  }
+  @Patch('/edit-profile')
+  async editProfile(@Body() body: UpdateEmployerDto) {}
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateEmployerDto: UpdateEmployerDto,
-  ) {
-    return this.employersService.update(+id, updateEmployerDto);
-  }
+  @Delete('/delete-profile')
+  async deleteProfile() {}
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.employersService.remove(+id);
-  }
+  @Get('/:employerId')
+  async getById(
+    @Param('employerId') employerId: string,
+    @Query('type') type: 'jobs' | 'reviews',
+    @Query('page', ParseIntPipe) page: number = 1,
+    @Query('limit', ParseIntPipe) limit: number = 10,
+  ) {}
+
+  @Get('/all')
+  async getAll(@Query() query: GetEmployersDto) {}
+
+  @Get('/analytics')
+  async getAnalytics() {}
+
+  getJobsPerMonth() {}
+
+  getFollowerOverTime() {}
+
+  getJobTypes() {}
 }

@@ -8,7 +8,7 @@ import { BaseUser } from 'src/models/shared/schemas/base.schema';
 
 export type EmployerDocument = HydratedDocument<Employer>;
 
-enum IndustryType {
+export enum IndustryType {
   TECHNOLOGY = 'technology',
   HEALTHCARE = 'healthcare',
   FINANCE = 'finance',
@@ -26,7 +26,7 @@ enum IndustryType {
   OTHER = 'other',
 }
 
-enum CompanySize {
+export enum CompanySize {
   LESS_THAN_17 = 'Less-than-17',
   BETWEEN_20_AND_50 = '20-50',
   BETWEEN_50_AND_100 = '50-100',
@@ -41,7 +41,7 @@ export class Employer extends BaseUser {
     type: String,
     required: true,
     trim: true,
-    minlength: 5,
+    minlength: 2,
     maxlength: 50,
     unique: true,
   })
@@ -100,15 +100,6 @@ export class Employer extends BaseUser {
     default: [],
   })
   reviews: Review;
-
-  @Prop({ type: Boolean, default: false })
-  emailVerified: boolean;
-
-  @Prop({ type: String, select: false })
-  verificationToken: string;
-
-  @Prop({ type: Date })
-  verificationExpiration: Date;
 
   constructor(bcryptService: BcryptService) {
     super(bcryptService);
