@@ -10,30 +10,30 @@ import { JobLevel, JobType } from '../schemas/experience.schema';
 export class CreateExperienceDto {
   @IsString()
   @IsNotEmpty()
-  jobTitle: string;
+  readonly jobTitle: string;
 
   @IsString()
   @IsNotEmpty()
-  companyName: string;
+  readonly companyName: string;
 
   @IsDate()
-  startDate: Date;
+  readonly startDate: Date;
 
   @IsOptional()
   @IsDate()
-  endDate?: Date;
+  readonly endDate?: Date;
 
   @IsEnum(JobLevel)
-  level: JobLevel;
+  readonly level: JobLevel;
 
   @IsEnum(JobType)
-  type: JobType;
+  readonly type: JobType;
 
   @IsString()
   @IsNotEmpty()
-  location: string;
+  readonly location: string;
 
   @IsOptional()
   @IsString()
-  position?: string;
+  readonly position?: string;
 }

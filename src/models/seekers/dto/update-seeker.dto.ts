@@ -3,33 +3,33 @@ import { IsOptional, IsString, IsArray } from 'class-validator';
 export class UpdateSeekerDto {
   @IsOptional()
   @IsString()
-  first_name?: string;
+  readonly first_name?: string;
 
   @IsOptional()
   @IsString()
-  last_name?: string;
+  readonly last_name?: string;
 
   @IsOptional()
   @IsString()
-  github?: string;
+  readonly github?: string;
 
   @IsOptional()
   @IsString()
-  linkedin?: string;
+  readonly linkedin?: string;
 
   @IsOptional()
   @IsString()
-  portfolio?: string;
+  readonly portfolio?: string;
 
   @IsOptional()
   @IsArray()
-  skills?: string[];
+  readonly skills?: string[];
 
   @IsOptional()
   @IsString()
-  biography?: string;
+  readonly biography?: string;
 
   @IsOptional()
   @IsString()
-  headline?: string;
+  readonly headline?: string;
 }

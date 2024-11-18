@@ -2,14 +2,14 @@ import { IsDate, IsString } from 'class-validator';
 
 export class CreateEducationDto {
   @IsString()
-  institution: string;
+  readonly institution: string;
 
   @IsDate()
-  graduationDate: Date;
+  readonly graduationDate: Date;
 
   @IsString()
-  fieldOfStudy: string;
+  readonly fieldOfStudy: string;
 
   @IsString()
-  degree: string;
+  readonly degree: string;
 }
