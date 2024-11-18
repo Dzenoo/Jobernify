@@ -1,34 +1,54 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { SeekersService } from './seekers.service';
-import { CreateSeekerDto } from './dto/create-seeker.dto';
+import { SignupSeekerDto } from './dto/signup-seeker.dto';
+import { SigninSeekerDto } from './dto/signin-seeker.dto';
+import { VerificationService } from '../shared/services/VerificationService';
 import { UpdateSeekerDto } from './dto/update-seeker.dto';
+import { GetSeekersDto } from './dto/get-seekers.dto';
+import { CreateEducationDto } from './dto/create-education.dto';
+import { CreateExperienceDto } from './dto/create-experience.dto';
 
 @Controller('seekers')
 export class SeekersController {
-  constructor(private readonly seekersService: SeekersService) {}
+  constructor(
+    private readonly seekersService: SeekersService,
+    private readonly verificationService: VerificationService,
+  ) {}
 
-  @Post()
-  create(@Body() createSeekerDto: CreateSeekerDto) {
-    return this.seekersService.create(createSeekerDto);
-  }
+  async signUp(@Body() body: SignupSeekerDto) {}
 
-  @Get()
-  findAll() {
-    return this.seekersService.findAll();
-  }
+  async signIn(@Body() body: SigninSeekerDto) {}
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.seekersService.findOne(+id);
-  }
+  async getProfile(
+    @Query('page', ParseIntPipe) page: number = 1,
+    @Query('limit', ParseIntPipe) limit: number = 10,
+  ) {}
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSeekerDto: UpdateSeekerDto) {
-    return this.seekersService.update(+id, updateSeekerDto);
-  }
+  async editProfile(@Body() body: UpdateSeekerDto) {}
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.seekersService.remove(+id);
-  }
+  async deleteProfile() {}
+
+  async getAll(@Query() query: GetSeekersDto) {}
+
+  async getById(@Param() seekerId: string) {}
+
+  async createEducation(@Body() body: CreateEducationDto) {}
+
+  async deleteEducation(@Param() educationId: string) {}
+
+  async createExperience(@Body() body: CreateExperienceDto) {}
+
+  async deleteExperience(@Param() experienceId: string) {}
+
+  async verifyEmail(@Query() token: string) {}
 }

@@ -10,7 +10,8 @@ import {
 import { Employer } from 'src/models/employers/schemas/employer.schema';
 import { Job } from 'src/models/jobs/schemas/job.schema';
 import { Application } from 'src/models/applications/schemas/application.schema';
-import { PasswordService } from 'src/common/services/password.service';
+import { BaseUser } from 'src/models/shared/schemas/base.schema';
+import { BcryptService } from 'src/common/shared/bcrypt/bcrypt.service';
 
 export type SeekerDocumentOverride = {
   education: Types.DocumentArray<Education>;
@@ -20,28 +21,24 @@ export type SeekerDocumentOverride = {
 export type SeekerDocument = HydratedDocument<Seeker, SeekerDocumentOverride>;
 
 @Schema({ timestamps: true })
-export class Seeker {
-  @Prop({ required: true, minlength: 2, maxlength: 15, trim: true })
+export class Seeker extends BaseUser {
+  @Prop({
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 15,
+    trim: true,
+  })
   first_name: string;
 
-  @Prop({ required: true, minlength: 2, maxlength: 15, trim: true })
+  @Prop({
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 15,
+    trim: true,
+  })
   last_name: string;
-
-  @Prop({
-    required: true,
-    unique: true,
-    lowercase: true,
-    trim: true,
-  })
-  email: string;
-
-  @Prop({
-    required: true,
-    minlength: 8,
-    trim: true,
-    select: false,
-  })
-  password: string;
 
   @Prop({ trim: true, default: '' })
   headline: string;
@@ -115,15 +112,6 @@ export class Seeker {
   })
   resume: string;
 
-  @Prop({ default: false })
-  emailVerified: boolean;
-
-  @Prop({ type: String, select: false })
-  verificationToken: string;
-
-  @Prop({ type: Date })
-  verificationExpiration: Date;
-
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
     default: [],
@@ -142,18 +130,8 @@ export class Seeker {
   })
   following: Employer[];
 
-  constructor(private readonly passwordService: PasswordService) {}
-
-  async hashPassword(): Promise<void> {
-    if (this.password) {
-      this.password = await this.passwordService.generatePasswordHash(
-        this.password,
-      );
-    }
-  }
-
-  async comparePassword(password: string): Promise<boolean> {
-    return await this.passwordService.verifyPassword(password, this.password);
+  constructor(bcryptService: BcryptService) {
+    super(bcryptService);
   }
 }
 

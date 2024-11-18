@@ -3,7 +3,8 @@ import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Job } from 'src/models/jobs/schemas/job.schema';
 import { Review } from 'src/models/reviews/schemas/review.schema';
-import { PasswordService } from 'src/common/services/password.service';
+import { BcryptService } from 'src/common/shared/bcrypt/bcrypt.service';
+import { BaseUser } from 'src/models/shared/schemas/base.schema';
 
 export type EmployerDocument = HydratedDocument<Employer>;
 
@@ -35,7 +36,7 @@ enum CompanySize {
 }
 
 @Schema({ timestamps: true })
-export class Employer {
+export class Employer extends BaseUser {
   @Prop({
     type: String,
     required: true,
@@ -45,25 +46,6 @@ export class Employer {
     unique: true,
   })
   name: string;
-
-  @Prop({
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 5,
-    maxlength: 255,
-    unique: true,
-    lowercase: true,
-  })
-  email: string;
-
-  @Prop({
-    type: String,
-    required: true,
-    minlength: 10,
-    select: false,
-  })
-  password: string;
 
   @Prop({
     type: String,
@@ -128,18 +110,8 @@ export class Employer {
   @Prop({ type: Date })
   verificationExpiration: Date;
 
-  constructor(private readonly passwordService: PasswordService) {}
-
-  async hashPassword(): Promise<void> {
-    if (this.password) {
-      this.password = await this.passwordService.generatePasswordHash(
-        this.password,
-      );
-    }
-  }
-
-  async comparePassword(password: string): Promise<boolean> {
-    return await this.passwordService.verifyPassword(password, this.password);
+  constructor(bcryptService: BcryptService) {
+    super(bcryptService);
   }
 }
 

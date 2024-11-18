@@ -1,0 +1,47 @@
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import {
+  Employer,
+  EmployerDocument,
+} from 'src/models/employers/schemas/employer.schema';
+import {
+  Seeker,
+  SeekerDocument,
+} from 'src/models/seekers/schemas/seeker.schema';
+
+@Injectable()
+export class VerificationService {
+  constructor(
+    @InjectModel(Seeker.name) private readonly seekerModel: Model<Seeker>,
+    @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
+  ) {}
+
+  async verifyEmail(
+    token: string,
+    userType: 'seeker' | 'employer',
+  ): Promise<boolean> {
+    let user: SeekerDocument | EmployerDocument;
+    if (userType === 'seeker') {
+      user = await this.seekerModel.findOne({ verificationToken: token });
+    } else if (userType === 'employer') {
+      user = await this.employerModel.findOne({ verificationToken: token });
+    }
+
+    if (!user) {
+      throw new Error('Invalid or expired token');
+    }
+
+    if (user.verificationExpiration < new Date()) {
+      throw new Error('Token has expired');
+    }
+
+    user.emailVerified = true;
+    user.verificationToken = undefined;
+    user.verificationExpiration = undefined;
+
+    await user.save();
+
+    return true;
+  }
+}

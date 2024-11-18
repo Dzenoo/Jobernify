@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSeekerDto } from './dto/create-seeker.dto';
+import { CreateSeekerDto } from './dto/signup-seeker.dto';
 import { UpdateSeekerDto } from './dto/update-seeker.dto';
-import { PasswordService } from 'src/common/services/password.service';
+import { BcryptService } from 'src/common/shared/bcrypt/bcrypt.service';
+
 import { InjectModel } from '@nestjs/mongoose';
 import { Seeker } from './schemas/seeker.schema';
 import { Model } from 'mongoose';
@@ -10,7 +11,7 @@ import { Model } from 'mongoose';
 export class SeekersService {
   constructor(
     @InjectModel(Seeker.name) private readonly seekerModel: Model<Seeker>,
-    private readonly passwordService: PasswordService,
+    private readonly bcryptService: BcryptService,
   ) {}
 
   create(createSeekerDto: CreateSeekerDto) {
