@@ -5,6 +5,22 @@ import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 
 export type ReviewDocument = HydratedDocument<Review>;
 
+export enum EmploymentType {
+  Freelance = 'Freelance',
+  PartTime = 'Part-Time',
+  FullTime = 'Full-Time',
+  Internship = 'Internship',
+}
+
+export enum EmploymentDuration {
+  LessThanOne = 'Less than 1',
+  OneToTwo = '1-2',
+  TwoToFour = '2-4',
+  FourToSeven = '4-7',
+  SevenToTen = '7-10',
+  TenOrGreater = '10 or greater',
+}
+
 @Schema({ timestamps: true })
 export class Review {
   @Prop({
@@ -27,17 +43,17 @@ export class Review {
     type: String,
     required: true,
     trim: true,
-    enum: ['Freelance', 'Part-Time', 'Full-Time', 'Internship'],
+    enum: EmploymentType,
   })
-  type: 'Freelance' | 'Part-Time' | 'Full-Time' | 'Internship';
+  type: EmploymentType;
 
   @Prop({
     type: String,
     required: true,
     trim: true,
-    enum: ['Less than 1', '1-2', '2-4', '4-7', '7-10', '10 or greater'],
+    enum: EmploymentDuration,
   })
-  time: 'Less than 1' | '1-2' | '2-4' | '4-7' | '7-10' | '10 or greater';
+  time: EmploymentDuration;
 
   @Prop({
     type: String,
