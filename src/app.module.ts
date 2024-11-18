@@ -1,7 +1,4 @@
-import { Module, ValidationPipe } from '@nestjs/common';
-
-import { APP_PIPE } from '@nestjs/core';
-
+import { Module } from '@nestjs/common';
 import { AppConfigModule } from './config/app/config.module';
 import { MongooseConfigModule } from './config/database/mongodb/config.module';
 import { SeekersModule } from './models/seekers/seekers.module';
@@ -23,17 +20,6 @@ import { NodemailerModule } from './common/email/nodemailer.module';
     ReviewsModule,
     S3Module,
     NodemailerModule,
-  ],
-  providers: [
-    {
-      provide: APP_PIPE,
-      useValue: new ValidationPipe({
-        forbidNonWhitelisted: true,
-        forbidUnknownValues: true,
-        whitelist: true,
-        transform: true,
-      }),
-    },
   ],
 })
 export class AppModule {}
