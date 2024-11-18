@@ -5,7 +5,7 @@ import { Experience, ExperienceSchema } from './experience.schema';
 import { Employer } from 'src/models/employers/schemas/employer.schema';
 import { Job, JobLevel, JobType } from 'src/models/jobs/schemas/job.schema';
 import { Application } from 'src/models/applications/schemas/application.schema';
-import { BaseUser } from 'src/models/shared/schemas/base.schema';
+import { BaseUser } from 'src/models/shared/schemas/user.schema';
 import { BcryptService } from 'src/common/bcrypt/bcrypt.service';
 
 export type SeekerDocumentOverride = {

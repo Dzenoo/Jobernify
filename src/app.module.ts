@@ -10,6 +10,7 @@ import { JobsModule } from './models/jobs/jobs.module';
 import { ApplicationsModule } from './models/applications/applications.module';
 import { ReviewsModule } from './models/reviews/reviews.module';
 import { S3Module } from './common/s3/s3.module';
+import { NodemailerModule } from './common/email/nodemailer.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { S3Module } from './common/s3/s3.module';
     ApplicationsModule,
     ReviewsModule,
     S3Module,
+    NodemailerModule,
   ],
   providers: [
     {
