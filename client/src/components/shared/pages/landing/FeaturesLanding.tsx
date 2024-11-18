@@ -1,0 +1,57 @@
+import React from "react";
+import BlueButton from "./BlueButton";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { FeaturesData } from "@/constants";
+
+const FeaturesLanding: React.FC = () => {
+  return (
+    <section
+      id="features"
+      className="px-5 flex gap-10 md:landing-padding max-xl:flex-col max-xl:gap-28"
+    >
+      <div className="basis-1/2 flex flex-col gap-8">
+        <div>
+          <BlueButton>Features</BlueButton>
+        </div>
+        <div className="max-w-xl">
+          <h1 className="text-4xl font-bold leading-[55px] max-sm:text-3xl">
+            Explore Features That Simplify{" "}
+            <span className="text-[#0084FF]">Job Searching and Hiring</span> for
+            Everyone
+          </h1>
+        </div>
+        <div className="max-w-lg">
+          <p className="text-[#777777] leading-[28px]">
+            Explore Powerful Features Designed to Simplify Your Job Search and
+            Hiring Process, Making It Easier for Job Seekers and Employers to
+            Connect and Succeed.
+          </p>
+        </div>
+        <div>
+          <Link href="/signup">
+            <Button className="px-10">Sign Up</Button>
+          </Link>
+        </div>
+      </div>
+      <div className="basis-1/2">
+        <ul className="grid grid-cols-2 gap-10 max-sm:grid-cols-1">
+          {FeaturesData.map(({ id, title, description }) => (
+            <li key={id} className="flex flex-col gap-2">
+              <div>
+                <h1 className="font-bold text-lg">{title}</h1>
+              </div>
+              <div>
+                <p className="text-[#A8A8A8] font-light leading-7">
+                  {description}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+};
+
+export default FeaturesLanding;
