@@ -1,11 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { AuthService } from '../shared/auth/auth.service';
 import { EmployersService } from './employers.service';
 import { CreateEmployerDto } from './dto/create-employer.dto';
 import { UpdateEmployerDto } from './dto/update-employer.dto';
 
 @Controller('employers')
 export class EmployersController {
-  constructor(private readonly employersService: EmployersService) {}
+  constructor(
+    private readonly employersService: EmployersService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Post()
   create(@Body() createEmployerDto: CreateEmployerDto) {
@@ -23,7 +35,10 @@ export class EmployersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEmployerDto: UpdateEmployerDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateEmployerDto: UpdateEmployerDto,
+  ) {
     return this.employersService.update(+id, updateEmployerDto);
   }
 

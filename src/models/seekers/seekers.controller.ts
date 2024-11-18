@@ -10,45 +10,55 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { SeekersService } from './seekers.service';
-import { SignupSeekerDto } from './dto/signup-seeker.dto';
-import { SigninSeekerDto } from './dto/signin-seeker.dto';
-import { VerificationService } from '../shared/services/VerificationService';
+import { VerificationService } from '../shared/services/verification.service';
 import { UpdateSeekerDto } from './dto/update-seeker.dto';
 import { GetSeekersDto } from './dto/get-seekers.dto';
 import { CreateEducationDto } from './dto/create-education.dto';
 import { CreateExperienceDto } from './dto/create-experience.dto';
+import { AuthService } from '../shared/auth/auth.service';
+import { SignupSeekerDto } from './dto/signup-seeker.dto';
 
-@Controller('seekers')
+@Controller('/seekers')
 export class SeekersController {
   constructor(
     private readonly seekersService: SeekersService,
     private readonly verificationService: VerificationService,
+    private readonly authService: AuthService,
   ) {}
 
-  async signUp(@Body() body: SignupSeekerDto) {}
+  @Post('/signup')
+  async signup(@Body() body: SignupSeekerDto) {}
 
-  async signIn(@Body() body: SigninSeekerDto) {}
-
+  @Get('/')
   async getProfile(
     @Query('page', ParseIntPipe) page: number = 1,
     @Query('limit', ParseIntPipe) limit: number = 10,
   ) {}
 
+  @Patch('/edit-profile')
   async editProfile(@Body() body: UpdateSeekerDto) {}
 
+  @Delete('/delete-profile')
   async deleteProfile() {}
 
+  @Get('/all')
   async getAll(@Query() query: GetSeekersDto) {}
 
-  async getById(@Param() seekerId: string) {}
+  @Get('/:seekerId')
+  async getById(@Param('seekerId') seekerId: string) {}
 
+  @Patch('/add-new-education')
   async createEducation(@Body() body: CreateEducationDto) {}
 
-  async deleteEducation(@Param() educationId: string) {}
+  @Delete('/delete-education/:educationId')
+  async deleteEducation(@Param('educationId') educationId: string) {}
 
+  @Patch('/add-new-experience')
   async createExperience(@Body() body: CreateExperienceDto) {}
 
-  async deleteExperience(@Param() experienceId: string) {}
+  @Delete('/delete-experience/:experienceId')
+  async deleteExperience(@Param('experienceId') experienceId: string) {}
 
+  @Get('/verify-email')
   async verifyEmail(@Query() token: string) {}
 }
