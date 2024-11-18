@@ -17,6 +17,7 @@ export class CreateExperienceDto {
   readonly companyName: string;
 
   @IsDate()
+  @IsNotEmpty()
   readonly startDate: Date;
 
   @IsOptional()
@@ -33,7 +34,7 @@ export class CreateExperienceDto {
   @IsNotEmpty()
   readonly location: string;
 
-  @IsOptional()
   @IsString()
-  readonly position?: string;
+  @IsNotEmpty()
+  readonly position: string;
 }

@@ -1,34 +1,37 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { JobsService } from './jobs.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
+import { GetJobsDto } from './dto/get-jobs.dto';
 
-@Controller('jobs')
+@Controller('/jobs')
 export class JobsController {
   constructor(private readonly jobsService: JobsService) {}
 
-  @Post()
-  create(@Body() createJobDto: CreateJobDto) {
-    return this.jobsService.create(createJobDto);
-  }
+  @Post('/create-new-job')
+  async createJob(@Body() body: CreateJobDto) {}
 
-  @Get()
-  findAll() {
-    return this.jobsService.findAll();
-  }
+  @Patch('/:jobId/edit')
+  async editJob(@Body() body: UpdateJobDto, @Param('jobId') jobId: string) {}
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.jobsService.findOne(+id);
-  }
+  @Delete('/:jobId/delete')
+  async deleteJob(@Param('jobId') jobId: string) {}
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateJobDto: UpdateJobDto) {
-    return this.jobsService.update(+id, updateJobDto);
-  }
+  @Post('/:jobId/save')
+  async saveJob(@Param('jobId') jobId: string) {}
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.jobsService.remove(+id);
-  }
+  @Get('/')
+  async getJobs(@Query() query: GetJobsDto) {}
+
+  @Get('/:jobId')
+  async getJob(@Param('jobId') jobId: string) {}
 }

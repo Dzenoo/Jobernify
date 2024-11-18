@@ -3,20 +3,20 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Employer } from 'src/models/employers/schemas/employer.schema';
 import { Application } from 'src/models/applications/schemas/application.schema';
 
-enum Position {
+export enum Position {
   REMOTE = 'Remote',
   ONSITE = 'On-Site',
   HYBRID = 'Hybrid',
 }
 
-enum JobType {
+export enum JobType {
   INTERNSHIP = 'Internship',
   FULL_TIME = 'Full-Time',
   PART_TIME = 'Part-Time',
   FREELANCE = 'Freelance',
 }
 
-enum JobLevel {
+export enum JobLevel {
   JUNIOR = 'Junior',
   MEDIOR = 'Medior',
   SENIOR = 'Senior',
