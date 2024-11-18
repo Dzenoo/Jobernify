@@ -17,6 +17,7 @@ import { CreateEducationDto } from './dto/create-education.dto';
 import { CreateExperienceDto } from './dto/create-experience.dto';
 import { AuthService } from '../shared/auth/auth.service';
 import { SignupSeekerDto } from './dto/signup-seeker.dto';
+import { CreateJobAlertDto } from './dto/create-job-alert.dto';
 
 @Controller('/seekers')
 export class SeekersController {
@@ -58,6 +59,9 @@ export class SeekersController {
 
   @Delete('/delete-experience/:experienceId')
   async deleteExperience(@Param('experienceId') experienceId: string) {}
+
+  @Post('/create-job-alert')
+  async createJobAlert(@Body() body: CreateJobAlertDto) {}
 
   @Post('/:employerId/follow')
   async followEmployer(@Param('employerId') employerId: string) {}

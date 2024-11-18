@@ -1,17 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-
-export enum JobLevel {
-  JUNIOR = 'junior',
-  MID = 'medior',
-  SENIOR = 'senior',
-}
-
-export enum JobType {
-  FULL_TIME = 'full-time',
-  PART_TIME = 'part-time',
-  FREELANCE = 'freelance',
-  INTERNSHIP = 'internship',
-}
+import { JobLevel, JobType } from 'src/models/jobs/schemas/job.schema';
 
 @Schema({ timestamps: true })
 export class Experience {

@@ -5,7 +5,7 @@ import {
   IsDate,
   IsNotEmpty,
 } from 'class-validator';
-import { JobLevel, JobType } from '../schemas/experience.schema';
+import { JobLevel, JobType } from 'src/models/jobs/schemas/job.schema';
 
 export class CreateExperienceDto {
   @IsString()

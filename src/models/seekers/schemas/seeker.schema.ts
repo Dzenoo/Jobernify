@@ -1,14 +1,9 @@
 import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { EducationSchema, Education } from './education.schema';
-import {
-  Experience,
-  ExperienceSchema,
-  JobLevel,
-  JobType,
-} from './experience.schema';
+import { Experience, ExperienceSchema } from './experience.schema';
 import { Employer } from 'src/models/employers/schemas/employer.schema';
-import { Job } from 'src/models/jobs/schemas/job.schema';
+import { Job, JobLevel, JobType } from 'src/models/jobs/schemas/job.schema';
 import { Application } from 'src/models/applications/schemas/application.schema';
 import { BaseUser } from 'src/models/shared/schemas/base.schema';
 import { BcryptService } from 'src/common/shared/bcrypt/bcrypt.service';
