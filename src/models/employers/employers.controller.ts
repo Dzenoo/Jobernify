@@ -9,7 +9,7 @@ import {
   Query,
   ParseIntPipe,
 } from '@nestjs/common';
-import { AuthService } from '../shared/auth/auth.service';
+import { AuthService } from '../../authentication/auth.service';
 import { EmployersService } from './employers.service';
 import { SignUpEmployerDto } from './dto/signup-employer.dto';
 import { GetEmployersDto } from './dto/get-employers.dto';

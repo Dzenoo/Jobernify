@@ -1,5 +1,4 @@
 import { HydratedDocument } from 'mongoose';
-import { BcryptService } from 'src/common/bcrypt/bcrypt.service';
 import { Prop } from '@nestjs/mongoose';
 
 export type BaseUserDocument = HydratedDocument<BaseUser>;
@@ -33,18 +32,4 @@ export abstract class BaseUser {
 
   @Prop({ type: Date })
   verificationExpiration: Date;
-
-  constructor(private readonly bcryptService: BcryptService) {}
-
-  async hashPassword(): Promise<void> {
-    if (this.password) {
-      this.password = await this.bcryptService.generatePasswordHash(
-        this.password,
-      );
-    }
-  }
-
-  async comparePassword(password: string): Promise<boolean> {
-    return await this.bcryptService.verifyPassword(password, this.password);
-  }
 }

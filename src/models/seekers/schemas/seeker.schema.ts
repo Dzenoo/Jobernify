@@ -6,7 +6,7 @@ import { Employer } from 'src/models/employers/schemas/employer.schema';
 import { Job, JobLevel, JobType } from 'src/models/jobs/schemas/job.schema';
 import { Application } from 'src/models/applications/schemas/application.schema';
 import { BaseUser } from 'src/models/shared/schemas/user.schema';
-import { BcryptService } from 'src/common/bcrypt/bcrypt.service';
+import * as bcrypt from 'bcrypt';
 
 export type SeekerDocumentOverride = {
   education: Types.DocumentArray<Education>;
@@ -124,10 +124,6 @@ export class Seeker extends BaseUser {
     default: [],
   })
   following: Employer[];
-
-  constructor(bcryptService: BcryptService) {
-    super(bcryptService);
-  }
 }
 
 export const SeekerSchema = SchemaFactory.createForClass(Seeker);
@@ -136,7 +132,8 @@ SeekerSchema.pre('save', async function (next) {
   const seeker = this as SeekerDocument;
 
   if (seeker.isModified('password')) {
-    await seeker.hashPassword();
+    const salt = await bcrypt.genSalt(10);
+    seeker.password = await bcrypt.hash(seeker.password, salt);
   }
 
   next();

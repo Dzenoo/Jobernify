@@ -3,14 +3,12 @@ import { Module } from '@nestjs/common';
 import { SeekersService } from './seekers.service';
 import { SeekersController } from './seekers.controller';
 import { Seeker, SeekerSchema } from './schemas/seeker.schema';
-import { BcryptModule } from 'src/common/bcrypt/bcrypt.module';
-import { AuthModule } from '../shared/auth/auth.module';
-import { VerificationModule } from '../shared/auth/verification/verification.module';
+import { AuthModule } from '../../authentication/auth.module';
+import { VerificationModule } from '../../authentication/verification/verification.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Seeker.name, schema: SeekerSchema }]),
-    BcryptModule,
     AuthModule,
     VerificationModule,
   ],

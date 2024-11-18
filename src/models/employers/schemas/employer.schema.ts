@@ -3,8 +3,8 @@ import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Job } from 'src/models/jobs/schemas/job.schema';
 import { Review } from 'src/models/reviews/schemas/review.schema';
-import { BcryptService } from 'src/common/bcrypt/bcrypt.service';
 import { BaseUser } from 'src/models/shared/schemas/user.schema';
+import * as bcrypt from 'bcrypt';
 
 export type EmployerDocument = HydratedDocument<Employer>;
 
@@ -100,10 +100,6 @@ export class Employer extends BaseUser {
     default: [],
   })
   reviews: Review;
-
-  constructor(bcryptService: BcryptService) {
-    super(bcryptService);
-  }
 }
 
 export const EmployerSchema = SchemaFactory.createForClass(Employer);
@@ -112,7 +108,8 @@ EmployerSchema.pre('save', async function (next) {
   const employer = this as EmployerDocument;
 
   if (employer.isModified('password')) {
-    await employer.hashPassword();
+    const salt = await bcrypt.genSalt(10);
+    employer.password = await bcrypt.hash(employer.password, salt);
   }
 
   next();

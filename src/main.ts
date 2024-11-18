@@ -8,7 +8,8 @@ async function initializeServer() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: ['https://jobernify.com', 'http://localhost:3000'],
+    origin: '*',
+    // origin: ['https://jobernify.com', 'http://localhost:3000'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Authorization',
     credentials: true,
