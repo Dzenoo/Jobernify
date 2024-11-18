@@ -1,5 +1,5 @@
 import { HydratedDocument } from 'mongoose';
-import { BcryptService } from 'src/common/shared/bcrypt/bcrypt.service';
+import { BcryptService } from 'src/common/bcrypt/bcrypt.service';
 import { Prop } from '@nestjs/mongoose';
 
 export type BaseUserDocument = HydratedDocument<BaseUser>;

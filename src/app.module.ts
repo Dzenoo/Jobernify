@@ -1,7 +1,5 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { APP_PIPE } from '@nestjs/core';
 
 import { AppConfigModule } from './config/app/config.module';
@@ -11,6 +9,7 @@ import { EmployersModule } from './models/employers/employers.module';
 import { JobsModule } from './models/jobs/jobs.module';
 import { ApplicationsModule } from './models/applications/applications.module';
 import { ReviewsModule } from './models/reviews/reviews.module';
+import { S3Module } from './common/s3/s3.module';
 
 @Module({
   imports: [
@@ -21,10 +20,9 @@ import { ReviewsModule } from './models/reviews/reviews.module';
     JobsModule,
     ApplicationsModule,
     ReviewsModule,
+    S3Module,
   ],
-  controllers: [AppController],
   providers: [
-    AppService,
     {
       provide: APP_PIPE,
       useValue: new ValidationPipe({

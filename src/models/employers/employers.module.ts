@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
 import { EmployersService } from './employers.service';
-import { VerificationService } from '../shared/services/verification.service';
 import { EmployersController } from './employers.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Employer, EmployerSchema } from './schemas/employer.schema';
-import { BcryptModule } from 'src/common/shared/bcrypt/bcrypt.module';
-import { AuthService } from '../shared/auth/auth.service';
+import { BcryptModule } from 'src/common/bcrypt/bcrypt.module';
 import { AuthModule } from '../shared/auth/auth.module';
+import { VerificationModule } from '../shared/verification/verification.module';
 
 @Module({
   imports: [
@@ -15,9 +14,10 @@ import { AuthModule } from '../shared/auth/auth.module';
     ]),
     BcryptModule,
     AuthModule,
+    VerificationModule,
   ],
   controllers: [EmployersController],
-  providers: [EmployersService, VerificationService, AuthService],
+  providers: [EmployersService],
   exports: [MongooseModule],
 })
 export class EmployersModule {}

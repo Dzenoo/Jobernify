@@ -7,16 +7,38 @@ import {
   Param,
   Query,
   ParseIntPipe,
+  UseInterceptors,
+  UploadedFile,
+  ParseFilePipe,
+  FileTypeValidator,
+  MaxFileSizeValidator,
 } from '@nestjs/common';
 import { ApplicationsService } from './applications.service';
 import { ApplicationStatus } from './schemas/application.schema';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('/applications')
 export class ApplicationsController {
   constructor(private readonly applicationsService: ApplicationsService) {}
 
   @Post('/:jobId/apply')
-  async create(@Param('jobId') jobId: string) {}
+  @UseInterceptors(FileInterceptor('resume'))
+  async create(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: '.(pdf|docx)' }),
+          new MaxFileSizeValidator({
+            maxSize: 6 * 1024 * 1024,
+            message: 'File is too large.',
+          }),
+        ],
+        fileIsRequired: true,
+      }),
+    )
+    resume: Express.Multer.File,
+    @Param('jobId') jobId: string,
+  ) {}
 
   @Patch('/:applicationId/status')
   async update(

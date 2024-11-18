@@ -3,7 +3,7 @@ import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Job } from 'src/models/jobs/schemas/job.schema';
 import { Review } from 'src/models/reviews/schemas/review.schema';
-import { BcryptService } from 'src/common/shared/bcrypt/bcrypt.service';
+import { BcryptService } from 'src/common/bcrypt/bcrypt.service';
 import { BaseUser } from 'src/models/shared/schemas/base.schema';
 
 export type EmployerDocument = HydratedDocument<Employer>;

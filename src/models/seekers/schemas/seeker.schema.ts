@@ -6,7 +6,7 @@ import { Employer } from 'src/models/employers/schemas/employer.schema';
 import { Job, JobLevel, JobType } from 'src/models/jobs/schemas/job.schema';
 import { Application } from 'src/models/applications/schemas/application.schema';
 import { BaseUser } from 'src/models/shared/schemas/base.schema';
-import { BcryptService } from 'src/common/shared/bcrypt/bcrypt.service';
+import { BcryptService } from 'src/common/bcrypt/bcrypt.service';
 
 export type SeekerDocumentOverride = {
   education: Types.DocumentArray<Education>;

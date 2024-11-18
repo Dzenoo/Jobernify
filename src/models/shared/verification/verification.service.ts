@@ -22,6 +22,7 @@ export class VerificationService {
     userType: 'seeker' | 'employer',
   ): Promise<boolean> {
     let user: SeekerDocument | EmployerDocument;
+
     if (userType === 'seeker') {
       user = await this.seekerModel.findOne({ verificationToken: token });
     } else if (userType === 'employer') {
