@@ -2,15 +2,17 @@ import {
   Controller,
   Get,
   Post,
-  Body,
   Patch,
-  Param,
   Delete,
+  Body,
+  Param,
   Query,
   ParseIntPipe,
 } from '@nestjs/common';
+
 import { SeekersService } from './seekers.service';
 import { VerificationService } from '../../authentication/verification/verification.service';
+
 import { UpdateSeekerDto } from './dto/update-seeker.dto';
 import { GetSeekersDto } from './dto/get-seekers.dto';
 import { CreateEducationDto } from './dto/create-education.dto';

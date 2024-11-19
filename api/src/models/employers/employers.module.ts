@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
+
+import { MongooseModule } from '@nestjs/mongoose';
+import { VerificationModule } from '../../authentication/verification/verification.module';
+
 import { EmployersService } from './employers.service';
 import { EmployersController } from './employers.controller';
-import { MongooseModule } from '@nestjs/mongoose';
 import { Employer, EmployerSchema } from './schemas/employer.schema';
-import { VerificationModule } from '../../authentication/verification/verification.module';
 
 @Module({
   imports: [

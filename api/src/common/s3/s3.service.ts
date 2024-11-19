@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
+
+import { ConfigService } from '@nestjs/config';
+
 import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class S3Service {

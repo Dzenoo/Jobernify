@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+
 import { JobLevel, JobType } from 'src/models/jobs/schemas/job.schema';
 
 @Schema({ timestamps: true })

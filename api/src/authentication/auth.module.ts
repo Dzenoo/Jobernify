@@ -1,11 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { JwtModule } from '@nestjs/jwt';
+
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SeekersModule } from 'src/models/seekers/seekers.module';
 import { EmployersModule } from 'src/models/employers/employers.module';
 import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+
+import { AuthController } from './auth.controller';
+
+import { AuthService } from './auth.service';
+
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
 

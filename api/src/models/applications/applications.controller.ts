@@ -2,8 +2,8 @@ import {
   Controller,
   Get,
   Post,
-  Body,
   Patch,
+  Body,
   Param,
   Query,
   ParseIntPipe,
@@ -13,9 +13,11 @@ import {
   FileTypeValidator,
   MaxFileSizeValidator,
 } from '@nestjs/common';
-import { ApplicationsService } from './applications.service';
-import { ApplicationStatus } from './schemas/application.schema';
 import { FileInterceptor } from '@nestjs/platform-express';
+
+import { ApplicationsService } from './applications.service';
+
+import { ApplicationStatus } from './schemas/application.schema';
 
 @Controller('/applications')
 export class ApplicationsController {

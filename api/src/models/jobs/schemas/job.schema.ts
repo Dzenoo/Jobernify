@@ -1,5 +1,6 @@
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+
 import { Employer } from 'src/models/employers/schemas/employer.schema';
 import { Application } from 'src/models/applications/schemas/application.schema';
 

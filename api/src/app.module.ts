@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+
 import { AppConfigModule } from './config/app/config.module';
 import { MongooseConfigModule } from './config/database/mongodb/config.module';
 import { SeekersModule } from './models/seekers/seekers.module';

@@ -2,14 +2,16 @@ import {
   Controller,
   Get,
   Post,
-  Body,
   Patch,
-  Param,
   Delete,
+  Body,
+  Param,
   Query,
   ParseIntPipe,
 } from '@nestjs/common';
+
 import { EmployersService } from './employers.service';
+
 import { SignUpEmployerDto } from './dto/signup-employer.dto';
 import { GetEmployersDto } from './dto/get-employers.dto';
 import { GetProfileDto } from './dto/get-profile.dto';

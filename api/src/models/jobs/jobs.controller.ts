@@ -2,13 +2,15 @@ import {
   Controller,
   Get,
   Post,
-  Body,
   Patch,
-  Param,
   Delete,
+  Body,
+  Param,
   Query,
 } from '@nestjs/common';
+
 import { JobsService } from './jobs.service';
+
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 import { GetJobsDto } from './dto/get-jobs.dto';

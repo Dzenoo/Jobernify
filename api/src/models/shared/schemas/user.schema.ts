@@ -1,4 +1,5 @@
 import { HydratedDocument } from 'mongoose';
+
 import { Prop } from '@nestjs/mongoose';
 
 export type BaseUserDocument = HydratedDocument<BaseUser>;

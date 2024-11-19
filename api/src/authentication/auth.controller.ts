@@ -1,14 +1,7 @@
-import {
-  Controller,
-  Post,
-  Body,
-  Get,
-  Request,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Post, Get, Request, UseGuards } from '@nestjs/common';
+
 import { AuthService } from './auth.service';
-import { SignInDto } from './dto/signin.dto';
-import { AuthGuard } from '@nestjs/passport';
+
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
@@ -26,10 +19,5 @@ export class AuthController {
   @Get('profile')
   getProfile(@Request() req) {
     return req.user;
-  }
-
-  @Get('/jobs')
-  findAll() {
-    return [];
   }
 }
