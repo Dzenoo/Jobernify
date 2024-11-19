@@ -1,8 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 
 import { JwtService } from '@nestjs/jwt';
 import { SeekersService } from 'src/models/seekers/seekers.service';
 import { EmployersService } from 'src/models/employers/employers.service';
+
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -12,19 +14,32 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async login(user: any) {
-    const payload = { username: user.username, sub: user.userId };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
-  }
+  async validateUser(email: string, password: string): Promise<any> {
+    let user = await this.seekersService.findOneByEmail(email);
 
-  async validateUser(username: string, password: string): Promise<any> {
-    const user = await this.seekersService.findOne(username);
-    if (user && user.password === password) {
+    if (!user) {
+      user = await this.employersService.findOneByEmail(email);
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Entered password is not valid!');
+    }
+
+    if (user && isPasswordValid) {
       const { password, ...result } = user;
       return result;
     }
+
     return null;
+  }
+
+  async login(user: any) {
+    const payload = { sub: user._id, email: user.email, role: user.role };
+
+    return {
+      access_token: await this.jwtService.signAsync(payload),
+    };
   }
 }

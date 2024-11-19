@@ -11,20 +11,7 @@ export class SeekersService {
     @InjectModel(Seeker.name) private readonly seekerModel: Model<Seeker>,
   ) {}
 
-  private readonly users = [
-    {
-      userId: 1,
-      username: 'john',
-      password: 'changeme',
-    },
-    {
-      userId: 2,
-      username: 'maria',
-      password: 'guess',
-    },
-  ];
-
-  async findOne(username: string): Promise<any> {
-    return this.users.find((user) => user.username === username);
+  async findOneByEmail(email: string): Promise<any> {
+    return await this.seekerModel.findOne({ email: email });
   }
 }

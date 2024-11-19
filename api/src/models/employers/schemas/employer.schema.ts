@@ -1,9 +1,11 @@
 import mongoose, { HydratedDocument } from 'mongoose';
-import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+
+import { BaseUser, Role } from 'src/models/shared/schemas/user.schema';
+import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 import { Job } from 'src/models/jobs/schemas/job.schema';
 import { Review } from 'src/models/reviews/schemas/review.schema';
-import { BaseUser } from 'src/models/shared/schemas/user.schema';
+
 import * as bcrypt from 'bcrypt';
 
 export type EmployerDocument = HydratedDocument<Employer>;
@@ -82,6 +84,9 @@ export class Employer extends BaseUser {
 
   @Prop({ type: String, trim: true, default: '' })
   website: string;
+
+  @Prop({ type: String, default: 'employer', enum: Role })
+  role: Role;
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],

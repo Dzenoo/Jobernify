@@ -1,7 +1,7 @@
 import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { BaseUser } from 'src/models/shared/schemas/user.schema';
+import { BaseUser, Role } from 'src/models/shared/schemas/user.schema';
 import { EducationSchema, Education } from './education.schema';
 import { ExperienceSchema, Experience } from './experience.schema';
 import { Job, JobLevel, JobType } from 'src/models/jobs/schemas/job.schema';
@@ -108,6 +108,9 @@ export class Seeker extends BaseUser {
     ],
   })
   resume: string;
+
+  @Prop({ type: String, default: 'seeker', enum: Role })
+  role: Role;
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],

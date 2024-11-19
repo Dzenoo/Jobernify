@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 
-import { AppConfigModule } from './config/app/config.module';
-import { MongooseConfigModule } from './config/database/mongodb/config.module';
 import { SeekersModule } from './models/seekers/seekers.module';
 import { EmployersModule } from './models/employers/employers.module';
 import { JobsModule } from './models/jobs/jobs.module';
@@ -10,11 +8,25 @@ import { ReviewsModule } from './models/reviews/reviews.module';
 import { S3Module } from './common/s3/s3.module';
 import { NodemailerModule } from './common/email/nodemailer.module';
 import { AuthModule } from './authentication/auth.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    AppConfigModule,
-    MongooseConfigModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: `.env`,
+    }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => {
+        return {
+          uri: configService.get<string>('MONGO_DB_URL'),
+          dbName: configService.get<string>('MONGO_DB_NAME'),
+        };
+      },
+    }),
     AuthModule,
     SeekersModule,
     EmployersModule,
