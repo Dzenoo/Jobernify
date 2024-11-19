@@ -15,7 +15,6 @@ import { UpdateSeekerDto } from './dto/update-seeker.dto';
 import { GetSeekersDto } from './dto/get-seekers.dto';
 import { CreateEducationDto } from './dto/create-education.dto';
 import { CreateExperienceDto } from './dto/create-experience.dto';
-import { AuthService } from '../../authentication/auth.service';
 import { SignupSeekerDto } from './dto/signup-seeker.dto';
 import { CreateJobAlertDto } from './dto/create-job-alert.dto';
 
@@ -24,7 +23,6 @@ export class SeekersController {
   constructor(
     private readonly seekersService: SeekersService,
     private readonly verificationService: VerificationService,
-    private readonly authService: AuthService,
   ) {}
 
   @Post('/signup')

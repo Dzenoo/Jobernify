@@ -3,7 +3,6 @@ import { EmployersService } from './employers.service';
 import { EmployersController } from './employers.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Employer, EmployerSchema } from './schemas/employer.schema';
-import { AuthModule } from '../../authentication/auth.module';
 import { VerificationModule } from '../../authentication/verification/verification.module';
 
 @Module({
@@ -11,11 +10,10 @@ import { VerificationModule } from '../../authentication/verification/verificati
     MongooseModule.forFeature([
       { name: Employer.name, schema: EmployerSchema },
     ]),
-    AuthModule,
     VerificationModule,
   ],
   controllers: [EmployersController],
   providers: [EmployersService],
-  exports: [MongooseModule],
+  exports: [EmployersService, MongooseModule],
 })
 export class EmployersModule {}

@@ -1,48 +1,30 @@
-import { Model } from 'mongoose';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
-import { Employer } from 'src/models/employers/schemas/employer.schema';
 import { SignInDto } from './dto/signin.dto';
-import * as bcrypt from 'bcrypt';
+import { SeekersService } from 'src/models/seekers/seekers.service';
+import { EmployersService } from 'src/models/employers/employers.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel(Seeker.name) private readonly seekerModel: Model<Seeker>,
-    @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
+    private readonly seekersService: SeekersService,
+    private readonly employersService: EmployersService,
     private readonly jwtService: JwtService,
   ) {}
 
-  async signIn(signinDto: SignInDto) {
-    const { email, password } = signinDto;
-
-    let user = await this.seekerModel.findOne({ email }).select('+password');
-
-    if (!user) {
-      user = await this.employerModel.findOne({ email }).select('+password');
-    }
-
-    if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
-
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-
-    if (!isPasswordValid) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
-
-    const payload = {
-      userId: user._id,
-      email: user.email,
-      role: user instanceof Seeker ? 'seeker' : 'employer',
-    };
-
+  async login(user: any) {
+    const payload = { username: user.username, sub: user.userId };
     return {
       access_token: this.jwtService.sign(payload),
-      role: payload.role,
     };
+  }
+
+  async validateUser(username: string, password: string): Promise<any> {
+    const user = await this.seekersService.findOne(username);
+    if (user && user.password === password) {
+      const { password, ...result } = user;
+      return result;
+    }
+    return null;
   }
 }

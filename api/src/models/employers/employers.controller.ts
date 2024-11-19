@@ -9,7 +9,6 @@ import {
   Query,
   ParseIntPipe,
 } from '@nestjs/common';
-import { AuthService } from '../../authentication/auth.service';
 import { EmployersService } from './employers.service';
 import { SignUpEmployerDto } from './dto/signup-employer.dto';
 import { GetEmployersDto } from './dto/get-employers.dto';
@@ -18,10 +17,7 @@ import { UpdateEmployerDto } from './dto/update-employer.dto';
 
 @Controller('/employers')
 export class EmployersController {
-  constructor(
-    private readonly employersService: EmployersService,
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly employersService: EmployersService) {}
 
   @Post('/signup')
   async signup(@Body() body: SignUpEmployerDto) {}
