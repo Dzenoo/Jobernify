@@ -138,7 +138,16 @@ export class SeekersController {
   }
 
   @Get('/:seekerId')
-  async getById(@Param('seekerId') seekerId: string) {}
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles(Role.EMPLOYER)
+  async getById(@Param('seekerId') seekerId: string) {
+    const seeker = await this.seekersService.getOneById(seekerId);
+
+    return {
+      statusCode: HttpStatus.OK,
+      seeker,
+    };
+  }
 
   @Patch('/add-new-education')
   async createEducation(@Body() body: CreateEducationDto) {}

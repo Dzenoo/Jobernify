@@ -254,4 +254,20 @@ export class SeekersService {
 
     return { seekers, totalSeekers };
   }
+
+  async getOneById(id: string): Promise<Seeker> {
+    const seeker = await this.seekerModel
+      .findById(id)
+      .select(
+        '_id first_name last_name biography education experience skills github linkedin portfolio image headline',
+      );
+
+    if (!seeker) {
+      throw new NotFoundException(
+        'The seeker you are looking for could not be found.',
+      );
+    }
+
+    return seeker;
+  }
 }
