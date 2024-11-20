@@ -367,4 +367,39 @@ export class SeekersService {
       );
     }
   }
+
+  async followEmployer(id: string, employerId: string): Promise<void> {
+    const [employer, seeker] = await Promise.all([
+      this.employersService.findOneById(employerId),
+      this.seekerModel.findById(id),
+    ]);
+
+    if (!employer || !seeker) {
+      throw new NotFoundException(
+        "We couldn't find the employer or your profile. Please try again later.",
+      );
+    }
+
+    const isFollowing = employer.followers.includes(id);
+
+    if (isFollowing) {
+      // Unfollow
+      await this.employersService.findOneByIdAndUpdate(employerId, {
+        $pull: { followers: id },
+      });
+      await this.seekerModel.findByIdAndUpdate(id, {
+        $pull: { following: employerId },
+      });
+    } else {
+      // Follow
+      await this.employersService.findOneByIdAndUpdate(employerId, {
+        $push: {
+          followers: id,
+        },
+      });
+      await this.seekerModel.findByIdAndUpdate(id, {
+        $push: { following: employerId },
+      });
+    }
+  }
 }

@@ -215,7 +215,7 @@ export class SeekersController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.SEEKER)
   async createJobAlert(
-    @User() userId: string,
+    @User('userId') userId: string,
     @Body() body: CreateJobAlertDto,
   ) {
     await this.seekersService.createJobAlert(userId, body);
@@ -227,7 +227,18 @@ export class SeekersController {
   }
 
   @Post('/:employerId/follow')
-  async followEmployer(@Param('employerId') employerId: string) {}
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.SEEKER)
+  async followEmployer(
+    @User('userId') userId: string,
+    @Param('employerId') employerId: string,
+  ) {
+    await this.seekersService.followEmployer(userId, employerId);
+
+    return {
+      statusCode: HttpStatus.OK,
+    };
+  }
 
   @Get('/verify-email')
   async verifyEmail(@Query() token: string) {

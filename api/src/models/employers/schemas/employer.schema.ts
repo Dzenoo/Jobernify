@@ -92,19 +92,19 @@ export class Employer extends BaseUser {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
     default: [],
   })
-  jobs: Job[];
+  jobs: Job[] & string[];
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seeker' }],
     default: [],
   })
-  followers: Seeker[];
+  followers: Seeker[] & string[];
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
     default: [],
   })
-  reviews: Review;
+  reviews: Review & string[];
 }
 
 export const EmployerSchema = SchemaFactory.createForClass(Employer);
