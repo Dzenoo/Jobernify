@@ -10,14 +10,20 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Seeker } from './schemas/seeker.schema';
 
 import { Model } from 'mongoose';
-import { SignupSeekerDto } from './dto/signup-seeker.dto';
 
+import { SignupSeekerDto } from './dto/signup-seeker.dto';
+import { UpdateSeekerDto } from './dto/update-seeker.dto';
+
+import { S3Service } from 'src/common/s3/s3.service';
 import { VerificationService } from 'src/authentication/verification/verification.service';
 import { NodemailerService } from 'src/common/email/nodemailer.service';
+
+import { uuidv7 } from 'uuidv7';
 
 @Injectable()
 export class SeekersService {
   constructor(
+    private readonly s3Service: S3Service,
     private readonly verificationService: VerificationService,
     private readonly emailService: NodemailerService,
     @InjectModel(Seeker.name) private readonly seekerModel: Model<Seeker>,
@@ -72,7 +78,7 @@ export class SeekersService {
     );
   }
 
-  async getProfile({
+  async getOne({
     page,
     limit,
     id,
@@ -119,5 +125,35 @@ export class SeekersService {
     }
 
     return seeker;
+  }
+
+  async editOne(
+    id: string,
+    updatedData: UpdateSeekerDto,
+    image?: Express.Multer.File,
+  ): Promise<void> {
+    if (image) {
+      const currentSeeker = await this.seekerModel.findById(id);
+
+      if (currentSeeker) {
+        if (currentSeeker.image.includes('seekers')) {
+          await this.s3Service.deleteFile(
+            currentSeeker.image.split('/')[1],
+            'seekers',
+          );
+        }
+
+        const result = uuidv7();
+        const imageKey = `seeker_${result}.png`;
+        await this.s3Service.uploadFile(image, imageKey, 'seekers');
+
+        updatedData.image = `seekers/${imageKey}`;
+      }
+    }
+
+    await this.seekerModel.findByIdAndUpdate(id, updatedData, {
+      new: true,
+      runValidators: true,
+    });
   }
 }

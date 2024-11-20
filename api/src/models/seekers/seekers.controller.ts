@@ -10,6 +10,11 @@ import {
   ParseIntPipe,
   HttpStatus,
   UseGuards,
+  UploadedFile,
+  MaxFileSizeValidator,
+  FileTypeValidator,
+  ParseFilePipe,
+  UseInterceptors,
 } from '@nestjs/common';
 
 import { SeekersService } from './seekers.service';
@@ -22,11 +27,14 @@ import { CreateExperienceDto } from './dto/create-experience.dto';
 import { SignupSeekerDto } from './dto/signup-seeker.dto';
 import { CreateJobAlertDto } from './dto/create-job-alert.dto';
 
-import { User } from 'src/common/decorators/user.decorator';
 import { JwtAuthGuard } from 'src/authentication/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/authentication/guards/role-auth.guard';
+
 import { Roles } from 'src/common/decorators/roles.decorator';
 import { Role } from '../shared/schemas/user.schema';
+import { User } from 'src/common/decorators/user.decorator';
+
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('/seekers')
 export class SeekersController {
@@ -55,7 +63,7 @@ export class SeekersController {
     @Query('page', ParseIntPipe) page: number = 1,
     @Query('limit', ParseIntPipe) limit: number = 10,
   ) {
-    const seeker = await this.seekersService.getProfile({
+    const seeker = await this.seekersService.getOne({
       page,
       limit,
       id: userId,
@@ -68,7 +76,33 @@ export class SeekersController {
   }
 
   @Patch('/edit-profile')
-  async editProfile(@Body() body: UpdateSeekerDto) {}
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.SEEKER)
+  @UseInterceptors(FileInterceptor('image'))
+  async editProfile(
+    @User('userId') userId: string,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: '.(png|jpg|jpeg)' }),
+          new MaxFileSizeValidator({
+            maxSize: 6 * 1024 * 1024,
+            message: 'File is too large.',
+          }),
+        ],
+        fileIsRequired: false,
+      }),
+    )
+    image: Express.Multer.File,
+    @Body() body: UpdateSeekerDto,
+  ) {
+    await this.seekersService.editOne(userId, body, image);
+
+    return {
+      statusCode: HttpStatus.ACCEPTED,
+      message: 'Successfully edited profile',
+    };
+  }
 
   @Delete('/delete-profile')
   async deleteProfile() {}

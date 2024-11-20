@@ -32,4 +32,8 @@ export class UpdateSeekerDto {
   @IsOptional()
   @IsString()
   readonly headline?: string;
+
+  @IsOptional()
+  @IsString()
+  image?: string;
 }
