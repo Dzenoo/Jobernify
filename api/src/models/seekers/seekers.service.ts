@@ -25,6 +25,7 @@ import { NodemailerService } from 'src/common/email/nodemailer.service';
 import { uuidv7 } from 'uuidv7';
 import { CreateEducationDto } from './dto/create-education.dto';
 import { CreateExperienceDto } from './dto/create-experience.dto';
+import { CreateJobAlertDto } from './dto/create-job-alert.dto';
 
 @Injectable()
 export class SeekersService {
@@ -350,5 +351,20 @@ export class SeekersService {
       { experience: updatedExperience },
       { new: true },
     );
+  }
+
+  async createJobAlert(
+    id: string,
+    alertData: CreateJobAlertDto,
+  ): Promise<void> {
+    const seeker = await this.seekerModel.findByIdAndUpdate(id, {
+      alerts: { ...alertData },
+    });
+
+    if (!seeker) {
+      throw new NotFoundException(
+        'Seeker not found or could not create job alert',
+      );
+    }
   }
 }

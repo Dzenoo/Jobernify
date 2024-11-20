@@ -212,7 +212,19 @@ export class SeekersController {
   }
 
   @Post('/create-job-alert')
-  async createJobAlert(@Body() body: CreateJobAlertDto) {}
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.SEEKER)
+  async createJobAlert(
+    @User() userId: string,
+    @Body() body: CreateJobAlertDto,
+  ) {
+    await this.seekersService.createJobAlert(userId, body);
+
+    return {
+      statusCode: HttpStatus.CREATED,
+      message: 'Your job alert has been successfully created.',
+    };
+  }
 
   @Post('/:employerId/follow')
   async followEmployer(@Param('employerId') employerId: string) {}
