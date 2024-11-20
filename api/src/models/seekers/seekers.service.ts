@@ -87,12 +87,12 @@ export class SeekersService {
   }
 
   async getOne({
-    page,
-    limit,
+    page = 1,
+    limit = 10,
     id,
   }: {
-    page: number;
-    limit: number;
+    page?: number;
+    limit?: number;
     id: string;
   }): Promise<Seeker> {
     const skip = (page - 1) * limit;
@@ -207,5 +207,51 @@ export class SeekersService {
     }
 
     await this.seekerModel.findByIdAndDelete(id);
+  }
+
+  async getMany({
+    page = 1,
+    limit = 12,
+    search = '',
+    skills = [''],
+  }: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    skills?: string[];
+  }): Promise<{
+    seekers: Seeker[];
+    totalSeekers: number;
+  }> {
+    const conditions: any = {
+      emailVerified: true,
+    };
+
+    if (search) {
+      const searchRegex = new RegExp(String(search), 'i');
+
+      conditions.$or = [
+        { first_name: { $regex: searchRegex } },
+        { email: { $regex: searchRegex } },
+        { headline: { $regex: searchRegex } },
+      ];
+    }
+
+    if (skills) {
+      conditions.skills = { $in: skills };
+    }
+
+    const seekers = await this.seekerModel
+      .find(conditions)
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .select(
+        '_id first_name last_name skills github linkedin portfolio image headline',
+      )
+      .exec();
+
+    const totalSeekers = await this.seekerModel.countDocuments(conditions);
+
+    return { seekers, totalSeekers };
   }
 }

@@ -118,7 +118,24 @@ export class SeekersController {
   }
 
   @Get('/all')
-  async getAll(@Query() query: GetSeekersDto) {}
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles(Role.EMPLOYER)
+  async getAll(@Query() query: GetSeekersDto) {
+    const { page, limit, search, skills } = query;
+
+    const { seekers, totalSeekers } = await this.seekersService.getMany({
+      page,
+      limit,
+      search,
+      skills,
+    });
+
+    return {
+      statusCode: HttpStatus.OK,
+      seekers,
+      totalSeekers,
+    };
+  }
 
   @Get('/:seekerId')
   async getById(@Param('seekerId') seekerId: string) {}
