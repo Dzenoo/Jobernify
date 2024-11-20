@@ -105,7 +105,17 @@ export class SeekersController {
   }
 
   @Delete('/delete-profile')
-  async deleteProfile() {}
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.SEEKER)
+  async deleteProfile(@User('userId') userId: string) {
+    await this.seekersService.deleteOne(userId);
+
+    return {
+      statusCode: HttpStatus.ACCEPTED,
+      message:
+        'Your profile and all associated data have been successfully deleted.',
+    };
+  }
 
   @Get('/all')
   async getAll(@Query() query: GetSeekersDto) {}

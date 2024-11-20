@@ -14,6 +14,10 @@ import { Model } from 'mongoose';
 import { SignupSeekerDto } from './dto/signup-seeker.dto';
 import { UpdateSeekerDto } from './dto/update-seeker.dto';
 
+import { EmployersService } from '../employers/employers.service';
+import { JobsService } from '../jobs/jobs.service';
+import { ReviewsService } from '../reviews/reviews.service';
+import { ApplicationsService } from '../applications/applications.service';
 import { S3Service } from 'src/common/s3/s3.service';
 import { VerificationService } from 'src/authentication/verification/verification.service';
 import { NodemailerService } from 'src/common/email/nodemailer.service';
@@ -23,6 +27,10 @@ import { uuidv7 } from 'uuidv7';
 @Injectable()
 export class SeekersService {
   constructor(
+    private readonly employersService: EmployersService,
+    private readonly jobsService: JobsService,
+    private readonly reviewsService: ReviewsService,
+    private readonly applicationsService: ApplicationsService,
     private readonly s3Service: S3Service,
     private readonly verificationService: VerificationService,
     private readonly emailService: NodemailerService,
@@ -155,5 +163,49 @@ export class SeekersService {
       new: true,
       runValidators: true,
     });
+  }
+
+  async deleteOne(id: string): Promise<void> {
+    const seeker = await this.seekerModel.findById(id);
+
+    if (!seeker) {
+      throw new NotFoundException(
+        'We could not find your profile or delete it. Please try again later.',
+      );
+    }
+
+    // const applications = await this.applicationsService.findBySeekerId(id)
+    // const reviews = await this.reviewsService.findBySeekerId(id)
+
+    // await this.applicationsService.deleteMany({ seekerId: id });
+    // await this.reviewsService.deleteMany({ seekerId: id });
+    // await this.jobsService.updateMany(
+    //   { applications: { $in: applications.map((app) => app._id) } },
+    //   {
+    //     $pull: {
+    //       applications: { $in: applications.map((app) => app._id) },
+    //     },
+    //   },
+    // );
+    // await this.employersService.updateMany(
+    //   {
+    //     $or: [
+    //       { followers: id },
+    //       { reviews: { $in: reviews.map((review) => review._id) } },
+    //     ],
+    //   },
+    //   {
+    //     $pull: {
+    //       followers: id,
+    //       reviews: { $in: reviews.map((review) => review._id) },
+    //     },
+    //   },
+    // );
+
+    if (seeker.image.includes('seekers')) {
+      await this.s3Service.deleteFile(seeker.image.split('/')[1], 'seekers');
+    }
+
+    await this.seekerModel.findByIdAndDelete(id);
   }
 }
