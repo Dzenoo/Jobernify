@@ -118,8 +118,8 @@ export class SeekersController {
   }
 
   @Get('/all')
-  // @UseGuards(JwtAuthGuard, RolesGuard)
-  // @Roles(Role.EMPLOYER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.EMPLOYER)
   async getAll(@Query() query: GetSeekersDto) {
     const { page, limit, search, skills } = query;
 
@@ -138,8 +138,8 @@ export class SeekersController {
   }
 
   @Get('/:seekerId')
-  // @UseGuards(JwtAuthGuard, RolesGuard)
-  // @Roles(Role.EMPLOYER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.EMPLOYER)
   async getById(@Param('seekerId') seekerId: string) {
     const seeker = await this.seekersService.getOneById(seekerId);
 
@@ -150,8 +150,8 @@ export class SeekersController {
   }
 
   @Patch('/add-new-education')
-  // @UseGuards(JwtAuthGuard, RolesGuard)
-  // @Roles(Role.SEEKER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.SEEKER)
   async createEducation(
     @User('userId') userId: string,
     @Body() body: CreateEducationDto,
@@ -166,8 +166,8 @@ export class SeekersController {
   }
 
   @Delete('/delete-education/:educationId')
-  // @UseGuards(JwtAuthGuard, RolesGuard)
-  // @Roles(Role.SEEKER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.SEEKER)
   async deleteEducation(
     @User('userId') userId: string,
     @Param('educationId') educationId: string,
@@ -181,10 +181,35 @@ export class SeekersController {
   }
 
   @Patch('/add-new-experience')
-  async createExperience(@Body() body: CreateExperienceDto) {}
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.SEEKER)
+  async createExperience(
+    @User('userId') userId: string,
+    @Body() body: CreateExperienceDto,
+  ) {
+    await this.seekersService.createExperience(userId, body);
+
+    return {
+      statusCode: HttpStatus.CREATED,
+      message:
+        'Your experience entry has been successfully added to your profile.',
+    };
+  }
 
   @Delete('/delete-experience/:experienceId')
-  async deleteExperience(@Param('experienceId') experienceId: string) {}
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.SEEKER)
+  async deleteExperience(
+    @User('userId') userId: string,
+    @Param('experienceId') experienceId: string,
+  ) {
+    await this.seekersService.deleteExperience(userId, experienceId);
+
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'Experience successfully deleted',
+    };
+  }
 
   @Post('/create-job-alert')
   async createJobAlert(@Body() body: CreateJobAlertDto) {}

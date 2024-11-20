@@ -24,6 +24,7 @@ import { NodemailerService } from 'src/common/email/nodemailer.service';
 
 import { uuidv7 } from 'uuidv7';
 import { CreateEducationDto } from './dto/create-education.dto';
+import { CreateExperienceDto } from './dto/create-experience.dto';
 
 @Injectable()
 export class SeekersService {
@@ -307,6 +308,46 @@ export class SeekersService {
     await this.seekerModel.findByIdAndUpdate(
       id,
       { education: updatedEducation },
+      { new: true },
+    );
+  }
+
+  async createExperience(
+    id: string,
+    experienceData: CreateExperienceDto,
+  ): Promise<void> {
+    const seeker = await this.seekerModel.findByIdAndUpdate(
+      id,
+      {
+        $push: { experience: experienceData },
+      },
+      { runValidators: true, new: true },
+    );
+
+    if (!seeker) {
+      throw new NotFoundException(
+        'Seeker not found or could not add experience',
+      );
+    }
+  }
+
+  async deleteExperience(id: string, experienceId: string): Promise<void> {
+    const seeker = await this.seekerModel.findById(id);
+
+    if (!seeker) {
+      throw new NotFoundException(
+        'Seeker not found or could not delete experience',
+      );
+    }
+
+    const updatedExperience = seeker.experience.filter(
+      (experience: any) =>
+        experience._id.toString() !== experienceId.toString(),
+    );
+
+    await this.seekerModel.findByIdAndUpdate(
+      id,
+      { experience: updatedExperience },
       { new: true },
     );
   }
