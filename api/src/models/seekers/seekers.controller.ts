@@ -218,5 +218,12 @@ export class SeekersController {
   async followEmployer(@Param('employerId') employerId: string) {}
 
   @Get('/verify-email')
-  async verifyEmail(@Query() token: string) {}
+  async verifyEmail(@Query() token: string) {
+    await this.verificationService.verifyEmail(token, 'seeker');
+
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'Email successfully verified.',
+    };
+  }
 }

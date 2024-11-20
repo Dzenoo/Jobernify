@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import {
@@ -35,11 +35,11 @@ export class VerificationService {
     }
 
     if (!user) {
-      throw new Error('Invalid or expired token');
+      throw new Error('Invalid token.');
     }
 
     if (user.verificationExpiration < new Date()) {
-      throw new Error('Token has expired');
+      throw new UnauthorizedException();
     }
 
     user.emailVerified = true;
