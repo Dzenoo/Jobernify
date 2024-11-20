@@ -150,10 +150,35 @@ export class SeekersController {
   }
 
   @Patch('/add-new-education')
-  async createEducation(@Body() body: CreateEducationDto) {}
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles(Role.SEEKER)
+  async createEducation(
+    @User('userId') userId: string,
+    @Body() body: CreateEducationDto,
+  ) {
+    await this.seekersService.createEducation(userId, body);
+
+    return {
+      statusCode: HttpStatus.CREATED,
+      message:
+        'Your education entry has been successfully added to your profile.',
+    };
+  }
 
   @Delete('/delete-education/:educationId')
-  async deleteEducation(@Param('educationId') educationId: string) {}
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles(Role.SEEKER)
+  async deleteEducation(
+    @User('userId') userId: string,
+    @Param('educationId') educationId: string,
+  ) {
+    await this.seekersService.deleteEducation(userId, educationId);
+
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'Education successfully deleted',
+    };
+  }
 
   @Patch('/add-new-experience')
   async createExperience(@Body() body: CreateExperienceDto) {}

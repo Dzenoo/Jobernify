@@ -23,6 +23,7 @@ import { VerificationService } from 'src/authentication/verification/verificatio
 import { NodemailerService } from 'src/common/email/nodemailer.service';
 
 import { uuidv7 } from 'uuidv7';
+import { CreateEducationDto } from './dto/create-education.dto';
 
 @Injectable()
 export class SeekersService {
@@ -269,5 +270,44 @@ export class SeekersService {
     }
 
     return seeker;
+  }
+
+  async createEducation(
+    id: string,
+    educationData: CreateEducationDto,
+  ): Promise<void> {
+    const seeker = await this.seekerModel.findByIdAndUpdate(
+      id,
+      {
+        $push: { education: educationData },
+      },
+      { runValidators: true, new: true },
+    );
+
+    if (!seeker) {
+      throw new NotFoundException(
+        'Seeker not found or could not add education',
+      );
+    }
+  }
+
+  async deleteEducation(id: string, educationId: string): Promise<void> {
+    const seeker = await this.seekerModel.findById(id);
+
+    if (!seeker) {
+      throw new NotFoundException(
+        'Seeker not found or could not delete education',
+      );
+    }
+
+    const updatedEducation = seeker.education.filter(
+      (education: any) => education._id.toString() !== educationId.toString(),
+    );
+
+    await this.seekerModel.findByIdAndUpdate(
+      id,
+      { education: updatedEducation },
+      { new: true },
+    );
   }
 }
