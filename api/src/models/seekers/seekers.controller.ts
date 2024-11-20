@@ -8,6 +8,7 @@ import {
   Param,
   Query,
   ParseIntPipe,
+  HttpStatus,
 } from '@nestjs/common';
 
 import { SeekersService } from './seekers.service';
@@ -28,7 +29,14 @@ export class SeekersController {
   ) {}
 
   @Post('/signup')
-  async signup(@Body() body: SignupSeekerDto) {}
+  async signup(@Body() body: SignupSeekerDto) {
+    await this.seekersService.createOne(body);
+
+    return {
+      statusCode: HttpStatus.CREATED,
+      message: 'Signup successful! Please verify your email.',
+    };
+  }
 
   @Get('/')
   async getProfile(

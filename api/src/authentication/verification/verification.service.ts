@@ -12,6 +12,9 @@ import {
 
 import { Model } from 'mongoose';
 
+import { uuidv7 } from 'uuidv7';
+import { VERIFICATION_TOKEN_EXPIRATION_TIME } from 'src/common/constants';
+
 @Injectable()
 export class VerificationService {
   constructor(
@@ -46,5 +49,13 @@ export class VerificationService {
     await user.save();
 
     return true;
+  }
+
+  create() {
+    const verificationToken = uuidv7();
+    const verificationExpiration =
+      Date.now() + VERIFICATION_TOKEN_EXPIRATION_TIME;
+
+    return { verificationToken, verificationExpiration };
   }
 }

@@ -11,7 +11,7 @@ export class EmployersService {
     @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
   ) {}
 
-  async findOneByEmail(email: string): Promise<any> {
-    return await this.employerModel.findOne({ email: email });
+  async findOneByEmail(email: string, select?: string): Promise<any> {
+    return await this.employerModel.findOne({ email: email }).select(select);
   }
 }
