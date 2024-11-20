@@ -9,6 +9,7 @@ import {
   Query,
   ParseIntPipe,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 
 import { SeekersService } from './seekers.service';
@@ -21,6 +22,12 @@ import { CreateExperienceDto } from './dto/create-experience.dto';
 import { SignupSeekerDto } from './dto/signup-seeker.dto';
 import { CreateJobAlertDto } from './dto/create-job-alert.dto';
 
+import { User } from 'src/common/decorators/user.decorator';
+import { JwtAuthGuard } from 'src/authentication/guards/jwt-auth.guard';
+import { RolesGuard } from 'src/authentication/guards/role-auth.guard';
+import { Roles } from 'src/common/decorators/roles.decorator';
+import { Role } from '../shared/schemas/user.schema';
+
 @Controller('/seekers')
 export class SeekersController {
   constructor(
@@ -29,6 +36,8 @@ export class SeekersController {
   ) {}
 
   @Post('/signup')
+  @UseGuards(RolesGuard)
+  @Roles(Role.SEEKER)
   async signup(@Body() body: SignupSeekerDto) {
     await this.seekersService.createOne(body);
 
@@ -38,11 +47,25 @@ export class SeekersController {
     };
   }
 
-  @Get('/')
+  @Get('/profile')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.SEEKER)
   async getProfile(
+    @User('userId') userId: string,
     @Query('page', ParseIntPipe) page: number = 1,
     @Query('limit', ParseIntPipe) limit: number = 10,
-  ) {}
+  ) {
+    const seeker = await this.seekersService.getProfile({
+      page,
+      limit,
+      id: userId,
+    });
+
+    return {
+      statusCode: HttpStatus.OK,
+      seeker,
+    };
+  }
 
   @Patch('/edit-profile')
   async editProfile(@Body() body: UpdateSeekerDto) {}

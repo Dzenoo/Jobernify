@@ -1,8 +1,9 @@
 import {
-  ConflictException,
   Injectable,
+  ConflictException,
   InternalServerErrorException,
   NotAcceptableException,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
@@ -69,5 +70,54 @@ export class SeekersService {
       'Jobernify - Verify your email',
       emailContent,
     );
+  }
+
+  async getProfile({
+    page,
+    limit,
+    id,
+  }: {
+    page: number;
+    limit: number;
+    id: string;
+  }): Promise<Seeker> {
+    const skip = (page - 1) * limit;
+
+    const seeker = await this.seekerModel
+      .findById(id)
+      .populate({
+        path: 'savedJobs',
+        options: { skip, limit: Number(limit) },
+        select:
+          '_id title location level expiration_date createdAt applications overview',
+        populate: {
+          path: 'company',
+          select: '_id image name',
+        },
+      })
+      .populate({
+        path: 'applications',
+        populate: {
+          path: 'job',
+          select: '_id title type level position',
+          populate: {
+            path: 'company',
+            select: '_id image name size address industry',
+          },
+        },
+        select: '_id status createdAt updatedAt',
+      })
+      .select(
+        '_id first_name last_name biography image education experience skills alerts github linkedin portfolio following headline resume',
+      )
+      .exec();
+
+    if (!seeker) {
+      throw new NotFoundException(
+        'We could not find your profile. Please try again later.',
+      );
+    }
+
+    return seeker;
   }
 }
