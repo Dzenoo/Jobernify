@@ -8,13 +8,13 @@ import { AppModule } from './app.module';
 async function initializeServer() {
   const app = await NestFactory.create(AppModule);
 
-  // app.enableCors({
-  //   origin: '*',
-  //   // origin: ['https://jobernify.com', 'http://localhost:3000'],
-  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  //   allowedHeaders: 'Content-Type, Authorization',
-  //   credentials: true,
-  // });
+  app.enableCors({
+    origin: '*',
+    // origin: ['https://jobernify.com', 'http://localhost:3000'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Authorization',
+    credentials: true,
+  });
 
   app.use(helmet());
 
