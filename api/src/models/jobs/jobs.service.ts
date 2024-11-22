@@ -273,9 +273,143 @@ export class JobsService {
     };
   }
 
-  async getAll(query: GetJobsDto): Promise<ResponseObject> {
+  async getAll({
+    page = 1,
+    limit = 10,
+    search,
+    type,
+    level,
+    salary,
+    position,
+    sort,
+  }: GetJobsDto): Promise<ResponseObject> {
+    const conditions: any = {};
+
+    const popularJobs = await this.jobModel.aggregate([
+      { $project: { title: 1, applicationCount: { $size: '$applications' } } },
+      { $sort: { applicationCount: -1 } },
+      { $limit: 5 },
+      { $project: { title: 1, _id: 1 } },
+    ]);
+
+    if (search) {
+      conditions.$or = [
+        { title: { $regex: new RegExp(String(search), 'i') } },
+        { description: { $regex: new RegExp(String(search), 'i') } },
+        { location: { $regex: new RegExp(String(search), 'i') } },
+      ];
+    }
+
+    if (type) {
+      conditions.type = Array.isArray(type)
+        ? { $in: type }
+        : type.toString().split(',');
+    }
+
+    if (level) {
+      conditions.level = Array.isArray(level)
+        ? { $in: level }
+        : level.toString().split(',');
+    }
+
+    if (position) {
+      conditions.position = Array.isArray(position)
+        ? { $in: position }
+        : position.toString().split(',');
+    }
+
+    if (salary) {
+      const salaryRanges = Array.isArray(salary)
+        ? salary
+        : salary.toString().split(',');
+
+      conditions.salary = {};
+
+      salaryRanges.forEach((range) => {
+        if (typeof range === 'string') {
+          const [minSalary, maxSalary] = range.split('-').map(Number);
+
+          if (!isNaN(minSalary)) {
+            conditions.salary.$gte = conditions.salary.$gte
+              ? Math.min(conditions.salary.$gte, minSalary)
+              : minSalary;
+          }
+          if (!isNaN(maxSalary) && maxSalary > minSalary) {
+            conditions.salary.$lte = conditions.salary.$lte
+              ? Math.max(conditions.salary.$lte, maxSalary)
+              : maxSalary;
+          }
+        }
+      });
+    }
+
+    const sortOptions: any = { createdAt: sort === 'desc' ? -1 : 1 };
+
+    const jobs = await this.jobModel
+      .find(conditions)
+      .sort(sortOptions)
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .populate({ path: 'company', select: 'image name _id' })
+      .select(
+        '_id title overview company applications location expiration_date level createdAt',
+      )
+      .exec();
+
+    const totalJobs = await this.jobModel.countDocuments(conditions);
+
+    const filterCounts = await this.jobModel.aggregate([
+      {
+        $facet: {
+          types: [{ $group: { _id: '$type', count: { $sum: 1 } } }],
+          seniority: [{ $group: { _id: '$level', count: { $sum: 1 } } }],
+          positions: [{ $group: { _id: '$position', count: { $sum: 1 } } }],
+          salaryRanges: [
+            {
+              $project: {
+                salary: 1,
+                range: {
+                  $switch: {
+                    branches: [
+                      {
+                        case: { $lt: ['$salary', 50000] },
+                        then: { min: 0, max: 50000 },
+                      },
+                      {
+                        case: { $lt: ['$salary', 100000] },
+                        then: { min: 50000, max: 100000 },
+                      },
+                      {
+                        case: { $lt: ['$salary', 150000] },
+                        then: { min: 100000, max: 150000 },
+                      },
+                      {
+                        case: { $lt: ['$salary', 200000] },
+                        then: { min: 150000, max: 200000 },
+                      },
+                      {
+                        case: { $lt: ['$salary', 500000] },
+                        then: { min: 200000, max: 500000 },
+                      },
+                    ],
+                    default: { min: 500000, max: 500000 },
+                  },
+                },
+              },
+            },
+            { $group: { _id: '$range', count: { $sum: 1 } } },
+            { $sort: { '_id.min': 1 } },
+          ],
+        },
+      },
+    ]);
+
     return {
       statusCode: HttpStatus.OK,
+      jobs,
+      totalJobs,
+      popularJobs,
+      filterCounts,
     };
   }
 }
