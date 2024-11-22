@@ -6,8 +6,8 @@ import {
   IsNumber,
   Min,
   Max,
-  IsDate,
   Length,
+  IsDateString,
 } from 'class-validator';
 import { JobType, JobLevel, Position } from '../schemas/job.schema';
 
@@ -45,7 +45,7 @@ export class CreateJobDto {
   @Max(500000)
   readonly salary: number;
 
-  @IsDate()
+  @IsDateString()
   readonly expiration_date: Date;
 
   @IsString()

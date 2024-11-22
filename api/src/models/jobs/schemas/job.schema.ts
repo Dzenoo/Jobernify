@@ -87,7 +87,7 @@ export class Job {
     ref: 'Employer',
     required: true,
   })
-  company: Employer;
+  company: Employer & string;
 
   @Prop({
     type: Number,
@@ -115,7 +115,7 @@ export class Job {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Application' }],
     default: [],
   })
-  applications: Application[];
+  applications: Application[] & string[];
 }
 
 export const JobSchema = SchemaFactory.createForClass(Job);

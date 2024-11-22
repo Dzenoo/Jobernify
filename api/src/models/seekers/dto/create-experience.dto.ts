@@ -2,7 +2,7 @@ import {
   IsEnum,
   IsOptional,
   IsString,
-  IsDate,
+  IsDateString,
   IsNotEmpty,
 } from 'class-validator';
 import { JobLevel, JobType } from 'src/models/jobs/schemas/job.schema';
@@ -16,12 +16,12 @@ export class CreateExperienceDto {
   @IsNotEmpty()
   readonly companyName: string;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   readonly startDate: Date;
 
   @IsOptional()
-  @IsDate()
+  @IsDateString()
   readonly endDate?: Date;
 
   @IsEnum(JobLevel)

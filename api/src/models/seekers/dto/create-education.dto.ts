@@ -1,11 +1,11 @@
-import { IsDate, IsNotEmpty, IsString } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateEducationDto {
   @IsString()
   @IsNotEmpty()
   readonly institution: string;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   readonly graduationDate: Date;
 

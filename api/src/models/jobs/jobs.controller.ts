@@ -30,7 +30,7 @@ export class JobsController {
   @Post('/create-new-job')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.EMPLOYER)
-  async createJob(@User() userId: string, @Body() body: CreateJobDto) {
+  async createJob(@User('userId') userId: string, @Body() body: CreateJobDto) {
     return await this.jobsService.createOne(body, userId);
   }
 
@@ -38,7 +38,7 @@ export class JobsController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.EMPLOYER)
   async editJob(
-    @User() userId: string,
+    @User('userId') userId: string,
     @Body() body: UpdateJobDto,
     @Param('jobId') jobId: string,
   ) {
@@ -48,14 +48,17 @@ export class JobsController {
   @Delete('/:jobId/delete')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.EMPLOYER)
-  async deleteJob(@User() userId: string, @Param('jobId') jobId: string) {
+  async deleteJob(
+    @User('userId') userId: string,
+    @Param('jobId') jobId: string,
+  ) {
     return await this.jobsService.deleteOne(jobId, userId);
   }
 
   @Post('/:jobId/save')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.SEEKER)
-  async saveJob(@User() userId: string, @Param('jobId') jobId: string) {
+  async saveJob(@User('userId') userId: string, @Param('jobId') jobId: string) {
     return await this.jobsService.saveOne(jobId, userId);
   }
 

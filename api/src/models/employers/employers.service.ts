@@ -28,11 +28,14 @@ import { uuidv7 } from 'uuidv7';
 @Injectable()
 export class EmployersService {
   constructor(
+    private readonly s3Service: S3Service,
     @Inject(forwardRef(() => SeekersService))
     private readonly seekersService: SeekersService,
-    private readonly s3Service: S3Service,
+    @Inject(forwardRef(() => JobsService))
     private readonly jobsService: JobsService,
+    @Inject(forwardRef(() => ApplicationsService))
     private readonly applicationsService: ApplicationsService,
+    @Inject(forwardRef(() => ReviewsService))
     private readonly reviewsService: ReviewsService,
     @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
   ) {}

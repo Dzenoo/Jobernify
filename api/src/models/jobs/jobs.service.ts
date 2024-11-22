@@ -1,5 +1,7 @@
 import {
+  forwardRef,
   HttpStatus,
+  Inject,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -9,7 +11,7 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Job, JobDocument } from './schemas/job.schema';
 
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
@@ -23,8 +25,11 @@ import { NodemailerService } from 'src/common/email/nodemailer.service';
 @Injectable()
 export class JobsService {
   constructor(
+    @Inject(forwardRef(() => SeekersService))
     private readonly seekersService: SeekersService,
+    @Inject(forwardRef(() => EmployersService))
     private readonly employersService: EmployersService,
+    @Inject(forwardRef(() => ApplicationsService))
     private readonly applicationsService: ApplicationsService,
     private readonly emailService: NodemailerService,
     @InjectModel(Job.name) private readonly jobModel: Model<Job>,
@@ -40,7 +45,7 @@ export class JobsService {
   ): Promise<ResponseObject> {
     const newJob = await this.jobModel.create({
       ...body,
-      company: employerId,
+      company: new mongoose.Types.ObjectId(employerId),
     });
 
     if (!newJob) {
@@ -55,7 +60,7 @@ export class JobsService {
 
     const matchedSeekers = await this.seekersService.find({
       'alerts.type': newJob.type,
-      'alerts.level': { $in: newJob.level },
+      'alerts.level': { $in: [newJob.level] },
       'alerts.title': { $regex: new RegExp(String(newJob.title), 'i') },
     });
 

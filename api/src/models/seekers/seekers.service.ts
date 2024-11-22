@@ -32,8 +32,11 @@ export class SeekersService {
   constructor(
     @Inject(forwardRef(() => EmployersService))
     private readonly employersService: EmployersService,
+    @Inject(forwardRef(() => JobsService))
     private readonly jobsService: JobsService,
+    @Inject(forwardRef(() => ReviewsService))
     private readonly reviewsService: ReviewsService,
+    @Inject(forwardRef(() => ApplicationsService))
     private readonly applicationsService: ApplicationsService,
     private readonly s3Service: S3Service,
     private readonly emailService: NodemailerService,
