@@ -5,6 +5,8 @@ import { SeekersModule } from 'src/models/seekers/seekers.module';
 import { EmployersModule } from 'src/models/employers/employers.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { VerificationModule } from './verification/verification.module';
+import { NodemailerModule } from 'src/common/email/nodemailer.module';
 
 import { AuthController } from './auth.controller';
 
@@ -15,6 +17,8 @@ import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
+    NodemailerModule,
+    VerificationModule,
     SeekersModule,
     EmployersModule,
     PassportModule,

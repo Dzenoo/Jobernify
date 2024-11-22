@@ -5,11 +5,17 @@ import { Employer } from './schemas/employer.schema';
 
 import { Model, UpdateQuery } from 'mongoose';
 
+import { SignUpEmployerDto } from './dto/signup-employer.dto';
+
 @Injectable()
 export class EmployersService {
   constructor(
     @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
   ) {}
+
+  async createOne(body: SignUpEmployerDto & Record<string, any>): Promise<any> {
+    return await this.employerModel.create(body);
+  }
 
   async findOneById(id: string, select?: string): Promise<Employer> {
     return await this.employerModel.findById(id).select(select);

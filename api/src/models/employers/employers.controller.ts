@@ -1,7 +1,6 @@
 import {
   Controller,
   Get,
-  Post,
   Patch,
   Delete,
   Body,
@@ -12,7 +11,6 @@ import {
 
 import { EmployersService } from './employers.service';
 
-import { SignUpEmployerDto } from './dto/signup-employer.dto';
 import { GetEmployersDto } from './dto/get-employers.dto';
 import { GetProfileDto } from './dto/get-profile.dto';
 import { UpdateEmployerDto } from './dto/update-employer.dto';
@@ -20,9 +18,6 @@ import { UpdateEmployerDto } from './dto/update-employer.dto';
 @Controller('/employers')
 export class EmployersController {
   constructor(private readonly employersService: EmployersService) {}
-
-  @Post('/signup')
-  async signup(@Body() body: SignUpEmployerDto) {}
 
   @Get('/')
   async getProfile(@Query() query: GetProfileDto) {}

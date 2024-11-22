@@ -24,7 +24,6 @@ import { UpdateSeekerDto } from './dto/update-seeker.dto';
 import { GetSeekersDto } from './dto/get-seekers.dto';
 import { CreateEducationDto } from './dto/create-education.dto';
 import { CreateExperienceDto } from './dto/create-experience.dto';
-import { SignupSeekerDto } from './dto/signup-seeker.dto';
 import { CreateJobAlertDto } from './dto/create-job-alert.dto';
 
 import { JwtAuthGuard } from 'src/authentication/guards/jwt-auth.guard';
@@ -42,18 +41,6 @@ export class SeekersController {
     private readonly seekersService: SeekersService,
     private readonly verificationService: VerificationService,
   ) {}
-
-  @Post('/signup')
-  @UseGuards(RolesGuard)
-  @Roles(Role.SEEKER)
-  async signup(@Body() body: SignupSeekerDto) {
-    await this.seekersService.createOne(body);
-
-    return {
-      statusCode: HttpStatus.CREATED,
-      message: 'Signup successful! Please verify your email.',
-    };
-  }
 
   @Get('/profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
