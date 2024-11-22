@@ -1,10 +1,10 @@
 import {
   Injectable,
-  ConflictException,
-  InternalServerErrorException,
   NotAcceptableException,
   NotFoundException,
   HttpStatus,
+  Inject,
+  forwardRef,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
@@ -20,7 +20,6 @@ import { JobsService } from '../jobs/jobs.service';
 import { ReviewsService } from '../reviews/reviews.service';
 import { ApplicationsService } from '../applications/applications.service';
 import { S3Service } from 'src/common/s3/s3.service';
-import { VerificationService } from 'src/authentication/verification/verification.service';
 import { NodemailerService } from 'src/common/email/nodemailer.service';
 
 import { uuidv7 } from 'uuidv7';
@@ -31,12 +30,12 @@ import { CreateJobAlertDto } from './dto/create-job-alert.dto';
 @Injectable()
 export class SeekersService {
   constructor(
+    @Inject(forwardRef(() => EmployersService))
     private readonly employersService: EmployersService,
     private readonly jobsService: JobsService,
     private readonly reviewsService: ReviewsService,
     private readonly applicationsService: ApplicationsService,
     private readonly s3Service: S3Service,
-    private readonly verificationService: VerificationService,
     private readonly emailService: NodemailerService,
     @InjectModel(Seeker.name) private readonly seekerModel: Model<Seeker>,
   ) {}

@@ -1,5 +1,7 @@
 import {
+  forwardRef,
   HttpStatus,
+  Inject,
   Injectable,
   NotAcceptableException,
   NotFoundException,
@@ -14,20 +16,23 @@ import { Model, UpdateQuery } from 'mongoose';
 import { SignUpEmployerDto } from './dto/signup-employer.dto';
 import { UpdateEmployerDto } from './dto/update-employer.dto';
 
-import { S3Service } from 'src/common/s3/s3.service';
 import { SeekersService } from '../seekers/seekers.service';
 import { JobsService } from '../jobs/jobs.service';
+import { S3Service } from 'src/common/s3/s3.service';
 import { ReviewsService } from '../reviews/reviews.service';
+import { ApplicationsService } from '../applications/applications.service';
 
 import { uuidv7 } from 'uuidv7';
 
 @Injectable()
 export class EmployersService {
   constructor(
-    private readonly jobsService: JobsService,
+    @Inject(forwardRef(() => SeekersService))
     private readonly seekersService: SeekersService,
-    private readonly reviewsService: ReviewsService,
     private readonly s3Service: S3Service,
+    private readonly jobsService: JobsService,
+    private readonly applicationsService: ApplicationsService,
+    private readonly reviewsService: ReviewsService,
     @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
   ) {}
 
@@ -249,12 +254,12 @@ export class EmployersService {
   async getOneById({
     page = 1,
     limit = 10,
-    type = '',
+    type = 'jobs',
     id,
   }: {
-    page: number;
-    limit: number;
-    type: string;
+    page?: number;
+    limit?: number;
+    type?: 'jobs' | 'reviews';
     id: string;
   }): Promise<any> {
     const skip = (page - 1) * limit;

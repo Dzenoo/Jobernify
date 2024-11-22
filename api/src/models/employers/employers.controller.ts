@@ -63,14 +63,19 @@ export class EmployersController {
     return await this.employersService.deleteOne(userId);
   }
 
+  @Get('/all')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.SEEKER)
+  async getAll(@Query() query: GetEmployersDto) {}
+
   @Get('/:employerId')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.SEEKER)
   async getById(
-    @Param('employerId') employerId: string,
-    @Query('type') type: 'jobs' | 'reviews',
     @Query('page', ParseIntPipe) page: number = 1,
     @Query('limit', ParseIntPipe) limit: number = 10,
+    @Query('type') type: 'jobs' | 'reviews',
+    @Param('employerId') employerId: string,
   ) {
     return await this.employersService.getOneById({
       page,
@@ -79,11 +84,6 @@ export class EmployersController {
       id: employerId,
     });
   }
-
-  @Get('/all')
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
-  async getAll(@Query() query: GetEmployersDto) {}
 
   @Get('/analytics')
   @UseGuards(JwtAuthGuard, RolesGuard)
