@@ -1,4 +1,9 @@
-import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ConflictException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import {
@@ -35,7 +40,7 @@ export class VerificationService {
     }
 
     if (!user) {
-      throw new Error('Invalid token.');
+      throw new ConflictException('Invalid token.');
     }
 
     if (user.verificationExpiration < new Date()) {

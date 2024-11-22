@@ -29,13 +29,12 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
-    let user = await this.seekersService.findOneByEmail(email, '+password');
+    let user;
+
+    user = await this.seekersService.findOneByEmail(email, '+password');
 
     if (!user) {
-      (user as any) = await this.employersService.findOneByEmail(
-        email,
-        '+password',
-      );
+      user = await this.employersService.findOneByEmail(email, '+password');
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -65,6 +64,16 @@ export class AuthService {
   }
 
   async signupSeeker(body: SignupSeekerDto) {
+    const existingEmployer = await this.employersService.findOneByEmail(
+      body.email,
+    );
+
+    if (existingEmployer) {
+      throw new ConflictException(
+        'This email is already associated with one account',
+      );
+    }
+
     const existingSeeker = await this.seekersService.findOneByEmail(body.email);
 
     if (existingSeeker) {
@@ -115,6 +124,14 @@ export class AuthService {
   }
 
   async signupEmployer(body: SignUpEmployerDto) {
+    const existingSeeker = await this.seekersService.findOneByEmail(body.email);
+
+    if (existingSeeker) {
+      throw new ConflictException(
+        'This email is already associated with one account',
+      );
+    }
+
     const existingEmployer = await this.employersService.findOneByEmail(
       body.email,
     );

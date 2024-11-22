@@ -12,6 +12,7 @@ import { JobDocument } from '../jobs/schemas/job.schema';
 import { Employer } from './schemas/employer.schema';
 
 import { Model, UpdateQuery } from 'mongoose';
+import mongoose from 'mongoose';
 
 import { SignUpEmployerDto } from './dto/signup-employer.dto';
 import { UpdateEmployerDto } from './dto/update-employer.dto';
@@ -161,6 +162,7 @@ export class EmployersService {
 
     return {
       statusCode: HttpStatus.ACCEPTED,
+      employer,
       // counts,
     };
   }
@@ -383,5 +385,152 @@ export class EmployersService {
     }
 
     return { statusCode: HttpStatus.OK, employers, totalEmployers };
+  }
+
+  async getAnalytics(id: string): Promise<ResponseObject> {
+    const startOfMonth = new Date();
+    startOfMonth.setDate(1);
+    startOfMonth.setHours(0, 0, 0, 0);
+
+    // const totalJobs = await this.jobsService.countDocuments({ company: id });
+    // const totalReviews = await this.reviewsService.countDocuments({
+    //   company: id,
+    // });
+    // const totalApplications = await this.applicationsService.countDocuments({
+    //   job: {
+    //     $in: await this.jobsService.find({ company: id }).distinct('_id'),
+    //   },
+    // });
+    // const totalFollowers = (
+    //   await this.employerModel.findById(id).select('followers')
+    // ).followers.length;
+
+    // const jobsThisMonth = await this.jobsService.countDocuments({
+    //   company: id,
+    //   createdAt: { $gte: startOfMonth },
+    // });
+
+    // const reviewsThisMonth = await this.reviewsService.countDocuments({
+    //   company: id,
+    //   createdAt: { $gte: startOfMonth },
+    // });
+
+    // const applicationsThisMonth = await this.applicationsService.countDocuments(
+    //   {
+    //     job: {
+    //       $in: await this.jobsService.find({ company: id }).distinct('_id'),
+    //     },
+    //     createdAt: { $gte: startOfMonth },
+    //   },
+    // );
+
+    // const employerWithFollowers = await this.employerModel
+    //   .findById(id)
+    //   .select('followers')
+    //   .populate('followers', 'createdAt');
+
+    // const followersThisMonth = employerWithFollowers.followers.filter(
+    //   (follower: any) => {
+    //     const followerCreatedAt = follower.createdAt;
+    //     return (
+    //       followerCreatedAt >= startOfMonth && followerCreatedAt < new Date()
+    //     );
+    //   },
+    // ).length;
+
+    const jobsPerMonth = await this.getJobsPerMonth(id);
+    const followersOverTime = await this.getFollowersOverTime(id);
+    const jobTypes = await this.getJobTypes(id);
+
+    return {
+      statusCode: HttpStatus.OK,
+      // totalJobs,
+      // totalReviews,
+      // totalApplications,
+      // totalFollowers,
+      jobsPerMonth,
+      followersOverTime,
+      jobTypes,
+      // jobsThisMonth,
+      // reviewsThisMonth,
+      // applicationsThisMonth,
+      // followersThisMonth,
+    };
+  }
+
+  private async getJobsPerMonth(id: string): Promise<any[]> {
+    const objectIdEmployerId = new mongoose.Types.ObjectId(id);
+
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 5);
+    sixMonthsAgo.setDate(1);
+    sixMonthsAgo.setHours(0, 0, 0, 0);
+
+    const jobs = await this.jobsService.aggregate([
+      {
+        $match: {
+          company: objectIdEmployerId,
+          createdAt: { $gte: sixMonthsAgo },
+        },
+      },
+      {
+        $group: {
+          _id: { $month: '$createdAt' },
+          count: { $sum: 1 },
+        },
+      },
+      { $sort: { _id: 1 } },
+    ]);
+
+    const jobsPerMonth = Array.from({ length: 6 }, (_, index) => {
+      const month = ((sixMonthsAgo.getMonth() + index) % 12) + 1;
+      const job = jobs.find((job) => job._id === month);
+      return job ? job.count : 0;
+    });
+
+    return jobsPerMonth;
+  }
+
+  private async getFollowersOverTime(id: string): Promise<number[]> {
+    const objectIdEmployerId = new mongoose.Types.ObjectId(id);
+
+    const employer = await this.employerModel
+      .findById(objectIdEmployerId)
+      .populate('followers');
+
+    const followers = employer.followers;
+
+    const followersOverTime = Array.from({ length: 6 }, (_, index) => {
+      const month = new Date().getMonth() - index + 1;
+      return followers.filter((follower: any) => {
+        return new Date(follower.createdAt).getMonth() + 1 === month;
+      }).length;
+    }).reverse();
+
+    return followersOverTime;
+  }
+
+  private async getJobTypes(id: string): Promise<
+    {
+      label: any;
+      value: any;
+    }[]
+  > {
+    const objectIdEmployerId = new mongoose.Types.ObjectId(id);
+
+    const jobTypes = await this.jobsService.aggregate([
+      { $match: { company: objectIdEmployerId } },
+      {
+        $group: {
+          _id: '$type',
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+
+    return jobTypes.map((jobType) => ({
+      label: jobType._id,
+      value: jobType.count,
+    }));
   }
 }

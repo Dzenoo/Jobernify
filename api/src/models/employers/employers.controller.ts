@@ -22,10 +22,14 @@ import { RolesGuard } from 'src/authentication/guards/role-auth.guard';
 import { Roles } from 'src/common/decorators/roles.decorator';
 import { Role } from '../shared/schemas/user.schema';
 import { User } from 'src/common/decorators/user.decorator';
+import { VerificationService } from 'src/authentication/verification/verification.service';
 
 @Controller('/employers')
 export class EmployersController {
-  constructor(private readonly employersService: EmployersService) {}
+  constructor(
+    private readonly employersService: EmployersService,
+    private readonly verificationService: VerificationService,
+  ) {}
 
   @Get('/profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
@@ -63,6 +67,18 @@ export class EmployersController {
     return await this.employersService.deleteOne(userId);
   }
 
+  @Get('/analytics')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.EMPLOYER)
+  async getAnalytics(@User('userId') userId: string) {
+    return await this.employersService.getAnalytics(userId);
+  }
+
+  @Get('/verify-email')
+  async verifyEmail(@Query('token') token: string) {
+    return await this.verificationService.verifyEmail(token, 'employer');
+  }
+
   @Get('/all')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.SEEKER)
@@ -95,17 +111,4 @@ export class EmployersController {
       id: employerId,
     });
   }
-
-  @Get('/analytics')
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.EMPLOYER)
-  async getAnalytics(@User('userId') userId: string) {}
-
-  getJobsPerMonth() {}
-
-  getFollowerOverTime() {}
-
-  getJobTypes() {}
-
-  verifyEmail() {}
 }

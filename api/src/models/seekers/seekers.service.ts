@@ -56,7 +56,7 @@ export class SeekersService {
     page?: number;
     limit?: number;
     id: string;
-  }): Promise<any> {
+  }): Promise<ResponseObject> {
     const skip = (page - 1) * limit;
 
     const seeker = await this.seekerModel
@@ -104,7 +104,7 @@ export class SeekersService {
     id: string,
     updatedData: UpdateSeekerDto,
     image?: Express.Multer.File,
-  ): Promise<any> {
+  ): Promise<ResponseObject> {
     if (image) {
       const currentSeeker = await this.seekerModel.findById(id);
 
@@ -145,7 +145,7 @@ export class SeekersService {
     };
   }
 
-  async deleteOne(id: string): Promise<any> {
+  async deleteOne(id: string): Promise<ResponseObject> {
     const seeker = await this.seekerModel.findById(id);
 
     if (!seeker) {
@@ -205,7 +205,7 @@ export class SeekersService {
     limit?: number;
     search?: string;
     skills?: string[];
-  }): Promise<any> {
+  }): Promise<ResponseObject> {
     const conditions: any = {
       emailVerified: true,
     };
@@ -242,7 +242,7 @@ export class SeekersService {
     };
   }
 
-  async getOneById(id: string): Promise<any> {
+  async getOneById(id: string): Promise<ResponseObject> {
     const seeker = await this.seekerModel
       .findById(id)
       .select(
@@ -264,7 +264,7 @@ export class SeekersService {
   async createEducation(
     id: string,
     educationData: CreateEducationDto,
-  ): Promise<any> {
+  ): Promise<ResponseObject> {
     const seeker = await this.seekerModel.findByIdAndUpdate(
       id,
       {
@@ -286,7 +286,10 @@ export class SeekersService {
     };
   }
 
-  async deleteEducation(id: string, educationId: string): Promise<any> {
+  async deleteEducation(
+    id: string,
+    educationId: string,
+  ): Promise<ResponseObject> {
     const seeker = await this.seekerModel.findById(id);
 
     if (!seeker) {
@@ -318,7 +321,7 @@ export class SeekersService {
   async createExperience(
     id: string,
     experienceData: CreateExperienceDto,
-  ): Promise<any> {
+  ): Promise<ResponseObject> {
     const seeker = await this.seekerModel.findByIdAndUpdate(
       id,
       {
@@ -340,7 +343,10 @@ export class SeekersService {
     };
   }
 
-  async deleteExperience(id: string, experienceId: string): Promise<any> {
+  async deleteExperience(
+    id: string,
+    experienceId: string,
+  ): Promise<ResponseObject> {
     const seeker = await this.seekerModel.findById(id);
 
     if (!seeker) {
@@ -370,7 +376,10 @@ export class SeekersService {
     };
   }
 
-  async createJobAlert(id: string, alertData: CreateJobAlertDto): Promise<any> {
+  async createJobAlert(
+    id: string,
+    alertData: CreateJobAlertDto,
+  ): Promise<ResponseObject> {
     const seeker = await this.seekerModel.findByIdAndUpdate(id, {
       alerts: { ...alertData },
     });
@@ -387,7 +396,10 @@ export class SeekersService {
     };
   }
 
-  async followEmployer(id: string, employerId: string): Promise<any> {
+  async followEmployer(
+    id: string,
+    employerId: string,
+  ): Promise<ResponseObject> {
     const [employer, seeker] = await Promise.all([
       this.employersService.findOneById(employerId),
       this.seekerModel.findById(id),

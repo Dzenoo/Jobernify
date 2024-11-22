@@ -87,27 +87,6 @@ export class SeekersController {
     return await this.seekersService.deleteOne(userId);
   }
 
-  @Get('/all')
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.EMPLOYER)
-  async getAll(@Query() query: GetSeekersDto) {
-    const { page, limit, search, skills } = query;
-
-    return await this.seekersService.getMany({
-      page,
-      limit,
-      search,
-      skills,
-    });
-  }
-
-  @Get('/:seekerId')
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.EMPLOYER)
-  async getById(@Param('seekerId') seekerId: string) {
-    return await this.seekersService.getOneById(seekerId);
-  }
-
   @Patch('/add-new-education')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.SEEKER)
@@ -169,7 +148,28 @@ export class SeekersController {
   }
 
   @Get('/verify-email')
-  async verifyEmail(@Query() token: string) {
+  async verifyEmail(@Query('token') token: string) {
     return await this.verificationService.verifyEmail(token, 'seeker');
+  }
+
+  @Get('/all')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.EMPLOYER)
+  async getAll(@Query() query: GetSeekersDto) {
+    const { page, limit, search, skills } = query;
+
+    return await this.seekersService.getMany({
+      page,
+      limit,
+      search,
+      skills,
+    });
+  }
+
+  @Get('/:seekerId')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.EMPLOYER)
+  async getById(@Param('seekerId') seekerId: string) {
+    return await this.seekersService.getOneById(seekerId);
   }
 }

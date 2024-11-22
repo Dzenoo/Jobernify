@@ -30,12 +30,12 @@ export abstract class BaseUser {
   })
   password: string;
 
-  @Prop({ default: false })
+  @Prop({ default: false, select: false })
   emailVerified: boolean;
 
   @Prop({ type: String, select: false })
   verificationToken: string;
 
-  @Prop({ type: Date })
+  @Prop({ type: Date, select: false })
   verificationExpiration: Date;
 }
