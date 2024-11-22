@@ -8,11 +8,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
+import { VerificationService } from './verification/verification.service';
+import { NodemailerService } from 'src/common/email/nodemailer.service';
 import { JwtService } from '@nestjs/jwt';
 import { SeekersService } from 'src/models/seekers/seekers.service';
 import { EmployersService } from 'src/models/employers/employers.service';
-import { VerificationService } from './verification/verification.service';
-import { NodemailerService } from 'src/common/email/nodemailer.service';
 
 import * as bcrypt from 'bcrypt';
 
@@ -22,11 +22,11 @@ import { SignUpEmployerDto } from 'src/models/employers/dto/signup-employer.dto'
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly emailService: NodemailerService,
     private readonly verificationService: VerificationService,
+    private readonly emailService: NodemailerService,
+    private readonly jwtService: JwtService,
     private readonly seekersService: SeekersService,
     private readonly employersService: EmployersService,
-    private readonly jwtService: JwtService,
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {

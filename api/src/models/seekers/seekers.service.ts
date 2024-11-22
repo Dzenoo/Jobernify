@@ -50,10 +50,6 @@ export class SeekersService {
     return await this.seekerModel.updateOne(query, update).exec();
   }
 
-  async findOneById(id: string, select?: string): Promise<Seeker> {
-    return await this.seekerModel.findById(id).select(select);
-  }
-
   async findAndUpdateMany(
     query: FilterQuery<Seeker>,
     update: UpdateQuery<Seeker>,
@@ -61,11 +57,15 @@ export class SeekersService {
     return await this.seekerModel.updateMany(query, update).exec();
   }
 
+  async findOneById(id: string, select?: string): Promise<Seeker> {
+    return await this.seekerModel.findById(id).select(select);
+  }
+
   async findOneByEmail(email: string, select?: string): Promise<Seeker> {
     return await this.seekerModel.findOne({ email: email }).select(select);
   }
 
-  async find(query: Record<string, any> = {}) {
+  async find(query: FilterQuery<Seeker> = {}) {
     return await this.seekerModel.find(query).exec();
   }
 

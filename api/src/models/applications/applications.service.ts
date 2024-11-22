@@ -12,11 +12,11 @@ export class ApplicationsService {
     private readonly applicationModel: Model<Application>,
   ) {}
 
-  async find(query: FilterQuery<Application> = {}) {
-    return await this.applicationModel.find(query).exec();
-  }
-
   async findAndDeleteMany(query: FilterQuery<Application> = {}) {
     return await this.applicationModel.deleteMany(query).exec();
+  }
+
+  async find(query: FilterQuery<Application> = {}) {
+    return await this.applicationModel.find(query).exec();
   }
 }

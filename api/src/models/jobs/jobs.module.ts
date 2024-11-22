@@ -1,10 +1,10 @@
 import { forwardRef, Module } from '@nestjs/common';
 
 import { MongooseModule } from '@nestjs/mongoose';
-import { SeekersModule } from '../seekers/seekers.module';
-import { ApplicationsModule } from '../applications/applications.module';
-import { EmployersModule } from '../employers/employers.module';
 import { NodemailerModule } from 'src/common/email/nodemailer.module';
+import { SeekersModule } from '../seekers/seekers.module';
+import { EmployersModule } from '../employers/employers.module';
+import { ApplicationsModule } from '../applications/applications.module';
 
 import { JobsService } from './jobs.service';
 import { JobsController } from './jobs.controller';
@@ -13,10 +13,10 @@ import { Job, JobSchema } from './schemas/job.schema';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Job.name, schema: JobSchema }]),
+    NodemailerModule,
     forwardRef(() => SeekersModule),
     forwardRef(() => EmployersModule),
     forwardRef(() => ApplicationsModule),
-    NodemailerModule,
   ],
   controllers: [JobsController],
   providers: [JobsService],

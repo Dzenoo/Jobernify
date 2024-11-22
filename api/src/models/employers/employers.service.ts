@@ -40,10 +40,15 @@ export class EmployersService {
     @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
   ) {}
 
-  async createOne(
-    body: SignUpEmployerDto & Record<string, any>,
-  ): Promise<Employer> {
-    return await this.employerModel.create(body);
+  async findOneByIdAndUpdate(
+    id: string,
+    update: UpdateQuery<Employer> = {},
+  ): Promise<void> {
+    if (Object.keys(update).length === 0) {
+      throw new Error('At least one update criterion must be provided.');
+    }
+
+    await this.employerModel.findByIdAndUpdate(id, update).exec();
   }
 
   async findOneById(id: string, select?: string): Promise<Employer> {
@@ -54,15 +59,10 @@ export class EmployersService {
     return await this.employerModel.findOne({ email: email }).select(select);
   }
 
-  async findOneByIdAndUpdate(
-    id: string,
-    update: UpdateQuery<Employer> = {},
-  ): Promise<void> {
-    if (Object.keys(update).length === 0) {
-      throw new Error('At least one update criterion must be provided.');
-    }
-
-    await this.employerModel.findByIdAndUpdate(id, update).exec();
+  async createOne(
+    body: SignUpEmployerDto & Record<string, any>,
+  ): Promise<Employer> {
+    return await this.employerModel.create(body);
   }
 
   async getOne({
