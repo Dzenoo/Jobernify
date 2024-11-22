@@ -235,8 +235,41 @@ export class JobsService {
   }
 
   async getOneById(id: string): Promise<ResponseObject> {
+    const job = await this.jobModel
+      .findById(id)
+      .populate({
+        path: 'company',
+        select:
+          'name company_description followers reviews size image industry',
+      })
+      .select(
+        '_id title overview company position applications location expiration_date level createdAt salary skills description type',
+      );
+
+    if (!job) {
+      throw new NotFoundException('Job not found');
+    }
+
+    const jobs = await this.jobModel
+      .find({
+        title: job.title,
+      })
+      .select(
+        '_id title overview company position applications location expiration_date level createdAt',
+      )
+      .populate({
+        path: 'company',
+        select:
+          'name company_description followers reviews size image industry',
+      })
+      .exec();
+
+    const filteredJobsData = jobs.filter((job) => job._id.toString() !== id);
+
     return {
       statusCode: HttpStatus.OK,
+      job,
+      jobs: filteredJobsData,
     };
   }
 
