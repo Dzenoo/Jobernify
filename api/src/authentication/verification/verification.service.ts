@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import {
@@ -25,7 +25,7 @@ export class VerificationService {
   async verifyEmail(
     token: string,
     userType: 'seeker' | 'employer',
-  ): Promise<boolean> {
+  ): Promise<any> {
     let user: SeekerDocument | EmployerDocument;
 
     if (userType === 'seeker') {
@@ -48,7 +48,10 @@ export class VerificationService {
 
     await user.save();
 
-    return true;
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'Email successfully verified.',
+    };
   }
 
   create() {

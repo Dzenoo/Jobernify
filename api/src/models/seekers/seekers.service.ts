@@ -4,6 +4,7 @@ import {
   InternalServerErrorException,
   NotAcceptableException,
   NotFoundException,
+  HttpStatus,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
@@ -56,7 +57,7 @@ export class SeekersService {
     page?: number;
     limit?: number;
     id: string;
-  }): Promise<Seeker> {
+  }): Promise<any> {
     const skip = (page - 1) * limit;
 
     const seeker = await this.seekerModel
@@ -94,14 +95,17 @@ export class SeekersService {
       );
     }
 
-    return seeker;
+    return {
+      statusCode: HttpStatus.OK,
+      seeker,
+    };
   }
 
   async editOne(
     id: string,
     updatedData: UpdateSeekerDto,
     image?: Express.Multer.File,
-  ): Promise<void> {
+  ): Promise<any> {
     if (image) {
       const currentSeeker = await this.seekerModel.findById(id);
 
@@ -121,13 +125,28 @@ export class SeekersService {
       }
     }
 
-    await this.seekerModel.findByIdAndUpdate(id, updatedData, {
-      new: true,
-      runValidators: true,
-    });
+    const updatedSeeker = await this.seekerModel.findByIdAndUpdate(
+      id,
+      updatedData,
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
+
+    if (!updatedSeeker) {
+      throw new NotAcceptableException(
+        'We cannot update your profile right now. Please try again later.',
+      );
+    }
+
+    return {
+      statusCode: HttpStatus.ACCEPTED,
+      message: 'Successfully edited profile',
+    };
   }
 
-  async deleteOne(id: string): Promise<void> {
+  async deleteOne(id: string): Promise<any> {
     const seeker = await this.seekerModel.findById(id);
 
     if (!seeker) {
@@ -169,6 +188,12 @@ export class SeekersService {
     }
 
     await this.seekerModel.findByIdAndDelete(id);
+
+    return {
+      statusCode: HttpStatus.ACCEPTED,
+      message:
+        'Your profile and all associated data have been successfully deleted.',
+    };
   }
 
   async getMany({
@@ -181,10 +206,7 @@ export class SeekersService {
     limit?: number;
     search?: string;
     skills?: string[];
-  }): Promise<{
-    seekers: Seeker[];
-    totalSeekers: number;
-  }> {
+  }): Promise<any> {
     const conditions: any = {
       emailVerified: true,
     };
@@ -214,10 +236,14 @@ export class SeekersService {
 
     const totalSeekers = await this.seekerModel.countDocuments(conditions);
 
-    return { seekers, totalSeekers };
+    return {
+      statusCode: HttpStatus.OK,
+      seekers,
+      totalSeekers,
+    };
   }
 
-  async getOneById(id: string): Promise<Seeker> {
+  async getOneById(id: string): Promise<any> {
     const seeker = await this.seekerModel
       .findById(id)
       .select(
@@ -230,13 +256,16 @@ export class SeekersService {
       );
     }
 
-    return seeker;
+    return {
+      statusCode: HttpStatus.OK,
+      seeker,
+    };
   }
 
   async createEducation(
     id: string,
     educationData: CreateEducationDto,
-  ): Promise<void> {
+  ): Promise<any> {
     const seeker = await this.seekerModel.findByIdAndUpdate(
       id,
       {
@@ -250,9 +279,15 @@ export class SeekersService {
         'Seeker not found or could not add education',
       );
     }
+
+    return {
+      statusCode: HttpStatus.CREATED,
+      message:
+        'Your education entry has been successfully added to your profile.',
+    };
   }
 
-  async deleteEducation(id: string, educationId: string): Promise<void> {
+  async deleteEducation(id: string, educationId: string): Promise<any> {
     const seeker = await this.seekerModel.findById(id);
 
     if (!seeker) {
@@ -265,17 +300,26 @@ export class SeekersService {
       (education: any) => education._id.toString() !== educationId.toString(),
     );
 
-    await this.seekerModel.findByIdAndUpdate(
+    const deletedSeekerEducation = await this.seekerModel.findByIdAndUpdate(
       id,
       { education: updatedEducation },
       { new: true },
     );
+
+    if (!deletedSeekerEducation) {
+      throw new NotFoundException('Could not delete education right now');
+    }
+
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'Education successfully deleted',
+    };
   }
 
   async createExperience(
     id: string,
     experienceData: CreateExperienceDto,
-  ): Promise<void> {
+  ): Promise<any> {
     const seeker = await this.seekerModel.findByIdAndUpdate(
       id,
       {
@@ -289,9 +333,15 @@ export class SeekersService {
         'Seeker not found or could not add experience',
       );
     }
+
+    return {
+      statusCode: HttpStatus.CREATED,
+      message:
+        'Your experience entry has been successfully added to your profile.',
+    };
   }
 
-  async deleteExperience(id: string, experienceId: string): Promise<void> {
+  async deleteExperience(id: string, experienceId: string): Promise<any> {
     const seeker = await this.seekerModel.findById(id);
 
     if (!seeker) {
@@ -305,17 +355,23 @@ export class SeekersService {
         experience._id.toString() !== experienceId.toString(),
     );
 
-    await this.seekerModel.findByIdAndUpdate(
+    const deletedSeekerExperience = await this.seekerModel.findByIdAndUpdate(
       id,
       { experience: updatedExperience },
       { new: true },
     );
+
+    if (!deletedSeekerExperience) {
+      throw new NotFoundException('Could not delete experience right now');
+    }
+
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'Experience successfully deleted',
+    };
   }
 
-  async createJobAlert(
-    id: string,
-    alertData: CreateJobAlertDto,
-  ): Promise<void> {
+  async createJobAlert(id: string, alertData: CreateJobAlertDto): Promise<any> {
     const seeker = await this.seekerModel.findByIdAndUpdate(id, {
       alerts: { ...alertData },
     });
@@ -325,9 +381,14 @@ export class SeekersService {
         'Seeker not found or could not create job alert',
       );
     }
+
+    return {
+      statusCode: HttpStatus.CREATED,
+      message: 'Your job alert has been successfully created.',
+    };
   }
 
-  async followEmployer(id: string, employerId: string): Promise<void> {
+  async followEmployer(id: string, employerId: string): Promise<any> {
     const [employer, seeker] = await Promise.all([
       this.employersService.findOneById(employerId),
       this.seekerModel.findById(id),
@@ -360,5 +421,9 @@ export class SeekersService {
         $push: { following: employerId },
       });
     }
+
+    return {
+      statusCode: HttpStatus.OK,
+    };
   }
 }

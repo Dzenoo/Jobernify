@@ -8,7 +8,6 @@ import {
   Param,
   Query,
   ParseIntPipe,
-  HttpStatus,
   UseGuards,
   UploadedFile,
   MaxFileSizeValidator,
@@ -50,16 +49,11 @@ export class SeekersController {
     @Query('page', ParseIntPipe) page: number = 1,
     @Query('limit', ParseIntPipe) limit: number = 10,
   ) {
-    const seeker = await this.seekersService.getOne({
+    return await this.seekersService.getOne({
       page,
       limit,
       id: userId,
     });
-
-    return {
-      statusCode: HttpStatus.OK,
-      seeker,
-    };
   }
 
   @Patch('/edit-profile')
@@ -83,25 +77,14 @@ export class SeekersController {
     image: Express.Multer.File,
     @Body() body: UpdateSeekerDto,
   ) {
-    await this.seekersService.editOne(userId, body, image);
-
-    return {
-      statusCode: HttpStatus.ACCEPTED,
-      message: 'Successfully edited profile',
-    };
+    return await this.seekersService.editOne(userId, body, image);
   }
 
   @Delete('/delete-profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.SEEKER)
   async deleteProfile(@User('userId') userId: string) {
-    await this.seekersService.deleteOne(userId);
-
-    return {
-      statusCode: HttpStatus.ACCEPTED,
-      message:
-        'Your profile and all associated data have been successfully deleted.',
-    };
+    return await this.seekersService.deleteOne(userId);
   }
 
   @Get('/all')
@@ -110,30 +93,19 @@ export class SeekersController {
   async getAll(@Query() query: GetSeekersDto) {
     const { page, limit, search, skills } = query;
 
-    const { seekers, totalSeekers } = await this.seekersService.getMany({
+    return await this.seekersService.getMany({
       page,
       limit,
       search,
       skills,
     });
-
-    return {
-      statusCode: HttpStatus.OK,
-      seekers,
-      totalSeekers,
-    };
   }
 
   @Get('/:seekerId')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.EMPLOYER)
   async getById(@Param('seekerId') seekerId: string) {
-    const seeker = await this.seekersService.getOneById(seekerId);
-
-    return {
-      statusCode: HttpStatus.OK,
-      seeker,
-    };
+    return await this.seekersService.getOneById(seekerId);
   }
 
   @Patch('/add-new-education')
@@ -143,13 +115,7 @@ export class SeekersController {
     @User('userId') userId: string,
     @Body() body: CreateEducationDto,
   ) {
-    await this.seekersService.createEducation(userId, body);
-
-    return {
-      statusCode: HttpStatus.CREATED,
-      message:
-        'Your education entry has been successfully added to your profile.',
-    };
+    return await this.seekersService.createEducation(userId, body);
   }
 
   @Delete('/delete-education/:educationId')
@@ -159,12 +125,7 @@ export class SeekersController {
     @User('userId') userId: string,
     @Param('educationId') educationId: string,
   ) {
-    await this.seekersService.deleteEducation(userId, educationId);
-
-    return {
-      statusCode: HttpStatus.OK,
-      message: 'Education successfully deleted',
-    };
+    return await this.seekersService.deleteEducation(userId, educationId);
   }
 
   @Patch('/add-new-experience')
@@ -174,13 +135,7 @@ export class SeekersController {
     @User('userId') userId: string,
     @Body() body: CreateExperienceDto,
   ) {
-    await this.seekersService.createExperience(userId, body);
-
-    return {
-      statusCode: HttpStatus.CREATED,
-      message:
-        'Your experience entry has been successfully added to your profile.',
-    };
+    return await this.seekersService.createExperience(userId, body);
   }
 
   @Delete('/delete-experience/:experienceId')
@@ -190,12 +145,7 @@ export class SeekersController {
     @User('userId') userId: string,
     @Param('experienceId') experienceId: string,
   ) {
-    await this.seekersService.deleteExperience(userId, experienceId);
-
-    return {
-      statusCode: HttpStatus.OK,
-      message: 'Experience successfully deleted',
-    };
+    return await this.seekersService.deleteExperience(userId, experienceId);
   }
 
   @Post('/create-job-alert')
@@ -205,12 +155,7 @@ export class SeekersController {
     @User('userId') userId: string,
     @Body() body: CreateJobAlertDto,
   ) {
-    await this.seekersService.createJobAlert(userId, body);
-
-    return {
-      statusCode: HttpStatus.CREATED,
-      message: 'Your job alert has been successfully created.',
-    };
+    return await this.seekersService.createJobAlert(userId, body);
   }
 
   @Post('/:employerId/follow')
@@ -220,20 +165,11 @@ export class SeekersController {
     @User('userId') userId: string,
     @Param('employerId') employerId: string,
   ) {
-    await this.seekersService.followEmployer(userId, employerId);
-
-    return {
-      statusCode: HttpStatus.OK,
-    };
+    return await this.seekersService.followEmployer(userId, employerId);
   }
 
   @Get('/verify-email')
   async verifyEmail(@Query() token: string) {
-    await this.verificationService.verifyEmail(token, 'seeker');
-
-    return {
-      statusCode: HttpStatus.OK,
-      message: 'Email successfully verified.',
-    };
+    return await this.verificationService.verifyEmail(token, 'seeker');
   }
 }
