@@ -2,6 +2,8 @@ import {
   HttpStatus,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
@@ -120,6 +122,29 @@ export class JobsService {
     body: UpdateJobDto,
     employerId: string,
   ): Promise<ResponseObject> {
+    const job = await this.jobModel.findById(id);
+
+    if (!job) {
+      throw new NotFoundException(
+        'The job posting you are trying to edit could not be found.',
+      );
+    }
+
+    if (employerId.toString() !== job.company.toString()) {
+      throw new UnauthorizedException(
+        'You are not authorized to edit this job posting.',
+      );
+    }
+
+    const editedJob = await this.jobModel.findByIdAndUpdate(id, body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!editedJob) {
+      throw new NotFoundException('Job not found or could not be updated');
+    }
+
     return {
       statusCode: HttpStatus.OK,
       message: 'Successfully edited',
