@@ -245,4 +245,68 @@ export class EmployersService {
         'Your profile and all associated data have been successfully deleted.',
     };
   }
+
+  async getOneById({
+    page = 1,
+    limit = 10,
+    type = '',
+    id,
+  }: {
+    page: number;
+    limit: number;
+    type: string;
+    id: string;
+  }): Promise<any> {
+    const skip = (page - 1) * limit;
+
+    let populateQuery: any;
+    switch (type) {
+      case 'jobs':
+        populateQuery = {
+          path: 'jobs',
+          options: { skip, limit },
+          select:
+            'title position _id location level applications expiration_date createdAt overview',
+          populate: {
+            path: 'company',
+            select: '_id image name',
+          },
+        };
+        break;
+      case 'reviews':
+        populateQuery = {
+          path: 'reviews',
+          options: { skip, limit },
+        };
+        break;
+      default:
+        populateQuery = {};
+    }
+
+    const employer = await this.employerModel
+      .findById(id)
+      .populate(populateQuery)
+      .select(
+        'name reviews address size website followers number company_description industry image jobs',
+      )
+      .exec();
+
+    if (!employer) {
+      throw new NotFoundException(
+        "We couldn't find the employer with the specified ID. Please try again later.",
+      );
+    }
+
+    // const totalJobs = await this.jobsService.countDocuments({ company: id });
+    // const totalReviews = await this.reviewsService.countDocuments({
+    //   company: id,
+    // });
+
+    return {
+      statusCode: HttpStatus.OK,
+      employer,
+      // totalJobs,
+      // totalReviews
+    };
+  }
 }

@@ -53,7 +53,7 @@ export class EmployersController {
     @User('userId') userId: string,
     @Body() body: UpdateEmployerDto,
   ) {
-    return this.employersService.editOne(userId, body);
+    return await this.employersService.editOne(userId, body);
   }
 
   @Delete('/delete-profile')
@@ -71,7 +71,14 @@ export class EmployersController {
     @Query('type') type: 'jobs' | 'reviews',
     @Query('page', ParseIntPipe) page: number = 1,
     @Query('limit', ParseIntPipe) limit: number = 10,
-  ) {}
+  ) {
+    return await this.employersService.getOneById({
+      page,
+      limit,
+      type,
+      id: employerId,
+    });
+  }
 
   @Get('/all')
   @UseGuards(JwtAuthGuard, RolesGuard)
