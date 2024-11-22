@@ -66,7 +66,18 @@ export class EmployersController {
   @Get('/all')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.SEEKER)
-  async getAll(@Query() query: GetEmployersDto) {}
+  async getAll(@Query() query: GetEmployersDto) {
+    const { page, limit, search, sort, size, industry } = query;
+
+    return await this.employersService.getMany({
+      page,
+      limit,
+      search,
+      sort,
+      size,
+      industry,
+    });
+  }
 
   @Get('/:employerId')
   @UseGuards(JwtAuthGuard, RolesGuard)

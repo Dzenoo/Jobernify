@@ -36,7 +36,9 @@ export class EmployersService {
     @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
   ) {}
 
-  async createOne(body: SignUpEmployerDto & Record<string, any>): Promise<any> {
+  async createOne(
+    body: SignUpEmployerDto & Record<string, any>,
+  ): Promise<Employer> {
     return await this.employerModel.create(body);
   }
 
@@ -73,7 +75,7 @@ export class EmployersService {
     search?: string;
     sort?: string;
     id: string;
-  }): Promise<any> {
+  }): Promise<ResponseObject> {
     const skip = (page - 1) * limit;
     const sorter = sort === 'desc' ? -1 : 1;
 
@@ -158,7 +160,7 @@ export class EmployersService {
     // }
 
     return {
-      employer,
+      statusCode: HttpStatus.ACCEPTED,
       // counts,
     };
   }
@@ -167,7 +169,7 @@ export class EmployersService {
     id: string,
     updatedData: UpdateEmployerDto,
     image?: Express.Multer.File,
-  ): Promise<any> {
+  ): Promise<ResponseObject> {
     if (image) {
       const currentEmployer = await this.employerModel.findById(id);
 
@@ -208,7 +210,7 @@ export class EmployersService {
     };
   }
 
-  async deleteOne(id: string): Promise<any> {
+  async deleteOne(id: string): Promise<ResponseObject> {
     const employer = await this.employerModel.findById(id);
 
     const jobIds = (employer.jobs || []).map((job: JobDocument) => job._id);
@@ -261,7 +263,7 @@ export class EmployersService {
     limit?: number;
     type?: 'jobs' | 'reviews';
     id: string;
-  }): Promise<any> {
+  }): Promise<ResponseObject> {
     const skip = (page - 1) * limit;
 
     let populateQuery: any;
@@ -313,5 +315,73 @@ export class EmployersService {
       // totalJobs,
       // totalReviews
     };
+  }
+
+  async getMany({
+    page = 1,
+    limit = 10,
+    search = '',
+    sort = '',
+    industry = '',
+    size = '',
+    location = '',
+  }: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    sort?: string;
+    industry?: string;
+    size?: string;
+    location?: string;
+  }): Promise<ResponseObject> {
+    const conditions: any = {};
+
+    if (search) {
+      const regex = new RegExp(String(search), 'i');
+
+      conditions.$or = [
+        { name: { $regex: regex } },
+        { address: { $regex: regex } },
+        { company_description: { $regex: regex } },
+      ];
+    }
+
+    const sortOptions: any = {};
+
+    if (sort) {
+      if (sort === 'followers' || sort === 'reviews') {
+        sortOptions[sort] = -1;
+      }
+    }
+
+    if (industry) {
+      conditions.industry = industry;
+    }
+
+    if (size) {
+      conditions.size = size;
+    }
+
+    if (location) {
+      conditions.address = location;
+    }
+
+    const employers = await this.employerModel
+      .find(conditions)
+      .sort(sortOptions)
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .select('image name company_description reviews followers size address')
+      .exec();
+
+    const totalEmployers = await this.employerModel.countDocuments(conditions);
+
+    if (!employers) {
+      throw new NotFoundException(
+        "We couldn't find any employers matching your criteria. Please try again later.",
+      );
+    }
+
+    return { statusCode: HttpStatus.OK, employers, totalEmployers };
   }
 }
