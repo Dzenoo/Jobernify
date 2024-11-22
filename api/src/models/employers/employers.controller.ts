@@ -59,7 +59,9 @@ export class EmployersController {
   @Delete('/delete-profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.EMPLOYER)
-  async deleteProfile(@User('userId') userId: string) {}
+  async deleteProfile(@User('userId') userId: string) {
+    return await this.employersService.deleteOne(userId);
+  }
 
   @Get('/:employerId')
   @UseGuards(JwtAuthGuard, RolesGuard)

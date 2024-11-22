@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
+import { JobDocument } from '../jobs/schemas/job.schema';
 import { Employer } from './schemas/employer.schema';
 
 import { Model, UpdateQuery } from 'mongoose';
@@ -14,12 +15,18 @@ import { SignUpEmployerDto } from './dto/signup-employer.dto';
 import { UpdateEmployerDto } from './dto/update-employer.dto';
 
 import { S3Service } from 'src/common/s3/s3.service';
+import { SeekersService } from '../seekers/seekers.service';
+import { JobsService } from '../jobs/jobs.service';
+import { ReviewsService } from '../reviews/reviews.service';
 
 import { uuidv7 } from 'uuidv7';
 
 @Injectable()
 export class EmployersService {
   constructor(
+    private readonly jobsService: JobsService,
+    private readonly seekersService: SeekersService,
+    private readonly reviewsService: ReviewsService,
     private readonly s3Service: S3Service,
     @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
   ) {}
@@ -193,6 +200,49 @@ export class EmployersService {
     return {
       statusCode: HttpStatus.ACCEPTED,
       message: 'Successfully edited profile',
+    };
+  }
+
+  async deleteOne(id: string): Promise<any> {
+    const employer = await this.employerModel.findById(id);
+
+    const jobIds = (employer.jobs || []).map((job: JobDocument) => job._id);
+
+    if (!employer) {
+      throw new NotFoundException(
+        "We couldn't find the employer's profile. Please check the ID and try again.",
+      );
+    }
+
+    // await this.jobsService.deleteMany({ company: id });
+
+    // await this.reviewsService.deleteMany({ company: id });
+
+    // await this.seekersService.updateMany(
+    //   {
+    //     $or: [{ following: id }, { savedJobs: { $in: jobIds } }],
+    //   },
+    //   {
+    //     $pull: {
+    //       following: id,
+    //       savedJobs: { $in: jobIds },
+    //     },
+    //   },
+    // );
+
+    if (employer.image.includes('employers')) {
+      await this.s3Service.deleteFile(
+        employer.image.split('/')[1],
+        'employers',
+      );
+    }
+
+    await this.employerModel.findByIdAndDelete(id);
+
+    return {
+      statusCode: HttpStatus.ACCEPTED,
+      message:
+        'Your profile and all associated data have been successfully deleted.',
     };
   }
 }
