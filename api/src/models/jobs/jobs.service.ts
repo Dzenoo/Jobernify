@@ -198,10 +198,40 @@ export class JobsService {
   }
 
   async saveOne(id: string, seekerId: string): Promise<ResponseObject> {
-    return {
-      statusCode: HttpStatus.OK,
-      message: 'The job has been successfully added to your saved list.',
-    };
+    const job = await this.jobModel.findById(id);
+    const seeker = await this.seekersService.findOneById(seekerId);
+
+    if (!job) {
+      throw new NotFoundException(
+        'The job posting you are trying to save/unsave could not be found.',
+      );
+    }
+
+    if (seeker.savedJobs.includes(id)) {
+      await this.seekersService.findAndUpdateOne(
+        { _id: seekerId },
+        {
+          $pull: { savedJobs: id },
+        },
+      );
+
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'The job has been successfully removed from your saved list.',
+      };
+    } else {
+      await this.seekersService.findAndUpdateOne(
+        { _id: seekerId },
+        {
+          $push: { savedJobs: id },
+        },
+      );
+
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'The job has been successfully added to your saved list.',
+      };
+    }
   }
 
   async getOneById(id: string): Promise<ResponseObject> {

@@ -40,6 +40,17 @@ export class SeekersService {
     @InjectModel(Seeker.name) private readonly seekerModel: Model<Seeker>,
   ) {}
 
+  async findAndUpdateOne(
+    query: FilterQuery<Seeker>,
+    update: UpdateQuery<Seeker>,
+  ) {
+    return await this.seekerModel.updateOne(query, update).exec();
+  }
+
+  async findOneById(id: string, select?: string): Promise<Seeker> {
+    return await this.seekerModel.findById(id).select(select);
+  }
+
   async findAndUpdateMany(
     query: FilterQuery<Seeker>,
     update: UpdateQuery<Seeker>,

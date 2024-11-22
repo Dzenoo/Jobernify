@@ -116,7 +116,7 @@ export class Seeker extends BaseUser {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
     default: [],
   })
-  savedJobs: Job[];
+  savedJobs: Job[] & string;
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Application' }],
