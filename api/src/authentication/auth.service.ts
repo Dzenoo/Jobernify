@@ -5,6 +5,7 @@ import {
   NotAcceptableException,
   UnauthorizedException,
   HttpStatus,
+  NotFoundException,
 } from '@nestjs/common';
 
 import { JwtService } from '@nestjs/jwt';
@@ -35,6 +36,12 @@ export class AuthService {
 
     if (!user) {
       user = await this.employersService.findOneByEmail(email, '+password');
+    }
+
+    if (!user) {
+      throw new NotFoundException(
+        'User not found. Please check your email and password.',
+      );
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
