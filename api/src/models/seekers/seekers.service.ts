@@ -10,7 +10,7 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Seeker } from './schemas/seeker.schema';
 
-import { Model } from 'mongoose';
+import { Model, Query } from 'mongoose';
 
 import { SignupSeekerDto } from './dto/signup-seeker.dto';
 import { UpdateSeekerDto } from './dto/update-seeker.dto';
@@ -42,6 +42,10 @@ export class SeekersService {
 
   async findOneByEmail(email: string, select?: string): Promise<Seeker> {
     return await this.seekerModel.findOne({ email: email }).select(select);
+  }
+
+  async find(query: Record<string, any> = {}) {
+    return await this.seekerModel.find(query).exec();
   }
 
   async createOne(body: SignupSeekerDto & Record<string, any>): Promise<any> {
