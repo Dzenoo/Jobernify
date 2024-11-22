@@ -152,6 +152,45 @@ export class JobsService {
   }
 
   async deleteOne(id: string, employerId: string): Promise<ResponseObject> {
+    const job = await this.jobModel.findById(id);
+
+    if (!job) {
+      throw new NotFoundException(
+        'The job posting you are trying to delete could not be found.',
+      );
+    }
+
+    if (employerId.toString() !== job.company.toString()) {
+      throw new UnauthorizedException(
+        'You are not authorized to edit this job posting.',
+      );
+    }
+
+    const applications = await this.applicationsService.find({ job: id });
+
+    await this.jobModel.findByIdAndDelete(id);
+
+    await this.applicationsService.findAndDeleteMany({ job: id });
+
+    await this.seekersService.findAndUpdateMany(
+      {
+        $or: [
+          { applications: { $in: applications.map((app) => app._id) } },
+          { savedJobs: id },
+        ],
+      },
+      {
+        $pullAll: {
+          applications: applications.map((app) => app._id),
+          savedJobs: [id],
+        },
+      },
+    );
+
+    await this.employersService.findOneByIdAndUpdate(employerId, {
+      $pull: { jobs: id },
+    });
+
     return {
       statusCode: HttpStatus.OK,
       message: 'Job Deleted Successfully',

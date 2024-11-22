@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Application } from './schemas/application.schema';
 
-import { Model } from 'mongoose';
+import { FilterQuery, Model } from 'mongoose';
 
 @Injectable()
 export class ApplicationsService {
@@ -11,4 +11,12 @@ export class ApplicationsService {
     @InjectModel(Application.name)
     private readonly applicationModel: Model<Application>,
   ) {}
+
+  async find(query: FilterQuery<Application> = {}) {
+    return await this.applicationModel.find(query).exec();
+  }
+
+  async findAndDeleteMany(query: FilterQuery<Application> = {}) {
+    return await this.applicationModel.deleteMany(query).exec();
+  }
 }

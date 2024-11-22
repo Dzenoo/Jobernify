@@ -10,7 +10,7 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Seeker } from './schemas/seeker.schema';
 
-import { Model, Query } from 'mongoose';
+import { FilterQuery, Model, UpdateQuery } from 'mongoose';
 
 import { SignupSeekerDto } from './dto/signup-seeker.dto';
 import { UpdateSeekerDto } from './dto/update-seeker.dto';
@@ -39,6 +39,13 @@ export class SeekersService {
     private readonly emailService: NodemailerService,
     @InjectModel(Seeker.name) private readonly seekerModel: Model<Seeker>,
   ) {}
+
+  async findAndUpdateMany(
+    query: FilterQuery<Seeker>,
+    update: UpdateQuery<Seeker>,
+  ) {
+    return await this.seekerModel.updateMany(query, update).exec();
+  }
 
   async findOneByEmail(email: string, select?: string): Promise<Seeker> {
     return await this.seekerModel.findOne({ email: email }).select(select);
