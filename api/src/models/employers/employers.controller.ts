@@ -47,12 +47,23 @@ export class EmployersController {
   }
 
   @Patch('/edit-profile')
-  async editProfile(@Body() body: UpdateEmployerDto) {}
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.EMPLOYER)
+  async editProfile(
+    @User('userId') userId: string,
+    @Body() body: UpdateEmployerDto,
+  ) {
+    return this.employersService.editOne(userId, body);
+  }
 
   @Delete('/delete-profile')
-  async deleteProfile() {}
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.EMPLOYER)
+  async deleteProfile(@User('userId') userId: string) {}
 
   @Get('/:employerId')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.SEEKER)
   async getById(
     @Param('employerId') employerId: string,
     @Query('type') type: 'jobs' | 'reviews',
@@ -61,14 +72,20 @@ export class EmployersController {
   ) {}
 
   @Get('/all')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.SEEKER)
   async getAll(@Query() query: GetEmployersDto) {}
 
   @Get('/analytics')
-  async getAnalytics() {}
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.EMPLOYER)
+  async getAnalytics(@User('userId') userId: string) {}
 
   getJobsPerMonth() {}
 
   getFollowerOverTime() {}
 
   getJobTypes() {}
+
+  verifyEmail() {}
 }

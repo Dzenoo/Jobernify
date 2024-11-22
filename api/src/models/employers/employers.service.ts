@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  HttpStatus,
+  Injectable,
+  NotAcceptableException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Employer } from './schemas/employer.schema';
@@ -6,11 +11,16 @@ import { Employer } from './schemas/employer.schema';
 import { Model, UpdateQuery } from 'mongoose';
 
 import { SignUpEmployerDto } from './dto/signup-employer.dto';
-import { throwError } from 'rxjs';
+import { UpdateEmployerDto } from './dto/update-employer.dto';
+
+import { S3Service } from 'src/common/s3/s3.service';
+
+import { uuidv7 } from 'uuidv7';
 
 @Injectable()
 export class EmployersService {
   constructor(
+    private readonly s3Service: S3Service,
     @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
   ) {}
 
@@ -138,6 +148,51 @@ export class EmployersService {
     return {
       employer,
       // counts,
+    };
+  }
+
+  async editOne(
+    id: string,
+    updatedData: UpdateEmployerDto,
+    image?: Express.Multer.File,
+  ): Promise<any> {
+    if (image) {
+      const currentEmployer = await this.employerModel.findById(id);
+
+      if (currentEmployer) {
+        if (currentEmployer.image.includes('employers')) {
+          await this.s3Service.deleteFile(
+            currentEmployer.image.split('/')[1],
+            'employers',
+          );
+        }
+
+        const result = uuidv7();
+        const imageKey = `employer_${result}.png`;
+        await this.s3Service.uploadFile(image, imageKey, 'employers');
+
+        updatedData.image = `employers/${imageKey}`;
+      }
+    }
+
+    const updatedEmployer = await this.employerModel.findByIdAndUpdate(
+      id,
+      updatedData,
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
+
+    if (!updatedEmployer) {
+      throw new NotAcceptableException(
+        'We cannot update your profile right now. Please try again later.',
+      );
+    }
+
+    return {
+      statusCode: HttpStatus.ACCEPTED,
+      message: 'Successfully edited profile',
     };
   }
 }

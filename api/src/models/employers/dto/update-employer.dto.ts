@@ -37,4 +37,8 @@ export class UpdateEmployerDto {
   @IsOptional()
   @IsString()
   readonly website?: string;
+
+  @IsOptional()
+  @IsString()
+  image?: string;
 }

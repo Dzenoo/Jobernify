@@ -6,6 +6,7 @@ import { SeekersModule } from '../seekers/seekers.module';
 import { JobsModule } from '../jobs/jobs.module';
 import { ApplicationsModule } from '../applications/applications.module';
 import { ReviewsModule } from '../reviews/reviews.module';
+import { S3Module } from 'src/common/s3/s3.module';
 
 import { EmployersService } from './employers.service';
 import { EmployersController } from './employers.controller';
@@ -17,6 +18,7 @@ import { Employer, EmployerSchema } from './schemas/employer.schema';
       { name: Employer.name, schema: EmployerSchema },
     ]),
     VerificationModule,
+    S3Module,
     forwardRef(() => SeekersModule),
     forwardRef(() => JobsModule),
     forwardRef(() => ApplicationsModule),
