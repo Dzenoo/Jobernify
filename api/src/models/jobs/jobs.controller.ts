@@ -59,7 +59,7 @@ export class JobsController {
     return await this.jobsService.saveOne(jobId, userId);
   }
 
-  @Get('/')
+  @Get('/all')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.SEEKER)
   async getJobs(@Query() query: GetJobsDto) {

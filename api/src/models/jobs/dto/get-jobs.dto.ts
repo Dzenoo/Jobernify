@@ -32,12 +32,12 @@ export class GetJobsDto {
 
   @IsOptional()
   @IsString()
-  readonly seniority?: string;
+  readonly level?: string;
 
   @IsOptional()
   @IsNumber()
   @Min(0)
-  readonly salaryRange?: number;
+  readonly salary?: number;
 
   @IsOptional()
   @IsString()
