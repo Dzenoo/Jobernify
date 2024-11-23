@@ -8,7 +8,6 @@ import { Upload } from '@aws-sdk/lib-storage';
 @Injectable()
 export class S3Service {
   private readonly s3Client: S3Client;
-  private bucketName = this.configService.get('AWS_BUCKET');
 
   constructor(private readonly configService: ConfigService) {
     const s3_region = this.configService.get('AWS_REGION');
@@ -29,7 +28,7 @@ export class S3Service {
     folder: string,
   ): Promise<void> {
     const uploadParams = {
-      Bucket: this.bucketName,
+      Bucket: 'jobernify',
       Key: `${folder}/${key}`,
       Body: file.buffer,
     };
@@ -44,7 +43,7 @@ export class S3Service {
 
   async deleteFile(key: string, folder: string): Promise<void> {
     const deleteParams = {
-      Bucket: this.bucketName,
+      Bucket: 'jobernify',
       Key: `${folder}/${key}`,
     };
     const command = new DeleteObjectCommand(deleteParams);

@@ -11,7 +11,7 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Job, JobDocument } from './schemas/job.schema';
 
-import mongoose, { Model } from 'mongoose';
+import mongoose, { FilterQuery, Model, UpdateQuery } from 'mongoose';
 
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
@@ -37,6 +37,10 @@ export class JobsService {
 
   async aggregate(pipeline: any): Promise<any[]> {
     return await this.jobModel.aggregate(pipeline).exec();
+  }
+
+  async findAndUpdateOne(query: FilterQuery<Job>, update: UpdateQuery<Job>) {
+    return await this.jobModel.updateOne(query, update).exec();
   }
 
   async createOne(
