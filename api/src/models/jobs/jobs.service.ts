@@ -11,7 +11,13 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Job, JobDocument } from './schemas/job.schema';
 
-import mongoose, { FilterQuery, Model, UpdateQuery } from 'mongoose';
+import mongoose, {
+  DeleteResult,
+  FilterQuery,
+  Model,
+  UpdateQuery,
+  UpdateWriteOpResult,
+} from 'mongoose';
 
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
@@ -35,32 +41,38 @@ export class JobsService {
     @InjectModel(Job.name) private readonly jobModel: Model<Job>,
   ) {}
 
-  async find(query: FilterQuery<Job> = {}) {
+  async find(query: FilterQuery<Job> = {}): Promise<Job[] | JobDocument[]> {
     return await this.jobModel.find(query).exec();
   }
 
-  async findAndDeleteMany(query: FilterQuery<Job>) {
-    return await this.jobModel.deleteMany(query).exec();
+  async findAndUpdateOne(
+    query: FilterQuery<Job> = {},
+    update: UpdateQuery<Job> = {},
+  ): Promise<UpdateWriteOpResult> {
+    return await this.jobModel.updateOne(query, update).exec();
   }
 
-  async countDocuments(query: FilterQuery<Job>) {
-    return await this.jobModel.countDocuments(query).exec();
-  }
-
-  async findAndUpdateMany(query: FilterQuery<Job>, update: UpdateQuery<Job>) {
+  async findAndUpdateMany(
+    query: FilterQuery<Job> = {},
+    update: UpdateQuery<Job> = {},
+  ): Promise<UpdateWriteOpResult> {
     return await this.jobModel.updateMany(query, update).exec();
   }
 
-  async aggregate(pipeline: any): Promise<any[]> {
-    return await this.jobModel.aggregate(pipeline).exec();
-  }
-
-  async findAndUpdateOne(query: FilterQuery<Job>, update: UpdateQuery<Job>) {
-    return await this.jobModel.updateOne(query, update).exec();
+  async findAndDeleteMany(query: FilterQuery<Job> = {}): Promise<DeleteResult> {
+    return await this.jobModel.deleteMany(query).exec();
   }
 
   async findOneById(id: string, select?: string): Promise<Job> {
     return await this.jobModel.findById(id).select(select);
+  }
+
+  async countDocuments(query: FilterQuery<Job> = {}): Promise<number> {
+    return await this.jobModel.countDocuments(query).exec();
+  }
+
+  async aggregate(pipeline: any): Promise<any[]> {
+    return await this.jobModel.aggregate(pipeline).exec();
   }
 
   async createOne(

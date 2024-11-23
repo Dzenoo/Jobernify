@@ -11,7 +11,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { JobDocument } from '../jobs/schemas/job.schema';
 import { Employer } from './schemas/employer.schema';
 
-import { FilterQuery, Model, UpdateQuery } from 'mongoose';
+import { FilterQuery, Model, UpdateQuery, UpdateWriteOpResult } from 'mongoose';
 import mongoose from 'mongoose';
 
 import { SignUpEmployerDto } from './dto/signup-employer.dto';
@@ -41,9 +41,9 @@ export class EmployersService {
   ) {}
 
   async findAndUpdateMany(
-    query: FilterQuery<Employer>,
-    update: UpdateQuery<Employer>,
-  ) {
+    query: FilterQuery<Employer> = {},
+    update: UpdateQuery<Employer> = {},
+  ): Promise<UpdateWriteOpResult> {
     return await this.employerModel.updateMany(query, update).exec();
   }
 
@@ -51,10 +51,6 @@ export class EmployersService {
     id: string,
     update: UpdateQuery<Employer> = {},
   ): Promise<void> {
-    if (Object.keys(update).length === 0) {
-      throw new Error('At least one update criterion must be provided.');
-    }
-
     await this.employerModel.findByIdAndUpdate(id, update).exec();
   }
 

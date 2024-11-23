@@ -10,7 +10,7 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Seeker } from './schemas/seeker.schema';
 
-import { FilterQuery, Model, UpdateQuery } from 'mongoose';
+import { FilterQuery, Model, UpdateQuery, UpdateWriteOpResult } from 'mongoose';
 
 import { SignupSeekerDto } from './dto/signup-seeker.dto';
 import { UpdateSeekerDto } from './dto/update-seeker.dto';
@@ -41,17 +41,21 @@ export class SeekersService {
     @InjectModel(Seeker.name) private readonly seekerModel: Model<Seeker>,
   ) {}
 
+  async find(query: FilterQuery<Seeker> = {}): Promise<Seeker[]> {
+    return await this.seekerModel.find(query).exec();
+  }
+
   async findAndUpdateOne(
-    query: FilterQuery<Seeker>,
-    update: UpdateQuery<Seeker>,
-  ) {
+    query: FilterQuery<Seeker> = {},
+    update: UpdateQuery<Seeker> = {},
+  ): Promise<UpdateWriteOpResult> {
     return await this.seekerModel.updateOne(query, update).exec();
   }
 
   async findAndUpdateMany(
-    query: FilterQuery<Seeker>,
-    update: UpdateQuery<Seeker>,
-  ) {
+    query: FilterQuery<Seeker> = {},
+    update: UpdateQuery<Seeker> = {},
+  ): Promise<UpdateWriteOpResult> {
     return await this.seekerModel.updateMany(query, update).exec();
   }
 
@@ -63,11 +67,9 @@ export class SeekersService {
     return await this.seekerModel.findOne({ email: email }).select(select);
   }
 
-  async find(query: FilterQuery<Seeker> = {}) {
-    return await this.seekerModel.find(query).exec();
-  }
-
-  async createOne(body: SignupSeekerDto & Record<string, any>): Promise<any> {
+  async createOne(
+    body: SignupSeekerDto & Record<string, any>,
+  ): Promise<Seeker> {
     return await this.seekerModel.create(body);
   }
 

@@ -9,9 +9,9 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { Review } from './schemas/review.schema';
+import { Review, ReviewDocument } from './schemas/review.schema';
 
-import { FilterQuery, Model } from 'mongoose';
+import { DeleteResult, FilterQuery, Model } from 'mongoose';
 
 import { CreateReviewDto } from './dto/create-review.dto';
 
@@ -27,16 +27,20 @@ export class ReviewsService {
     private readonly reviewModel: Model<Review>,
   ) {}
 
-  async countDocuments(query: FilterQuery<Review>) {
-    return await this.reviewModel.countDocuments(query).exec();
+  async find(
+    query: FilterQuery<Review> = {},
+  ): Promise<Review[] | ReviewDocument[]> {
+    return await this.reviewModel.find(query).exec();
   }
 
-  async findAndDeleteMany(query: FilterQuery<Review> = {}) {
+  async findAndDeleteMany(
+    query: FilterQuery<Review> = {},
+  ): Promise<DeleteResult> {
     return await this.reviewModel.deleteMany(query).exec();
   }
 
-  async find(query: FilterQuery<Review> = {}) {
-    return await this.reviewModel.find(query).exec();
+  async countDocuments(query: FilterQuery<Review> = {}): Promise<number> {
+    return await this.reviewModel.countDocuments(query).exec();
   }
 
   async createOne(

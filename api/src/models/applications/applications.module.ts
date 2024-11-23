@@ -12,11 +12,11 @@ import { Application, ApplicationSchema } from './schemas/application.schema';
 
 @Module({
   imports: [
-    S3Module,
-    NodemailerModule,
     MongooseModule.forFeature([
       { name: Application.name, schema: ApplicationSchema },
     ]),
+    S3Module,
+    NodemailerModule,
     forwardRef(() => SeekersModule),
     forwardRef(() => JobsModule),
   ],

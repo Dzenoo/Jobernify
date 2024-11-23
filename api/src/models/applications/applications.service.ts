@@ -10,9 +10,13 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { Application, ApplicationStatus } from './schemas/application.schema';
+import {
+  Application,
+  ApplicationDocument,
+  ApplicationStatus,
+} from './schemas/application.schema';
 
-import { FilterQuery, Model } from 'mongoose';
+import { DeleteResult, FilterQuery, Model } from 'mongoose';
 
 import { SeekersService } from '../seekers/seekers.service';
 import { JobsService } from '../jobs/jobs.service';
@@ -32,16 +36,20 @@ export class ApplicationsService {
     private readonly applicationModel: Model<Application>,
   ) {}
 
-  async countDocuments(query: FilterQuery<Application>) {
-    return await this.applicationModel.countDocuments(query).exec();
+  async find(
+    query: FilterQuery<Application> = {},
+  ): Promise<Application[] | ApplicationDocument[]> {
+    return await this.applicationModel.find(query).exec();
   }
 
-  async findAndDeleteMany(query: FilterQuery<Application> = {}) {
+  async findAndDeleteMany(
+    query: FilterQuery<Application> = {},
+  ): Promise<DeleteResult> {
     return await this.applicationModel.deleteMany(query).exec();
   }
 
-  async find(query: FilterQuery<Application> = {}) {
-    return await this.applicationModel.find(query).exec();
+  async countDocuments(query: FilterQuery<Application> = {}): Promise<number> {
+    return await this.applicationModel.countDocuments(query).exec();
   }
 
   async createOne(
