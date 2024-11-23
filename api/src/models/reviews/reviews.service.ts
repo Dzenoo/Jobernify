@@ -4,6 +4,7 @@ import {
   HttpStatus,
   Inject,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
@@ -16,6 +17,7 @@ import { CreateReviewDto } from './dto/create-review.dto';
 
 import { EmployersService } from '../employers/employers.service';
 import { SeekersService } from '../seekers/seekers.service';
+import { UpdateReviewDto } from './dto/update-review.dto';
 
 @Injectable()
 export class ReviewsService {
@@ -68,9 +70,43 @@ export class ReviewsService {
     };
   }
 
-  async editOne(): Promise<ResponseObject> {
+  async editOne(
+    seekerId: string,
+    body: UpdateReviewDto,
+    id: string,
+  ): Promise<ResponseObject> {
+    const existingReview = await this.reviewModel.findById(id);
+
+    if (!existingReview) {
+      throw new NotFoundException(
+        'The review you are trying to edit could not be found.',
+      );
+    }
+
+    if (existingReview.seeker.toString() !== seekerId.toString()) {
+      throw new ForbiddenException(
+        'You are not authorized to edit this review.',
+      );
+    }
+
+    const editedReview = await this.reviewModel.findByIdAndUpdate(
+      existingReview._id,
+      body,
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
+
+    if (!editedReview) {
+      throw new InternalServerErrorException(
+        'Review not found or could not be updated',
+      );
+    }
+
     return {
       statusCode: HttpStatus.OK,
+      message: 'Review successfully edited',
     };
   }
 

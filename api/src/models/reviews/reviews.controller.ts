@@ -37,10 +37,15 @@ export class ReviewsController {
   }
 
   @Patch('/:reviewId')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Seeker)
   async edit(
+    @User('userId') userId: string,
     @Body() body: UpdateReviewDto,
     @Param('reviewId') reviewId: string,
-  ) {}
+  ) {
+    return await this.reviewsService.editOne(userId, body, reviewId);
+  }
 
   @Delete('/:employerId')
   async delete(@Param('employerId') employerId: string) {}
