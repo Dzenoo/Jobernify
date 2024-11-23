@@ -110,9 +110,35 @@ export class ReviewsService {
     };
   }
 
-  async deleteOne(): Promise<ResponseObject> {
+  async deleteOne(
+    seekerId: string,
+    employerId: string,
+  ): Promise<ResponseObject> {
+    const employer = await this.employersService.findOneById(employerId);
+
+    if (!employer) {
+      throw new NotFoundException('The specified employer could not be found.');
+    }
+
+    const existingReview = await this.reviewModel.findOne({
+      seeker: seekerId,
+    });
+
+    if (!existingReview) {
+      throw new NotFoundException(
+        'The review you are trying to delete could not be found.',
+      );
+    }
+
+    await this.employersService.findOneByIdAndUpdate(employerId, {
+      $pull: { reviews: existingReview._id },
+    });
+
+    await this.reviewModel.findByIdAndDelete(existingReview._id);
+
     return {
       statusCode: HttpStatus.OK,
+      message: 'Review successfully deleted',
     };
   }
 }

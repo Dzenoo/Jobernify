@@ -48,5 +48,12 @@ export class ReviewsController {
   }
 
   @Delete('/:employerId')
-  async delete(@Param('employerId') employerId: string) {}
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Seeker)
+  async delete(
+    @User('userId') userId: string,
+    @Param('employerId') employerId: string,
+  ) {
+    return await this.reviewsService.deleteOne(userId, employerId);
+  }
 }
