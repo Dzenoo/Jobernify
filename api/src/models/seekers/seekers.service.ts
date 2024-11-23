@@ -20,7 +20,6 @@ import { JobsService } from '../jobs/jobs.service';
 import { ReviewsService } from '../reviews/reviews.service';
 import { ApplicationsService } from '../applications/applications.service';
 import { S3Service } from 'src/common/s3/s3.service';
-import { NodemailerService } from 'src/common/email/nodemailer.service';
 
 import { uuidv7 } from 'uuidv7';
 import { CreateEducationDto } from './dto/create-education.dto';
@@ -39,7 +38,6 @@ export class SeekersService {
     @Inject(forwardRef(() => ApplicationsService))
     private readonly applicationsService: ApplicationsService,
     private readonly s3Service: S3Service,
-    private readonly emailService: NodemailerService,
     @InjectModel(Seeker.name) private readonly seekerModel: Model<Seeker>,
   ) {}
 
@@ -179,33 +177,41 @@ export class SeekersService {
       );
     }
 
-    // const applications = await this.applicationsService.findBySeekerId(id)
-    // const reviews = await this.reviewsService.findBySeekerId(id)
+    const applications = await this.applicationsService.find({
+      seeker: id,
+    });
 
-    // await this.applicationsService.deleteMany({ seekerId: id });
-    // await this.reviewsService.deleteMany({ seekerId: id });
-    // await this.jobsService.updateMany(
-    //   { applications: { $in: applications.map((app) => app._id) } },
-    //   {
-    //     $pull: {
-    //       applications: { $in: applications.map((app) => app._id) },
-    //     },
-    //   },
-    // );
-    // await this.employersService.updateMany(
-    //   {
-    //     $or: [
-    //       { followers: id },
-    //       { reviews: { $in: reviews.map((review) => review._id) } },
-    //     ],
-    //   },
-    //   {
-    //     $pull: {
-    //       followers: id,
-    //       reviews: { $in: reviews.map((review) => review._id) },
-    //     },
-    //   },
-    // );
+    const reviews = await this.reviewsService.find({
+      seeker: id,
+    });
+
+    await this.applicationsService.findAndDeleteMany({ seeker: id });
+
+    await this.reviewsService.findAndDeleteMany({ seeker: id });
+
+    await this.jobsService.findAndUpdateMany(
+      { applications: { $in: applications.map((app) => app._id) } },
+      {
+        $pull: {
+          applications: { $in: applications.map((app) => app._id) },
+        },
+      },
+    );
+
+    await this.employersService.findAndUpdateMany(
+      {
+        $or: [
+          { followers: id },
+          { reviews: { $in: reviews.map((review) => review._id) } },
+        ],
+      },
+      {
+        $pull: {
+          followers: id,
+          reviews: { $in: reviews.map((review) => review._id) },
+        },
+      },
+    );
 
     if (seeker.image.includes('seekers')) {
       await this.s3Service.deleteFile(seeker.image.split('/')[1], 'seekers');
@@ -439,7 +445,6 @@ export class SeekersService {
     const isFollowing = employer.followers.includes(id);
 
     if (isFollowing) {
-      // Unfollow
       await this.employersService.findOneByIdAndUpdate(employerId, {
         $pull: { followers: id },
       });
@@ -447,7 +452,6 @@ export class SeekersService {
         $pull: { following: employerId },
       });
     } else {
-      // Follow
       await this.employersService.findOneByIdAndUpdate(employerId, {
         $push: {
           followers: id,

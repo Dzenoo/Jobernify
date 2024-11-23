@@ -1,6 +1,5 @@
 import {
   BadRequestException,
-  ConflictException,
   ForbiddenException,
   forwardRef,
   HttpStatus,
@@ -16,7 +15,6 @@ import { Application, ApplicationStatus } from './schemas/application.schema';
 import { FilterQuery, Model } from 'mongoose';
 
 import { SeekersService } from '../seekers/seekers.service';
-import { EmployersService } from '../employers/employers.service';
 import { JobsService } from '../jobs/jobs.service';
 import { S3Service } from 'src/common/s3/s3.service';
 import { NodemailerService } from 'src/common/email/nodemailer.service';
@@ -26,8 +24,6 @@ export class ApplicationsService {
   constructor(
     @Inject(forwardRef(() => SeekersService))
     private readonly seekersService: SeekersService,
-    @Inject(forwardRef(() => EmployersService))
-    private readonly employersService: EmployersService,
     @Inject(forwardRef(() => JobsService))
     private readonly jobsService: JobsService,
     private readonly s3Service: S3Service,
@@ -35,6 +31,10 @@ export class ApplicationsService {
     @InjectModel(Application.name)
     private readonly applicationModel: Model<Application>,
   ) {}
+
+  async countDocuments(query: FilterQuery<Application>) {
+    return await this.applicationModel.countDocuments(query).exec();
+  }
 
   async findAndDeleteMany(query: FilterQuery<Application> = {}) {
     return await this.applicationModel.deleteMany(query).exec();

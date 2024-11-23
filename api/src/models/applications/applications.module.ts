@@ -4,7 +4,6 @@ import { S3Module } from 'src/common/s3/s3.module';
 import { NodemailerModule } from 'src/common/email/nodemailer.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { SeekersModule } from '../seekers/seekers.module';
-import { EmployersModule } from '../employers/employers.module';
 import { JobsModule } from '../jobs/jobs.module';
 
 import { ApplicationsService } from './applications.service';
@@ -19,7 +18,6 @@ import { Application, ApplicationSchema } from './schemas/application.schema';
       { name: Application.name, schema: ApplicationSchema },
     ]),
     forwardRef(() => SeekersModule),
-    forwardRef(() => EmployersModule),
     forwardRef(() => JobsModule),
   ],
   controllers: [ApplicationsController],

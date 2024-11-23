@@ -11,12 +11,11 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Review } from './schemas/review.schema';
 
-import { Model } from 'mongoose';
+import { FilterQuery, Model } from 'mongoose';
 
 import { CreateReviewDto } from './dto/create-review.dto';
 
 import { EmployersService } from '../employers/employers.service';
-import { SeekersService } from '../seekers/seekers.service';
 import { UpdateReviewDto } from './dto/update-review.dto';
 
 @Injectable()
@@ -24,11 +23,21 @@ export class ReviewsService {
   constructor(
     @Inject(forwardRef(() => EmployersService))
     private readonly employersService: EmployersService,
-    @Inject(forwardRef(() => SeekersService))
-    private readonly seekersService: SeekersService,
     @InjectModel(Review.name)
     private readonly reviewModel: Model<Review>,
   ) {}
+
+  async countDocuments(query: FilterQuery<Review>) {
+    return await this.reviewModel.countDocuments(query).exec();
+  }
+
+  async findAndDeleteMany(query: FilterQuery<Review> = {}) {
+    return await this.reviewModel.deleteMany(query).exec();
+  }
+
+  async find(query: FilterQuery<Review> = {}) {
+    return await this.reviewModel.find(query).exec();
+  }
 
   async createOne(
     seekerId: string,

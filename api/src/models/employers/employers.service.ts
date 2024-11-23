@@ -11,7 +11,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { JobDocument } from '../jobs/schemas/job.schema';
 import { Employer } from './schemas/employer.schema';
 
-import { Model, UpdateQuery } from 'mongoose';
+import { FilterQuery, Model, UpdateQuery } from 'mongoose';
 import mongoose from 'mongoose';
 
 import { SignUpEmployerDto } from './dto/signup-employer.dto';
@@ -39,6 +39,13 @@ export class EmployersService {
     private readonly reviewsService: ReviewsService,
     @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
   ) {}
+
+  async findAndUpdateMany(
+    query: FilterQuery<Employer>,
+    update: UpdateQuery<Employer>,
+  ) {
+    return await this.employerModel.updateMany(query, update).exec();
+  }
 
   async findOneByIdAndUpdate(
     id: string,
@@ -149,24 +156,24 @@ export class EmployersService {
       throw new NotFoundException();
     }
 
-    // const counts: any = {};
-    // if (type === 'jobs' || !type) {
-    //   counts.totalJobs = await this.jobService.countDocuments({
-    //     company: id,
-    //     ...searchQuery,
-    //   });
-    // }
-    // if (type === 'reviews' || !type) {
-    //   counts.totalReviews = await this.reviewService.countDocuments({
-    //     company: id,
-    //     ...searchQuery,
-    //   });
-    // }
+    const counts: any = {};
+    if (type === 'jobs' || !type) {
+      counts.totalJobs = await this.jobsService.countDocuments({
+        company: id,
+        ...searchQuery,
+      });
+    }
+    if (type === 'reviews' || !type) {
+      counts.totalReviews = await this.reviewsService.countDocuments({
+        company: id,
+        ...searchQuery,
+      });
+    }
 
     return {
       statusCode: HttpStatus.ACCEPTED,
       employer,
-      // counts,
+      counts,
     };
   }
 
@@ -226,21 +233,21 @@ export class EmployersService {
       );
     }
 
-    // await this.jobsService.deleteMany({ company: id });
+    await this.jobsService.findAndDeleteMany({ company: id });
 
-    // await this.reviewsService.deleteMany({ company: id });
+    await this.reviewsService.findAndDeleteMany({ company: id });
 
-    // await this.seekersService.updateMany(
-    //   {
-    //     $or: [{ following: id }, { savedJobs: { $in: jobIds } }],
-    //   },
-    //   {
-    //     $pull: {
-    //       following: id,
-    //       savedJobs: { $in: jobIds },
-    //     },
-    //   },
-    // );
+    await this.seekersService.findAndUpdateMany(
+      {
+        $or: [{ following: id }, { savedJobs: { $in: jobIds } }],
+      },
+      {
+        $pull: {
+          following: id,
+          savedJobs: { $in: jobIds },
+        },
+      },
+    );
 
     if (employer.image.includes('employers')) {
       await this.s3Service.deleteFile(
@@ -309,16 +316,16 @@ export class EmployersService {
       );
     }
 
-    // const totalJobs = await this.jobsService.countDocuments({ company: id });
-    // const totalReviews = await this.reviewsService.countDocuments({
-    //   company: id,
-    // });
+    const totalJobs = await this.jobsService.countDocuments({ company: id });
+    const totalReviews = await this.reviewsService.countDocuments({
+      company: id,
+    });
 
     return {
       statusCode: HttpStatus.OK,
       employer,
-      // totalJobs,
-      // totalReviews
+      totalJobs,
+      totalReviews,
     };
   }
 
@@ -395,51 +402,58 @@ export class EmployersService {
     startOfMonth.setDate(1);
     startOfMonth.setHours(0, 0, 0, 0);
 
-    // const totalJobs = await this.jobsService.countDocuments({ company: id });
-    // const totalReviews = await this.reviewsService.countDocuments({
-    //   company: id,
-    // });
-    // const totalApplications = await this.applicationsService.countDocuments({
-    //   job: {
-    //     $in: await this.jobsService.find({ company: id }).distinct('_id'),
-    //   },
-    // });
-    // const totalFollowers = (
-    //   await this.employerModel.findById(id).select('followers')
-    // ).followers.length;
+    const totalJobs = await this.jobsService.countDocuments({ company: id });
 
-    // const jobsThisMonth = await this.jobsService.countDocuments({
-    //   company: id,
-    //   createdAt: { $gte: startOfMonth },
-    // });
+    const totalReviews = await this.reviewsService.countDocuments({
+      company: id,
+    });
 
-    // const reviewsThisMonth = await this.reviewsService.countDocuments({
-    //   company: id,
-    //   createdAt: { $gte: startOfMonth },
-    // });
+    const totalApplications = await this.applicationsService.countDocuments({
+      job: {
+        $in: (await this.jobsService.find({ company: id })).map(
+          (job) => job._id,
+        ),
+      },
+    });
 
-    // const applicationsThisMonth = await this.applicationsService.countDocuments(
-    //   {
-    //     job: {
-    //       $in: await this.jobsService.find({ company: id }).distinct('_id'),
-    //     },
-    //     createdAt: { $gte: startOfMonth },
-    //   },
-    // );
+    const totalFollowers = (
+      await this.employerModel.findById(id).select('followers')
+    ).followers.length;
 
-    // const employerWithFollowers = await this.employerModel
-    //   .findById(id)
-    //   .select('followers')
-    //   .populate('followers', 'createdAt');
+    const jobsThisMonth = await this.jobsService.countDocuments({
+      company: id,
+      createdAt: { $gte: startOfMonth },
+    });
 
-    // const followersThisMonth = employerWithFollowers.followers.filter(
-    //   (follower: any) => {
-    //     const followerCreatedAt = follower.createdAt;
-    //     return (
-    //       followerCreatedAt >= startOfMonth && followerCreatedAt < new Date()
-    //     );
-    //   },
-    // ).length;
+    const reviewsThisMonth = await this.reviewsService.countDocuments({
+      company: id,
+      createdAt: { $gte: startOfMonth },
+    });
+
+    const applicationsThisMonth = await this.applicationsService.countDocuments(
+      {
+        job: {
+          $in: (await this.jobsService.find({ company: id })).map(
+            (job) => job._id,
+          ),
+        },
+        createdAt: { $gte: startOfMonth },
+      },
+    );
+
+    const employerWithFollowers = await this.employerModel
+      .findById(id)
+      .select('followers')
+      .populate('followers', 'createdAt');
+
+    const followersThisMonth = employerWithFollowers.followers.filter(
+      (follower: any) => {
+        const followerCreatedAt = follower.createdAt;
+        return (
+          followerCreatedAt >= startOfMonth && followerCreatedAt < new Date()
+        );
+      },
+    ).length;
 
     const jobsPerMonth = await this.getJobsPerMonth(id);
     const followersOverTime = await this.getFollowersOverTime(id);
@@ -447,17 +461,17 @@ export class EmployersService {
 
     return {
       statusCode: HttpStatus.OK,
-      // totalJobs,
-      // totalReviews,
-      // totalApplications,
-      // totalFollowers,
+      totalJobs,
+      totalReviews,
+      totalApplications,
+      totalFollowers,
       jobsPerMonth,
       followersOverTime,
       jobTypes,
-      // jobsThisMonth,
-      // reviewsThisMonth,
-      // applicationsThisMonth,
-      // followersThisMonth,
+      jobsThisMonth,
+      reviewsThisMonth,
+      applicationsThisMonth,
+      followersThisMonth,
     };
   }
 

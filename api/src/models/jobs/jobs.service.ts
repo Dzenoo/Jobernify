@@ -35,6 +35,22 @@ export class JobsService {
     @InjectModel(Job.name) private readonly jobModel: Model<Job>,
   ) {}
 
+  async find(query: FilterQuery<Job> = {}) {
+    return await this.jobModel.find(query).exec();
+  }
+
+  async findAndDeleteMany(query: FilterQuery<Job>) {
+    return await this.jobModel.deleteMany(query).exec();
+  }
+
+  async countDocuments(query: FilterQuery<Job>) {
+    return await this.jobModel.countDocuments(query).exec();
+  }
+
+  async findAndUpdateMany(query: FilterQuery<Job>, update: UpdateQuery<Job>) {
+    return await this.jobModel.updateMany(query, update).exec();
+  }
+
   async aggregate(pipeline: any): Promise<any[]> {
     return await this.jobModel.aggregate(pipeline).exec();
   }
