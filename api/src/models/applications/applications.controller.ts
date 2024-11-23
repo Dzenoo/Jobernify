@@ -50,7 +50,14 @@ export class ApplicationsController {
     @Query('status') status: ApplicationStatus,
     @Query('page', ParseIntPipe) page: number = 1,
     @Query('limit', ParseIntPipe) limit: number = 10,
-  ) {}
+  ) {
+    return await this.applicationsService.getManyByJobId({
+      jobId,
+      page,
+      limit,
+      status,
+    });
+  }
 
   @Post('/:jobId/apply')
   @UseInterceptors(FileInterceptor('resume'))

@@ -43,6 +43,10 @@ export class JobsService {
     return await this.jobModel.updateOne(query, update).exec();
   }
 
+  async findOneById(id: string, select?: string): Promise<Job> {
+    return await this.jobModel.findById(id).select(select);
+  }
+
   async createOne(
     body: CreateJobDto,
     employerId: string,

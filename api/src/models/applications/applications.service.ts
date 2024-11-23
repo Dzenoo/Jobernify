@@ -164,9 +164,70 @@ export class ApplicationsService {
     };
   }
 
-  async getManyByJobId(): Promise<ResponseObject> {
+  async getManyByJobId({
+    jobId,
+    page = 1,
+    limit = 10,
+    status = ApplicationStatus.Pending,
+  }: {
+    jobId: string;
+    page?: number;
+    limit?: number;
+    status?: ApplicationStatus;
+  }): Promise<ResponseObject> {
+    const conditions: any = { job: jobId };
+
+    if (status) {
+      conditions.status = status;
+    }
+
+    const applications = await this.applicationModel
+      .find(conditions)
+      .populate({
+        path: 'job',
+        select: '_id title type',
+      })
+      .populate({
+        path: 'seeker',
+        select:
+          'first_name last_name email _id linkedin github portfolio image',
+      })
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .exec();
+
+    const totalApplications = await this.applicationModel.countDocuments({
+      job: jobId,
+    });
+
+    const totalPending = await this.applicationModel.countDocuments({
+      job: jobId,
+      status: 'Pending',
+    });
+
+    const totalInterview = await this.applicationModel.countDocuments({
+      job: jobId,
+      status: 'Interview',
+    });
+
+    const totalRejected = await this.applicationModel.countDocuments({
+      job: jobId,
+      status: 'Rejected',
+    });
+
+    const totalAccepted = await this.applicationModel.countDocuments({
+      job: jobId,
+      status: 'Accepted',
+    });
+
     return {
       statusCode: HttpStatus.OK,
+      applications,
+      totalApplications,
+      totalPendingStatus: totalPending,
+      totalInterviewStatus: totalInterview,
+      totalRejectedStatus: totalRejected,
+      totalAcceptedStatus: totalAccepted,
     };
   }
 
