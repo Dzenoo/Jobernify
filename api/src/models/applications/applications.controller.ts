@@ -32,6 +32,26 @@ import { Roles } from 'src/common/decorators/roles.decorator';
 export class ApplicationsController {
   constructor(private readonly applicationsService: ApplicationsService) {}
 
+  @Patch('/:applicationId/status')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.EMPLOYER)
+  async update(
+    @Param('applicationId') applicationId: string,
+    @Body('status') status: ApplicationStatus,
+  ) {
+    return await this.applicationsService.updateOne(applicationId, status);
+  }
+
+  @Get('/:jobId')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.EMPLOYER)
+  async get(
+    @Param('jobId') jobId: string,
+    @Query('status') status: ApplicationStatus,
+    @Query('page', ParseIntPipe) page: number = 1,
+    @Query('limit', ParseIntPipe) limit: number = 10,
+  ) {}
+
   @Post('/:jobId/apply')
   @UseInterceptors(FileInterceptor('resume'))
   @UseGuards(JwtAuthGuard, RolesGuard)
@@ -61,18 +81,4 @@ export class ApplicationsController {
       coverLetter,
     );
   }
-
-  @Patch('/:applicationId/status')
-  async update(
-    @Param('applicationId') applicationId: string,
-    @Body('status') status: ApplicationStatus,
-  ) {}
-
-  @Get('/:jobId')
-  async get(
-    @Param('jobId') jobId: string,
-    @Query('status') status: ApplicationStatus,
-    @Query('page', ParseIntPipe) page: number = 1,
-    @Query('limit', ParseIntPipe) limit: number = 10,
-  ) {}
 }

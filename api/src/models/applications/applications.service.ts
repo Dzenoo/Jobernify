@@ -1,14 +1,17 @@
 import {
+  BadRequestException,
   ConflictException,
+  ForbiddenException,
   forwardRef,
   HttpStatus,
   Inject,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { Application } from './schemas/application.schema';
+import { Application, ApplicationStatus } from './schemas/application.schema';
 
 import { FilterQuery, Model } from 'mongoose';
 
@@ -16,6 +19,7 @@ import { SeekersService } from '../seekers/seekers.service';
 import { EmployersService } from '../employers/employers.service';
 import { JobsService } from '../jobs/jobs.service';
 import { S3Service } from 'src/common/s3/s3.service';
+import { NodemailerService } from 'src/common/email/nodemailer.service';
 
 @Injectable()
 export class ApplicationsService {
@@ -27,6 +31,7 @@ export class ApplicationsService {
     @Inject(forwardRef(() => JobsService))
     private readonly jobsService: JobsService,
     private readonly s3Service: S3Service,
+    private readonly nodemailerService: NodemailerService,
     @InjectModel(Application.name)
     private readonly applicationModel: Model<Application>,
   ) {}
@@ -51,7 +56,7 @@ export class ApplicationsService {
       const seeker = await this.seekersService.findOneById(seekerId);
 
       if (!seeker.resume) {
-        throw new ConflictException(
+        throw new ForbiddenException(
           'Please upload a resume to apply for this job.',
         );
       }
@@ -110,9 +115,52 @@ export class ApplicationsService {
     };
   }
 
-  async updateOne(): Promise<ResponseObject> {
+  async updateOne(
+    id: string,
+    status: ApplicationStatus,
+  ): Promise<ResponseObject> {
+    if (!status) {
+      throw new BadRequestException(
+        'Invalid status provided. Please select a valid application status',
+      );
+    }
+
+    const existingApplication = await this.applicationModel
+      .findById(id)
+      .populate('seeker', 'email')
+      .populate({
+        path: 'job',
+        select: 'company',
+        populate: {
+          path: 'company',
+          select: 'name',
+        },
+      });
+
+    if (!existingApplication) {
+      throw new NotFoundException('The specified application does not exist.');
+    }
+
+    await this.applicationModel.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true, runValidators: true },
+    );
+
+    const emailContent = this.generateApplicationEmailContent(
+      status,
+      existingApplication.job.company.name,
+    );
+
+    await this.nodemailerService.sendMail(
+      existingApplication.seeker.email,
+      'Application Status Update',
+      emailContent,
+    );
+
     return {
       statusCode: HttpStatus.OK,
+      message: 'Successfully Updated',
     };
   }
 
@@ -122,5 +170,46 @@ export class ApplicationsService {
     };
   }
 
-  private generateApplicationEmailContent() {}
+  private generateApplicationEmailContent(status: string, companyName: string) {
+    let content = '';
+    switch (status) {
+      case 'Rejected':
+        content = `We regret to inform you that your application for the position at ${companyName} has been rejected. Thank you for considering us.`;
+        break;
+      case 'Pending':
+        content = `Your application for the position at ${companyName} is currently under review. We will get back to you shortly.`;
+        break;
+      case 'Accepted':
+        content = `Congratulations! Your application for the position at ${companyName} has been accepted. We look forward to having you on board.`;
+        break;
+      case 'Interview':
+        content = `We are pleased to inform you that you have been selected for an interview for the position at ${companyName}. Further details will be shared shortly.`;
+        break;
+      default:
+        content = `Your application status has been updated to ${status}.`;
+    }
+
+    return `<html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+          .container { max-width: 600px; margin: auto; padding: 20px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px; }
+          .header { background-color: #f0f0f0; padding: 20px; text-align: center; }
+          .header h2 { margin: 0; color: #333; }
+          .content { padding: 20px; }
+          .content p { margin-bottom: 20px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h2>Application Update</h2>
+          </div>
+          <div class="content">
+            <p>${content}</p>
+          </div>
+        </div>
+      </body>
+    </html>`;
+  }
 }
