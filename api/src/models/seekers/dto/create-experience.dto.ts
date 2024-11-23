@@ -5,7 +5,11 @@ import {
   IsDateString,
   IsNotEmpty,
 } from 'class-validator';
-import { JobLevel, JobType } from 'src/models/jobs/schemas/job.schema';
+import {
+  JobLevel,
+  JobPosition,
+  JobType,
+} from 'src/models/jobs/schemas/job.schema';
 
 export class CreateExperienceDto {
   @IsString()
@@ -34,7 +38,6 @@ export class CreateExperienceDto {
   @IsNotEmpty()
   readonly location: string;
 
-  @IsString()
-  @IsNotEmpty()
-  readonly position: string;
+  @IsEnum(JobPosition)
+  readonly position: JobPosition;
 }

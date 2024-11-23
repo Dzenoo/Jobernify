@@ -4,7 +4,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Employer } from 'src/models/employers/schemas/employer.schema';
 import { Application } from 'src/models/applications/schemas/application.schema';
 
-export enum Position {
+export enum JobPosition {
   REMOTE = 'Remote',
   ONSITE = 'On-Site',
   HYBRID = 'Hybrid',
@@ -40,9 +40,9 @@ export class Job {
   @Prop({
     type: String,
     required: true,
-    enum: Position,
+    enum: JobPosition,
   })
-  position: Position;
+  position: JobPosition;
 
   @Prop({
     type: String,

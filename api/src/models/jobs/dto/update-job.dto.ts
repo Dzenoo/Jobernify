@@ -9,7 +9,7 @@ import {
   IsDate,
   Length,
 } from 'class-validator';
-import { JobType, JobLevel, Position } from '../schemas/job.schema';
+import { JobType, JobLevel, JobPosition } from '../schemas/job.schema';
 
 export class UpdateJobDto {
   @IsOptional()
@@ -18,8 +18,8 @@ export class UpdateJobDto {
   readonly title?: string;
 
   @IsOptional()
-  @IsEnum(Position)
-  readonly position?: Position;
+  @IsEnum(JobPosition)
+  readonly position?: JobPosition;
 
   @IsOptional()
   @IsString()

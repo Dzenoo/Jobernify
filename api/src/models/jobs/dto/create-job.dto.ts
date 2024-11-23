@@ -9,7 +9,7 @@ import {
   Length,
   IsDateString,
 } from 'class-validator';
-import { JobType, JobLevel, Position } from '../schemas/job.schema';
+import { JobType, JobLevel, JobPosition } from '../schemas/job.schema';
 
 export class CreateJobDto {
   @IsString()
@@ -17,8 +17,8 @@ export class CreateJobDto {
   @Length(3, 30)
   readonly title: string;
 
-  @IsEnum(Position)
-  readonly position: Position;
+  @IsEnum(JobPosition)
+  readonly position: JobPosition;
 
   @IsString()
   @IsNotEmpty()

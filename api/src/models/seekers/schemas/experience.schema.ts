@@ -1,6 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { JobLevel, JobType } from 'src/models/jobs/schemas/job.schema';
+import {
+  JobLevel,
+  JobPosition,
+  JobType,
+} from 'src/models/jobs/schemas/job.schema';
 
 @Schema({ timestamps: true })
 export class Experience {
@@ -25,8 +29,8 @@ export class Experience {
   @Prop({ required: true, trim: true })
   location: string;
 
-  @Prop({ trim: true, default: '' })
-  position: string;
+  @Prop({ required: true, enum: Object.values(JobPosition) })
+  position: JobPosition;
 }
 
 export const ExperienceSchema = SchemaFactory.createForClass(Experience);
