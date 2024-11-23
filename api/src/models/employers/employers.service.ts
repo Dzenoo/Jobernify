@@ -14,7 +14,6 @@ import { Employer } from './schemas/employer.schema';
 import { FilterQuery, Model, UpdateQuery, UpdateWriteOpResult } from 'mongoose';
 import mongoose from 'mongoose';
 
-import { SignUpEmployerDto } from './dto/signup-employer.dto';
 import { UpdateEmployerDto } from './dto/update-employer.dto';
 
 import { SeekersService } from '../seekers/seekers.service';
@@ -62,9 +61,7 @@ export class EmployersService {
     return await this.employerModel.findOne({ email: email }).select(select);
   }
 
-  async createOne(
-    body: SignUpEmployerDto & Record<string, any>,
-  ): Promise<Employer> {
+  async createOne(body: Record<string, any>): Promise<Employer> {
     return await this.employerModel.create(body);
   }
 

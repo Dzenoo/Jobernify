@@ -12,7 +12,6 @@ import { Seeker } from './schemas/seeker.schema';
 
 import { FilterQuery, Model, UpdateQuery, UpdateWriteOpResult } from 'mongoose';
 
-import { SignupSeekerDto } from './dto/signup-seeker.dto';
 import { UpdateSeekerDto } from './dto/update-seeker.dto';
 
 import { EmployersService } from '../employers/employers.service';
@@ -67,9 +66,7 @@ export class SeekersService {
     return await this.seekerModel.findOne({ email: email }).select(select);
   }
 
-  async createOne(
-    body: SignupSeekerDto & Record<string, any>,
-  ): Promise<Seeker> {
+  async createOne(body: Record<string, any>): Promise<Seeker> {
     return await this.seekerModel.create(body);
   }
 

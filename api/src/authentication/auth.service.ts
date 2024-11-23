@@ -29,6 +29,50 @@ export class AuthService {
     private readonly employersService: EmployersService,
   ) {}
 
+  async validateGoogleUser(user: any, userType: 'seeker' | 'employer') {
+    if (!user) {
+      throw new UnauthorizedException('Google authentication failed');
+    }
+
+    const email = user.email;
+
+    let existingUser;
+
+    if (userType === 'seeker') {
+      existingUser = await this.seekersService.findOneByEmail(email);
+
+      if (!existingUser) {
+        existingUser = await this.seekersService.createOne({
+          email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          image: user.picture,
+          emailVerified: true,
+          password: '',
+        });
+      }
+    } else {
+      existingUser = await this.employersService.findOneByEmail(email);
+
+      if (!existingUser) {
+        existingUser = await this.employersService.createOne({
+          email,
+          name: `${user.firstName} ${user.lastName}`,
+          image: user.picture,
+          emailVerified: true,
+          password: '',
+        });
+      }
+    }
+
+    const payload = { email: existingUser.email, sub: existingUser._id };
+
+    return {
+      access_token: this.jwtService.sign(payload),
+      user: existingUser,
+    };
+  }
+
   async validateUser(email: string, password: string): Promise<any> {
     let user;
 
