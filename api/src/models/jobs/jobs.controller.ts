@@ -29,14 +29,14 @@ export class JobsController {
 
   @Post('/create-new-job')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.EMPLOYER)
+  @Roles(Role.Employer)
   async createJob(@User('userId') userId: string, @Body() body: CreateJobDto) {
     return await this.jobsService.createOne(body, userId);
   }
 
   @Patch('/:jobId/edit')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.EMPLOYER)
+  @Roles(Role.Employer)
   async editJob(
     @User('userId') userId: string,
     @Body() body: UpdateJobDto,
@@ -47,7 +47,7 @@ export class JobsController {
 
   @Delete('/:jobId/delete')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.EMPLOYER)
+  @Roles(Role.Employer)
   async deleteJob(
     @User('userId') userId: string,
     @Param('jobId') jobId: string,
@@ -57,21 +57,21 @@ export class JobsController {
 
   @Post('/:jobId/save')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   async saveJob(@User('userId') userId: string, @Param('jobId') jobId: string) {
     return await this.jobsService.saveOne(jobId, userId);
   }
 
   @Get('/all')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   async getJobs(@Query() query: GetJobsDto) {
     return await this.jobsService.getAll(query);
   }
 
   @Get('/:jobId')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   async getJob(@Param('jobId') jobId: string) {
     return await this.jobsService.getOneById(jobId);
   }

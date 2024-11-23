@@ -11,30 +11,30 @@ import * as bcrypt from 'bcrypt';
 export type EmployerDocument = HydratedDocument<Employer>;
 
 export enum IndustryType {
-  TECHNOLOGY = 'technology',
-  HEALTHCARE = 'healthcare',
-  FINANCE = 'finance',
-  EDUCATION = 'education',
-  MANUFACTURING = 'manufacturing',
-  RETAIL = 'retail',
-  HOSPITALITY = 'hospitality',
-  AUTOMOTIVE = 'automotive',
-  CONSTRUCTION = 'construction',
-  MEDIA = 'media',
-  MARKETING = 'marketing',
-  TELECOMMUNICATIONS = 'telecommunications',
-  GOVERNMENT = 'government',
-  NONPROFIT = 'nonprofit',
-  OTHER = 'other',
+  Technology = 'technology',
+  Healthcare = 'healthcare',
+  Finance = 'finance',
+  Education = 'education',
+  Manufacturing = 'manufacturing',
+  Retail = 'retail',
+  Hospitality = 'hospitality',
+  Automotive = 'automotive',
+  Construction = 'construction',
+  Media = 'media',
+  Marketing = 'marketing',
+  Telecommunications = 'telecommunications',
+  Government = 'government',
+  Nonprofit = 'nonprofit',
+  Other = 'other',
 }
 
 export enum CompanySize {
-  LESS_THAN_17 = 'Less-than-17',
-  BETWEEN_20_AND_50 = '20-50',
-  BETWEEN_50_AND_100 = '50-100',
-  BETWEEN_100_AND_250 = '100-250',
-  BETWEEN_250_AND_500 = '250-500',
-  BETWEEN_500_AND_1000 = '500-1000',
+  LessThan17 = 'Less-than-17',
+  Between20And50 = '20-50',
+  Between50And100 = '50-100',
+  Between100And250 = '100-250',
+  Between250And500 = '250-500',
+  Between500And1000 = '500-1000',
 }
 
 @Schema({ timestamps: true })

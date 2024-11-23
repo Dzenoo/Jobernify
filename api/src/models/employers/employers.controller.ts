@@ -33,7 +33,7 @@ export class EmployersController {
 
   @Get('/profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.EMPLOYER)
+  @Roles(Role.Employer)
   async getProfile(
     @User('userId') userId: string,
     @Query() query: GetProfileDto,
@@ -52,7 +52,7 @@ export class EmployersController {
 
   @Patch('/edit-profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.EMPLOYER)
+  @Roles(Role.Employer)
   async editProfile(
     @User('userId') userId: string,
     @Body() body: UpdateEmployerDto,
@@ -62,14 +62,14 @@ export class EmployersController {
 
   @Delete('/delete-profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.EMPLOYER)
+  @Roles(Role.Employer)
   async deleteProfile(@User('userId') userId: string) {
     return await this.employersService.deleteOne(userId);
   }
 
   @Get('/analytics')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.EMPLOYER)
+  @Roles(Role.Employer)
   async getAnalytics(@User('userId') userId: string) {
     return await this.employersService.getAnalytics(userId);
   }
@@ -81,7 +81,7 @@ export class EmployersController {
 
   @Get('/all')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   async getAll(@Query() query: GetEmployersDto) {
     const { page, limit, search, sort, size, industry } = query;
 
@@ -97,7 +97,7 @@ export class EmployersController {
 
   @Get('/:employerId')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   async getById(
     @Query('page', ParseIntPipe) page: number = 1,
     @Query('limit', ParseIntPipe) limit: number = 10,

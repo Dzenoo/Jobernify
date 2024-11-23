@@ -34,7 +34,7 @@ export class ApplicationsController {
 
   @Patch('/:applicationId/status')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.EMPLOYER)
+  @Roles(Role.Employer)
   async update(
     @Param('applicationId') applicationId: string,
     @Body('status') status: ApplicationStatus,
@@ -44,7 +44,7 @@ export class ApplicationsController {
 
   @Get('/:jobId')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.EMPLOYER)
+  @Roles(Role.Employer)
   async get(
     @Param('jobId') jobId: string,
     @Query('status') status: ApplicationStatus,
@@ -62,7 +62,7 @@ export class ApplicationsController {
   @Post('/:jobId/apply')
   @UseInterceptors(FileInterceptor('resume'))
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   async create(
     @User('userId') userId: string,
     @Param('jobId') jobId: string,

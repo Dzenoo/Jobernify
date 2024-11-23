@@ -43,7 +43,7 @@ export class SeekersController {
 
   @Get('/profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   async getProfile(
     @User('userId') userId: string,
     @Query('page', ParseIntPipe) page: number = 1,
@@ -58,7 +58,7 @@ export class SeekersController {
 
   @Patch('/edit-profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   @UseInterceptors(FileInterceptor('image'))
   async editProfile(
     @User('userId') userId: string,
@@ -82,14 +82,14 @@ export class SeekersController {
 
   @Delete('/delete-profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   async deleteProfile(@User('userId') userId: string) {
     return await this.seekersService.deleteOne(userId);
   }
 
   @Patch('/add-new-education')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   async createEducation(
     @User('userId') userId: string,
     @Body() body: CreateEducationDto,
@@ -99,7 +99,7 @@ export class SeekersController {
 
   @Delete('/delete-education/:educationId')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   async deleteEducation(
     @User('userId') userId: string,
     @Param('educationId') educationId: string,
@@ -109,7 +109,7 @@ export class SeekersController {
 
   @Patch('/add-new-experience')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   async createExperience(
     @User('userId') userId: string,
     @Body() body: CreateExperienceDto,
@@ -119,7 +119,7 @@ export class SeekersController {
 
   @Delete('/delete-experience/:experienceId')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   async deleteExperience(
     @User('userId') userId: string,
     @Param('experienceId') experienceId: string,
@@ -129,7 +129,7 @@ export class SeekersController {
 
   @Post('/create-job-alert')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   async createJobAlert(
     @User('userId') userId: string,
     @Body() body: CreateJobAlertDto,
@@ -139,7 +139,7 @@ export class SeekersController {
 
   @Post('/:employerId/follow')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.SEEKER)
+  @Roles(Role.Seeker)
   async followEmployer(
     @User('userId') userId: string,
     @Param('employerId') employerId: string,
@@ -154,7 +154,7 @@ export class SeekersController {
 
   @Get('/all')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.EMPLOYER)
+  @Roles(Role.Employer)
   async getAll(@Query() query: GetSeekersDto) {
     const { page, limit, search, skills } = query;
 
@@ -168,7 +168,7 @@ export class SeekersController {
 
   @Get('/:seekerId')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.EMPLOYER)
+  @Roles(Role.Employer)
   async getById(@Param('seekerId') seekerId: string) {
     return await this.seekersService.getOneById(seekerId);
   }

@@ -5,8 +5,8 @@ import { Prop } from '@nestjs/mongoose';
 export type BaseUserDocument = HydratedDocument<BaseUser>;
 
 export enum Role {
-  EMPLOYER = 'employer',
-  SEEKER = 'seeker',
+  Employer = 'employer',
+  Seeker = 'seeker',
 }
 
 export abstract class BaseUser {
