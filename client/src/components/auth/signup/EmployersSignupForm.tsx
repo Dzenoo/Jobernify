@@ -59,7 +59,6 @@ const EmployersSignupForm: React.FC<EmployersSignupFormTypes> = ({
       industry: "",
       size: "",
       address: "",
-      number: "",
     },
     mode: "all",
   });
@@ -86,7 +85,7 @@ const EmployersSignupForm: React.FC<EmployersSignupFormTypes> = ({
   };
 
   return (
-    <Card className="flex flex-col gap-2 lg:w-[600px]">
+    <Card className="flex flex-col gap-2 lg:w-[700px]">
       <CardHeader>
         <div className="flex items-center justify-center gap-3 flex-col">
           <div>
@@ -126,25 +125,9 @@ const EmployersSignupForm: React.FC<EmployersSignupFormTypes> = ({
             />
             <FormField
               control={form.control}
-              name="number"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Contact Number</FormLabel>
-                  <FormControl>
-                    <Input type="number" {...field} placeholder="Number" />
-                  </FormControl>
-                  <FormDescription>
-                    Provide a contact number where you can be reached.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="w-full">
                   <FormLabel>Email Address</FormLabel>
                   <FormControl>
                     <Input type="email" {...field} placeholder="Email" />
@@ -161,7 +144,7 @@ const EmployersSignupForm: React.FC<EmployersSignupFormTypes> = ({
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="w-full">
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input type="password" {...field} placeholder="Password" />
@@ -174,7 +157,7 @@ const EmployersSignupForm: React.FC<EmployersSignupFormTypes> = ({
                 </FormItem>
               )}
             />
-            <div className="flex items-center gap-5 max-sm:flex-col">
+            <div className="flex items-start gap-5 max-sm:flex-col">
               <FormField
                 control={form.control}
                 name="industry"
@@ -258,20 +241,18 @@ const EmployersSignupForm: React.FC<EmployersSignupFormTypes> = ({
                 </FormItem>
               )}
             />
-            <div>
-              <Button
-                variant="default"
-                type="submit"
-                disabled={form.formState.isSubmitting}
-                className="m-auto block relative px-10"
-              >
-                {form.formState.isSubmitting ? (
-                  <ClipLoader size={25} color="#fff" />
-                ) : (
-                  "Register"
-                )}
-              </Button>
-            </div>
+            <Button
+              variant="default"
+              type="submit"
+              disabled={!form.formState.isValid || form.formState.isSubmitting}
+              className="w-full"
+            >
+              {form.formState.isSubmitting ? (
+                <ClipLoader size={25} color="#fff" />
+              ) : (
+                "Register"
+              )}
+            </Button>
           </form>
         </Form>
       </CardContent>

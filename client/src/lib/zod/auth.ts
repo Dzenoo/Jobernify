@@ -33,10 +33,6 @@ export const SeekerRegistrationSchemas = zod.object({
 });
 
 export const EmployersRegistrationSchemas = zod.object({
-  number: zod
-    .string()
-    .min(5, { message: "Number must be at least 5 characters long" })
-    .max(50, { message: "Number must be at most 50 characters long" }),
   name: zod
     .string()
     .min(5, { message: "Name must be at least 5 characters long" })

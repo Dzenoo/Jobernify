@@ -97,7 +97,7 @@ const SeekersSignupForm: React.FC<SeekersSignupFormTypes> = ({
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-            <div className="flex items-center gap-3 max-[600px]:flex-wrap">
+            <div className="flex items-start gap-3 max-[600px]:flex-wrap">
               <FormField
                 control={form.control}
                 name="first_name"
@@ -163,20 +163,18 @@ const SeekersSignupForm: React.FC<SeekersSignupFormTypes> = ({
                 </FormItem>
               )}
             />
-            <div>
-              <Button
-                variant="default"
-                type="submit"
-                disabled={form.formState.isSubmitting}
-                className="m-auto block relative px-10"
-              >
-                {form.formState.isSubmitting ? (
-                  <ClipLoader size={25} color="#fff" />
-                ) : (
-                  "Register"
-                )}
-              </Button>
-            </div>
+            <Button
+              variant="default"
+              type="submit"
+              disabled={!form.formState.isValid || form.formState.isSubmitting}
+              className="w-full"
+            >
+              {form.formState.isSubmitting ? (
+                <ClipLoader size={25} color="#fff" />
+              ) : (
+                "Register"
+              )}
+            </Button>
           </form>
         </Form>
       </CardContent>

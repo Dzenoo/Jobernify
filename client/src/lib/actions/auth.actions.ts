@@ -31,7 +31,6 @@ export const signupSeeker = async (data: {
  * @returns A promise resolving to the new employer and the authentication token.
  */
 export const signupEmployer = async (data: {
-  number: string;
   name: string;
   email: string;
   password: string;

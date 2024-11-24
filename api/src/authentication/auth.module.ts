@@ -12,7 +12,6 @@ import { AuthController } from './auth.controller';
 
 import { AuthService } from './auth.service';
 
-import { GoogleStrategy } from './google.strategy';
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
 
@@ -33,7 +32,7 @@ import { JwtStrategy } from './jwt.strategy';
     SeekersModule,
     EmployersModule,
   ],
-  providers: [AuthService, GoogleStrategy, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController],
   exports: [AuthService],
 })

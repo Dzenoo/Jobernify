@@ -138,20 +138,18 @@ const LoginForm: React.FC<LoginFormTypes> = ({ handleTypeSelection, type }) => {
                 </FormItem>
               )}
             />
-            <div>
-              <Button
-                variant="default"
-                type="submit"
-                disabled={form.formState.isSubmitting || isAuthenticated}
-                className="m-auto block relative px-10"
-              >
-                {form.formState.isSubmitting ? (
-                  <ClipLoader size={25} />
-                ) : (
-                  "Login"
-                )}
-              </Button>
-            </div>
+            <Button
+              variant="default"
+              type="submit"
+              disabled={
+                !form.formState.isValid ||
+                form.formState.isSubmitting ||
+                isAuthenticated
+              }
+              className="w-full"
+            >
+              {form.formState.isSubmitting ? <ClipLoader size={25} /> : "Login"}
+            </Button>
           </form>
         </Form>
       </CardContent>
