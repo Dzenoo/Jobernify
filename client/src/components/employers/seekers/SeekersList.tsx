@@ -25,7 +25,7 @@ const SeekersList: React.FC<SeekersListProps> = ({ seekers }) => {
           </div>
         </div>
       )}
-      <ul className="grid gap-3 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+      <ul className="grid gap-3 grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
         {seekers?.length > 0 &&
           seekers?.map((seeker) => (
             <SeekerItem seeker={seeker} key={seeker._id} />

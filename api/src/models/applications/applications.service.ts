@@ -179,10 +179,11 @@ export class ApplicationsService {
     status = ApplicationStatus.Pending,
   }: {
     jobId: string;
-    page?: number;
-    limit?: number;
+    page: number;
+    limit: number;
     status?: ApplicationStatus;
   }): Promise<ResponseObject> {
+    const job = (await this.jobsService.findOneById(jobId)).title;
     const conditions: any = { job: jobId };
 
     if (status) {
@@ -230,6 +231,7 @@ export class ApplicationsService {
 
     return {
       statusCode: HttpStatus.OK,
+      job,
       applications,
       totalApplications,
       totalPendingStatus: totalPending,

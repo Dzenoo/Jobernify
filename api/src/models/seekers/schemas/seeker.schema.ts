@@ -95,7 +95,7 @@ export class Seeker extends BaseUser {
 
   @Prop({
     type: Object,
-    default: { title: '', type: JobType.FullTime, level: JobLevel.Junior },
+    default: { title: '', type: '', level: '' },
   })
   alerts: { title: string; type: JobType; level: JobLevel };
 

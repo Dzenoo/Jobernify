@@ -33,13 +33,13 @@ const JobApplicationsPage = ({
   const { updateSearchParams } = useSearchParams();
   const { token } = useAuthentication().getCookieHandler();
   const { data, isLoading, isFetching, isRefetching } = useQuery(
-    ["applications", params.jobId, searchParams.page, searchParams.type],
+    ["applications", params.jobId, searchParams.page, searchParams.status],
     () =>
       getApplications({
-        token: token!,
+        token: token as string,
         jobId: params.jobId,
-        page: searchParams?.page || "1",
-        type: searchParams.type || "",
+        page: Number(searchParams?.page) || 1,
+        status: searchParams?.status || "",
       })
   );
 
@@ -56,7 +56,7 @@ const JobApplicationsPage = ({
     <section className="flex flex-col gap-3">
       <div>
         <div>
-          <h1 className="text-base-black">{data?.job.title}</h1>
+          <h1 className="text-base-black">{data?.job}</h1>
         </div>
         <div>
           <p className="text-initial-gray">

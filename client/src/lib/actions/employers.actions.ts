@@ -1,9 +1,4 @@
-import {
-  EmployerTypes,
-  JobTypes,
-  ResponseMessageTypes,
-  SeekerTypes,
-} from "@/types";
+import { EmployerTypes, ResponseMessageTypes, SeekerTypes } from "@/types";
 import { deleteApiHandler, getApiHandler, patchApiHandler } from "../api";
 
 /**
@@ -28,14 +23,10 @@ export const getSeekers = async ({
   skills?: string | string[];
   search?: string;
 }): Promise<{ seekers: SeekerTypes[]; totalSeekers: number }> => {
-  try {
-    return await getApiHandler(
-      `employer/seekers?page=${page}&search=${search}&skills=${skills}`,
-      token
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await getApiHandler(
+    `seekers/all?page=${page}&search=${search}&skills=${skills}`,
+    token
+  );
 };
 
 /**
@@ -48,11 +39,7 @@ export const deleteEmployerProfile = async ({
 }: {
   token: string;
 }): Promise<ResponseMessageTypes> => {
-  try {
-    return await deleteApiHandler("employer/delete-employer-profile", token);
-  } catch (error) {
-    throw error;
-  }
+  return await deleteApiHandler("employers/delete-profile", token);
 };
 
 /**
@@ -76,14 +63,10 @@ export const getEmployerProfile = async ({
   counts: { totalJobs: number; totalReviews: number };
   employer: EmployerTypes;
 }> => {
-  try {
-    return await getApiHandler(
-      `employer?type=${type}&page=${page}&srt=${srt}&search=${search}`,
-      token
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await getApiHandler(
+    `employers/profile?type=${type}&page=${page}&sort=${srt}&search=${search}`,
+    token
+  );
 };
 
 /**
@@ -96,11 +79,7 @@ export const getSeekerById = async (
   seekerId: string,
   token: string
 ): Promise<{ seeker: SeekerTypes }> => {
-  try {
-    return await getApiHandler(`employer/seekers/${seekerId}`, token);
-  } catch (error) {
-    throw error;
-  }
+  return await getApiHandler(`seekers/${seekerId}`, token);
 };
 
 /**
@@ -113,16 +92,12 @@ export const editEmployerProfile = async (
   formData: FormData,
   token: string
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await patchApiHandler(
-      "employer/edit-employer-profile",
-      formData,
-      token,
-      "multipart/form-data"
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await patchApiHandler(
+    "employers/edit-profile",
+    formData,
+    token,
+    "multipart/form-data"
+  );
 };
 
 /**
@@ -145,26 +120,5 @@ export const getEmployerAnalytics = async (
   applicationsThisMonth: number;
   followersThisMonth: number;
 }> => {
-  try {
-    return await getApiHandler("employer/analytics", token);
-  } catch (error) {
-    throw error;
-  }
-};
-
-/**
- * Fetches a specific job by its ID.
- * @param token - The authentication token for the employer.
- * @param jobId - The ID of the job.
- * @returns A promise resolving to the job details.
- */
-export const getJob = async (
-  token: string,
-  jobId: string
-): Promise<{ job: JobTypes }> => {
-  try {
-    return await getApiHandler(`employer/jobs/${jobId}`, token);
-  } catch (error) {
-    throw error;
-  }
+  return await getApiHandler("employers/analytics", token);
 };

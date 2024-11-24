@@ -1,5 +1,10 @@
 import { EmployerTypes, ResponseMessageTypes, SeekerTypes } from "@/types";
-import { deleteApiHandler, getApiHandler, patchApiHandler } from "../api";
+import {
+  deleteApiHandler,
+  getApiHandler,
+  patchApiHandler,
+  postApiHandler,
+} from "../api";
 
 /**
  * ===============================
@@ -17,7 +22,7 @@ import { deleteApiHandler, getApiHandler, patchApiHandler } from "../api";
  */
 export const getEmployers = async ({
   page = "1",
-  srt = "",
+  sort = "",
   search = "",
   token,
   industry = "",
@@ -26,20 +31,16 @@ export const getEmployers = async ({
 }: {
   token: string;
   page: string;
-  srt: string;
+  sort: string;
   search: string;
   industry: string;
   size: string;
   location: string;
 }): Promise<{ employers: EmployerTypes[]; totalEmployers: number }> => {
-  try {
-    return await getApiHandler(
-      `seeker/employers?page=${page}&srt=${srt}&search=${search}&industry=${industry}&size=${size}&location=${location}`,
-      token
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await getApiHandler(
+    `employers/all?page=${page}&sort=${sort}&search=${search}&industry=${industry}&size=${size}&location=${location}`,
+    token
+  );
 };
 
 /**
@@ -54,20 +55,16 @@ export const getEmployerById = async (
   employerId: string,
   token: string,
   type: string = "reviews",
-  page: string = "1"
+  page: number = 1
 ): Promise<{
   employer: EmployerTypes;
   totalJobs: number;
   totalReviews: number;
 }> => {
-  try {
-    return await getApiHandler(
-      `seeker/employers/${employerId}?page=${page}&type=${type}`,
-      token
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await getApiHandler(
+    `employers/${employerId}?page=${page}&limit=10&type=${type}`,
+    token
+  );
 };
 
 /**
@@ -76,13 +73,14 @@ export const getEmployerById = async (
  * @returns A promise resolving to the seeker profile.
  */
 export const getSeekerProfile = async (
-  token: string
+  token: string,
+  page: number = 1,
+  limit: number = 10
 ): Promise<{ seeker: SeekerTypes }> => {
-  try {
-    return await getApiHandler(`seeker`, token);
-  } catch (error) {
-    throw error;
-  }
+  return await getApiHandler(
+    `seekers/profile?page=${page}&limit=${limit}`,
+    token
+  );
 };
 
 /**
@@ -95,11 +93,7 @@ export const followEmployer = async (
   employerId: string,
   token: string
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await patchApiHandler(`seeker/${employerId}/follow`, {}, token);
-  } catch (error) {
-    throw error;
-  }
+  return await postApiHandler(`seekers/${employerId}/follow`, {}, token);
 };
 
 /**
@@ -112,16 +106,12 @@ export const editSeekerProfile = async (
   formData: FormData,
   token: string
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await patchApiHandler(
-      `seeker/edit-seeker-profile`,
-      formData,
-      token,
-      "multipart/form-data"
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await patchApiHandler(
+    `seekers/edit-profile`,
+    formData,
+    token,
+    "multipart/form-data"
+  );
 };
 
 /**
@@ -134,11 +124,7 @@ export const addNewEducation = async (
   data: any,
   token: string
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await patchApiHandler(`seeker/add-new-education`, data, token);
-  } catch (error) {
-    throw error;
-  }
+  return await patchApiHandler(`seekers/add-new-education`, data, token);
 };
 
 /**
@@ -151,11 +137,7 @@ export const addNewExperience = async (
   data: any,
   token: string
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await patchApiHandler(`seeker/add-new-experience`, data, token);
-  } catch (error) {
-    throw error;
-  }
+  return await patchApiHandler(`seekers/add-new-experience`, data, token);
 };
 
 /**
@@ -168,11 +150,7 @@ export const generateJobAlert = async (
   formData: FormData,
   token: string
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await patchApiHandler(`seeker/jobs/alerts`, formData, token);
-  } catch (error) {
-    throw error;
-  }
+  return await postApiHandler(`seekers/create-job-alert`, formData, token);
 };
 
 /**
@@ -183,11 +161,7 @@ export const generateJobAlert = async (
 export const deleteSeekerProfile = async (
   token: string
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await deleteApiHandler(`seeker/delete-seeker-profile`, token);
-  } catch (error) {
-    throw error;
-  }
+  return await deleteApiHandler(`seekers/delete-profile`, token);
 };
 
 /**
@@ -200,14 +174,10 @@ export const deleteEducation = async (
   educationId: string,
   token: string
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await deleteApiHandler(
-      `seeker/delete-education/${educationId}`,
-      token
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await deleteApiHandler(
+    `seekers/delete-education/${educationId}`,
+    token
+  );
 };
 
 /**
@@ -220,12 +190,8 @@ export const deleteExperience = async (
   experienceId: string,
   token: string
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await deleteApiHandler(
-      `seeker/delete-experience/${experienceId}`,
-      token
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await deleteApiHandler(
+    `seekers/delete-experience/${experienceId}`,
+    token
+  );
 };

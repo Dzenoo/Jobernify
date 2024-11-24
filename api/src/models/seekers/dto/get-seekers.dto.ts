@@ -1,5 +1,4 @@
 import {
-  IsArray,
   IsNumber,
   IsOptional,
   IsString,
@@ -25,10 +24,9 @@ export class GetSeekersDto {
 
   @IsOptional()
   @IsString()
-  readonly search: string;
+  readonly search?: string;
 
   @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
-  readonly skills: string[];
+  @IsString()
+  readonly skills?: string;
 }

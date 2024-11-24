@@ -37,11 +37,16 @@ import { renderSkills } from "@/helpers";
 import useMediaQuery from "@/hooks/defaults/useMediaQuery";
 
 type AddSkillsProps = {
+  closeSkills: () => void;
   skills?: string[];
   isDialog: boolean;
 };
 
-const AddSkillsForm: React.FC<AddSkillsProps> = ({ skills = [], isDialog }) => {
+const AddSkillsForm: React.FC<AddSkillsProps> = ({
+  closeSkills,
+  skills = [],
+  isDialog,
+}) => {
   const form = useForm<zod.infer<typeof SeekersSkillsSchemas>>({
     resolver: zodResolver(SeekersSkillsSchemas),
     defaultValues: {
@@ -54,6 +59,7 @@ const AddSkillsForm: React.FC<AddSkillsProps> = ({ skills = [], isDialog }) => {
 
   const onSubmit = async (values: zod.infer<typeof SeekersSkillsSchemas>) => {
     await editSeekerProfileMutate(values);
+    closeSkills();
   };
 
   const children = (
@@ -129,6 +135,7 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
   const [isSkillsOpen, setIsSkillsOpen] = useState(false);
 
   const openSkills = () => setIsSkillsOpen(true);
+  const closeSkills = () => setIsSkillsOpen(false);
 
   const categorizedSkills = getSkillsData(skills || []);
 
@@ -136,12 +143,20 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
     <Fragment>
       {isLarge && (
         <Dialog onOpenChange={setIsSkillsOpen} open={isSkillsOpen}>
-          <AddSkillsForm skills={skills} isDialog={true} />
+          <AddSkillsForm
+            closeSkills={closeSkills}
+            skills={skills}
+            isDialog={true}
+          />
         </Dialog>
       )}
       {!isLarge && (
         <Drawer onOpenChange={setIsSkillsOpen} open={isSkillsOpen}>
-          <AddSkillsForm skills={skills} isDialog={false} />
+          <AddSkillsForm
+            closeSkills={closeSkills}
+            skills={skills}
+            isDialog={false}
+          />
         </Drawer>
       )}
       <div className="flex flex-col gap-10">

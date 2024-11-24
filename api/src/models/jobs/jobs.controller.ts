@@ -71,7 +71,7 @@ export class JobsController {
 
   @Get('/:jobId')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.Seeker)
+  @Roles(Role.Seeker, Role.Employer)
   async getJob(@Param('jobId') jobId: string) {
     return await this.jobsService.getOneById(jobId);
   }

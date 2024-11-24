@@ -21,7 +21,7 @@ const FilterApplications: React.FC<FilterApplicationsProps> = ({
   const { updateSearchParams } = useSearchParams();
 
   const updateApplicationsFilters = (filter: string) => {
-    updateSearchParams("type", filter);
+    updateSearchParams("status", filter);
   };
 
   return (

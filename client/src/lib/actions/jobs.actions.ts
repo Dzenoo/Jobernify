@@ -25,35 +25,31 @@ import {
 export const getJobs = async ({
   token,
   page = "1",
-  srt = "",
+  sort = "",
   search = "",
-  salaryRange = "",
+  salary = "",
   type = "",
-  seniority = "",
+  level = "",
   position = "",
 }: {
   token: string;
   page?: string;
-  srt?: string;
+  sort?: string;
   search?: string;
-  salaryRange?: string | string[];
-  type?: string | string[];
-  seniority?: string | string[];
-  position?: string | string[];
+  salary?: string;
+  type?: string;
+  level?: string;
+  position?: string;
 }): Promise<{
   jobs: JobTypes[];
   totalJobs: number;
   popularJobs: JobTypes[];
   filterCounts: FilterCounts;
 }> => {
-  try {
-    return await getApiHandler(
-      `seeker/jobs?page=${page}&srt=${srt}&search=${search}&salaryRange=${salaryRange}&position=${position}&seniority=${seniority}&type=${type}`,
-      token
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await getApiHandler(
+    `jobs/all?page=${page}&sort=${sort}&search=${search}&salary=${salary}&position=${position}&level=${level}&type=${type}`,
+    token
+  );
 };
 
 /**
@@ -66,11 +62,7 @@ export const getJobById = async (
   jobId: string,
   token: string
 ): Promise<{ job: JobTypes; jobs: JobTypes[] }> => {
-  try {
-    return await getApiHandler(`seeker/jobs/${jobId}`, token);
-  } catch (error) {
-    throw error;
-  }
+  return await getApiHandler(`jobs/${jobId}`, token);
 };
 
 /**
@@ -83,15 +75,7 @@ export const createNewJob = async (
   token: string,
   formData: any
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await postApiHandler(
-      `employer/jobs/create-new-job`,
-      formData,
-      token
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await postApiHandler(`jobs/create-new-job`, formData, token);
 };
 
 /**
@@ -106,15 +90,7 @@ export const editJob = async (
   jobId: string,
   formData: any
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await patchApiHandler(
-      `employer/jobs/${jobId}/edit`,
-      formData,
-      token
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await patchApiHandler(`jobs/${jobId}/edit`, formData, token);
 };
 
 /**
@@ -129,16 +105,12 @@ export const applyToJob = async (
   token: string,
   formData: FormData
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await postApiHandler(
-      `seeker/jobs/${jobId}/apply`,
-      formData,
-      token,
-      "multipart/form-data"
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await postApiHandler(
+    `applications/${jobId}/apply`,
+    formData,
+    token,
+    "multipart/form-data"
+  );
 };
 
 /**
@@ -151,15 +123,11 @@ export const addCoverLetter = async (
   jobId: string,
   token: string
 ): Promise<{ cover_letter: string }> => {
-  try {
-    return await postApiHandler(
-      `seeker/${jobId}/generate-cover-letter`,
-      {},
-      token
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await postApiHandler(
+    `seekers/${jobId}/generate-cover-letter`,
+    {},
+    token
+  );
 };
 
 /**
@@ -172,11 +140,7 @@ export const saveJob = async (
   jobId: string,
   token: string
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await patchApiHandler(`seeker/jobs/${jobId}/save`, {}, token);
-  } catch (error) {
-    throw error;
-  }
+  return await postApiHandler(`jobs/${jobId}/save`, {}, token);
 };
 
 /**
@@ -189,11 +153,7 @@ export const addJobAlert = async (
   token: string,
   data: any
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await patchApiHandler(`seeker/jobs/alerts`, data, token);
-  } catch (error) {
-    throw error;
-  }
+  return await patchApiHandler(`seekers/jobs/alerts`, data, token);
 };
 
 /**
@@ -206,11 +166,7 @@ export const deleteJob = async (
   token: string,
   jobId: string
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await deleteApiHandler(`employer/jobs/${jobId}/delete`, token);
-  } catch (error) {
-    throw error;
-  }
+  return await deleteApiHandler(`jobs/${jobId}/delete`, token);
 };
 
 /**
@@ -221,15 +177,15 @@ export const deleteJob = async (
 export const getApplications = async ({
   token,
   jobId,
-  type = "",
-  page = "1",
+  status = "",
+  page = 1,
 }: {
   token: string;
   jobId: string;
-  type?: string;
-  page?: string;
+  status: string;
+  page: number;
 }): Promise<{
-  job: JobTypes;
+  job: string;
   applications: ApplicationsTypes[];
   totalApplications: number;
   totalPendingStatus: number;
@@ -237,14 +193,10 @@ export const getApplications = async ({
   totalRejectedStatus: number;
   totalAcceptedStatus: number;
 }> => {
-  try {
-    return await getApiHandler(
-      `employer/applications/${jobId}?page=${page}&type=${type}`,
-      token
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await getApiHandler(
+    `applications/${jobId}?page=${page}&limit=10&status=${status}`,
+    token
+  );
 };
 
 /**
@@ -259,13 +211,9 @@ export const updateApplicationStatus = async (
   token: string,
   status: string
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await patchApiHandler(
-      `employer/${applicationId}/status`,
-      { status },
-      token
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await patchApiHandler(
+    `applications/${applicationId}/status`,
+    { status },
+    token
+  );
 };

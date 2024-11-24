@@ -5,11 +5,8 @@ import {
   IsPositive,
   Max,
   Min,
-  IsEnum,
 } from 'class-validator';
-import { IndustryType } from '../schemas/employer.schema';
 import { Transform } from 'class-transformer';
-import { CompanySize } from '../schemas/employer.schema';
 
 export class GetEmployersDto {
   @IsOptional()
@@ -27,19 +24,21 @@ export class GetEmployersDto {
 
   @IsOptional()
   @IsString()
-  readonly search: string;
+  readonly search?: string;
 
   @IsOptional()
   @IsString()
-  readonly sort: 'followers' | 'reviews';
+  readonly sort?: 'followers' | 'reviews';
 
   @IsOptional()
   @IsString()
-  @IsEnum(CompanySize)
-  readonly size: CompanySize;
+  readonly size?: string;
 
   @IsOptional()
   @IsString()
-  @IsEnum(IndustryType)
-  readonly industry: IndustryType;
+  readonly industry?: string;
+
+  @IsOptional()
+  @IsString()
+  readonly location?: string;
 }

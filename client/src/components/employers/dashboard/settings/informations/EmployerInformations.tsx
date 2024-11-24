@@ -84,11 +84,6 @@ const EmployerInformations: React.FC<EmployerInformationsProps> = ({
       title: "Address",
       data: employer?.address,
     },
-    {
-      id: "3",
-      title: "Email",
-      data: employer?.email,
-    },
   ];
 
   return (

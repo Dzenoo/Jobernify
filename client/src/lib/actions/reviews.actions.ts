@@ -26,11 +26,7 @@ export const reviewEmployer = async (
     time: keyof typeof ReviewTime;
   }
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await postApiHandler(`seeker/${employerId}/review`, formData, token);
-  } catch (error) {
-    throw error;
-  }
+  return await postApiHandler(`reviews/${employerId}`, formData, token);
 };
 
 /**
@@ -50,15 +46,7 @@ export const editReview = async (
     reviewId: string;
   }
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await patchApiHandler(
-      `seeker/${employerId}/review`,
-      formData,
-      token
-    );
-  } catch (error) {
-    throw error;
-  }
+  return await patchApiHandler(`reviews/${employerId}`, formData, token);
 };
 
 /**
@@ -71,9 +59,5 @@ export const deleteReview = async (
   employerId: string,
   token: string
 ): Promise<ResponseMessageTypes> => {
-  try {
-    return await deleteApiHandler(`seeker/${employerId}/review`, token);
-  } catch (error) {
-    throw error;
-  }
+  return await deleteApiHandler(`reviews/${employerId}`, token);
 };

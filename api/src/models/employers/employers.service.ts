@@ -73,8 +73,8 @@ export class EmployersService {
     sort = '',
     id,
   }: {
-    page?: number;
-    limit?: number;
+    page: number;
+    limit: number;
     type?: string;
     search?: string;
     sort?: string;
@@ -140,9 +140,10 @@ export class EmployersService {
           ...populateQuery,
           match: searchQuery,
         })
+        .select('-email')
         .exec();
     } else {
-      employer = await this.employerModel.findById(id).exec();
+      employer = await this.employerModel.findById(id).select('-email').exec();
     }
 
     if (!employer) {
@@ -264,8 +265,8 @@ export class EmployersService {
     type = 'jobs',
     id,
   }: {
-    page?: number;
-    limit?: number;
+    page: number;
+    limit: number;
     type?: 'jobs' | 'reviews';
     id: string;
   }): Promise<ResponseObject> {
@@ -331,8 +332,8 @@ export class EmployersService {
     size = '',
     location = '',
   }: {
-    page?: number;
-    limit?: number;
+    page: number;
+    limit: number;
     search?: string;
     sort?: string;
     industry?: string;

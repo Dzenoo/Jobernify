@@ -146,7 +146,9 @@ export type ApplicationsTypes = {
 };
 
 export type ResponseMessageTypes = {
+  statusCode: number;
   message: string;
+  [key: string]: any;
 };
 
 export type FilterCounts = {

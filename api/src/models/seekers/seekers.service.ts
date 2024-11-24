@@ -75,8 +75,8 @@ export class SeekersService {
     limit = 10,
     id,
   }: {
-    page?: number;
-    limit?: number;
+    page: number;
+    limit: number;
     id: string;
   }): Promise<ResponseObject> {
     const skip = (page - 1) * limit;
@@ -229,12 +229,12 @@ export class SeekersService {
     page = 1,
     limit = 12,
     search = '',
-    skills = [''],
+    skills = '',
   }: {
-    page?: number;
-    limit?: number;
+    page: number;
+    limit: number;
     search?: string;
-    skills?: string[];
+    skills?: string;
   }): Promise<ResponseObject> {
     const conditions: any = {
       emailVerified: true,
@@ -251,7 +251,10 @@ export class SeekersService {
     }
 
     if (skills) {
-      conditions.skills = { $in: skills };
+      const filteredSkills =
+        typeof skills === 'string' ? skills.split(',') : skills;
+
+      conditions.skills = { $in: filteredSkills };
     }
 
     const seekers = await this.seekerModel

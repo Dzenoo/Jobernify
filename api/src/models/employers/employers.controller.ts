@@ -8,6 +8,11 @@ import {
   Query,
   ParseIntPipe,
   UseGuards,
+  UseInterceptors,
+  UploadedFile,
+  ParseFilePipe,
+  FileTypeValidator,
+  MaxFileSizeValidator,
 } from '@nestjs/common';
 
 import { EmployersService } from './employers.service';
@@ -23,6 +28,8 @@ import { Roles } from 'src/common/decorators/roles.decorator';
 import { Role } from '../shared/schemas/user.schema';
 import { User } from 'src/common/decorators/user.decorator';
 import { VerificationService } from 'src/authentication/verification/verification.service';
+
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('/employers')
 export class EmployersController {
@@ -53,11 +60,25 @@ export class EmployersController {
   @Patch('/edit-profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Employer)
+  @UseInterceptors(FileInterceptor('image'))
   async editProfile(
     @User('userId') userId: string,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: '.(png|jpg|jpeg)' }),
+          new MaxFileSizeValidator({
+            maxSize: 6 * 1024 * 1024,
+            message: 'File is too large.',
+          }),
+        ],
+        fileIsRequired: false,
+      }),
+    )
+    image: Express.Multer.File,
     @Body() body: UpdateEmployerDto,
   ) {
-    return await this.employersService.editOne(userId, body);
+    return await this.employersService.editOne(userId, body, image);
   }
 
   @Delete('/delete-profile')
@@ -83,7 +104,7 @@ export class EmployersController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)
   async getAll(@Query() query: GetEmployersDto) {
-    const { page, limit, search, sort, size, industry } = query;
+    const { page, limit, search, sort, size, industry, location } = query;
 
     return await this.employersService.getMany({
       page,
@@ -92,6 +113,7 @@ export class EmployersController {
       sort,
       size,
       industry,
+      location,
     });
   }
 

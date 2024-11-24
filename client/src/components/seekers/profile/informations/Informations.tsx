@@ -28,10 +28,12 @@ type InformationsProps = {
 
 const Informations: React.FC<InformationsProps> = ({ seeker }) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
+
   const form = useForm<zod.infer<typeof EditableSeekerInformationsSchemas>>({
     resolver: zodResolver(EditableSeekerInformationsSchemas),
     mode: "all",
   });
+
   const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
 
   useEffect(() => {
