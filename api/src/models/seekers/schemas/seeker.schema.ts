@@ -83,7 +83,7 @@ export class Seeker extends BaseUser {
   @Prop({
     type: [String],
     default: [],
-    set: (skills) => skills.map((s) => s.toLowerCase().trim()),
+    set: (skills: string[]) => skills.map((s) => s.toLowerCase().trim()),
   })
   skills: string[];
 
@@ -122,13 +122,13 @@ export class Seeker extends BaseUser {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Application' }],
     default: [],
   })
-  applications: Application[];
+  applications: Application[] & string;
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Employer' }],
     default: [],
   })
-  following: Employer[];
+  following: Employer[] & string;
 }
 
 export const SeekerSchema = SchemaFactory.createForClass(Seeker);

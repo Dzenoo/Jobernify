@@ -29,7 +29,7 @@ export class Review {
     ref: 'Employer',
     required: true,
   })
-  company: Employer;
+  company: Employer & string;
 
   @Prop({
     type: String,
@@ -88,7 +88,7 @@ export class Review {
     ref: 'Seeker',
     required: true,
   })
-  seeker: Seeker;
+  seeker: Seeker & string;
 }
 
 export const ReviewSchema = SchemaFactory.createForClass(Review);

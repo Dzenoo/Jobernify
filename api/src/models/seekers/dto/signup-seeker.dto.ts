@@ -21,6 +21,8 @@ export class SignupSeekerDto {
 
   @IsString()
   @IsNotEmpty()
+  @MinLength(5)
+  @MaxLength(255)
   @IsEmail()
   readonly email: string;
 

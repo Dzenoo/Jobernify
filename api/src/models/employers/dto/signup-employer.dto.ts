@@ -11,14 +11,16 @@ import { CompanySize, IndustryType } from '../schemas/employer.schema';
 export class SignUpEmployerDto {
   @IsString()
   @IsNotEmpty()
-  @MinLength(8)
-  @MaxLength(15)
-  readonly password: string;
+  @MinLength(5)
+  @MaxLength(255)
+  @IsEmail()
+  readonly email: string;
 
   @IsString()
   @IsNotEmpty()
-  @IsEmail()
-  readonly email: string;
+  @MinLength(8)
+  @MaxLength(15)
+  readonly password: string;
 
   @IsString()
   @IsNotEmpty()

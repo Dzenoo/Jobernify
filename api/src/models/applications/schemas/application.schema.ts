@@ -37,13 +37,13 @@ export class Application {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Seeker',
   })
-  seeker: Seeker;
+  seeker: Seeker & string;
 
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Job',
   })
-  job: Job;
+  job: Job & string;
 }
 
 export const ApplicationSchema = SchemaFactory.createForClass(Application);

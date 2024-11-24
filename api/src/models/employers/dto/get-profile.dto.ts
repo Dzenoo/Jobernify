@@ -24,13 +24,13 @@ export class GetProfileDto {
 
   @IsOptional()
   @IsString()
-  readonly search: string;
+  readonly search?: string;
 
   @IsOptional()
   @IsString()
-  readonly sort: string;
+  readonly sort?: string;
 
   @IsOptional()
   @IsString()
-  readonly type: 'jobs' | 'reviews';
+  readonly type?: 'jobs' | 'reviews';
 }
