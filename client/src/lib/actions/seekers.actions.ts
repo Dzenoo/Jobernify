@@ -148,12 +148,12 @@ export const followEmployer = async (
  */
 export const getSeekers = async ({
   token,
-  page = "1",
+  page = 1,
   search = "",
   skills = "",
 }: {
   token: string;
-  page?: string;
+  page: number;
   skills?: string | string[];
   search?: string;
 }): Promise<{ seekers: SeekerTypes[]; totalSeekers: number }> => {

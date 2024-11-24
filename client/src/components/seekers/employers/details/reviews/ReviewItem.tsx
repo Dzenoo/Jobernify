@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 import { useMutation } from "react-query";
 import { deleteReview } from "@/lib/actions/reviews.actions";
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import { queryClient } from "@/context/react-query-client";
 import { toast } from "@/components/ui/use-toast";
 import EditReview from "./EditReview";

@@ -188,7 +188,7 @@ const EmployerProfileInformation: React.FC<EmployerProfileInformationProps> = ({
                   alt="Employer_profile_img"
                   width={130}
                   height={130}
-                  className="border border-blue-500 rounded-full w-36 h-36 object-cover"
+                  className="border border-gray-900 rounded-full w-36 h-36 object-cover"
                 />
               </div>
               <div className="flex flex-col gap-3">

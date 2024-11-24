@@ -4,9 +4,9 @@ import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 import { useQuery } from "react-query";
 
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
-import { getEmployers } from "@/lib/actions/seekers.actions";
+import { getEmployers } from "@/lib/actions/employers.actions";
 
 import LoadingCompaniesSkeleton from "@/components/loaders/LoadingCompanies";
 

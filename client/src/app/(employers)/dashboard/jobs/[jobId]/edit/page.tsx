@@ -6,7 +6,7 @@ import UpdateJobForm from "@/components/employers/dashboard/jobs/new/UpdateJobFo
 import { useQuery } from "react-query";
 import { getJobById } from "@/lib/actions/jobs.actions";
 
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import { JobTypes } from "@/types";
 import NotFound from "@/components/shared/pages/NotFound";
 

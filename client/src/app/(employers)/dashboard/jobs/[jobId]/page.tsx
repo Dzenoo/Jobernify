@@ -3,7 +3,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 
 import { getApplications } from "@/lib/actions/jobs.actions";

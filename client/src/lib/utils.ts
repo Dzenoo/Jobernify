@@ -118,9 +118,7 @@ export const getTime = (date: string): string => {
  * @returns The full image URL.
  */
 export const getImageUrl = (image: string): string => {
-  return image?.includes("https:")
-    ? image
-    : `https://job-searching-application.s3.amazonaws.com/${image}`;
+  return image?.includes("https:") ? image : `${process.env.AWS_URL}/${image}`;
 };
 
 /**

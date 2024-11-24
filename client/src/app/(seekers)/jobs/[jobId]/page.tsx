@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
 import { getJobById } from "@/lib/actions/jobs.actions";
 

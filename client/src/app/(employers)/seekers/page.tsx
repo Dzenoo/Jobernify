@@ -3,9 +3,9 @@
 import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
-import { getSeekers } from "@/lib/actions/employers.actions";
+import { getSeekers } from "@/lib/actions/seekers.actions";
 
 import FilterSeekers from "@/components/employers/seekers/filters/FilterSeekers";
 
@@ -26,7 +26,7 @@ const SeekersList = dynamic(
 const SeekersPage = ({
   searchParams,
 }: {
-  searchParams: { [key: string]: string };
+  searchParams: { [key: string]: string & number };
 }) => {
   const { updateSearchParams } = useSearchParams();
   const { token } = useAuthentication().getCookieHandler();
@@ -40,9 +40,9 @@ const SeekersPage = ({
     queryFn: () =>
       getSeekers({
         token: token as string,
-        page: searchParams.page || "1",
-        skills: searchParams.skills || "",
+        page: searchParams.page || 1,
         search: searchParams.query || "",
+        skills: searchParams.skills || "",
       }),
     queryKey: ["seekers", searchParams],
   });

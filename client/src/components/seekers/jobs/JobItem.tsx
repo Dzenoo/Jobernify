@@ -68,7 +68,7 @@ const JobItem: React.FC<JobItemProps> = ({ job, showDescription = true }) => {
           <div className="flex justify-between sm:items-center">
             <div className="flex items-center gap-3 flex-wrap">
               <Link href={`/companies/${job?.company._id}?section=jobs`}>
-                <Avatar className="border border-blue-500 w-12 h-12">
+                <Avatar className="border border-blue-900 w-12 h-12">
                   <AvatarImage
                     src={getImageUrl(job.company?.image)}
                     className="object-cover w-auto h-auto"
