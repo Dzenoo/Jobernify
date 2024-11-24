@@ -30,7 +30,10 @@ export class JobsController {
   @Post('/create-new-job')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Employer)
-  async createJob(@User('userId') userId: string, @Body() body: CreateJobDto) {
+  async createNewJob(
+    @User('userId') userId: string,
+    @Body() body: CreateJobDto,
+  ) {
     return await this.jobsService.createOne(body, userId);
   }
 
@@ -72,7 +75,7 @@ export class JobsController {
   @Get('/:jobId')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker, Role.Employer)
-  async getJob(@Param('jobId') jobId: string) {
+  async getJobById(@Param('jobId') jobId: string) {
     return await this.jobsService.getOneById(jobId);
   }
 }

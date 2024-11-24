@@ -13,7 +13,7 @@ import LoadingPopularJobs from "@/components/loaders/LoadingPopularJobs";
 import PopularJobsInfo from "@/components/seekers/jobs/PopularJobsInfo";
 import FilterJobs from "@/components/seekers/jobs/filters/FilterJobs";
 import PaginatedList from "@/components/ui/paginate-list";
-import useSearchParams from "@/hooks/defaults/useSearchParams";
+import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 import SearchJobs from "@/components/seekers/jobs/search/SearchJobs";
 import SeekerInfo from "@/components/seekers/jobs/SeekerInfo";
 

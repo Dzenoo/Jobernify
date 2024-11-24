@@ -19,7 +19,7 @@ import SaveJobButton from "../SaveJobButton";
 
 import { ApplicationsTypes, JobTypes } from "@/types";
 
-import useGetSeeker from "@/hooks/queries/useGetSeeker";
+import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
 import {
   findIndustriesData,

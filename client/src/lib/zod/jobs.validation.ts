@@ -1,11 +1,11 @@
 // Jobs
 import zod from "zod";
 
-export const ApplyToJobSchemas = zod.object({
+export const ApplyToJobSchema = zod.object({
   coverLetter: zod.string().optional(),
 });
 
-export const UpdateJobSchemas = zod.object({
+export const UpdateJobSchema = zod.object({
   title: zod
     .string()
     .min(3, "Title should have at least 3 characters.")

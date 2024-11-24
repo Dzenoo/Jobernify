@@ -5,7 +5,7 @@ import Followers from "@/components/employers/dashboard/overview/Followers";
 import JobsPerMonth from "@/components/employers/dashboard/overview/JobsPerMonth";
 import Statistics from "@/components/employers/dashboard/overview/Statistics";
 import Types from "@/components/employers/dashboard/overview/Types";
-import useGetEmployer from "@/hooks/queries/useGetEmployer";
+import useGetEmployer from "@/hooks/queries/useGetEmployer.query";
 import useAuthentication from "@/hooks/defaults/useAuthentication";
 import { getEmployerAnalytics } from "@/lib/actions/employers.actions";
 import { useQuery } from "react-query";

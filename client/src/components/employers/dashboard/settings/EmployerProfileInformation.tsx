@@ -7,9 +7,9 @@ import { ImagePlusIcon, Trash } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { useMutation } from "react-query";
 
-import useEditEmployer from "@/hooks/mutations/useEditEmployer";
-import useUploads from "@/hooks/defaults/useUploads";
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useEditEmployer from "@/hooks/mutations/useEditEmployer.mutation";
+import useUploads from "@/hooks/defaults/useUploads.hook";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
 import { EmployerTypes } from "@/types";
 
@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import EmployerInformations from "./informations/EmployerInformations";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery";
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import {
   Drawer,
   DrawerContent,

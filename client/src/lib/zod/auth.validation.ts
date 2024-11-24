@@ -1,7 +1,7 @@
 import { industries, PASSWORD_REGEX } from "@/constants";
 import zod from "zod";
 
-export const SeekerRegistrationSchemas = zod.object({
+export const SeekerRegistrationSchema = zod.object({
   first_name: zod
     .string()
     .min(2, { message: "First Name must be at least 2 characters long" })
@@ -32,7 +32,7 @@ export const SeekerRegistrationSchemas = zod.object({
     ),
 });
 
-export const EmployersRegistrationSchemas = zod.object({
+export const EmployerRegistrationSchema = zod.object({
   name: zod
     .string()
     .min(5, { message: "Name must be at least 5 characters long" })

@@ -6,21 +6,21 @@ import {
 } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 
+type RenderIconTextDefault = {
+  data: string | number;
+  icon: React.JSX.Element;
+  id: string;
+};
+
 type RenderIconTextProps =
-  | {
+  | ({
       tooltip?: true;
       tooltipContent?: string;
-      data: string | number;
-      icon: React.JSX.Element;
-      id: string;
-    }
-  | {
+    } & RenderIconTextDefault)
+  | ({
       tooltip?: false;
       tooltipContent?: null;
-      data: string | number;
-      icon: React.JSX.Element;
-      id: string;
-    };
+    } & RenderIconTextDefault);
 
 export const renderIconText = ({
   tooltip,

@@ -8,10 +8,10 @@ import { ClipLoader } from "react-spinners";
 import { useToast } from "@/components/ui/use-toast";
 import zod from "zod";
 
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
 import { createNewJob, editJob } from "@/lib/actions/jobs.actions";
-import { UpdateJobSchemas } from "@/lib/zod/jobs";
+import { UpdateJobSchema } from "@/lib/zod/jobs.validation";
 import { useRouter } from "next/navigation";
 import TurndownService from "turndown";
 
@@ -45,7 +45,7 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
   const formData = isEdit ? props.formData : undefined;
   const jobId = isEdit ? props.jobId : undefined;
 
-  const form = useForm<zod.infer<typeof UpdateJobSchemas>>({
+  const form = useForm<zod.infer<typeof UpdateJobSchema>>({
     mode: "all",
     defaultValues: {
       title: "",
@@ -59,7 +59,7 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
       level: "Junior",
       type: "Freelance",
     },
-    resolver: zodResolver(UpdateJobSchemas),
+    resolver: zodResolver(UpdateJobSchema),
   });
 
   const { reset } = form;
@@ -120,7 +120,7 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
     return components[currentJobForm];
   }
 
-  async function updateJob(values: zod.infer<typeof UpdateJobSchemas>) {
+  async function updateJob(values: zod.infer<typeof UpdateJobSchema>) {
     const markdownDescription = turndownService.turndown(values.description);
 
     const jobData = {

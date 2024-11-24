@@ -4,7 +4,7 @@ import React from "react";
 import { useQuery } from "react-query";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication";
-import useSearchParams from "@/hooks/defaults/useSearchParams";
+import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 
 import { getApplications } from "@/lib/actions/jobs.actions";
 

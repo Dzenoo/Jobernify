@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import zod from "zod";
 import { ClipLoader } from "react-spinners";
 
-import { EmployersRegistrationSchemas } from "@/lib/zod/auth";
+import { EmployerRegistrationSchema } from "@/lib/zod/auth.validation";
 import { signupEmployer } from "@/lib/actions/auth.actions";
 import { TypeOfAccount } from "@/types";
 import { industries } from "@/constants";
@@ -51,8 +51,8 @@ const EmployersSignupForm: React.FC<EmployersSignupFormTypes> = ({
   const router = useRouter();
   const { toast } = useToast();
 
-  const form = useForm<zod.infer<typeof EmployersRegistrationSchemas>>({
-    resolver: zodResolver(EmployersRegistrationSchemas),
+  const form = useForm<zod.infer<typeof EmployerRegistrationSchema>>({
+    resolver: zodResolver(EmployerRegistrationSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -80,7 +80,7 @@ const EmployersSignupForm: React.FC<EmployersSignupFormTypes> = ({
   });
 
   const onSubmit = async (
-    values: zod.infer<typeof EmployersRegistrationSchemas>
+    values: zod.infer<typeof EmployerRegistrationSchema>
   ) => {
     await signupEmployerMutation(values);
   };

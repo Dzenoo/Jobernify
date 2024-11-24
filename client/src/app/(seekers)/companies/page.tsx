@@ -11,7 +11,7 @@ import { getEmployers } from "@/lib/actions/seekers.actions";
 import LoadingCompaniesSkeleton from "@/components/loaders/LoadingCompanies";
 
 import PaginatedList from "@/components/ui/paginate-list";
-import useSearchParams from "@/hooks/defaults/useSearchParams";
+import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 import SearchEmployers from "@/components/seekers/employers/search/SearchEmployers";
 
 const EmployersList = dynamic(

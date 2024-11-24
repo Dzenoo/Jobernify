@@ -11,9 +11,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { useToast } from "@/components/ui/use-toast";
 
-import { EditableEducationsSchemas } from "@/lib/zod/seekers";
+import { EducationSchema } from "@/lib/zod/seekers.validation";
 import { addNewEducation } from "@/lib/actions/seekers.actions";
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import { queryClient } from "@/context/react-query-client";
 import { cn } from "@/lib/utils";
 import { SeekerTypes } from "@/types";
@@ -49,7 +49,7 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 
 import EducationList from "./EducationList";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery";
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 
 type AddEducationsProps = {
   closeEducations: () => void;
@@ -62,8 +62,8 @@ const AddEducations: React.FC<AddEducationsProps> = ({
 }) => {
   const { toast } = useToast();
   const { token } = useAuthentication().getCookieHandler();
-  const form = useForm<zod.infer<typeof EditableEducationsSchemas>>({
-    resolver: zodResolver(EditableEducationsSchemas),
+  const form = useForm<zod.infer<typeof EducationSchema>>({
+    resolver: zodResolver(EducationSchema),
     defaultValues: {
       graduationDate: new Date(),
       institution: "",
@@ -92,9 +92,7 @@ const AddEducations: React.FC<AddEducationsProps> = ({
     },
   });
 
-  const onSubmit = async (
-    values: zod.infer<typeof EditableEducationsSchemas>
-  ) => {
+  const onSubmit = async (values: zod.infer<typeof EducationSchema>) => {
     await addNewEducationMutate(values);
   };
 

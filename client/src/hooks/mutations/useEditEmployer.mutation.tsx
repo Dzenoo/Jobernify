@@ -1,6 +1,6 @@
 import { queryClient } from "@/context/react-query-client";
 import { useMutation } from "react-query";
-import useAuthentication from "../defaults/useAuthentication";
+import useAuthentication from "../defaults/useAuthentication.hook";
 import { useToast } from "@/components/ui/use-toast";
 import { editEmployerProfile } from "@/lib/actions/employers.actions";
 

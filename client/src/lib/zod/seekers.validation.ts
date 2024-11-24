@@ -1,13 +1,13 @@
 import zod from "zod";
 
-export const EditableSeekerInformationsSchemas = zod.object({
+export const SeekerProfileSchema = zod.object({
   first_name: zod.string().min(1).max(30),
   last_name: zod.string().min(1).max(30),
   biography: zod.string().max(3000),
   headline: zod.string().max(30),
 });
 
-export const EditableSeekerSocialsSchemas = zod.object({
+export const SeekerSocialsSchema = zod.object({
   portfolio: zod
     .string()
     .optional()
@@ -28,14 +28,14 @@ export const EditableSeekerSocialsSchemas = zod.object({
     }),
 });
 
-export const EditableEducationsSchemas = zod.object({
+export const EducationSchema = zod.object({
   institution: zod.string().min(3).max(300),
   fieldOfStudy: zod.string().min(3).max(30),
   degree: zod.string().min(3).max(30),
   graduationDate: zod.date(),
 });
 
-export const EditableExperiencesSchemas = zod.object({
+export const ExperienceSchema = zod.object({
   jobTitle: zod.string().min(3).max(100),
   companyName: zod.string().min(3).max(300),
   startDate: zod.date(),
@@ -59,11 +59,11 @@ export const EditableExperiencesSchemas = zod.object({
   }),
 });
 
-export const SeekersSkillsSchemas = zod.object({
+export const SkillsSchema = zod.object({
   skills: zod.array(zod.string()),
 });
 
-export const JobAlertsSchemas = zod.object({
+export const JobAlertSchema = zod.object({
   title: zod.string().min(3).max(30),
   type: zod.string().min(3).max(30),
   level: zod.string().min(3).max(30),

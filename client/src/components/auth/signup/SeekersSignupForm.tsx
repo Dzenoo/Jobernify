@@ -11,7 +11,7 @@ import zod from "zod";
 import { ClipLoader } from "react-spinners";
 import { useToast } from "@/components/ui/use-toast";
 
-import { SeekerRegistrationSchemas } from "@/lib/zod/auth";
+import { SeekerRegistrationSchema } from "@/lib/zod/auth.validation";
 import { signupSeeker } from "@/lib/actions/auth.actions";
 import { TypeOfAccount } from "@/types";
 
@@ -42,8 +42,8 @@ const SeekersSignupForm: React.FC<SeekersSignupFormTypes> = ({
 }) => {
   const router = useRouter();
   const { toast } = useToast();
-  const form = useForm<zod.infer<typeof SeekerRegistrationSchemas>>({
-    resolver: zodResolver(SeekerRegistrationSchemas),
+  const form = useForm<zod.infer<typeof SeekerRegistrationSchema>>({
+    resolver: zodResolver(SeekerRegistrationSchema),
     defaultValues: {
       first_name: "",
       last_name: "",
@@ -69,7 +69,7 @@ const SeekersSignupForm: React.FC<SeekersSignupFormTypes> = ({
   });
 
   const onSubmit = async (
-    values: zod.infer<typeof SeekerRegistrationSchemas>
+    values: zod.infer<typeof SeekerRegistrationSchema>
   ) => {
     await signupSeekerMutation(values);
   };

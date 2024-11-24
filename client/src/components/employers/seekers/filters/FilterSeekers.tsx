@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Filter, ListFilter } from "lucide-react";
 
 import FilterHandler from "@/components/shared/filters/FilterHandler";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery";
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import { SkillsInformationsData } from "@/constants";
 
 import {

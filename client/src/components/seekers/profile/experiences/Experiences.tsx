@@ -11,9 +11,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { useToast } from "@/components/ui/use-toast";
 
-import { EditableExperiencesSchemas } from "@/lib/zod/seekers";
+import { ExperienceSchema } from "@/lib/zod/seekers.validation";
 import { addNewExperience } from "@/lib/actions/seekers.actions";
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import { queryClient } from "@/context/react-query-client";
 import { cn } from "@/lib/utils";
 import { SeekerTypes } from "@/types";
@@ -55,7 +55,7 @@ import {
 } from "@/components/ui/select";
 import { Calendar } from "@/components/ui/calendar";
 
-import useMediaQuery from "@/hooks/defaults/useMediaQuery";
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import { JobsFiltersData } from "@/constants";
 import ExperienceList from "./ExperienceList";
 
@@ -70,8 +70,8 @@ const AddExperience: React.FC<AddExperienceProps> = ({
 }) => {
   const { toast } = useToast();
   const { token } = useAuthentication().getCookieHandler();
-  const form = useForm<zod.infer<typeof EditableExperiencesSchemas>>({
-    resolver: zodResolver(EditableExperiencesSchemas),
+  const form = useForm<zod.infer<typeof ExperienceSchema>>({
+    resolver: zodResolver(ExperienceSchema),
     defaultValues: {
       jobTitle: "",
       companyName: "",
@@ -104,9 +104,7 @@ const AddExperience: React.FC<AddExperienceProps> = ({
     },
   });
 
-  const onSubmit = async (
-    values: zod.infer<typeof EditableExperiencesSchemas>
-  ) => {
+  const onSubmit = async (values: zod.infer<typeof ExperienceSchema>) => {
     await addNewExperienceMutate(values);
   };
 

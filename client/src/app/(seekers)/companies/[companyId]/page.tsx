@@ -14,7 +14,7 @@ import EmployerDetailsInfo from "@/components/seekers/employers/details/Employer
 import EmployerFilters from "@/components/seekers/employers/filters/EmployerFilters";
 
 import PaginatedList from "@/components/ui/paginate-list";
-import useSearchParams from "@/hooks/defaults/useSearchParams";
+import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 import LoadingCompanyDetails from "@/components/loaders/LoadingCompanyDetails";
 import NotFound from "@/components/shared/pages/NotFound";
 

@@ -6,8 +6,8 @@ import zod from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import useEditSeeker from "@/hooks/mutations/useEditSeeker";
-import { SeekersSkillsSchemas } from "@/lib/zod/seekers";
+import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
+import { SkillsSchema } from "@/lib/zod/seekers.validation";
 import { getSkillsData, multiselectSkills } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
@@ -34,7 +34,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { renderSkills } from "@/helpers";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery";
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 
 type AddSkillsProps = {
   closeSkills: () => void;
@@ -47,8 +47,8 @@ const AddSkillsForm: React.FC<AddSkillsProps> = ({
   skills = [],
   isDialog,
 }) => {
-  const form = useForm<zod.infer<typeof SeekersSkillsSchemas>>({
-    resolver: zodResolver(SeekersSkillsSchemas),
+  const form = useForm<zod.infer<typeof SkillsSchema>>({
+    resolver: zodResolver(SkillsSchema),
     defaultValues: {
       skills: skills,
     },
@@ -57,7 +57,7 @@ const AddSkillsForm: React.FC<AddSkillsProps> = ({
 
   const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
 
-  const onSubmit = async (values: zod.infer<typeof SeekersSkillsSchemas>) => {
+  const onSubmit = async (values: zod.infer<typeof SkillsSchema>) => {
     await editSeekerProfileMutate(values);
     closeSkills();
   };

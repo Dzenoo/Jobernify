@@ -1,7 +1,7 @@
 import React from "react";
 
 import { getImageUrl } from "@/lib/utils";
-import useGetSeeker from "@/hooks/queries/useGetSeeker";
+import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 import Image from "next/image";
 import Link from "next/link";
 import LoadingSeekerInfo from "@/components/loaders/LoadingSeekerInfo";

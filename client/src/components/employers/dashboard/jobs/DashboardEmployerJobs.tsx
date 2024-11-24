@@ -7,7 +7,7 @@ import { ClipLoader } from "react-spinners";
 import { Edit, Eye, Trash } from "lucide-react";
 
 import { deleteJob } from "@/lib/actions/jobs.actions";
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import { queryClient } from "@/context/react-query-client";
 import { JobTypes } from "@/types";
 import { findLocationData, formatDate } from "@/lib/utils";
@@ -30,7 +30,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery";
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import {
   Drawer,
   DrawerContent,

@@ -6,7 +6,7 @@ import { useMutation } from "react-query";
 import { useToast } from "@/components/ui/use-toast";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication";
-import useGetSeeker from "@/hooks/queries/useGetSeeker";
+import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
 import { saveJob } from "@/lib/actions/jobs.actions";
 import { queryClient } from "@/context/react-query-client";

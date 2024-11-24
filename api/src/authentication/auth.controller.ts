@@ -18,12 +18,12 @@ export class AuthController {
   }
 
   @Post('/seekers-signup')
-  async signUpSeekers(@Body() body: SignupSeekerDto) {
+  async signupSeeker(@Body() body: SignupSeekerDto) {
     return this.authService.signupSeeker(body);
   }
 
   @Post('/employers-signup')
-  async signUpEmployers(@Body() body: SignUpEmployerDto) {
+  async signupEmployer(@Body() body: SignUpEmployerDto) {
     return this.authService.signupEmployer(body);
   }
 }

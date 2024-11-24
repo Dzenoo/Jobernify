@@ -7,8 +7,8 @@ import { ClipLoader } from "react-spinners";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
-import useAuthentication from "@/hooks/defaults/useAuthentication";
-import { ReviewEmployersSchemas } from "@/lib/zod/reviews";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import { ReviewSchema } from "@/lib/zod/reviews.validation";
 import { reviewEmployer } from "@/lib/actions/reviews.actions";
 
 import { Button } from "@/components/ui/button";
@@ -44,8 +44,8 @@ const ReviewCompanyForm: React.FC<ReviewCompanyFormProps> = ({
   const { toast } = useToast();
   const router = useRouter();
   const { token } = useAuthentication().getCookieHandler();
-  const form = useForm<zod.infer<typeof ReviewEmployersSchemas>>({
-    resolver: zodResolver(ReviewEmployersSchemas),
+  const form = useForm<zod.infer<typeof ReviewSchema>>({
+    resolver: zodResolver(ReviewSchema),
     defaultValues: {
       job_position: "",
       time: "4-7",
@@ -67,9 +67,7 @@ const ReviewCompanyForm: React.FC<ReviewCompanyFormProps> = ({
     },
   });
 
-  const onSubmit = async (
-    reviewData: zod.infer<typeof ReviewEmployersSchemas>
-  ) => {
+  const onSubmit = async (reviewData: zod.infer<typeof ReviewSchema>) => {
     await reviewEmployerMutate(reviewData);
   };
 

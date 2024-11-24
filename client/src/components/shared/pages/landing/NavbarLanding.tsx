@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
 import { NavbarLandingLinks } from "@/constants";
 import { Button } from "@/components/ui/button";

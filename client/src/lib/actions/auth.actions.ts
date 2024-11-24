@@ -1,6 +1,22 @@
 import { postApiHandler } from "../api";
 
 /**
+ * Logs in a user (seeker or employer).
+ * @param params - An object containing the type of account and the login data (email and password).
+ * @returns A promise resolving to the user (seeker or employer) and the authentication token.
+ */
+export const signIn = async ({
+  loginData,
+}: {
+  loginData: {
+    email: string;
+    password: string;
+  };
+}): Promise<{ access_token: string; role: string }> => {
+  return await postApiHandler("auth/signin", loginData);
+};
+
+/**
  * Registers a new seeker account.
  * @param data - An object containing seeker details (first name, last name, email, password).
  * @returns A promise resolving to success signup
@@ -28,20 +44,4 @@ export const signupEmployer = async (data: {
   address: string;
 }) => {
   return await postApiHandler("auth/employers-signup", data);
-};
-
-/**
- * Logs in a user (seeker or employer).
- * @param params - An object containing the type of account and the login data (email and password).
- * @returns A promise resolving to the user (seeker or employer) and the authentication token.
- */
-export const signin = async ({
-  loginData,
-}: {
-  loginData: {
-    email: string;
-    password: string;
-  };
-}): Promise<{ access_token: string; role: string }> => {
-  return await postApiHandler("auth/signin", loginData);
 };

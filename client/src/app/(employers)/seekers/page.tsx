@@ -12,7 +12,7 @@ import FilterSeekers from "@/components/employers/seekers/filters/FilterSeekers"
 import dynamic from "next/dynamic";
 import LoadingSeekers from "@/components/loaders/LoadingSeekers";
 import PaginatedList from "@/components/ui/paginate-list";
-import useSearchParams from "@/hooks/defaults/useSearchParams";
+import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 import SearchSeekers from "@/components/employers/seekers/search/SearchSeekers";
 import ExploreSeekers from "@/components/employers/seekers/explore/ExploreSeekers";
 

@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ClipLoader } from "react-spinners";
 import { Edit, X } from "lucide-react";
 
-import { EditableSeekerInformationsSchemas } from "@/lib/zod/seekers";
-import useEditSeeker from "@/hooks/mutations/useEditSeeker";
+import { SeekerProfileSchema } from "@/lib/zod/seekers.validation";
+import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
 import { SeekerTypes } from "@/types";
 
 import { Button } from "@/components/ui/button";
@@ -29,8 +29,8 @@ type InformationsProps = {
 const Informations: React.FC<InformationsProps> = ({ seeker }) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
-  const form = useForm<zod.infer<typeof EditableSeekerInformationsSchemas>>({
-    resolver: zodResolver(EditableSeekerInformationsSchemas),
+  const form = useForm<zod.infer<typeof SeekerProfileSchema>>({
+    resolver: zodResolver(SeekerProfileSchema),
     mode: "all",
   });
 
@@ -46,7 +46,7 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
   }, [isEditMode, seeker, form.setValue]);
 
   const changeSeekerInformation = async (
-    values: zod.infer<typeof EditableSeekerInformationsSchemas>
+    values: zod.infer<typeof SeekerProfileSchema>
   ) => {
     const formData = new FormData();
 

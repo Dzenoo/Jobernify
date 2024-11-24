@@ -4,9 +4,9 @@ import zod from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ReviewTypes } from "@/types";
-import { EditReviewEmployersSchemas } from "@/lib/zod/reviews";
+import { EditReviewSchema } from "@/lib/zod/reviews.validation";
 
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
 import { DialogFooter } from "@/components/ui/dialog";
 import {
@@ -52,8 +52,8 @@ const EditReview: React.FC<EditReviewProps> = ({ review, closeDialog }) => {
       toast({ title: "Error", description: error?.response?.data.message });
     },
   });
-  const form = useForm<zod.infer<typeof EditReviewEmployersSchemas>>({
-    resolver: zodResolver(EditReviewEmployersSchemas),
+  const form = useForm<zod.infer<typeof EditReviewSchema>>({
+    resolver: zodResolver(EditReviewSchema),
     defaultValues: {
       positiveReview: review?.positiveReview || "",
       negativeReview: review?.negativeReview || "",
@@ -62,9 +62,7 @@ const EditReview: React.FC<EditReviewProps> = ({ review, closeDialog }) => {
     mode: "all",
   });
 
-  const onSubmit = async (
-    values: zod.infer<typeof EditReviewEmployersSchemas>
-  ) => {
+  const onSubmit = async (values: zod.infer<typeof EditReviewSchema>) => {
     await editReviewMutate(values);
   };
 

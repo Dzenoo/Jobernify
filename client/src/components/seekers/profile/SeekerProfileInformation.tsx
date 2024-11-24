@@ -7,9 +7,9 @@ import { ImagePlusIcon, Trash } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { useMutation } from "react-query";
 
-import useEditSeeker from "@/hooks/mutations/useEditSeeker";
-import useUploads from "@/hooks/defaults/useUploads";
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
+import useUploads from "@/hooks/defaults/useUploads.hook";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
 import { SeekerTypes } from "@/types";
 
@@ -37,7 +37,7 @@ import Skills from "./skills/Skills";
 import Socials from "./socials/Socials";
 import { ClipLoader } from "react-spinners";
 import { useTheme } from "next-themes";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery";
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import Experiences from "./experiences/Experiences";
 
 type DeleteSeekerProfileProps = {

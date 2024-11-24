@@ -6,8 +6,8 @@ import { ClipLoader } from "react-spinners";
 import { Edit, X } from "lucide-react";
 
 import { EmployerTypes } from "@/types";
-import { EditableEmployerInformationsSchemas } from "@/lib/zod/employers";
-import useEditEmployer from "@/hooks/mutations/useEditEmployer";
+import { EmployerProfileSchema } from "@/lib/zod/employers.validation";
+import useEditEmployer from "@/hooks/mutations/useEditEmployer.mutation";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -39,8 +39,8 @@ const EmployerInformations: React.FC<EmployerInformationsProps> = ({
   employer,
 }) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  const form = useForm<zod.infer<typeof EditableEmployerInformationsSchemas>>({
-    resolver: zodResolver(EditableEmployerInformationsSchemas),
+  const form = useForm<zod.infer<typeof EmployerProfileSchema>>({
+    resolver: zodResolver(EmployerProfileSchema),
     mode: "all",
   });
   const { mutateAsync: editEmployerProfileMutate } = useEditEmployer();
@@ -57,7 +57,7 @@ const EmployerInformations: React.FC<EmployerInformationsProps> = ({
   }, [isEditMode, employer, form.setValue]);
 
   const changeEmployerInformation = async (
-    values: zod.infer<typeof EditableEmployerInformationsSchemas>
+    values: zod.infer<typeof EmployerProfileSchema>
   ) => {
     const formData = new FormData();
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Briefcase, Trash } from "lucide-react";
 import { useMutation } from "react-query";
 
-import useAuthentication from "@/hooks/defaults/useAuthentication";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import { useToast } from "@/components/ui/use-toast";
 
 import { deleteExperience } from "@/lib/actions/seekers.actions";

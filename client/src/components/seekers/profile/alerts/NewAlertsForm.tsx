@@ -40,12 +40,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { JobAlertsSchemas } from "@/lib/zod/seekers";
+import { JobAlertSchema } from "@/lib/zod/seekers.validation";
 import { JobAlertsTypes } from "@/types";
 
-import useJobAlert from "@/hooks/mutations/useJobAlert";
+import useJobAlert from "@/hooks/mutations/useJobAlert.mutation";
 import { JobsFiltersData } from "@/constants";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery";
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 
 type NewAlertsFormProps = {
   closeAlerts: () => void;
@@ -58,8 +58,8 @@ const NewAlertsForm: React.FC<NewAlertsFormProps> = ({
   closeAlerts,
   isDialog,
 }) => {
-  const form = useForm<zod.infer<typeof JobAlertsSchemas>>({
-    resolver: zodResolver(JobAlertsSchemas),
+  const form = useForm<zod.infer<typeof JobAlertSchema>>({
+    resolver: zodResolver(JobAlertSchema),
     defaultValues: {
       title: "",
       level: "",
@@ -76,7 +76,7 @@ const NewAlertsForm: React.FC<NewAlertsFormProps> = ({
     form.setValue("type", alerts?.type || "");
   }, [alerts, form]);
 
-  const onSubmit = async (values: zod.infer<typeof JobAlertsSchemas>) => {
+  const onSubmit = async (values: zod.infer<typeof JobAlertSchema>) => {
     const formData = new FormData();
     formData.append("title", values.title || "");
     formData.append("type", values.type || "");

@@ -28,7 +28,7 @@ export class ReviewsController {
   @Post('/:employerId')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)
-  async create(
+  async reviewEmployer(
     @User('userId') userId: string,
     @Body() body: CreateReviewDto,
     @Param('employerId') employerId: string,
@@ -39,7 +39,7 @@ export class ReviewsController {
   @Patch('/:reviewId')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)
-  async edit(
+  async editReview(
     @User('userId') userId: string,
     @Body() body: UpdateReviewDto,
     @Param('reviewId') reviewId: string,
@@ -50,7 +50,7 @@ export class ReviewsController {
   @Delete('/:employerId')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)
-  async delete(
+  async deleteReview(
     @User('userId') userId: string,
     @Param('employerId') employerId: string,
   ) {

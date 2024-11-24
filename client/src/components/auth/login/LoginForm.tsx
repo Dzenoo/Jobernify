@@ -8,9 +8,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import zod from "zod";
 import { ClipLoader } from "react-spinners";
 
-import useAuthentication from "@/hooks/defaults/useAuthentication";
-import { signin } from "@/lib/actions/auth.actions";
-import { LoginSchema } from "@/lib/zod/auth";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import { signIn } from "@/lib/actions/auth.actions";
+import { LoginSchema } from "@/lib/zod/auth.validation";
 
 import {
   Form,
@@ -46,7 +46,7 @@ const LoginForm: React.FC = () => {
   });
 
   const { mutateAsync: loginToAccount } = useMutation({
-    mutationFn: signin,
+    mutationFn: signIn,
     onSuccess: (data) => {
       form.reset();
       storeCookieHandler(data.access_token);

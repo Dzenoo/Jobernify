@@ -6,8 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ClipLoader } from "react-spinners";
 import { Edit, Github, Image, Linkedin } from "lucide-react";
 
-import useEditSeeker from "@/hooks/mutations/useEditSeeker";
-import { EditableSeekerSocialsSchemas } from "@/lib/zod/seekers";
+import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
+import { SeekerSocialsSchema } from "@/lib/zod/seekers.validation";
 import { SeekerTypes } from "@/types";
 
 import { Button } from "@/components/ui/button";
@@ -34,7 +34,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { formatURL } from "@/lib/utils";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery";
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 
 type EditSocialsProps = {
   closeEditSocials: () => void;
@@ -51,8 +51,8 @@ const EditSocials: React.FC<EditSocialsProps> = ({
   seeker,
   isDialog,
 }) => {
-  const form = useForm<zod.infer<typeof EditableSeekerSocialsSchemas>>({
-    resolver: zodResolver(EditableSeekerSocialsSchemas),
+  const form = useForm<zod.infer<typeof SeekerSocialsSchema>>({
+    resolver: zodResolver(SeekerSocialsSchema),
     defaultValues: {
       portfolio: seeker?.portfolio || "",
       github: seeker?.github || "",
@@ -67,9 +67,7 @@ const EditSocials: React.FC<EditSocialsProps> = ({
     return () => form.reset();
   }, [closeEditSocials, form]);
 
-  const onSubmit = async (
-    values: zod.infer<typeof EditableSeekerSocialsSchemas>
-  ) => {
+  const onSubmit = async (values: zod.infer<typeof SeekerSocialsSchema>) => {
     const formData = new FormData();
 
     formData.append("portfolio", values.portfolio || "");

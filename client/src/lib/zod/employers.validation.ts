@@ -1,7 +1,7 @@
 import { industries } from "@/constants";
 import zod from "zod";
 
-export const EditableEmployerInformationsSchemas = zod.object({
+export const EmployerProfileSchema = zod.object({
   name: zod.string().min(5).max(50),
   address: zod.string().min(5).max(50),
   industry: zod.enum(

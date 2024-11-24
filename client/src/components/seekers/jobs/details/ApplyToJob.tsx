@@ -7,10 +7,10 @@ import { useToast } from "@/components/ui/use-toast";
 import { ClipLoader } from "react-spinners";
 
 import { queryClient } from "@/context/react-query-client";
-import useUploads from "@/hooks/defaults/useUploads";
+import useUploads from "@/hooks/defaults/useUploads.hook";
 
-import { ApplyToJobSchemas } from "@/lib/zod/jobs";
-import { applyToJob } from "@/lib/actions/jobs.actions";
+import { ApplyToJobSchema } from "@/lib/zod/jobs.validation";
+import { applyToJob } from "@/lib/actions/applications.actions";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -37,7 +37,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { Textarea } from "@/components/ui/textarea";
-import useGetSeeker from "@/hooks/queries/useGetSeeker";
+import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 import { SeekerTypes } from "@/types";
 
 type ApplyToJobProps = {
@@ -70,8 +70,8 @@ const ApplyToJob: React.FC<ApplyToJobProps> = ({
 
   const seekerData = fetchedSeekerProfile as { seeker: SeekerTypes };
 
-  const form = useForm<zod.infer<typeof ApplyToJobSchemas>>({
-    resolver: zodResolver(ApplyToJobSchemas),
+  const form = useForm<zod.infer<typeof ApplyToJobSchema>>({
+    resolver: zodResolver(ApplyToJobSchema),
     defaultValues: {
       coverLetter: "",
     },
@@ -96,7 +96,7 @@ const ApplyToJob: React.FC<ApplyToJobProps> = ({
   const existingResume = seekerData?.seeker?.resume;
   const resumeToSubmit = selectedFile || existingResume;
 
-  const onSubmit = async (values: zod.infer<typeof ApplyToJobSchemas>) => {
+  const onSubmit = async (values: zod.infer<typeof ApplyToJobSchema>) => {
     if (!resumeToSubmit) {
       toast({ title: "Error", description: "Please select a resume file" });
       return;

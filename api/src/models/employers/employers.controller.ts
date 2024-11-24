@@ -41,7 +41,7 @@ export class EmployersController {
   @Get('/profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Employer)
-  async getProfile(
+  async getEmployerProfile(
     @User('userId') userId: string,
     @Query() query: GetProfileDto,
   ) {
@@ -61,7 +61,7 @@ export class EmployersController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Employer)
   @UseInterceptors(FileInterceptor('image'))
-  async editProfile(
+  async editEmployerProfile(
     @User('userId') userId: string,
     @UploadedFile(
       new ParseFilePipe({
@@ -84,14 +84,14 @@ export class EmployersController {
   @Delete('/delete-profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Employer)
-  async deleteProfile(@User('userId') userId: string) {
+  async deleteEmployerProfile(@User('userId') userId: string) {
     return await this.employersService.deleteOne(userId);
   }
 
   @Get('/analytics')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Employer)
-  async getAnalytics(@User('userId') userId: string) {
+  async getEmployerAnalytics(@User('userId') userId: string) {
     return await this.employersService.getAnalytics(userId);
   }
 
@@ -103,7 +103,7 @@ export class EmployersController {
   @Get('/all')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)
-  async getAll(@Query() query: GetEmployersDto) {
+  async getEmployers(@Query() query: GetEmployersDto) {
     const { page, limit, search, sort, size, industry, location } = query;
 
     return await this.employersService.getMany({
@@ -120,7 +120,7 @@ export class EmployersController {
   @Get('/:employerId')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)
-  async getById(
+  async getEmployerById(
     @Query('page', ParseIntPipe) page: number = 1,
     @Query('limit', ParseIntPipe) limit: number = 10,
     @Query('type') type: 'jobs' | 'reviews',

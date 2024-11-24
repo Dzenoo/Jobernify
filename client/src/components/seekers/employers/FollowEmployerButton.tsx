@@ -2,8 +2,8 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 
-import useFollowEmployer from "@/hooks/mutations/useFollowEmployer";
-import useGetSeeker from "@/hooks/queries/useGetSeeker";
+import useFollowEmployer from "@/hooks/mutations/useFollowEmployer.mutation";
+import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
 type FollowEmployerProps = {
   employerId: string;

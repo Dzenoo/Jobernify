@@ -35,7 +35,7 @@ export class ApplicationsController {
   @Patch('/:applicationId/status')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Employer)
-  async update(
+  async updateApplicationStatus(
     @Param('applicationId') applicationId: string,
     @Body('status') status: ApplicationStatus,
   ) {
@@ -45,7 +45,7 @@ export class ApplicationsController {
   @Get('/:jobId')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Employer)
-  async get(
+  async getApplications(
     @Param('jobId') jobId: string,
     @Query('status') status: ApplicationStatus,
     @Query('page', ParseIntPipe) page: number = 1,
@@ -63,7 +63,7 @@ export class ApplicationsController {
   @UseInterceptors(FileInterceptor('resume'))
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)
-  async create(
+  async applyToJob(
     @User('userId') userId: string,
     @Param('jobId') jobId: string,
     @UploadedFile(
