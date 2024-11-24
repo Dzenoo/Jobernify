@@ -18,7 +18,7 @@ const VerifyEmail = ({
       setVerificationStatus("verifying");
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/${type}/verify-email?token=${token}`
+          `${process.env.NEXT_PUBLIC_API_URL}/${type}s/verify-email?token=${token}`
         )
         .then(() => {
           setVerificationStatus("success");

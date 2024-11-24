@@ -9,9 +9,8 @@ import zod from "zod";
 import { ClipLoader } from "react-spinners";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication";
-import { loginUserAccount } from "@/lib/actions/auth.actions";
+import { signin } from "@/lib/actions/auth.actions";
 import { LoginSchema } from "@/lib/zod/auth";
-import { TypeOfAccount } from "@/types";
 
 import {
   Form,
@@ -31,16 +30,12 @@ import {
 } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
 
-type LoginFormTypes = {
-  handleTypeSelection: (type: TypeOfAccount) => void;
-  type: TypeOfAccount;
-};
-
-const LoginForm: React.FC<LoginFormTypes> = ({ handleTypeSelection, type }) => {
+const LoginForm: React.FC = () => {
   const router = useRouter();
   const { toast } = useToast();
   const { getCookieHandler, storeCookieHandler } = useAuthentication();
   const { isAuthenticated } = getCookieHandler();
+
   const form = useForm<zod.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -51,14 +46,14 @@ const LoginForm: React.FC<LoginFormTypes> = ({ handleTypeSelection, type }) => {
   });
 
   const { mutateAsync: loginToAccount } = useMutation({
-    mutationFn: loginUserAccount,
+    mutationFn: signin,
     onSuccess: (data) => {
       form.reset();
-      storeCookieHandler(data.token);
-      if (data?.employer) {
-        router.replace("/seekers");
-      } else {
+      storeCookieHandler(data.access_token);
+      if (data?.role === "seeker") {
         router.replace("/jobs");
+      } else {
+        router.replace("/seekers");
       }
     },
     onError: (error: any) => {
@@ -70,42 +65,25 @@ const LoginForm: React.FC<LoginFormTypes> = ({ handleTypeSelection, type }) => {
   });
 
   const onSubmit = async (loginData: zod.infer<typeof LoginSchema>) => {
-    await loginToAccount({ type, loginData });
+    await loginToAccount({ loginData });
   };
 
   return (
     <Card className="flex flex-col sm:w-[450px]">
       <CardHeader>
-        <div className="flex items-center justify-center gap-3 flex-col">
-          <div>
-            <p className="text-low-gray">
-              Login to{" "}
-              <button
-                className={`text-blue-700 ${
-                  type === TypeOfAccount.Seeker && "font-bold"
-                }`}
-                onClick={() => handleTypeSelection(TypeOfAccount.Seeker)}
-              >
-                Seeker
-              </button>{" "}
-              or{" "}
-              <button
-                className={`text-blue-700 ${
-                  type === TypeOfAccount.Employer && "font-bold"
-                }`}
-                onClick={() => handleTypeSelection(TypeOfAccount.Employer)}
-              >
-                Employer
-              </button>{" "}
-              Account
-            </p>
-          </div>
+        <div className="flex flex-col items-center justify-center text-center gap-3">
           <div>
             <h1 className="text-2xl font-bold">Login to Jobernify</h1>
           </div>
+          <div>
+            <p className="text-gray-500">
+              Welcome back! Please enter your email and password to access your
+              account.
+            </p>
+          </div>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-0">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
             <FormField

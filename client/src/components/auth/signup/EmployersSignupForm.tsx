@@ -50,6 +50,7 @@ const EmployersSignupForm: React.FC<EmployersSignupFormTypes> = ({
 }) => {
   const router = useRouter();
   const { toast } = useToast();
+
   const form = useForm<zod.infer<typeof EmployersRegistrationSchemas>>({
     resolver: zodResolver(EmployersRegistrationSchemas),
     defaultValues: {
@@ -150,8 +151,8 @@ const EmployersSignupForm: React.FC<EmployersSignupFormTypes> = ({
                     <Input type="password" {...field} placeholder="Password" />
                   </FormControl>
                   <FormDescription>
-                    Choose a strong password with at least 8 characters,
-                    including symbols and numbers.
+                    Choose a strong password with at least 8 characters, one
+                    uppercase including symbols and numbers.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

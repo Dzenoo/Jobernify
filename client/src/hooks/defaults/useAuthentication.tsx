@@ -1,6 +1,8 @@
-import { jwtDecode } from "jwt-decode";
 import React from "react";
+
 import Cookies from "js-cookie";
+
+import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 
 type AuthData = {
@@ -35,15 +37,31 @@ const useAuthentication = () => {
     }
 
     try {
-      const decoded: any = jwtDecode(token);
-      const userType = decoded.userType;
-      const isSeeker = userType === "seeker";
+      const decoded: {
+        email: string;
+        sub: string;
+        role: string;
+        exp: number;
+        iat: number;
+      } = jwtDecode(token);
+
+      const currentTime = Math.floor(Date.now() / 1000);
+
+      if (decoded.exp < currentTime) {
+        Cookies.remove("token");
+        return {
+          isAuthenticated: false,
+          userType: null,
+          token: null,
+          userId: null,
+        };
+      }
 
       return {
         isAuthenticated: true,
-        userType: decoded.userType,
+        userType: decoded.role,
         token,
-        userId: isSeeker ? decoded.seekerId : decoded.employerId,
+        userId: decoded.sub,
       };
     } catch (error) {
       return {

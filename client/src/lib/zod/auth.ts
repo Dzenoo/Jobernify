@@ -1,4 +1,4 @@
-import { industries } from "@/constants";
+import { industries, PASSWORD_REGEX } from "@/constants";
 import zod from "zod";
 
 export const SeekerRegistrationSchemas = zod.object({
@@ -27,8 +27,8 @@ export const SeekerRegistrationSchemas = zod.object({
     .string()
     .min(8, { message: "Password must be at least 8 characters long" })
     .regex(
-      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/,
-      "Password must be at least 8 characters long and contain symbols and numbers"
+      PASSWORD_REGEX,
+      "Password must be at least 8 characters long, start with uppercase letter and contain symbols and numbers"
     ),
 });
 
@@ -62,12 +62,18 @@ export const EmployersRegistrationSchemas = zod.object({
     .string()
     .min(8, { message: "Password must be at least 8 characters long" })
     .regex(
-      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/,
-      "Password must be at least 8 characters long and contain symbols and numbers"
+      PASSWORD_REGEX,
+      "Password must be at least 8 characters long, start with uppercase letter and contain symbols and numbers"
     ),
 });
 
 export const LoginSchema = zod.object({
   email: zod.string().min(1, { message: "Email must not be empty" }).email(),
-  password: zod.string().min(1, { message: "Password must not be empty" }),
+  password: zod
+    .string()
+    .min(8, { message: "Password must be at least 8 characters long" })
+    .regex(
+      PASSWORD_REGEX,
+      "Password must be at least 8 characters long, start with uppercase letter and contain symbols and numbers"
+    ),
 });
