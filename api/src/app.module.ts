@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './authentication/auth.module';
@@ -8,9 +9,16 @@ import { EmployersModule } from './models/employers/employers.module';
 import { JobsModule } from './models/jobs/jobs.module';
 import { ApplicationsModule } from './models/applications/applications.module';
 import { ReviewsModule } from './models/reviews/reviews.module';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60,
+        limit: 10,
+      },
+    ]),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env`,
@@ -31,6 +39,12 @@ import { ReviewsModule } from './models/reviews/reviews.module';
     JobsModule,
     ApplicationsModule,
     ReviewsModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
   ],
 })
 export class AppModule {}
