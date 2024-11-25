@@ -59,7 +59,7 @@ export class JobsController {
     return await this.jobsService.deleteOne(jobId, userId);
   }
 
-  @Throttle({ default: { limit: 20, ttl: 60 } })
+  @Throttle({ default: { limit: 20, ttl: 60000 } })
   @Post('/:jobId/save')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)
@@ -67,7 +67,7 @@ export class JobsController {
     return await this.jobsService.saveOne(jobId, userId);
   }
 
-  @Throttle({ default: { limit: 20, ttl: 60 } })
+  @Throttle({ default: { limit: 20, ttl: 60000 } })
   @Get('/all')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)
@@ -75,7 +75,7 @@ export class JobsController {
     return await this.jobsService.getAll(query);
   }
 
-  @Throttle({ default: { limit: 20, ttl: 60 } })
+  @Throttle({ default: { limit: 20, ttl: 60000 } })
   @Get('/:jobId')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker, Role.Employer)

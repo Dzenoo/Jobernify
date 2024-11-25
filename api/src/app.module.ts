@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { ScheduleModule } from '@nestjs/schedule';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerGuard, ThrottlerModule, seconds } from '@nestjs/throttler';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { AuthModule } from './authentication/auth.module';
@@ -22,7 +22,7 @@ import { CleanupService } from './common/cleanup/cleanup.service';
     ScheduleModule.forRoot(),
     ThrottlerModule.forRoot([
       {
-        ttl: 60,
+        ttl: 60000,
         limit: 10,
       },
     ]),
