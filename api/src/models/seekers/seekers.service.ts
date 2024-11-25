@@ -10,7 +10,13 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Seeker } from './schemas/seeker.schema';
 
-import { FilterQuery, Model, UpdateQuery, UpdateWriteOpResult } from 'mongoose';
+import {
+  DeleteResult,
+  FilterQuery,
+  Model,
+  UpdateQuery,
+  UpdateWriteOpResult,
+} from 'mongoose';
 
 import { UpdateSeekerDto } from './dto/update-seeker.dto';
 
@@ -56,6 +62,12 @@ export class SeekersService {
     update: UpdateQuery<Seeker> = {},
   ): Promise<UpdateWriteOpResult> {
     return await this.seekerModel.updateMany(query, update).exec();
+  }
+
+  async findAndDeleteMany(
+    query: FilterQuery<Seeker> = {},
+  ): Promise<DeleteResult> {
+    return await this.seekerModel.deleteMany(query).exec();
   }
 
   async findOneById(id: string, select?: string): Promise<Seeker> {

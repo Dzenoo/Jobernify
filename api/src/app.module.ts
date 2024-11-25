@@ -1,18 +1,25 @@
 import { Module } from '@nestjs/common';
 
+import { ScheduleModule } from '@nestjs/schedule';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { MongooseModule } from '@nestjs/mongoose';
+
 import { AuthModule } from './authentication/auth.module';
+
+import { MongooseModule } from '@nestjs/mongoose';
 import { SeekersModule } from './models/seekers/seekers.module';
 import { EmployersModule } from './models/employers/employers.module';
 import { JobsModule } from './models/jobs/jobs.module';
 import { ApplicationsModule } from './models/applications/applications.module';
 import { ReviewsModule } from './models/reviews/reviews.module';
+
 import { APP_GUARD } from '@nestjs/core';
+
+import { CleanupService } from './common/cleanup/cleanup.service';
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     ThrottlerModule.forRoot([
       {
         ttl: 60,
@@ -41,6 +48,7 @@ import { APP_GUARD } from '@nestjs/core';
     ReviewsModule,
   ],
   providers: [
+    CleanupService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,

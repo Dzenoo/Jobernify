@@ -11,7 +11,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { JobDocument } from '../jobs/schemas/job.schema';
 import { Employer } from './schemas/employer.schema';
 
-import { FilterQuery, Model, UpdateQuery, UpdateWriteOpResult } from 'mongoose';
+import {
+  DeleteResult,
+  FilterQuery,
+  Model,
+  UpdateQuery,
+  UpdateWriteOpResult,
+} from 'mongoose';
 import mongoose from 'mongoose';
 
 import { UpdateEmployerDto } from './dto/update-employer.dto';
@@ -51,6 +57,12 @@ export class EmployersService {
     update: UpdateQuery<Employer> = {},
   ): Promise<void> {
     await this.employerModel.findByIdAndUpdate(id, update).exec();
+  }
+
+  async findAndDeleteMany(
+    query: FilterQuery<Employer> = {},
+  ): Promise<DeleteResult> {
+    return await this.employerModel.deleteMany(query).exec();
   }
 
   async findOneById(id: string, select?: string): Promise<Employer> {
