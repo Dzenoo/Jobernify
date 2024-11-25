@@ -1,0 +1,35 @@
+services:
+  client:
+    depends_on:
+      - api
+    build: ./client
+    ports:
+      - 3000:3000
+    develop:
+      watch:
+        - path: ./client/package.json
+          action: rebuild
+        - path: ./client/package-lock.json
+          action: rebuild
+        - path: ./client
+          target: /app
+          action: sync
+
+  api:
+    build: ./api
+    ports:
+      - 8080:8080
+    env_file:
+      - ./api/.env
+    develop:
+      watch:
+        - path: ./api/package.json
+          action: rebuild
+        - path: ./api/package-lock.json
+          action: rebuild
+        - path: ./api
+          target: /app
+          action: sync
+
+volumes:
+  jobernify:
