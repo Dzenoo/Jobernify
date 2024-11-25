@@ -228,6 +228,11 @@ export class SeekersService {
       await this.s3Service.deleteFile(seeker.image.split('/')[1], 'seekers');
     }
 
+    if (seeker.resume) {
+      const resumeKey = seeker.resume.split('/')[1];
+      await this.s3Service.deleteFile(resumeKey, 'documents');
+    }
+
     await this.seekerModel.findByIdAndDelete(id);
 
     return {

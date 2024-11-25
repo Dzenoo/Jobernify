@@ -126,7 +126,11 @@ const LoginForm: React.FC = () => {
               }
               className="w-full"
             >
-              {form.formState.isSubmitting ? <ClipLoader size={25} /> : "Login"}
+              {form.formState.isSubmitting ? (
+                <ClipLoader size={25} color="#fff" />
+              ) : (
+                "Login"
+              )}
             </Button>
           </form>
         </Form>
