@@ -40,7 +40,7 @@ const JobItem: React.FC<JobItemProps> = ({ job, showDescription = true }) => {
   const expirationDate = formatDate(job.expiration_date);
   const createdTime = getTime(job.createdAt);
 
-  let FooterInfoData = new Array(
+  let FooterInfoData = [
     {
       id: "1",
       data: findLocationData(job.location),
@@ -58,8 +58,8 @@ const JobItem: React.FC<JobItemProps> = ({ job, showDescription = true }) => {
       data: expirationDate,
       icon: <Timer color="gray" />,
       tooltip: "Expiration",
-    }
-  );
+    },
+  ];
 
   return (
     <li>

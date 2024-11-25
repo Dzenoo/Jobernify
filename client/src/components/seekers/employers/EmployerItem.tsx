@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 import { Camera, Text } from "lucide-react";
 
@@ -17,7 +16,7 @@ type EmployersItemProps = {
 };
 
 const EmployerItem: React.FC<EmployersItemProps> = ({ employer }) => {
-  const FooterEmployerData = new Array(
+  const FooterEmployerData = [
     {
       id: "1",
       icon: <Camera color="gray" />,
@@ -27,8 +26,8 @@ const EmployerItem: React.FC<EmployersItemProps> = ({ employer }) => {
       id: "2",
       icon: <Text color="gray" />,
       data: employer.reviews.length + " Reviews",
-    }
-  );
+    },
+  ];
 
   return (
     <Card hoverable={true}>

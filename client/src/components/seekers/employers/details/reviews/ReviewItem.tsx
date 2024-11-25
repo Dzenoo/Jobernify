@@ -6,7 +6,14 @@ import { ReviewTypes } from "@/types";
 import { getSkillNames, getTime } from "@/lib/utils";
 import { renderIconText } from "@/helpers";
 
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import { useMutation } from "react-query";
+import { deleteReview } from "@/lib/actions/reviews.actions";
+import { queryClient } from "@/context/react-query-client";
+import { toast } from "@/components/ui/use-toast";
+import EditReview from "./EditReview";
+
 import {
   Card,
   CardContent,
@@ -14,13 +21,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
-import { useMutation } from "react-query";
-import { deleteReview } from "@/lib/actions/reviews.actions";
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import { queryClient } from "@/context/react-query-client";
-import { toast } from "@/components/ui/use-toast";
-import EditReview from "./EditReview";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 type ReviewItemProps = {
   review: ReviewTypes;
@@ -28,8 +29,11 @@ type ReviewItemProps = {
 
 const ReviewItem: React.FC<ReviewItemProps> = ({ review }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   const { token } = useAuthentication().getCookieHandler();
+
   const { data: seekerData } = useGetSeeker();
+
   const { mutateAsync: deleteReviewMutate } = useMutation({
     mutationFn: () => deleteReview(review?.company, token!),
     onSuccess: () => {
@@ -40,11 +44,12 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ review }) => {
       toast({ title: "Error", description: error?.data?.response.message });
     },
   });
+
   const createdTime = getTime(review?.createdAt);
 
   const isAlreadyReviewedEmployer = review.seeker === seekerData?.seeker._id;
 
-  const ReviewFooterData = new Array(
+  const ReviewFooterData = [
     {
       id: "1",
       data: review?.time,
@@ -59,8 +64,8 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ review }) => {
       id: "3",
       data: createdTime,
       icon: <Calendar color="gray" />,
-    }
-  );
+    },
+  ];
 
   const openDialog = () => setIsDialogOpen(true);
 

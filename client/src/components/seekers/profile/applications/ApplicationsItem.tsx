@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 import {
@@ -32,7 +31,7 @@ type ApplicationItemProps = {
 const ApplicationsItem: React.FC<ApplicationItemProps> = ({ application }) => {
   const appliedDate = formatDate(application?.createdAt || "");
 
-  const ApplicationCompanyInfo = new Array(
+  const ApplicationCompanyInfo = [
     {
       id: "1",
       icon: <Building />,
@@ -47,10 +46,10 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({ application }) => {
       id: "3",
       icon: <LayoutTemplate />,
       data: application?.job.company.size,
-    }
-  );
+    },
+  ];
 
-  const ApplicationJobInfo = new Array(
+  const ApplicationJobInfo = [
     {
       id: "1",
       icon: <GraduationCap />,
@@ -65,8 +64,8 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({ application }) => {
       id: "3",
       icon: <Calendar />,
       data: application?.job.position,
-    }
-  );
+    },
+  ];
 
   const applicationStatusAccepted = application?.status === "Accepted";
   const applicationStatusRejected = application?.status === "Rejected";

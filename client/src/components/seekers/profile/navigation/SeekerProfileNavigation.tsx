@@ -11,7 +11,7 @@ const SeekerProfileNavigation: React.FC<SeekerProfileNavigationProps> = ({
 }) => {
   const { updateSearchParams } = useSearchParams();
 
-  const SeekerNavList = new Array(
+  const SeekerNavList = [
     {
       id: "1",
       title: "Personal Information",
@@ -31,8 +31,8 @@ const SeekerProfileNavigation: React.FC<SeekerProfileNavigationProps> = ({
       id: "4",
       title: "My Applications",
       params: "applications",
-    }
-  );
+    },
+  ];
 
   return (
     <div className="flex flex-col gap-6">

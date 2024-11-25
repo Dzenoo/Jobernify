@@ -82,6 +82,33 @@ const StatusBadge = ({
     Rejected: "bg-red-100 text-red-600",
   };
 
+  const StatusButtons = [
+    {
+      id: 1,
+      title: "Pending",
+      color: statusClasses.Pending,
+      filter: "Pending",
+    },
+    {
+      id: 2,
+      title: "Interview",
+      color: statusClasses.Interview,
+      filter: "Interview",
+    },
+    {
+      id: 3,
+      title: "Accepted",
+      color: statusClasses.Accepted,
+      filter: "Accepted",
+    },
+    {
+      id: 4,
+      title: "Rejected",
+      color: statusClasses.Rejected,
+      filter: "Rejected",
+    },
+  ];
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -95,42 +122,16 @@ const StatusBadge = ({
       </PopoverTrigger>
       <PopoverContent align="start">
         <div className="flex flex-col gap-2">
-          <Button
-            variant="outline"
-            onClick={() => {
-              updateStatusApi("Pending");
-            }}
-            className={statusClasses.Pending}
-          >
-            Pending
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => {
-              updateStatusApi("Interview");
-            }}
-            className={statusClasses.Interview}
-          >
-            Interview
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => {
-              updateStatusApi("Accepted");
-            }}
-            className={statusClasses.Accepted}
-          >
-            Accepted
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => {
-              updateStatusApi("Rejected");
-            }}
-            className={statusClasses.Rejected}
-          >
-            Rejected
-          </Button>
+          {StatusButtons.map(({ id, title, color, filter }) => (
+            <Button
+              key={id}
+              variant="outline"
+              onClick={() => updateStatusApi(filter)}
+              className={color}
+            >
+              {title}
+            </Button>
+          ))}
         </div>
       </PopoverContent>
     </Popover>
@@ -207,19 +208,25 @@ const Applications: React.FC<ApplicationsProps> = ({
       </div>
     );
 
+  const columns = [
+    "Index",
+    "Name",
+    "Email",
+    "Resume",
+    "Cover Letter",
+    "Applied",
+    "Status",
+    "Socials",
+  ];
+
   return (
     <Table>
       <TableCaption>A list of applications</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead>Index</TableHead>
-          <TableHead>Name</TableHead>
-          <TableHead>Email</TableHead>
-          <TableHead>Resume</TableHead>
-          <TableHead>Cover Letter</TableHead>
-          <TableHead>Applied</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Socials</TableHead>
+          {columns.map((column) => (
+            <TableHead>{column}</TableHead>
+          ))}
         </TableRow>
       </TableHeader>
       <TableBody>

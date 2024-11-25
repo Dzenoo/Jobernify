@@ -2,6 +2,7 @@ import React from "react";
 import { ClipLoader } from "react-spinners";
 
 import useJobAlert from "@/hooks/mutations/useJobAlert.mutation";
+import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -10,7 +11,6 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
 type JobAlertProps = {
   level: string;

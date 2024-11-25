@@ -21,7 +21,7 @@ type SeekerItemProps = {
 };
 
 const SeekerItem: React.FC<SeekerItemProps> = ({ seeker }) => {
-  const SocialsArrays = new Array(
+  const SocialsArrays = [
     {
       id: "1",
       href: seeker?.portfolio,
@@ -36,8 +36,8 @@ const SeekerItem: React.FC<SeekerItemProps> = ({ seeker }) => {
       id: "3",
       href: seeker?.linkedin,
       icon: <Linkedin />,
-    }
-  );
+    },
+  ];
 
   const profileImageUrl = getImageUrl(seeker?.image);
 

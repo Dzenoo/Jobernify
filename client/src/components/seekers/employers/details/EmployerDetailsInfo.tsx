@@ -6,6 +6,7 @@ import { Building, Camera, Text } from "lucide-react";
 import { EmployerTypes } from "@/types";
 import { findIndustriesData, getImageUrl } from "@/lib/utils";
 import { renderIconText } from "@/helpers";
+import FollowEmployerButton from "../FollowEmployerButton";
 
 import {
   Card,
@@ -14,10 +15,8 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import Navigator from "@/components/ui/navigator";
-
-import FollowEmployerButton from "../FollowEmployerButton";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import Navigator from "@/components/ui/navigator";
 
 type EmployerDetailsInfoProps = {
   employer: EmployerTypes;
@@ -28,7 +27,7 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
 }) => {
   const employerIndustry = findIndustriesData(employer?.industry);
 
-  const FooterEmployerData = new Array(
+  const FooterEmployerData = [
     {
       id: "1",
       icon: <Camera color="gray" />,
@@ -38,8 +37,8 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
       id: "2",
       icon: <Text color="gray" />,
       data: employer?.reviews.length + " Reviews",
-    }
-  );
+    },
+  ];
 
   return (
     <div className="flex flex-col gap-6">

@@ -2,6 +2,9 @@
 
 import React from "react";
 
+import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import { companySizes, industries, locations } from "@/constants";
+
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -10,9 +13,6 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
-
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
-import { companySizes, industries, locations } from "@/constants";
 
 type SearchEmployersProps = {
   searchParams: { [key: string]: string };

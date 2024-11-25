@@ -8,6 +8,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useMutation } from "react-query";
 
 import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import useUploads from "@/hooks/defaults/useUploads.hook";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
@@ -15,6 +16,15 @@ import { AWS_URL } from "@/constants";
 import { SeekerTypes } from "@/types";
 
 import { deleteSeekerProfile } from "@/lib/actions/seekers.actions";
+
+import Informations from "./informations/Informations";
+import Educations from "./educations/Educations";
+import Skills from "./skills/Skills";
+import Socials from "./socials/Socials";
+import Experiences from "./experiences/Experiences";
+
+import { ClipLoader } from "react-spinners";
+import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -32,14 +42,6 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import Informations from "./informations/Informations";
-import Educations from "./educations/Educations";
-import Skills from "./skills/Skills";
-import Socials from "./socials/Socials";
-import { ClipLoader } from "react-spinners";
-import { useTheme } from "next-themes";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
-import Experiences from "./experiences/Experiences";
 
 type DeleteSeekerProfileProps = {
   token: string;

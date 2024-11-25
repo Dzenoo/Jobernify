@@ -8,6 +8,11 @@ import { EditReviewSchema } from "@/lib/zod/reviews.validation";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
+import { ClipLoader } from "react-spinners";
+import { useMutation } from "react-query";
+import { editReview } from "@/lib/actions/reviews.actions";
+import { queryClient } from "@/context/react-query-client";
+
 import { DialogFooter } from "@/components/ui/dialog";
 import {
   Form,
@@ -23,11 +28,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 
-import { ClipLoader } from "react-spinners";
-import { useMutation } from "react-query";
-import { editReview } from "@/lib/actions/reviews.actions";
-import { queryClient } from "@/context/react-query-client";
-
 type EditReviewProps = {
   review: ReviewTypes;
   closeDialog: () => void;
@@ -35,6 +35,7 @@ type EditReviewProps = {
 
 const EditReview: React.FC<EditReviewProps> = ({ review, closeDialog }) => {
   const { token } = useAuthentication().getCookieHandler();
+
   const { mutateAsync: editReviewMutate } = useMutation({
     mutationFn: (formData: any) =>
       editReview(review?.company, token!, {
@@ -52,6 +53,7 @@ const EditReview: React.FC<EditReviewProps> = ({ review, closeDialog }) => {
       toast({ title: "Error", description: error?.response?.data.message });
     },
   });
+
   const form = useForm<zod.infer<typeof EditReviewSchema>>({
     resolver: zodResolver(EditReviewSchema),
     defaultValues: {

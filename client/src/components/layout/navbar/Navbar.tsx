@@ -2,7 +2,6 @@
 
 import React from "react";
 import { usePathname } from "next/navigation";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getImageUrl } from "@/lib/utils";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import useFetchProfile from "@/hooks/queries/useFetchProfile.query";
@@ -17,6 +16,7 @@ import Logo from "./Logo";
 import NavbarActionsList from "./NavbarActionsList";
 import NavbarLinksList from "./NavbarLinksList";
 import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 import { ClipLoader } from "react-spinners";
 import {
@@ -25,6 +25,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const AuthenticationDivLinks: React.FC = () => {
   return (

@@ -18,6 +18,10 @@ import { queryClient } from "@/context/react-query-client";
 import { cn } from "@/lib/utils";
 import { SeekerTypes } from "@/types";
 
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
+import { JobsFiltersData } from "@/constants";
+import ExperienceList from "./ExperienceList";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -54,10 +58,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Calendar } from "@/components/ui/calendar";
-
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
-import { JobsFiltersData } from "@/constants";
-import ExperienceList from "./ExperienceList";
 
 type AddExperienceProps = {
   closeExperience: () => void;

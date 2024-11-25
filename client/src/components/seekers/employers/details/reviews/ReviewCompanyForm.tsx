@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import { ReviewSchema } from "@/lib/zod/reviews.validation";
 import { reviewEmployer } from "@/lib/actions/reviews.actions";
+import { multiselectSkills } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,7 +33,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { multiselectSkills } from "@/lib/utils";
 
 type ReviewCompanyFormProps = {
   employerId: string;
@@ -43,7 +43,9 @@ const ReviewCompanyForm: React.FC<ReviewCompanyFormProps> = ({
 }) => {
   const { toast } = useToast();
   const router = useRouter();
+
   const { token } = useAuthentication().getCookieHandler();
+
   const form = useForm<zod.infer<typeof ReviewSchema>>({
     resolver: zodResolver(ReviewSchema),
     defaultValues: {

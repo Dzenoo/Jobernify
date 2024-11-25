@@ -14,6 +14,7 @@ import { createNewJob, editJob } from "@/lib/actions/jobs.actions";
 import { UpdateJobSchema } from "@/lib/zod/jobs.validation";
 import { useRouter } from "next/navigation";
 import TurndownService from "turndown";
+import { JobTypes } from "@/types";
 
 import { queryClient } from "@/context/react-query-client";
 
@@ -24,7 +25,6 @@ import Skills from "@/components/employers/dashboard/jobs/new/Skills";
 import Text from "@/components/employers/dashboard/jobs/new/Text";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { JobTypes } from "@/types";
 
 type UpdateJobFormProps =
   | {
@@ -95,6 +95,7 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
       toast({ title: "Error", description: error?.response?.data?.message });
     },
   });
+
   const [currentJobForm, setCurrentJobForm] = useState<number>(0);
 
   function hadleFormNext(): void {

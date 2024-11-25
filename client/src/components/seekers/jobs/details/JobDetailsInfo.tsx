@@ -12,9 +12,9 @@ import {
   Timer,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import Navigator from "@/components/ui/navigator";
+import { renderIconText, renderSkills } from "@/helpers";
+import Link from "next/link";
+
 import SaveJobButton from "../SaveJobButton";
 
 import { ApplicationsTypes, JobTypes } from "@/types";
@@ -29,9 +29,11 @@ import {
   getSkillsData,
   getTime,
 } from "@/lib/utils";
-import { renderIconText, renderSkills } from "@/helpers";
-import Link from "next/link";
+
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import Navigator from "@/components/ui/navigator";
 
 type JobDetailsInfoProps = {
   job: JobTypes;
@@ -46,7 +48,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({ job, onApplyJob }) => {
   const createdTime = getTime(job?.createdAt);
   const categorizedSkills = getSkillsData(job?.skills);
 
-  const CompanyInformationsData = new Array(
+  const CompanyInformationsData = [
     {
       tooltip: "Location",
       id: "1",
@@ -58,10 +60,10 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({ job, onApplyJob }) => {
       id: "2",
       icon: <LayoutTemplate color="gray" />,
       data: job?.company.size,
-    }
-  );
+    },
+  ];
 
-  const JobInformationsData = new Array(
+  const JobInformationsData = [
     {
       tooltip: "Created At",
       id: "1",
@@ -79,10 +81,10 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({ job, onApplyJob }) => {
       id: "3",
       icon: <GraduationCap color="gray" />,
       data: job?.applications.length + " Applications",
-    }
-  );
+    },
+  ];
 
-  const JobDetailsData = new Array(
+  const JobDetailsData = [
     {
       id: "1",
       icon: <Calendar color="gray" />,
@@ -106,8 +108,8 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({ job, onApplyJob }) => {
       icon: <CircleDollarSignIcon color="green" />,
       data: job?.salary + `$/month`,
       title: "Salary",
-    }
-  );
+    },
+  ];
 
   const isAppliedJob = fetchedSeekerProfile?.seeker.applications.find(
     (application: ApplicationsTypes) => application.job._id === job._id

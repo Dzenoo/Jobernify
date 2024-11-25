@@ -8,9 +8,12 @@ import { ClipLoader } from "react-spinners";
 
 import { queryClient } from "@/context/react-query-client";
 import useUploads from "@/hooks/defaults/useUploads.hook";
+import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
 import { ApplyToJobSchema } from "@/lib/zod/jobs.validation";
 import { applyToJob } from "@/lib/actions/applications.actions";
+
+import { SeekerTypes } from "@/types";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -37,8 +40,6 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { Textarea } from "@/components/ui/textarea";
-import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
-import { SeekerTypes } from "@/types";
 
 type ApplyToJobProps = {
   isApplyToJob: boolean;
