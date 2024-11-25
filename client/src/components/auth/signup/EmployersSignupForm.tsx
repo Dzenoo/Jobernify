@@ -101,7 +101,7 @@ const EmployersSignupForm: React.FC<EmployersSignupFormTypes> = ({
             </p>
           </div>
           <div>
-            <h1 className="text-2xl font-bold">Sign up to hire a talent</h1>
+            <h1 className="text-2xl font-bold text-center">Sign up to hire a talent</h1>
           </div>
         </div>
       </CardHeader>
