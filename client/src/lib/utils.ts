@@ -5,7 +5,12 @@
 import moment from "moment";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { industries, locations, SkillsInformationsData } from "@/constants";
+import {
+  AWS_URL,
+  industries,
+  locations,
+  SkillsInformationsData,
+} from "@/constants";
 import { jwtDecode } from "jwt-decode";
 import { FilterCounts, FilterGroup } from "@/types";
 
@@ -118,7 +123,7 @@ export const getTime = (date: string): string => {
  * @returns The full image URL.
  */
 export const getImageUrl = (image: string): string => {
-  return image?.includes("https:") ? image : `${process.env.AWS_URL}/${image}`;
+  return image?.includes("https:") ? image : `${AWS_URL}/${image}`;
 };
 
 /**

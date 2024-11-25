@@ -11,6 +11,7 @@ import useEditEmployer from "@/hooks/mutations/useEditEmployer.mutation";
 import useUploads from "@/hooks/defaults/useUploads.hook";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
+import { AWS_URL } from "@/constants";
 import { EmployerTypes } from "@/types";
 
 import { deleteEmployerProfile } from "@/lib/actions/employers.actions";
@@ -156,7 +157,7 @@ const EmployerProfileInformation: React.FC<EmployerProfileInformationProps> = ({
     ? URL.createObjectURL(selectedFile)
     : employer?.image.includes("https:")
     ? employer?.image
-    : `https://job-searching-application.s3.amazonaws.com/${employer?.image}`;
+    : `${AWS_URL}/${employer?.image}`;
 
   return (
     <Fragment>

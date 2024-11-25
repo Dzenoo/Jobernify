@@ -23,7 +23,7 @@ const HeroLanding: React.FC = () => {
             </p>
           </div>
           <div>
-            <Link href="/signin">
+            <Link href="/login">
               <Button className="px-10">Start Now</Button>
             </Link>
           </div>

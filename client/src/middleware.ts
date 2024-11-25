@@ -19,7 +19,6 @@ const protectedRoutes = {
 
 export function middleware(req: NextRequest) {
   const token = req.cookies.get("token");
-  console.log(token);
 
   const userType = token ? decodeToken(token.value)?.role : null;
   const pathname = req.nextUrl.pathname;

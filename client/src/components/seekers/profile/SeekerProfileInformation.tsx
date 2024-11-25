@@ -11,6 +11,7 @@ import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
 import useUploads from "@/hooks/defaults/useUploads.hook";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
+import { AWS_URL } from "@/constants";
 import { SeekerTypes } from "@/types";
 
 import { deleteSeekerProfile } from "@/lib/actions/seekers.actions";
@@ -159,7 +160,7 @@ const SeekerProfileInformation: React.FC<SeekerProfileInformationProps> = ({
     ? URL.createObjectURL(selectedFile)
     : seeker?.image.includes("https:")
     ? seeker?.image
-    : `https://job-searching-application.s3.amazonaws.com/${seeker?.image}`;
+    : `${AWS_URL}/${seeker?.image}`;
 
   return (
     <Fragment>

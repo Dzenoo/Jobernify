@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { Github, ImageIcon, Linkedin, Search } from "lucide-react";
 import { useMutation } from "react-query";
+import { AWS_URL } from "@/constants";
 import { useToast } from "@/components/ui/use-toast";
 
 import { updateApplicationStatus } from "@/lib/actions/applications.actions";
@@ -233,9 +234,7 @@ const Applications: React.FC<ApplicationsProps> = ({
             <TableCell>{app.seeker.email}</TableCell>
             <TableCell>
               {app.resume ? (
-                <Link
-                  href={`https://job-searching-application.s3.amazonaws.com/${app.resume}`}
-                >
+                <Link href={`${AWS_URL}/${app.resume}`}>
                   View Seeker Resume
                 </Link>
               ) : (

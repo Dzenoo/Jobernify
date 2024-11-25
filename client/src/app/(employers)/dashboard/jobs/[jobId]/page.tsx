@@ -6,7 +6,7 @@ import { useQuery } from "react-query";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 
-import { getApplications } from "@/lib/actions/jobs.actions";
+import { getApplications } from "@/lib/actions/applications.actions";
 
 import FilterApplications from "@/components/employers/dashboard/jobs/applications/FilterApplications";
 import dynamic from "next/dynamic";

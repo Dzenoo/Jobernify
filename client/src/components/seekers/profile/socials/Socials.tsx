@@ -242,7 +242,7 @@ const Socials: React.FC<SocialsProps> = ({ seeker }) => {
             >
               <div className="max-lg:hidden">Edit Socials</div>
               <div>
-                <Edit color="#fff" />
+                <Edit />
               </div>
             </Button>
           </div>
