@@ -13,5 +13,5 @@ export const EmployerProfileSchema = zod.object({
     ["", "Less-than-17", "20-50", "50-100", "100-250", "250-500", "500-1000"],
     { message: "Please select valid size" }
   ),
-  company_description: zod.string().max(300),
+  companyDescription: zod.string().max(300),
 });

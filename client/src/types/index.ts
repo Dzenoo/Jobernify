@@ -46,7 +46,7 @@ export type EmployerTypes = {
   _id: string;
   image: string;
   industry: string;
-  company_description: string;
+  companyDescription: string;
   size: keyof typeof SizeOfEmployers;
   website: string;
   address: string;

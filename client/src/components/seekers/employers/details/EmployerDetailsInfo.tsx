@@ -112,7 +112,7 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
         </div>
         <div>
           <p className="text-initial-gray">
-            {employer?.company_description || "No Biography Available"}
+            {employer?.companyDescription || "No Biography Available"}
           </p>
         </div>
       </div>

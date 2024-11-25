@@ -53,9 +53,7 @@ const EmployerItem: React.FC<EmployersItemProps> = ({ employer }) => {
               </div>
             </div>
             <div>
-              <p className="text-initial-gray">
-                {employer.company_description}
-              </p>
+              <p className="text-initial-gray">{employer.companyDescription}</p>
             </div>
           </div>
         </div>

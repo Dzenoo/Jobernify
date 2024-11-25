@@ -45,11 +45,13 @@ const EmployerInformations: React.FC<EmployerInformationsProps> = ({
   });
   const { mutateAsync: editEmployerProfileMutate } = useEditEmployer();
 
+  console.log({ employer });
+
   useEffect(() => {
     if (isEditMode && employer) {
       form.setValue("name", employer.name || "");
       form.setValue("address", employer.address || "");
-      form.setValue("company_description", employer.company_description || "");
+      form.setValue("companyDescription", employer.companyDescription || "");
       form.setValue("industry", employer.industry || "");
       form.setValue("website", employer.website || "");
       form.setValue("size", employer.size || "");
@@ -63,7 +65,7 @@ const EmployerInformations: React.FC<EmployerInformationsProps> = ({
 
     formData.append("name", values.name);
     formData.append("address", values.address);
-    formData.append("company_description", values.company_description);
+    formData.append("companyDescription", values.companyDescription);
     formData.append("industry", values.industry);
     formData.append("website", values.website);
     formData.append("size", values.size);
@@ -126,7 +128,7 @@ const EmployerInformations: React.FC<EmployerInformationsProps> = ({
               </div>
               <div>
                 <p className="text-initial-gray">
-                  {employer?.company_description || "No Description Available"}
+                  {employer?.companyDescription || "No Description Available"}
                 </p>
               </div>
             </div>
@@ -206,7 +208,7 @@ const EmployerInformations: React.FC<EmployerInformationsProps> = ({
               </div>
               <FormField
                 control={form.control}
-                name="company_description"
+                name="companyDescription"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Company Description</FormLabel>

@@ -312,7 +312,7 @@ export class EmployersService {
       .findById(id)
       .populate(populateQuery)
       .select(
-        'name reviews address size website followers number company_description industry image jobs',
+        'name reviews address size website followers number companyDescription industry image jobs',
       )
       .exec();
 
@@ -360,7 +360,7 @@ export class EmployersService {
       conditions.$or = [
         { name: { $regex: regex } },
         { address: { $regex: regex } },
-        { company_description: { $regex: regex } },
+        { companyDescription: { $regex: regex } },
       ];
     }
 
@@ -389,7 +389,7 @@ export class EmployersService {
       .sort(sortOptions)
       .skip((page - 1) * limit)
       .limit(limit)
-      .select('image name company_description reviews followers size address')
+      .select('image name companyDescription reviews followers size address')
       .exec();
 
     const totalEmployers = await this.employerModel.countDocuments(conditions);
