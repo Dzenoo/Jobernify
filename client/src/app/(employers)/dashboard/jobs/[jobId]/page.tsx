@@ -2,14 +2,14 @@
 
 import React from "react";
 import { useQuery } from "react-query";
+import dynamic from "next/dynamic";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 
 import { getApplications } from "@/lib/actions/applications.actions";
 
-import FilterApplications from "@/components/employers/dashboard/jobs/applications/FilterApplications";
-import dynamic from "next/dynamic";
+import FilterApplications from "@/components/employers/dashboard/jobs/applications/filter/FilterApplications";
 import LoadingJobApplications from "@/components/loaders/LoadingJobApplications";
 
 import PaginatedList from "@/components/ui/paginate-list";
