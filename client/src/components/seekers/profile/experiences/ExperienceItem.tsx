@@ -1,26 +1,16 @@
 import React from "react";
 import { Briefcase, Edit, Trash } from "lucide-react";
 import { useMutation } from "react-query";
-
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import { useToast } from "@/components/ui/use-toast";
-
 import { deleteExperience } from "@/lib/actions/seekers.actions";
 import { queryClient } from "@/context/react-query-client";
 import { formatDate } from "@/lib/utils";
+import { ExperienceTypes } from "@/types";
 
-export type ExperienceItemProps = {
+type ExperienceItemProps = {
   onEdit: () => void;
-  _id: string;
-  jobTitle: string;
-  companyName: string;
-  startDate: string;
-  endDate?: string;
-  level: string;
-  type: string;
-  location: string;
-  position: string;
-};
+} & ExperienceTypes;
 
 const ExperienceItem: React.FC<ExperienceItemProps> = ({
   onEdit,
@@ -33,6 +23,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
   type,
   location,
   position,
+  isCurrentlyWorking,
 }) => {
   const { toast } = useToast();
   const { userType, token } = useAuthentication().getCookieHandler();
@@ -52,7 +43,6 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this experience?"
     );
-
     if (confirmDelete) {
       await deleteExperienceMutate();
     }
@@ -70,20 +60,21 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
         <HeaderSection jobTitle={jobTitle} type={type} />
         <p className="text-initial-gray">{companyName}</p>
         <DateSection
+          isCurrentlyWorking={isCurrentlyWorking}
           startDate={formattedStartDate}
           endDate={formattedEndDate}
         />
         <InfoSection location={location} position={position} level={level} />
       </div>
       {userType === "seeker" && (
-        <button onClick={onEdit}>
-          <Edit />
-        </button>
-      )}
-      {userType === "seeker" && (
-        <button onClick={handleDeleteExperience}>
-          <Trash color="red" />
-        </button>
+        <div className="flex gap-2">
+          <button onClick={onEdit}>
+            <Edit />
+          </button>
+          <button onClick={handleDeleteExperience}>
+            <Trash color="red" />
+          </button>
+        </div>
       )}
     </div>
   );
@@ -100,14 +91,19 @@ const HeaderSection: React.FC<{ jobTitle: string; type: string }> = ({
   </div>
 );
 
-const DateSection: React.FC<{ startDate: string; endDate?: string }> = ({
-  startDate,
-  endDate,
-}) => (
+const DateSection: React.FC<{
+  isCurrentlyWorking: boolean;
+  startDate: string;
+  endDate?: string;
+}> = ({ isCurrentlyWorking, startDate, endDate }) => (
   <div className="flex items-center gap-2">
     <p className="text-initial-gray">{startDate}</p>
     <span className="text-sm">·</span>
-    {endDate && <p className="text-initial-gray">{endDate}</p>}
+    {isCurrentlyWorking ? (
+      <p className="text-initial-gray">{formatDate(Date.now() as any)}</p>
+    ) : (
+      <p className="text-initial-gray">{endDate}</p>
+    )}
   </div>
 );
 

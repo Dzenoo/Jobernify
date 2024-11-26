@@ -31,6 +31,9 @@ export class Experience {
 
   @Prop({ required: true, enum: Object.values(JobPosition) })
   position: JobPosition;
+
+  @Prop({ type: Boolean, default: false })
+  isCurrentlyWorking: boolean;
 }
 
 export const ExperienceSchema = SchemaFactory.createForClass(Experience);

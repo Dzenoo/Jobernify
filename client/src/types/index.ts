@@ -113,6 +113,7 @@ export type ExperienceTypes = {
   type: string;
   location: string;
   position: string;
+  isCurrentlyWorking: boolean;
 };
 
 export type SeekerTypes = {

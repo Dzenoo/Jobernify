@@ -14,7 +14,6 @@ const EducationList: React.FC<EducationListProps> = ({
   openForm,
 }) => {
   const [showAll, setShowAll] = useState(false);
-
   const educationsList =
     educations!.length > 2
       ? showAll
@@ -33,12 +32,8 @@ const EducationList: React.FC<EducationListProps> = ({
         {educationsList?.map((education) => (
           <EducationItem
             onEdit={() => openForm(education._id)}
-            _id={education._id}
             key={education._id}
-            graduationDate={education.graduationDate}
-            fieldOfStudy={education.fieldOfStudy}
-            institution={education.institution}
-            degree={education.degree}
+            {...education}
           />
         ))}
       </div>

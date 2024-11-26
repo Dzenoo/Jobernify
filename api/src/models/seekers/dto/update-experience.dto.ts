@@ -4,6 +4,7 @@ import {
   IsString,
   IsDateString,
   ValidateIf,
+  IsBooleanString,
 } from 'class-validator';
 import {
   JobLevel,
@@ -51,4 +52,9 @@ export class UpdateExperienceDto {
   @IsOptional()
   @ValidateIf((obj, value) => value !== undefined)
   readonly position?: JobPosition;
+
+  @IsOptional()
+  @IsBooleanString()
+  @ValidateIf((obj, value) => value !== undefined)
+  readonly isCurrentlyWorking?: boolean;
 }

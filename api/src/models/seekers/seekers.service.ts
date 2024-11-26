@@ -405,10 +405,19 @@ export class SeekersService {
     id: string,
     experienceData: CreateExperienceDto,
   ): Promise<ResponseObject> {
+    let createdExperienceData: CreateExperienceDto;
+
+    if (experienceData.isCurrentlyWorking) {
+      createdExperienceData = {
+        ...experienceData,
+        endDate: null,
+      };
+    }
+
     const seeker = await this.seekerModel.findByIdAndUpdate(
       id,
       {
-        $push: { experience: experienceData },
+        $push: { experience: createdExperienceData },
       },
       { runValidators: true, new: true },
     );
@@ -446,6 +455,15 @@ export class SeekersService {
 
     if (!experienceToUpdate) {
       throw new NotFoundException('Experience entry not found');
+    }
+
+    let updatedExperienceData: UpdateExperienceDto;
+
+    if (experienceData.isCurrentlyWorking) {
+      updatedExperienceData = {
+        ...experienceData,
+        endDate: null,
+      };
     }
 
     Object.assign(experienceToUpdate, experienceData);

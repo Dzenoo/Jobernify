@@ -10,15 +10,11 @@ import { queryClient } from "@/context/react-query-client";
 
 import { formatDate } from "@/lib/utils";
 import { renderIconText } from "@/helpers";
+import { EducationTypes } from "@/types";
 
 export type EducationItemProps = {
   onEdit: () => void;
-  institution: string;
-  graduationDate: string;
-  fieldOfStudy: string;
-  degree: string;
-  _id: string;
-};
+} & EducationTypes;
 
 const EducationItem: React.FC<EducationItemProps> = ({
   onEdit,
@@ -46,7 +42,6 @@ const EducationItem: React.FC<EducationItemProps> = ({
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this education entry?"
     );
-
     if (confirmDelete) {
       await deleteEducationMutate();
     }
@@ -77,22 +72,20 @@ const EducationItem: React.FC<EducationItemProps> = ({
             })}
           </div>
         </div>
-        <div className="flex items-center gap-5">
-          {userType === "seeker" && (
+        {userType === "seeker" && (
+          <div className="flex items-center gap-5">
             <div>
               <button onClick={onEdit}>
                 <Edit />
               </button>
             </div>
-          )}
-          {userType === "seeker" && (
             <div>
               <button onClick={handleDeleteEducation}>
                 <Trash color="red" />
               </button>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -114,6 +114,7 @@ const ExperienceHandle: React.FC<ExperienceHandleProps> = ({
         position: experience?.position as any,
         location: experience?.location,
       });
+      setIsCurrentlyWorking(experience.isCurrentlyWorking);
     }
   }, [isOpen, isEdit, experience]);
 

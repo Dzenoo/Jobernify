@@ -4,6 +4,7 @@ import {
   IsString,
   IsDateString,
   IsNotEmpty,
+  IsBooleanString,
 } from 'class-validator';
 import {
   JobLevel,
@@ -40,4 +41,8 @@ export class CreateExperienceDto {
 
   @IsEnum(JobPosition)
   readonly position: JobPosition;
+
+  @IsOptional()
+  @IsBooleanString()
+  readonly isCurrentlyWorking?: boolean;
 }

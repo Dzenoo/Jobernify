@@ -66,7 +66,7 @@ const Educations: React.FC<EducationsProps> = ({ seeker }) => {
           )}
         </Drawer>
       )}
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center gap-3">
           <div>
             <h1 className="text-base-black">Education</h1>
