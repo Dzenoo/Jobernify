@@ -4,7 +4,7 @@ const LoadingReviewForm: React.FC = () => {
       {Array.from({ length: 6 }).map((_item, ind) => (
         <div key={ind}>
           <div>
-            <div className="h-10 bg-gray-300 rounded-lg w-full"></div>
+            <div className="h-10 bg-gray-300 rounded-xl w-full"></div>
           </div>
         </div>
       ))}

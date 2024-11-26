@@ -4,7 +4,7 @@ const LoadingCompaniesSkeleton: React.FC = () => {
       {Array.from({ length: 10 }).map((_job, ind) => (
         <div
           key={ind}
-          className="flex flex-col gap-4 sm:gap-6 lg:gap-10 animate-pulse bg-gray-100 p-4 sm:p-5 lg:p-6 rounded-lg w-full"
+          className="flex flex-col gap-4 sm:gap-6 lg:gap-10 animate-pulse bg-gray-100 p-4 sm:p-5 lg:p-6 rounded-xl w-full"
         >
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3">
             <div className="animate-pulse bg-gray-300 w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full"></div>

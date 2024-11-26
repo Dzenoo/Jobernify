@@ -3,7 +3,7 @@ import LoadingJobsSkeleton from "./LoadingJobsSkeleton";
 
 const LoadingJobDetails = () => {
   return (
-    <div className="flex flex-col lg:flex-row justify-between animate-pulse rounded-lg p-4 gap-6">
+    <div className="flex flex-col lg:flex-row justify-between animate-pulse rounded-xl p-4 gap-6">
       <div className="w-full lg:basis-[38em] flex flex-col gap-6">
         <div>
           <div className="w-full h-4 rounded-xl bg-gray-300"></div>

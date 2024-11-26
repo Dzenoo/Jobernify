@@ -4,7 +4,7 @@ const LoadingSeekers: React.FC = () => {
       {Array.from({ length: 6 }).map((_item, ind) => (
         <div
           key={ind}
-          className="flex flex-col gap-4 sm:gap-6 lg:gap-10 animate-pulse bg-gray-100 p-4 sm:p-5 lg:p-6 rounded-lg w-full items-center"
+          className="flex flex-col gap-4 sm:gap-6 lg:gap-10 animate-pulse bg-gray-100 p-4 sm:p-5 lg:p-6 rounded-xl w-full items-center"
         >
           <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full bg-gray-300"></div>
           <div className="flex flex-col items-center gap-2 sm:gap-3">
@@ -21,7 +21,7 @@ const LoadingSeekers: React.FC = () => {
             <div className="h-4 bg-gray-300 rounded w-4 sm:w-5"></div>
           </div>
           <div>
-            <div className="h-8 sm:h-9 lg:h-10 bg-gray-300 rounded-lg w-24 sm:w-28 lg:w-32"></div>
+            <div className="h-8 sm:h-9 lg:h-10 bg-gray-300 rounded-xl w-24 sm:w-28 lg:w-32"></div>
           </div>
         </div>
       ))}

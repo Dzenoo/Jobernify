@@ -1,7 +1,7 @@
 const LoadingSeekerDetails: React.FC = () => {
   return (
     <div className="w-full">
-      <div className="flex flex-col gap-10 animate-pulse bg-gray-100 p-6 rounded-lg w-full">
+      <div className="flex flex-col gap-10 animate-pulse bg-gray-100 p-6 rounded-xl w-full">
         <div className="flex gap-3 items-center">
           <div className="w-28 h-28 rounded-full bg-gray-300"></div>
           <div className="flex flex-col gap-3">

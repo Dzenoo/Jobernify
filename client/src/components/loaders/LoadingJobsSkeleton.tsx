@@ -4,7 +4,7 @@ const LoadingJobsSkeleton: React.FC = () => {
       {Array.from({ length: 3 }).map((_job, ind) => (
         <div
           key={ind}
-          className="animate-pulse bg-gray-100 rounded-lg p-4 flex flex-col gap-3"
+          className="animate-pulse bg-gray-100 rounded-xl p-4 flex flex-col gap-3"
         >
           <div className="flex items-center gap-3 justify-between">
             <div className="flex items-center gap-3">
