@@ -2,8 +2,9 @@
 
 import React from "react";
 
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 import { companySizes, industries, locations } from "@/constants";
+
+import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 
 import { Input } from "@/components/ui/input";
 import {

@@ -1,5 +1,7 @@
 import { useQuery } from "react-query";
+
 import { getEmployerProfile } from "@/lib/actions/employers.actions";
+
 import useAuthentication from "../defaults/useAuthentication.hook";
 
 const useGetEmployer = (type?: string) => {

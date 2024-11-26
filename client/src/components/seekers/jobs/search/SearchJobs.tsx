@@ -2,6 +2,8 @@
 
 import React from "react";
 
+import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -10,8 +12,6 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
-
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 
 type SearchJobsProps = {
   query: string;

@@ -4,10 +4,10 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+import zod from "zod";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
-import zod from "zod";
 import { ClipLoader } from "react-spinners";
 
 import { EmployerRegistrationSchema } from "@/lib/zod/auth.validation";
@@ -15,6 +15,8 @@ import { signupEmployer } from "@/lib/actions/auth.actions";
 import { TypeOfAccount } from "@/types";
 import { industries } from "@/constants";
 
+import { useToast } from "@/components/ui/use-toast";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -31,8 +33,6 @@ import {
   FormMessage,
   FormDescription,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
 import {
   Select,
   SelectContent,

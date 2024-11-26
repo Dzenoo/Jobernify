@@ -1,22 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
+
 import { Filter, ListFilter } from "lucide-react";
 
-import FilterHandler from "@/components/shared/filters/FilterHandler";
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import { JobsFiltersData } from "@/constants";
 import { injectCountsIntoFilters } from "@/lib/utils";
 import { FilterCounts } from "@/types";
 
+import FilterHandler from "@/components/shared/filters/FilterHandler";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 
 type FilterJobsProps = {
   filterCounts: FilterCounts;

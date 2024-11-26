@@ -1,4 +1,5 @@
 import { useQuery } from "react-query";
+
 import { getSeekerProfile } from "@/lib/actions/seekers.actions";
 import { getEmployerProfile } from "@/lib/actions/employers.actions";
 

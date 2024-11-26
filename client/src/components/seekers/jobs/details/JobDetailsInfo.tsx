@@ -1,4 +1,7 @@
 import React from "react";
+
+import Link from "next/link";
+
 import DOMPurify from "dompurify";
 import ReactMarkdown from "react-markdown";
 
@@ -12,15 +15,12 @@ import {
   Timer,
 } from "lucide-react";
 
-import { renderIconText, renderSkills } from "@/helpers";
-import Link from "next/link";
-
-import SaveJobButton from "../SaveJobButton";
-
-import { ApplicationsTypes, JobTypes } from "@/types";
-
 import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
+import SaveJobButton from "../SaveJobButton";
+import Navigator from "@/components/ui/navigator";
+
+import { renderIconText, renderSkills } from "@/helpers";
 import {
   findIndustriesData,
   findLocationData,
@@ -30,10 +30,11 @@ import {
   getTime,
 } from "@/lib/utils";
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { ApplicationsTypes, JobTypes } from "@/types";
+
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import Navigator from "@/components/ui/navigator";
 
 type JobDetailsInfoProps = {
   job: JobTypes;

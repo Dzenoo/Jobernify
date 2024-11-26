@@ -1,10 +1,12 @@
 import React from "react";
 
+import { Search } from "lucide-react";
+
+import ApplicationsItem from "./ApplicationsItem";
+
 import { ApplicationsTypes } from "@/types";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import ApplicationsItem from "./ApplicationsItem";
-import { Search } from "lucide-react";
 
 type ApplicationsProps = {
   applications: ApplicationsTypes[];

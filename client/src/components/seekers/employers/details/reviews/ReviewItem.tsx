@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 
 import { Briefcase, Calendar, Timer, Trash } from "lucide-react";
+import { useMutation } from "react-query";
 
-import { ReviewTypes } from "@/types";
-import { getSkillNames, getTime } from "@/lib/utils";
 import { renderIconText } from "@/helpers";
-
+import { queryClient } from "@/context/react-query-client";
 import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import { useMutation } from "react-query";
+import { getSkillNames, getTime } from "@/lib/utils";
 import { deleteReview } from "@/lib/actions/reviews.actions";
-import { queryClient } from "@/context/react-query-client";
-import { toast } from "@/components/ui/use-toast";
+
+import { ReviewTypes } from "@/types";
+
 import EditReview from "./EditReview";
 
+import { toast } from "@/components/ui/use-toast";
 import {
   Card,
   CardContent,

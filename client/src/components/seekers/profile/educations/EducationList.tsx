@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
 import EducationItem from "./EducationItem";
-import { Button } from "@/components/ui/button";
+
 import { EducationTypes } from "@/types";
+
+import { Button } from "@/components/ui/button";
 
 type EducationListProps = {
   educations?: EducationTypes[];

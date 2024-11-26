@@ -1,7 +1,11 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+import { ClipLoader } from "react-spinners";
+
 import { getImageUrl } from "@/lib/utils";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import useFetchProfile from "@/hooks/queries/useFetchProfile.query";
@@ -12,13 +16,7 @@ import {
   SeekersNavbarLinks,
 } from "@/constants";
 
-import Logo from "./Logo";
-import NavbarActionsList from "./NavbarActionsList";
-import NavbarLinksList from "./NavbarLinksList";
-import Link from "next/link";
-
 import { Button } from "@/components/ui/button";
-import { ClipLoader } from "react-spinners";
 import {
   Tooltip,
   TooltipContent,
@@ -26,6 +24,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+import Logo from "./Logo";
+import NavbarActionsList from "./NavbarActionsList";
+import NavbarLinksList from "./NavbarLinksList";
 
 const AuthenticationDivLinks: React.FC = () => {
   return (

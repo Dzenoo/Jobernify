@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
+
 import zod from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ClipLoader } from "react-spinners";
 import { Edit, X } from "lucide-react";
 
-import { SeekerProfileSchema } from "@/lib/zod/seekers.validation";
 import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
+import { SeekerProfileSchema } from "@/lib/zod/seekers.validation";
+
 import { SeekerTypes } from "@/types";
 
 import { Button } from "@/components/ui/button";

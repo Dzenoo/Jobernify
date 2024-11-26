@@ -1,12 +1,15 @@
 import React from "react";
 
-import { getImageUrl } from "@/lib/utils";
-import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 import Image from "next/image";
 import Link from "next/link";
-import LoadingSeekerInfo from "@/components/loaders/LoadingSeekerInfo";
+
+import { getImageUrl } from "@/lib/utils";
+
+import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
 import { SeekerTypes } from "@/types";
+
+import LoadingSeekerInfo from "@/components/loaders/LoadingSeekerInfo";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

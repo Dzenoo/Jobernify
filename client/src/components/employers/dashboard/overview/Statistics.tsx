@@ -1,10 +1,12 @@
 import React from "react";
+
 import {
   Briefcase,
   CalendarSearch,
   Folder,
   MessageSquareDot,
 } from "lucide-react";
+
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 type StatisticsProps = {

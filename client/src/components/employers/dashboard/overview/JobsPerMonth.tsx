@@ -1,8 +1,12 @@
 "use client";
 
 import React from "react";
+
 import { Chart, registerables } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { useTheme } from "next-themes";
+
+import { getMonthsLabels } from "@/lib/utils";
 
 import {
   Card,
@@ -11,9 +15,6 @@ import {
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
-
-import { getMonthsLabels } from "@/lib/utils";
-import { useTheme } from "next-themes";
 
 Chart.register(...registerables);
 

@@ -1,10 +1,11 @@
-import { EmployerTypes, ResponseMessageTypes, SeekerTypes } from "@/types";
 import {
-  deleteApiHandler,
   getApiHandler,
-  patchApiHandler,
   postApiHandler,
+  patchApiHandler,
+  deleteApiHandler,
 } from "../api";
+
+import { ResponseMessageTypes, SeekerTypes } from "@/types";
 
 /**
  * ===============================

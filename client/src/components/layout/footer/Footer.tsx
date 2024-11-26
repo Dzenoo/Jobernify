@@ -1,11 +1,14 @@
 "use client";
 
 import React from "react";
+
+import { useTheme } from "next-themes";
+
 import Image from "next/image";
 import Link from "next/link";
-import { FooterLinks } from "@/constants";
-import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
+
+import { FooterLinks } from "@/constants";
 
 const Footer: React.FC = () => {
   const pathname = usePathname();

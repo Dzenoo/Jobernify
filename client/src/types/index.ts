@@ -71,8 +71,8 @@ export type JobTypes = {
   expiration_date: string & Date;
   description: string;
   overview: string;
-  applications: ApplicationsTypes[];
   createdAt: string;
+  applications: ApplicationsTypes[];
   company: EmployerTypes;
 };
 
@@ -130,13 +130,13 @@ export type SeekerTypes = {
   resume?: string;
   role: string;
   receiveJobAlerts: boolean;
-  applications: ApplicationsTypes[];
   headline: string;
   skills: string[];
+  following: string[];
+  savedJobs: JobTypes[];
+  applications: ApplicationsTypes[];
   education: EducationTypes[];
   experience: ExperienceTypes[];
-  savedJobs: JobTypes[];
-  following: string[];
   alerts: JobAlertsTypes;
   createdAt: Date;
   updatedAt: Date;

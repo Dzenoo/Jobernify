@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+
+import zod from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import zod from "zod";
 import { useMutation } from "react-query";
-import { useToast } from "@/components/ui/use-toast";
 import { ClipLoader } from "react-spinners";
-
 import { queryClient } from "@/context/react-query-client";
+
 import useUploads from "@/hooks/defaults/useUploads.hook";
 import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
@@ -15,6 +15,8 @@ import { applyToJob } from "@/lib/actions/applications.actions";
 
 import { SeekerTypes } from "@/types";
 
+import { useToast } from "@/components/ui/use-toast";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -39,7 +41,6 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import { Textarea } from "@/components/ui/textarea";
 
 type ApplyToJobProps = {
   isApplyToJob: boolean;

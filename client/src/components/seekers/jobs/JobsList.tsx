@@ -1,7 +1,10 @@
 import React from "react";
-import { JobTypes } from "@/types";
-import JobItem from "./JobItem";
+
 import { Search } from "lucide-react";
+
+import JobItem from "./JobItem";
+
+import { JobTypes } from "@/types";
 
 type JobListProps = {
   jobs?: JobTypes[];

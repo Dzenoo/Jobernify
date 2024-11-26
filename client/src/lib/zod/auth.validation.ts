@@ -1,5 +1,6 @@
-import { industries, PASSWORD_REGEX } from "@/constants";
 import zod from "zod";
+
+import { industries, PASSWORD_REGEX } from "@/constants";
 
 export const SeekerRegistrationSchema = zod.object({
   first_name: zod

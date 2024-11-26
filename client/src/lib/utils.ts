@@ -1,17 +1,15 @@
-// ===============================
-// Imports
-// ===============================
-
 import moment from "moment";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { jwtDecode } from "jwt-decode";
+
 import {
   AWS_URL,
   industries,
   locations,
   SkillsInformationsData,
 } from "@/constants";
-import { jwtDecode } from "jwt-decode";
+
 import { FilterCounts, FilterGroup } from "@/types";
 
 // ===============================

@@ -1,12 +1,17 @@
 import React from "react";
-import { Briefcase, Edit, Trash } from "lucide-react";
+
 import { useMutation } from "react-query";
+import { Briefcase, Edit, Trash } from "lucide-react";
+
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import { useToast } from "@/components/ui/use-toast";
-import { deleteExperience } from "@/lib/actions/seekers.actions";
+
 import { queryClient } from "@/context/react-query-client";
+import { deleteExperience } from "@/lib/actions/seekers.actions";
 import { formatDate } from "@/lib/utils";
+
 import { ExperienceTypes } from "@/types";
+
+import { useToast } from "@/components/ui/use-toast";
 
 type ExperienceItemProps = {
   onEdit: () => void;

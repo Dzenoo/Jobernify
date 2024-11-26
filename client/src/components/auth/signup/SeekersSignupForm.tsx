@@ -4,18 +4,19 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+import zod from "zod";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
-import zod from "zod";
 import { ClipLoader } from "react-spinners";
-import { useToast } from "@/components/ui/use-toast";
 
 import { SeekerRegistrationSchema } from "@/lib/zod/auth.validation";
 import { signupSeeker } from "@/lib/actions/auth.actions";
 import { TypeOfAccount } from "@/types";
 
+import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Card,
   CardContent,
@@ -31,7 +32,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 
 type SeekersSignupFormTypes = {
   handleTypeSelection: (type: TypeOfAccount) => void;
@@ -90,7 +90,9 @@ const SeekersSignupForm: React.FC<SeekersSignupFormTypes> = ({
             </p>
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-center">Sign up to find job you want</h1>
+            <h1 className="text-2xl font-bold text-center">
+              Sign up to find job you want
+            </h1>
           </div>
         </div>
       </CardHeader>

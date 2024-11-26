@@ -4,19 +4,22 @@ import React, { FormEvent, Fragment, useState } from "react";
 import Image from "next/image";
 
 import { ImagePlusIcon, Trash } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
 import { useMutation } from "react-query";
 
 import useEditEmployer from "@/hooks/mutations/useEditEmployer.mutation";
 import useUploads from "@/hooks/defaults/useUploads.hook";
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
 import { AWS_URL } from "@/constants";
 import { EmployerTypes } from "@/types";
-
 import { deleteEmployerProfile } from "@/lib/actions/employers.actions";
 
+import EmployerInformations from "./informations/EmployerInformations";
+
+import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
   Dialog,
   DialogContent,
@@ -24,9 +27,6 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
-import EmployerInformations from "./informations/EmployerInformations";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import {
   Drawer,
   DrawerContent,

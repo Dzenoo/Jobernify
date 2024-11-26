@@ -12,6 +12,14 @@ import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import { signIn } from "@/lib/actions/auth.actions";
 import { LoginSchema } from "@/lib/zod/auth.validation";
 
+import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -20,15 +28,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
-import { useToast } from "@/components/ui/use-toast";
 
 const LoginForm: React.FC = () => {
   const router = useRouter();

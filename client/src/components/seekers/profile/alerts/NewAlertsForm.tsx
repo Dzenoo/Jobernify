@@ -16,6 +16,7 @@ import useJobAlert from "@/hooks/mutations/useJobAlert.mutation";
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
 
+import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -50,7 +51,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
 
 type NewAlertsFormProps = {
   closeAlerts: () => void;

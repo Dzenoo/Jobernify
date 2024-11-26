@@ -1,15 +1,18 @@
 import React from "react";
+
 import Link from "next/link";
 
 import { Camera, Text } from "lucide-react";
 
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { renderIconText } from "@/helpers";
+import { getImageUrl } from "@/lib/utils";
+
 import { EmployerTypes } from "@/types";
 
 import FollowEmployerButton from "./FollowEmployerButton";
+
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { getImageUrl } from "@/lib/utils";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 type EmployersItemProps = {
   employer: EmployerTypes;

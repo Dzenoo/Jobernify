@@ -1,5 +1,6 @@
-import { industries } from "@/constants";
 import zod from "zod";
+
+import { industries } from "@/constants";
 
 export const EmployerProfileSchema = zod.object({
   name: zod.string().min(5).max(50),

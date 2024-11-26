@@ -5,8 +5,6 @@ import { GraduationCap, MapPin, Timer } from "lucide-react";
 
 import SaveJobButton from "./SaveJobButton";
 
-import { JobTypes } from "@/types";
-
 import {
   checkExpired,
   findLocationData,
@@ -15,6 +13,8 @@ import {
   getTime,
 } from "@/lib/utils";
 import { renderIconText } from "@/helpers";
+
+import { JobTypes } from "@/types";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {

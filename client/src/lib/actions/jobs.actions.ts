@@ -1,15 +1,11 @@
 import {
-  ApplicationsTypes,
-  FilterCounts,
-  JobTypes,
-  ResponseMessageTypes,
-} from "@/types";
-import {
-  deleteApiHandler,
   getApiHandler,
-  patchApiHandler,
   postApiHandler,
+  patchApiHandler,
+  deleteApiHandler,
 } from "../api";
+
+import { FilterCounts, JobTypes, ResponseMessageTypes } from "@/types";
 
 /**
  * ===============================

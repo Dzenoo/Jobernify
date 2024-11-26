@@ -1,9 +1,9 @@
 import React, { FormEvent, useState } from "react";
 import Link from "next/link";
+
 import { useMutation } from "react-query";
 import { useToast } from "@/components/ui/use-toast";
 import { ClipLoader } from "react-spinners";
-
 import { Edit, Eye, Trash } from "lucide-react";
 
 import { deleteJob } from "@/lib/actions/jobs.actions";

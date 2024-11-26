@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+
 import ExperienceItem from "./ExperienceItem";
-import { Button } from "@/components/ui/button";
+
 import { ExperienceTypes } from "@/types";
+
+import { Button } from "@/components/ui/button";
 
 type ExperienceListProps = {
   experiences?: ExperienceTypes[];

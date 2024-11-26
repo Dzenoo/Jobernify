@@ -1,17 +1,20 @@
 import React, { Fragment, useState } from "react";
 
-import { Plus } from "lucide-react";
-import { ClipLoader } from "react-spinners";
 import zod from "zod";
+import { ClipLoader } from "react-spinners";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Plus } from "lucide-react";
 
 import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
+
 import { SkillsSchema } from "@/lib/zod/seekers.validation";
 import { getSkillsData, multiselectSkills } from "@/lib/utils";
+import { renderSkills } from "@/helpers";
 
-import { Button } from "@/components/ui/button";
 import MultiSelect from "@/components/ui/multiselect";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -33,8 +36,6 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import { renderSkills } from "@/helpers";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 
 type AddSkillsProps = {
   closeSkills: () => void;

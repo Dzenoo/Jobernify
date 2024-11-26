@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
+
+import zod from "zod";
 import { CalendarIcon } from "lucide-react";
 import { ClipLoader } from "react-spinners";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { useToast } from "@/components/ui/use-toast";
 
 import {
   AddEducationSchema,
@@ -18,6 +18,7 @@ import { queryClient } from "@/context/react-query-client";
 import { cn } from "@/lib/utils";
 import { EducationTypes } from "@/types";
 
+import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Calendar } from "@/components/ui/calendar";

@@ -2,9 +2,11 @@
 
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
+
+import { Mail } from "lucide-react";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mail } from "lucide-react";
 
 const CheckYourEmail = () => {
   const router = useRouter();

@@ -1,13 +1,15 @@
 import React, { Fragment, useState } from "react";
-import zod from "zod";
 
+import zod from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ClipLoader } from "react-spinners";
 import { Edit, Github, Image, Linkedin } from "lucide-react";
 
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
 import { SeekerSocialsSchema } from "@/lib/zod/seekers.validation";
+
 import { SeekerTypes } from "@/types";
 
 import { Button } from "@/components/ui/button";
@@ -34,7 +36,6 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { formatURL } from "@/lib/utils";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 
 type EditSocialsProps = {
   isEditSocialsOpen: boolean;

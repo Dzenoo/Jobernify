@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 
 import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+
 import { FilterGroup } from "@/types";
 
 import { Checkbox } from "@/components/ui/checkbox";

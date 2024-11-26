@@ -1,28 +1,30 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
+import zod from "zod";
+import TurndownService from "turndown";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ClipLoader } from "react-spinners";
 import { useToast } from "@/components/ui/use-toast";
-import zod from "zod";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
+import { queryClient } from "@/context/react-query-client";
 import { createNewJob, editJob } from "@/lib/actions/jobs.actions";
 import { UpdateJobSchema } from "@/lib/zod/jobs.validation";
-import { useRouter } from "next/navigation";
-import TurndownService from "turndown";
-import { JobTypes } from "@/types";
 
-import { queryClient } from "@/context/react-query-client";
+import { JobTypes } from "@/types";
 
 import Details from "@/components/employers/dashboard/jobs/new/Details";
 import Overview from "@/components/employers/dashboard/jobs/new/Overview";
 import Scope from "@/components/employers/dashboard/jobs/new/Scope";
 import Skills from "@/components/employers/dashboard/jobs/new/Skills";
 import Text from "@/components/employers/dashboard/jobs/new/Text";
+
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 

@@ -1,4 +1,3 @@
-// Jobs
 import zod from "zod";
 
 export const ApplyToJobSchema = zod.object({

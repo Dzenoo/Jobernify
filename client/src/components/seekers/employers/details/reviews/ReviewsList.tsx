@@ -1,9 +1,10 @@
 import React from "react";
 
+import { Search } from "lucide-react";
+
 import { ReviewTypes } from "@/types";
 
 import ReviewItem from "./ReviewItem";
-import { Search } from "lucide-react";
 
 type ReviewsListProps = {
   reviews?: ReviewTypes[];

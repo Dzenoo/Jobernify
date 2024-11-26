@@ -1,7 +1,10 @@
 import React from "react";
-import SeekerItem from "./SeekerItem";
-import { SeekerTypes } from "@/types";
+
 import { Search } from "lucide-react";
+
+import { SeekerTypes } from "@/types";
+
+import SeekerItem from "./SeekerItem";
 
 type SeekersListProps = {
   seekers: SeekerTypes[];

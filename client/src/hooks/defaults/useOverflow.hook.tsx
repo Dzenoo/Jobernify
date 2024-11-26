@@ -1,6 +1,8 @@
 "use client";
-import { usePathname } from "next/navigation";
+
 import { useEffect } from "react";
+
+import { usePathname } from "next/navigation";
 
 const useOverflow = (name: string) => {
   const pathname = usePathname();

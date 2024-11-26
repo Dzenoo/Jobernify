@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
+
 import zod from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ClipLoader } from "react-spinners";
 import { Edit, X } from "lucide-react";
 
-import { EmployerTypes } from "@/types";
 import { EmployerProfileSchema } from "@/lib/zod/employers.validation";
 import useEditEmployer from "@/hooks/mutations/useEditEmployer.mutation";
+import { industries } from "@/constants";
+import { findIndustriesData } from "@/lib/utils";
+
+import { EmployerTypes } from "@/types";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,8 +32,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { findIndustriesData } from "@/lib/utils";
-import { industries } from "@/constants";
 
 type EmployerInformationsProps = {
   employer?: EmployerTypes;

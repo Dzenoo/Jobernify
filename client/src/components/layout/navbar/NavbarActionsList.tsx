@@ -1,9 +1,10 @@
 import React from "react";
+
 import Link from "next/link";
 
-import { LogOut } from "lucide-react";
-
 import Themes from "./Themes";
+
+import { LogOut } from "lucide-react";
 
 import {
   Tooltip,

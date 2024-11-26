@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import BlueButton from "./BlueButton";
+
 import { HowItWorksEmployersData, HowItWorksSeekersData } from "@/constants";
+
+import BlueButton from "./BlueButton";
 
 const HowItWorksLanding: React.FC = () => {
   const [activeTab, setActiveTab] = useState(true);

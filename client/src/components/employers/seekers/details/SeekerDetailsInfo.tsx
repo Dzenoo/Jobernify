@@ -5,15 +5,16 @@ import Image from "next/image";
 
 import { Github, Linkedin, LucideImage } from "lucide-react";
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import Navigator from "@/components/ui/navigator";
-
-import EducationList from "@/components/seekers/profile/educations/EducationList";
-
-import { SeekerTypes } from "@/types";
 import { formatURL, getImageUrl, getSkillsData } from "@/lib/utils";
 import { renderSkills } from "@/helpers";
+
+import { SeekerTypes } from "@/types";
+
+import EducationList from "@/components/seekers/profile/educations/EducationList";
 import ExperienceList from "@/components/seekers/profile/experiences/ExperienceList";
+
+import Navigator from "@/components/ui/navigator";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 type SeekerDetailsInfoProps = {
   seeker: SeekerTypes;

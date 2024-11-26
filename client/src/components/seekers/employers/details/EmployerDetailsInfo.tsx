@@ -1,4 +1,5 @@
 import React from "react";
+
 import Link from "next/link";
 
 import { Building, Camera, Text } from "lucide-react";
@@ -6,7 +7,9 @@ import { Building, Camera, Text } from "lucide-react";
 import { EmployerTypes } from "@/types";
 import { findIndustriesData, getImageUrl } from "@/lib/utils";
 import { renderIconText } from "@/helpers";
+
 import FollowEmployerButton from "../FollowEmployerButton";
+import Navigator from "@/components/ui/navigator";
 
 import {
   Card,
@@ -16,7 +19,6 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import Navigator from "@/components/ui/navigator";
 
 type EmployerDetailsInfoProps = {
   employer: EmployerTypes;

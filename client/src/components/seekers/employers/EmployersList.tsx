@@ -1,9 +1,10 @@
 import React from "react";
 
+import { Search } from "lucide-react";
+
 import { EmployerTypes } from "@/types";
 
 import EmployerItem from "./EmployerItem";
-import { Search } from "lucide-react";
 
 type EmployersListProps = {
   employers?: EmployerTypes[];

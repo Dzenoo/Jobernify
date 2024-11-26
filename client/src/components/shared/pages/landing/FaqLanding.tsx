@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+
 import { EmployerFAQs, GeneralPlatformFAQs, JobSeekerFAQs } from "@/constants";
+
 import BlueButton from "./BlueButton";
+
 import {
   Accordion,
   AccordionTrigger,

@@ -1,7 +1,10 @@
 import { useMutation } from "react-query";
-import useAuthentication from "../defaults/useAuthentication.hook";
+
 import { queryClient } from "@/context/react-query-client";
 import { followEmployer } from "@/lib/actions/seekers.actions";
+
+import useAuthentication from "../defaults/useAuthentication.hook";
+
 import { useToast } from "@/components/ui/use-toast";
 
 const useFollowEmployer = (employerId: string) => {

@@ -4,15 +4,18 @@ import Link from "next/link";
 
 import { Github, ImageIcon, Linkedin, Search } from "lucide-react";
 import { useMutation } from "react-query";
-import { AWS_URL } from "@/constants";
-import { useToast } from "@/components/ui/use-toast";
 
+import { AWS_URL } from "@/constants";
 import { updateApplicationStatus } from "@/lib/actions/applications.actions";
 import { formatDate, getImageUrl } from "@/lib/utils";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import { queryClient } from "@/context/react-query-client";
+
 import { ApplicationsTypes, SeekerTypes } from "@/types";
 
+import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Table,
   TableBody,
@@ -23,8 +26,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Popover,
   PopoverContent,
