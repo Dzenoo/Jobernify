@@ -74,7 +74,7 @@ const EducationItem: React.FC<EducationItemProps> = ({
           </div>
         </div>
         {userType === "seeker" && (
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-2">
             <div>
               <button onClick={onEdit}>
                 <Edit />

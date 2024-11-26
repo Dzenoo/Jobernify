@@ -105,7 +105,7 @@ const DateSection: React.FC<{
     <p className="text-initial-gray">{startDate}</p>
     <span className="text-sm">·</span>
     {isCurrentlyWorking ? (
-      <p className="text-initial-gray">{formatDate(Date.now() as any)}</p>
+      <p className="text-initial-gray">Present</p>
     ) : (
       <p className="text-initial-gray">{endDate}</p>
     )}
