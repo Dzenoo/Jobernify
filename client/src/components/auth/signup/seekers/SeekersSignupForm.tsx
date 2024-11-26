@@ -135,7 +135,7 @@ const SeekersSignupForm: React.FC = () => {
           className="w-full"
         >
           {form.formState.isSubmitting ? (
-            <ScaleLoader color="#fff" />
+            <ScaleLoader color="#fff" height={10} />
           ) : (
             "Register"
           )}

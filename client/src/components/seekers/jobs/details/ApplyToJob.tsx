@@ -176,7 +176,7 @@ const ApplyToJob: React.FC<ApplyToJobProps> = ({
             className="w-full"
           >
             {form.formState.isSubmitting ? (
-              <ScaleLoader color="#fff" />
+              <ScaleLoader color="#fff" height={10} />
             ) : (
               "Apply"
             )}

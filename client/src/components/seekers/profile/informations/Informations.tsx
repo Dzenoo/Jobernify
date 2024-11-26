@@ -218,7 +218,7 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
                   className="px-10"
                 >
                   {form.formState.isSubmitting ? (
-                    <ScaleLoader color="#fff" />
+                    <ScaleLoader color="#fff" height={10} />
                   ) : (
                     "Save"
                   )}

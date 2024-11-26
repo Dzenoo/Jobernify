@@ -65,7 +65,7 @@ const DeleteJob: React.FC<DeleteJobProps> = ({ onClose, ids, isDialog }) => {
         <form onSubmit={onDeleteJob}>
           <DialogFooter>
             <Button variant="destructive" type="submit" className="w-full">
-              {isLoading ? <ScaleLoader /> : "Delete"}
+              {isLoading ? <ScaleLoader height={10} /> : "Delete"}
             </Button>
           </DialogFooter>
         </form>
@@ -86,7 +86,7 @@ const DeleteJob: React.FC<DeleteJobProps> = ({ onClose, ids, isDialog }) => {
       <form onSubmit={onDeleteJob}>
         <DrawerFooter>
           <Button variant="destructive" type="submit" className="w-full">
-            {isLoading ? <ScaleLoader /> : "Delete"}
+            {isLoading ? <ScaleLoader height={10} /> : "Delete"}
           </Button>
         </DrawerFooter>
       </form>

@@ -96,7 +96,7 @@ const AddSkillsForm: React.FC<AddSkillsProps> = ({
             className="w-full"
           >
             {form.formState.isSubmitting ? (
-              <ScaleLoader color="#fff" />
+              <ScaleLoader color="#fff" height={10} />
             ) : (
               "Update"
             )}

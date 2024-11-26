@@ -93,7 +93,7 @@ const Navbar: React.FC<{ href?: string }> = ({ href }) => {
                         )}
                       />
                       <AvatarFallback>
-                        <ScaleLoader />
+                        <ScaleLoader height={10} />
                       </AvatarFallback>
                     </Avatar>
                   </Link>

@@ -167,7 +167,11 @@ const NewAlertForm: React.FC<NewAlertFormProps> = ({
             disabled={form.formState.isSubmitting || !form.formState.isValid}
             className="w-full"
           >
-            {form.formState.isSubmitting ? <ScaleLoader color="#fff" /> : "Add"}
+            {form.formState.isSubmitting ? (
+              <ScaleLoader color="#fff" height={10} />
+            ) : (
+              "Add"
+            )}
           </Button>
         </DialogFooter>
       </form>

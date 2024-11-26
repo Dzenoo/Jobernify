@@ -220,7 +220,7 @@ const EditEmployerProfileForm: React.FC<EditEmployerProfileFormProps> = ({
             className="px-10"
           >
             {form.formState.isSubmitting ? (
-              <ScaleLoader color="#fff" />
+              <ScaleLoader color="#fff" height={10} />
             ) : (
               "Save"
             )}

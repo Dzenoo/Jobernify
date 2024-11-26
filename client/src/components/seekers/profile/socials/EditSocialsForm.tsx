@@ -143,7 +143,7 @@ const EditSocialsForm: React.FC<EditSocialsFormProps> = ({
               className="w-full"
             >
               {form.formState.isSubmitting ? (
-                <ScaleLoader color="#fff" />
+                <ScaleLoader color="#fff" height={10} />
               ) : (
                 "Save"
               )}

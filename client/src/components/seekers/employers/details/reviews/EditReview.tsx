@@ -127,7 +127,7 @@ const EditReview: React.FC<EditReviewProps> = ({ review, closeDialog }) => {
             className="w-full"
           >
             {form.formState.isSubmitting ? (
-              <ScaleLoader color="#fff" />
+              <ScaleLoader color="#fff" height={10} />
             ) : (
               "Save"
             )}

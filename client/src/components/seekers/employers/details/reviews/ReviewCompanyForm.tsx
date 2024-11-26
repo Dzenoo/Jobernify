@@ -221,7 +221,7 @@ const ReviewCompanyForm: React.FC<ReviewCompanyFormProps> = ({
                 className="px-10"
               >
                 {form.formState.isSubmitting ? (
-                  <ScaleLoader />
+                  <ScaleLoader height={10} />
                 ) : (
                   "Submit Review"
                 )}

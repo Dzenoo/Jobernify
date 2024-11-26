@@ -62,7 +62,7 @@ const UploadSeekerImage: React.FC<UploadSeekerImageProps> = ({ image }) => {
             className="rounded-full w-36 h-36 object-cover"
           />
         ) : (
-          <ScaleLoader color={theme === "dark" ? "#ffffff" : ""} />
+          <ScaleLoader color={theme === "dark" ? "#ffffff" : ""} height={10} />
         )}
       </div>
       <div className="flex flex-col gap-3">

@@ -53,7 +53,7 @@ const AddJobAlert: React.FC<JobAlertProps> = ({ level, type, title }) => {
           disabled={isLoading || isAlreadyAlertGeneratedWithProperties}
         >
           {isLoading ? (
-            <ScaleLoader color="#fff" />
+            <ScaleLoader color="#fff" height={10} />
           ) : isAlreadyAlertGeneratedWithProperties ? (
             "Already Generated"
           ) : (

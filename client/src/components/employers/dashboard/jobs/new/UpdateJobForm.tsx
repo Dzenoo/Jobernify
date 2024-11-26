@@ -178,7 +178,7 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
                 {stepDetails.length - 1 === currentJobForm && (
                   <div className="flex gap-3 justify-end">
                     <Button type="submit" variant="default">
-                      {isLoading ? <ScaleLoader /> : "Submit"}
+                      {isLoading ? <ScaleLoader height={10} /> : "Submit"}
                     </Button>
                   </div>
                 )}

@@ -96,7 +96,11 @@ const LoginForm: React.FC = () => {
           }
           className="w-full"
         >
-          {form.formState.isSubmitting ? <ScaleLoader color="#fff" /> : "Login"}
+          {form.formState.isSubmitting ? (
+            <ScaleLoader color="#fff" height={10} />
+          ) : (
+            "Login"
+          )}
         </Button>
       </form>
     </Form>
