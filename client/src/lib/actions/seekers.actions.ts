@@ -71,6 +71,24 @@ export const addNewEducation = async (
 };
 
 /**
+ * Edits a education record to the seeker profile.
+ * @param data - The education data to edit.
+ * @param token - The authentication token.
+ * @returns A promise resolving to a response message.
+ */
+export const editEducation = async (
+  data: any,
+  token: string,
+  educationId: string
+): Promise<ResponseMessageTypes> => {
+  return await patchApiHandler(
+    `seekers/edit-education/${educationId}`,
+    data,
+    token
+  );
+};
+
+/**
  * Deletes an education record from the seeker profile.
  * @param educationId - The ID of the education record to delete.
  * @param token - The authentication token.
@@ -97,6 +115,24 @@ export const addNewExperience = async (
   token: string
 ): Promise<ResponseMessageTypes> => {
   return await patchApiHandler(`seekers/add-new-experience`, data, token);
+};
+
+/**
+ * Edits a experience record to the seeker profile.
+ * @param data - The experience data to edit.
+ * @param token - The authentication token.
+ * @returns A promise resolving to a response message.
+ */
+export const editExperience = async (
+  data: any,
+  token: string,
+  experienceId: string
+): Promise<ResponseMessageTypes> => {
+  return await patchApiHandler(
+    `seekers/edit-experience/${experienceId}`,
+    data,
+    token
+  );
 };
 
 /**

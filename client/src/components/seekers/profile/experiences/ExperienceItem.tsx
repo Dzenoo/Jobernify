@@ -1,5 +1,5 @@
 import React from "react";
-import { Briefcase, Trash } from "lucide-react";
+import { Briefcase, Edit, Trash } from "lucide-react";
 import { useMutation } from "react-query";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
@@ -10,11 +10,12 @@ import { queryClient } from "@/context/react-query-client";
 import { formatDate } from "@/lib/utils";
 
 export type ExperienceItemProps = {
+  onEdit: () => void;
   _id: string;
   jobTitle: string;
   companyName: string;
   startDate: string;
-  endDate: string;
+  endDate?: string;
   level: string;
   type: string;
   location: string;
@@ -22,6 +23,7 @@ export type ExperienceItemProps = {
 };
 
 const ExperienceItem: React.FC<ExperienceItemProps> = ({
+  onEdit,
   _id,
   jobTitle,
   companyName,
@@ -57,7 +59,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
   };
 
   const formattedStartDate = formatDate(startDate);
-  const formattedEndDate = formatDate(endDate);
+  const formattedEndDate = endDate ? formatDate(endDate) : "";
 
   return (
     <div className="flex items-start gap-5 dark:bg-[#1b1b1b] rounded-xl bg-white p-6 border border-gray-100 dark:border-[#3b3b3b] overflow-auto whitespace-nowrap">
@@ -73,6 +75,11 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
         />
         <InfoSection location={location} position={position} level={level} />
       </div>
+      {userType === "seeker" && (
+        <button onClick={onEdit}>
+          <Edit />
+        </button>
+      )}
       {userType === "seeker" && (
         <button onClick={handleDeleteExperience}>
           <Trash color="red" />
@@ -93,14 +100,14 @@ const HeaderSection: React.FC<{ jobTitle: string; type: string }> = ({
   </div>
 );
 
-const DateSection: React.FC<{ startDate: string; endDate: string }> = ({
+const DateSection: React.FC<{ startDate: string; endDate?: string }> = ({
   startDate,
   endDate,
 }) => (
   <div className="flex items-center gap-2">
     <p className="text-initial-gray">{startDate}</p>
     <span className="text-sm">·</span>
-    <p className="text-initial-gray">{endDate}</p>
+    {endDate && <p className="text-initial-gray">{endDate}</p>}
   </div>
 );
 

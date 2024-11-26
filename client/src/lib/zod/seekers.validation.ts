@@ -28,18 +28,25 @@ export const SeekerSocialsSchema = zod.object({
     }),
 });
 
-export const EducationSchema = zod.object({
+export const AddEducationSchema = zod.object({
   institution: zod.string().min(3).max(300),
   fieldOfStudy: zod.string().min(3).max(30),
   degree: zod.string().min(3).max(30),
   graduationDate: zod.date(),
 });
 
-export const ExperienceSchema = zod.object({
+export const EditEducationSchema = zod.object({
+  institution: zod.string().min(3).max(300).optional(),
+  fieldOfStudy: zod.string().min(3).max(30).optional(),
+  degree: zod.string().min(3).max(30).optional(),
+  graduationDate: zod.date().optional(),
+});
+
+export const AddExperienceSchema = zod.object({
   jobTitle: zod.string().min(3).max(100),
   companyName: zod.string().min(3).max(300),
   startDate: zod.date(),
-  endDate: zod.date(),
+  endDate: zod.date().optional(),
   level: zod.enum(["Junior", "Medior", "Senior", "Lead"], {
     errorMap: () => ({
       message: "Level must be 'Junior', 'Medior', 'Senior', or 'Lead'.",
@@ -57,6 +64,36 @@ export const ExperienceSchema = zod.object({
       message: "Position must be either 'Remote', 'On-Site', or 'Hybrid'.",
     }),
   }),
+});
+
+export const EditExperienceSchema = zod.object({
+  jobTitle: zod.string().min(3).max(100).optional(),
+  companyName: zod.string().min(3).max(300).optional(),
+  startDate: zod.date().optional(),
+  endDate: zod.date().optional(),
+  level: zod
+    .enum(["Junior", "Medior", "Senior", "Lead"], {
+      errorMap: () => ({
+        message: "Level must be 'Junior', 'Medior', 'Senior', or 'Lead'.",
+      }),
+    })
+    .optional(),
+  type: zod
+    .enum(["Internship", "Full-Time", "Part-Time", "Freelance"], {
+      errorMap: () => ({
+        message:
+          "Job type must be 'Internship', 'Full-Time', 'Part-Time', or 'Freelance'.",
+      }),
+    })
+    .optional(),
+  location: zod.string().min(3).max(100).optional(),
+  position: zod
+    .enum(["Remote", "On-Site", "Hybrid"], {
+      errorMap: () => ({
+        message: "Position must be either 'Remote', 'On-Site', or 'Hybrid'.",
+      }),
+    })
+    .optional(),
 });
 
 export const SkillsSchema = zod.object({

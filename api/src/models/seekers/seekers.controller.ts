@@ -23,7 +23,9 @@ import { VerificationService } from '../../authentication/verification/verificat
 import { UpdateSeekerDto } from './dto/update-seeker.dto';
 import { GetSeekersDto } from './dto/get-seekers.dto';
 import { CreateEducationDto } from './dto/create-education.dto';
+import { UpdateEducationDto } from './dto/update-education.dto';
 import { CreateExperienceDto } from './dto/create-experience.dto';
+import { UpdateExperienceDto } from './dto/update-experience.dto';
 import { CreateJobAlertDto } from './dto/create-job-alert.dto';
 
 import { JwtAuthGuard } from 'src/authentication/guards/jwt-auth.guard';
@@ -98,6 +100,17 @@ export class SeekersController {
     return await this.seekersService.createEducation(userId, body);
   }
 
+  @Patch('/edit-education/:educationId')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Seeker)
+  async editEducation(
+    @User('userId') userId: string,
+    @Param('educationId') educationId: string,
+    @Body() body: UpdateEducationDto,
+  ) {
+    return await this.seekersService.editEducation(userId, educationId, body);
+  }
+
   @Delete('/delete-education/:educationId')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)
@@ -116,6 +129,17 @@ export class SeekersController {
     @Body() body: CreateExperienceDto,
   ) {
     return await this.seekersService.createExperience(userId, body);
+  }
+
+  @Patch('/edit-experience/:experienceId')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Seeker)
+  async editExperience(
+    @User('userId') userId: string,
+    @Param('experienceId') experienceId: string,
+    @Body() body: UpdateExperienceDto,
+  ) {
+    return await this.seekersService.editExperience(userId, experienceId, body);
   }
 
   @Delete('/delete-experience/:experienceId')

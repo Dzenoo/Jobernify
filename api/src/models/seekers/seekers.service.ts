@@ -28,7 +28,9 @@ import { S3Service } from 'src/common/s3/s3.service';
 
 import { uuidv7 } from 'uuidv7';
 import { CreateEducationDto } from './dto/create-education.dto';
+import { UpdateEducationDto } from './dto/update-education.dto';
 import { CreateExperienceDto } from './dto/create-experience.dto';
+import { UpdateExperienceDto } from './dto/update-experience.dto';
 import { CreateJobAlertDto } from './dto/create-job-alert.dto';
 
 @Injectable()
@@ -336,6 +338,37 @@ export class SeekersService {
     };
   }
 
+  async editEducation(
+    id: string,
+    educationId: string,
+    educationData: UpdateEducationDto,
+  ): Promise<ResponseObject> {
+    const seeker = await this.seekerModel.findById(id);
+
+    if (!seeker) {
+      throw new NotFoundException(
+        'Seeker not found or could not add education',
+      );
+    }
+
+    const educationToUpdate = seeker.education.find(
+      (education: any) => education._id.toString() === educationId.toString(),
+    );
+
+    if (!educationToUpdate) {
+      throw new NotFoundException('Education entry not found');
+    }
+
+    Object.assign(educationToUpdate, educationData);
+
+    await seeker.save();
+
+    return {
+      statusCode: HttpStatus.ACCEPTED,
+      message: 'Education updated!',
+    };
+  }
+
   async deleteEducation(
     id: string,
     educationId: string,
@@ -390,6 +423,38 @@ export class SeekersService {
       statusCode: HttpStatus.CREATED,
       message:
         'Your experience entry has been successfully added to your profile.',
+    };
+  }
+
+  async editExperience(
+    id: string,
+    experienceId: string,
+    experienceData: UpdateExperienceDto,
+  ): Promise<ResponseObject> {
+    const seeker = await this.seekerModel.findById(id);
+
+    if (!seeker) {
+      throw new NotFoundException(
+        'Seeker not found or could not add experience',
+      );
+    }
+
+    const experienceToUpdate = seeker.experience.find(
+      (experience: any) =>
+        experience._id.toString() === experienceId.toString(),
+    );
+
+    if (!experienceToUpdate) {
+      throw new NotFoundException('Experience entry not found');
+    }
+
+    Object.assign(experienceToUpdate, experienceData);
+
+    await seeker.save();
+
+    return {
+      statusCode: HttpStatus.ACCEPTED,
+      message: 'Experience updated!',
     };
   }
 

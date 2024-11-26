@@ -1,5 +1,5 @@
 import React from "react";
-import { Calendar, GraduationCap, Trash } from "lucide-react";
+import { Calendar, Edit, GraduationCap, Trash } from "lucide-react";
 import { useMutation } from "react-query";
 
 import { useToast } from "@/components/ui/use-toast";
@@ -12,6 +12,7 @@ import { formatDate } from "@/lib/utils";
 import { renderIconText } from "@/helpers";
 
 export type EducationItemProps = {
+  onEdit: () => void;
   institution: string;
   graduationDate: string;
   fieldOfStudy: string;
@@ -20,6 +21,7 @@ export type EducationItemProps = {
 };
 
 const EducationItem: React.FC<EducationItemProps> = ({
+  onEdit,
   _id,
   degree,
   fieldOfStudy,
@@ -75,7 +77,14 @@ const EducationItem: React.FC<EducationItemProps> = ({
             })}
           </div>
         </div>
-        <div className="flex items-end flex-col gap-2">
+        <div className="flex items-center gap-5">
+          {userType === "seeker" && (
+            <div>
+              <button onClick={onEdit}>
+                <Edit />
+              </button>
+            </div>
+          )}
           {userType === "seeker" && (
             <div>
               <button onClick={handleDeleteEducation}>

@@ -95,6 +95,26 @@ export type JobAlertsTypes = {
   level: string;
 };
 
+export type EducationTypes = {
+  _id: string;
+  institution: string;
+  graduationDate: string;
+  fieldOfStudy: string;
+  degree: string;
+};
+
+export type ExperienceTypes = {
+  _id: string;
+  jobTitle: string;
+  companyName: string;
+  startDate: string;
+  endDate: string;
+  level: string;
+  type: string;
+  location: string;
+  position: string;
+};
+
 export type SeekerTypes = {
   _id: string;
   biography: string;
@@ -112,24 +132,8 @@ export type SeekerTypes = {
   applications: ApplicationsTypes[];
   headline: string;
   skills: string[];
-  education: {
-    _id: string;
-    institution: string;
-    graduationDate: string;
-    fieldOfStudy: string;
-    degree: string;
-  }[];
-  experience: {
-    _id: string;
-    jobTitle: string;
-    companyName: string;
-    startDate: string;
-    endDate: string;
-    level: string;
-    type: string;
-    location: string;
-    position: string;
-  }[];
+  education: EducationTypes[];
+  experience: ExperienceTypes[];
   savedJobs: JobTypes[];
   following: string[];
   alerts: JobAlertsTypes;
