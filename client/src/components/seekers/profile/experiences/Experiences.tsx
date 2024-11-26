@@ -7,7 +7,7 @@ import { Plus } from "lucide-react";
 
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import ExperienceList from "./ExperienceList";
-import ExperienceHandle from "./ExperienceHandle";
+import ExperienceForm from "./ExperienceForm";
 
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
@@ -41,7 +41,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ seeker }) => {
       {isLarge && (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           {isOpen && (
-            <ExperienceHandle
+            <ExperienceForm
               isEdit={isEdit}
               experienceId={experienceId}
               experience={experience as ExperienceTypes}
@@ -55,7 +55,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ seeker }) => {
       {!isLarge && (
         <Drawer open={isOpen} onOpenChange={setIsOpen}>
           {isOpen && (
-            <ExperienceHandle
+            <ExperienceForm
               isEdit={isEdit}
               experienceId={experienceId}
               experience={experience as ExperienceTypes}

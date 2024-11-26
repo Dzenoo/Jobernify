@@ -47,7 +47,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 
-type EducationHandleProps = {
+type EducationFormProps = {
   isEdit: boolean;
   educationId: string | null;
   education: EducationTypes;
@@ -56,7 +56,7 @@ type EducationHandleProps = {
   isDialog: boolean;
 };
 
-const EducationHandle: React.FC<EducationHandleProps> = ({
+const EducationForm: React.FC<EducationFormProps> = ({
   isEdit,
   educationId,
   education,
@@ -247,4 +247,4 @@ const EducationHandle: React.FC<EducationHandleProps> = ({
   );
 };
 
-export default EducationHandle;
+export default EducationForm;

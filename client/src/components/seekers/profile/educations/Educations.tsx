@@ -7,7 +7,7 @@ import { Plus } from "lucide-react";
 
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import EducationList from "./EducationList";
-import EducationHandle from "./EducationHandle";
+import EducationForm from "./EducationForm";
 
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
@@ -41,7 +41,7 @@ const Educations: React.FC<EducationsProps> = ({ seeker }) => {
       {isLarge && (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           {isOpen && (
-            <EducationHandle
+            <EducationForm
               isEdit={isEdit}
               educationId={educationId}
               education={education as EducationTypes}
@@ -55,7 +55,7 @@ const Educations: React.FC<EducationsProps> = ({ seeker }) => {
       {!isLarge && (
         <Drawer open={isOpen} onOpenChange={setIsOpen}>
           {isOpen && (
-            <EducationHandle
+            <EducationForm
               isEdit={isEdit}
               educationId={educationId}
               education={education as EducationTypes}

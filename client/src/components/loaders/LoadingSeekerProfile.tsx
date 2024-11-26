@@ -1,4 +1,4 @@
-const LoadingSeekersInformationsSkeleton: React.FC = () => {
+const LoadingSeekerProfileSkeleton: React.FC = () => {
   return (
     <div className="flex flex-col gap-10 animate-pulse bg-gray-100 p-6 rounded-xl w-full">
       <div className="flex justify-between gap-3">
@@ -48,4 +48,4 @@ const LoadingSeekersInformationsSkeleton: React.FC = () => {
   );
 };
 
-export default LoadingSeekersInformationsSkeleton;
+export default LoadingSeekerProfileSkeleton;

@@ -8,9 +8,9 @@ import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
 import LoadingApplicationsSkeleton from "@/components/loaders/LoadingApplications";
 import LoadingJobsSkeleton from "@/components/loaders/LoadingJobsSkeleton";
-import LoadingSeekersInformationsSkeleton from "@/components/loaders/LoadingSeekersInformations";
+import LoadingSeekerProfileSkeleton from "@/components/loaders/LoadingSeekerProfile";
 
-import SeekerProfileAlerts from "@/components/seekers/profile/alerts/NewAlertsForm";
+import SeekerAlerts from "@/components/seekers/profile/alerts/SeekerAlerts";
 import SeekerProfileNavigation from "@/components/seekers/profile/navigation/SeekerProfileNavigation";
 import NotFound from "@/components/shared/pages/NotFound";
 
@@ -25,10 +25,10 @@ const Applications = dynamic(
   }
 );
 
-const SeekerProfileInformation = dynamic(
-  () => import("@/components/seekers/profile/SeekerProfileInformation"),
+const SeekerProfile = dynamic(
+  () => import("@/components/seekers/profile/SeekerProfile"),
   {
-    loading: () => <LoadingSeekersInformationsSkeleton />,
+    loading: () => <LoadingSeekerProfileSkeleton />,
   }
 );
 
@@ -56,10 +56,7 @@ const SeekerProfilePage = ({
       </div>
       {!searchParams.section && (
         <div>
-          <SeekerProfileInformation
-            seeker={fetchedSeekerProfile?.seeker}
-            token={token!}
-          />
+          <SeekerProfile seeker={fetchedSeekerProfile?.seeker} token={token!} />
         </div>
       )}
       {searchParams.section === "saved" && (
@@ -72,7 +69,7 @@ const SeekerProfilePage = ({
       )}
       {searchParams.section === "alerts" && (
         <div>
-          <SeekerProfileAlerts
+          <SeekerAlerts
             token={token as string}
             alertsData={{
               alerts: fetchedSeekerProfile?.seeker.alerts,

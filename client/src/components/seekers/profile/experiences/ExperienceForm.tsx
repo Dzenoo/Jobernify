@@ -59,7 +59,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-type ExperienceHandleProps = {
+type ExperienceFormProps = {
   isEdit: boolean;
   experienceId: string | null;
   experience: ExperienceTypes;
@@ -68,7 +68,7 @@ type ExperienceHandleProps = {
   isDialog: boolean;
 };
 
-const ExperienceHandle: React.FC<ExperienceHandleProps> = ({
+const ExperienceForm: React.FC<ExperienceFormProps> = ({
   isEdit,
   experienceId,
   experience,
@@ -434,4 +434,4 @@ const ExperienceHandle: React.FC<ExperienceHandleProps> = ({
   );
 };
 
-export default ExperienceHandle;
+export default ExperienceForm;
