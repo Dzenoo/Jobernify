@@ -115,7 +115,10 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
               <h1 className="font-bold">Experience</h1>
             </div>
             <div>
-              <ExperienceList experiences={seeker?.experience} />
+              <ExperienceList
+                openForm={() => {}}
+                experiences={seeker?.experience}
+              />
             </div>
           </div>
           <div className="flex flex-col gap-3">
@@ -123,7 +126,10 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
               <h1 className="font-bold">Education</h1>
             </div>
             <div>
-              <EducationList educations={seeker?.education} />
+              <EducationList
+                openForm={() => {}}
+                educations={seeker?.education}
+              />
             </div>
           </div>
           <div className="flex flex-col gap-3">
