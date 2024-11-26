@@ -64,6 +64,7 @@ export const AddExperienceSchema = zod.object({
       message: "Position must be either 'Remote', 'On-Site', or 'Hybrid'.",
     }),
   }),
+  isCurrentlyWorking: zod.boolean().optional(),
 });
 
 export const EditExperienceSchema = zod.object({
@@ -94,6 +95,7 @@ export const EditExperienceSchema = zod.object({
       }),
     })
     .optional(),
+  isCurrentlyWorking: zod.boolean().optional(),
 });
 
 export const SkillsSchema = zod.object({

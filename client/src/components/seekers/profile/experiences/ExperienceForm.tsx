@@ -78,7 +78,6 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
 }) => {
   const { toast } = useToast();
   const { token } = useAuthentication().getCookieHandler();
-  const [isCurrentlyWorking, setIsCurrentlyWorking] = useState(false);
 
   const SchemaToInfer = isEdit ? EditExperienceSchema : AddExperienceSchema;
 
@@ -90,7 +89,6 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
   useEffect(() => {
     if (!isOpen) {
       form.reset();
-      setIsCurrentlyWorking(false);
     } else if (!isEdit) {
       form.reset({
         jobTitle: "",
@@ -101,21 +99,20 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
         type: "Freelance",
         position: "Hybrid",
         location: "",
+        isCurrentlyWorking: false,
       });
     } else if (isEdit) {
       form.reset({
         jobTitle: experience?.jobTitle,
         companyName: experience?.companyName,
         startDate: new Date(experience?.startDate),
-        endDate: experience?.endDate
-          ? new Date(experience?.endDate)
-          : (null as any),
+        endDate: new Date(experience?.endDate),
         level: experience?.level as any,
         type: experience?.type as any,
         position: experience?.position as any,
         location: experience?.location,
+        isCurrentlyWorking: experience.isCurrentlyWorking,
       });
-      setIsCurrentlyWorking(experience.isCurrentlyWorking);
     }
   }, [isOpen, isEdit, experience]);
 
@@ -140,7 +137,8 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
   const onSubmit = async (values: zod.infer<typeof SchemaToInfer>) => {
     const experienceData = {
       ...values,
-      endDate: isCurrentlyWorking ? null : values.endDate,
+      endDate: values.isCurrentlyWorking ? null : values.endDate,
+      isCurrentlyWorking: String(values.isCurrentlyWorking),
     };
 
     await handleExperienceMutate(experienceData);
@@ -241,7 +239,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
                         "pl-3 text-left font-normal",
                         !field.value && "text-muted-foreground"
                       )}
-                      disabled={isCurrentlyWorking}
+                      disabled={form.getValues("isCurrentlyWorking")}
                     >
                       {field.value ? (
                         format(field.value, "PPP")
@@ -272,15 +270,21 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
             </FormItem>
           )}
         />
-        <div className="flex items-center">
-          <Checkbox
-            checked={isCurrentlyWorking}
-            onCheckedChange={() => setIsCurrentlyWorking(!isCurrentlyWorking)}
-          />
-          <div className="ml-2">
-            <p className="text-sm">Currently Working Here</p>
-          </div>
-        </div>
+        <FormField
+          control={form.control}
+          name="isCurrentlyWorking"
+          render={({ field }) => (
+            <FormItem className="flex items-center gap-5">
+              <FormLabel>Currently Working Here</FormLabel>
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="level"
