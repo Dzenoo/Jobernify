@@ -52,11 +52,13 @@ import EducationList from "./EducationList";
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 
 type AddEducationsProps = {
+  isEducationsOpen: boolean;
   closeEducations: () => void;
   isDialog: boolean;
 };
 
 const AddEducations: React.FC<AddEducationsProps> = ({
+  isEducationsOpen,
   closeEducations,
   isDialog,
 }) => {
@@ -74,8 +76,10 @@ const AddEducations: React.FC<AddEducationsProps> = ({
   });
 
   React.useEffect(() => {
-    return () => form.reset();
-  }, [closeEducations, form]);
+    if (!isEducationsOpen) {
+      form.reset();
+    }
+  }, [isEducationsOpen]);
 
   const { mutateAsync: addNewEducationMutate } = useMutation({
     mutationFn: (formData: any) => addNewEducation(formData, token!),
@@ -248,12 +252,20 @@ const Educations: React.FC<EducationsProps> = ({ seeker }) => {
     <Fragment>
       {isLarge && (
         <Dialog open={isEducationsOpen} onOpenChange={setIsEducationsOpen}>
-          <AddEducations closeEducations={closeEducations} isDialog={true} />
+          <AddEducations
+            isEducationsOpen={isEducationsOpen}
+            closeEducations={closeEducations}
+            isDialog={true}
+          />
         </Dialog>
       )}
       {!isLarge && (
         <Drawer open={isEducationsOpen} onOpenChange={setIsEducationsOpen}>
-          <AddEducations closeEducations={closeEducations} isDialog={false} />
+          <AddEducations
+            isEducationsOpen={isEducationsOpen}
+            closeEducations={closeEducations}
+            isDialog={false}
+          />
         </Drawer>
       )}
       <div className="flex flex-col gap-10">

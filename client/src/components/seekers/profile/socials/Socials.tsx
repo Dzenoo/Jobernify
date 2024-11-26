@@ -37,6 +37,7 @@ import { formatURL } from "@/lib/utils";
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 
 type EditSocialsProps = {
+  isEditSocialsOpen: boolean;
   closeEditSocials: () => void;
   seeker?: {
     portfolio: string;
@@ -47,6 +48,7 @@ type EditSocialsProps = {
 };
 
 const EditSocials: React.FC<EditSocialsProps> = ({
+  isEditSocialsOpen,
   closeEditSocials,
   seeker,
   isDialog,
@@ -64,8 +66,10 @@ const EditSocials: React.FC<EditSocialsProps> = ({
   const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
 
   React.useEffect(() => {
-    return () => form.reset();
-  }, [closeEditSocials, form]);
+    if (isEditSocialsOpen) {
+      form.reset();
+    }
+  }, [isEditSocialsOpen]);
 
   const onSubmit = async (values: zod.infer<typeof SeekerSocialsSchema>) => {
     const formData = new FormData();
@@ -214,6 +218,7 @@ const Socials: React.FC<SocialsProps> = ({ seeker }) => {
       {isLarge && (
         <Dialog open={isEditSocialsOpen} onOpenChange={setIsEditSocialsOpen}>
           <EditSocials
+            isEditSocialsOpen={isEditSocialsOpen}
             seeker={seeker}
             closeEditSocials={closeEditSocials}
             isDialog={true}
@@ -223,6 +228,7 @@ const Socials: React.FC<SocialsProps> = ({ seeker }) => {
       {!isLarge && (
         <Drawer open={isEditSocialsOpen} onOpenChange={setIsEditSocialsOpen}>
           <EditSocials
+            isEditSocialsOpen={isEditSocialsOpen}
             seeker={seeker}
             closeEditSocials={closeEditSocials}
             isDialog={false}

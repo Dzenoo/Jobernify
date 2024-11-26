@@ -60,11 +60,13 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 
 type AddExperienceProps = {
+  isExperienceOpen: boolean;
   closeExperience: () => void;
   isDialog: boolean;
 };
 
 const AddExperience: React.FC<AddExperienceProps> = ({
+  isExperienceOpen,
   closeExperience,
   isDialog,
 }) => {
@@ -86,8 +88,10 @@ const AddExperience: React.FC<AddExperienceProps> = ({
   });
 
   React.useEffect(() => {
-    return () => form.reset();
-  }, [closeExperience, form]);
+    if (!isExperienceOpen) {
+      form.reset();
+    }
+  }, [isExperienceOpen]);
 
   const { mutateAsync: addNewExperienceMutate } = useMutation({
     mutationFn: (formData: any) => addNewExperience(formData, token!),
@@ -399,12 +403,20 @@ const Experiences: React.FC<ExperiencesProps> = ({ seeker }) => {
     <Fragment>
       {isLarge && (
         <Dialog open={isExperienceOpen} onOpenChange={setIsExperienceOpen}>
-          <AddExperience closeExperience={closeExperience} isDialog={true} />
+          <AddExperience
+            isExperienceOpen={isExperienceOpen}
+            closeExperience={closeExperience}
+            isDialog={true}
+          />
         </Dialog>
       )}
       {!isLarge && (
         <Drawer open={isExperienceOpen} onOpenChange={setIsExperienceOpen}>
-          <AddExperience closeExperience={closeExperience} isDialog={false} />
+          <AddExperience
+            isExperienceOpen={isExperienceOpen}
+            closeExperience={closeExperience}
+            isDialog={false}
+          />
         </Drawer>
       )}
       <div className="flex flex-col gap-10">
