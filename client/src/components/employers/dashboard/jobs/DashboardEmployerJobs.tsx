@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { useMutation } from "react-query";
 import { useToast } from "@/components/ui/use-toast";
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 import { Edit, Eye, Trash } from "lucide-react";
 
 import { deleteJob } from "@/lib/actions/jobs.actions";
@@ -79,7 +79,7 @@ const DeleteJob: React.FC<{
         <form onSubmit={onDeleteJob}>
           <DialogFooter>
             <Button variant="destructive" type="submit" className="w-full">
-              {isLoading ? <ClipLoader /> : "Delete"}
+              {isLoading ? <ScaleLoader /> : "Delete"}
             </Button>
           </DialogFooter>
         </form>
@@ -100,7 +100,7 @@ const DeleteJob: React.FC<{
       <form onSubmit={onDeleteJob}>
         <DrawerFooter>
           <Button variant="destructive" type="submit" className="w-full">
-            {isLoading ? <ClipLoader /> : "Delete"}
+            {isLoading ? <ScaleLoader /> : "Delete"}
           </Button>
         </DrawerFooter>
       </form>

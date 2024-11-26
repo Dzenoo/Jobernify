@@ -5,7 +5,7 @@ import zod from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "react-query";
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 import { useToast } from "@/components/ui/use-toast";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
@@ -220,7 +220,11 @@ const ReviewCompanyForm: React.FC<ReviewCompanyFormProps> = ({
                 }
                 className="px-10"
               >
-                {form.formState.isSubmitting ? <ClipLoader /> : "Submit Review"}
+                {form.formState.isSubmitting ? (
+                  <ScaleLoader />
+                ) : (
+                  "Submit Review"
+                )}
               </Button>
             </div>
           </form>

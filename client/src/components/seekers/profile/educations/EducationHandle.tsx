@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import zod from "zod";
 import { CalendarIcon } from "lucide-react";
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -206,7 +206,7 @@ const EducationHandle: React.FC<EducationHandleProps> = ({
           disabled={form.formState.isSubmitting || !form.formState.isValid}
           className="w-full"
         >
-          {form.formState.isSubmitting ? <ClipLoader color="#fff" /> : "Add"}
+          {form.formState.isSubmitting ? <ScaleLoader color="#fff" /> : "Add"}
         </Button>
       </form>
     </Form>

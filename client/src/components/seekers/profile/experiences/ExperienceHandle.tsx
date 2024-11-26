@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import zod from "zod";
 import { CalendarIcon } from "lucide-react";
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -391,7 +391,7 @@ const ExperienceHandle: React.FC<ExperienceHandleProps> = ({
           disabled={form.formState.isSubmitting || !form.formState.isValid}
           className="w-full"
         >
-          {form.formState.isSubmitting ? <ClipLoader color="#fff" /> : "Add"}
+          {form.formState.isSubmitting ? <ScaleLoader color="#fff" /> : "Add"}
         </Button>
       </form>
     </Form>

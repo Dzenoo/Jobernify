@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import zod from "zod";
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import { signIn } from "@/lib/actions/auth.actions";
@@ -50,11 +50,7 @@ const LoginForm: React.FC = () => {
     onSuccess: (data) => {
       form.reset();
       storeCookieHandler(data.access_token);
-      if (data?.role === "seeker") {
-        router.replace("/jobs");
-      } else {
-        router.replace("/seekers");
-      }
+      router.replace(data?.role === "seeker" ? "/jobs" : "/seekers");
     },
     onError: (error: any) => {
       toast({
@@ -127,7 +123,7 @@ const LoginForm: React.FC = () => {
               className="w-full"
             >
               {form.formState.isSubmitting ? (
-                <ClipLoader size={25} color="#fff" />
+                <ScaleLoader color="#fff" />
               ) : (
                 "Login"
               )}

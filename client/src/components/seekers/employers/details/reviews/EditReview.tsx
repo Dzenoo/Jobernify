@@ -8,7 +8,7 @@ import { EditReviewSchema } from "@/lib/zod/reviews.validation";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 import { useMutation } from "react-query";
 import { editReview } from "@/lib/actions/reviews.actions";
 import { queryClient } from "@/context/react-query-client";
@@ -126,7 +126,11 @@ const EditReview: React.FC<EditReviewProps> = ({ review, closeDialog }) => {
             disabled={form.formState.isSubmitting || !form.formState.isValid}
             className="w-full"
           >
-            {form.formState.isSubmitting ? <ClipLoader color="#fff" /> : "Save"}
+            {form.formState.isSubmitting ? (
+              <ScaleLoader color="#fff" />
+            ) : (
+              "Save"
+            )}
           </Button>
         </DialogFooter>
       </form>

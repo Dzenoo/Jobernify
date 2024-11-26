@@ -23,7 +23,7 @@ import Skills from "./skills/Skills";
 import Socials from "./socials/Socials";
 import Experiences from "./experiences/Experiences";
 
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
@@ -204,7 +204,7 @@ const SeekerProfileInformation: React.FC<SeekerProfileInformationProps> = ({
                     className="rounded-full w-36 h-36 object-cover"
                   />
                 ) : (
-                  <ClipLoader
+                  <ScaleLoader
                     color={theme === "dark" ? "#ffffff" : ""}
                     size={100}
                   />

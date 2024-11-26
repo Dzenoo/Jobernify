@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 
 import zod from "zod";
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "lucide-react";
@@ -96,7 +96,7 @@ const AddSkillsForm: React.FC<AddSkillsProps> = ({
             className="w-full"
           >
             {form.formState.isSubmitting ? (
-              <ClipLoader color="#fff" />
+              <ScaleLoader color="#fff" />
             ) : (
               "Update"
             )}

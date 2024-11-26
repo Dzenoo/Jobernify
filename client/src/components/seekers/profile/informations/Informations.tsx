@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import zod from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 import { Edit, X } from "lucide-react";
 
 import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
@@ -218,7 +218,7 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
                   className="px-10"
                 >
                   {form.formState.isSubmitting ? (
-                    <ClipLoader color="#fff" />
+                    <ScaleLoader color="#fff" />
                   ) : (
                     "Save"
                   )}

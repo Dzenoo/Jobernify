@@ -8,7 +8,7 @@ import TurndownService from "turndown";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 import { useToast } from "@/components/ui/use-toast";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
@@ -178,7 +178,7 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
                 {stepDetails.length - 1 === currentJobForm && (
                   <div className="flex gap-3 justify-end">
                     <Button type="submit" variant="default">
-                      {isLoading ? <ClipLoader /> : "Submit"}
+                      {isLoading ? <ScaleLoader /> : "Submit"}
                     </Button>
                   </div>
                 )}

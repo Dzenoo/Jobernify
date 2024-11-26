@@ -4,7 +4,7 @@ import zod from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "react-query";
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 import { queryClient } from "@/context/react-query-client";
 
 import useUploads from "@/hooks/defaults/useUploads.hook";
@@ -176,7 +176,7 @@ const ApplyToJob: React.FC<ApplyToJobProps> = ({
             className="w-full"
           >
             {form.formState.isSubmitting ? (
-              <ClipLoader color="#fff" />
+              <ScaleLoader color="#fff" />
             ) : (
               "Apply"
             )}

@@ -8,7 +8,7 @@ import zod from "zod";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 
 import { EmployerRegistrationSchema } from "@/lib/zod/auth.validation";
 import { signupEmployer } from "@/lib/actions/auth.actions";
@@ -251,7 +251,7 @@ const EmployersSignupForm: React.FC<EmployersSignupFormTypes> = ({
               className="w-full"
             >
               {form.formState.isSubmitting ? (
-                <ClipLoader size={25} color="#fff" />
+                <ScaleLoader color="#fff" />
               ) : (
                 "Register"
               )}

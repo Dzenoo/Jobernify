@@ -3,7 +3,7 @@ import React, { Fragment, useEffect } from "react";
 import zod from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 
 import {
   JobAlertSchema,
@@ -176,7 +176,7 @@ const NewAlertsForm: React.FC<NewAlertsFormProps> = ({
             disabled={form.formState.isSubmitting || !form.formState.isValid}
             className="w-full"
           >
-            {form.formState.isSubmitting ? <ClipLoader color="#fff" /> : "Add"}
+            {form.formState.isSubmitting ? <ScaleLoader color="#fff" /> : "Add"}
           </Button>
         </DialogFooter>
       </form>

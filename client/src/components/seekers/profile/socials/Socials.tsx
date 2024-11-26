@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import zod from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 import { Edit, Github, Image, Linkedin } from "lucide-react";
 
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
@@ -150,7 +150,7 @@ const EditSocials: React.FC<EditSocialsProps> = ({
               className="w-full"
             >
               {form.formState.isSubmitting ? (
-                <ClipLoader color="#fff" />
+                <ScaleLoader color="#fff" />
               ) : (
                 "Save"
               )}

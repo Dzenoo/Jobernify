@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 
 import { getImageUrl } from "@/lib/utils";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
@@ -93,7 +93,7 @@ const Navbar: React.FC<{ href?: string }> = ({ href }) => {
                         )}
                       />
                       <AvatarFallback>
-                        <ClipLoader />
+                        <ScaleLoader />
                       </AvatarFallback>
                     </Avatar>
                   </Link>

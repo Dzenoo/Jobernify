@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ClipLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 
 import useJobAlert from "@/hooks/mutations/useJobAlert.mutation";
 import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
@@ -53,7 +53,7 @@ const AddJobAlert: React.FC<JobAlertProps> = ({ level, type, title }) => {
           disabled={isLoading || isAlreadyAlertGeneratedWithProperties}
         >
           {isLoading ? (
-            <ClipLoader color="#fff" />
+            <ScaleLoader color="#fff" />
           ) : isAlreadyAlertGeneratedWithProperties ? (
             "Already Generated"
           ) : (
