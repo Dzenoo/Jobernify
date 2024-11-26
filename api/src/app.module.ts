@@ -23,7 +23,7 @@ import { CleanupService } from './common/cleanup/cleanup.service';
     ThrottlerModule.forRoot([
       {
         ttl: 60000,
-        limit: 10,
+        limit: 20,
       },
     ]),
     ConfigModule.forRoot({
