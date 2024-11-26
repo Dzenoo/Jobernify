@@ -68,3 +68,7 @@ export const JobAlertSchema = zod.object({
   type: zod.string().min(3).max(30),
   level: zod.string().min(3).max(30),
 });
+
+export const ReceiveJobAlertsSchema = zod.object({
+  receiveJobAlerts: zod.boolean(),
+});

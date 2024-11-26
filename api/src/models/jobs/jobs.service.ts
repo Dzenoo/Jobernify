@@ -100,14 +100,19 @@ export class JobsService {
       'alerts.title': { $regex: new RegExp(String(newJob.title), 'i') },
     });
 
-    const alertEmails = matchedSeekers.map((seeker) => seeker.email);
+    const seekersToSendAlerts = matchedSeekers.map((seeker) => ({
+      email: seeker.email,
+      receiveJobAlerts: seeker.receiveJobAlerts,
+    }));
 
-    for (const seekerEmail of alertEmails) {
-      await this.emailService.sendMail(
-        seekerEmail,
-        'Jobernify - New Job Alert Match',
-        this.generateJobEmailContent(newJob, 'alert'),
-      );
+    for (const seeker of seekersToSendAlerts) {
+      if (seeker.receiveJobAlerts === true) {
+        await this.emailService.sendMail(
+          seeker.email,
+          'Jobernify - New Job Alert Match',
+          this.generateJobEmailContent(newJob, 'alert'),
+        );
+      }
     }
 
     const followers = await this.seekersService.find({ following: employerId });

@@ -112,6 +112,9 @@ export class Seeker extends BaseUser {
   @Prop({ type: String, default: 'seeker', enum: Role })
   role: Role;
 
+  @Prop({ type: Boolean, default: false })
+  receiveJobAlerts: boolean;
+
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
     default: [],

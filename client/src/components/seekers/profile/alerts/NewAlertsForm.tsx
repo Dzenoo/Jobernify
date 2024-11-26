@@ -5,6 +5,17 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ClipLoader } from "react-spinners";
 
+import {
+  JobAlertSchema,
+  ReceiveJobAlertsSchema,
+} from "@/lib/zod/seekers.validation";
+import { JobAlertsTypes } from "@/types";
+import { JobsFiltersData } from "@/constants";
+
+import useJobAlert from "@/hooks/mutations/useJobAlert.mutation";
+import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
+import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -39,13 +50,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-import { JobAlertSchema } from "@/lib/zod/seekers.validation";
-import { JobAlertsTypes } from "@/types";
-
-import useJobAlert from "@/hooks/mutations/useJobAlert.mutation";
-import { JobsFiltersData } from "@/constants";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
+import { Switch } from "@/components/ui/switch";
 
 type NewAlertsFormProps = {
   closeAlerts: () => void;
@@ -207,18 +212,75 @@ const NewAlertsForm: React.FC<NewAlertsFormProps> = ({
   );
 };
 
+const ReceiveJobAlertsForm: React.FC<{
+  token: string;
+  receiveJobAlerts: boolean;
+}> = ({ receiveJobAlerts }) => {
+  const form = useForm<zod.infer<typeof ReceiveJobAlertsSchema>>({
+    resolver: zodResolver(ReceiveJobAlertsSchema),
+    defaultValues: {
+      receiveJobAlerts: receiveJobAlerts,
+    },
+  });
+
+  const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
+
+  useEffect(() => {
+    form.setValue("receiveJobAlerts", receiveJobAlerts);
+  }, [receiveJobAlerts, form]);
+
+  async function onSubmit(data: zod.infer<typeof ReceiveJobAlertsSchema>) {
+    const formData = new FormData();
+    formData.append("receiveJobAlerts", data.receiveJobAlerts.toString());
+
+    await editSeekerProfileMutate(formData);
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
+        <FormField
+          control={form.control}
+          name="receiveJobAlerts"
+          render={({ field }) => (
+            <FormItem className="flex flex-row gap-10 items-center justify-between rounded-lg border p-4 overflow-auto whitespace-nowrap">
+              <div className="space-y-0.5">
+                <FormLabel className="text-base">Receive Job Alerts</FormLabel>
+                <FormDescription>
+                  Receive alerts about new jobs that you like.
+                </FormDescription>
+              </div>
+              <FormControl>
+                <Switch
+                  type="submit"
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+      </form>
+    </Form>
+  );
+};
+
 type SeekerProfileAlertsProps = {
-  alerts?: JobAlertsTypes;
+  alertsData: { alerts?: JobAlertsTypes; receiveJobAlerts: boolean };
+  token: string;
 };
 
 const SeekerProfileAlerts: React.FC<SeekerProfileAlertsProps> = ({
-  alerts,
+  alertsData,
+  token,
 }) => {
   const isLarge = useMediaQuery("(min-width: 1280px)");
   const [isOpen, setIsOpen] = React.useState(false);
 
   const closeAlerts = () => setIsOpen(false);
   const openAlerts = () => setIsOpen(true);
+
+  const { alerts, receiveJobAlerts } = alertsData;
 
   function areObjectKeysEmpty(obj: any) {
     if (obj == null || typeof obj !== "object") {
@@ -248,19 +310,29 @@ const SeekerProfileAlerts: React.FC<SeekerProfileAlertsProps> = ({
         </Drawer>
       )}
       <Card>
-        <CardHeader>
+        <CardHeader className="flex flex-col gap-5">
           <div className="flex justify-between gap-3">
             <div>
               <h1 className="text-base-black">Job Alerts</h1>
             </div>
-            <div>
-              <Button onClick={openAlerts} variant="default">
-                Edit Job Alerts
-              </Button>
-            </div>
+            {!areObjectKeysEmpty(alerts) && (
+              <div>
+                <Button onClick={openAlerts} variant="default">
+                  Edit Job Alerts
+                </Button>
+              </div>
+            )}
           </div>
+          {!areObjectKeysEmpty(alerts) && (
+            <div>
+              <ReceiveJobAlertsForm
+                token={token}
+                receiveJobAlerts={receiveJobAlerts}
+              />
+            </div>
+          )}
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-0">
           {areObjectKeysEmpty(alerts) ? (
             <div className="text-center flex flex-col gap-[10px]">
               <div>

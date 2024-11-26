@@ -107,6 +107,8 @@ export type SeekerTypes = {
   linkedin: string;
   github: string;
   resume?: string;
+  role: string;
+  receiveJobAlerts: boolean;
   applications: ApplicationsTypes[];
   headline: string;
   skills: string[];

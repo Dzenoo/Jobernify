@@ -72,7 +72,14 @@ const SeekerProfilePage = ({
       )}
       {searchParams.section === "alerts" && (
         <div>
-          <SeekerProfileAlerts alerts={fetchedSeekerProfile?.seeker.alerts} />
+          <SeekerProfileAlerts
+            token={token as string}
+            alertsData={{
+              alerts: fetchedSeekerProfile?.seeker.alerts,
+              receiveJobAlerts: fetchedSeekerProfile?.seeker
+                .receiveJobAlerts as boolean,
+            }}
+          />
         </div>
       )}
       {searchParams.section === "applications" && (

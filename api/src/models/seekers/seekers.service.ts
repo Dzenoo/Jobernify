@@ -118,7 +118,7 @@ export class SeekersService {
         select: '_id status createdAt updatedAt',
       })
       .select(
-        '_id first_name last_name biography image education experience skills alerts github linkedin portfolio following headline resume',
+        '_id first_name last_name biography image education experience skills alerts github linkedin portfolio following headline resume receiveJobAlerts',
       )
       .exec();
 
@@ -175,7 +175,7 @@ export class SeekersService {
 
     return {
       statusCode: HttpStatus.ACCEPTED,
-      message: 'Successfully edited profile',
+      message: 'Profile updated successfully',
     };
   }
 

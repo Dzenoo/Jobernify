@@ -70,7 +70,7 @@ const FiltersContent: React.FC = () => {
           <Filter />
         </div>
       </div>
-      <div className="space-y-6">
+      <div>
         {transformedSkillsInformationsData.map((filterGroup) => (
           <FilterHandler
             key={filterGroup.id}
