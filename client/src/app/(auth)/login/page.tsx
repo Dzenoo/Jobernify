@@ -1,12 +1,13 @@
 "use client";
 
 import React from "react";
-import LoginForm from "@/components/auth/login/LoginForm";
+
+import Login from "@/components/auth/login/Login";
 
 const LoginPage: React.FC = () => {
   return (
     <section className="py-16 flex justify-center">
-      <LoginForm />
+      <Login />
     </section>
   );
 };

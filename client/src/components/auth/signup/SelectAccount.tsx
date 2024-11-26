@@ -1,22 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
 
 import { Briefcase, Building } from "lucide-react";
 
 import { TypeOfAccount } from "@/types";
-import EmployersSignupForm from "./EmployersSignupForm";
-import SeekersSignupForm from "./SeekersSignupForm";
 
-type TabChooseAccount = {
-  icon: React.ReactNode;
-  text: string;
-  selected: boolean;
-  handler: () => void;
-};
+import SeekersSignup from "./seekers/SeekersSignup";
+import EmployersSignup from "./employers/EmployersSignup";
+import RedirectToLoginLink from "./RedirectToLoginLink";
 
-const ChooseSignup: React.FC = () => {
+const SelectAccount: React.FC = () => {
   const [typeOfAccount, setTypeOfAccount] = useState<TypeOfAccount>(
     TypeOfAccount.Default
   );
@@ -27,9 +21,25 @@ const ChooseSignup: React.FC = () => {
 
   const employer = typeOfAccount === TypeOfAccount.Employer;
   const seeker = typeOfAccount === TypeOfAccount.Seeker;
+
   const isSelectedAccount =
     typeOfAccount === TypeOfAccount.Seeker ||
     typeOfAccount === TypeOfAccount.Employer;
+
+  const SelectCardsArrayData = [
+    {
+      icon: <Building />,
+      text: "Im a Employer, looking for talents",
+      handler: () => handleTypeSelection(TypeOfAccount.Employer),
+      selected: employer,
+    },
+    {
+      icon: <Briefcase />,
+      text: "Im a Seeker, looking for job",
+      handler: () => handleTypeSelection(TypeOfAccount.Seeker),
+      selected: seeker,
+    },
+  ];
 
   return (
     <div className="px-5">
@@ -39,41 +49,26 @@ const ChooseSignup: React.FC = () => {
             <h1 className="text-2xl font-bold">Join as a Employer or Seeker</h1>
           </div>
           <div className="flex justify-between gap-3 max-sm:flex-col">
-            {Array.from([
-              {
-                icon: <Building />,
-                text: "Im a Employer, looking for talents",
-                handler: () => handleTypeSelection(TypeOfAccount.Employer),
-                selected: employer,
-              },
-              {
-                icon: <Briefcase />,
-                text: "Im a Seeker, looking for job",
-                handler: () => handleTypeSelection(TypeOfAccount.Seeker),
-                selected: seeker,
-              },
-            ]).map((tab) => renderTab(tab))}
+            {SelectCardsArrayData.map((tab) => renderTab(tab))}
           </div>
-          <div>
-            <p className="text-low-gray">
-              Already have account?{" "}
-              <Link href="/login" className="text-blue-600 underline">
-                Login
-              </Link>
-            </p>
-          </div>
+          <RedirectToLoginLink />
         </div>
       )}
       {employer && (
         <div className="pb-16">
-          <EmployersSignupForm handleTypeSelection={handleTypeSelection} />
+          <EmployersSignup handleTypeSelection={handleTypeSelection} />
         </div>
       )}
-      {seeker && (
-        <SeekersSignupForm handleTypeSelection={handleTypeSelection} />
-      )}
+      {seeker && <SeekersSignup handleTypeSelection={handleTypeSelection} />}
     </div>
   );
+};
+
+type TabChooseAccount = {
+  icon: React.ReactNode;
+  text: string;
+  selected: boolean;
+  handler: () => void;
 };
 
 function renderTab<T extends TabChooseAccount>({
@@ -100,4 +95,4 @@ function renderTab<T extends TabChooseAccount>({
   );
 }
 
-export default ChooseSignup;
+export default SelectAccount;
