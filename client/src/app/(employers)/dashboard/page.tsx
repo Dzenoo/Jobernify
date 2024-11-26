@@ -1,14 +1,19 @@
 "use client";
 
 import React from "react";
+
+import { useQuery } from "react-query";
+
+import { getEmployerAnalytics } from "@/lib/actions/employers.actions";
+
+import useGetEmployer from "@/hooks/queries/useGetEmployer.query";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+
 import Followers from "@/components/employers/dashboard/overview/Followers";
 import JobsPerMonth from "@/components/employers/dashboard/overview/JobsPerMonth";
 import Statistics from "@/components/employers/dashboard/overview/Statistics";
 import Types from "@/components/employers/dashboard/overview/Types";
-import useGetEmployer from "@/hooks/queries/useGetEmployer.query";
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import { getEmployerAnalytics } from "@/lib/actions/employers.actions";
-import { useQuery } from "react-query";
+
 import LoadingDashboard from "@/components/loaders/LoadingDashboard";
 
 const Dashboard = () => {
