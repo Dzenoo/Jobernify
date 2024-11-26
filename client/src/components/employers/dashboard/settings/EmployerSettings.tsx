@@ -50,7 +50,7 @@ const EmployerSettings: React.FC<EmployerSettingsProps> = ({
         </Drawer>
       )}
       <div className="flex justify-between items-start gap-5">
-        <UploadEmployerImage image={employer.image} />
+        <UploadEmployerImage image={employer?.image} />
         <Button
           className="flex items-center gap-3"
           variant="destructive"
