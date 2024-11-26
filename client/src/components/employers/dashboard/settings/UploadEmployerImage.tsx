@@ -44,7 +44,7 @@ const UploadEmployerImage: React.FC<UploadEmployerImageProps> = ({ image }) => {
 
   const profileImageUrl = selectedFile
     ? URL.createObjectURL(selectedFile)
-    : image.includes("https:")
+    : image?.includes("https:")
     ? image
     : `${AWS_URL}/${image}`;
 
