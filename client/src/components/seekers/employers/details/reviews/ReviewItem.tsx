@@ -36,7 +36,7 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ review }) => {
   const { data: seekerData } = useGetSeeker();
 
   const { mutateAsync: deleteReviewMutate } = useMutation({
-    mutationFn: () => deleteReview(review?.company, token!),
+    mutationFn: () => deleteReview(review?.company, token as string),
     onSuccess: () => {
       toast({ title: "Success", description: "Deleted!" });
       queryClient.invalidateQueries(["company"]);

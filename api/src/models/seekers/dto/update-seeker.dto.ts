@@ -1,9 +1,5 @@
-import {
-  IsOptional,
-  IsString,
-  IsArray,
-  IsBooleanString,
-} from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsOptional, IsString, IsArray, IsBoolean } from 'class-validator';
 
 export class UpdateSeekerDto {
   @IsOptional()
@@ -39,7 +35,8 @@ export class UpdateSeekerDto {
   readonly headline?: string;
 
   @IsOptional()
-  @IsBooleanString()
+  @IsBoolean()
+  @Transform(({ value }) => value === 'true' || value === true)
   readonly receiveJobAlerts?: boolean;
 
   @IsOptional()

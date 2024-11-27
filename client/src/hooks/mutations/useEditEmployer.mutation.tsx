@@ -13,7 +13,7 @@ const useEditEmployer = () => {
 
   return useMutation({
     mutationFn: (formData: FormData | any) =>
-      editEmployerProfile(formData, token!),
+      editEmployerProfile(formData, token as string),
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
       queryClient.invalidateQueries(["profile"]);

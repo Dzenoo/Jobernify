@@ -27,7 +27,7 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ applicationId, status }) => {
 
   const { mutateAsync: updateStatusMutate } = useMutation({
     mutationFn: (status: string) =>
-      updateApplicationStatus(applicationId, token!, status),
+      updateApplicationStatus(applicationId, token as string, status),
     onSuccess: () => {
       window.location.reload;
       queryClient.invalidateQueries(["applications"]);

@@ -87,40 +87,30 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
   });
 
   useEffect(() => {
-    if (!isOpen) {
-      form.reset();
-    } else if (!isEdit) {
-      form.reset({
-        jobTitle: "",
-        companyName: "",
-        startDate: new Date(),
-        endDate: new Date(),
-        level: "Junior",
-        type: "Freelance",
-        position: "Hybrid",
-        location: "",
-        isCurrentlyWorking: false,
-      });
-    } else if (isEdit) {
-      form.reset({
-        jobTitle: experience?.jobTitle,
-        companyName: experience?.companyName,
-        startDate: new Date(experience?.startDate),
-        endDate: new Date(experience?.endDate),
-        level: experience?.level as any,
-        type: experience?.type as any,
-        position: experience?.position as any,
-        location: experience?.location,
-        isCurrentlyWorking: experience.isCurrentlyWorking,
-      });
+    if (isOpen) {
+      if (!isEdit) {
+        form.reset();
+      } else {
+        form.reset({
+          jobTitle: experience?.jobTitle,
+          companyName: experience?.companyName,
+          startDate: new Date(experience?.startDate),
+          endDate: new Date(experience?.endDate),
+          level: experience?.level as any,
+          type: experience?.type as any,
+          position: experience?.position as any,
+          location: experience?.location,
+          isCurrentlyWorking: experience.isCurrentlyWorking,
+        });
+      }
     }
   }, [isOpen, isEdit, experience]);
 
   const { mutateAsync: handleExperienceMutate } = useMutation({
     mutationFn: (formData: any) =>
       isEdit
-        ? editExperience(formData, token!, experienceId as string)
-        : addNewExperience(formData, token!),
+        ? editExperience(formData, token as string, experienceId as string)
+        : addNewExperience(formData, token as string),
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
       queryClient.invalidateQueries(["profile"]);
@@ -138,7 +128,6 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
     const experienceData = {
       ...values,
       endDate: values.isCurrentlyWorking ? null : values.endDate,
-      isCurrentlyWorking: String(values.isCurrentlyWorking),
     };
 
     await handleExperienceMutate(experienceData);

@@ -1,10 +1,11 @@
+import { Transform } from 'class-transformer';
 import {
   IsEnum,
   IsOptional,
   IsString,
   IsDateString,
   IsNotEmpty,
-  IsBooleanString,
+  IsBoolean,
 } from 'class-validator';
 import {
   JobLevel,
@@ -43,6 +44,7 @@ export class CreateExperienceDto {
   readonly position: JobPosition;
 
   @IsOptional()
-  @IsBooleanString()
+  @IsBoolean()
+  @Transform(({ value }) => value === 'true' || value === true)
   readonly isCurrentlyWorking?: boolean;
 }

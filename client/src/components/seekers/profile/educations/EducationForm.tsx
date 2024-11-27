@@ -89,8 +89,8 @@ const EducationForm: React.FC<EducationFormProps> = ({
   const { mutateAsync: handleEducationMutate } = useMutation({
     mutationFn: (formData: any) =>
       isEdit
-        ? editEducation(formData, token!, educationId as string)
-        : addNewEducation(formData, token!),
+        ? editEducation(formData, token as string, educationId as string)
+        : addNewEducation(formData, token as string),
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
       queryClient.invalidateQueries(["profile"]);

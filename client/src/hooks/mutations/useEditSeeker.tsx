@@ -13,7 +13,7 @@ const useEditSeeker = () => {
 
   return useMutation({
     mutationFn: (formData: FormData | any) =>
-      editSeekerProfile(formData, token!),
+      editSeekerProfile(formData, token as string),
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
       queryClient.invalidateQueries(["profile"]);

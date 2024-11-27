@@ -34,7 +34,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
   const { userType, token } = useAuthentication().getCookieHandler();
 
   const { mutateAsync: deleteExperienceMutate } = useMutation({
-    mutationFn: () => deleteExperience(_id, token!),
+    mutationFn: () => deleteExperience(_id, token as string),
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
       queryClient.invalidateQueries(["profile"]);

@@ -61,7 +61,8 @@ const ReviewCompanyForm: React.FC<ReviewCompanyFormProps> = ({
   });
 
   const { mutateAsync: reviewEmployerMutate } = useMutation({
-    mutationFn: (formData: any) => reviewEmployer(employerId, token!, formData),
+    mutationFn: (formData: any) =>
+      reviewEmployer(employerId, token as string, formData),
     onSuccess: () => {
       router.push(`/companies/${employerId}?section=reviews`);
     },

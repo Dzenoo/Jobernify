@@ -63,7 +63,7 @@ const JobDetailsPage = ({
       <ApplyToJob
         isApplyToJob={isApplyToJob}
         setIsApplyToJob={setIsApplyToJob}
-        token={token!}
+        token={token as string}
         jobId={jobId}
         isDialog={isLarge ? true : false}
       />

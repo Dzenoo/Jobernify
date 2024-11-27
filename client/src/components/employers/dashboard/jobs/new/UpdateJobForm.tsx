@@ -86,8 +86,8 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
   const { mutateAsync: updateJobMutate, isLoading } = useMutation({
     mutationFn: (formData: any) =>
       isEdit
-        ? editJob(token!, jobId as string, formData)
-        : createNewJob(token!, formData),
+        ? editJob(token as string, jobId as string, formData)
+        : createNewJob(token as string, formData),
     onSuccess: (response) => {
       router.push(`/dashboard/jobs/?page=1`);
       queryClient.invalidateQueries(["jobs"]);

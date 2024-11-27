@@ -56,7 +56,10 @@ const SeekerProfilePage = ({
       </div>
       {!searchParams.section && (
         <div>
-          <SeekerProfile seeker={fetchedSeekerProfile?.seeker} token={token!} />
+          <SeekerProfile
+            seeker={fetchedSeekerProfile?.seeker}
+            token={token as string}
+          />
         </div>
       )}
       {searchParams.section === "saved" && (

@@ -13,7 +13,7 @@ const useJobAlert = () => {
 
   return useMutation({
     mutationFn: (formData: FormData | any) =>
-      generateJobAlert(formData, token!),
+      generateJobAlert(formData, token as string),
     onSuccess: (response) => {
       queryClient.invalidateQueries(["profile"]);
       toast({ title: "Success", description: response.message });

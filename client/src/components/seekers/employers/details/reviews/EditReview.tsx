@@ -38,7 +38,7 @@ const EditReview: React.FC<EditReviewProps> = ({ review, closeDialog }) => {
 
   const { mutateAsync: editReviewMutate } = useMutation({
     mutationFn: (formData: any) =>
-      editReview(review?.company, token!, {
+      editReview(review?.company, token as string, {
         job_position: formData?.job_position,
         negative_review: formData?.negativeReview,
         positive_review: formData?.positiveReview,
