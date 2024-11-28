@@ -28,12 +28,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 
-type EditReviewProps = {
+type EditReviewFormProps = {
   review: ReviewTypes;
   closeDialog: () => void;
 };
 
-const EditReview: React.FC<EditReviewProps> = ({ review, closeDialog }) => {
+const EditReviewForm: React.FC<EditReviewFormProps> = ({
+  review,
+  closeDialog,
+}) => {
   const { token } = useAuthentication().getCookieHandler();
 
   const { mutateAsync: editReviewMutate } = useMutation({
@@ -138,4 +141,4 @@ const EditReview: React.FC<EditReviewProps> = ({ review, closeDialog }) => {
   );
 };
 
-export default EditReview;
+export default EditReviewForm;

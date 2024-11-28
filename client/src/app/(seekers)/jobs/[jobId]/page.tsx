@@ -11,7 +11,7 @@ import LoadingJobDetails from "@/components/loaders/LoadingJobDetails";
 import AddJobAlert from "@/components/seekers/jobs/details/AddJobAlert";
 import JobDetailsInfo from "@/components/seekers/jobs/details/JobDetailsInfo";
 import JobsList from "@/components/seekers/jobs/JobsList";
-import ApplyToJob from "@/components/seekers/jobs/details/ApplyToJob";
+import ApplyToJobForm from "@/components/seekers/jobs/details/forms/ApplyToJobForm";
 import NotFound from "@/components/shared/pages/NotFound";
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import SeekerInfo from "@/components/seekers/jobs/SeekerInfo";
@@ -60,7 +60,7 @@ const JobDetailsPage = ({
           <JobsList jobs={fetchedJobs?.jobs} />
         </div>
       </div>
-      <ApplyToJob
+      <ApplyToJobForm
         isApplyToJob={isApplyToJob}
         setIsApplyToJob={setIsApplyToJob}
         token={token as string}

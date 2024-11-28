@@ -12,7 +12,7 @@ import { deleteReview } from "@/lib/actions/reviews.actions";
 
 import { ReviewTypes } from "@/types";
 
-import EditReview from "./EditReview";
+import EditReviewFrom from "./forms/EditReviewForm";
 
 import { toast } from "@/components/ui/use-toast";
 import {
@@ -78,7 +78,7 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ review }) => {
     <>
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
-          <EditReview review={review} closeDialog={closeDialog} />
+          <EditReviewFrom review={review} closeDialog={closeDialog} />
         </DialogContent>
       </Dialog>
       <Card hoverable={true}>

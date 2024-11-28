@@ -42,7 +42,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 
-type ApplyToJobProps = {
+type ApplyToJobFormProps = {
   isApplyToJob: boolean;
   setIsApplyToJob: React.Dispatch<React.SetStateAction<boolean>>;
   jobId: string;
@@ -50,7 +50,7 @@ type ApplyToJobProps = {
   isDialog: boolean;
 };
 
-const ApplyToJob: React.FC<ApplyToJobProps> = ({
+const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
   setIsApplyToJob,
   isApplyToJob,
   jobId,
@@ -219,4 +219,4 @@ const ApplyToJob: React.FC<ApplyToJobProps> = ({
   );
 };
 
-export default ApplyToJob;
+export default ApplyToJobForm;
