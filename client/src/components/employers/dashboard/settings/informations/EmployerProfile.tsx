@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Edit, X } from "lucide-react";
 
 import EmployerData from "./EmployerData";
-import EditEmployerProfileForm from "./EditEmployerProfileForm";
+import EditEmployerProfileForm from "./forms/EditEmployerProfileForm";
 
 import { EmployerTypes } from "@/types";
 
