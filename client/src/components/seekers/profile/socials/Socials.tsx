@@ -10,7 +10,7 @@ import { SeekerTypes } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 import { Drawer } from "@/components/ui/drawer";
-import EditSocialsForm from "./EditSocialsForm";
+import EditSocialsForm from "./forms/EditSocialsForm";
 
 type SocialsProps = {
   seeker?: SeekerTypes;

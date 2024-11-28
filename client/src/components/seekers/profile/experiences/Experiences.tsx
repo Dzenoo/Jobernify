@@ -7,7 +7,7 @@ import { Plus } from "lucide-react";
 
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import ExperienceList from "./ExperienceList";
-import ExperienceForm from "./ExperienceForm";
+import ExperienceForm from "./forms/ExperienceForm";
 
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";

@@ -7,7 +7,7 @@ import { Plus } from "lucide-react";
 
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import EducationList from "./EducationList";
-import EducationForm from "./EducationForm";
+import EducationForm from "./forms/EducationForm";
 
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";

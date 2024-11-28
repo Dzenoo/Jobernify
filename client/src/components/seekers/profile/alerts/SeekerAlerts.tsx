@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 
-import NewAlertForm from "./NewAlertForm";
-import ReceiveJobAlertsForm from "./ReceiveJobAlertsForm";
+import NewAlertForm from "./forms/NewAlertForm";
+import ReceiveJobAlertsForm from "./forms/ReceiveJobAlertsForm";
 
 import { JobAlertsTypes } from "@/types";
 
