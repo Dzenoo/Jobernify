@@ -4,10 +4,12 @@ import React, { useState } from "react";
 
 import { Briefcase, Building } from "lucide-react";
 
-import { TypeOfAccount } from "@/types";
+import { renderSignupTabCard } from "@/helpers";
 
 import Signup from "./Signup";
 import RedirectToLoginLink from "./RedirectToLoginLink";
+
+import { TypeOfAccount } from "@/types";
 
 const SelectAccount: React.FC = () => {
   const [typeOfAccount, setTypeOfAccount] = useState<TypeOfAccount>(
@@ -48,7 +50,7 @@ const SelectAccount: React.FC = () => {
             <h1 className="text-2xl font-bold">Join as a Employer or Seeker</h1>
           </div>
           <div className="flex justify-between gap-3 max-sm:flex-col">
-            {SelectCardsArrayData.map((tab) => renderTab(tab))}
+            {SelectCardsArrayData.map((tab) => renderSignupTabCard(tab))}
           </div>
           <RedirectToLoginLink />
         </div>
@@ -62,36 +64,5 @@ const SelectAccount: React.FC = () => {
     </div>
   );
 };
-
-type TabChooseAccount = {
-  icon: React.ReactNode;
-  text: string;
-  selected: boolean;
-  handler: () => void;
-};
-
-function renderTab<T extends TabChooseAccount>({
-  icon,
-  text,
-  selected,
-  handler,
-}: T): React.JSX.Element {
-  return (
-    <div
-      className={`${
-        selected && "bg-blue-100"
-      } border rounded-lg p-5 border-gray-100 cursor-pointer flex flex-col gap-7 w-full transition hover:bg-gray-50`}
-      onClick={handler}
-      key={text}
-    >
-      <div>
-        <div>{icon}</div>
-      </div>
-      <div className="flex flex-col justify-start items-start">
-        <h1 className="text-initial-black text-left">{text}</h1>
-      </div>
-    </div>
-  );
-}
 
 export default SelectAccount;

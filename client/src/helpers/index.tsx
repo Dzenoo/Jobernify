@@ -85,3 +85,34 @@ export const renderSkills = <
     </div>
   );
 };
+
+type RenderSignupTabCardProps = {
+  icon: React.ReactNode;
+  text: string;
+  selected: boolean;
+  handler: () => void;
+};
+
+export function renderSignupTabCard<T extends RenderSignupTabCardProps>({
+  icon,
+  text,
+  selected,
+  handler,
+}: T): React.JSX.Element {
+  return (
+    <div
+      className={`${
+        selected && "bg-blue-100"
+      } border rounded-lg p-5 border-gray-100 cursor-pointer flex flex-col gap-7 w-full transition hover:bg-gray-50`}
+      onClick={handler}
+      key={text}
+    >
+      <div>
+        <div>{icon}</div>
+      </div>
+      <div className="flex flex-col justify-start items-start">
+        <h1 className="text-initial-black text-left">{text}</h1>
+      </div>
+    </div>
+  );
+}
