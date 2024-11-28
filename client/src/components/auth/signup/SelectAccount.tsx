@@ -6,8 +6,7 @@ import { Briefcase, Building } from "lucide-react";
 
 import { TypeOfAccount } from "@/types";
 
-import SeekersSignup from "./seekers/SeekersSignup";
-import EmployersSignup from "./employers/EmployersSignup";
+import Signup from "./Signup";
 import RedirectToLoginLink from "./RedirectToLoginLink";
 
 const SelectAccount: React.FC = () => {
@@ -54,12 +53,12 @@ const SelectAccount: React.FC = () => {
           <RedirectToLoginLink />
         </div>
       )}
-      {employer && (
-        <div className="pb-16">
-          <EmployersSignup handleTypeSelection={handleTypeSelection} />
-        </div>
+      {isSelectedAccount && (
+        <Signup
+          handleTypeSelection={handleTypeSelection}
+          typeOfAccount={typeOfAccount}
+        />
       )}
-      {seeker && <SeekersSignup handleTypeSelection={handleTypeSelection} />}
     </div>
   );
 };
