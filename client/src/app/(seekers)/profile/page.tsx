@@ -6,9 +6,9 @@ import dynamic from "next/dynamic";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
-import LoadingApplicationsSkeleton from "@/components/loaders/LoadingApplications";
-import LoadingJobsSkeleton from "@/components/loaders/LoadingJobsSkeleton";
-import LoadingSeekerProfileSkeleton from "@/components/loaders/LoadingSeekerProfile";
+import LoadingApplicationsSkeleton from "@/components/loaders/seekers/LoadingApplications";
+import LoadingJobsSkeleton from "@/components/loaders/seekers/LoadingJobsSkeleton";
+import LoadingSeekerProfileSkeleton from "@/components/loaders/seekers/LoadingSeekerProfile";
 
 import SeekerAlerts from "@/components/seekers/profile/alerts/SeekerAlerts";
 import SeekerProfileNavigation from "@/components/seekers/profile/navigation/SeekerProfileNavigation";

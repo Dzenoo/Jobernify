@@ -14,7 +14,7 @@ import JobsPerMonth from "@/components/employers/dashboard/overview/JobsPerMonth
 import Statistics from "@/components/employers/dashboard/overview/Statistics";
 import Types from "@/components/employers/dashboard/overview/Types";
 
-import LoadingDashboard from "@/components/loaders/LoadingDashboard";
+import LoadingDashboard from "@/components/loaders/employers/LoadingDashboard";
 
 const Dashboard = () => {
   const { token } = useAuthentication().getCookieHandler();

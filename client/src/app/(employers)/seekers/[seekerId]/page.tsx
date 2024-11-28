@@ -7,7 +7,7 @@ import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import { getSeekerById } from "@/lib/actions/seekers.actions";
 
 import dynamic from "next/dynamic";
-import LoadingSeekerDetails from "@/components/loaders/LoadingSeekerDetails";
+import LoadingSeekerDetails from "@/components/loaders/employers/LoadingSeekerDetails";
 import NotFound from "@/components/shared/pages/NotFound";
 
 const SeekerDetailsInfo = dynamic(

@@ -8,7 +8,7 @@ import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
 import { getEmployers } from "@/lib/actions/employers.actions";
 
-import LoadingCompaniesSkeleton from "@/components/loaders/LoadingCompanies";
+import LoadingCompaniesSkeleton from "@/components/loaders/seekers/LoadingCompanies";
 
 import PaginatedList from "@/components/ui/paginate-list";
 import useSearchParams from "@/hooks/defaults/useSearchParams.hook";

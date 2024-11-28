@@ -8,14 +8,14 @@ import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
 import { getEmployerById } from "@/lib/actions/employers.actions";
 
-import LoadingJobsSkeleton from "@/components/loaders/LoadingJobsSkeleton";
-import LoadingReviewsSkeleton from "@/components/loaders/LoadingReviews";
+import LoadingJobsSkeleton from "@/components/loaders/seekers/LoadingJobsSkeleton";
+import LoadingReviewsSkeleton from "@/components/loaders/seekers/LoadingReviews";
 import EmployerDetailsInfo from "@/components/seekers/employers/details/EmployerDetailsInfo";
 import EmployerFilters from "@/components/seekers/employers/filters/EmployerFilters";
 
 import PaginatedList from "@/components/ui/paginate-list";
 import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
-import LoadingCompanyDetails from "@/components/loaders/LoadingCompanyDetails";
+import LoadingCompanyDetails from "@/components/loaders/seekers/LoadingCompanyDetails";
 import NotFound from "@/components/shared/pages/NotFound";
 
 const ReviewsList = dynamic(

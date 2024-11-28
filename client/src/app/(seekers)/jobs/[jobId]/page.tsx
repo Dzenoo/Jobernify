@@ -7,7 +7,7 @@ import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
 import { getJobById } from "@/lib/actions/jobs.actions";
 
-import LoadingJobDetails from "@/components/loaders/LoadingJobDetails";
+import LoadingJobDetails from "@/components/loaders/seekers/LoadingJobDetails";
 import AddJobAlert from "@/components/seekers/jobs/details/AddJobAlert";
 import JobDetailsInfo from "@/components/seekers/jobs/details/JobDetailsInfo";
 import JobsList from "@/components/seekers/jobs/JobsList";

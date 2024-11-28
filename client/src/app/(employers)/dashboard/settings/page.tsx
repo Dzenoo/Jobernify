@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import useGetEmployer from "@/hooks/queries/useGetEmployer.query";
 
-import LoadingEmployerSettings from "@/components/loaders/LoadingEmployerSettings";
+import LoadingEmployerSettings from "@/components/loaders/employers/LoadingEmployerSettings";
 
 import { EmployerTypes } from "@/types";
 

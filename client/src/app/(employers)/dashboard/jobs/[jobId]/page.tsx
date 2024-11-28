@@ -10,7 +10,7 @@ import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 import { getApplications } from "@/lib/actions/applications.actions";
 
 import FilterApplications from "@/components/employers/dashboard/jobs/applications/filter/FilterApplications";
-import LoadingJobApplications from "@/components/loaders/LoadingJobApplications";
+import LoadingJobApplications from "@/components/loaders/employers/LoadingJobApplications";
 
 import PaginatedList from "@/components/ui/paginate-list";
 import NotFound from "@/components/shared/pages/NotFound";

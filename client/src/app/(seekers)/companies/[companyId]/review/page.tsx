@@ -3,7 +3,7 @@
 import React from "react";
 
 import dynamic from "next/dynamic";
-import LoadingReviewForm from "@/components/loaders/LoadingReviewForm";
+import LoadingReviewForm from "@/components/loaders/seekers/LoadingReviewForm";
 
 const ReviewCompanyForm = dynamic(
   () =>

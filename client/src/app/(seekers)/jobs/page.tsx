@@ -8,8 +8,8 @@ import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
 import { getJobs } from "@/lib/actions/jobs.actions";
 
-import LoadingJobsSkeleton from "@/components/loaders/LoadingJobsSkeleton";
-import LoadingPopularJobs from "@/components/loaders/LoadingPopularJobs";
+import LoadingJobsSkeleton from "@/components/loaders/seekers/LoadingJobsSkeleton";
+import LoadingPopularJobs from "@/components/loaders/seekers/LoadingPopularJobs";
 import PopularJobsInfo from "@/components/seekers/jobs/PopularJobsInfo";
 import FilterJobs from "@/components/seekers/jobs/filters/FilterJobs";
 import PaginatedList from "@/components/ui/paginate-list";

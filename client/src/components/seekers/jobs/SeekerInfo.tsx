@@ -9,7 +9,7 @@ import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
 import { SeekerTypes } from "@/types";
 
-import LoadingSeekerInfo from "@/components/loaders/LoadingSeekerInfo";
+import LoadingSeekerInfo from "@/components/loaders/employers/LoadingSeekerInfo";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

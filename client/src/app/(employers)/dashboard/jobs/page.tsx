@@ -9,7 +9,7 @@ import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 import { getEmployerProfile } from "@/lib/actions/employers.actions";
 
 import dynamic from "next/dynamic";
-import LoadingDashboardJobs from "@/components/loaders/LoadingDashboardJobs";
+import LoadingDashboardJobs from "@/components/loaders/employers/LoadingDashboardJobs";
 
 import PaginatedList from "@/components/ui/paginate-list";
 import SearchJobs from "@/components/employers/dashboard/jobs/search/SearchJobs";
