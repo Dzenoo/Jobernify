@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import zod from "zod";
 import { CalendarIcon } from "lucide-react";
@@ -83,28 +83,23 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
 
   const form = useForm<zod.infer<typeof SchemaToInfer>>({
     resolver: zodResolver(SchemaToInfer),
+    defaultValues: {
+      jobTitle: isEdit ? experience.jobTitle : "",
+      companyName: isEdit ? experience.companyName : "",
+      startDate: isEdit ? new Date(experience.startDate) : new Date(),
+      endDate: isEdit ? new Date(experience.endDate) : new Date(),
+      level: isEdit ? (experience.level as any) : "",
+      type: isEdit ? (experience.type as any) : "",
+      position: isEdit ? (experience.position as any) : "",
+      location: isEdit ? experience.location : "",
+      isCurrentlyWorking: isEdit ? experience.isCurrentlyWorking : false,
+    },
     mode: "all",
   });
 
   useEffect(() => {
-    if (isOpen) {
-      if (!isEdit) {
-        form.reset();
-      } else {
-        form.reset({
-          jobTitle: experience?.jobTitle,
-          companyName: experience?.companyName,
-          startDate: new Date(experience?.startDate),
-          endDate: new Date(experience?.endDate),
-          level: experience?.level as any,
-          type: experience?.type as any,
-          position: experience?.position as any,
-          location: experience?.location,
-          isCurrentlyWorking: experience.isCurrentlyWorking,
-        });
-      }
-    }
-  }, [isOpen, isEdit, experience]);
+    if (!isOpen && !isEdit) form.reset();
+  }, [isOpen, isEdit]);
 
   const { mutateAsync: handleExperienceMutate } = useMutation({
     mutationFn: (formData: any) =>
@@ -264,7 +259,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
           name="isCurrentlyWorking"
           render={({ field }) => (
             <FormItem className="flex items-center gap-5">
-              <FormLabel>Currently Working Here</FormLabel>
+              <FormLabel className="mt-1.5">Currently Working Here</FormLabel>
               <FormControl>
                 <Checkbox
                   checked={field.value}

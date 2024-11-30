@@ -1,4 +1,5 @@
 import moment from "moment";
+import { format } from "date-fns";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { jwtDecode } from "jwt-decode";
@@ -58,14 +59,15 @@ export const getMonthsLabels = (): string[] => {
 /**
  * Formats a date string to a specified format.
  * @param date - The date string to format.
- * @param format - The format string (default: "DD/MM/YYYY").
+ * @param format - The format string (default: "DD/mm/YYYY").
  * @returns The formatted date string.
  */
 export const formatDate = (
   date: string,
-  format: string = "DD/MM/YYYY"
+  formatStr: string = "dd/MM/yyyy"
 ): string => {
-  return date ? moment.utc(date).format(format) : date;
+  return date ? format(new Date(date), formatStr) : date;
+  // return date ? moment.utc(date).format(format) : date;
 };
 
 /**

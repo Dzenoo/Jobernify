@@ -81,9 +81,7 @@ const EducationForm: React.FC<EducationFormProps> = ({
   });
 
   useEffect(() => {
-    if (!isOpen && !isEdit) {
-      form.reset();
-    }
+    if (!isOpen && !isEdit) form.reset();
   }, [isOpen, isEdit]);
 
   const { mutateAsync: handleEducationMutate } = useMutation({
