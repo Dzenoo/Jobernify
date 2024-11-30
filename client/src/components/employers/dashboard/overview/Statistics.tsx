@@ -81,7 +81,11 @@ const Statistics: React.FC<StatisticsProps> = ({
               <div>
                 <p
                   className={`${
-                    statistics.increment > 0 ? "text-green-500" : "text-red-500"
+                    statistics.increment === 0
+                      ? "text-yellow-500"
+                      : statistics.increment > 0
+                      ? "text-green-500"
+                      : "text-red-500"
                   }`}
                 >
                   {statistics.increment > 0

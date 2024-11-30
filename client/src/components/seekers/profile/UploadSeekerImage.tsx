@@ -59,7 +59,7 @@ const UploadSeekerImage: React.FC<UploadSeekerImageProps> = ({ image }) => {
             alt="seeker_profile_img"
             width={130}
             height={130}
-            className="rounded-full w-36 h-36 object-cover"
+            className="border border-gray-000 rounded-full w-36 h-36 object-cover"
           />
         ) : (
           <ScaleLoader color={theme === "dark" ? "#ffffff" : ""} height={10} />

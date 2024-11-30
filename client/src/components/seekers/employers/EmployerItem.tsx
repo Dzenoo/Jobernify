@@ -36,7 +36,7 @@ const EmployerItem: React.FC<EmployersItemProps> = ({ employer }) => {
     <Card hoverable={true}>
       <CardContent>
         <div className="flex gap-3 max-xl:flex-col">
-          <Avatar className="border border-blue-900 w-28 h-28">
+          <Avatar className="border border-blue-100 w-28 h-28">
             <AvatarImage
               src={getImageUrl(employer?.image)}
               className="object-cover w-auto h-auto"

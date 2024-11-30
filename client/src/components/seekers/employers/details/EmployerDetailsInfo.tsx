@@ -49,7 +49,7 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
         <div className="flex overflow-auto justify-between max-lg:flex-wrap">
           <div className="flex sm:items-center gap-3 max-sm:flex-col">
             <CardHeader>
-              <Avatar className="border border-blue-900 w-36 h-36">
+              <Avatar className="border border-blue-100 w-36 h-36">
                 <AvatarImage
                   src={getImageUrl(employer?.image)}
                   className="object-cover w-auto h-auto"

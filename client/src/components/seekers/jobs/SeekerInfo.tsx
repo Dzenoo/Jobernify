@@ -31,7 +31,7 @@ const SeekerInfo: React.FC = () => {
             src={profileImageUrl}
             width={150}
             height={150}
-            className="rounded-full w-28 h-28 object-cover"
+            className="border border-gray-100 rounded-full w-28 h-28 object-cover"
             alt="seeker"
           />
         </div>
