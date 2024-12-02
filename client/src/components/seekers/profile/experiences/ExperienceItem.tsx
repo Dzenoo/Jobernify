@@ -57,7 +57,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
   const formattedEndDate = endDate ? formatDate(endDate) : "";
 
   return (
-    <div className="flex items-start gap-5 dark:bg-[#1b1b1b] rounded-xl bg-white p-6 border border-gray-100 dark:border-[#3b3b3b] overflow-auto whitespace-nowrap">
+    <div className="flex items-start gap-5 dark:bg-transparent rounded-xl bg-white p-6 border border-gray-100 dark:border-[#3b3b3b] overflow-auto whitespace-nowrap">
       <div className="max-sm:hidden">
         <Briefcase width={25} height={25} />
       </div>
