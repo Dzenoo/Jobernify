@@ -25,13 +25,13 @@ const EmployerFilters: React.FC<EmployerTypeFilters> = ({ type }) => {
 
   return (
     <div className="flex items-center gap-3">
-      {FilterButtons.map((button) => (
+      {FilterButtons.map(({ id, filter, title }) => (
         <Button
-          key={button.id}
-          variant={type === button.filter ? "default" : "outline"}
-          onClick={() => updateSearchParams("section", button.filter)}
+          key={id}
+          variant={type === filter ? "default" : "outline"}
+          onClick={() => updateSearchParams("section", filter)}
         >
-          {button.title}
+          {title}
         </Button>
       ))}
     </div>
