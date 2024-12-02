@@ -26,9 +26,11 @@ const Footer: React.FC = () => {
         <div className="flex flex-col gap-3 basis-[36em] max-xl:basis-full">
           <div>
             <Image
-              src={`/images/logo-${
-                resolvedTheme === "dark" ? "dark" : "light"
-              }.png`}
+              src={
+                resolvedTheme === "dark"
+                  ? "/images/logo-dark.png"
+                  : "/images/logo-light.png"
+              }
               alt="light-talentify-logo"
               width={100}
               height={100}
