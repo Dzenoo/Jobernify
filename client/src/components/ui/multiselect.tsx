@@ -49,7 +49,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         type="button"
         variant="outline"
         onClick={toggleDropdown}
-        className="w-full h-fit flex gap-2 flex-wrap  text-left hover:border-blue-400 hover:bg-gray-100 dark:hover:bg-[#1b1b1b]"
+        className="w-full h-fit flex gap-2 flex-wrap items-start justify-start hover:border-blue-400 hover:bg-gray-100 dark:hover:bg-[#1b1b1b]"
       >
         {skillsNames.length > 0 ? (
           skillsNames.map((value) => (
@@ -58,7 +58,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
             </Badge>
           ))
         ) : (
-          <span className="text-gray-400">{placeholder}</span>
+          <span className=" text-left text-gray-400">{placeholder}</span>
         )}
       </Button>
       {open && (

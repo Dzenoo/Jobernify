@@ -43,7 +43,7 @@ const Overview: React.FC<OverviewProps> = ({ control }) => {
         render={({ field }) => (
           <FormItem>
             <FormLabel>Write a detailed description</FormLabel>
-            <FormControl>
+            <FormControl className="max-w-4xl max-h-96 overflow-auto">
               <ReactQuill
                 value={marked(field.value) as any}
                 onChange={field.onChange}
@@ -54,7 +54,6 @@ const Overview: React.FC<OverviewProps> = ({ control }) => {
                   ],
                 }}
                 formats={["bold", "italic", "list", "bullet"]}
-                placeholder="Write the job description..."
               />
             </FormControl>
             <FormDescription>

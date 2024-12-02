@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import zod from "zod";
 
 export const ApplyToJobSchema = zod.object({
@@ -53,6 +54,12 @@ export const UpdateJobSchema = zod.object({
   expiration_date: zod.any(),
   description: zod
     .string()
-    .min(30, "Description should be detailed, with at least 30 characters.")
-    .max(2500, "Description can be up to 2500 characters long."),
+    .max(2500, "Description can be up to 2500 characters long.")
+    .refine(
+      (value) => {
+        const plainText = DOMPurify.sanitize(value, { ALLOWED_TAGS: [] });
+        return plainText.trim().length >= 30;
+      },
+      { message: "Description should be at least 30 characters long." }
+    ),
 });

@@ -56,7 +56,7 @@ const UploadEmployerImage: React.FC<UploadEmployerImageProps> = ({ image }) => {
           alt="Employer_profile_img"
           width={130}
           height={130}
-          className="border border-gray-100 rounded-full w-36 h-36 object-cover"
+          className="border border-gray-100 rounded-full w-36 h-36 object-cover dark:border-[#1b1b1b]"
         />
       </div>
       <div className="flex flex-col gap-3">
