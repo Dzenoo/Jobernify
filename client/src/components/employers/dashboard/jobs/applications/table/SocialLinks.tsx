@@ -5,12 +5,16 @@ import { Github, ImageIcon, Linkedin } from "lucide-react";
 
 import { SeekerTypes } from "@/types";
 
-type SocialLinksProps = { seeker: SeekerTypes };
+type SocialLinksProps = {
+  seeker: Pick<SeekerTypes, "github" | "linkedin" | "portfolio">;
+};
 
-const SocialLinks: React.FC<SocialLinksProps> = ({ seeker }) => {
+const SocialLinks: React.FC<SocialLinksProps> = ({
+  seeker: { github, linkedin, portfolio },
+}) => {
   return (
     <div className="flex items-center gap-6">
-      {seeker.github === "" ? (
+      {github === "" ? (
         <div className="text-initial-gray cursor-not-allowed">
           <Github />
         </div>
@@ -18,12 +22,12 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ seeker }) => {
         <Link
           target="_blank"
           rel="noopener noreferrer"
-          href={`https://${seeker.github}`}
+          href={`https://${github}`}
         >
           <Github />
         </Link>
       )}
-      {seeker.linkedin === "" ? (
+      {linkedin === "" ? (
         <div className="text-initial-gray cursor-not-allowed">
           <Linkedin />
         </div>
@@ -31,12 +35,12 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ seeker }) => {
         <Link
           target="_blank"
           rel="noopener noreferrer"
-          href={`https://${seeker.linkedin}`}
+          href={`https://${linkedin}`}
         >
           <Linkedin />
         </Link>
       )}
-      {seeker.portfolio === "" ? (
+      {portfolio === "" ? (
         <div className="text-initial-gray cursor-not-allowed">
           <ImageIcon />
         </div>
@@ -44,7 +48,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ seeker }) => {
         <Link
           target="_blank"
           rel="noopener noreferrer"
-          href={`https://${seeker.portfolio}`}
+          href={`https://${portfolio}`}
         >
           <ImageIcon />
         </Link>

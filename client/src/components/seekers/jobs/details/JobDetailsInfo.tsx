@@ -41,26 +41,44 @@ type JobDetailsInfoProps = {
   onApplyJob?: () => void;
 };
 
-const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({ job, onApplyJob }) => {
+const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
+  job: {
+    _id,
+    company,
+    title,
+    description,
+    expiration_date,
+    createdAt,
+    applications,
+    skills,
+    position,
+    type,
+    level,
+    salary,
+    overview,
+    location,
+  },
+  onApplyJob,
+}) => {
   const { data: fetchedSeekerProfile } = useGetSeeker();
 
-  const sanitizedDescription = DOMPurify.sanitize(job?.description);
-  const expirationDate = formatDate(job?.expiration_date);
-  const createdTime = getTime(job?.createdAt);
-  const categorizedSkills = getSkillsData(job?.skills);
+  const sanitizedDescription = DOMPurify.sanitize(description);
+  const expirationDate = formatDate(expiration_date);
+  const createdTime = getTime(createdAt);
+  const categorizedSkills = getSkillsData(skills);
 
   const CompanyInformationsData = [
     {
       tooltip: "Location",
       id: "1",
       icon: <MapPinIcon color="gray" />,
-      data: job?.company.address || findLocationData(job?.location),
+      data: company.address || findLocationData(location),
     },
     {
       tooltip: "Size",
       id: "2",
       icon: <LayoutTemplate color="gray" />,
-      data: job?.company.size,
+      data: company.size,
     },
   ];
 
@@ -81,7 +99,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({ job, onApplyJob }) => {
       tooltip: "Applicants",
       id: "3",
       icon: <GraduationCap color="gray" />,
-      data: job?.applications.length + " Applications",
+      data: applications.length + " Applications",
     },
   ];
 
@@ -89,52 +107,52 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({ job, onApplyJob }) => {
     {
       id: "1",
       icon: <Calendar color="gray" />,
-      data: job?.position,
+      data: position,
       title: "Position",
     },
     {
       id: "2",
       icon: <Timer color="gray" />,
-      data: job?.type,
+      data: type,
       title: "Time",
     },
     {
       id: "3",
       icon: <GraduationCap color="gray" />,
-      data: job?.level,
+      data: level,
       title: "Level",
     },
     {
       id: "4",
       icon: <CircleDollarSignIcon color="green" />,
-      data: job?.salary + `$/month`,
+      data: salary + `$/month`,
       title: "Salary",
     },
   ];
 
   const isAppliedJob = fetchedSeekerProfile?.seeker.applications.find(
-    (application: ApplicationsTypes) => application.job._id === job._id
+    (application: ApplicationsTypes) => application._id === _id
   );
 
   return (
     <div className="flex flex-col gap-3">
-      <Navigator info="Jobs" href={"/jobs"} title={job?.title} />
+      <Navigator info="Jobs" href={"/jobs"} title={title} />
       <Card>
         <CardHeader>
           <div className="flex justify-between gap-6 max-md:flex-col">
             <div className="flex gap-3 max-sm:flex-col sm:items-center">
-              <Link href={`/companies/${job?.company._id}?section=jobs`}>
+              <Link href={`/companies/${company._id}?section=jobs`}>
                 <Avatar className="border border-blue-100 dark:border-[#1b1b1b] w-28 h-28">
                   <AvatarImage
-                    src={getImageUrl(job.company?.image)}
+                    src={getImageUrl(company?.image)}
                     className="object-cover w-auto h-auto"
                   />
                 </Avatar>
               </Link>
               <div className="flex flex-col gap-3">
                 <div>
-                  <Link href={`/companies/${job?.company._id}?section=jobs`}>
-                    <h3 className="text-initial-black">{job?.company.name}</h3>
+                  <Link href={`/companies/${company._id}?section=jobs`}>
+                    <h3 className="text-initial-black">{company.name}</h3>
                   </Link>
                 </div>
                 {renderIconText({
@@ -142,7 +160,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({ job, onApplyJob }) => {
                   tooltipContent: "Industry",
                   id: "3",
                   icon: <Building color="gray" />,
-                  data: findIndustriesData(job?.company.industry),
+                  data: findIndustriesData(company.industry),
                 })}
                 <div className="flex items-center gap-3 flex-wrap">
                   {CompanyInformationsData.map((data) =>
@@ -166,13 +184,13 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({ job, onApplyJob }) => {
                   {isAppliedJob ? "Already Applied" : "Apply to Job"}
                 </Button>
               </div>
-              <SaveJobButton jobId={job?._id} />
+              <SaveJobButton jobId={_id} />
             </div>
           </div>
         </CardHeader>
         <CardContent className="flex flex-col gap-6 pt-0">
           <div>
-            <h1 className="text-base-black font-bold">{job?.title}</h1>
+            <h1 className="text-base-black font-bold">{title}</h1>
           </div>
           <div className="flex items-center gap-6 max-sm:justify-between max-sm:flex-wrap">
             {JobInformationsData.map((data) =>
@@ -191,7 +209,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({ job, onApplyJob }) => {
               <h1 className="font-bold">Overview</h1>
             </div>
             <div className="py-3">
-              <p>{job?.overview}</p>
+              <p>{overview}</p>
             </div>
           </div>
           <div>

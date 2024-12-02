@@ -20,26 +20,41 @@ type SeekerDetailsInfoProps = {
   seeker: SeekerTypes;
 };
 
-const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
-  const profileImageUrl = getImageUrl(seeker?.image);
-  const categorizedSkills = getSkillsData(seeker?.skills);
+const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({
+  seeker: {
+    _id,
+    image,
+    skills,
+    portfolio,
+    github,
+    linkedin,
+    first_name,
+    last_name,
+    headline,
+    biography,
+    experience,
+    education,
+  },
+}) => {
+  const profileImageUrl = getImageUrl(image);
+  const categorizedSkills = getSkillsData(skills);
 
   const SocialsArrays = [
     {
       id: "1",
-      href: seeker?.portfolio,
+      href: portfolio,
       icon: <LucideImage />,
       label: "Portfolio",
     },
     {
       id: "2",
-      href: seeker?.github,
+      href: github,
       icon: <Github />,
       label: "Github",
     },
     {
       id: "3",
-      href: seeker?.linkedin,
+      href: linkedin,
       icon: <Linkedin />,
       label: "Linkedin",
     },
@@ -47,7 +62,7 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
 
   return (
     <div className="flex flex-col gap-6">
-      <Navigator info="Seekers" href={"/seekers"} title={seeker?.first_name} />
+      <Navigator info="Seekers" href={"/seekers"} title={first_name} />
       <Card>
         <CardHeader>
           <div className="flex justify-between items-start gap-5 max-sm:flex-col">
@@ -64,11 +79,11 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
               <div className="flex flex-col gap-[3px]">
                 <div>
                   <h1 className="text-base-black">
-                    {seeker?.first_name} {seeker?.last_name}
+                    {first_name} {last_name}
                   </h1>
                 </div>
                 <div>
-                  <p className="font-bold">{seeker?.headline}</p>
+                  <p className="font-bold">{headline}</p>
                 </div>
               </div>
             </div>
@@ -101,9 +116,9 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
             <div>
               <h1 className="font-bold">Biography</h1>
             </div>
-            {seeker?.biography ? (
+            {biography ? (
               <div>
-                <p className="text-initial-gray">{seeker?.biography}</p>
+                <p className="text-initial-gray">{biography}</p>
               </div>
             ) : (
               <div>
@@ -116,10 +131,7 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
               <h1 className="font-bold">Experience</h1>
             </div>
             <div>
-              <ExperienceList
-                openForm={() => {}}
-                experiences={seeker?.experience}
-              />
+              <ExperienceList openForm={() => {}} experiences={experience} />
             </div>
           </div>
           <div className="flex flex-col gap-3">
@@ -127,17 +139,14 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
               <h1 className="font-bold">Education</h1>
             </div>
             <div>
-              <EducationList
-                openForm={() => {}}
-                educations={seeker?.education}
-              />
+              <EducationList openForm={() => {}} educations={education} />
             </div>
           </div>
           <div className="flex flex-col gap-3">
             <div>
               <h1 className="font-bold">Skills</h1>
             </div>
-            {seeker?.skills.length > 0 ? (
+            {skills.length > 0 ? (
               renderSkills(categorizedSkills)
             ) : (
               <div>

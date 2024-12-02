@@ -8,6 +8,8 @@ import { ScaleLoader } from "react-spinners";
 import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
 import { SeekerSocialsSchema } from "@/lib/zod/seekers.validation";
 
+import { SeekerTypes } from "@/types";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -33,26 +35,22 @@ import {
 type EditSocialsFormProps = {
   isEditSocialsOpen: boolean;
   closeEditSocials: () => void;
-  seeker?: {
-    portfolio: string;
-    linkedin: string;
-    github: string;
-  };
+  seeker: Pick<SeekerTypes, "portfolio" | "linkedin" | "github">;
   isDialog: boolean;
 };
 
 const EditSocialsForm: React.FC<EditSocialsFormProps> = ({
   isEditSocialsOpen,
   closeEditSocials,
-  seeker,
+  seeker: { portfolio, linkedin, github },
   isDialog,
 }) => {
   const form = useForm<zod.infer<typeof SeekerSocialsSchema>>({
     resolver: zodResolver(SeekerSocialsSchema),
     defaultValues: {
-      portfolio: seeker?.portfolio || "",
-      github: seeker?.github || "",
-      linkedin: seeker?.linkedin || "",
+      portfolio: portfolio || "",
+      github: github || "",
+      linkedin: linkedin || "",
     },
     mode: "all",
   });

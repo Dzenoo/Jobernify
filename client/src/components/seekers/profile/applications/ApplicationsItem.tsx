@@ -26,27 +26,40 @@ import { ApplicationsTypes } from "@/types";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 type ApplicationItemProps = {
-  application: ApplicationsTypes;
+  application: Pick<ApplicationsTypes, "_id" | "status" | "createdAt" | "job">;
 };
 
-const ApplicationsItem: React.FC<ApplicationItemProps> = ({ application }) => {
-  const appliedDate = formatDate(application?.createdAt || "");
+const ApplicationsItem: React.FC<ApplicationItemProps> = ({
+  application: {
+    _id,
+    status,
+    createdAt,
+    job: {
+      company: { industry, name, size, address, image },
+      level,
+      position,
+      title,
+      type,
+    },
+  },
+}) => {
+  const appliedDate = formatDate(createdAt || "");
 
   const ApplicationCompanyInfo = [
     {
       id: "1",
       icon: <Building />,
-      data: findIndustriesData(application?.job.company.industry),
+      data: findIndustriesData(industry),
     },
     {
       id: "2",
       icon: <MapPin />,
-      data: application?.job.company.address,
+      data: address,
     },
     {
       id: "3",
       icon: <LayoutTemplate />,
-      data: application?.job.company.size,
+      data: size,
     },
   ];
 
@@ -54,23 +67,23 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({ application }) => {
     {
       id: "1",
       icon: <GraduationCap />,
-      data: application?.job.level,
+      data: level,
     },
     {
       id: "2",
       icon: <Briefcase />,
-      data: application?.job.type,
+      data: type,
     },
     {
       id: "3",
       icon: <Calendar />,
-      data: application?.job.position,
+      data: position,
     },
   ];
 
-  const applicationStatusAccepted = application?.status === "Accepted";
-  const applicationStatusRejected = application?.status === "Rejected";
-  const applicationsStatusInterview = application?.status === "Interview";
+  const applicationStatusAccepted = status === "Accepted";
+  const applicationStatusRejected = status === "Rejected";
+  const applicationsStatusInterview = status === "Interview";
 
   return (
     <Card className="dark:border-[#3b3b3b]">
@@ -78,13 +91,13 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({ application }) => {
         <div className="flex gap-3 items-center max-xl:flex-wrap">
           <Avatar className="w-28 h-28">
             <AvatarImage
-              src={getImageUrl(application?.job.company?.image)}
+              src={getImageUrl(image)}
               className="object-cover w-auto h-auto"
             />
           </Avatar>
           <div className="flex flex-col gap-3">
             <div>
-              <h1>{application?.job.company.name}</h1>
+              <h1>{name}</h1>
             </div>
             <div className="flex gap-3 items-center flex-wrap">
               {ApplicationCompanyInfo.map((data) => renderIconText(data))}
@@ -95,10 +108,8 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({ application }) => {
       <CardContent>
         <div className="flex flex-col gap-6">
           <div>
-            <Link href={`/jobs/${application?.job._id}`}>
-              <h1 className="font-bold text-xl overflow-auto">
-                {application?.job.title}
-              </h1>
+            <Link href={`/jobs/${_id}`}>
+              <h1 className="font-bold text-xl overflow-auto">{title}</h1>
             </Link>
           </div>
           <div className="flex gap-6 items-center flex-wrap justify-between">
@@ -137,7 +148,7 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({ application }) => {
                : "text-[--blue-base-color]"
            }`}
           >
-            {application?.status}
+            {status}
           </p>
         </div>
       </CardFooter>

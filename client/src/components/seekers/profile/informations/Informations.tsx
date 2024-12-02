@@ -25,10 +25,12 @@ import {
 } from "@/components/ui/form";
 
 type InformationsProps = {
-  seeker?: SeekerTypes;
+  seeker: SeekerTypes;
 };
 
-const Informations: React.FC<InformationsProps> = ({ seeker }) => {
+const Informations: React.FC<InformationsProps> = ({
+  seeker: { _id, first_name, last_name, headline, biography, ...seeker },
+}) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
   const form = useForm<zod.infer<typeof SeekerProfileSchema>>({
@@ -40,10 +42,10 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
 
   useEffect(() => {
     if (isEditMode && seeker) {
-      form.setValue("first_name", seeker.first_name || "");
-      form.setValue("last_name", seeker.last_name || "");
-      form.setValue("headline", seeker.headline || "");
-      form.setValue("biography", seeker.biography || "");
+      form.setValue("first_name", first_name || "");
+      form.setValue("last_name", last_name || "");
+      form.setValue("headline", headline || "");
+      form.setValue("biography", biography || "");
     }
   }, [isEditMode, seeker, form.setValue]);
 
@@ -66,12 +68,12 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
     {
       id: "1",
       title: "First Name",
-      data: seeker?.first_name,
+      data: first_name,
     },
     {
       id: "2",
       title: "Last Name",
-      data: seeker?.last_name,
+      data: last_name,
     },
   ];
 
@@ -115,9 +117,7 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
               </div>
               <div>
                 <p className="text-initial-gray">
-                  {seeker?.headline
-                    ? seeker.headline
-                    : "Headline not available"}
+                  {headline ? headline : "Headline not available"}
                 </p>
               </div>
             </div>
@@ -127,9 +127,7 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
               </div>
               <div>
                 <p className="text-initial-gray">
-                  {seeker?.biography
-                    ? seeker.biography
-                    : "Biography not available"}
+                  {biography ? biography : "Biography not available"}
                 </p>
               </div>
             </div>

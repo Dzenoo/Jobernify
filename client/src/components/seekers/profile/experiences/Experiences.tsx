@@ -14,15 +14,17 @@ import { Dialog } from "@/components/ui/dialog";
 import { Drawer } from "@/components/ui/drawer";
 
 type ExperiencesProps = {
-  seeker?: SeekerTypes;
+  seeker: Pick<SeekerTypes, "experience">;
 };
 
-const Experiences: React.FC<ExperiencesProps> = ({ seeker }) => {
+const Experiences: React.FC<ExperiencesProps> = ({
+  seeker: { experience },
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [experienceId, setExperienceId] = useState<string | null>(null);
   const isEdit = Boolean(experienceId);
   const isLarge = useMediaQuery("(min-width: 1280px)");
-  const experience = seeker?.experience.find(
+  const seekerExperience = experience.find(
     (experience) => experience._id === experienceId
   );
 
@@ -44,7 +46,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ seeker }) => {
             <ExperienceForm
               isEdit={isEdit}
               experienceId={experienceId}
-              experience={experience as ExperienceTypes}
+              experience={seekerExperience as ExperienceTypes}
               isOpen={isOpen}
               closeForm={closeForm}
               isDialog={true}
@@ -58,7 +60,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ seeker }) => {
             <ExperienceForm
               isEdit={isEdit}
               experienceId={experienceId}
-              experience={experience as ExperienceTypes}
+              experience={seekerExperience as ExperienceTypes}
               isOpen={isOpen}
               closeForm={closeForm}
               isDialog={false}
@@ -70,7 +72,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ seeker }) => {
         <div className="flex justify-between items-center gap-3">
           <div>
             <h1 className="text-base-black">
-              Experience ({seeker?.experience.length})
+              Experience ({experience.length})
             </h1>
           </div>
           <div>
@@ -87,10 +89,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ seeker }) => {
           </div>
         </div>
         <div>
-          <ExperienceList
-            experiences={seeker?.experience}
-            openForm={openForm}
-          />
+          <ExperienceList experiences={experience} openForm={openForm} />
         </div>
       </div>
     </Fragment>

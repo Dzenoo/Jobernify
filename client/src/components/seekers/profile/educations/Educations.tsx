@@ -14,15 +14,15 @@ import { Dialog } from "@/components/ui/dialog";
 import { Drawer } from "@/components/ui/drawer";
 
 type EducationsProps = {
-  seeker?: SeekerTypes;
+  seeker: Pick<SeekerTypes, "education">;
 };
 
-const Educations: React.FC<EducationsProps> = ({ seeker }) => {
+const Educations: React.FC<EducationsProps> = ({ seeker: { education } }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [educationId, setEducationId] = useState<string | null>(null);
   const isEdit = Boolean(educationId);
   const isLarge = useMediaQuery("(min-width: 1280px)");
-  const education = seeker?.education.find(
+  const seekerEducation = education.find(
     (education) => education._id === educationId
   );
 
@@ -44,7 +44,7 @@ const Educations: React.FC<EducationsProps> = ({ seeker }) => {
             <EducationForm
               isEdit={isEdit}
               educationId={educationId}
-              education={education as EducationTypes}
+              education={seekerEducation as EducationTypes}
               isOpen={isOpen}
               closeForm={closeForm}
               isDialog={true}
@@ -58,7 +58,7 @@ const Educations: React.FC<EducationsProps> = ({ seeker }) => {
             <EducationForm
               isEdit={isEdit}
               educationId={educationId}
-              education={education as EducationTypes}
+              education={seekerEducation as EducationTypes}
               isOpen={isOpen}
               closeForm={closeForm}
               isDialog={false}
@@ -85,7 +85,7 @@ const Educations: React.FC<EducationsProps> = ({ seeker }) => {
           </div>
         </div>
         <div>
-          <EducationList educations={seeker?.education} openForm={openForm} />
+          <EducationList educations={education} openForm={openForm} />
         </div>
       </div>
     </Fragment>

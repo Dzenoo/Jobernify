@@ -20,28 +20,40 @@ type SeekerItemProps = {
   seeker: SeekerTypes;
 };
 
-const SeekerItem: React.FC<SeekerItemProps> = ({ seeker }) => {
+const SeekerItem: React.FC<SeekerItemProps> = ({
+  seeker: {
+    _id,
+    portfolio,
+    github,
+    linkedin,
+    image,
+    skills,
+    first_name,
+    last_name,
+    headline,
+  },
+}) => {
   const SocialsArrays = [
     {
       id: "1",
-      href: seeker?.portfolio,
+      href: portfolio,
       icon: <LucideImage />,
     },
     {
       id: "2",
-      href: seeker?.github,
+      href: github,
       icon: <Github />,
     },
     {
       id: "3",
-      href: seeker?.linkedin,
+      href: linkedin,
       icon: <Linkedin />,
     },
   ];
 
-  const profileImageUrl = getImageUrl(seeker?.image);
+  const profileImageUrl = getImageUrl(image);
 
-  const skillNames = getSkillNames(seeker?.skills || []);
+  const skillNames = getSkillNames(skills || []);
 
   return (
     <Card hoverable={true} className="overflow-hidden">
@@ -58,15 +70,15 @@ const SeekerItem: React.FC<SeekerItemProps> = ({ seeker }) => {
         <div>
           <Link
             className="hover:text-blue-700 hover:underline"
-            href={`/seekers/${seeker?._id}`}
+            href={`/seekers/${_id}`}
           >
             <h1 className="font-bold">
-              {seeker?.first_name} {seeker?.last_name}
+              {first_name} {last_name}
             </h1>
           </Link>
         </div>
         <div>
-          <p>{seeker?.headline}</p>
+          <p>{headline}</p>
         </div>
         <div className="flex items-center gap-10 pt-3">
           {SocialsArrays.map((socials) =>

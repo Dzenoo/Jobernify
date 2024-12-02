@@ -5,7 +5,7 @@ import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import NewAlertForm from "./forms/NewAlertForm";
 import ReceiveJobAlertsForm from "./forms/ReceiveJobAlertsForm";
 
-import { JobAlertsTypes } from "@/types";
+import { SeekerTypes } from "@/types";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Dialog } from "@/components/ui/dialog";
@@ -13,7 +13,7 @@ import { Drawer } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 
 type SeekerAlertsProps = {
-  alertsData: { alerts?: JobAlertsTypes; receiveJobAlerts: boolean };
+  alertsData: Pick<SeekerTypes, "alerts" | "receiveJobAlerts">;
   token: string;
 };
 

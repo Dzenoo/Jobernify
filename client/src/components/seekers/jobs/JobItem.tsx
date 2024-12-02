@@ -36,21 +36,34 @@ type JobItemProps = {
   showDescription?: boolean;
 };
 
-const JobItem: React.FC<JobItemProps> = ({ job, showDescription = true }) => {
-  const isJobExpired = checkExpired(job.expiration_date);
-  const expirationDate = formatDate(job.expiration_date);
-  const createdTime = getTime(job.createdAt);
+const JobItem: React.FC<JobItemProps> = ({
+  job: {
+    _id,
+    title,
+    company,
+    overview,
+    expiration_date,
+    createdAt,
+    location,
+    level,
+    applications,
+  },
+  showDescription = true,
+}) => {
+  const isJobExpired = checkExpired(expiration_date);
+  const expirationDate = formatDate(expiration_date);
+  const createdTime = getTime(createdAt);
 
   let FooterInfoData = [
     {
       id: "1",
-      data: findLocationData(job.location),
+      data: findLocationData(location),
       icon: <MapPin color="gray" />,
       tooltip: "Location",
     },
     {
       id: "2",
-      data: job.level,
+      data: level,
       icon: <GraduationCap color="gray" />,
       tooltip: "Level",
     },
@@ -68,10 +81,10 @@ const JobItem: React.FC<JobItemProps> = ({ job, showDescription = true }) => {
         <CardHeader>
           <div className="flex justify-between sm:items-center">
             <div className="flex items-center gap-3 flex-wrap">
-              <Link href={`/companies/${job?.company._id}?section=jobs`}>
+              <Link href={`/companies/${company._id}?section=jobs`}>
                 <Avatar className="border border-blue-100 dark:border-[#1b1b1b] w-12 h-12">
                   <AvatarImage
-                    src={getImageUrl(job.company?.image)}
+                    src={getImageUrl(company?.image)}
                     className="object-cover w-auto h-auto"
                   />
                 </Avatar>
@@ -81,9 +94,9 @@ const JobItem: React.FC<JobItemProps> = ({ job, showDescription = true }) => {
                   <TooltipProvider delayDuration={0.1}>
                     <Tooltip>
                       <TooltipTrigger>
-                        <Link href={`/jobs/${job._id}`}>
+                        <Link href={`/jobs/${_id}`}>
                           <h1 className="transition-all hover:text-blue-700 text-base-black font-bold max-sm:text-lg">
-                            {job.title}
+                            {title}
                           </h1>
                         </Link>
                       </TooltipTrigger>
@@ -93,27 +106,25 @@ const JobItem: React.FC<JobItemProps> = ({ job, showDescription = true }) => {
                 </div>
                 <div className="flex items-center gap-3 max-sm:flex-wrap">
                   <div>
-                    <p className="text-low-gray">{job.company?.name}</p>
+                    <p className="text-low-gray">{company?.name}</p>
                   </div>
                   <div>
                     <p className="text-low-gray">
-                      {job?.applications?.length} Applicants
+                      {applications?.length} Applicants
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <SaveJobButton jobId={job?._id} />
+            <SaveJobButton jobId={_id} />
           </div>
         </CardHeader>
         {showDescription && (
           <CardContent className="pt-0 break-words">
             <div>
-              <p className="text-initial-black hidden md:block">
-                {job.overview}
-              </p>
+              <p className="text-initial-black hidden md:block">{overview}</p>
               <p className="text-initial-black md:hidden">
-                {truncate(job?.overview, 80)}
+                {truncate(overview, 80)}
               </p>
             </div>
           </CardContent>

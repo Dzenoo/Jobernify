@@ -7,22 +7,24 @@ import { getImageUrl } from "@/lib/utils";
 import { SeekerTypes } from "@/types";
 
 type NameWithImage = {
-  seeker: SeekerTypes;
+  seeker: Pick<SeekerTypes, "first_name" | "last_name" | "image">;
 };
 
-const NameWithImage: React.FC<NameWithImage> = ({ seeker }) => {
+const NameWithImage: React.FC<NameWithImage> = ({
+  seeker: { first_name, last_name, image },
+}) => {
   return (
     <div className="flex items-center gap-3">
       <Image
         width={30}
         height={30}
         className="rounded-full object-cover"
-        src={getImageUrl(seeker.image)}
-        alt={`${seeker.first_name} ${seeker.last_name}`}
+        src={getImageUrl(image)}
+        alt={`${first_name} ${last_name}`}
       />
       <div>
         <h1>
-          {seeker.first_name} {seeker.last_name}
+          {first_name} {last_name}
         </h1>
       </div>
     </div>

@@ -73,10 +73,10 @@ const SeekerProfile: React.FC<SeekerProfileProps> = ({ seeker, token }) => {
           </div>
         </CardHeader>
         <CardContent className="flex flex-col gap-10">
-          <Informations seeker={seeker} />
-          <Socials seeker={seeker} />
-          <Experiences seeker={seeker} />
-          <Educations seeker={seeker} />
+          <Informations seeker={seeker as SeekerTypes} />
+          <Socials seeker={seeker as SeekerTypes} />
+          <Experiences seeker={seeker as SeekerTypes} />
+          <Educations seeker={seeker as SeekerTypes} />
           <Skills skills={seeker?.skills} />
         </CardContent>
       </Card>
