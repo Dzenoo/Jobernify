@@ -13,12 +13,10 @@ import { Drawer } from "@/components/ui/drawer";
 import EditSocialsForm from "./forms/EditSocialsForm";
 
 type SocialsProps = {
-  seeker: Pick<SeekerTypes, "portfolio" | "linkedin" | "github">;
+  seeker?: SeekerTypes;
 };
 
-const Socials: React.FC<SocialsProps> = ({
-  seeker: { portfolio, linkedin, github },
-}) => {
+const Socials: React.FC<SocialsProps> = ({ seeker }) => {
   const isLarge = useMediaQuery("(min-width: 1280px)");
   const [isEditSocialsOpen, setIsEditSocialsOpen] = useState(false);
 
@@ -29,19 +27,19 @@ const Socials: React.FC<SocialsProps> = ({
     {
       id: "1",
       title: "Portfolio",
-      data: portfolio || "",
+      data: seeker?.portfolio || "",
       icon: <Image />,
     },
     {
       id: "2",
       title: "Github",
-      data: github || "",
+      data: seeker?.github || "",
       icon: <Github />,
     },
     {
       id: "3",
       title: "Linkedin",
-      data: linkedin || "",
+      data: seeker?.linkedin || "",
       icon: <Linkedin />,
     },
   ];
@@ -52,7 +50,7 @@ const Socials: React.FC<SocialsProps> = ({
         <Dialog open={isEditSocialsOpen} onOpenChange={setIsEditSocialsOpen}>
           <EditSocialsForm
             isEditSocialsOpen={isEditSocialsOpen}
-            seeker={{ portfolio, linkedin, github }}
+            seeker={seeker}
             closeEditSocials={closeEditSocials}
             isDialog={true}
           />
@@ -62,7 +60,7 @@ const Socials: React.FC<SocialsProps> = ({
         <Drawer open={isEditSocialsOpen} onOpenChange={setIsEditSocialsOpen}>
           <EditSocialsForm
             isEditSocialsOpen={isEditSocialsOpen}
-            seeker={{ portfolio, linkedin, github }}
+            seeker={seeker}
             closeEditSocials={closeEditSocials}
             isDialog={false}
           />

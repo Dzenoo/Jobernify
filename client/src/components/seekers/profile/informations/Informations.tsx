@@ -28,9 +28,7 @@ type InformationsProps = {
   seeker: SeekerTypes;
 };
 
-const Informations: React.FC<InformationsProps> = ({
-  seeker: { _id, first_name, last_name, headline, biography, ...seeker },
-}) => {
+const Informations: React.FC<InformationsProps> = ({ seeker }) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
   const form = useForm<zod.infer<typeof SeekerProfileSchema>>({
@@ -42,10 +40,10 @@ const Informations: React.FC<InformationsProps> = ({
 
   useEffect(() => {
     if (isEditMode && seeker) {
-      form.setValue("first_name", first_name || "");
-      form.setValue("last_name", last_name || "");
-      form.setValue("headline", headline || "");
-      form.setValue("biography", biography || "");
+      form.setValue("first_name", seeker?.first_name || "");
+      form.setValue("last_name", seeker?.last_name || "");
+      form.setValue("headline", seeker?.headline || "");
+      form.setValue("biography", seeker?.biography || "");
     }
   }, [isEditMode, seeker, form.setValue]);
 
@@ -68,12 +66,12 @@ const Informations: React.FC<InformationsProps> = ({
     {
       id: "1",
       title: "First Name",
-      data: first_name,
+      data: seeker?.first_name,
     },
     {
       id: "2",
       title: "Last Name",
-      data: last_name,
+      data: seeker?.last_name,
     },
   ];
 
@@ -117,7 +115,7 @@ const Informations: React.FC<InformationsProps> = ({
               </div>
               <div>
                 <p className="text-initial-gray">
-                  {headline ? headline : "Headline not available"}
+                  {seeker.headline ? seeker.headline : "Headline not available"}
                 </p>
               </div>
             </div>
@@ -127,7 +125,9 @@ const Informations: React.FC<InformationsProps> = ({
               </div>
               <div>
                 <p className="text-initial-gray">
-                  {biography ? biography : "Biography not available"}
+                  {seeker.biography
+                    ? seeker.biography
+                    : "Biography not available"}
                 </p>
               </div>
             </div>

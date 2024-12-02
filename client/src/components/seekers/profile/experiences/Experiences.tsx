@@ -2,7 +2,7 @@
 
 import React, { Fragment, useState } from "react";
 
-import { ExperienceTypes, SeekerTypes } from "@/types";
+import { ExperienceTypes } from "@/types";
 import { Plus } from "lucide-react";
 
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
@@ -14,12 +14,10 @@ import { Dialog } from "@/components/ui/dialog";
 import { Drawer } from "@/components/ui/drawer";
 
 type ExperiencesProps = {
-  seeker: Pick<SeekerTypes, "experience">;
+  experience: ExperienceTypes[] | [];
 };
 
-const Experiences: React.FC<ExperiencesProps> = ({
-  seeker: { experience },
-}) => {
+const Experiences: React.FC<ExperiencesProps> = ({ experience }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [experienceId, setExperienceId] = useState<string | null>(null);
   const isEdit = Boolean(experienceId);

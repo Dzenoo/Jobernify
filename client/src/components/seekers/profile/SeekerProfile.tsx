@@ -22,7 +22,7 @@ import { Dialog } from "@/components/ui/dialog";
 import { Drawer } from "@/components/ui/drawer";
 
 type SeekerProfileProps = {
-  seeker?: SeekerTypes;
+  seeker: SeekerTypes;
   token: string;
 };
 
@@ -73,11 +73,11 @@ const SeekerProfile: React.FC<SeekerProfileProps> = ({ seeker, token }) => {
           </div>
         </CardHeader>
         <CardContent className="flex flex-col gap-10">
-          <Informations seeker={seeker as SeekerTypes} />
-          <Socials seeker={seeker as SeekerTypes} />
-          <Experiences seeker={seeker as SeekerTypes} />
-          <Educations seeker={seeker as SeekerTypes} />
-          <Skills skills={seeker?.skills} />
+          <Informations seeker={seeker} />
+          <Socials seeker={seeker} />
+          <Experiences experience={seeker.experience || []} />
+          <Educations education={seeker.education || []} />
+          <Skills skills={seeker.skills || []} />
         </CardContent>
       </Card>
     </Fragment>

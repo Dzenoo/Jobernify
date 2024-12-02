@@ -7,7 +7,7 @@ import { ExperienceTypes } from "@/types";
 import { Button } from "@/components/ui/button";
 
 type ExperienceListProps = {
-  experiences?: ExperienceTypes[];
+  experiences: ExperienceTypes[];
   openForm: (id: string) => void;
 };
 

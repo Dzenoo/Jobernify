@@ -128,7 +128,7 @@ const AddSkillsForm: React.FC<AddSkillsProps> = ({
 };
 
 type SkillsProps = {
-  skills?: string[];
+  skills: string[] | [];
 };
 
 const Skills: React.FC<SkillsProps> = ({ skills }) => {

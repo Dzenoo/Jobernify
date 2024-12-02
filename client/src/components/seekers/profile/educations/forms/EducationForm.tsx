@@ -59,7 +59,7 @@ type EducationFormProps = {
 const EducationForm: React.FC<EducationFormProps> = ({
   isEdit,
   educationId,
-  education: { degree, fieldOfStudy, graduationDate, institution },
+  education,
   closeForm,
   isOpen,
   isDialog,
@@ -72,10 +72,10 @@ const EducationForm: React.FC<EducationFormProps> = ({
   const form = useForm<zod.infer<typeof SchemaToInfer>>({
     resolver: zodResolver(SchemaToInfer),
     defaultValues: {
-      graduationDate: isEdit ? new Date(graduationDate) : new Date(),
-      institution: isEdit ? institution : "",
-      degree: isEdit ? degree : "",
-      fieldOfStudy: isEdit ? fieldOfStudy : "",
+      graduationDate: isEdit ? new Date(education.graduationDate) : new Date(),
+      institution: isEdit ? education.institution : "",
+      degree: isEdit ? education.degree : "",
+      fieldOfStudy: isEdit ? education.fieldOfStudy : "",
     },
     mode: "all",
   });

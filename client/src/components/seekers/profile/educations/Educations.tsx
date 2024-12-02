@@ -2,7 +2,7 @@
 
 import React, { Fragment, useState } from "react";
 
-import { EducationTypes, SeekerTypes } from "@/types";
+import { EducationTypes } from "@/types";
 import { Plus } from "lucide-react";
 
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
@@ -14,10 +14,10 @@ import { Dialog } from "@/components/ui/dialog";
 import { Drawer } from "@/components/ui/drawer";
 
 type EducationsProps = {
-  seeker: Pick<SeekerTypes, "education">;
+  education: EducationTypes[] | [];
 };
 
-const Educations: React.FC<EducationsProps> = ({ seeker: { education } }) => {
+const Educations: React.FC<EducationsProps> = ({ education }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [educationId, setEducationId] = useState<string | null>(null);
   const isEdit = Boolean(educationId);

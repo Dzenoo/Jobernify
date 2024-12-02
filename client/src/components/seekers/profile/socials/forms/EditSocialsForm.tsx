@@ -8,8 +8,6 @@ import { ScaleLoader } from "react-spinners";
 import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
 import { SeekerSocialsSchema } from "@/lib/zod/seekers.validation";
 
-import { SeekerTypes } from "@/types";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -35,22 +33,26 @@ import {
 type EditSocialsFormProps = {
   isEditSocialsOpen: boolean;
   closeEditSocials: () => void;
-  seeker: Pick<SeekerTypes, "portfolio" | "linkedin" | "github">;
+  seeker?: {
+    portfolio: string;
+    linkedin: string;
+    github: string;
+  };
   isDialog: boolean;
 };
 
 const EditSocialsForm: React.FC<EditSocialsFormProps> = ({
   isEditSocialsOpen,
   closeEditSocials,
-  seeker: { portfolio, linkedin, github },
+  seeker,
   isDialog,
 }) => {
   const form = useForm<zod.infer<typeof SeekerSocialsSchema>>({
     resolver: zodResolver(SeekerSocialsSchema),
     defaultValues: {
-      portfolio: portfolio || "",
-      github: github || "",
-      linkedin: linkedin || "",
+      portfolio: seeker?.portfolio || "",
+      github: seeker?.github || "",
+      linkedin: seeker?.linkedin || "",
     },
     mode: "all",
   });
@@ -58,9 +60,12 @@ const EditSocialsForm: React.FC<EditSocialsFormProps> = ({
   const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
 
   React.useEffect(() => {
-    if (isEditSocialsOpen) {
-      form.reset();
-    }
+    if (!isEditSocialsOpen)
+      form.reset({
+        portfolio: seeker?.portfolio || "",
+        github: seeker?.github || "",
+        linkedin: seeker?.linkedin || "",
+      });
   }, [isEditSocialsOpen]);
 
   const onSubmit = async (values: zod.infer<typeof SeekerSocialsSchema>) => {
