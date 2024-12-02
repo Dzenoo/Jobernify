@@ -83,13 +83,13 @@ const FiltersContent: React.FC<{
     <div className="flex flex-col gap-5">
       <div className="flex justify-between items-center gap-5 max-xl:hidden">
         <div>
-          <h1 className="text-xl font-bold">Job Filters</h1>
+          <h1 className="text-xl font-bold">Filters</h1>
         </div>
         <div>
           <Filter />
         </div>
       </div>
-      <div>
+      <div className="flex flex-col gap-7">
         {updatedJobsFiltersData.map((filterGroup) => (
           <FilterHandler
             key={filterGroup.id}

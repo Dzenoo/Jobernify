@@ -57,8 +57,8 @@ const Jobs = ({
   const isFiltering = isLoading || isFetching || isRefetching;
 
   return (
-    <section className="flex justify-between gap-[25px] max-xl:flex-col">
-      <div className="basis-1/2 flex flex-col gap-5">
+    <section className="flex justify-between gap-10 max-xl:flex-col">
+      <div className="basis-2/5 flex flex-col gap-5">
         <div>
           <SeekerInfo />
         </div>
@@ -97,7 +97,7 @@ const Jobs = ({
           />
         )}
       </div>
-      <div className="max-xl:hidden basis-1/2">
+      <div className="basis-2/5 max-xl:hidden">
         <FilterJobs filterCounts={fetchedJobs?.filterCounts || []} />
       </div>
     </section>

@@ -26,7 +26,9 @@ const JobsList: React.FC<JobListProps> = ({
             <h2 className="text-lg font-semibold ">No Jobs Found</h2>
           </div>
           <div>
-            <p className="text-gray-600 text-center">{message}</p>
+            <p className="text-gray-600 dark:text-gray-400 text-center">
+              {message}
+            </p>
           </div>
         </div>
       ) : (

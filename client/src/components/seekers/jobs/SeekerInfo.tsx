@@ -35,22 +35,24 @@ const SeekerInfo: React.FC = () => {
             alt="seeker"
           />
         </div>
-        <div>
-          <h1 className="font-bold">
-            {seeker?.first_name} {seeker?.last_name}
-          </h1>
-        </div>
-        {seeker?.headline && (
+        <div className="flex flex-col gap-3 items-center justify-center text-center">
           <div>
-            <p className="text-gray-500 dark:text-gray-400">
-              {seeker?.headline}
-            </p>
+            <h1 className="font-bold">
+              {seeker?.first_name} {seeker?.last_name}
+            </h1>
           </div>
-        )}
-        <div>
-          <Link href={`/profile`}>
-            <Button className="px-10">Edit Profile</Button>
-          </Link>
+          {seeker?.headline && (
+            <div>
+              <p className="text-gray-500 dark:text-gray-400">
+                {seeker?.headline}
+              </p>
+            </div>
+          )}
+          <div>
+            <Link href={`/profile`}>
+              <Button className="px-10">Edit Profile</Button>
+            </Link>
+          </div>
         </div>
       </CardContent>
     </Card>

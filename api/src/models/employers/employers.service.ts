@@ -354,7 +354,9 @@ export class EmployersService {
       .sort(sortOptions)
       .skip((page - 1) * limit)
       .limit(limit)
-      .select('image name companyDescription followers size address')
+      .select(
+        'image name companyDescription followers size address jobs industry',
+      )
       .exec();
 
     const totalEmployers = await this.employerModel.countDocuments(conditions);

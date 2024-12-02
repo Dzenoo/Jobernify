@@ -72,7 +72,7 @@ const FiltersContent: React.FC = () => {
           <Filter />
         </div>
       </div>
-      <div>
+      <div className="flex flex-col gap-7">
         {transformedSkillsInformationsData.map((filterGroup) => (
           <FilterHandler
             key={filterGroup.id}

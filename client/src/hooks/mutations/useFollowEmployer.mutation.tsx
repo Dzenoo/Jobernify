@@ -14,9 +14,8 @@ const useFollowEmployer = (employerId: string) => {
   return useMutation({
     mutationFn: () => followEmployer(employerId, token as string),
     mutationKey: ["profile", "company", "companies"],
-    onSuccess: (response) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["profile", "company", "companies"]);
-      toast({ title: "Success", description: response.message });
     },
     onError: (error: any) => {
       toast({ title: "Error", description: error.response.data.message });

@@ -164,6 +164,16 @@ export const findLocationData = (selectedValue: string): string => {
   return selectedOption ? selectedOption.label : "Location not found";
 };
 
+/**
+ * Truncates text to a specified length.
+ * @param text - The text to truncate
+ * @param length - The length to truncate the text to
+ * @returns The truncated text
+ */
+export const truncate = (text: string, length: number): string => {
+  return text?.length > length ? text.substring(0, length) + "..." : text;
+};
+
 // -------------------------------
 // Skills Utilities
 // -------------------------------

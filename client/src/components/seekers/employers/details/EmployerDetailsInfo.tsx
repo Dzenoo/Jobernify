@@ -1,8 +1,6 @@
 import React from "react";
 
-import Link from "next/link";
-
-import { Building, Camera, Text } from "lucide-react";
+import { Building, Camera, LayoutTemplate } from "lucide-react";
 
 import { EmployerTypes } from "@/types";
 import { findIndustriesData, getImageUrl } from "@/lib/utils";
@@ -25,72 +23,77 @@ type EmployerDetailsInfoProps = {
 };
 
 const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
-  employer,
+  employer: {
+    _id,
+    name,
+    image,
+    address,
+    companyDescription,
+    website,
+    followers,
+    industry,
+    size,
+  },
 }) => {
-  const employerIndustry = findIndustriesData(employer?.industry);
+  const employerIndustry = findIndustriesData(industry);
 
   const FooterEmployerData = [
     {
       id: "1",
       icon: <Camera color="gray" />,
-      data: employer?.followers.length + " Followers",
+      data: followers?.length + " Followers",
+    },
+    {
+      id: "2",
+      icon: <Building color="gray" />,
+      data: employerIndustry,
+    },
+    {
+      id: "3",
+      icon: <LayoutTemplate color="gray" />,
+      data: size + " Employees",
     },
   ];
 
   return (
     <div className="flex flex-col gap-6">
-      <Navigator info="Employers" href={"/companies"} title={employer?.name} />
+      <Navigator info="Employers" href={"/companies"} title={name} />
       <Card>
-        <div className="flex overflow-auto justify-between max-lg:flex-wrap">
-          <div className="flex sm:items-center gap-3 max-sm:flex-col">
+        <div className="flex overflow-auto justify-between max-lg:flex-col hide-scrollbar">
+          <div className="flex sm:items-center max-sm:flex-col">
             <CardHeader>
-              <Avatar className="border border-blue-100 w-36 h-36">
+              <Avatar className="border border-blue-100 dark:border-[#1b1b1b] w-36 h-36">
                 <AvatarImage
-                  src={getImageUrl(employer?.image)}
+                  src={getImageUrl(image)}
                   className="object-cover w-auto h-auto"
                 />
               </Avatar>
             </CardHeader>
-            <CardContent className="flex flex-col gap-3 sm:pl-0">
-              <div className="rounded-full bg-blue-100 p-3 w-fit dark:bg-blue-500">
-                <p className="text-initial-blue">
-                  {employer?.address || "Location"}
-                </p>
+            <CardContent className="flex flex-col justify-between gap-5 sm:pl-0">
+              <div className="rounded-full bg-gray-100 p-3 w-fit dark:bg-[#1b1b1b]">
+                <p className="text-low-gray">{address || "Location"}</p>
               </div>
               <div>
-                <h1 className="text-base-black">{employer?.name}</h1>
+                <h1 className="text-base-black">{name}</h1>
               </div>
-              <div>
-                {renderIconText({
-                  id: "1",
-                  icon: <Building color="gray" />,
-                  data: employerIndustry,
-                })}
+              <div className="flex items-center gap-5 whitespace-nowrap max-sm:flex-col max-sm:items-start">
+                {FooterEmployerData.map((data) => renderIconText(data))}
               </div>
             </CardContent>
           </div>
           <CardFooter className="items-start pt-5 flex flex-col justify-between gap-10 max-lg:basis-full">
-            <div className="flex items-center gap-6 flex-wrap">
-              {FooterEmployerData.map((data) => renderIconText(data))}
-            </div>
-            <div className="w-full flex items-center justify-end gap-2 max-sm:flex-col max-lg:justify-stretch max-lg:gap-3 max-lg:items-stretch">
-              <div>
-                <Button
-                  className="max-sm:w-full"
-                  disabled={employer?.website === ""}
-                  variant="outline"
-                >
-                  <a
-                    target="_blank"
-                    href={employer?.website || ""}
-                    className="text-blue-500"
-                  >
-                    Visit Website
+            <div className="w-full flex items-center justify-end gap-2 max-lg:flex-col max-lg:justify-stretch max-lg:gap-3 max-lg:items-stretch">
+              {website !== "" && (
+                <div>
+                  <a target="_blank" href={website}>
+                    <Button className="max-lg:w-full px-10" variant="outline">
+                      Website
+                    </Button>
                   </a>
-                </Button>
-              </div>
+                </div>
+              )}
               <div>
-                <FollowEmployerButton employerId={employer?._id} />
+                <FollowEmployerButton employerId={_id} />
               </div>
             </div>
           </CardFooter>
@@ -102,7 +105,7 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
         </div>
         <div>
           <p className="text-initial-gray">
-            {employer?.companyDescription || "No Biography Available"}
+            {companyDescription || "No Biography Available"}
           </p>
         </div>
       </div>

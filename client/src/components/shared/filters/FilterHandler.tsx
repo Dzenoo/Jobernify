@@ -50,7 +50,7 @@ const FilterHandler: React.FC<FilterHandlerProps> = ({
         return (
           <AccordionItem key={filter.id} value={`item-${index}`}>
             <AccordionTrigger>
-              <h3 className="text-lg font-semibold mb-4">{filter.title}</h3>
+              <h3 className="text-lg font-semibold">{filter.title}</h3>
             </AccordionTrigger>
             <AccordionContent>
               <div className="space-y-5">

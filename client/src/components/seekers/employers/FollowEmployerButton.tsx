@@ -28,7 +28,7 @@ const FollowEmployerButton: React.FC<FollowEmployerProps> = ({
     <div>
       <Button
         variant={isEmployerFollowed ? "outline" : "default"}
-        className="max-sm:w-full px-10"
+        className="max-lg:w-full px-10"
         onClick={handleFollowToggle}
         disabled={isLoading}
       >

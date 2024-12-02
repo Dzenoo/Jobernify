@@ -36,7 +36,7 @@ const CheckYourEmail = () => {
           <CardTitle className="text-2xl font-bold">Check Your Email</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-center text-gray-600 dark:text-gray-300 mb-6">
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-6">
             We've sent a verification link to your email. Please check your
             inbox and click the link to verify your account.
           </p>

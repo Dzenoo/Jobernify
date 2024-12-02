@@ -17,6 +17,8 @@ import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 import LoadingCompanyDetails from "@/components/loaders/seekers/LoadingCompanyDetails";
 import NotFound from "@/components/shared/pages/NotFound";
 
+import { EmployerTypes } from "@/types";
+
 const JobsList = dynamic(() => import("@/components/seekers/jobs/JobsList"), {
   loading: () => <LoadingJobsSkeleton />,
 });
@@ -74,9 +76,11 @@ const CompanyDetails = ({
       {isFiltering ? (
         <LoadingCompanyDetails />
       ) : (
-        <div className="flex flex-col gap-6 justify-center overflow-auto py-6">
+        <div className="flex flex-col gap-6 justify-center overflow-auto">
           <div>
-            <EmployerDetailsInfo employer={fetchedCompany?.employer!} />
+            <EmployerDetailsInfo
+              employer={fetchedCompany?.employer as EmployerTypes}
+            />
           </div>
           <div>
             <EmployerFilters type={searchParams.section} />

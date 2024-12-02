@@ -11,6 +11,7 @@ import {
   formatDate,
   getImageUrl,
   getTime,
+  truncate,
 } from "@/lib/utils";
 import { renderIconText } from "@/helpers";
 
@@ -68,7 +69,7 @@ const JobItem: React.FC<JobItemProps> = ({ job, showDescription = true }) => {
           <div className="flex justify-between sm:items-center">
             <div className="flex items-center gap-3 flex-wrap">
               <Link href={`/companies/${job?.company._id}?section=jobs`}>
-                <Avatar className="border border-blue-100 w-12 h-12">
+                <Avatar className="border border-blue-100 dark:border-[#1b1b1b] w-12 h-12">
                   <AvatarImage
                     src={getImageUrl(job.company?.image)}
                     className="object-cover w-auto h-auto"
@@ -112,8 +113,7 @@ const JobItem: React.FC<JobItemProps> = ({ job, showDescription = true }) => {
                 {job.overview}
               </p>
               <p className="text-initial-black md:hidden">
-                {job.overview.length > 80 &&
-                  job.overview.substring(0, 80) + "......"}
+                {truncate(job?.overview, 80)}
               </p>
             </div>
           </CardContent>

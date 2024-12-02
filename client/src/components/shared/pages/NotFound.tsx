@@ -11,7 +11,7 @@ const NotFound: React.FC<{ href?: string }> = ({ href = "/" }) => {
       <h2 className="text-2xl font-semibold text-gray-700 mb-6">
         Oops! Page Not Found
       </h2>
-      <p className="text-gray-600 mb-8 text-center max-w-md">
+      <p className="text-gray-600 dark:text-gray-400 mb-8 text-center max-w-md">
         We're sorry, but the page you're looking for doesn't exist or has been
         moved.
       </p>

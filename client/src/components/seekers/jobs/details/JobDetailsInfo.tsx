@@ -124,7 +124,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({ job, onApplyJob }) => {
           <div className="flex justify-between gap-6 max-md:flex-col">
             <div className="flex gap-3 max-sm:flex-col sm:items-center">
               <Link href={`/companies/${job?.company._id}?section=jobs`}>
-                <Avatar className="border border-blue-100 w-28 h-28">
+                <Avatar className="border border-blue-100 dark:border-[#1b1b1b] w-28 h-28">
                   <AvatarImage
                     src={getImageUrl(job.company?.image)}
                     className="object-cover w-auto h-auto"

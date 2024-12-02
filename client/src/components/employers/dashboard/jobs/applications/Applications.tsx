@@ -44,7 +44,9 @@ const Applications: React.FC<ApplicationsProps> = ({
           <h2 className="text-lg font-semibold ">No Applications Found</h2>
         </div>
         <div>
-          <p className="text-gray-600">You don't have new applications</p>
+          <p className="text-gray-600 dark:text-gray-400">
+            You don't have new applications
+          </p>
         </div>
       </div>
     );

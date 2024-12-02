@@ -22,7 +22,7 @@ const SeekersList: React.FC<SeekersListProps> = ({ seekers }) => {
             <h2 className="text-lg font-semibold ">No Seekers Found</h2>
           </div>
           <div>
-            <p className="text-gray-600 text-center">
+            <p className="text-gray-600 dark:text-gray-400 text-center">
               Oops! It seems like there are no seekers found
             </p>
           </div>
