@@ -75,9 +75,13 @@ const SeekerProfilePage = ({
           <SeekerAlerts
             token={token as string}
             alertsData={{
-              alerts: fetchedSeekerProfile?.seeker.alerts,
-              receiveJobAlerts: fetchedSeekerProfile?.seeker
-                .receiveJobAlerts as boolean,
+              alerts: fetchedSeekerProfile?.seeker.alerts ?? {
+                title: "",
+                type: "",
+                level: "",
+              },
+              receiveJobAlerts:
+                fetchedSeekerProfile?.seeker.receiveJobAlerts ?? false,
             }}
           />
         </div>
