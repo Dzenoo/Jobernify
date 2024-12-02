@@ -125,7 +125,6 @@ const SearchEmployers: React.FC<SearchEmployersProps> = ({ searchParams }) => {
           <SelectContent>
             <SelectItem value="all">Default</SelectItem>
             <SelectItem value="followers">Most Followers</SelectItem>
-            <SelectItem value="reviews">Highest Rated</SelectItem>
           </SelectContent>
         </Select>
       </div>

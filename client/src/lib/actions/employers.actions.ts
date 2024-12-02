@@ -9,7 +9,7 @@ import { EmployerTypes, ResponseMessageTypes } from "@/types";
  */
 
 /**
- * Fetches the employer profile along with job and review counts.
+ * Fetches the employer profile along with job counts.
  * @param params - An object containing token, page, srt, search, and type.
  * @returns A promise resolving to the employer profile and associated counts.
  */
@@ -26,7 +26,7 @@ export const getEmployerProfile = async ({
   search?: string;
   type?: string;
 }): Promise<{
-  counts: { totalJobs: number; totalReviews: number };
+  counts: { totalJobs: number };
   employer: EmployerTypes;
 }> => {
   return await getApiHandler(
@@ -75,14 +75,12 @@ export const getEmployerAnalytics = async (
   token: string
 ): Promise<{
   totalJobs: number;
-  totalReviews: number;
   totalApplications: number;
   totalFollowers: number;
   jobsPerMonth: number[];
   followersOverTime: number[];
   jobTypes: Record<string, number>;
   jobsThisMonth: number;
-  reviewsThisMonth: number;
   applicationsThisMonth: number;
   followersThisMonth: number;
 }> => {
@@ -121,22 +119,21 @@ export const getEmployers = async ({
 };
 
 /**
- * Fetches the details of a specific employer, including jobs and reviews.
+ * Fetches the details of a specific employer, including jobs and .
  * @param employerId - The ID of the employer.
  * @param token - The authentication token.
- * @param type - The type of data to fetch (default: "reviews").
+ * @param type - The type of data to fetch (default: "").
  * @param page - The page number for paginated data (default: "1").
- * @returns A promise resolving to the employer details along with the total jobs and reviews count.
+ * @returns A promise resolving to the employer details along with the total jobs and  count.
  */
 export const getEmployerById = async (
   employerId: string,
   token: string,
-  type: string = "reviews",
+  type: string = "",
   page: number = 1
 ): Promise<{
   employer: EmployerTypes;
   totalJobs: number;
-  totalReviews: number;
 }> => {
   return await getApiHandler(
     `employers/${employerId}?page=${page}&limit=10&type=${type}`,

@@ -248,7 +248,7 @@ export class ApplicationsService {
         content = `We regret to inform you that your application for the position at ${companyName} has been rejected. Thank you for considering us.`;
         break;
       case 'Pending':
-        content = `Your application for the position at ${companyName} is currently under review. We will get back to you shortly.`;
+        content = `Your application for the position at ${companyName} is currently un. We will get back to you shortly.`;
         break;
       case 'Accepted':
         content = `Congratulations! Your application for the position at ${companyName} has been accepted. We look forward to having you on board.`;

@@ -11,22 +11,18 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 type StatisticsProps = {
   totalJobs: number;
-  totalReviews: number;
   totalApplications: number;
   totalFollowers: number;
   jobsThisMonth: number;
-  reviewsThisMonth: number;
   applicationsThisMonth: number;
   followersThisMonth: number;
 };
 
 const Statistics: React.FC<StatisticsProps> = ({
   totalApplications,
-  totalReviews,
   totalJobs,
   totalFollowers,
   jobsThisMonth,
-  reviewsThisMonth,
   applicationsThisMonth,
   followersThisMonth,
 }) => {
@@ -37,13 +33,6 @@ const Statistics: React.FC<StatisticsProps> = ({
       data: totalJobs,
       increment: jobsThisMonth,
       icon: <Briefcase color="#0066FF" />,
-    },
-    {
-      id: "2",
-      title: "Total Reviews",
-      data: totalReviews,
-      increment: reviewsThisMonth,
-      icon: <MessageSquareDot color="#00C7E2" />,
     },
     {
       id: "3",

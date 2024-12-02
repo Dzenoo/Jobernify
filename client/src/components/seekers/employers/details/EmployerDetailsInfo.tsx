@@ -35,11 +35,6 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
       icon: <Camera color="gray" />,
       data: employer?.followers.length + " Followers",
     },
-    {
-      id: "2",
-      icon: <Text color="gray" />,
-      data: employer?.reviews.length + " Reviews",
-    },
   ];
 
   return (
@@ -93,13 +88,6 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
                     Visit Website
                   </a>
                 </Button>
-              </div>
-              <div>
-                <Link href={`/companies/${employer?._id}/review`}>
-                  <Button className="max-sm:w-full" variant="outline">
-                    Review
-                  </Button>
-                </Link>
               </div>
               <div>
                 <FollowEmployerButton employerId={employer?._id} />

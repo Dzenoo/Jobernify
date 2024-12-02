@@ -50,11 +50,9 @@ const Dashboard = () => {
       <div>
         <Statistics
           totalJobs={analytics?.totalJobs || 0}
-          totalReviews={analytics?.totalReviews || 0}
           totalApplications={analytics?.totalApplications || 0}
           totalFollowers={analytics?.totalFollowers || 0}
           jobsThisMonth={analytics?.jobsThisMonth || 0}
-          reviewsThisMonth={analytics?.reviewsThisMonth || 0}
           applicationsThisMonth={analytics?.applicationsThisMonth || 0}
           followersThisMonth={analytics?.followersThisMonth || 0}
         />

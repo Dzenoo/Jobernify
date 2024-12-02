@@ -10,22 +10,6 @@ export enum SizeOfEmployers {
   "500-1000" = "500-1000",
 }
 
-export enum ReviewType {
-  "Freelance",
-  "Part-Time",
-  "Full-Time",
-  "Internship",
-}
-
-export enum ReviewTime {
-  "Less than 1",
-  "1-2",
-  "2-4",
-  "4-7",
-  "7-10",
-  "10 or greater",
-}
-
 export enum ApplicationStatus {
   Rejected = "Rejected",
   Pending = "Pending",
@@ -56,7 +40,6 @@ export type EmployerTypes = {
   password: string;
   jobs: JobTypes[];
   followers: SeekerTypes[];
-  reviews: ReviewTypes[];
 };
 
 export type JobTypes = {
@@ -74,19 +57,6 @@ export type JobTypes = {
   createdAt: string;
   applications: ApplicationsTypes[];
   company: EmployerTypes;
-};
-
-export type ReviewTypes = {
-  _id: string;
-  company: EmployerTypes & string;
-  job_position: string;
-  type: keyof typeof ReviewType;
-  time: keyof typeof ReviewTime;
-  negativeReview: string;
-  positiveReview: string;
-  technologies: string[];
-  seeker: SeekerTypes | string;
-  createdAt: string;
 };
 
 export type JobAlertsTypes = {

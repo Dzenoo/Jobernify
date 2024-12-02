@@ -5,7 +5,6 @@ import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 import { Button } from "@/components/ui/button";
 
 enum EmployerType {
-  reviews = "reviews",
   jobs = "jobs",
 }
 
@@ -16,18 +15,13 @@ type EmployerTypeFilters = {
 const EmployerFilters: React.FC<EmployerTypeFilters> = ({ type }) => {
   const { updateSearchParams } = useSearchParams();
 
-  const FilterButtons = Array(
+  const FilterButtons = [
     {
       id: "1",
       title: "Jobs",
       filter: "jobs",
     },
-    {
-      id: "2",
-      title: "Reviews",
-      filter: "reviews",
-    }
-  );
+  ];
 
   return (
     <div className="flex items-center gap-3">

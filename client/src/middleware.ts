@@ -14,7 +14,6 @@ const protectedRoutes = {
   "/companies": ["seeker"],
   "/profile": ["seeker"],
   "/companies/seekerId": ["seeker"],
-  "/companies/companyId/review": ["seeker"],
 };
 
 export function middleware(req: NextRequest) {

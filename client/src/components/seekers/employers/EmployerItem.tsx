@@ -25,11 +25,6 @@ const EmployerItem: React.FC<EmployersItemProps> = ({ employer }) => {
       icon: <Camera color="gray" />,
       data: employer.followers.length + " Followers",
     },
-    {
-      id: "2",
-      icon: <Text color="gray" />,
-      data: employer.reviews.length + " Reviews",
-    },
   ];
 
   return (
