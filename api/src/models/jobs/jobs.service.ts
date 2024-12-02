@@ -285,7 +285,7 @@ export class JobsService {
       .findById(id)
       .populate({
         path: 'company',
-        select: 'name companyDescription followers reviews size image industry',
+        select: 'name companyDescription followers size image industry',
       })
       .select(
         '_id title overview company position applications location expiration_date level createdAt salary skills description type',
@@ -304,7 +304,7 @@ export class JobsService {
       )
       .populate({
         path: 'company',
-        select: 'name companyDescription followers reviews size image industry',
+        select: 'name companyDescription followers size image industry',
       })
       .exec();
 

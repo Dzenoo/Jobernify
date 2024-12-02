@@ -128,7 +128,7 @@ export class EmployersController {
   async getEmployerById(
     @Query('page', ParseIntPipe) page: number = 1,
     @Query('limit', ParseIntPipe) limit: number = 10,
-    @Query('type') type: 'jobs' | 'reviews',
+    @Query('type') type: 'jobs',
     @Param('employerId') employerId: string,
   ) {
     return await this.employersService.getOneById({

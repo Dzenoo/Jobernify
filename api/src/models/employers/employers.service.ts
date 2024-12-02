@@ -25,7 +25,6 @@ import { UpdateEmployerDto } from './dto/update-employer.dto';
 import { SeekersService } from '../seekers/seekers.service';
 import { JobsService } from '../jobs/jobs.service';
 import { S3Service } from 'src/common/s3/s3.service';
-import { ReviewsService } from '../reviews/reviews.service';
 import { ApplicationsService } from '../applications/applications.service';
 
 import { uuidv7 } from 'uuidv7';
@@ -40,8 +39,6 @@ export class EmployersService {
     private readonly jobsService: JobsService,
     @Inject(forwardRef(() => ApplicationsService))
     private readonly applicationsService: ApplicationsService,
-    @Inject(forwardRef(() => ReviewsService))
-    private readonly reviewsService: ReviewsService,
     @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
   ) {}
 
@@ -109,16 +106,6 @@ export class EmployersService {
             'title position _id location level type applications expiration_date salary',
         };
         break;
-      case 'reviews':
-        populateQuery = {
-          path: 'reviews',
-          options: {
-            skip,
-            limit: limit,
-            sort: { _id: sorter },
-          },
-        };
-        break;
       default:
         break;
     }
@@ -130,10 +117,6 @@ export class EmployersService {
         case 'jobs':
           searchFields.push('title', 'position', 'location');
           break;
-        case 'reviews':
-          searchFields.push('type');
-          break;
-
         default:
           break;
       }
@@ -165,12 +148,6 @@ export class EmployersService {
     const counts: any = {};
     if (type === 'jobs' || !type) {
       counts.totalJobs = await this.jobsService.countDocuments({
-        company: id,
-        ...searchQuery,
-      });
-    }
-    if (type === 'reviews' || !type) {
-      counts.totalReviews = await this.reviewsService.countDocuments({
         company: id,
         ...searchQuery,
       });
@@ -241,8 +218,6 @@ export class EmployersService {
 
     await this.jobsService.findAndDeleteMany({ company: id });
 
-    await this.reviewsService.findAndDeleteMany({ company: id });
-
     await this.seekersService.findAndUpdateMany(
       {
         $or: [{ following: id }, { savedJobs: { $in: jobIds } }],
@@ -279,7 +254,7 @@ export class EmployersService {
   }: {
     page: number;
     limit: number;
-    type?: 'jobs' | 'reviews';
+    type?: 'jobs';
     id: string;
   }): Promise<ResponseObject> {
     const skip = (page - 1) * limit;
@@ -298,12 +273,6 @@ export class EmployersService {
           },
         };
         break;
-      case 'reviews':
-        populateQuery = {
-          path: 'reviews',
-          options: { skip, limit },
-        };
-        break;
       default:
         populateQuery = {};
     }
@@ -312,7 +281,7 @@ export class EmployersService {
       .findById(id)
       .populate(populateQuery)
       .select(
-        'name reviews address size website followers number companyDescription industry image jobs',
+        'name address size website followers number companyDescription industry image jobs',
       )
       .exec();
 
@@ -323,15 +292,11 @@ export class EmployersService {
     }
 
     const totalJobs = await this.jobsService.countDocuments({ company: id });
-    const totalReviews = await this.reviewsService.countDocuments({
-      company: id,
-    });
 
     return {
       statusCode: HttpStatus.OK,
       employer,
       totalJobs,
-      totalReviews,
     };
   }
 
@@ -367,7 +332,7 @@ export class EmployersService {
     const sortOptions: any = {};
 
     if (sort) {
-      if (sort === 'followers' || sort === 'reviews') {
+      if (sort === 'followers') {
         sortOptions[sort] = -1;
       }
     }
@@ -389,7 +354,7 @@ export class EmployersService {
       .sort(sortOptions)
       .skip((page - 1) * limit)
       .limit(limit)
-      .select('image name companyDescription reviews followers size address')
+      .select('image name companyDescription followers size address')
       .exec();
 
     const totalEmployers = await this.employerModel.countDocuments(conditions);
@@ -410,10 +375,6 @@ export class EmployersService {
 
     const totalJobs = await this.jobsService.countDocuments({ company: id });
 
-    const totalReviews = await this.reviewsService.countDocuments({
-      company: id,
-    });
-
     const totalApplications = await this.applicationsService.countDocuments({
       job: {
         $in: (await this.jobsService.find({ company: id })).map(
@@ -427,11 +388,6 @@ export class EmployersService {
     ).followers.length;
 
     const jobsThisMonth = await this.jobsService.countDocuments({
-      company: id,
-      createdAt: { $gte: startOfMonth },
-    });
-
-    const reviewsThisMonth = await this.reviewsService.countDocuments({
       company: id,
       createdAt: { $gte: startOfMonth },
     });
@@ -468,14 +424,12 @@ export class EmployersService {
     return {
       statusCode: HttpStatus.OK,
       totalJobs,
-      totalReviews,
       totalApplications,
       totalFollowers,
       jobsPerMonth,
       followersOverTime,
       jobTypes,
       jobsThisMonth,
-      reviewsThisMonth,
       applicationsThisMonth,
       followersThisMonth,
     };

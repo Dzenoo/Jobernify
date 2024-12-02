@@ -22,7 +22,6 @@ import { UpdateSeekerDto } from './dto/update-seeker.dto';
 
 import { EmployersService } from '../employers/employers.service';
 import { JobsService } from '../jobs/jobs.service';
-import { ReviewsService } from '../reviews/reviews.service';
 import { ApplicationsService } from '../applications/applications.service';
 import { S3Service } from 'src/common/s3/s3.service';
 
@@ -40,8 +39,6 @@ export class SeekersService {
     private readonly employersService: EmployersService,
     @Inject(forwardRef(() => JobsService))
     private readonly jobsService: JobsService,
-    @Inject(forwardRef(() => ReviewsService))
-    private readonly reviewsService: ReviewsService,
     @Inject(forwardRef(() => ApplicationsService))
     private readonly applicationsService: ApplicationsService,
     private readonly s3Service: S3Service,
@@ -194,13 +191,7 @@ export class SeekersService {
       seeker: id,
     });
 
-    const reviews = await this.reviewsService.find({
-      seeker: id,
-    });
-
     await this.applicationsService.findAndDeleteMany({ seeker: id });
-
-    await this.reviewsService.findAndDeleteMany({ seeker: id });
 
     await this.jobsService.findAndUpdateMany(
       { applications: { $in: applications.map((app) => app._id) } },
@@ -213,15 +204,11 @@ export class SeekersService {
 
     await this.employersService.findAndUpdateMany(
       {
-        $or: [
-          { followers: id },
-          { reviews: { $in: reviews.map((review) => review._id) } },
-        ],
+        $or: [{ followers: id }],
       },
       {
         $pull: {
           followers: id,
-          reviews: { $in: reviews.map((review) => review._id) },
         },
       },
     );

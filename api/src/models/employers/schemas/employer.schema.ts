@@ -4,7 +4,6 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { BaseUser, Role } from 'src/models/shared/schemas/user.schema';
 import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 import { Job } from 'src/models/jobs/schemas/job.schema';
-import { Review } from 'src/models/reviews/schemas/review.schema';
 
 import * as bcrypt from 'bcrypt';
 
@@ -99,12 +98,6 @@ export class Employer extends BaseUser {
     default: [],
   })
   followers: Seeker[] & string[];
-
-  @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
-    default: [],
-  })
-  reviews: Review & string[];
 }
 
 export const EmployerSchema = SchemaFactory.createForClass(Employer);

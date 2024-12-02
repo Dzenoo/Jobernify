@@ -32,5 +32,5 @@ export class GetProfileDto {
 
   @IsOptional()
   @IsString()
-  readonly type?: 'jobs' | 'reviews';
+  readonly type?: 'jobs';
 }

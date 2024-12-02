@@ -28,7 +28,7 @@ export class GetEmployersDto {
 
   @IsOptional()
   @IsString()
-  readonly sort?: 'followers' | 'reviews';
+  readonly sort?: 'followers';
 
   @IsOptional()
   @IsString()
