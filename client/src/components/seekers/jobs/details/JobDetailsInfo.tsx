@@ -207,7 +207,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
               })
             )}
           </div>
-          <div className="px-10 border border-[--blue-base-color] rounded-xl flex items-center gap-6 justify-between py-4 max-sm:flex-col">
+          <div className="px-10 border border-gray-100 dark:border-[#1b1b1b] rounded-xl flex items-center gap-6 justify-between py-4 max-sm:flex-col">
             {JobDetailsData.map((data) => renderJobDetails(data))}
           </div>
           <div>

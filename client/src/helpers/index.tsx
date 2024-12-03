@@ -74,7 +74,11 @@ export const renderSkills = <
               </div>
               <div className="flex flex-wrap gap-3">
                 {skills.map((skill, index) => (
-                  <Button variant="outline" key={index}>
+                  <Button
+                    className="max-sm:whitespace-break-spaces"
+                    variant="outline"
+                    key={index}
+                  >
                     {skill}
                   </Button>
                 ))}
