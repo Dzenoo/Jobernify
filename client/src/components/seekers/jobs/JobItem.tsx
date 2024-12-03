@@ -91,7 +91,7 @@ const JobItem: React.FC<JobItemProps> = ({
               </Link>
               <div className="flex flex-col gap-[3px]">
                 <div>
-                  <TooltipProvider delayDuration={0.1}>
+                  <TooltipProvider delayDuration={400}>
                     <Tooltip>
                       <TooltipTrigger>
                         <Link href={`/jobs/${_id}`}>

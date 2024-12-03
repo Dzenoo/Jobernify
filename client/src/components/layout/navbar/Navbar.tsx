@@ -79,7 +79,7 @@ const Navbar: React.FC<{ href?: string }> = ({ href }) => {
               logout={deleteCookieHandler}
               data={isSeeker ? SeekersNavbarActions : EmployersNavbarActions}
             />
-            <TooltipProvider delayDuration={0.1}>
+            <TooltipProvider delayDuration={400}>
               <Tooltip>
                 <TooltipTrigger>
                   <Link href={isSeeker ? "/profile" : "/dashboard/settings"}>

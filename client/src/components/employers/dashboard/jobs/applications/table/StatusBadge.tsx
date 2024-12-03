@@ -52,25 +52,25 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ applicationId, status }) => {
     {
       id: 1,
       title: "Pending",
-      color: statusClasses.Pending,
+      className: statusClasses.Pending,
       filter: "Pending",
     },
     {
       id: 2,
       title: "Interview",
-      color: statusClasses.Interview,
+      className: statusClasses.Interview,
       filter: "Interview",
     },
     {
       id: 3,
       title: "Accepted",
-      color: statusClasses.Accepted,
+      className: statusClasses.Accepted,
       filter: "Accepted",
     },
     {
       id: 4,
       title: "Rejected",
-      color: statusClasses.Rejected,
+      className: statusClasses.Rejected,
       filter: "Rejected",
     },
   ];
@@ -88,12 +88,12 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ applicationId, status }) => {
       </PopoverTrigger>
       <PopoverContent align="start">
         <div className="flex flex-col gap-2">
-          {StatusButtons.map(({ id, title, color, filter }) => (
+          {StatusButtons.map(({ id, title, className, filter }) => (
             <Button
               key={id}
               variant="outline"
               onClick={() => updateStatusApi(filter)}
-              className={color}
+              className={className}
             >
               {title}
             </Button>

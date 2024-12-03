@@ -11,6 +11,7 @@ type FilterApplicationsProps = {
   interviews: number;
   rejected: number;
   accepted: number;
+  status: string;
 };
 
 const FilterApplications: React.FC<FilterApplicationsProps> = ({
@@ -19,6 +20,7 @@ const FilterApplications: React.FC<FilterApplicationsProps> = ({
   interviews,
   rejected,
   accepted,
+  status,
 }) => {
   const { updateSearchParams } = useSearchParams();
 
@@ -32,35 +34,35 @@ const FilterApplications: React.FC<FilterApplicationsProps> = ({
       title: "Seekers",
       data: applicants,
       filter: "",
-      color: "",
+      className: "",
     },
     {
       id: 2,
       title: "Pending",
       data: pending,
       filter: "Pending",
-      color: "border-yellow-500",
+      className: "border-yellow-500",
     },
     {
       id: 3,
       title: "Interviews",
       data: interviews,
       filter: "Interview",
-      color: "border-blue-500",
+      className: "border-blue-500",
     },
     {
       id: 4,
       title: "Rejected",
       data: rejected,
       filter: "Rejected",
-      color: "border-red-500",
+      className: "border-red-500",
     },
     {
       id: 5,
       title: "Accepted",
       data: accepted,
       filter: "Accepted",
-      color: "border-green-500",
+      className: "border-green-500",
     },
   ];
 
@@ -69,11 +71,11 @@ const FilterApplications: React.FC<FilterApplicationsProps> = ({
       <CardContent>
         <div className="flex items-center max-sm:overflow-auto gap-5 hide-scrollbar">
           {FilterApplicationsButtons.map(
-            ({ id, title, data, filter, color }) => (
+            ({ id, title, data, filter, className }) => (
               <Button
                 key={id}
-                className={color}
-                variant="outline"
+                className={className}
+                variant={status === filter ? "default" : "outline"}
                 onClick={() => updateApplicationsFilters(filter)}
               >
                 {title} ({data})

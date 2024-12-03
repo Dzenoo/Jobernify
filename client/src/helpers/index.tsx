@@ -32,7 +32,7 @@ export const renderIconText = ({
 }: RenderIconTextProps) => {
   if (tooltip) {
     return (
-      <TooltipProvider key={id} delayDuration={0.1}>
+      <TooltipProvider key={id} delayDuration={400}>
         <Tooltip>
           <div key={id} className="flex items-center gap-3">
             <TooltipTrigger>{icon}</TooltipTrigger>

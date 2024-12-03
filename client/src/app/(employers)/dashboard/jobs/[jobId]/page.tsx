@@ -53,7 +53,7 @@ const JobApplicationsPage = ({
   }
 
   return (
-    <section className="flex flex-col gap-3">
+    <section className="flex flex-col gap-8">
       <div>
         <div>
           <h1 className="text-base-black">{data?.job}</h1>
@@ -71,6 +71,7 @@ const JobApplicationsPage = ({
           interviews={data?.totalInterviewStatus || 0}
           rejected={data?.totalRejectedStatus || 0}
           accepted={data?.totalAcceptedStatus || 0}
+          status={searchParams.status}
         />
       </div>
       <div>

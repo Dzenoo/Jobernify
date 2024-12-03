@@ -61,7 +61,7 @@ const EmployersDashboardNavbar: React.FC = () => {
       >
         <div className="flex flex-col gap-3">
           {NavbarActionsLinks.map(({ tooltip, id, icon, href }) => (
-            <TooltipProvider delayDuration={0.1} key={id}>
+            <TooltipProvider delayDuration={400} key={id}>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link

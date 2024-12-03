@@ -14,7 +14,6 @@ import CoverLetter from "./table/CoverLetter";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
@@ -36,7 +35,7 @@ const Applications: React.FC<ApplicationsProps> = ({
 }) => {
   if (applications?.length === 0)
     return (
-      <div className="flex flex-col items-center justify-center gap-2 py-6">
+      <div className="flex flex-col items-center justify-center gap-2 py-10">
         <div>
           <Search size={50} className="mb-4" />
         </div>
@@ -64,7 +63,6 @@ const Applications: React.FC<ApplicationsProps> = ({
 
   return (
     <Table>
-      <TableCaption>A list of applications</TableCaption>
       <TableHeader>
         <TableRow>
           {columns.map((column) => (

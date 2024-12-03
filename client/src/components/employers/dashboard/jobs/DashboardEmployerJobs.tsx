@@ -14,7 +14,6 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  TableCaption,
 } from "@/components/ui/table";
 import { Dialog } from "@/components/ui/dialog";
 import { Drawer } from "@/components/ui/drawer";
@@ -83,7 +82,6 @@ const DashboardEmployerJobs: React.FC<DashboardEmployerJobsProps> = ({
         </Drawer>
       )}
       <Table>
-        <TableCaption>A list of your jobs</TableCaption>
         <TableHeader>
           <TableRow>
             {columns.map((column) => (
@@ -102,13 +100,13 @@ const DashboardEmployerJobs: React.FC<DashboardEmployerJobsProps> = ({
               <TableCell>{job.level}</TableCell>
               <TableCell>{job.position}</TableCell>
               <TableCell>{findLocationData(job.location)}</TableCell>
-              <TableCell className="bg-green-100 dark:text-green-600 text-green-600 p-3">
+              <TableCell className="bg-green-100 text-green-600 dark:bg-green-300 dark:text-green-900 p-3">
                 {job.salary}$
               </TableCell>
-              <TableCell className="bg-red-100 dark:text-red-600 text-red-600 p-3">
+              <TableCell className="bg-red-100 text-red-600 dark:bg-red-300 dark:text-red-900 p-3">
                 {formatDate(job.expiration_date)}
               </TableCell>
-              <TableCell className="bg-blue-100 dark:text-blue-600 text-blue-600 p-3">
+              <TableCell className="bg-blue-100 text-blue-600 dark:bg-blue-300 dark:text-blue-900 p-3">
                 {job.applications?.length ?? 0}
               </TableCell>
               <TableCell>

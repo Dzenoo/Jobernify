@@ -1,6 +1,7 @@
 import React from "react";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import DOMPurify from "dompurify";
 import ReactMarkdown from "react-markdown";
@@ -60,6 +61,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
   },
   onApplyJob,
 }) => {
+  const router = useRouter();
   const { data: fetchedSeekerProfile } = useGetSeeker();
 
   const sanitizedDescription = DOMPurify.sanitize(description);
@@ -130,9 +132,12 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
     },
   ];
 
-  const isAppliedJob = fetchedSeekerProfile?.seeker.applications.find(
-    (application: ApplicationsTypes) => application._id === _id
+  const isAppliedToJob = fetchedSeekerProfile?.seeker.applications.find(
+    (application: ApplicationsTypes) => application.job._id === _id
   );
+
+  const redirectToProfileApplications = () =>
+    router.push(`/profile?section=applications`);
 
   return (
     <div className="flex flex-col gap-3">
@@ -177,11 +182,12 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
               <div className="basis-full">
                 <Button
                   className="w-full px-6"
-                  variant={isAppliedJob ? "outline" : "default"}
-                  onClick={onApplyJob}
-                  disabled={isAppliedJob !== undefined}
+                  variant={isAppliedToJob ? "outline" : "default"}
+                  onClick={
+                    isAppliedToJob ? redirectToProfileApplications : onApplyJob
+                  }
                 >
-                  {isAppliedJob ? "Already Applied" : "Apply to Job"}
+                  {isAppliedToJob ? "View Status" : "Apply to Job"}
                 </Button>
               </div>
               <SaveJobButton jobId={_id} />

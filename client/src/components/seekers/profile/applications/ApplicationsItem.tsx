@@ -31,11 +31,11 @@ type ApplicationItemProps = {
 
 const ApplicationsItem: React.FC<ApplicationItemProps> = ({
   application: {
-    _id,
     status,
     createdAt,
     job: {
-      company: { industry, name, size, address, image },
+      _id: jobId,
+      company: { _id: companyId, industry, name, size, address, image },
       level,
       position,
       title,
@@ -89,15 +89,19 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
     <Card className="dark:border-[#3b3b3b]">
       <CardHeader>
         <div className="flex gap-3 items-center max-xl:flex-wrap">
-          <Avatar className="w-28 h-28">
-            <AvatarImage
-              src={getImageUrl(image)}
-              className="object-cover w-auto h-auto"
-            />
-          </Avatar>
+          <Link href={`/companies/${companyId}?section=jobs`}>
+            <Avatar className="w-28 h-28">
+              <AvatarImage
+                src={getImageUrl(image)}
+                className="object-cover w-auto h-auto"
+              />
+            </Avatar>
+          </Link>
           <div className="flex flex-col gap-3">
             <div>
-              <h1>{name}</h1>
+              <Link href={`/companies/${companyId}?section=jobs`}>
+                <h1>{name}</h1>
+              </Link>
             </div>
             <div className="flex gap-3 items-center flex-wrap">
               {ApplicationCompanyInfo.map((data) => renderIconText(data))}
@@ -108,7 +112,7 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
       <CardContent>
         <div className="flex flex-col gap-6">
           <div>
-            <Link href={`/jobs/${_id}`}>
+            <Link href={`/jobs/${jobId}`}>
               <h1 className="font-bold text-xl overflow-auto">{title}</h1>
             </Link>
           </div>

@@ -42,7 +42,7 @@ const SearchJobs: React.FC<SearchJobsProps> = ({ query, sort }) => {
 
   return (
     <div className="flex justify-between gap-3 items-center max-sm:flex-wrap">
-      <div className="basis-full">
+      <div className="basis-full w-96">
         <Input
           defaultValue={query}
           placeholder="Search Jobs..."
@@ -67,7 +67,7 @@ const SearchJobs: React.FC<SearchJobsProps> = ({ query, sort }) => {
           </SelectContent>
         </Select>
       </div>
-      <div className="basis-full">
+      <div className="max-sm:basis-full">
         <Link href="/dashboard/jobs/new">
           <Button className="w-full" variant="default">
             Add New Job

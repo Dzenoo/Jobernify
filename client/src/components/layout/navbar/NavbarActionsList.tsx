@@ -32,7 +32,7 @@ const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
   return (
     <ul className="flex items-center gap-4">
       {Array.from(data).map(({ id, href, icon, tooltip }) => (
-        <TooltipProvider key={id} delayDuration={0.1}>
+        <TooltipProvider key={id} delayDuration={400}>
           <Tooltip>
             <TooltipTrigger>
               <Link
