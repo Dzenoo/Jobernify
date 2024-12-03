@@ -52,7 +52,7 @@ const EmployerData: React.FC<EmployerInformationsProps> = ({ employer }) => {
         </div>
         <div>
           <a href={employer?.website} target="_blank">
-            <p className="text-initial-gray">
+            <p className="text-blue-500 dark:text-blue-500">
               {employer?.website || "No Website Available"}
             </p>
           </a>
