@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Calendar, Edit, GraduationCap, Trash } from "lucide-react";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { useToast } from "@/components/ui/use-toast";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
@@ -32,7 +32,7 @@ const EducationItem: React.FC<EducationItemProps> = ({
     mutationFn: () => deleteEducation(_id, token as string),
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
-      queryClient.invalidateQueries(["profile"]);
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
     },
     onError: (error: any) => {
       toast({ title: "Error", description: error?.response?.data?.message });

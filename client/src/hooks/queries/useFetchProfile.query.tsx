@@ -1,11 +1,12 @@
-import { useQuery } from "react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { getSeekerProfile } from "@/lib/actions/seekers.actions";
 import { getEmployerProfile } from "@/lib/actions/employers.actions";
 
 const useFetchProfile = (userType: string, token: string | null) => {
-  return useQuery({
-    queryKey: ["profile", userType],
+  if (!userType || !token) return { data: null };
+
+  return useSuspenseQuery({
     queryFn: async () => {
       if (userType === "seeker") {
         return await getSeekerProfile(token as string);
@@ -16,7 +17,7 @@ const useFetchProfile = (userType: string, token: string | null) => {
         });
       }
     },
-    enabled: !!userType && !!token,
+    queryKey: ["profile", userType],
   });
 };
 

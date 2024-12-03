@@ -2,20 +2,23 @@
 
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
-import { useQuery } from "react-query";
+
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 
 import { getJobs } from "@/lib/actions/jobs.actions";
 
 import LoadingJobsSkeleton from "@/components/loaders/seekers/LoadingJobsSkeleton";
 import LoadingPopularJobs from "@/components/loaders/seekers/LoadingPopularJobs";
+
 import PopularJobsInfo from "@/components/seekers/jobs/PopularJobsInfo";
 import FilterJobs from "@/components/seekers/jobs/filters/FilterJobs";
-import PaginatedList from "@/components/ui/paginate-list";
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 import SearchJobs from "@/components/seekers/jobs/search/SearchJobs";
 import SeekerInfo from "@/components/seekers/jobs/SeekerInfo";
+
+import PaginatedList from "@/components/ui/paginate-list";
 
 const JobsList = dynamic(() => import("@/components/seekers/jobs/JobsList"), {
   loading: () => <LoadingJobsSkeleton />,
@@ -34,7 +37,7 @@ const Jobs = ({
     isLoading,
     isFetching,
     isRefetching,
-  } = useQuery({
+  } = useSuspenseQuery({
     queryFn: () =>
       getJobs({
         token: token as string,
@@ -53,7 +56,7 @@ const Jobs = ({
     refetch();
   }, [searchParams]);
 
-  const totalJobs = fetchedJobs?.totalJobs || 0;
+  const totalJobs = fetchedJobs.totalJobs || 0;
   const isFiltering = isLoading || isFetching || isRefetching;
 
   return (
@@ -66,9 +69,7 @@ const Jobs = ({
           {isFiltering ? (
             <LoadingPopularJobs />
           ) : (
-            <PopularJobsInfo
-              jobs={(fetchedJobs && fetchedJobs.popularJobs) || []}
-            />
+            <PopularJobsInfo jobs={fetchedJobs.popularJobs} />
           )}
         </div>
       </div>
@@ -77,13 +78,13 @@ const Jobs = ({
           <SearchJobs query={searchParams.query} sort={searchParams.sort} />
         </div>
         <div className="xl:hidden">
-          <FilterJobs filterCounts={fetchedJobs?.filterCounts || []} />
+          <FilterJobs filterCounts={fetchedJobs.filterCounts} />
         </div>
         <div>
           {isFiltering ? (
             <LoadingJobsSkeleton />
           ) : (
-            <JobsList jobs={fetchedJobs?.jobs} />
+            <JobsList jobs={fetchedJobs.jobs} />
           )}
         </div>
         {totalJobs > 10 && (
@@ -98,7 +99,7 @@ const Jobs = ({
         )}
       </div>
       <div className="basis-2/5 max-xl:hidden">
-        <FilterJobs filterCounts={fetchedJobs?.filterCounts || []} />
+        <FilterJobs filterCounts={fetchedJobs.filterCounts} />
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { queryClient } from "@/context/react-query-client";
 import { editEmployerProfile } from "@/lib/actions/employers.actions";
@@ -16,7 +16,7 @@ const useEditEmployer = () => {
       editEmployerProfile(formData, token as string),
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
-      queryClient.invalidateQueries(["profile"]);
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
     },
     onError: (error: any) => {
       toast({ title: "Error", description: error?.response?.data?.message });

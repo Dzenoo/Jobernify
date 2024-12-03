@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { queryClient } from "@/context/react-query-client";
 import { generateJobAlert } from "@/lib/actions/seekers.actions";
@@ -15,7 +15,7 @@ const useJobAlert = () => {
     mutationFn: (formData: FormData | any) =>
       generateJobAlert(formData, token as string),
     onSuccess: (response) => {
-      queryClient.invalidateQueries(["profile"]);
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
       toast({ title: "Success", description: response.message });
     },
     onError: (error: any) => {

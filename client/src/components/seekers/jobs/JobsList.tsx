@@ -7,7 +7,7 @@ import JobItem from "./JobItem";
 import { JobTypes } from "@/types";
 
 type JobListProps = {
-  jobs?: JobTypes[];
+  jobs: JobTypes[];
   message?: string;
 };
 
@@ -17,7 +17,7 @@ const JobsList: React.FC<JobListProps> = ({
 }) => {
   return (
     <div>
-      {jobs?.length === 0 ? (
+      {jobs.length === 0 ? (
         <div className="flex flex-col items-center justify-center gap-2 py-6">
           <div>
             <Search size={50} className="mb-4" />
@@ -33,7 +33,7 @@ const JobsList: React.FC<JobListProps> = ({
         </div>
       ) : (
         <ul className="flex flex-col gap-4">
-          {jobs?.map((job) => (
+          {jobs.map((job) => (
             <JobItem key={job._id} job={job} />
           ))}
         </ul>

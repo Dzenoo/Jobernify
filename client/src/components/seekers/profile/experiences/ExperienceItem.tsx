@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { Briefcase, Edit, Trash } from "lucide-react";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
@@ -37,7 +37,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
     mutationFn: () => deleteExperience(_id, token as string),
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
-      queryClient.invalidateQueries(["profile"]);
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
     },
     onError: (error: any) => {
       toast({ title: "Error", description: error?.response?.data?.message });

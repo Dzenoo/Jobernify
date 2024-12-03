@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import zod from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { ScaleLoader } from "react-spinners";
 import { queryClient } from "@/context/react-query-client";
 
@@ -66,9 +66,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
     multiple: false,
   });
 
-  const { data: fetchedSeekerProfile } = useGetSeeker({
-    enabled: isApplyToJob,
-  });
+  const { data: fetchedSeekerProfile } = useGetSeeker();
 
   const seekerData = fetchedSeekerProfile as { seeker: SeekerTypes };
 
@@ -85,9 +83,10 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
     onSuccess: () => {
       form.reset();
       toast({ title: "Success", description: "Successfully Applied to Job" });
-      queryClient.invalidateQueries(["job", { jobId }]);
-      queryClient.invalidateQueries(["profile"]);
-      queryClient.invalidateQueries(["jobs"]);
+      queryClient.invalidateQueries({
+        queryKey: ["jobs", "job", "profile", { jobId }],
+      });
+
       setIsApplyToJob(false);
     },
     onError: (error: any) => {

@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { queryClient } from "@/context/react-query-client";
 import { followEmployer } from "@/lib/actions/seekers.actions";
@@ -15,7 +15,9 @@ const useFollowEmployer = (employerId: string) => {
     mutationFn: () => followEmployer(employerId, token as string),
     mutationKey: ["profile", "company", "companies"],
     onSuccess: () => {
-      queryClient.invalidateQueries(["profile", "company", "companies"]);
+      queryClient.invalidateQueries({
+        queryKey: ["profile", "company", "companies"],
+      });
     },
     onError: (error: any) => {
       toast({ title: "Error", description: error.response.data.message });

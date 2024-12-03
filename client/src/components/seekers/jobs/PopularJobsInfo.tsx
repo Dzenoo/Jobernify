@@ -1,9 +1,16 @@
-import React from "react";
+"use client";
 
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useToast } from "@/components/ui/use-toast";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 type PopularsJobsInfoProps = {
   jobs: {
@@ -13,7 +20,16 @@ type PopularsJobsInfoProps = {
 };
 
 const PopularJobsInfo: React.FC<PopularsJobsInfoProps> = ({ jobs }) => {
-  const { updateSearchParams } = useSearchParams();
+  const { toast } = useToast();
+
+  const handleCopyPopularJobTilted = async (title: string) => {
+    navigator.clipboard.writeText(title);
+
+    toast({
+      title: "Success",
+      description: `${title} copied to clipboard`,
+    });
+  };
 
   return (
     <Card>
@@ -30,15 +46,24 @@ const PopularJobsInfo: React.FC<PopularsJobsInfoProps> = ({ jobs }) => {
       </CardHeader>
       {jobs && jobs.length > 0 && (
         <CardContent className="pt-0">
-          {jobs.map((job, index) => (
-            <Button
-              variant="outline"
-              key={job._id}
-              className={`w-full ${index < jobs.length - 1 ? "mb-2" : ""}`}
-              onClick={() => updateSearchParams("query", job.title)}
-            >
-              {job.title}
-            </Button>
+          {jobs.map(({ _id, title }, index) => (
+            <TooltipProvider delayDuration={400}>
+              <Tooltip>
+                <TooltipTrigger className="w-full">
+                  <Button
+                    variant="outline"
+                    key={_id}
+                    className={`w-full ${
+                      index < jobs.length - 1 ? "mb-2" : ""
+                    }`}
+                    onClick={() => handleCopyPopularJobTilted(title)}
+                  >
+                    {title}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Copy to clipboard</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           ))}
         </CardContent>
       )}

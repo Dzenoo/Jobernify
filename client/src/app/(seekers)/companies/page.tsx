@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
-import { useQuery } from "react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
@@ -34,7 +34,7 @@ const Companies = ({
     isLoading,
     isFetching,
     isRefetching,
-  } = useQuery({
+  } = useSuspenseQuery({
     queryFn: () =>
       getEmployers({
         token: token as string,
@@ -52,7 +52,7 @@ const Companies = ({
     refetch();
   }, [searchParams]);
 
-  const totalEmployers = fetchedCompanies?.totalEmployers!;
+  const totalEmployers = fetchedCompanies.totalEmployers;
   const isFiltering = isLoading || isFetching || isRefetching;
 
   return (
@@ -64,7 +64,7 @@ const Companies = ({
         {isFiltering ? (
           <LoadingCompaniesSkeleton />
         ) : (
-          <EmployersList employers={fetchedCompanies?.employers} />
+          <EmployersList employers={fetchedCompanies.employers} />
         )}
       </div>
       {totalEmployers > 10 && (

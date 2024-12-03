@@ -8,8 +8,6 @@ import useGetEmployer from "@/hooks/queries/useGetEmployer.query";
 
 import LoadingEmployerSettings from "@/components/loaders/employers/LoadingEmployerSettings";
 
-import { EmployerTypes } from "@/types";
-
 const EmployerProfileInformation = dynamic(
   () => import("@/components/employers/dashboard/settings/EmployerSettings"),
   {
@@ -25,7 +23,7 @@ const SettingsPage = () => {
     <div className="flex justify-between gap-[10px] flex-col mx-40 py-6 max-xl:mx-0">
       <EmployerProfileInformation
         token={token as string}
-        employer={fetchedEmployerProfile?.employer as EmployerTypes}
+        employer={fetchedEmployerProfile.employer}
       />
     </div>
   );

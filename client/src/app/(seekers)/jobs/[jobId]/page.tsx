@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
@@ -21,10 +21,12 @@ const JobDetailsPage = ({
 }: {
   params: { jobId: string };
 }) => {
-  const isLarge = useMediaQuery("(min-width: 1280px)");
   const [isApplyToJob, setIsApplyToJob] = useState(false);
   const { token } = useAuthentication().getCookieHandler();
-  const { data: fetchedJobs, isLoading } = useQuery({
+
+  const isLarge = useMediaQuery("(min-width: 1280px)");
+
+  const { data: fetchedJobs, isLoading } = useSuspenseQuery({
     queryFn: () => getJobById(jobId, token as string),
     queryKey: ["job", { jobId }],
   });
@@ -41,14 +43,14 @@ const JobDetailsPage = ({
     <section className="flex gap-5 justify-between max-xl:flex-col">
       <div className="max-xl:basis-full basis-[38em]">
         <AddJobAlert
-          level={fetchedJobs?.job.level || ""}
-          type={fetchedJobs?.job.type || ""}
-          title={fetchedJobs?.job.title || ""}
+          level={fetchedJobs.job.level}
+          type={fetchedJobs.job.type}
+          title={fetchedJobs.job.title}
         />
       </div>
       <div className="basis-full grow">
         <JobDetailsInfo
-          job={fetchedJobs?.job}
+          job={fetchedJobs.job}
           onApplyJob={() => setIsApplyToJob(true)}
         />
       </div>
@@ -57,7 +59,7 @@ const JobDetailsPage = ({
           <SeekerInfo />
         </div>
         <div>
-          <JobsList jobs={fetchedJobs?.jobs} />
+          <JobsList jobs={fetchedJobs.jobs} />
         </div>
       </div>
       <ApplyToJobForm

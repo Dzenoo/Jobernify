@@ -25,14 +25,14 @@ const AddJobAlert: React.FC<JobAlertProps> = ({ level, type, title }) => {
     type,
     title,
   };
-  const { mutateAsync: addJobAlertMutate, isLoading } = useJobAlert();
+  const { mutateAsync: addJobAlertMutate, status } = useJobAlert();
   const { data: fetchedSeekerProfile } = useGetSeeker();
-  const seekerData = fetchedSeekerProfile?.seeker;
+  const { alerts } = fetchedSeekerProfile.seeker;
+
+  const isLoading = status === "pending";
 
   const isAlreadyAlertGeneratedWithProperties =
-    seekerData?.alerts.level === level &&
-    seekerData?.alerts.type === type &&
-    seekerData?.alerts.title === title;
+    alerts.level === level && alerts.type === type && alerts.title === title;
 
   return (
     <Card>

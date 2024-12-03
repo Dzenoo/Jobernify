@@ -2,7 +2,7 @@ import React from "react";
 
 import { Bookmark } from "lucide-react";
 
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
@@ -24,16 +24,18 @@ const SaveJobButton: React.FC<SaveJobButtonProps> = ({ jobId }) => {
   const { toast } = useToast();
   const { data } = useGetSeeker();
   const { token } = useAuthentication().getCookieHandler();
-  const { mutateAsync: saveJobMutate, isLoading } = useMutation({
+  const { mutateAsync: saveJobMutate, status } = useMutation({
     mutationFn: () => saveJob(jobId, token as string),
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
-      queryClient.invalidateQueries(["profile"]);
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
     },
     onError: (error: any) => {
       toast({ title: "Error", description: error.response.data.message });
     },
   });
+
+  const isLoading = status === "pending";
 
   const fetchedSeeker: any = data;
 

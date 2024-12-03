@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { useQuery } from "react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { getEmployerAnalytics } from "@/lib/actions/employers.actions";
 
@@ -23,7 +23,7 @@ const Dashboard = () => {
     isLoading,
     isFetching,
     isRefetching,
-  } = useQuery({
+  } = useSuspenseQuery({
     queryFn: () => getEmployerAnalytics(token as string),
     queryKey: ["analytics"],
   });
@@ -40,7 +40,7 @@ const Dashboard = () => {
       <div className="flex flex-col gap-[3px]">
         <div>
           <h1 className="text-base-black">
-            Hi There, {fetchedEmployer?.employer.name}
+            Hi There, {fetchedEmployer.employer.name}
           </h1>
         </div>
         <div>
@@ -49,23 +49,23 @@ const Dashboard = () => {
       </div>
       <div>
         <Statistics
-          totalJobs={analytics?.totalJobs || 0}
-          totalApplications={analytics?.totalApplications || 0}
-          totalFollowers={analytics?.totalFollowers || 0}
-          jobsThisMonth={analytics?.jobsThisMonth || 0}
-          applicationsThisMonth={analytics?.applicationsThisMonth || 0}
-          followersThisMonth={analytics?.followersThisMonth || 0}
+          totalJobs={analytics.totalJobs || 0}
+          totalApplications={analytics.totalApplications || 0}
+          totalFollowers={analytics.totalFollowers || 0}
+          jobsThisMonth={analytics.jobsThisMonth || 0}
+          applicationsThisMonth={analytics.applicationsThisMonth || 0}
+          followersThisMonth={analytics.followersThisMonth || 0}
         />
       </div>
       <div className="grid gap-3 grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1">
         <div>
-          <JobsPerMonth data={analytics?.jobsPerMonth} />
+          <JobsPerMonth data={analytics.jobsPerMonth} />
         </div>
         <div>
-          <Followers data={analytics?.followersOverTime} />
+          <Followers data={analytics.followersOverTime} />
         </div>
         <div>
-          <Types data={analytics?.jobTypes} />
+          <Types data={analytics.jobTypes} />
         </div>
       </div>
       <div></div>

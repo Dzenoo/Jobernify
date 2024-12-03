@@ -59,7 +59,7 @@ const SeekerProfile: React.FC<SeekerProfileProps> = ({ seeker, token }) => {
       <Card>
         <CardHeader>
           <div className="flex justify-between items-start gap-5">
-            <UploadSeekerImage image={seeker?.image as string} />
+            <UploadSeekerImage image={seeker.image} />
             <Button
               className="flex items-center gap-3"
               variant="destructive"
@@ -75,9 +75,9 @@ const SeekerProfile: React.FC<SeekerProfileProps> = ({ seeker, token }) => {
         <CardContent className="flex flex-col gap-10">
           <Informations seeker={seeker} />
           <Socials seeker={seeker} />
-          <Experiences experience={seeker.experience || []} />
-          <Educations education={seeker.education || []} />
-          <Skills skills={seeker.skills || []} />
+          <Experiences experience={seeker.experience} />
+          <Educations education={seeker.education} />
+          <Skills skills={seeker.skills} />
         </CardContent>
       </Card>
     </Fragment>

@@ -132,7 +132,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
     },
   ];
 
-  const isAppliedToJob = fetchedSeekerProfile?.seeker.applications.find(
+  const isAppliedToJob = fetchedSeekerProfile.seeker.applications.find(
     (application: ApplicationsTypes) => application.job._id === _id
   );
 
@@ -149,7 +149,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
               <Link href={`/companies/${company._id}?section=jobs`}>
                 <Avatar className="border border-blue-100 dark:border-[#1b1b1b] w-28 h-28">
                   <AvatarImage
-                    src={getImageUrl(company?.image)}
+                    src={getImageUrl(company.image)}
                     className="object-cover w-auto h-auto"
                   />
                 </Avatar>

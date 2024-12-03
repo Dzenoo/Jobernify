@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import zod from "zod";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ScaleLoader } from "react-spinners";
 

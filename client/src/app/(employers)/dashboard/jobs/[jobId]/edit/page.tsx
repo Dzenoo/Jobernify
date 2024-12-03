@@ -3,17 +3,17 @@
 import React from "react";
 import UpdateJobForm from "@/components/employers/dashboard/jobs/new/forms/UpdateJobForm";
 
-import { useQuery } from "react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { getJobById } from "@/lib/actions/jobs.actions";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import { JobTypes } from "@/types";
 import NotFound from "@/components/shared/pages/NotFound";
 
 const EditJobPage = ({ params }: { params: { jobId: string } }) => {
   const { token } = useAuthentication().getCookieHandler();
-  const { data: fetchedJob, isLoading } = useQuery({
+  const { data: fetchedJob, isLoading } = useSuspenseQuery({
     queryFn: () => getJobById(params.jobId, token as string),
+    queryKey: ["jobs"],
   });
 
   if (!isLoading && !fetchedJob) {
@@ -25,7 +25,7 @@ const EditJobPage = ({ params }: { params: { jobId: string } }) => {
       <UpdateJobForm
         isEdit={true}
         jobId={params.jobId}
-        formData={fetchedJob?.job as JobTypes}
+        formData={fetchedJob.job}
       />
     </section>
   );

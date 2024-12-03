@@ -13,7 +13,7 @@ type SeekersListProps = {
 const SeekersList: React.FC<SeekersListProps> = ({ seekers }) => {
   return (
     <div>
-      {seekers?.length === 0 && (
+      {seekers.length === 0 && (
         <div className="flex flex-col items-center justify-center gap-2 py-6">
           <div>
             <Search size={50} className="mb-4" />
@@ -29,8 +29,8 @@ const SeekersList: React.FC<SeekersListProps> = ({ seekers }) => {
         </div>
       )}
       <ul className="grid gap-3 grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
-        {seekers?.length > 0 &&
-          seekers?.map((seeker) => (
+        {seekers.length > 0 &&
+          seekers.map((seeker) => (
             <SeekerItem seeker={seeker} key={seeker._id} />
           ))}
       </ul>

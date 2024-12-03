@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { ScaleLoader } from "react-spinners";
 
 import { deleteJob } from "@/lib/actions/jobs.actions";
@@ -33,15 +33,17 @@ type DeleteJobProps = {
 const DeleteJob: React.FC<DeleteJobProps> = ({ onClose, ids, isDialog }) => {
   const { toast } = useToast();
   const { token } = useAuthentication().getCookieHandler();
-  const { mutateAsync: deleteJobMutate, isLoading } = useMutation({
+  const { mutateAsync: deleteJobMutate, status } = useMutation({
     mutationFn: () => deleteJob(token as string, ids),
     onSuccess: () => {
-      queryClient.invalidateQueries(["jobs"]);
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
     },
     onError: (error: any) => {
       toast({ title: "Error", description: error?.response?.data?.message });
     },
   });
+
+  const isLoading = status === "pending";
 
   const onDeleteJob = async (e: React.FormEvent) => {
     e.preventDefault();

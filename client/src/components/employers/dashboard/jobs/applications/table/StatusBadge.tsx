@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/context/react-query-client";
 
 import { updateApplicationStatus } from "@/lib/actions/applications.actions";
@@ -30,7 +30,7 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ applicationId, status }) => {
       updateApplicationStatus(applicationId, token as string, status),
     onSuccess: () => {
       window.location.reload;
-      queryClient.invalidateQueries(["applications"]);
+      queryClient.invalidateQueries({ queryKey: ["applications"] });
     },
     onError: (error: any) => {
       toast({ title: "Error", description: error?.response?.data?.message });

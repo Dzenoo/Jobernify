@@ -13,7 +13,7 @@ import { Drawer } from "@/components/ui/drawer";
 import EditSocialsForm from "./forms/EditSocialsForm";
 
 type SocialsProps = {
-  seeker?: SeekerTypes;
+  seeker: SeekerTypes;
 };
 
 const Socials: React.FC<SocialsProps> = ({ seeker }) => {

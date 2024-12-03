@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import zod from "zod";
 import TurndownService from "turndown";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ScaleLoader } from "react-spinners";
 import { useToast } from "@/components/ui/use-toast";
@@ -83,20 +83,22 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
     }
   }, [formData, reset]);
 
-  const { mutateAsync: updateJobMutate, isLoading } = useMutation({
+  const { mutateAsync: updateJobMutate, status } = useMutation({
     mutationFn: (formData: any) =>
       isEdit
         ? editJob(token as string, jobId as string, formData)
         : createNewJob(token as string, formData),
     onSuccess: (response) => {
       router.push(`/dashboard/jobs/?page=1`);
-      queryClient.invalidateQueries(["jobs"]);
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
       toast({ title: "Success", description: response.message });
     },
     onError: (error: any) => {
       toast({ title: "Error", description: error?.response?.data?.message });
     },
   });
+
+  const isLoading = status === "pending";
 
   const [currentJobForm, setCurrentJobForm] = useState<number>(0);
 

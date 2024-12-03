@@ -14,8 +14,6 @@ import SeekerAlerts from "@/components/seekers/profile/alerts/SeekerAlerts";
 import SeekerProfileNavigation from "@/components/seekers/profile/navigation/SeekerProfileNavigation";
 import NotFound from "@/components/shared/pages/NotFound";
 
-import { SeekerTypes } from "@/types";
-
 const JobsList = dynamic(() => import("@/components/seekers/jobs/JobsList"), {
   loading: () => <LoadingJobsSkeleton />,
 });
@@ -59,7 +57,7 @@ const SeekerProfilePage = ({
       {!searchParams.section && (
         <div>
           <SeekerProfile
-            seeker={(fetchedSeekerProfile?.seeker as SeekerTypes) || {}}
+            seeker={fetchedSeekerProfile.seeker}
             token={token as string}
           />
         </div>
@@ -67,7 +65,7 @@ const SeekerProfilePage = ({
       {searchParams.section === "saved" && (
         <div>
           <JobsList
-            jobs={fetchedSeekerProfile?.seeker.savedJobs || []}
+            jobs={fetchedSeekerProfile.seeker.savedJobs}
             message="You have no saved jobs."
           />
         </div>
@@ -77,13 +75,8 @@ const SeekerProfilePage = ({
           <SeekerAlerts
             token={token as string}
             alertsData={{
-              alerts: fetchedSeekerProfile?.seeker.alerts ?? {
-                title: "",
-                type: "",
-                level: "",
-              },
-              receiveJobAlerts:
-                fetchedSeekerProfile?.seeker.receiveJobAlerts ?? false,
+              alerts: fetchedSeekerProfile.seeker.alerts,
+              receiveJobAlerts: fetchedSeekerProfile.seeker.receiveJobAlerts,
             }}
           />
         </div>
@@ -91,7 +84,7 @@ const SeekerProfilePage = ({
       {searchParams.section === "applications" && (
         <div>
           <Applications
-            applications={fetchedSeekerProfile?.seeker.applications || []}
+            applications={fetchedSeekerProfile.seeker.applications}
           />
         </div>
       )}

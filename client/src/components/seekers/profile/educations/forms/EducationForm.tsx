@@ -4,7 +4,7 @@ import zod from "zod";
 import { CalendarIcon } from "lucide-react";
 import { ScaleLoader } from "react-spinners";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 
@@ -91,7 +91,7 @@ const EducationForm: React.FC<EducationFormProps> = ({
         : addNewEducation(formData, token as string),
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
-      queryClient.invalidateQueries(["profile"]);
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
       closeForm();
     },
     onError: (error: any) => {

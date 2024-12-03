@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
-import { useQuery } from "react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
@@ -16,8 +16,6 @@ import PaginatedList from "@/components/ui/paginate-list";
 import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 import LoadingCompanyDetails from "@/components/loaders/seekers/LoadingCompanyDetails";
 import NotFound from "@/components/shared/pages/NotFound";
-
-import { EmployerTypes } from "@/types";
 
 const JobsList = dynamic(() => import("@/components/seekers/jobs/JobsList"), {
   loading: () => <LoadingJobsSkeleton />,
@@ -38,7 +36,7 @@ const CompanyDetails = ({
     isFetching,
     isLoading,
     isRefetching,
-  } = useQuery({
+  } = useSuspenseQuery({
     queryFn: () =>
       getEmployerById(
         params.companyId,
@@ -58,11 +56,11 @@ const CompanyDetails = ({
     refetch();
   }, [searchParams]);
 
-  const searchParamsJobs = searchParams?.section === "jobs";
+  const searchParamsJobs = searchParams.section === "jobs";
 
   let totalItems = 0;
-  if (searchParamsJobs && fetchedCompany?.totalJobs) {
-    totalItems = fetchedCompany?.totalJobs;
+  if (searchParamsJobs && fetchedCompany.totalJobs) {
+    totalItems = fetchedCompany.totalJobs;
   }
 
   const isFiltering = isLoading || isFetching || isRefetching;
@@ -78,9 +76,7 @@ const CompanyDetails = ({
       ) : (
         <div className="flex flex-col gap-6 justify-center overflow-auto">
           <div>
-            <EmployerDetailsInfo
-              employer={fetchedCompany?.employer as EmployerTypes}
-            />
+            <EmployerDetailsInfo employer={fetchedCompany.employer} />
           </div>
           <div>
             <EmployerFilters type={searchParams.section} />
@@ -93,7 +89,7 @@ const CompanyDetails = ({
             {isFiltering ? (
               <LoadingJobsSkeleton />
             ) : (
-              <JobsList jobs={fetchedCompany?.employer?.jobs} />
+              <JobsList jobs={fetchedCompany.employer.jobs} />
             )}
           </>
         )}
