@@ -79,7 +79,9 @@ const Applications: React.FC<ApplicationsProps> = ({
             <TableCell>
               <NameWithImage seeker={app.seeker} />
             </TableCell>
-            <TableCell>{app.seeker.email}</TableCell>
+            <TableCell>
+              <a href={`mailto:${app.seeker.email}`}>{app.seeker.email}</a>
+            </TableCell>
             <TableCell>
               <Resume resume={app.resume} />
             </TableCell>
