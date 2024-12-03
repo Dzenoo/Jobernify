@@ -28,7 +28,7 @@ const Applications: React.FC<ApplicationsProps> = ({ applications }) => {
           </div>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-0">
         {applications?.length === 0 && (
           <div className="flex flex-col items-center justify-center gap-2 py-6">
             <div>
