@@ -1,5 +1,3 @@
-"use server";
-
 import { getApiHandler, patchApiHandler, postApiHandler } from "../api";
 
 import { ApplicationsTypes, ResponseMessageTypes } from "@/types";

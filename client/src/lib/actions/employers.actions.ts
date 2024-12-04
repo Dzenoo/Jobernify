@@ -1,5 +1,3 @@
-"use server";
-
 import { deleteApiHandler, getApiHandler, patchApiHandler } from "../api";
 
 import { EmployerTypes, ResponseMessageTypes } from "@/types";
