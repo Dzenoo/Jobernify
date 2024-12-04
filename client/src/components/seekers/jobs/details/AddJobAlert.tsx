@@ -12,6 +12,7 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
+import { SeekerTypes } from "@/types";
 
 type JobAlertProps = {
   level: string;
@@ -26,7 +27,8 @@ const AddJobAlert: React.FC<JobAlertProps> = ({ level, type, title }) => {
     title,
   };
   const { mutateAsync: addJobAlertMutate, status } = useJobAlert();
-  const { data: fetchedSeekerProfile } = useGetSeeker();
+  const { data } = useGetSeeker();
+  const fetchedSeekerProfile = data as { seeker: SeekerTypes };
   const { alerts } = fetchedSeekerProfile.seeker;
 
   const isLoading = status === "pending";

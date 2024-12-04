@@ -31,7 +31,7 @@ import {
   getTime,
 } from "@/lib/utils";
 
-import { ApplicationsTypes, JobTypes } from "@/types";
+import { ApplicationsTypes, JobTypes, SeekerTypes } from "@/types";
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -62,7 +62,8 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
   onApplyJob,
 }) => {
   const router = useRouter();
-  const { data: fetchedSeekerProfile } = useGetSeeker();
+  const { data } = useGetSeeker();
+  const fetchedSeekerProfile = data as { seeker: SeekerTypes };
 
   const sanitizedDescription = DOMPurify.sanitize(description);
   const expirationDate = formatDate(expiration_date);

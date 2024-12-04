@@ -1,7 +1,4 @@
-import {
-  useSuspenseQuery,
-  UseSuspenseQueryOptions,
-} from "@tanstack/react-query";
+import { useQuery, UseSuspenseQueryOptions } from "@tanstack/react-query";
 
 import { getSeekerProfile } from "@/lib/actions/seekers.actions";
 
@@ -16,9 +13,10 @@ interface SeekerProfile {
 const useGetSeeker = (options?: UseSuspenseQueryOptions<SeekerProfile>) => {
   const { token } = useAuthentication().getCookieHandler();
 
-  return useSuspenseQuery<SeekerProfile>({
+  return useQuery<SeekerProfile>({
     queryFn: () => getSeekerProfile(token as string),
     queryKey: ["profile"],
+    enabled: !!token,
     ...options,
   });
 };
