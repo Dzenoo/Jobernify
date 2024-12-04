@@ -13,8 +13,10 @@ const FollowEmployerButton: React.FC<FollowEmployerProps> = ({
   employerId,
 }) => {
   const { data: fetchedSeekerProfile, refetch } = useGetSeeker();
-  const { mutateAsync: followEmployerMutate, isLoading } =
+  const { mutateAsync: followEmployerMutate, status } =
     useFollowEmployer(employerId);
+
+  const isLoading = status === "pending";
 
   const isEmployerFollowed =
     fetchedSeekerProfile?.seeker?.following.includes(employerId);
