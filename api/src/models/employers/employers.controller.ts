@@ -94,7 +94,7 @@ export class EmployersController {
   @Get('/analytics')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Employer)
-  async getEmployerAnalytics(@User('userId') userId: string) {
+  async getEmployerAnalyticsInfo(@User('userId') userId: string) {
     return await this.employersService.getAnalytics(userId);
   }
 

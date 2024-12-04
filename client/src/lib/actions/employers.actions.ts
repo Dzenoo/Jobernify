@@ -71,7 +71,7 @@ export const deleteEmployerProfile = async ({
  * @param token - The authentication token for the employer.
  * @returns A promise resolving to various employer statistics.
  */
-export const getEmployerAnalytics = async (
+export const getEmployerAnalyticsInfo = async (
   token: string
 ): Promise<{
   totalJobs: number;

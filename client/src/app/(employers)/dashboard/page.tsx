@@ -4,7 +4,7 @@ import React from "react";
 
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import { getEmployerAnalytics } from "@/lib/actions/employers.actions";
+import { getEmployerAnalyticsInfo } from "@/lib/actions/employers.actions";
 
 import useGetEmployer from "@/hooks/queries/useGetEmployer.query";
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
@@ -24,7 +24,7 @@ const Dashboard = () => {
     isFetching,
     isRefetching,
   } = useSuspenseQuery({
-    queryFn: () => getEmployerAnalytics(token as string),
+    queryFn: () => getEmployerAnalyticsInfo(token as string),
     queryKey: ["analytics"],
   });
   const { data: fetchedEmployer } = useGetEmployer();
