@@ -1,3 +1,5 @@
+"use server";
+
 import { postApiHandler } from "../api";
 
 /**
