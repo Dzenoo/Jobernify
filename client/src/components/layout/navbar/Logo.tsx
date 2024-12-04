@@ -9,7 +9,7 @@ const Logo: React.FC<{ href?: string }> = ({ href = "/" }) => {
   return (
     <Link href={href}>
       <Image
-        className="sm:hidden"
+        className="sm:hidden max-w-[50px] max-h-[50px]"
         src={
           theme === "dark"
             ? "/images/logo-icon-dark.png"

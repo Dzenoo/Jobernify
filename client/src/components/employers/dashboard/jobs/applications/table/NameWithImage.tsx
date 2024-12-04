@@ -20,7 +20,7 @@ const NameWithImage: React.FC<NameWithImage> = ({
         <Image
           width={30}
           height={30}
-          className="rounded-full object-cover"
+          className="rounded-full object-cover min-w-[30px] min-h-[30px]"
           src={getImageUrl(image)}
           alt={`${first_name} ${last_name}`}
         />
