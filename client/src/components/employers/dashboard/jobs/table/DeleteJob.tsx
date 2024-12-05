@@ -36,7 +36,7 @@ const DeleteJob: React.FC<DeleteJobProps> = ({ onClose, ids, isDialog }) => {
   const { mutateAsync: deleteJobMutate, status } = useMutation({
     mutationFn: () => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return deleteJob(token, ids);

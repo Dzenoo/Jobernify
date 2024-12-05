@@ -14,7 +14,7 @@ const useEditSeeker = () => {
   return useMutation({
     mutationFn: (formData: FormData | any) => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return editSeekerProfile(formData, token);

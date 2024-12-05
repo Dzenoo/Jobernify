@@ -27,7 +27,7 @@ const SeekerDetailsPage = ({
   const { data: fetchedSeeker, isLoading } = useSuspenseQuery({
     queryFn: () => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return getSeekerById(seekerId, token);

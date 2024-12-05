@@ -36,7 +36,7 @@ const DeleteSeekerProfile: React.FC<DeleteSeekerProfileProps> = ({
   const { mutateAsync: deleteSeekerProfileMutate } = useMutation({
     mutationFn: () => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return deleteSeekerProfile(token);

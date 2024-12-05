@@ -14,7 +14,7 @@ const EditJobPage = ({ params }: { params: { jobId: string } }) => {
   const { data: fetchedJob, isLoading } = useSuspenseQuery({
     queryFn: () => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return getJobById(params.jobId, token);

@@ -14,7 +14,7 @@ const useFollowEmployer = (employerId: string) => {
   return useMutation({
     mutationFn: () => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return followEmployer(employerId, token);

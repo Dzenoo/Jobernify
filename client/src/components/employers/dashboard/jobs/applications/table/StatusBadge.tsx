@@ -27,7 +27,7 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ applicationId, status }) => {
   const { mutateAsync: updateStatusMutate } = useMutation({
     mutationFn: (status: string) => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return updateApplicationStatus(applicationId, token, status);

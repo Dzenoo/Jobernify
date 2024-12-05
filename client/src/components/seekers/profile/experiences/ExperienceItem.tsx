@@ -36,7 +36,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
   const { mutateAsync: deleteExperienceMutate } = useMutation({
     mutationFn: () => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return deleteExperience(_id, token);

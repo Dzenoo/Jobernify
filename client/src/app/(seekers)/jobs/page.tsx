@@ -40,7 +40,7 @@ const Jobs = ({
   } = useSuspenseQuery({
     queryFn: () => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return getJobs({

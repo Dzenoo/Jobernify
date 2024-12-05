@@ -86,7 +86,7 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
   const { mutateAsync: updateJobMutate, status } = useMutation({
     mutationFn: (formData: any) => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return isEdit

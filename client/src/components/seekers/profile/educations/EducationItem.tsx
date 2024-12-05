@@ -31,7 +31,7 @@ const EducationItem: React.FC<EducationItemProps> = ({
   const { mutateAsync: deleteEducationMutate } = useMutation({
     mutationFn: () => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return deleteEducation(_id, token);

@@ -27,7 +27,7 @@ const SaveJobButton: React.FC<SaveJobButtonProps> = ({ jobId }) => {
   const { mutateAsync: saveJobMutate, status } = useMutation({
     mutationFn: () => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return saveJob(jobId, token);

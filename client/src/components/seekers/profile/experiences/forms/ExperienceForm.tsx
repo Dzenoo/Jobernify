@@ -104,7 +104,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
   const { mutateAsync: handleExperienceMutate } = useMutation({
     mutationFn: (formData: any) => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return isEdit

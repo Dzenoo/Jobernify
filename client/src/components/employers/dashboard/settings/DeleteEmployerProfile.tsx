@@ -36,7 +36,7 @@ const DeleteEmployerProfile: React.FC<DeleteEmployerProfileProps> = ({
   const { mutateAsync: deleteEmployerProfileMutate } = useMutation({
     mutationFn: () => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return deleteEmployerProfile({ token });

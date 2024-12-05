@@ -16,7 +16,7 @@ const useGetSeeker = (options?: UseSuspenseQueryOptions<SeekerProfile>) => {
   return useQuery<SeekerProfile>({
     queryFn: () => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return getSeekerProfile(token);

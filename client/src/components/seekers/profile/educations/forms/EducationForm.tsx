@@ -87,7 +87,7 @@ const EducationForm: React.FC<EducationFormProps> = ({
   const { mutateAsync: handleEducationMutate } = useMutation({
     mutationFn: (formData: any) => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return isEdit

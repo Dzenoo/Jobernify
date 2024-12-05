@@ -26,7 +26,7 @@ const Dashboard = () => {
   } = useQuery({
     queryFn: () => {
       if (!token) {
-        throw new Error("Unathorized!");
+        throw new Error("Unauthorized!");
       }
 
       return getEmployerAnalyticsInfo(token);
