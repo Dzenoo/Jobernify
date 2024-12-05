@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
@@ -33,7 +33,7 @@ const DashboardJobsPage = ({
     isFetching,
     isRefetching,
     isLoading,
-  } = useSuspenseQuery({
+  } = useQuery({
     queryFn: () => {
       if (!token) {
         throw new Error("Unauthorized!");
@@ -51,7 +51,7 @@ const DashboardJobsPage = ({
   });
 
   const isLoadingJobs = isLoading || isFetching || isRefetching;
-  const totalJobs = fetchedEmployer.counts.totalJobs || 0;
+  const totalJobs = fetchedEmployer?.counts.totalJobs || 0;
   const itemsPerPage = 10;
   const currentPage = Number(searchParams.page) || 1;
 
@@ -71,7 +71,7 @@ const DashboardJobsPage = ({
         <LoadingDashboardJobs />
       ) : (
         <DashboardEmployerJobs
-          jobs={fetchedEmployer.employer.jobs}
+          jobs={fetchedEmployer?.employer.jobs || []}
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}
         />

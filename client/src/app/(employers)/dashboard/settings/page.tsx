@@ -17,7 +17,7 @@ const EmployerProfileInformation = dynamic(
 );
 
 const SettingsPage = () => {
-  const { data: fetchedEmployerProfile, isLoading, status } = useGetEmployer();
+  const { data: fetchedEmployerProfile, isLoading } = useGetEmployer();
 
   if (!isLoading) {
     if (!fetchedEmployerProfile?.employer) {

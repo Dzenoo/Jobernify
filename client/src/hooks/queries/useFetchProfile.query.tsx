@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { getSeekerProfile } from "@/lib/actions/seekers.actions";
 import { getEmployerProfile } from "@/lib/actions/employers.actions";
@@ -6,7 +6,7 @@ import { getEmployerProfile } from "@/lib/actions/employers.actions";
 const useFetchProfile = (userType: string | null, token: string | null) => {
   if (!userType || !token) return { data: null };
 
-  return useSuspenseQuery({
+  return useQuery({
     queryFn: async () => {
       if (userType === "seeker") {
         return await getSeekerProfile(token);

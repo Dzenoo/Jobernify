@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
@@ -36,7 +36,7 @@ const SeekersPage = ({
     isLoading,
     isRefetching,
     isFetching,
-  } = useSuspenseQuery({
+  } = useQuery({
     queryFn: () => {
       if (!token) {
         throw new Error("Unauthorized!");
@@ -56,7 +56,7 @@ const SeekersPage = ({
     refetch();
   }, [searchParams]);
 
-  const totalSeekers = fetchedSeekers.totalSeekers || 0;
+  const totalSeekers = fetchedSeekers?.totalSeekers || 0;
   const isFiltering = isLoading || isFetching || isRefetching;
 
   return (
@@ -75,7 +75,7 @@ const SeekersPage = ({
           {isFiltering ? (
             <LoadingSeekers />
           ) : (
-            <SeekersList seekers={fetchedSeekers.seekers} />
+            <SeekersList seekers={fetchedSeekers?.seekers || []} />
           )}
         </div>
         {totalSeekers > 12 && (

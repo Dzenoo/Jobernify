@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
@@ -15,6 +15,7 @@ import ApplyToJobForm from "@/components/seekers/jobs/details/forms/ApplyToJobFo
 import NotFound from "@/components/shared/pages/NotFound";
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import SeekerInfo from "@/components/seekers/jobs/SeekerInfo";
+import { JobTypes } from "@/types";
 
 const JobDetailsPage = ({
   params: { jobId },
@@ -26,7 +27,7 @@ const JobDetailsPage = ({
 
   const isLarge = useMediaQuery("(min-width: 1280px)");
 
-  const { data: fetchedJobs, isLoading } = useSuspenseQuery({
+  const { data: fetchedJobs, isLoading } = useQuery({
     queryFn: () => {
       if (!token) {
         throw new Error("Unauthorized!");
@@ -49,14 +50,14 @@ const JobDetailsPage = ({
     <section className="flex gap-5 justify-between max-xl:flex-col">
       <div className="max-xl:basis-full basis-[38em]">
         <AddJobAlert
-          level={fetchedJobs.job.level}
-          type={fetchedJobs.job.type}
-          title={fetchedJobs.job.title}
+          level={fetchedJobs?.job.level || ""}
+          type={fetchedJobs?.job.type || ""}
+          title={fetchedJobs?.job.title || ""}
         />
       </div>
       <div className="basis-full grow">
         <JobDetailsInfo
-          job={fetchedJobs.job}
+          job={fetchedJobs?.job as JobTypes}
           onApplyJob={() => setIsApplyToJob(true)}
         />
       </div>
@@ -65,7 +66,7 @@ const JobDetailsPage = ({
           <SeekerInfo />
         </div>
         <div>
-          <JobsList jobs={fetchedJobs.jobs} />
+          <JobsList jobs={fetchedJobs?.jobs || []} />
         </div>
       </div>
       <ApplyToJobForm

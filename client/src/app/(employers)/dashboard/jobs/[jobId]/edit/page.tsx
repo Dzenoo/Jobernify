@@ -3,15 +3,17 @@
 import React from "react";
 import UpdateJobForm from "@/components/employers/dashboard/jobs/new/forms/UpdateJobForm";
 
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getJobById } from "@/lib/actions/jobs.actions";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import NotFound from "@/components/shared/pages/NotFound";
 
+import { JobTypes } from "@/types";
+
 const EditJobPage = ({ params }: { params: { jobId: string } }) => {
   const { token } = useAuthentication().getCookieHandler();
-  const { data: fetchedJob, isLoading } = useSuspenseQuery({
+  const { data: fetchedJob, isLoading } = useQuery({
     queryFn: () => {
       if (!token) {
         throw new Error("Unauthorized!");
@@ -31,7 +33,7 @@ const EditJobPage = ({ params }: { params: { jobId: string } }) => {
       <UpdateJobForm
         isEdit={true}
         jobId={params.jobId}
-        formData={fetchedJob.job}
+        formData={fetchedJob?.job as JobTypes}
       />
     </section>
   );

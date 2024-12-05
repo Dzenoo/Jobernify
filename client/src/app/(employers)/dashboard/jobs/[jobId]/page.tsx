@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
@@ -32,7 +32,13 @@ const JobApplicationsPage = ({
 }) => {
   const { updateSearchParams } = useSearchParams();
   const { token } = useAuthentication().getCookieHandler();
-  const { data, isLoading, isFetching, isRefetching } = useSuspenseQuery({
+  const { data, isLoading, isFetching, isRefetching } = useQuery({
+    queryKey: [
+      "applications",
+      params.jobId,
+      searchParams.page,
+      searchParams.status,
+    ],
     queryFn: () => {
       if (!token) {
         throw new Error("Unauthorized!");
@@ -45,16 +51,10 @@ const JobApplicationsPage = ({
         status: searchParams.status || "",
       });
     },
-    queryKey: [
-      "applications",
-      params.jobId,
-      searchParams.page,
-      searchParams.status,
-    ],
   });
 
   const isLoadingJobApplications = isLoading || isFetching || isRefetching;
-  const totalApplications = data.totalApplications || 0;
+  const totalApplications = data?.totalApplications || 0;
   const currentPage = Number(searchParams.page) || 1;
   const itemsPerPage = 10;
 
@@ -66,7 +66,7 @@ const JobApplicationsPage = ({
     <section className="flex flex-col gap-8">
       <div>
         <div>
-          <h1 className="text-base-black">{data.job}</h1>
+          <h1 className="text-base-black">{data?.job}</h1>
         </div>
         <div>
           <p className="text-initial-gray">
@@ -76,11 +76,11 @@ const JobApplicationsPage = ({
       </div>
       <div>
         <FilterApplications
-          applicants={data.totalApplications || 0}
-          pending={data.totalPendingStatus || 0}
-          interviews={data.totalInterviewStatus || 0}
-          rejected={data.totalRejectedStatus || 0}
-          accepted={data.totalAcceptedStatus || 0}
+          applicants={data?.totalApplications || 0}
+          pending={data?.totalPendingStatus || 0}
+          interviews={data?.totalInterviewStatus || 0}
+          rejected={data?.totalRejectedStatus || 0}
+          accepted={data?.totalAcceptedStatus || 0}
           status={searchParams.status}
         />
       </div>
@@ -89,7 +89,7 @@ const JobApplicationsPage = ({
           <LoadingJobApplications />
         ) : (
           <Applications
-            applications={data.applications}
+            applications={data?.applications || []}
             currentPage={1}
             itemsPerPage={10}
           />
