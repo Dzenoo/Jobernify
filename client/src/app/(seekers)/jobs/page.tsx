@@ -2,25 +2,20 @@
 
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
-
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 
 import { getJobs } from "@/lib/actions/jobs.actions";
 
 import LoadingJobsSkeleton from "@/components/loaders/seekers/LoadingJobsSkeleton";
 import LoadingPopularJobs from "@/components/loaders/seekers/LoadingPopularJobs";
-
 import PopularJobsInfo from "@/components/seekers/jobs/PopularJobsInfo";
 import FilterJobs from "@/components/seekers/jobs/filters/FilterJobs";
+import PaginatedList from "@/components/ui/paginate-list";
+import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 import SearchJobs from "@/components/seekers/jobs/search/SearchJobs";
 import SeekerInfo from "@/components/seekers/jobs/SeekerInfo";
-
-import PaginatedList from "@/components/ui/paginate-list";
-
-import { FilterCounts, JobTypes } from "@/types";
 
 const JobsList = dynamic(() => import("@/components/seekers/jobs/JobsList"), {
   loading: () => <LoadingJobsSkeleton />,
@@ -33,14 +28,16 @@ const Jobs = ({
 }) => {
   const { updateSearchParams } = useSearchParams();
   const { token } = useAuthentication().getCookieHandler();
-  const { data, refetch, isLoading, isFetching, isRefetching } = useQuery({
-    queryFn: () => {
-      if (!token) {
-        throw new Error("Unauthorized!");
-      }
-
-      return getJobs({
-        token: token,
+  const {
+    data: fetchedJobs,
+    refetch,
+    isLoading,
+    isFetching,
+    isRefetching,
+  } = useQuery({
+    queryFn: () =>
+      getJobs({
+        token: token as string,
         page: searchParams.page || "1",
         sort: searchParams.sort || "",
         search: searchParams.query || "",
@@ -48,23 +45,15 @@ const Jobs = ({
         salary: searchParams.salary || "",
         level: searchParams.level || "",
         type: searchParams.type || "",
-      });
-    },
+      }),
     queryKey: ["jobs", searchParams],
   });
-
-  const fetchedJobs = data as {
-    jobs: JobTypes[];
-    totalJobs: number;
-    popularJobs: JobTypes[];
-    filterCounts: FilterCounts;
-  };
 
   useEffect(() => {
     refetch();
   }, [searchParams]);
 
-  const totalJobs = fetchedJobs.totalJobs || 0;
+  const totalJobs = fetchedJobs?.totalJobs || 0;
   const isFiltering = isLoading || isFetching || isRefetching;
 
   return (
@@ -77,7 +66,9 @@ const Jobs = ({
           {isFiltering ? (
             <LoadingPopularJobs />
           ) : (
-            <PopularJobsInfo jobs={fetchedJobs.popularJobs} />
+            <PopularJobsInfo
+              jobs={(fetchedJobs && fetchedJobs.popularJobs) || []}
+            />
           )}
         </div>
       </div>
@@ -86,13 +77,13 @@ const Jobs = ({
           <SearchJobs query={searchParams.query} sort={searchParams.sort} />
         </div>
         <div className="xl:hidden">
-          <FilterJobs filterCounts={fetchedJobs.filterCounts} />
+          <FilterJobs filterCounts={fetchedJobs?.filterCounts || []} />
         </div>
         <div>
           {isFiltering ? (
             <LoadingJobsSkeleton />
           ) : (
-            <JobsList jobs={fetchedJobs.jobs} />
+            <JobsList jobs={fetchedJobs?.jobs || []} />
           )}
         </div>
         {totalJobs > 10 && (
@@ -107,7 +98,7 @@ const Jobs = ({
         )}
       </div>
       <div className="basis-2/5 max-xl:hidden">
-        <FilterJobs filterCounts={fetchedJobs.filterCounts} />
+        <FilterJobs filterCounts={fetchedJobs?.filterCounts || []} />
       </div>
     </section>
   );
