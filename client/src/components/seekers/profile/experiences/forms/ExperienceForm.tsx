@@ -102,10 +102,15 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
   }, [isOpen, isEdit]);
 
   const { mutateAsync: handleExperienceMutate } = useMutation({
-    mutationFn: (formData: any) =>
-      isEdit
-        ? editExperience(formData, token as string, experienceId as string)
-        : addNewExperience(formData, token as string),
+    mutationFn: (formData: any) => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return isEdit
+        ? editExperience(formData, token, experienceId as string)
+        : addNewExperience(formData, token);
+    },
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
       queryClient.invalidateQueries({ queryKey: ["profile"] });

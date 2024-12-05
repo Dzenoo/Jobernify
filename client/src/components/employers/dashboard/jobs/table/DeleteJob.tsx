@@ -34,7 +34,13 @@ const DeleteJob: React.FC<DeleteJobProps> = ({ onClose, ids, isDialog }) => {
   const { toast } = useToast();
   const { token } = useAuthentication().getCookieHandler();
   const { mutateAsync: deleteJobMutate, status } = useMutation({
-    mutationFn: () => deleteJob(token as string, ids),
+    mutationFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return deleteJob(token, ids);
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
     },

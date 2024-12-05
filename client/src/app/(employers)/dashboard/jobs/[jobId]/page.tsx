@@ -33,13 +33,18 @@ const JobApplicationsPage = ({
   const { updateSearchParams } = useSearchParams();
   const { token } = useAuthentication().getCookieHandler();
   const { data, isLoading, isFetching, isRefetching } = useSuspenseQuery({
-    queryFn: () =>
-      getApplications({
-        token: token as string,
+    queryFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return getApplications({
+        token: token,
         jobId: params.jobId,
         page: Number(searchParams.page) || 1,
         status: searchParams.status || "",
-      }),
+      });
+    },
     queryKey: [
       "applications",
       params.jobId,

@@ -5,7 +5,7 @@ import {
   deleteApiHandler,
 } from "../api";
 
-import { FilterCounts, JobTypes, ResponseMessageTypes } from "@/types";
+import { FilterCounts, JobTypes } from "@/types";
 
 /**
  * ===============================

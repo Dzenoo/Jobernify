@@ -12,7 +12,13 @@ const useFollowEmployer = (employerId: string) => {
   const { token } = useAuthentication().getCookieHandler();
 
   return useMutation({
-    mutationFn: () => followEmployer(employerId, token as string),
+    mutationFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return followEmployer(employerId, token);
+    },
     mutationKey: ["profile", "company", "companies"],
     onSuccess: () => {
       queryClient.invalidateQueries({

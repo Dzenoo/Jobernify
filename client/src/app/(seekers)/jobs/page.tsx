@@ -38,9 +38,13 @@ const Jobs = ({
     isFetching,
     isRefetching,
   } = useSuspenseQuery({
-    queryFn: () =>
-      getJobs({
-        token: token as string,
+    queryFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return getJobs({
+        token: token,
         page: searchParams.page || "1",
         sort: searchParams.sort || "",
         search: searchParams.query || "",
@@ -48,7 +52,8 @@ const Jobs = ({
         salary: searchParams.salary || "",
         level: searchParams.level || "",
         type: searchParams.type || "",
-      }),
+      });
+    },
     queryKey: ["jobs", searchParams],
   });
 

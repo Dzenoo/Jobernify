@@ -27,7 +27,13 @@ const JobDetailsPage = ({
   const isLarge = useMediaQuery("(min-width: 1280px)");
 
   const { data: fetchedJobs, isLoading } = useSuspenseQuery({
-    queryFn: () => getJobById(jobId, token as string),
+    queryFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return getJobById(jobId, token);
+    },
     queryKey: ["job", { jobId }],
   });
 
@@ -65,7 +71,6 @@ const JobDetailsPage = ({
       <ApplyToJobForm
         isApplyToJob={isApplyToJob}
         setIsApplyToJob={setIsApplyToJob}
-        token={token as string}
         jobId={jobId}
         isDialog={isLarge ? true : false}
       />

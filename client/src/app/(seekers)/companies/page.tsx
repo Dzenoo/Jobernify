@@ -35,16 +35,21 @@ const Companies = ({
     isFetching,
     isRefetching,
   } = useSuspenseQuery({
-    queryFn: () =>
-      getEmployers({
-        token: token as string,
+    queryFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return getEmployers({
+        token: token,
         page: searchParams.page || "1",
         sort: searchParams.sort || "",
         search: searchParams.query || "",
         industry: searchParams.industry || "",
         size: searchParams.size || "",
         location: searchParams.location || "",
-      }),
+      });
+    },
     queryKey: ["companies", searchParams],
   });
 

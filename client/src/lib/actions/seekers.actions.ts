@@ -5,7 +5,7 @@ import {
   deleteApiHandler,
 } from "../api";
 
-import { ResponseMessageTypes, SeekerTypes } from "@/types";
+import { SeekerTypes } from "@/types";
 
 /**
  * ===============================

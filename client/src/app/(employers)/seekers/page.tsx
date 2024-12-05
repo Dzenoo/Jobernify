@@ -37,13 +37,18 @@ const SeekersPage = ({
     isRefetching,
     isFetching,
   } = useSuspenseQuery({
-    queryFn: () =>
-      getSeekers({
-        token: token as string,
+    queryFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return getSeekers({
+        token: token,
         page: searchParams.page || 1,
         search: searchParams.query || "",
         skills: searchParams.skills || "",
-      }),
+      });
+    },
     queryKey: ["seekers", searchParams],
   });
 

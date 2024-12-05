@@ -19,7 +19,6 @@ import {
 import { Switch } from "@/components/ui/switch";
 
 type ReceiveJobAlertsFormProps = {
-  token: string;
   receiveJobAlerts: boolean;
 };
 

@@ -85,10 +85,15 @@ const EducationForm: React.FC<EducationFormProps> = ({
   }, [isOpen, isEdit]);
 
   const { mutateAsync: handleEducationMutate } = useMutation({
-    mutationFn: (formData: any) =>
-      isEdit
-        ? editEducation(formData, token as string, educationId as string)
-        : addNewEducation(formData, token as string),
+    mutationFn: (formData: any) => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return isEdit
+        ? editEducation(formData, token, educationId as string)
+        : addNewEducation(formData, token);
+    },
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
       queryClient.invalidateQueries({ queryKey: ["profile"] });

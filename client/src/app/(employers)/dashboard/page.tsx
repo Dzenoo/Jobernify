@@ -24,7 +24,13 @@ const Dashboard = () => {
     isFetching,
     isRefetching,
   } = useQuery({
-    queryFn: () => getEmployerAnalyticsInfo(token as string),
+    queryFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return getEmployerAnalyticsInfo(token);
+    },
     queryKey: ["analytics"],
   });
   const { data: fetchedEmployer } = useGetEmployer();

@@ -14,10 +14,9 @@ import { Button } from "@/components/ui/button";
 
 type SeekerAlertsProps = {
   alertsData: Pick<SeekerTypes, "alerts" | "receiveJobAlerts">;
-  token: string;
 };
 
-const SeekerAlerts: React.FC<SeekerAlertsProps> = ({ alertsData, token }) => {
+const SeekerAlerts: React.FC<SeekerAlertsProps> = ({ alertsData }) => {
   const isLarge = useMediaQuery("(min-width: 1280px)");
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -69,10 +68,7 @@ const SeekerAlerts: React.FC<SeekerAlertsProps> = ({ alertsData, token }) => {
           </div>
           {!areObjectKeysEmpty(alerts) && (
             <div>
-              <ReceiveJobAlertsForm
-                token={token}
-                receiveJobAlerts={receiveJobAlerts}
-              />
+              <ReceiveJobAlertsForm receiveJobAlerts={receiveJobAlerts} />
             </div>
           )}
         </CardHeader>

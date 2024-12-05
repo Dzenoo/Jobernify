@@ -25,7 +25,13 @@ const SaveJobButton: React.FC<SaveJobButtonProps> = ({ jobId }) => {
   const { data } = useGetSeeker();
   const { token } = useAuthentication().getCookieHandler();
   const { mutateAsync: saveJobMutate, status } = useMutation({
-    mutationFn: () => saveJob(jobId, token as string),
+    mutationFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return saveJob(jobId, token);
+    },
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
       queryClient.invalidateQueries({ queryKey: ["profile"] });

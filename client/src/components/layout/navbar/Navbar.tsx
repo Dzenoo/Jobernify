@@ -49,7 +49,7 @@ const Navbar: React.FC<{ href?: string }> = ({ href }) => {
   const { deleteCookieHandler, getCookieHandler } = useAuthentication();
   const { isAuthenticated, userType, token } = getCookieHandler();
 
-  const { data } = useFetchProfile(userType as string, token);
+  const { data } = useFetchProfile(userType, token);
   const fetchedProfile: any = data;
 
   React.useEffect(() => {

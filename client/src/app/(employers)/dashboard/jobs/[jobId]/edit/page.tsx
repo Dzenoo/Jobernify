@@ -12,7 +12,13 @@ import NotFound from "@/components/shared/pages/NotFound";
 const EditJobPage = ({ params }: { params: { jobId: string } }) => {
   const { token } = useAuthentication().getCookieHandler();
   const { data: fetchedJob, isLoading } = useSuspenseQuery({
-    queryFn: () => getJobById(params.jobId, token as string),
+    queryFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return getJobById(params.jobId, token);
+    },
     queryKey: ["jobs"],
   });
 

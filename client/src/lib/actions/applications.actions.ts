@@ -1,6 +1,6 @@
 import { getApiHandler, patchApiHandler, postApiHandler } from "../api";
 
-import { ApplicationsTypes, ResponseMessageTypes } from "@/types";
+import { ApplicationsTypes } from "@/types";
 
 /**
  * ===============================

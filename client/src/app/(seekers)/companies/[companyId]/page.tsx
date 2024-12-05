@@ -37,13 +37,18 @@ const CompanyDetails = ({
     isLoading,
     isRefetching,
   } = useSuspenseQuery({
-    queryFn: () =>
-      getEmployerById(
+    queryFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return getEmployerById(
         params.companyId,
-        token as string,
+        token,
         searchParams.section,
         searchParams.page
-      ),
+      );
+    },
     queryKey: [
       "company",
       params.companyId,

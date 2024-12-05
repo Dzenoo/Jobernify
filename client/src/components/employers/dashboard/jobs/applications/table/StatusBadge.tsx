@@ -22,12 +22,16 @@ type StatusBadgeProps = {
 
 const StatusBadge: React.FC<StatusBadgeProps> = ({ applicationId, status }) => {
   const { toast } = useToast();
-
   const { token } = useAuthentication().getCookieHandler();
 
   const { mutateAsync: updateStatusMutate } = useMutation({
-    mutationFn: (status: string) =>
-      updateApplicationStatus(applicationId, token as string, status),
+    mutationFn: (status: string) => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return updateApplicationStatus(applicationId, token, status);
+    },
     onSuccess: () => {
       window.location.reload;
       queryClient.invalidateQueries({ queryKey: ["applications"] });

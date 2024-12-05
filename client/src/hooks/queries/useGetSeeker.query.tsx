@@ -14,7 +14,13 @@ const useGetSeeker = (options?: UseSuspenseQueryOptions<SeekerProfile>) => {
   const { token } = useAuthentication().getCookieHandler();
 
   return useQuery<SeekerProfile>({
-    queryFn: () => getSeekerProfile(token as string),
+    queryFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return getSeekerProfile(token);
+    },
     queryKey: ["profile"],
     enabled: !!token,
     ...options,

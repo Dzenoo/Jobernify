@@ -23,10 +23,9 @@ import { Drawer } from "@/components/ui/drawer";
 
 type SeekerProfileProps = {
   seeker: SeekerTypes;
-  token: string;
 };
 
-const SeekerProfile: React.FC<SeekerProfileProps> = ({ seeker, token }) => {
+const SeekerProfile: React.FC<SeekerProfileProps> = ({ seeker }) => {
   const isLarge = useMediaQuery("(min-width: 1280px)");
   const [isDeleteProfileOpen, setIsDeleteProfileOpen] = useState(false);
 
@@ -38,7 +37,6 @@ const SeekerProfile: React.FC<SeekerProfileProps> = ({ seeker, token }) => {
           open={isDeleteProfileOpen}
         >
           <DeleteSeekerProfile
-            token={token}
             closeDialog={() => setIsDeleteProfileOpen(false)}
             isDialog={true}
           />
@@ -50,7 +48,6 @@ const SeekerProfile: React.FC<SeekerProfileProps> = ({ seeker, token }) => {
           open={isDeleteProfileOpen}
         >
           <DeleteSeekerProfile
-            token={token}
             closeDialog={() => setIsDeleteProfileOpen(false)}
             isDialog={false}
           />

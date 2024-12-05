@@ -12,8 +12,13 @@ const useJobAlert = () => {
   const { token } = useAuthentication().getCookieHandler();
 
   return useMutation({
-    mutationFn: (formData: FormData | any) =>
-      generateJobAlert(formData, token as string),
+    mutationFn: (formData: FormData | any) => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return generateJobAlert(formData, token);
+    },
     onSuccess: (response) => {
       queryClient.invalidateQueries({ queryKey: ["profile"] });
       toast({ title: "Success", description: response.message });

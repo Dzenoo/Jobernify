@@ -22,20 +22,25 @@ import {
 } from "@/components/ui/drawer";
 
 type DeleteSeekerProfileProps = {
-  token: string;
   closeDialog: () => void;
   isDialog: boolean;
 };
 
 const DeleteSeekerProfile: React.FC<DeleteSeekerProfileProps> = ({
-  token,
   closeDialog,
   isDialog,
 }) => {
   const { toast } = useToast();
   const { deleteCookieHandler } = useAuthentication();
+  const { token } = useAuthentication().getCookieHandler();
   const { mutateAsync: deleteSeekerProfileMutate } = useMutation({
-    mutationFn: () => deleteSeekerProfile(token),
+    mutationFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return deleteSeekerProfile(token);
+    },
     onSuccess: () => {},
     onError: (error: any) => {
       toast({ title: "Error", description: error?.response?.data?.message });

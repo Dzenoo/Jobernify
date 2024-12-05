@@ -19,13 +19,9 @@ import { Drawer } from "@/components/ui/drawer";
 
 type EmployerSettingsProps = {
   employer: EmployerTypes;
-  token: string;
 };
 
-const EmployerSettings: React.FC<EmployerSettingsProps> = ({
-  employer,
-  token,
-}) => {
+const EmployerSettings: React.FC<EmployerSettingsProps> = ({ employer }) => {
   const isLarge = useMediaQuery("(min-width: 1280px)");
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
@@ -34,7 +30,6 @@ const EmployerSettings: React.FC<EmployerSettingsProps> = ({
       {isLarge && (
         <Dialog onOpenChange={setIsDeleteOpen} open={isDeleteOpen}>
           <DeleteEmployerProfile
-            token={token}
             closeDelete={() => setIsDeleteOpen(false)}
             isDialog={true}
           />
@@ -43,7 +38,6 @@ const EmployerSettings: React.FC<EmployerSettingsProps> = ({
       {!isLarge && (
         <Drawer onOpenChange={setIsDeleteOpen} open={isDeleteOpen}>
           <DeleteEmployerProfile
-            token={token}
             closeDelete={() => setIsDeleteOpen(false)}
             isDialog={false}
           />
@@ -62,7 +56,7 @@ const EmployerSettings: React.FC<EmployerSettingsProps> = ({
       </div>
       <div className="flex flex-col gap-10">
         <Separator className="relative top-5" />
-        <EmployerProfile employer={employer as EmployerTypes} />
+        <EmployerProfile employer={employer} />
       </div>
     </Fragment>
   );

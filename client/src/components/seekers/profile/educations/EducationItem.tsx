@@ -29,7 +29,13 @@ const EducationItem: React.FC<EducationItemProps> = ({
   const { userType, token } = useAuthentication().getCookieHandler();
 
   const { mutateAsync: deleteEducationMutate } = useMutation({
-    mutationFn: () => deleteEducation(_id, token as string),
+    mutationFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return deleteEducation(_id, token);
+    },
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
       queryClient.invalidateQueries({ queryKey: ["profile"] });

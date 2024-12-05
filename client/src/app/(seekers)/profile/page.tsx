@@ -3,7 +3,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
 import LoadingApplicationsSkeleton from "@/components/loaders/seekers/LoadingApplications";
@@ -39,7 +38,6 @@ const SeekerProfilePage = ({
 }: {
   searchParams: { section: string };
 }) => {
-  const { token } = useAuthentication().getCookieHandler();
   const { data } = useGetSeeker();
   const fetchedSeekerProfile = data as { seeker: SeekerTypes };
 
@@ -59,10 +57,7 @@ const SeekerProfilePage = ({
       </div>
       {!searchParams.section && (
         <div>
-          <SeekerProfile
-            seeker={fetchedSeekerProfile.seeker}
-            token={token as string}
-          />
+          <SeekerProfile seeker={fetchedSeekerProfile.seeker} />
         </div>
       )}
       {searchParams.section === "saved" && (
@@ -76,7 +71,6 @@ const SeekerProfilePage = ({
       {searchParams.section === "alerts" && (
         <div>
           <SeekerAlerts
-            token={token as string}
             alertsData={{
               alerts: fetchedSeekerProfile.seeker.alerts,
               receiveJobAlerts: fetchedSeekerProfile.seeker.receiveJobAlerts,

@@ -34,14 +34,19 @@ const DashboardJobsPage = ({
     isRefetching,
     isLoading,
   } = useSuspenseQuery({
-    queryFn: () =>
-      getEmployerProfile({
-        token: token as string,
+    queryFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return getEmployerProfile({
+        token: token,
         page: searchParams.page || "1",
         srt: searchParams.sort || "",
         search: searchParams.query || "",
         type: "jobs",
-      }),
+      });
+    },
     queryKey: ["jobs", searchParams],
   });
 

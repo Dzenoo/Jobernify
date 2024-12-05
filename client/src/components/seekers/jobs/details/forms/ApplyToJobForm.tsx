@@ -9,6 +9,7 @@ import { queryClient } from "@/context/react-query-client";
 
 import useUploads from "@/hooks/defaults/useUploads.hook";
 import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
+import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
 import { ApplyToJobSchema } from "@/lib/zod/jobs.validation";
 import { applyToJob } from "@/lib/actions/applications.actions";
@@ -46,7 +47,6 @@ type ApplyToJobFormProps = {
   isApplyToJob: boolean;
   setIsApplyToJob: React.Dispatch<React.SetStateAction<boolean>>;
   jobId: string;
-  token: string;
   isDialog: boolean;
 };
 
@@ -54,10 +54,10 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
   setIsApplyToJob,
   isApplyToJob,
   jobId,
-  token,
   isDialog,
 }) => {
   const [willSeekerUploadResume, setWillSeekerUploadResume] = useState(false);
+  const { token } = useAuthentication().getCookieHandler();
   const { toast } = useToast();
   const { getInputProps, getRootProps, selectedFile } = useUploads({
     accept: {
@@ -79,7 +79,13 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
   });
 
   const { mutateAsync: applyToJobMutate } = useMutation({
-    mutationFn: (formData: FormData) => applyToJob(jobId, token, formData),
+    mutationFn: (formData: FormData) => {
+      if (!token) {
+        throw new Error("Unauthorized!");
+      }
+
+      return applyToJob(jobId, token, formData);
+    },
     onSuccess: () => {
       form.reset();
       toast({ title: "Success", description: "Successfully Applied to Job" });

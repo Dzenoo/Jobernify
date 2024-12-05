@@ -25,7 +25,13 @@ const SeekerDetailsPage = ({
   const { token } = useAuthentication().getCookieHandler();
 
   const { data: fetchedSeeker, isLoading } = useSuspenseQuery({
-    queryFn: () => getSeekerById(seekerId, token as string),
+    queryFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return getSeekerById(seekerId, token);
+    },
     queryKey: ["seeker", { seekerId }],
   });
 

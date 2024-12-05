@@ -22,20 +22,25 @@ import {
 } from "@/components/ui/drawer";
 
 type DeleteEmployerProfileProps = {
-  token: string;
   closeDelete: () => void;
   isDialog: boolean;
 };
 
 const DeleteEmployerProfile: React.FC<DeleteEmployerProfileProps> = ({
-  token,
   closeDelete,
   isDialog,
 }) => {
   const { toast } = useToast();
-  const { deleteCookieHandler } = useAuthentication();
+  const { getCookieHandler, deleteCookieHandler } = useAuthentication();
+  const { token } = getCookieHandler();
   const { mutateAsync: deleteEmployerProfileMutate } = useMutation({
-    mutationFn: () => deleteEmployerProfile({ token }),
+    mutationFn: () => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return deleteEmployerProfile({ token });
+    },
     onSuccess: () => {},
     onError: (error: any) => {
       toast({ title: "Error", description: error?.response?.data?.message });
@@ -46,7 +51,6 @@ const DeleteEmployerProfile: React.FC<DeleteEmployerProfileProps> = ({
     e.preventDefault();
 
     await deleteEmployerProfileMutate();
-
     deleteCookieHandler();
     closeDelete();
   };

@@ -122,12 +122,6 @@ export type ApplicationsTypes = {
   createdAt: string;
 };
 
-export type ResponseMessageTypes = {
-  statusCode: number;
-  message: string;
-  [key: string]: any;
-};
-
 export type FilterCounts = {
   [key: string]: {
     _id: string;

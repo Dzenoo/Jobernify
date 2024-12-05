@@ -12,8 +12,13 @@ const useEditEmployer = () => {
   const { token } = useAuthentication().getCookieHandler();
 
   return useMutation({
-    mutationFn: (formData: FormData | any) =>
-      editEmployerProfile(formData, token as string),
+    mutationFn: (formData: FormData | any) => {
+      if (!token) {
+        throw new Error("Unathorized!");
+      }
+
+      return editEmployerProfile(formData, token);
+    },
     onSuccess: (response) => {
       toast({ title: "Success", description: response.message });
       queryClient.invalidateQueries({ queryKey: ["profile"] });
