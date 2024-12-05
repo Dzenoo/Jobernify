@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
@@ -20,6 +20,8 @@ import SeekerInfo from "@/components/seekers/jobs/SeekerInfo";
 
 import PaginatedList from "@/components/ui/paginate-list";
 
+import { FilterCounts, JobTypes } from "@/types";
+
 const JobsList = dynamic(() => import("@/components/seekers/jobs/JobsList"), {
   loading: () => <LoadingJobsSkeleton />,
 });
@@ -31,13 +33,7 @@ const Jobs = ({
 }) => {
   const { updateSearchParams } = useSearchParams();
   const { token } = useAuthentication().getCookieHandler();
-  const {
-    data: fetchedJobs,
-    refetch,
-    isLoading,
-    isFetching,
-    isRefetching,
-  } = useSuspenseQuery({
+  const { data, refetch, isLoading, isFetching, isRefetching } = useQuery({
     queryFn: () => {
       if (!token) {
         throw new Error("Unauthorized!");
@@ -56,6 +52,13 @@ const Jobs = ({
     },
     queryKey: ["jobs", searchParams],
   });
+
+  const fetchedJobs = data as {
+    jobs: JobTypes[];
+    totalJobs: number;
+    popularJobs: JobTypes[];
+    filterCounts: FilterCounts;
+  };
 
   useEffect(() => {
     refetch();
