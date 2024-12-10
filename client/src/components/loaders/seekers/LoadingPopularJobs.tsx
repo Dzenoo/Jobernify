@@ -10,7 +10,7 @@ const LoadingPopularJobs: React.FC = () => {
         {Array.from({ length: 3 }).map((_, index) => (
           <div
             key={index}
-            className="animate-pulse bg-gray-100 rounded-none p-4 flex items-center justify-between"
+            className="animate-pulse bg-gray-100 rounded p-4 flex items-center justify-between"
           >
             <div className="h-4 bg-gray-300 rounded w-full"></div>
           </div>
