@@ -20,6 +20,16 @@ export const metadata: Metadata = {
   title: "Jobernify",
   description:
     "Unlock your career potential with Jobernify. Explore opportunities, connect with others, and achieve your goals with our innovative platform. Begin your journey now!",
+  openGraph: {
+    title: "Jobernify - Unlock Your Career Potential",
+    description:
+      "Unlock your career potential with Jobernify. Explore opportunities, connect with others, and achieve your goals with our innovative platform. Begin your journey now!",
+    type: "website",
+    locale: "en_US",
+    url: "https://jobernify.com",
+    siteName: "Jobernify",
+  },
+  metadataBase: new URL("https://jobernify.com"),
 };
 
 export default function RootLayout({

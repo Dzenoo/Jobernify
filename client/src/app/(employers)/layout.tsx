@@ -30,6 +30,16 @@ export const metadata: Metadata = {
   title: "Jobernify",
   description:
     "Attract top talent with ease using Jobernify. Showcase your company culture, and reach a pool of qualified candidates. Start your hiring journey today!",
+  openGraph: {
+    title: "Jobernify - Unlock Your Career Potential",
+    description:
+      "Unlock your career potential with Jobernify. Explore opportunities, connect with others, and achieve your goals with our innovative platform. Begin your journey now!",
+    type: "website",
+    locale: "en_US",
+    url: "https://jobernify.com",
+    siteName: "Jobernify",
+  },
+  metadataBase: new URL("https://jobernify.com"),
 };
 
 export default function EmployersLayout({
