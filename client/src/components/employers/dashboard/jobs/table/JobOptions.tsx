@@ -41,7 +41,7 @@ const JobOptions: React.FC<JobOptionsProps> = ({ jobId, onDeleteButton }) => {
       {options.map(({ id, icon, tooltip, link, onClick }) => (
         <TooltipProvider delayDuration={400} key={id}>
           <Tooltip>
-            <TooltipTrigger>
+            <TooltipTrigger asChild>
               {link ? (
                 <Link href={link}>{icon}</Link>
               ) : (

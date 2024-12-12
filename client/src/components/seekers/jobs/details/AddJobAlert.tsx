@@ -12,7 +12,6 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { SeekerTypes } from "@/types";
 
 type JobAlertProps = {
   level: string;
@@ -21,20 +20,36 @@ type JobAlertProps = {
 };
 
 const AddJobAlert: React.FC<JobAlertProps> = ({ level, type, title }) => {
-  const jobAlertData = {
-    level,
-    type,
-    title,
-  };
   const { mutateAsync: addJobAlertMutate, status } = useJobAlert();
   const { data } = useGetSeeker();
-  const fetchedSeekerProfile = data as { seeker: SeekerTypes };
-  const { alerts } = fetchedSeekerProfile.seeker;
+
+  if (!data) {
+    return (
+      <Card>
+        <CardHeader>
+          <h1 className="text-base-black">Generate Job Alert</h1>
+        </CardHeader>
+        <CardContent className="pt-0">
+          <p className="text-initial-gray">Loading seeker data...</p>
+        </CardContent>
+        <CardFooter>
+          <Button variant="default" className="w-full" disabled>
+            Loading...
+          </Button>
+        </CardFooter>
+      </Card>
+    );
+  }
+
+  const { alerts } = data.seeker;
 
   const isLoading = status === "pending";
 
   const isAlreadyAlertGeneratedWithProperties =
-    alerts.level === level && alerts.type === type && alerts.title === title;
+    alerts &&
+    alerts.level === level &&
+    alerts.type === type &&
+    alerts.title === title;
 
   return (
     <Card>
@@ -51,7 +66,7 @@ const AddJobAlert: React.FC<JobAlertProps> = ({ level, type, title }) => {
         <Button
           variant="default"
           className="w-full"
-          onClick={() => addJobAlertMutate(jobAlertData)}
+          onClick={() => addJobAlertMutate({ level, type, title })}
           disabled={isLoading || isAlreadyAlertGeneratedWithProperties}
         >
           {isLoading ? (

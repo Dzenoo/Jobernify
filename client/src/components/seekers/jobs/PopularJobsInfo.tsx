@@ -22,7 +22,7 @@ type PopularsJobsInfoProps = {
 const PopularJobsInfo: React.FC<PopularsJobsInfoProps> = ({ jobs }) => {
   const { toast } = useToast();
 
-  const handleCopyPopularJobTilted = async (title: string) => {
+  const handleCopyPopularJobTitle = async (title: string) => {
     navigator.clipboard.writeText(title);
 
     toast({
@@ -47,16 +47,15 @@ const PopularJobsInfo: React.FC<PopularsJobsInfoProps> = ({ jobs }) => {
       {jobs && jobs.length > 0 && (
         <CardContent className="pt-0">
           {jobs.map(({ _id, title }, index) => (
-            <TooltipProvider delayDuration={400}>
+            <TooltipProvider key={_id} delayDuration={400}>
               <Tooltip>
-                <TooltipTrigger className="w-full">
+                <TooltipTrigger asChild className="w-full">
                   <Button
                     variant="outline"
-                    key={_id}
                     className={`w-full ${
                       index < jobs.length - 1 ? "mb-2" : ""
                     }`}
-                    onClick={() => handleCopyPopularJobTilted(title)}
+                    onClick={() => handleCopyPopularJobTitle(title)}
                   >
                     {title}
                   </Button>

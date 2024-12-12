@@ -10,12 +10,13 @@ import { getJobs } from "@/lib/actions/jobs.actions";
 
 import LoadingJobsSkeleton from "@/components/loaders/seekers/LoadingJobsSkeleton";
 import LoadingPopularJobs from "@/components/loaders/seekers/LoadingPopularJobs";
+import LoadingSeekerInfo from "@/components/loaders/employers/LoadingSeekerInfo";
+import SeekerInfo from "@/components/seekers/jobs/SeekerInfo";
 import PopularJobsInfo from "@/components/seekers/jobs/PopularJobsInfo";
 import FilterJobs from "@/components/seekers/jobs/filters/FilterJobs";
 import PaginatedList from "@/components/ui/paginate-list";
 import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 import SearchJobs from "@/components/seekers/jobs/search/SearchJobs";
-import SeekerInfo from "@/components/seekers/jobs/SeekerInfo";
 
 const JobsList = dynamic(() => import("@/components/seekers/jobs/JobsList"), {
   loading: () => <LoadingJobsSkeleton />,
@@ -59,9 +60,7 @@ const Jobs = ({
   return (
     <section className="flex justify-between gap-10 max-xl:flex-col">
       <div className="basis-2/5 flex flex-col gap-5">
-        <div>
-          <SeekerInfo />
-        </div>
+        <div>{isFiltering ? <LoadingSeekerInfo /> : <SeekerInfo />}</div>
         <div>
           {isFiltering ? (
             <LoadingPopularJobs />

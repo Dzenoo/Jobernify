@@ -385,7 +385,7 @@ export const JobsFiltersData = [
     title: "Position",
     data: [
       { id: "1", title: "Hybrid", value: "Hybrid", type: "position" },
-      { id: "2", title: "On-Site", value: "On-site", type: "position" },
+      { id: "2", title: "On-Site", value: "On-Site", type: "position" },
       { id: "3", title: "Remote", value: "Remote", type: "position" },
     ],
   },

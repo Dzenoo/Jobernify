@@ -9,19 +9,13 @@ import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
 import { SeekerTypes } from "@/types";
 
-import LoadingSeekerInfo from "@/components/loaders/employers/LoadingSeekerInfo";
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 const SeekerInfo: React.FC = () => {
-  const { data: fetchedSeeker, isLoading } = useGetSeeker();
+  const { data: fetchedSeeker } = useGetSeeker();
   const seeker = fetchedSeeker?.seeker as SeekerTypes;
   const profileImageUrl = getImageUrl(seeker?.image);
-
-  if (isLoading) {
-    return <LoadingSeekerInfo />;
-  }
 
   return (
     <Card>

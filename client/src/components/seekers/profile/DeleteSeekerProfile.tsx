@@ -71,7 +71,11 @@ const DeleteSeekerProfile: React.FC<DeleteSeekerProfileProps> = ({
             </div>
           </div>
           <DialogFooter>
-            <Button variant="destructive" onClick={onDeleteAccount}>
+            <Button
+              className="w-full"
+              variant="destructive"
+              onClick={onDeleteAccount}
+            >
               Delete
             </Button>
           </DialogFooter>

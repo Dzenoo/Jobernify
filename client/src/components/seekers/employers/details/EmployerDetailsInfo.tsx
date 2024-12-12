@@ -81,7 +81,7 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
               </div>
             </CardContent>
           </div>
-          <CardFooter className="items-start pt-5 flex flex-col justify-between gap-10 max-lg:basis-full">
+          <CardFooter className="items-start pt-5 flex flex-col justify-between gap-10 max-lg:basis-full flex-wrap">
             <div className="w-full flex items-center justify-end gap-2 max-lg:flex-col max-lg:justify-stretch max-lg:gap-3 max-lg:items-stretch">
               {website !== "" && (
                 <div>

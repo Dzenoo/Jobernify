@@ -102,10 +102,10 @@ export class Seeker extends BaseUser {
   @Prop({
     trim: true,
     default: '',
-    match: [
-      /^https?:\/\/(www\.)?[^\s/$.?#].[^\s]*$/,
-      'Invalid resume URL format',
-    ],
+    // match: [
+    //   /^https?:\/\/(www\.)?[^\s/$.?#].[^\s]*$/,
+    //   'Invalid resume URL format',
+    // ],
   })
   resume: string;
 

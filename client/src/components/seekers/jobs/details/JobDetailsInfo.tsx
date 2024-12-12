@@ -63,7 +63,10 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
 }) => {
   const router = useRouter();
   const { data } = useGetSeeker();
-  const fetchedSeekerProfile = data as { seeker: SeekerTypes };
+
+  if (!data) {
+    return;
+  }
 
   const sanitizedDescription = DOMPurify.sanitize(description);
   const expirationDate = formatDate(expiration_date);
@@ -133,7 +136,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
     },
   ];
 
-  const isAppliedToJob = fetchedSeekerProfile.seeker.applications.find(
+  const isAppliedToJob = data.seeker.applications.find(
     (application: ApplicationsTypes) => application.job._id === _id
   );
 
