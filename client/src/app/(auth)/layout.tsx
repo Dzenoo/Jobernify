@@ -37,7 +37,6 @@ export const metadata: Metadata = {
     url: "https://jobernify.com",
     siteName: "Jobernify",
   },
-  metadataBase: new URL("https://jobernify.com"),
 };
 
 export default function AuthLayout({
