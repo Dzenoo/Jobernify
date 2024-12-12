@@ -40,10 +40,11 @@ const SeekerProfilePage = ({
   const { data } = useGetSeeker() as { data: { seeker: SeekerTypes } };
 
   if (
-    searchParams.section &&
-    searchParams.section !== "saved" &&
-    searchParams.section !== "alerts" &&
-    searchParams.section !== "applications"
+    !data ||
+    (searchParams.section &&
+      searchParams.section !== "saved" &&
+      searchParams.section !== "alerts" &&
+      searchParams.section !== "applications")
   ) {
     return <NotFound />;
   }
