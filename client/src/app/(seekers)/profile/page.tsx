@@ -12,6 +12,7 @@ import LoadingSeekerProfileSkeleton from "@/components/loaders/seekers/LoadingSe
 import SeekerAlerts from "@/components/seekers/profile/alerts/SeekerAlerts";
 import SeekerProfileNavigation from "@/components/seekers/profile/navigation/SeekerProfileNavigation";
 import NotFound from "@/components/shared/pages/NotFound";
+import { SeekerTypes } from "@/types";
 
 const JobsList = dynamic(() => import("@/components/seekers/jobs/JobsList"), {
   loading: () => <LoadingJobsSkeleton />,
@@ -36,9 +37,7 @@ const SeekerProfilePage = ({
 }: {
   searchParams: { section: string };
 }) => {
-  const { data } = useGetSeeker();
-
-  if (!data) return;
+  const { data } = useGetSeeker() as { data: { seeker: SeekerTypes } };
 
   if (
     searchParams.section &&

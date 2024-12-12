@@ -132,24 +132,24 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
         <div
           className={`p-3 rounded-full border w-full overflow-auto text-center ${
             applicationStatusAccepted
-              ? "bg-green-100 dark:bg-green-500"
+              ? "bg-green-100 dark:bg-green-200"
               : applicationStatusRejected
-              ? "bg-red-100 dark:bg-red-500"
+              ? "bg-red-100 dark:bg-red-200"
               : applicationsStatusInterview
-              ? "bg-yellow-100 dark:bg-yellow-500"
-              : "bg-blue-100 dark:bg-blue-500"
+              ? "bg-yellow-100 dark:bg-yellow-200"
+              : "bg-blue-100 dark:bg-blue-200"
           }`}
         >
           <p
             className={`
            ${
              applicationStatusAccepted
-               ? "text-[--green-base-color]"
+               ? "text-green-500"
                : applicationStatusRejected
-               ? "text-[--red-base-color]"
+               ? "text-red-500"
                : applicationsStatusInterview
-               ? "text-yellow-100"
-               : "text-[--blue-base-color]"
+               ? "text-yellow-500"
+               : "text-blue-500"
            }`}
           >
             {status}
