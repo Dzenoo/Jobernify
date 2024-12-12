@@ -53,19 +53,19 @@ const SeekerProfilePage = () => {
       )}
       {currentTab === 1 && (
         <div>
-          <JobsList
-            jobs={data.seeker.savedJobs}
-            message="You have no saved jobs."
-          />
-        </div>
-      )}
-      {currentTab === 2 && (
-        <div>
           <SeekerAlerts
             alertsData={{
               alerts: data.seeker.alerts,
               receiveJobAlerts: data.seeker.receiveJobAlerts,
             }}
+          />
+        </div>
+      )}
+      {currentTab === 2 && (
+        <div>
+          <JobsList
+            jobs={data.seeker.savedJobs}
+            message="You have no saved jobs."
           />
         </div>
       )}
