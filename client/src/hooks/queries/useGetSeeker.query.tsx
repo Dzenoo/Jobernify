@@ -18,11 +18,11 @@ const useGetSeeker = (options?: UseQueryOptions<SeekerProfile>) => {
       if (!token) {
         throw new Error("Unauthorized!");
       }
-
       return getSeekerProfile(token);
     },
     queryKey: ["profile"],
     enabled: !!token,
+    staleTime: 5 * 60 * 1000,
     ...options,
   });
 };

@@ -25,7 +25,7 @@ type SeekerProfileProps = {
   seeker: SeekerTypes;
 };
 
-const SeekerProfile: React.FC<SeekerProfileProps> = ({ seeker }) => {
+const SeekerProfile: React.FC<SeekerProfileProps> = React.memo(({ seeker }) => {
   const isLarge = useMediaQuery("(min-width: 1280px)");
   const [isDeleteProfileOpen, setIsDeleteProfileOpen] = useState(false);
 
@@ -79,6 +79,6 @@ const SeekerProfile: React.FC<SeekerProfileProps> = ({ seeker }) => {
       </Card>
     </Fragment>
   );
-};
+});
 
 export default SeekerProfile;

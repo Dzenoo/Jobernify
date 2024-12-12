@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
@@ -13,41 +13,45 @@ import JobsList from "@/components/seekers/jobs/JobsList";
 import Applications from "@/components/seekers/profile/applications/Applications";
 import NotFound from "@/components/shared/pages/NotFound";
 
-const SeekerProfilePage = ({
-  searchParams,
-}: {
-  searchParams: { section: string };
-}) => {
+const SeekerProfilePage = () => {
+  const [currentTab, setCurrentTab] = useState<number>(0);
   const { data, isLoading, isFetching, isRefetching } = useGetSeeker();
 
   const isLoadingSeeker = isLoading || isFetching || isRefetching;
 
-  if (isLoadingSeeker) {
+  if (typeof window === "undefined" || isLoadingSeeker) {
     return <LoadingSeekerProfileSkeleton />;
-  } else if (!data) {
+  }
+
+  if (!data) {
     return <NotFound />;
   }
 
-  if (
-    searchParams.section &&
-    searchParams.section !== "saved" &&
-    searchParams.section !== "alerts" &&
-    searchParams.section !== "applications"
-  ) {
+  const isValidTab = currentTab >= 0 && currentTab <= 3;
+  if (!isValidTab) {
     return <NotFound />;
   }
+
+  const updateTab = (tab: number) => {
+    if (currentTab !== tab) {
+      setCurrentTab(tab);
+    }
+  };
 
   return (
     <section className="flex justify-between gap-[10px] flex-col mx-40 max-xl:mx-0">
       <div>
-        <SeekerProfileNavigation section={searchParams.section} />
+        <SeekerProfileNavigation
+          currentTab={currentTab}
+          updateTab={updateTab}
+        />
       </div>
-      {!searchParams.section && (
+      {currentTab === 0 && (
         <div>
           <SeekerProfile seeker={data.seeker} />
         </div>
       )}
-      {searchParams.section === "saved" && (
+      {currentTab === 1 && (
         <div>
           <JobsList
             jobs={data.seeker.savedJobs}
@@ -55,7 +59,7 @@ const SeekerProfilePage = ({
           />
         </div>
       )}
-      {searchParams.section === "alerts" && (
+      {currentTab === 2 && (
         <div>
           <SeekerAlerts
             alertsData={{
@@ -65,7 +69,7 @@ const SeekerProfilePage = ({
           />
         </div>
       )}
-      {searchParams.section === "applications" && (
+      {currentTab === 3 && (
         <div>
           <Applications applications={data.seeker.applications} />
         </div>

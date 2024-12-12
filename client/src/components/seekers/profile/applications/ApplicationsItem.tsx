@@ -90,7 +90,7 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
       <CardHeader>
         <div className="flex gap-3 items-center max-xl:flex-wrap">
           <Link href={`/companies/${companyId}?section=jobs`}>
-            <Avatar className="w-28 h-28">
+            <Avatar className="w-28 h-28 border border-blue-100 dark:border-[#1b1b1b] ">
               <AvatarImage
                 src={getImageUrl(image)}
                 className="object-cover w-auto h-auto"
