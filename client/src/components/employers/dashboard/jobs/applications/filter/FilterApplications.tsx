@@ -31,7 +31,7 @@ const FilterApplications: React.FC<FilterApplicationsProps> = ({
   const FilterApplicationsButtons = [
     {
       id: 1,
-      title: "Seekers",
+      title: "All",
       data: applicants,
       filter: "",
       className: "",

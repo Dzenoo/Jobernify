@@ -11,6 +11,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -67,7 +68,7 @@ const DashboardEmployerJobs: React.FC<DashboardEmployerJobsProps> = ({
         <Dialog open={!!openedJobId} onOpenChange={closeDeleteJob}>
           <DeleteJob
             onClose={closeDeleteJob}
-            ids={openedJobId}
+            id={openedJobId}
             isDialog={true}
           />
         </Dialog>
@@ -76,7 +77,7 @@ const DashboardEmployerJobs: React.FC<DashboardEmployerJobsProps> = ({
         <Drawer open={!!openedJobId} onOpenChange={closeDeleteJob}>
           <DeleteJob
             onClose={closeDeleteJob}
-            ids={openedJobId}
+            id={openedJobId}
             isDialog={false}
           />
         </Drawer>
@@ -110,11 +111,17 @@ const DashboardEmployerJobs: React.FC<DashboardEmployerJobsProps> = ({
                 {job.applications?.length ?? 0}
               </TableCell>
               <TableCell>
-                <JobOptions jobId={job._id} onDeleteButton={openDeleteJob} />
+                <JobOptions jobId={job._id} onDelete={openDeleteJob} />
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TableCell colSpan={9}>Total Jobs</TableCell>
+            <TableCell className="text-right">{jobs.length}</TableCell>
+          </TableRow>
+        </TableFooter>
       </Table>
     </>
   );

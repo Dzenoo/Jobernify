@@ -1,57 +1,93 @@
-import React from "react";
+import React, { useState } from "react";
+
 import Link from "next/link";
 
-import { Edit, Eye, Trash } from "lucide-react";
+import { Edit, Eye, Trash, MoreHorizontal } from "lucide-react";
+
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 
 type JobOptionsProps = {
   jobId: string;
-  onDeleteButton: (jobIds: string) => void;
+  onDelete: (jobId: string) => void;
 };
 
-const JobOptions: React.FC<JobOptionsProps> = ({ jobId, onDeleteButton }) => {
-  const options = [
+type MenuOption = {
+  id: number;
+  label: string;
+  icon: React.ReactNode;
+  action: () => void;
+  asLink?: boolean;
+  href?: string;
+};
+
+const JobOptions: React.FC<JobOptionsProps> = ({ jobId, onDelete }) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const closeDropdown = () => setDropdownOpen(false);
+
+  const options: MenuOption[] = [
     {
       id: 1,
-      icon: <Eye />,
-      tooltip: "View Applications",
-      link: `/dashboard/jobs/${jobId}`,
+      label: "View Applications",
+      icon: <Eye className="w-4 h-4 text-blue-600" />,
+      action: closeDropdown,
+      asLink: true,
+      href: `/dashboard/jobs/${jobId}`,
     },
     {
       id: 2,
-      icon: <Edit />,
-      tooltip: "Edit Job",
-      link: `/dashboard/jobs/${jobId}/edit`,
+      label: "Edit Job",
+      icon: <Edit className="w-4 h-4 text-green-600" />,
+      action: closeDropdown,
+      asLink: true,
+      href: `/dashboard/jobs/${jobId}/edit`,
     },
     {
       id: 3,
-      icon: <Trash color="red" />,
-      tooltip: "Delete Job",
-      onClick: () => onDeleteButton(jobId),
+      label: "Delete Job",
+      icon: <Trash className="w-4 h-4 text-red-600" />,
+      action: () => {
+        closeDropdown();
+        onDelete(jobId);
+      },
     },
   ];
-
   return (
-    <div className="flex items-center justify-between gap-3">
-      {options.map(({ id, icon, tooltip, link, onClick }) => (
-        <TooltipProvider delayDuration={400} key={id}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              {link ? (
-                <Link href={link}>{icon}</Link>
+    <div>
+      <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
+        <DropdownMenuTrigger asChild>
+          <MoreHorizontal className="cursor-pointer w-5 h-5" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="center">
+          {options.map(({ id, label, icon, action, asLink, href }) => (
+            <DropdownMenuItem
+              key={id}
+              asChild={asLink}
+              onClick={!asLink ? action : undefined}
+            >
+              {asLink && href ? (
+                <Link href={href} className="flex items-center gap-2">
+                  {icon}
+                  {label}
+                </Link>
               ) : (
-                <button onClick={onClick}>{icon}</button>
+                <button
+                  onClick={action}
+                  className="cursor-default flex items-center gap-2 w-full text-left"
+                >
+                  {icon}
+                  {label}
+                </button>
               )}
-            </TooltipTrigger>
-            <TooltipContent>{tooltip}</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      ))}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 };

@@ -1,19 +1,22 @@
 import React from "react";
-
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/context/react-query-client";
 
 import { updateApplicationStatus } from "@/lib/actions/applications.actions";
-
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
 
 import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuLabel,
+  DropdownMenuGroup,
+} from "@/components/ui/dropdown-menu";
+import { CheckCircle, XCircle, Clock, UserCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 type StatusBadgeProps = {
   applicationId: string;
@@ -25,86 +28,78 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ applicationId, status }) => {
   const { token } = useAuthentication().getCookieHandler();
 
   const { mutateAsync: updateStatusMutate } = useMutation({
-    mutationFn: (status: string) => {
+    mutationFn: (newStatus: string) => {
       if (!token) {
         throw new Error("Unauthorized!");
       }
 
-      return updateApplicationStatus(applicationId, token, status);
+      return updateApplicationStatus(applicationId, token, newStatus);
     },
     onSuccess: () => {
-      window.location.reload;
       queryClient.invalidateQueries({ queryKey: ["applications"] });
     },
     onError: (error: any) => {
-      toast({ title: "Error", description: error?.response?.data?.message });
+      toast({
+        title: "Error",
+        description: error?.response?.data?.message || "Something went wrong.",
+      });
     },
   });
 
-  const updateStatusApi = async (status: string) => {
-    await updateStatusMutate(status);
-  };
-
-  const statusClasses = {
-    Pending: "bg-blue-100 text-blue-600",
-    Interview: "bg-yellow-100 text-yellow-600",
-    Accepted: "bg-green-100 text-green-600",
-    Rejected: "bg-red-100 text-red-600",
-  };
-
-  const StatusButtons = [
+  const StatusOptions = [
     {
       id: 1,
-      title: "Pending",
-      className: statusClasses.Pending,
-      filter: "Pending",
+      label: "Pending",
+      value: "Pending",
+      icon: <Clock className="text-yellow-500" />,
     },
     {
       id: 2,
-      title: "Interview",
-      className: statusClasses.Interview,
-      filter: "Interview",
+      label: "Interview",
+      value: "Interview",
+      icon: <UserCheck className="text-blue-500" />,
     },
     {
       id: 3,
-      title: "Accepted",
-      className: statusClasses.Accepted,
-      filter: "Accepted",
+      label: "Accepted",
+      value: "Accepted",
+      icon: <XCircle className="text-red-500" />,
     },
     {
       id: 4,
-      title: "Rejected",
-      className: statusClasses.Rejected,
-      filter: "Rejected",
+      label: "Rejected",
+      value: "Rejected",
+      icon: <CheckCircle className="text-green-500" />,
     },
   ];
 
+  const handleStatusChange = async (newStatus: string) => {
+    if (newStatus !== status) {
+      await updateStatusMutate(newStatus);
+    }
+  };
+
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <div
-          className={`rounded-full p-3 transition-colors cursor-pointer ${
-            statusClasses[status] || ""
-          }`}
-        >
-          {status}
-        </div>
-      </PopoverTrigger>
-      <PopoverContent align="start">
-        <div className="flex flex-col gap-2">
-          {StatusButtons.map(({ id, title, className, filter }) => (
-            <Button
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">{status}</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-48">
+        <DropdownMenuLabel>Change Status</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          {StatusOptions.map(({ id, icon, label, value }) => (
+            <DropdownMenuItem
+              onClick={() => handleStatusChange(value)}
               key={id}
-              variant="outline"
-              onClick={() => updateStatusApi(filter)}
-              className={className}
             >
-              {title}
-            </Button>
+              {icon}
+              <span>{label}</span>
+            </DropdownMenuItem>
           ))}
-        </div>
-      </PopoverContent>
-    </Popover>
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

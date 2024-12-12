@@ -25,12 +25,12 @@ import {
 } from "@/components/ui/drawer";
 
 type DeleteJobProps = {
-  onClose: (dialogIds: string) => void;
-  ids: string;
+  onClose: () => void;
+  id: string;
   isDialog: boolean;
 };
 
-const DeleteJob: React.FC<DeleteJobProps> = ({ onClose, ids, isDialog }) => {
+const DeleteJob: React.FC<DeleteJobProps> = ({ onClose, id, isDialog }) => {
   const { toast } = useToast();
   const { token } = useAuthentication().getCookieHandler();
   const { mutateAsync: deleteJobMutate, status } = useMutation({
@@ -39,10 +39,15 @@ const DeleteJob: React.FC<DeleteJobProps> = ({ onClose, ids, isDialog }) => {
         throw new Error("Unauthorized!");
       }
 
-      return deleteJob(token, ids);
+      return deleteJob(token, id);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      toast({
+        title: "Job Deleted",
+        description: "The job has been successfully deleted.",
+      });
+      onClose();
     },
     onError: (error: any) => {
       toast({ title: "Error", description: error?.response?.data?.message });
@@ -53,10 +58,7 @@ const DeleteJob: React.FC<DeleteJobProps> = ({ onClose, ids, isDialog }) => {
 
   const onDeleteJob = async (e: React.FormEvent) => {
     e.preventDefault();
-
     await deleteJobMutate();
-
-    onClose("delete");
   };
 
   if (isDialog) {
