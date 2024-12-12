@@ -61,7 +61,7 @@ const SeekerProfilePage = ({
       {searchParams.section === "saved" && (
         <div>
           <JobsList
-            jobs={data?.seeker.savedJobs}
+            jobs={data?.seeker?.savedJobs}
             message="You have no saved jobs."
           />
         </div>
@@ -70,15 +70,15 @@ const SeekerProfilePage = ({
         <div>
           <SeekerAlerts
             alertsData={{
-              alerts: data?.seeker.alerts,
-              receiveJobAlerts: data?.seeker.receiveJobAlerts,
+              alerts: data?.seeker?.alerts,
+              receiveJobAlerts: data?.seeker?.receiveJobAlerts,
             }}
           />
         </div>
       )}
       {searchParams.section === "applications" && (
         <div>
-          <Applications applications={data?.seeker.applications} />
+          <Applications applications={data?.seeker?.applications} />
         </div>
       )}
     </section>
