@@ -31,7 +31,7 @@ import {
   getTime,
 } from "@/lib/utils";
 
-import { ApplicationsTypes, JobTypes, SeekerTypes } from "@/types";
+import { ApplicationsTypes, JobTypes } from "@/types";
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -140,8 +140,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
     (application: ApplicationsTypes) => application.job._id === _id
   );
 
-  const redirectToProfileApplications = () =>
-    router.push(`/profile?section=applications`);
+  const redirectToProfileApplications = () => router.push(`/profile`);
 
   return (
     <div className="flex flex-col gap-3">
