@@ -1,4 +1,9 @@
 import React from "react";
+
+import { getTruncatedPageRange } from "@/lib/utils";
+
+import usePagination from "@/hooks/defaults/usePagination.hook";
+
 import {
   Pagination,
   PaginationContent,
@@ -8,7 +13,6 @@ import {
   PaginationPrevious,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
-import usePagination from "@/hooks/defaults/usePagination.hook";
 
 type PaginationProps = {
   totalItems: number;
@@ -28,6 +32,8 @@ const PaginatedList: React.FC<PaginationProps> = ({
     itemsPerPage,
   });
 
+  const pageRange = getTruncatedPageRange(currentPage, totalPages, 10);
+
   return (
     <Pagination>
       <PaginationContent>
@@ -38,21 +44,29 @@ const PaginatedList: React.FC<PaginationProps> = ({
             <PaginationPrevious isActive={false} />
           )}
         </PaginationItem>
-        {[...Array(totalPages)].map((_, index) => (
-          <PaginationItem key={index}>
-            <PaginationLink
-              isActive={currentPage === index + 1}
-              onClick={() => onPageChange(index + 1)}
-            >
-              {index + 1}
-            </PaginationLink>
-          </PaginationItem>
-        ))}
-        {currentPage < totalPages && (
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-        )}
+
+        {pageRange.map((pageOrEllipsis, index) => {
+          if (pageOrEllipsis === "...") {
+            return (
+              <PaginationItem key={`ellipsis-${index}`}>
+                <PaginationEllipsis />
+              </PaginationItem>
+            );
+          } else {
+            const pageNumber = pageOrEllipsis as number;
+            return (
+              <PaginationItem key={pageNumber}>
+                <PaginationLink
+                  isActive={currentPage === pageNumber}
+                  onClick={() => onPageChange(pageNumber)}
+                >
+                  {pageNumber}
+                </PaginationLink>
+              </PaginationItem>
+            );
+          }
+        })}
+
         <PaginationItem>
           {currentPage < totalPages ? (
             <PaginationNext onClick={() => onPageChange(currentPage + 1)} />

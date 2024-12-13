@@ -38,7 +38,7 @@ const SearchSeekers: React.FC<SearchSeekersProps> = ({ query }) => {
       <div className="basis-full">
         <Input
           defaultValue={query}
-          placeholder="Search Seekers..."
+          placeholder="Name, headline, or skills..."
           onChange={handleInputChange}
         />
       </div>

@@ -40,17 +40,17 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
   const FooterEmployerData = [
     {
       id: "1",
-      icon: <Camera color="gray" />,
+      icon: <Camera />,
       data: followers?.length + " Followers",
     },
     {
       id: "2",
-      icon: <Building color="gray" />,
+      icon: <Building />,
       data: employerIndustry,
     },
     {
       id: "3",
-      icon: <LayoutTemplate color="gray" />,
+      icon: <LayoutTemplate />,
       data: size + " Employees",
     },
   ];

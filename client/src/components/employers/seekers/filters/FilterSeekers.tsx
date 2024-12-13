@@ -24,14 +24,14 @@ const FilterSeekers: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="hidden lg:block">
+      <div className="hidden xl:block">
         <Card>
           <CardContent>
             <FiltersContent />
           </CardContent>
         </Card>
       </div>
-      <div className="lg:hidden">
+      <div className="xl:hidden">
         <Button
           variant="outline"
           onClick={() => setOpen(true)}

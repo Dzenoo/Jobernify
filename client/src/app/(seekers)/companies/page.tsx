@@ -42,7 +42,7 @@ const Companies = ({
 
       return getEmployers({
         token: token,
-        page: searchParams.page || "1",
+        page: Number(searchParams.page) || 1,
         sort: searchParams.sort || "",
         search: searchParams.query || "",
         industry: searchParams.industry || "",

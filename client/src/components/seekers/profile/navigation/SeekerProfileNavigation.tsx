@@ -1,12 +1,13 @@
 import React from "react";
 
 type SeekerProfileNavigationProps = {
+  onSearchParamsChange: (param: string, value: string) => void;
   currentTab: number;
   updateTab: (tab: number) => void;
 };
 
 const SeekerProfileNavigation: React.FC<SeekerProfileNavigationProps> =
-  React.memo(({ currentTab, updateTab }) => {
+  React.memo(({ onSearchParamsChange, currentTab, updateTab }) => {
     const SeekerNavList = [
       {
         id: 0,
@@ -38,7 +39,10 @@ const SeekerProfileNavigation: React.FC<SeekerProfileNavigationProps> =
                 currentTab === item.id ? "text-blue-700" : ""
               }`}
               key={item.id}
-              onClick={() => updateTab(item.id)}
+              onClick={() => {
+                onSearchParamsChange("page", "");
+                updateTab(item.id);
+              }}
             >
               {item.title}
             </button>

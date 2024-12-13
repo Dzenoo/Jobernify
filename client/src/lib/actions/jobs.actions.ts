@@ -74,7 +74,7 @@ export const saveJob = async (
  */
 export const getJobs = async ({
   token,
-  page = "1",
+  page = 1,
   sort = "",
   search = "",
   salary = "",
@@ -83,7 +83,7 @@ export const getJobs = async ({
   position = "",
 }: {
   token: string;
-  page?: string;
+  page?: number;
   sort?: string;
   search?: string;
   salary?: string;

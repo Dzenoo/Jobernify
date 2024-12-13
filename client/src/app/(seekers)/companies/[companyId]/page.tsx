@@ -47,7 +47,7 @@ const CompanyDetails = ({
         params.companyId,
         token,
         searchParams.section,
-        searchParams.page
+        Number(searchParams.page) || 1
       );
     },
     queryKey: [

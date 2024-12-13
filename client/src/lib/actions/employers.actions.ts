@@ -15,13 +15,13 @@ import { EmployerTypes } from "@/types";
  */
 export const getEmployerProfile = async ({
   token,
-  page = "1",
+  page = 1,
   srt = "",
   search = "",
   type = "",
 }: {
   token: string;
-  page?: string;
+  page?: number;
   srt?: string;
   search?: string;
   type?: string;
@@ -96,7 +96,7 @@ export const getEmployerAnalyticsInfo = async (
  * @returns A promise resolving to a list of employers and total employer count.
  */
 export const getEmployers = async ({
-  page = "1",
+  page = 1,
   sort = "",
   search = "",
   token,
@@ -104,7 +104,7 @@ export const getEmployers = async ({
   size = "",
   location = "",
 }: {
-  page: string;
+  page: number;
   sort: string;
   search: string;
   token: string;

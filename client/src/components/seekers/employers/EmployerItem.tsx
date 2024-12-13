@@ -33,20 +33,20 @@ const EmployerItem: React.FC<EmployersItemProps> = ({
   const FooterEmployerData = [
     {
       id: "1",
-      icon: <Camera color="gray" />,
+      icon: <Camera />,
       data:
         followers?.length + ` Follower${followers?.length !== 1 ? "s" : ""}`,
       tooltip: "Followers",
     },
     {
       id: "2",
-      icon: <Briefcase color="gray" />,
+      icon: <Briefcase />,
       data: jobs?.length + ` Job${jobs?.length !== 1 ? "s" : ""}`,
       tooltip: "Jobs",
     },
     {
       id: "3",
-      icon: <Building color="gray" />,
+      icon: <Building />,
       data: findIndustriesData(industry),
       tooltip: "Industry",
     },
@@ -83,7 +83,7 @@ const EmployerItem: React.FC<EmployersItemProps> = ({
           </div>
         </div>
       </CardContent>
-      <CardFooter className="border-t border-gray-100 pt-6 dark:border-[#0d0d0d]">
+      <CardFooter className="border-t border-gray-100 pt-6 dark:border-[#1b1b1b]">
         <div className="w-full gap-6 flex items-center justify-between flex-wrap">
           {FooterEmployerData.map((data) =>
             renderIconText({

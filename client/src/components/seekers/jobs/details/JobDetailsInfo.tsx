@@ -77,13 +77,13 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
     {
       tooltip: "Location",
       id: "1",
-      icon: <MapPinIcon color="gray" />,
+      icon: <MapPinIcon />,
       data: company.address || findLocationData(location),
     },
     {
       tooltip: "Size",
       id: "2",
-      icon: <LayoutTemplate color="gray" />,
+      icon: <LayoutTemplate />,
       data: company.size,
     },
   ];
@@ -92,19 +92,19 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
     {
       tooltip: "Created At",
       id: "1",
-      icon: <Calendar color="gray" />,
+      icon: <Calendar />,
       data: createdTime,
     },
     {
       tooltip: "Expires At",
       id: "2",
-      icon: <Timer color="gray" />,
+      icon: <Timer />,
       data: expirationDate,
     },
     {
       tooltip: "Applicants",
       id: "3",
-      icon: <GraduationCap color="gray" />,
+      icon: <GraduationCap />,
       data: applications.length + " Applications",
     },
   ];
@@ -112,19 +112,19 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
   const JobDetailsData = [
     {
       id: "1",
-      icon: <Calendar color="gray" />,
+      icon: <Calendar />,
       data: position,
       title: "Position",
     },
     {
       id: "2",
-      icon: <Timer color="gray" />,
+      icon: <Timer />,
       data: type,
       title: "Time",
     },
     {
       id: "3",
-      icon: <GraduationCap color="gray" />,
+      icon: <GraduationCap />,
       data: level,
       title: "Level",
     },
@@ -168,7 +168,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = ({
                   tooltip: true,
                   tooltipContent: "Industry",
                   id: "3",
-                  icon: <Building color="gray" />,
+                  icon: <Building />,
                   data: findIndustriesData(company.industry),
                 })}
                 <div className="flex items-center gap-3 flex-wrap">

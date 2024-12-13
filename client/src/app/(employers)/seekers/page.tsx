@@ -44,7 +44,7 @@ const SeekersPage = ({
 
       return getSeekers({
         token: token,
-        page: searchParams.page || 1,
+        page: Number(searchParams.page) || 1,
         search: searchParams.query || "",
         skills: searchParams.skills || "",
       });

@@ -58,19 +58,19 @@ const JobItem: React.FC<JobItemProps> = ({
     {
       id: "1",
       data: findLocationData(location),
-      icon: <MapPin color="gray" />,
+      icon: <MapPin />,
       tooltip: "Location",
     },
     {
       id: "2",
       data: level,
-      icon: <GraduationCap color="gray" />,
+      icon: <GraduationCap />,
       tooltip: "Level",
     },
     {
       id: "3",
       data: expirationDate,
-      icon: <Timer color="gray" />,
+      icon: <Timer />,
       tooltip: "Expiration",
     },
   ];
@@ -82,7 +82,7 @@ const JobItem: React.FC<JobItemProps> = ({
           <div className="flex justify-between sm:items-center">
             <div className="flex items-center gap-3 flex-wrap">
               <Link href={`/companies/${company._id}?section=jobs`}>
-                <Avatar className="border border-blue-100 dark:border-[#1b1b1b] w-12 h-12">
+                <Avatar className="border border-blue-100 dark:border-[#1b1b1b] w-14 h-14">
                   <AvatarImage
                     src={getImageUrl(company?.image)}
                     className="object-cover w-auto h-auto"

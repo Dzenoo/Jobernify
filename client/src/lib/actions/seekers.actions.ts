@@ -22,7 +22,11 @@ export const getSeekerProfile = async (
   token: string,
   page: number = 1,
   limit: number = 10
-): Promise<{ seeker: SeekerTypes }> => {
+): Promise<{
+  seeker: SeekerTypes;
+  totalSavedJobs: number;
+  totalApplications: number;
+}> => {
   return await getApiHandler(
     `seekers/profile?page=${page}&limit=${limit}`,
     token

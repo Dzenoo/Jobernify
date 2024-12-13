@@ -45,7 +45,7 @@ const SearchJobs: React.FC<SearchJobsProps> = ({ query, sort }) => {
       <div className="basis-full w-96">
         <Input
           defaultValue={query}
-          placeholder="Search Jobs..."
+          placeholder="Job title, description, or location..."
           onChange={handleInputChange}
         />
       </div>

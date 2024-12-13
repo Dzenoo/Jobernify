@@ -106,6 +106,7 @@ export class SeekersService {
       })
       .populate({
         path: 'applications',
+        options: { skip, limit: Number(limit) },
         populate: {
           path: 'job',
           select: '_id title type level position',
@@ -127,9 +128,19 @@ export class SeekersService {
       );
     }
 
+    const totalSavedJobs = await this.seekerModel.countDocuments({
+      savedJobs: { $in: seeker.savedJobs },
+    });
+
+    const totalApplications = await this.seekerModel.countDocuments({
+      applications: { $in: seeker.applications },
+    });
+
     return {
       statusCode: HttpStatus.OK,
       seeker,
+      totalSavedJobs,
+      totalApplications,
     };
   }
 

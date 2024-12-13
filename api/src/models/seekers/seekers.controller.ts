@@ -49,8 +49,8 @@ export class SeekersController {
   @Roles(Role.Seeker)
   async getSeekerProfile(
     @User('userId') userId: string,
-    @Query('page', ParseIntPipe) page: number = 1,
-    @Query('limit', ParseIntPipe) limit: number = 10,
+    @Query('page', ParseIntPipe) page: number,
+    @Query('limit', ParseIntPipe) limit: number,
   ) {
     return await this.seekersService.getOne({
       page,

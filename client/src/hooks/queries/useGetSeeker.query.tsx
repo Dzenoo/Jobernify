@@ -8,9 +8,14 @@ import { SeekerTypes } from "@/types";
 
 interface SeekerProfile {
   seeker: SeekerTypes;
+  totalSavedJobs: number;
+  totalApplications: number;
 }
 
-const useGetSeeker = (options?: UseQueryOptions<SeekerProfile>) => {
+const useGetSeeker = (
+  page?: number,
+  options?: UseQueryOptions<SeekerProfile>
+) => {
   const { token } = useAuthentication().getCookieHandler();
 
   return useQuery<SeekerProfile>({
@@ -18,7 +23,7 @@ const useGetSeeker = (options?: UseQueryOptions<SeekerProfile>) => {
       if (!token) {
         throw new Error("Unauthorized!");
       }
-      return getSeekerProfile(token);
+      return getSeekerProfile(token, page);
     },
     queryKey: ["profile"],
     enabled: !!token,

@@ -274,3 +274,59 @@ export const injectCountsIntoFilters = (
     return { ...filterGroup, data: updatedData };
   });
 };
+
+/**
+ * Returns an array of page numbers (and string '...') to render for truncated pagination.
+ *
+ * @param currentPage - The current active page
+ * @param totalPages  - The total number of pages
+ * @param maxVisible  - The maximum number of page *buttons* you want to show
+ * @returns An array containing page numbers and possibly '...' strings
+ */
+export function getTruncatedPageRange(
+  currentPage: number,
+  totalPages: number,
+  maxVisible: number = 10
+): (number | string)[] {
+  const pages: (number | string)[] = [];
+
+  // if the total pages is already <= maxVisible, just show them all
+  if (totalPages <= maxVisible) {
+    return [...Array(totalPages)].map((_, i) => i + 1);
+  }
+
+  const siblingCount = 2; // how many pages to show on either side of `currentPage`
+  const firstPage = 1;
+  const lastPage = totalPages;
+
+  // Always show first page, last page, and the current page. Then fill in pages around current.
+  // We'll possibly add ellipses in between.
+
+  // Start by pushing the first page.
+  pages.push(firstPage);
+
+  // Figure out the left boundary near currentPage
+  let leftBound = Math.max(currentPage - siblingCount, 2); // from page 2 onwards
+  // Figure out the right boundary near currentPage
+  let rightBound = Math.min(currentPage + siblingCount, totalPages - 1); // up to second last page
+
+  // Insert '...' if the leftBound is more than 2 pages after the first page
+  if (leftBound > 2) {
+    pages.push("...");
+  }
+
+  // Push pages from leftBound to rightBound
+  for (let i = leftBound; i <= rightBound; i++) {
+    pages.push(i);
+  }
+
+  // Insert '...' if the rightBound is at least 2 pages before the last page
+  if (rightBound < totalPages - 1) {
+    pages.push("...");
+  }
+
+  // Lastly, push the last page
+  pages.push(lastPage);
+
+  return pages;
+}

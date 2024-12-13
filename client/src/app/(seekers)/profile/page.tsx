@@ -12,10 +12,19 @@ import SeekerAlerts from "@/components/seekers/profile/alerts/SeekerAlerts";
 import SavedJobs from "@/components/seekers/profile/savedJobs/SavedJobs";
 import Applications from "@/components/seekers/profile/applications/Applications";
 import NotFound from "@/components/shared/pages/NotFound";
+import PaginatedList from "@/components/ui/paginate-list";
+import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 
-const SeekerProfilePage = () => {
+const SeekerProfilePage = ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) => {
   const [currentTab, setCurrentTab] = useState<number>(0);
-  const { data, isLoading, isFetching, isRefetching } = useGetSeeker();
+  const { updateSearchParams } = useSearchParams();
+  const { data, isLoading, isFetching, isRefetching } = useGetSeeker(
+    Number(searchParams.page || 1)
+  );
 
   const isLoadingSeeker = isLoading || isFetching || isRefetching;
 
@@ -42,6 +51,7 @@ const SeekerProfilePage = () => {
     <section className="flex justify-between gap-[10px] flex-col mx-40 max-xl:mx-0">
       <div>
         <SeekerProfileNavigation
+          onSearchParamsChange={updateSearchParams}
           currentTab={currentTab}
           updateTab={updateTab}
         />
@@ -62,13 +72,41 @@ const SeekerProfilePage = () => {
         </div>
       )}
       {currentTab === 2 && (
-        <div>
-          <SavedJobs savedJobs={data.seeker.savedJobs} />
+        <div className="flex flex-col gap-5">
+          <div>
+            <SavedJobs savedJobs={data.seeker.savedJobs} />
+          </div>
+          {data.totalSavedJobs > 10 && (
+            <div>
+              <PaginatedList
+                onPageChange={(value) =>
+                  updateSearchParams("page", value.toString())
+                }
+                totalItems={data.totalSavedJobs}
+                itemsPerPage={10}
+                currentPage={Number(searchParams.page) || 1}
+              />
+            </div>
+          )}
         </div>
       )}
       {currentTab === 3 && (
-        <div>
-          <Applications applications={data.seeker.applications} />
+        <div className="flex flex-col gap-5">
+          <div>
+            <Applications applications={data.seeker.applications} />
+          </div>
+          {data.totalApplications > 10 && (
+            <div>
+              <PaginatedList
+                onPageChange={(value) =>
+                  updateSearchParams("page", value.toString())
+                }
+                totalItems={data.totalApplications}
+                itemsPerPage={10}
+                currentPage={Number(searchParams.page) || 1}
+              />
+            </div>
+          )}
         </div>
       )}
     </section>

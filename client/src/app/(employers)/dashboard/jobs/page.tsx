@@ -41,7 +41,7 @@ const DashboardJobsPage = ({
 
       return getEmployerProfile({
         token: token,
-        page: searchParams.page || "1",
+        page: Number(searchParams.page) || 1,
         srt: searchParams.sort || "",
         search: searchParams.query || "",
         type: "jobs",
