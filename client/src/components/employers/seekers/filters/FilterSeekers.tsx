@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import { Filter, ListFilter } from "lucide-react";
+import { ListFilter } from "lucide-react";
 
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import { SkillsInformationsData } from "@/constants";
@@ -16,7 +16,6 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 
 const FilterSeekers: React.FC = () => {
   const isLarge = useMediaQuery("(min-width: 1280px)");
@@ -25,11 +24,7 @@ const FilterSeekers: React.FC = () => {
   return (
     <div className="flex flex-col gap-6">
       <div className="hidden xl:block">
-        <Card>
-          <CardContent>
-            <FiltersContent />
-          </CardContent>
-        </Card>
+        <FiltersContent />
       </div>
       <div className="xl:hidden">
         <Button
@@ -64,23 +59,13 @@ const FiltersContent: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex justify-between items-center gap-5 max-xl:hidden">
-        <div>
-          <h1 className="text-xl font-bold">Seeker Filters</h1>
-        </div>
-        <div>
-          <Filter />
-        </div>
-      </div>
-      <div className="flex flex-col gap-7">
-        {transformedSkillsInformationsData.map((filterGroup) => (
-          <FilterHandler
-            key={filterGroup.id}
-            filterGroups={[filterGroup]}
-            showCount={true}
-          />
-        ))}
-      </div>
+      {transformedSkillsInformationsData.map((filterGroup) => (
+        <FilterHandler
+          key={filterGroup.id}
+          filterGroups={[filterGroup]}
+          showCount={true}
+        />
+      ))}
     </div>
   );
 };

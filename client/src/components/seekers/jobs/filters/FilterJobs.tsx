@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import { Filter, ListFilter } from "lucide-react";
+import { ListFilter } from "lucide-react";
 
 import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
 import { JobsFiltersData } from "@/constants";
@@ -12,7 +12,6 @@ import { FilterCounts } from "@/types";
 import FilterHandler from "@/components/shared/filters/FilterHandler";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Drawer,
   DrawerContent,
@@ -31,11 +30,7 @@ const FilterJobs: React.FC<FilterJobsProps> = ({ filterCounts }) => {
   return (
     <div className="flex flex-col gap-6">
       <div className="hidden xl:block">
-        <Card>
-          <CardContent>
-            <FiltersContent filterCounts={filterCounts} />
-          </CardContent>
-        </Card>
+        <FiltersContent filterCounts={filterCounts} />
       </div>
       <div className="xl:hidden">
         <Button
@@ -81,23 +76,13 @@ const FiltersContent: React.FC<{
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex justify-between items-center gap-5 max-xl:hidden">
-        <div>
-          <h1 className="text-xl font-bold">Filters</h1>
-        </div>
-        <div>
-          <Filter />
-        </div>
-      </div>
-      <div className="flex flex-col gap-7">
-        {updatedJobsFiltersData.map((filterGroup) => (
-          <FilterHandler
-            key={filterGroup.id}
-            filterGroups={[filterGroup]}
-            showCount={true}
-          />
-        ))}
-      </div>
+      {updatedJobsFiltersData.map((filterGroup) => (
+        <FilterHandler
+          key={filterGroup.id}
+          filterGroups={[filterGroup]}
+          showCount={true}
+        />
+      ))}
     </div>
   );
 };

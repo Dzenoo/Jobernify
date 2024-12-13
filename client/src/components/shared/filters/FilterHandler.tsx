@@ -41,14 +41,14 @@ const FilterHandler: React.FC<FilterHandlerProps> = ({
   };
 
   return (
-    <Accordion type="single" collapsible defaultValue="item-0">
+    <Accordion type="multiple" defaultValue={["item-0"]}>
       {filterGroups.map((filter, index) => {
         const visibleCheckboxes = showAll
           ? filter.data
           : filter.data.slice(0, initialVisibleCount);
 
         return (
-          <AccordionItem key={filter.id} value={`item-${index}`}>
+          <AccordionItem key={filter.id} value={`item-${index}`} border={false}>
             <AccordionTrigger>
               <h3 className="text-lg font-semibold">{filter.title}</h3>
             </AccordionTrigger>
