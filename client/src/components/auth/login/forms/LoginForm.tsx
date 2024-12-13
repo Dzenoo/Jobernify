@@ -35,7 +35,7 @@ const LoginForm: React.FC = () => {
       email: "",
       password: "",
     },
-    mode: "all",
+    mode: "onChange",
   });
 
   const { mutateAsync: loginToAccount } = useMutation({

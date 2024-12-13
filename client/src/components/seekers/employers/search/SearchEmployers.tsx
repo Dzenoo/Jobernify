@@ -59,7 +59,7 @@ const SearchEmployers: React.FC<SearchEmployersProps> = ({ searchParams }) => {
       <div className="basis-full max-sm:basis-full">
         <Input
           defaultValue={searchParams.query}
-          placeholder="Search Employers..."
+          placeholder="Employer name, address, or description..."
           onChange={handleInputChange}
         />
       </div>

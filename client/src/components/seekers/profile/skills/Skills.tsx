@@ -160,7 +160,7 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
           />
         </Drawer>
       )}
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-3">
         <div className="flex justify-between items-center gap-3">
           <div>
             <h1 className="text-base-black">Skills</h1>
@@ -178,14 +178,14 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
             </Button>
           </div>
         </div>
-      </div>
-      <div>
         <div>
-          {skills?.length === 0 && (
-            <p className="text-initial-gray">No skills listed</p>
-          )}
+          <div>
+            {skills?.length === 0 && (
+              <p className="text-initial-gray">No skills listed</p>
+            )}
+          </div>
+          {renderSkills(categorizedSkills)}
         </div>
-        {renderSkills(categorizedSkills)}
       </div>
     </Fragment>
   );

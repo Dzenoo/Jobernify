@@ -9,7 +9,7 @@ import LoadingSeekerProfileSkeleton from "@/components/loaders/seekers/LoadingSe
 import SeekerProfileNavigation from "@/components/seekers/profile/navigation/SeekerProfileNavigation";
 import SeekerProfile from "@/components/seekers/profile/SeekerProfile";
 import SeekerAlerts from "@/components/seekers/profile/alerts/SeekerAlerts";
-import JobsList from "@/components/seekers/jobs/JobsList";
+import SavedJobs from "@/components/seekers/profile/savedJobs/SavedJobs";
 import Applications from "@/components/seekers/profile/applications/Applications";
 import NotFound from "@/components/shared/pages/NotFound";
 
@@ -63,10 +63,7 @@ const SeekerProfilePage = () => {
       )}
       {currentTab === 2 && (
         <div>
-          <JobsList
-            jobs={data.seeker.savedJobs}
-            message="You have no saved jobs."
-          />
+          <SavedJobs savedJobs={data.seeker.savedJobs} />
         </div>
       )}
       {currentTab === 3 && (
