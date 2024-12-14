@@ -19,67 +19,69 @@ type JobAlertProps = {
   title: string;
 };
 
-const AddJobAlert: React.FC<JobAlertProps> = ({ level, type, title }) => {
-  const { mutateAsync: addJobAlertMutate, status } = useJobAlert();
-  const { data } = useGetSeeker();
+const AddJobAlert: React.FC<JobAlertProps> = React.memo(
+  ({ level, type, title }) => {
+    const { mutateAsync: addJobAlertMutate, status } = useJobAlert();
+    const { data } = useGetSeeker();
 
-  if (!data) {
+    if (!data) {
+      return (
+        <Card>
+          <CardHeader>
+            <h1 className="text-base-black">Generate Job Alert</h1>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <p className="text-initial-gray">Loading seeker data...</p>
+          </CardContent>
+          <CardFooter>
+            <Button variant="default" className="w-full" disabled>
+              Loading...
+            </Button>
+          </CardFooter>
+        </Card>
+      );
+    }
+
+    const { alerts } = data.seeker;
+
+    const isLoading = status === "pending";
+
+    const isAlreadyAlertGeneratedWithProperties =
+      alerts &&
+      alerts.level === level &&
+      alerts.type === type &&
+      alerts.title === title;
+
     return (
       <Card>
         <CardHeader>
           <h1 className="text-base-black">Generate Job Alert</h1>
         </CardHeader>
         <CardContent className="pt-0">
-          <p className="text-initial-gray">Loading seeker data...</p>
+          <p className="text-initial-gray">
+            Get notified when job like this show. Set up alerts now and never
+            miss a matching opportunity.
+          </p>
         </CardContent>
         <CardFooter>
-          <Button variant="default" className="w-full" disabled>
-            Loading...
+          <Button
+            variant="default"
+            className="w-full"
+            onClick={() => addJobAlertMutate({ level, type, title })}
+            disabled={isLoading || isAlreadyAlertGeneratedWithProperties}
+          >
+            {isLoading ? (
+              <ScaleLoader color="#fff" height={10} />
+            ) : isAlreadyAlertGeneratedWithProperties ? (
+              "Already Generated"
+            ) : (
+              "Add Job Alert"
+            )}
           </Button>
         </CardFooter>
       </Card>
     );
   }
-
-  const { alerts } = data.seeker;
-
-  const isLoading = status === "pending";
-
-  const isAlreadyAlertGeneratedWithProperties =
-    alerts &&
-    alerts.level === level &&
-    alerts.type === type &&
-    alerts.title === title;
-
-  return (
-    <Card>
-      <CardHeader>
-        <h1 className="text-base-black">Generate Job Alert</h1>
-      </CardHeader>
-      <CardContent className="pt-0">
-        <p className="text-initial-gray">
-          Get notified when job like this show. Set up alerts now and never miss
-          a matching opportunity.
-        </p>
-      </CardContent>
-      <CardFooter>
-        <Button
-          variant="default"
-          className="w-full"
-          onClick={() => addJobAlertMutate({ level, type, title })}
-          disabled={isLoading || isAlreadyAlertGeneratedWithProperties}
-        >
-          {isLoading ? (
-            <ScaleLoader color="#fff" height={10} />
-          ) : isAlreadyAlertGeneratedWithProperties ? (
-            "Already Generated"
-          ) : (
-            "Add Job Alert"
-          )}
-        </Button>
-      </CardFooter>
-    </Card>
-  );
-};
+);
 
 export default AddJobAlert;

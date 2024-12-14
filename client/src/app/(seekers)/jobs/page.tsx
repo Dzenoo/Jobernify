@@ -71,35 +71,35 @@ const Jobs = ({
     return <NotFound />;
   }
 
-  const jobData = fetchedJobs || {
+  const jobsData = fetchedJobs || {
     jobs: [],
     totalJobs: 0,
     popularJobs: [],
     filterCounts: [],
   };
 
-  const totalJobs = jobData.totalJobs;
+  const totalJobs = jobsData.totalJobs;
   const isFiltering = isLoading || isFetching || isRefetching;
 
   return (
     <section className="flex justify-between gap-10 max-xl:flex-col">
       <div className="basis-2/5 flex flex-col gap-5">
         <SeekerInfo />
-        <PopularJobsInfo jobs={jobData.popularJobs} />
+        <PopularJobsInfo jobs={jobsData.popularJobs} />
       </div>
 
       <div className="basis-full grow flex flex-col gap-4">
         <SearchJobs query={searchParams.query} sort={searchParams.sort} />
 
         <div className="xl:hidden">
-          <FilterJobs filterCounts={jobData.filterCounts} />
+          <FilterJobs filterCounts={jobsData.filterCounts} />
         </div>
 
         <div>
           {isFiltering ? (
             <LoadingJobsSkeleton />
           ) : (
-            <JobsList jobs={jobData.jobs} />
+            <JobsList jobs={jobsData.jobs} />
           )}
         </div>
 
@@ -116,7 +116,7 @@ const Jobs = ({
       </div>
 
       <div className="basis-2/5 max-xl:hidden">
-        <FilterJobs filterCounts={jobData.filterCounts} />
+        <FilterJobs filterCounts={jobsData.filterCounts} />
       </div>
     </section>
   );
