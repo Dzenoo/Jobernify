@@ -106,7 +106,9 @@ const JobItem: React.FC<JobItemProps> = ({
                 </div>
                 <div className="flex items-center gap-3 max-sm:flex-wrap">
                   <div>
-                    <p className="text-low-gray">{company?.name}</p>
+                    <Link href={`/companies/${company._id}?section=jobs`}>
+                      <p className="text-low-gray">{company?.name}</p>
+                    </Link>
                   </div>
                   <div>
                     <p className="text-low-gray">

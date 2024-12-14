@@ -259,7 +259,7 @@ export const injectCountsIntoFilters = (
       if (counts[countKey]) {
         count =
           counts[countKey]?.find((item: any) => {
-            if (countKey === "salaryRanges") {
+            if (countKey === "salary") {
               const range = item._id;
               const [min, max] = filterOption.value.split("-").map(Number);
               return range.min === min && range.max === max;

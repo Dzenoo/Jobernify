@@ -405,10 +405,10 @@ export class JobsService {
     const filterCounts = await this.jobModel.aggregate([
       {
         $facet: {
-          types: [{ $group: { _id: '$type', count: { $sum: 1 } } }],
-          seniority: [{ $group: { _id: '$level', count: { $sum: 1 } } }],
-          positions: [{ $group: { _id: '$position', count: { $sum: 1 } } }],
-          salaryRanges: [
+          type: [{ $group: { _id: '$type', count: { $sum: 1 } } }],
+          level: [{ $group: { _id: '$level', count: { $sum: 1 } } }],
+          position: [{ $group: { _id: '$position', count: { $sum: 1 } } }],
+          salary: [
             {
               $project: {
                 salary: 1,

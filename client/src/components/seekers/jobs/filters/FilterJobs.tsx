@@ -23,9 +23,9 @@ type FilterJobsProps = {
   filterCounts: FilterCounts;
 };
 
-const FilterJobs: React.FC<FilterJobsProps> = ({ filterCounts }) => {
-  const isLarge = useMediaQuery("(min-width: 1280px)");
+const FilterJobs: React.FC<FilterJobsProps> = React.memo(({ filterCounts }) => {
   const [open, setOpen] = useState(false);
+  const isLarge = useMediaQuery("(min-width: 1280px)");
 
   return (
     <div className="flex flex-col gap-6">
@@ -56,16 +56,16 @@ const FilterJobs: React.FC<FilterJobsProps> = ({ filterCounts }) => {
       </div>
     </div>
   );
-};
+});
 
 const FiltersContent: React.FC<{
   filterCounts: FilterCounts;
 }> = ({ filterCounts }) => {
   const typeToCountMapForJobs = {
-    type: "types",
-    seniority: "seniority",
-    salaryRange: "salaryRanges",
-    position: "positions",
+    type: "type",
+    level: "level",
+    salary: "salary",
+    position: "position",
   };
 
   const updatedJobsFiltersData = injectCountsIntoFilters(

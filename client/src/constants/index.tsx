@@ -331,7 +331,7 @@ export const locations = [
 export const JobsFiltersData = [
   {
     id: "1",
-    title: "Job Type",
+    title: "Job type",
     data: [
       { id: "1", title: "Internship", value: "Internship", type: "type" },
       { id: "2", title: "Full-Time", value: "Full-Time", type: "type" },
@@ -341,48 +341,48 @@ export const JobsFiltersData = [
   },
   {
     id: "2",
-    title: "Seniority",
+    title: "Job level",
     data: [
-      { id: "1", title: "Junior", value: "Junior", type: "seniority" },
-      { id: "2", title: "Medior", value: "Medior", type: "seniority" },
-      { id: "3", title: "Senior", value: "Senior", type: "seniority" },
-      { id: "4", title: "Lead", value: "Lead", type: "seniority" },
+      { id: "1", title: "Junior", value: "Junior", type: "level" },
+      { id: "2", title: "Medior", value: "Medior", type: "level" },
+      { id: "3", title: "Senior", value: "Senior", type: "level" },
+      { id: "4", title: "Lead", value: "Lead", type: "level" },
     ],
   },
   {
     id: "3",
-    title: "Salary Range",
+    title: "Salary range",
     data: [
-      { id: "1", title: "0$ - 50 000$", value: "0-50000", type: "salaryRange" },
+      { id: "1", title: "0$ - 50 000$", value: "0-50000", type: "salary" },
       {
         id: "2",
         title: "50 000$ - 100 000$",
         value: "50000-100000",
-        type: "salaryRange",
+        type: "salary",
       },
       {
         id: "3",
         title: "100 000$ - 150 000$",
         value: "100000-150000",
-        type: "salaryRange",
+        type: "salary",
       },
       {
         id: "4",
         title: "150 000$ - 200 000$",
         value: "150000-200000",
-        type: "salaryRange",
+        type: "salary",
       },
       {
         id: "5",
         title: "200 000$ - 500 000$",
         value: "200000-500000",
-        type: "salaryRange",
+        type: "salary",
       },
     ],
   },
   {
     id: "4",
-    title: "Position",
+    title: "Job position",
     data: [
       { id: "1", title: "Hybrid", value: "Hybrid", type: "position" },
       { id: "2", title: "On-Site", value: "On-Site", type: "position" },

@@ -18,7 +18,7 @@ type SearchJobsProps = {
   sort: string;
 };
 
-const SearchJobs: React.FC<SearchJobsProps> = ({ query, sort }) => {
+const SearchJobs: React.FC<SearchJobsProps> = React.memo(({ query, sort }) => {
   const { updateSearchParams, debounce } = useSearchParams();
 
   const handleInputChange = debounce(
@@ -77,6 +77,6 @@ const SearchJobs: React.FC<SearchJobsProps> = ({ query, sort }) => {
       </div>
     </div>
   );
-};
+});
 
 export default SearchJobs;

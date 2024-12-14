@@ -7,15 +7,25 @@ import { getImageUrl } from "@/lib/utils";
 
 import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
 
-import { SeekerTypes } from "@/types";
+import LoadingSeekerInfo from "@/components/loaders/employers/LoadingSeekerInfo";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-const SeekerInfo: React.FC = () => {
-  const { data: fetchedSeeker } = useGetSeeker();
-  const seeker = fetchedSeeker?.seeker as SeekerTypes;
-  const profileImageUrl = getImageUrl(seeker?.image);
+const SeekerInfo: React.FC = React.memo(() => {
+  const { data: fetchedSeeker, isLoading } = useGetSeeker();
+
+  if (!fetchedSeeker) {
+    if (isLoading) {
+      return <LoadingSeekerInfo />;
+    } else {
+      return null;
+    }
+  }
+
+  const seeker = fetchedSeeker.seeker;
+
+  const profileImageUrl = getImageUrl(seeker.image);
 
   return (
     <Card>
@@ -32,13 +42,13 @@ const SeekerInfo: React.FC = () => {
         <div className="flex flex-col gap-3 items-center justify-center text-center">
           <div>
             <h1 className="font-bold">
-              {seeker?.first_name} {seeker?.last_name}
+              {seeker.first_name} {seeker.last_name}
             </h1>
           </div>
-          {seeker?.headline && (
+          {seeker.headline && (
             <div>
               <p className="text-gray-500 dark:text-gray-400">
-                {seeker?.headline}
+                {seeker.headline}
               </p>
             </div>
           )}
@@ -51,6 +61,6 @@ const SeekerInfo: React.FC = () => {
       </CardContent>
     </Card>
   );
-};
+});
 
 export default SeekerInfo;

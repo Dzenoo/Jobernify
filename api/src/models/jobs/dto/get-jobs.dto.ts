@@ -24,6 +24,10 @@ export class GetJobsDto {
 
   @IsOptional()
   @IsString()
+  readonly sort?: string;
+
+  @IsOptional()
+  @IsString()
   readonly search?: string;
 
   @IsOptional()
@@ -41,8 +45,4 @@ export class GetJobsDto {
   @IsOptional()
   @IsString()
   readonly position?: string;
-
-  @IsOptional()
-  @IsString()
-  readonly sort?: string;
 }
