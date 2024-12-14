@@ -1,6 +1,6 @@
 const LoadingSeekerProfileSkeleton: React.FC = () => {
   return (
-    <div className="flex flex-col gap-10 animate-pulse bg-gray-100 p-6 rounded-xl w-full">
+    <div className="flex flex-col gap-10 animate-pulse bg-gray-100 p-6 rounded-xl mx-40 max-xl:mx-0">
       <div className="flex justify-between gap-3">
         <div className="flex gap-10 items-center">
           <div className="w-36 h-36 rounded-full bg-gray-300"></div>

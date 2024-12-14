@@ -24,8 +24,8 @@ type FilterJobsProps = {
 };
 
 const FilterJobs: React.FC<FilterJobsProps> = React.memo(({ filterCounts }) => {
-  const [open, setOpen] = useState(false);
   const isLarge = useMediaQuery("(min-width: 1280px)");
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="flex flex-col gap-6">

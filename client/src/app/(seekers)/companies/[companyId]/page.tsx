@@ -1,23 +1,22 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import dynamic from "next/dynamic";
 import { useQuery } from "@tanstack/react-query";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 
 import { getEmployerById } from "@/lib/actions/employers.actions";
 
-import LoadingJobsSkeleton from "@/components/loaders/seekers/LoadingJobsSkeleton";
+import LoadingCompanyDetails from "@/components/loaders/seekers/LoadingCompanyDetails";
 import EmployerDetailsInfo from "@/components/seekers/employers/details/EmployerDetailsInfo";
 import EmployerFilters from "@/components/seekers/employers/filters/EmployerFilters";
-
 import PaginatedList from "@/components/ui/paginate-list";
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
-import LoadingCompanyDetails from "@/components/loaders/seekers/LoadingCompanyDetails";
-import NotFound from "@/components/shared/pages/NotFound";
-import { EmployerTypes } from "@/types";
 
+import NotFound from "@/components/shared/pages/NotFound";
+
+import LoadingJobsSkeleton from "@/components/loaders/seekers/LoadingJobsSkeleton";
 const JobsList = dynamic(() => import("@/components/seekers/jobs/JobsList"), {
   loading: () => <LoadingJobsSkeleton />,
 });
@@ -31,13 +30,7 @@ const CompanyDetails = ({
 }) => {
   const { updateSearchParams } = useSearchParams();
   const { token } = useAuthentication().getCookieHandler();
-  const {
-    data: fetchedCompany,
-    refetch,
-    isFetching,
-    isLoading,
-    isRefetching,
-  } = useQuery({
+  const { data: fetchedCompany, isLoading } = useQuery({
     queryFn: () => {
       if (!token) {
         throw new Error("Unauthorized!");
@@ -58,49 +51,30 @@ const CompanyDetails = ({
     ],
   });
 
-  useEffect(() => {
-    refetch();
-  }, [searchParams]);
+  if (isLoading) {
+    return <LoadingCompanyDetails />;
+  }
+
+  if (!fetchedCompany) {
+    return <NotFound />;
+  }
 
   const searchParamsJobs = searchParams.section === "jobs";
 
   let totalItems = 0;
-  if (searchParamsJobs && fetchedCompany?.totalJobs) {
+  if (searchParamsJobs && fetchedCompany.totalJobs) {
     totalItems = fetchedCompany.totalJobs;
-  }
-
-  const isFiltering = isLoading || isFetching || isRefetching;
-
-  if (!isLoading && !fetchedCompany) {
-    return <NotFound />;
   }
 
   return (
     <section className="overflow-hidden mx-40 max-xl:mx-0">
-      {isFiltering ? (
-        <LoadingCompanyDetails />
-      ) : (
-        <div className="flex flex-col gap-6 justify-center overflow-auto">
-          <div>
-            <EmployerDetailsInfo
-              employer={fetchedCompany?.employer as EmployerTypes}
-            />
-          </div>
-          <div>
-            <EmployerFilters type={searchParams.section} />
-          </div>
-        </div>
-      )}
+      <div className="flex flex-col gap-6 justify-center overflow-auto">
+        <EmployerDetailsInfo employer={fetchedCompany.employer} />
+        <EmployerFilters type={searchParams.section} />
+      </div>
+
       <div className="flex flex-col gap-6 justify-center overflow-auto py-6">
-        {searchParamsJobs && (
-          <>
-            {isFiltering ? (
-              <LoadingJobsSkeleton />
-            ) : (
-              <JobsList jobs={fetchedCompany?.employer.jobs || []} />
-            )}
-          </>
-        )}
+        {searchParamsJobs && <JobsList jobs={fetchedCompany.employer.jobs} />}
         {totalItems > 10 && (
           <PaginatedList
             onPageChange={(value) =>

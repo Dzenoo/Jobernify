@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 
 import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
+import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 
 import LoadingSeekerProfileSkeleton from "@/components/loaders/seekers/LoadingSeekerProfile";
 
@@ -11,9 +12,8 @@ import SeekerProfile from "@/components/seekers/profile/SeekerProfile";
 import SeekerAlerts from "@/components/seekers/profile/alerts/SeekerAlerts";
 import SavedJobs from "@/components/seekers/profile/savedJobs/SavedJobs";
 import Applications from "@/components/seekers/profile/applications/Applications";
-import NotFound from "@/components/shared/pages/NotFound";
 import PaginatedList from "@/components/ui/paginate-list";
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import NotFound from "@/components/shared/pages/NotFound";
 
 const SeekerProfilePage = ({
   searchParams,
@@ -22,9 +22,12 @@ const SeekerProfilePage = ({
 }) => {
   const [currentTab, setCurrentTab] = useState<number>(0);
   const { updateSearchParams } = useSearchParams();
-  const { data, isLoading, isFetching, isRefetching } = useGetSeeker(
-    Number(searchParams.page || 1)
-  );
+  const {
+    data: fetchedSeeker,
+    isLoading,
+    isFetching,
+    isRefetching,
+  } = useGetSeeker(Number(searchParams.page || 1));
 
   const isLoadingSeeker = isLoading || isFetching || isRefetching;
 
@@ -32,7 +35,7 @@ const SeekerProfilePage = ({
     return <LoadingSeekerProfileSkeleton />;
   }
 
-  if (!data) {
+  if (!fetchedSeeker) {
     return <NotFound />;
   }
 
@@ -56,33 +59,37 @@ const SeekerProfilePage = ({
           updateTab={updateTab}
         />
       </div>
+
       {currentTab === 0 && (
         <div>
-          <SeekerProfile seeker={data.seeker} />
+          <SeekerProfile seeker={fetchedSeeker.seeker} />
         </div>
       )}
+
       {currentTab === 1 && (
         <div>
           <SeekerAlerts
             alertsData={{
-              alerts: data.seeker.alerts,
-              receiveJobAlerts: data.seeker.receiveJobAlerts,
+              alerts: fetchedSeeker.seeker.alerts,
+              receiveJobAlerts: fetchedSeeker.seeker.receiveJobAlerts,
             }}
           />
         </div>
       )}
+
       {currentTab === 2 && (
         <div className="flex flex-col gap-5">
           <div>
-            <SavedJobs savedJobs={data.seeker.savedJobs} />
+            <SavedJobs savedJobs={fetchedSeeker.seeker.savedJobs} />
           </div>
-          {data.totalSavedJobs > 10 && (
+
+          {fetchedSeeker.totalSavedJobs > 10 && (
             <div>
               <PaginatedList
                 onPageChange={(value) =>
                   updateSearchParams("page", value.toString())
                 }
-                totalItems={data.totalSavedJobs}
+                totalItems={fetchedSeeker.totalSavedJobs}
                 itemsPerPage={10}
                 currentPage={Number(searchParams.page) || 1}
               />
@@ -90,18 +97,20 @@ const SeekerProfilePage = ({
           )}
         </div>
       )}
+
       {currentTab === 3 && (
         <div className="flex flex-col gap-5">
           <div>
-            <Applications applications={data.seeker.applications} />
+            <Applications applications={fetchedSeeker.seeker.applications} />
           </div>
-          {data.totalApplications > 10 && (
+
+          {fetchedSeeker.totalApplications > 10 && (
             <div>
               <PaginatedList
                 onPageChange={(value) =>
                   updateSearchParams("page", value.toString())
                 }
-                totalItems={data.totalApplications}
+                totalItems={fetchedSeeker.totalApplications}
                 itemsPerPage={10}
                 currentPage={Number(searchParams.page) || 1}
               />

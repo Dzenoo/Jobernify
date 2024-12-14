@@ -1,6 +1,6 @@
 const LoadingCompanyDetails: React.FC = () => {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="mx-40 max-xl:mx-0 flex flex-col gap-6">
       <div className="h-6 bg-gray-300 rounded w-48"></div>
       <div className="flex overflow-auto justify-between max-lg:flex-wrap">
         <div className="flex sm:items-center gap-3 max-sm:flex-col">

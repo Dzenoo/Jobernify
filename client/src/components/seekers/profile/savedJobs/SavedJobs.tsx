@@ -1,8 +1,14 @@
 import React from "react";
 
-import JobsList from "../../jobs/JobsList";
+import dynamic from "next/dynamic";
+
+import LoadingJobsSkeleton from "@/components/loaders/seekers/LoadingJobsSkeleton";
 
 import { JobTypes } from "@/types";
+
+const JobsList = dynamic(() => import("@/components/seekers/jobs/JobsList"), {
+  loading: () => <LoadingJobsSkeleton />,
+});
 
 type SavedJobsProps = {
   savedJobs: JobTypes[];

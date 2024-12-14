@@ -1,19 +1,19 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import dynamic from "next/dynamic";
 import { useQuery } from "@tanstack/react-query";
 
 import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 
 import { getEmployers } from "@/lib/actions/employers.actions";
 
-import LoadingCompaniesSkeleton from "@/components/loaders/seekers/LoadingCompanies";
-
-import PaginatedList from "@/components/ui/paginate-list";
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
 import SearchEmployers from "@/components/seekers/employers/search/SearchEmployers";
+import PaginatedList from "@/components/ui/paginate-list";
+import NotFound from "@/components/shared/pages/NotFound";
 
+import LoadingCompaniesSkeleton from "@/components/loaders/seekers/LoadingCompanies";
 const EmployersList = dynamic(
   () => import("@/components/seekers/employers/EmployersList"),
   {
@@ -30,7 +30,6 @@ const Companies = ({
   const { token } = useAuthentication().getCookieHandler();
   const {
     data: fetchedCompanies,
-    refetch,
     isLoading,
     isFetching,
     isRefetching,
@@ -53,11 +52,16 @@ const Companies = ({
     queryKey: ["companies", searchParams],
   });
 
-  useEffect(() => {
-    refetch();
-  }, [searchParams]);
+  if (!fetchedCompanies && !isLoading) {
+    return <NotFound />;
+  }
 
-  const totalEmployers = fetchedCompanies?.totalEmployers || 0;
+  const companiesData = fetchedCompanies || {
+    employers: [],
+    totalEmployers: 0,
+  };
+
+  const totalEmployers = companiesData.totalEmployers;
   const isFiltering = isLoading || isFetching || isRefetching;
 
   return (
@@ -65,13 +69,15 @@ const Companies = ({
       <div>
         <SearchEmployers searchParams={searchParams} />
       </div>
+
       <div>
         {isFiltering ? (
           <LoadingCompaniesSkeleton />
         ) : (
-          <EmployersList employers={fetchedCompanies?.employers || []} />
+          <EmployersList employers={companiesData.employers} />
         )}
       </div>
+
       {totalEmployers > 10 && (
         <PaginatedList
           onPageChange={(value) => updateSearchParams("page", value.toString())}
