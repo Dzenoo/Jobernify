@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
 
-import { getEmployerProfile } from "@/lib/actions/employers.actions";
+import { getEmployerProfile } from '@/lib/actions/employers.actions';
 
-import dynamic from "next/dynamic";
-import LoadingDashboardJobs from "@/components/loaders/employers/LoadingDashboardJobs";
+import dynamic from 'next/dynamic';
+import LoadingDashboardJobs from '@/components/loaders/employers/LoadingDashboardJobs';
 
-import PaginatedList from "@/components/ui/paginate-list";
-import SearchJobs from "@/components/employers/dashboard/jobs/search/SearchJobs";
+import PaginatedList from '@/components/ui/paginate-list';
+import SearchJobs from '@/components/employers/dashboard/jobs/search/SearchJobs';
 
 const DashboardEmployerJobs = dynamic(
-  () => import("@/components/employers/dashboard/jobs/DashboardEmployerJobs"),
+  () => import('@/components/employers/dashboard/jobs/DashboardEmployerJobs'),
   {
     loading: () => <LoadingDashboardJobs />,
-  }
+  },
 );
 
 const DashboardJobsPage = ({
@@ -36,18 +36,18 @@ const DashboardJobsPage = ({
   } = useQuery({
     queryFn: () => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return getEmployerProfile({
         token: token,
         page: Number(searchParams.page) || 1,
-        srt: searchParams.sort || "",
-        search: searchParams.query || "",
-        type: "jobs",
+        srt: searchParams.sort || '',
+        search: searchParams.query || '',
+        type: 'jobs',
       });
     },
-    queryKey: ["jobs", searchParams],
+    queryKey: ['jobs', searchParams],
   });
 
   const isLoadingJobs = isLoading || isFetching || isRefetching;
@@ -78,7 +78,7 @@ const DashboardJobsPage = ({
       )}
       {totalJobs > 10 && (
         <PaginatedList
-          onPageChange={(value) => updateSearchParams("page", value.toString())}
+          onPageChange={(value) => updateSearchParams('page', value.toString())}
           totalItems={totalJobs}
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}

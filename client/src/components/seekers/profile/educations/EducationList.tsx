@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import EducationItem from "./EducationItem";
+import EducationItem from './EducationItem';
 
-import { EducationTypes } from "@/types";
+import { Education } from '@/types';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 type EducationListProps = {
-  educations?: EducationTypes[];
+  educations?: Education[];
   openForm: (id: string) => void;
 };
 
@@ -46,7 +46,7 @@ const EducationList: React.FC<EducationListProps> = ({
             onClick={() => setShowAll((prev) => !prev)}
             className="w-full"
           >
-            {showAll ? "Show Less" : "Show More"}
+            {showAll ? 'Show Less' : 'Show More'}
           </Button>
         </div>
       )}

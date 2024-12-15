@@ -26,7 +26,7 @@ import { JwtAuthGuard } from 'src/authentication/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/authentication/guards/role-auth.guard';
 
 import { Roles } from 'src/common/decorators/roles.decorator';
-import { Role } from '../shared/schemas/user.schema';
+import { Role } from 'shared';
 import { User } from 'src/common/decorators/user.decorator';
 import { VerificationService } from 'src/authentication/verification/verification.service';
 

@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
 
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectTrigger,
   SelectContent,
   SelectItem,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 type SearchJobsProps = {
   query: string;
@@ -23,14 +23,14 @@ const SearchJobs: React.FC<SearchJobsProps> = ({ query, sort }) => {
 
   const handleInputChange = debounce(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      updateSearchParams("query", e.target.value);
+      updateSearchParams('query', e.target.value);
     },
-    300
+    300,
   );
 
   const handleSelectChange = (value: string, key: string) => {
-    if (value === "all") {
-      updateSearchParams(key, "");
+    if (value === 'all') {
+      updateSearchParams(key, '');
     } else {
       updateSearchParams(key, value);
     }
@@ -61,7 +61,7 @@ const SearchJobs: React.FC<SearchJobsProps> = ({ query, sort }) => {
         </div>
         <div className="basis-1/2 max-sm:basis-full">
           <Select
-            onValueChange={(value) => handleSelectChange(value, "sort")}
+            onValueChange={(value) => handleSelectChange(value, 'sort')}
             defaultValue={sort}
           >
             <SelectTrigger>

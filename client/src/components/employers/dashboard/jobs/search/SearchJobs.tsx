@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
 
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectTrigger,
@@ -15,7 +15,7 @@ import {
   SelectGroup,
   SelectItem,
   SelectLabel,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 type SearchJobsProps = {
   query: string;
@@ -27,14 +27,14 @@ const SearchJobs: React.FC<SearchJobsProps> = ({ query, sort }) => {
 
   const handleInputChange = debounce(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      updateSearchParams("query", e.target.value);
+      updateSearchParams('query', e.target.value);
     },
-    300
+    300,
   );
 
   const handleSelectChange = (value: string, key: string) => {
-    if (value === "all") {
-      updateSearchParams(key, "");
+    if (value === 'all') {
+      updateSearchParams(key, '');
     } else {
       updateSearchParams(key, value);
     }
@@ -51,7 +51,7 @@ const SearchJobs: React.FC<SearchJobsProps> = ({ query, sort }) => {
       </div>
       <div className="max-sm:basis-full">
         <Select
-          onValueChange={(value) => handleSelectChange(value, "sort")}
+          onValueChange={(value) => handleSelectChange(value, 'sort')}
           defaultValue={sort}
         >
           <SelectTrigger className="w-[180px] max-sm:w-full">

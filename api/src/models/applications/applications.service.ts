@@ -10,11 +10,8 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import {
-  Application,
-  ApplicationDocument,
-  ApplicationStatus,
-} from './schemas/application.schema';
+import { Application, ApplicationDocument } from './schemas/application.schema';
+import { ApplicationStatus } from 'shared';
 
 import { DeleteResult, FilterQuery, Model } from 'mongoose';
 

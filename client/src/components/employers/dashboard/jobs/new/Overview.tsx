@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
-import { Control } from "react-hook-form";
-import { CalendarIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { format } from "date-fns";
+import { Control } from 'react-hook-form';
+import { CalendarIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
 
-import "react-quill/dist/quill.snow.css";
-import dynamic from "next/dynamic";
-import { marked } from "marked";
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+import { marked } from 'marked';
 
 import {
   FormControl,
@@ -18,17 +18,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 type OverviewProps = {
   control: Control<any>;
@@ -49,11 +49,11 @@ const Overview: React.FC<OverviewProps> = ({ control }) => {
                 onChange={field.onChange}
                 modules={{
                   toolbar: [
-                    ["bold", "italic"],
-                    [{ list: "ordered" }, { list: "bullet" }],
+                    ['bold', 'italic'],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
                   ],
                 }}
-                formats={["bold", "italic", "list", "bullet"]}
+                formats={['bold', 'italic', 'list', 'bullet']}
               />
             </FormControl>
             <FormDescription>
@@ -75,14 +75,14 @@ const Overview: React.FC<OverviewProps> = ({ control }) => {
               <PopoverTrigger asChild>
                 <FormControl>
                   <Button
-                    variant={"outline"}
+                    variant={'outline'}
                     className={cn(
-                      "pl-3 text-left font-normal",
-                      !field.value && "text-muted-foreground"
+                      'pl-3 text-left font-normal',
+                      !field.value && 'text-muted-foreground',
                     )}
                   >
                     {field.value ? (
-                      format(field.value, "PPP")
+                      format(field.value, 'PPP')
                     ) : (
                       <span>Pick a date</span>
                     )}
@@ -99,7 +99,7 @@ const Overview: React.FC<OverviewProps> = ({ control }) => {
                   selected={field.value as any}
                   onSelect={field.onChange}
                   disabled={(date) =>
-                    date < new Date() || date < new Date("1900-01-01")
+                    date < new Date() || date < new Date('1900-01-01')
                   }
                   initialFocus
                 />

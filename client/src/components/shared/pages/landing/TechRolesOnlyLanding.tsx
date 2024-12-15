@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import BlueButton from "./BlueButton";
+import BlueButton from './BlueButton';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 const TechRolesOnlyLanding: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ const TechRolesOnlyLanding: React.FC = () => {
         </div>
         <div className="max-w-lg">
           <h1 className="text-4xl font-bold leading-[55px] max-sm:text-3xl">
-            Tailored for All Tech Roles:{" "}
+            Tailored for All Tech Roles:{' '}
             <span className="text-[#0084FF]">Your Career Starts Here</span>
           </h1>
         </div>

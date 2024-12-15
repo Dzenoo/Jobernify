@@ -1,4 +1,4 @@
-import { postApiHandler } from "../api";
+import { postApiHandler } from '../api';
 
 /**
  * Logs in a user (seeker or employer).
@@ -13,7 +13,7 @@ export const signIn = async ({
     password: string;
   };
 }): Promise<{ access_token: string; role: string }> => {
-  return await postApiHandler("auth/signin", loginData);
+  return await postApiHandler('auth/signin', loginData);
 };
 
 /**
@@ -27,7 +27,7 @@ export const signupSeeker = async (data: {
   email: string;
   password: string;
 }) => {
-  return await postApiHandler("auth/seekers-signup", data);
+  return await postApiHandler('auth/seekers-signup', data);
 };
 
 /**
@@ -43,5 +43,5 @@ export const signupEmployer = async (data: {
   size: string;
   address: string;
 }) => {
-  return await postApiHandler("auth/employers-signup", data);
+  return await postApiHandler('auth/employers-signup', data);
 };

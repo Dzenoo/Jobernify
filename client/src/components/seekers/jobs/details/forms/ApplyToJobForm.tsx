@@ -1,24 +1,24 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import zod from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { ScaleLoader } from "react-spinners";
-import { queryClient } from "@/context/react-query-client";
+import zod from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { ScaleLoader } from 'react-spinners';
+import { queryClient } from '@/context/react-query-client';
 
-import useUploads from "@/hooks/defaults/useUploads.hook";
-import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import useUploads from '@/hooks/defaults/useUploads.hook';
+import useGetSeeker from '@/hooks/queries/useGetSeeker.query';
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
 
-import { ApplyToJobSchema } from "@/lib/zod/jobs.validation";
-import { applyToJob } from "@/lib/actions/applications.actions";
+import { ApplyToJobSchema } from '@/lib/zod/jobs.validation';
+import { applyToJob } from '@/lib/actions/applications.actions';
 
-import { SeekerTypes } from "@/types";
+import { Seeker } from '@/types';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import { useToast } from '@/components/ui/use-toast';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -27,21 +27,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
   Dialog,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Drawer,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer";
+} from '@/components/ui/drawer';
 
 type ApplyToJobFormProps = {
   isApplyToJob: boolean;
@@ -61,42 +61,42 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
   const { toast } = useToast();
   const { getInputProps, getRootProps, selectedFile } = useUploads({
     accept: {
-      "application/pdf": [".pdf"],
+      'application/pdf': ['.pdf'],
     },
     multiple: false,
   });
 
   const { data: fetchedSeekerProfile } = useGetSeeker();
 
-  const seekerData = fetchedSeekerProfile as { seeker: SeekerTypes };
+  const seekerData = fetchedSeekerProfile as { seeker: Seeker };
 
   const form = useForm<zod.infer<typeof ApplyToJobSchema>>({
     resolver: zodResolver(ApplyToJobSchema),
     defaultValues: {
-      coverLetter: "",
+      coverLetter: '',
     },
-    mode: "all",
+    mode: 'all',
   });
 
   const { mutateAsync: applyToJobMutate } = useMutation({
     mutationFn: (formData: FormData) => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return applyToJob(jobId, token, formData);
     },
     onSuccess: () => {
       form.reset();
-      toast({ title: "Success", description: "Successfully Applied to Job" });
+      toast({ title: 'Success', description: 'Successfully Applied to Job' });
       queryClient.invalidateQueries({
-        queryKey: ["jobs", "job", "profile", { jobId }],
+        queryKey: ['jobs', 'job', 'profile', { jobId }],
       });
 
       setIsApplyToJob(false);
     },
     onError: (error: any) => {
-      toast({ title: "Error", description: error.response.data.message });
+      toast({ title: 'Error', description: error.response.data.message });
     },
   });
 
@@ -105,15 +105,15 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
 
   const onSubmit = async (values: zod.infer<typeof ApplyToJobSchema>) => {
     if (!resumeToSubmit) {
-      toast({ title: "Error", description: "Please select a resume file" });
+      toast({ title: 'Error', description: 'Please select a resume file' });
       return;
     }
 
     const formData = new FormData();
-    if (selectedFile) formData.append("resume", selectedFile);
-    else formData.set("resume", existingResume as string);
+    if (selectedFile) formData.append('resume', selectedFile);
+    else formData.set('resume', existingResume as string);
 
-    if (values.coverLetter) formData.set("coverLetter", values.coverLetter);
+    if (values.coverLetter) formData.set('coverLetter', values.coverLetter);
 
     await applyToJobMutate(formData);
   };
@@ -183,7 +183,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
             {form.formState.isSubmitting ? (
               <ScaleLoader height={10} />
             ) : (
-              "Apply"
+              'Apply'
             )}
           </Button>
         </div>

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 type NavbarLinksListProps = {
   pathname: string;
@@ -25,8 +25,8 @@ const NavbarLinksList: React.FC<NavbarLinksListProps> = ({
           href={href}
           className={`font-extralight flex items-center gap-3 transition-colors hover:text-[#0066ff] dark:hover:text-[#0066ff] ${
             pathname === href
-              ? "text-[#0066ff]"
-              : "text-[--black-base-color] dark:text-white"
+              ? 'text-[#0066ff]'
+              : 'text-[--black-base-color] dark:text-white'
           }`}
         >
           {title}

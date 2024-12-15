@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import zod from "zod";
-import { useForm } from "react-hook-form";
+import zod from 'zod';
+import { useForm } from 'react-hook-form';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ReceiveJobAlertsSchema } from "@/lib/zod/seekers.validation";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ReceiveJobAlertsSchema } from '@/lib/zod/seekers.validation';
 
-import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
+import useEditSeeker from '@/hooks/mutations/useEditSeeker.mutation';
 
 import {
   Form,
@@ -15,8 +15,8 @@ import {
   FormItem,
   FormLabel,
   FormDescription,
-} from "@/components/ui/form";
-import { Switch } from "@/components/ui/switch";
+} from '@/components/ui/form';
+import { Switch } from '@/components/ui/switch';
 
 type ReceiveJobAlertsFormProps = {
   receiveJobAlerts: boolean;
@@ -35,12 +35,12 @@ const ReceiveJobAlertsForm: React.FC<ReceiveJobAlertsFormProps> = ({
   const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
 
   useEffect(() => {
-    form.setValue("receiveJobAlerts", receiveJobAlerts);
+    form.setValue('receiveJobAlerts', receiveJobAlerts);
   }, [receiveJobAlerts, form]);
 
   async function onSubmit(data: zod.infer<typeof ReceiveJobAlertsSchema>) {
     const formData = new FormData();
-    formData.append("receiveJobAlerts", data.receiveJobAlerts.toString());
+    formData.append('receiveJobAlerts', data.receiveJobAlerts.toString());
 
     await editSeekerProfileMutate(formData);
   }

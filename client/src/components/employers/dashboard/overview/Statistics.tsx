@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { Briefcase, CalendarSearch, Folder } from "lucide-react";
+import { Briefcase, CalendarSearch, Folder } from 'lucide-react';
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 type StatisticsProps = {
   totalJobs: number;
@@ -23,22 +23,22 @@ const Statistics: React.FC<StatisticsProps> = ({
 }) => {
   const StatisticsData = [
     {
-      id: "1",
-      title: "Total Jobs",
+      id: '1',
+      title: 'Total Jobs',
       data: totalJobs,
       increment: jobsThisMonth,
       icon: <Briefcase color="#0066FF" />,
     },
     {
-      id: "3",
-      title: "Total Applications",
+      id: '3',
+      title: 'Total Applications',
       data: totalApplications,
       increment: applicationsThisMonth,
       icon: <CalendarSearch color="#007D05" />,
     },
     {
-      id: "4",
-      title: "Total Followers",
+      id: '4',
+      title: 'Total Followers',
       data: totalFollowers,
       increment: followersThisMonth,
       icon: <Folder color="#007D05" />,
@@ -66,15 +66,15 @@ const Statistics: React.FC<StatisticsProps> = ({
                 <p
                   className={`${
                     statistics.increment === 0
-                      ? "text-yellow-500"
+                      ? 'text-yellow-500'
                       : statistics.increment > 0
-                      ? "text-green-500"
-                      : "text-red-500"
+                        ? 'text-green-500'
+                        : 'text-red-500'
                   }`}
                 >
                   {statistics.increment > 0
                     ? `+${statistics.increment}`
-                    : statistics.increment}{" "}
+                    : statistics.increment}{' '}
                   this month
                 </p>
               </div>

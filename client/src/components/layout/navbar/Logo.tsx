@@ -1,9 +1,9 @@
-import { useTheme } from "next-themes";
+import { useTheme } from 'next-themes';
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-const Logo: React.FC<{ href?: string }> = ({ href = "/" }) => {
+const Logo: React.FC<{ href?: string }> = ({ href = '/' }) => {
   const { theme } = useTheme();
 
   return (
@@ -11,9 +11,9 @@ const Logo: React.FC<{ href?: string }> = ({ href = "/" }) => {
       <Image
         className="sm:hidden max-w-[50px] max-h-[50px]"
         src={
-          theme === "dark"
-            ? "/images/logo-icon-dark.png"
-            : "/images/logo-icon.png"
+          theme === 'dark'
+            ? '/images/logo-icon-dark.png'
+            : '/images/logo-icon.png'
         }
         alt="logo"
         width={50}
@@ -23,7 +23,7 @@ const Logo: React.FC<{ href?: string }> = ({ href = "/" }) => {
       <Image
         className="max-sm:hidden"
         src={
-          theme === "dark" ? "/images/logo-dark.png" : "/images/logo-light.png"
+          theme === 'dark' ? '/images/logo-dark.png' : '/images/logo-light.png'
         }
         alt="logo"
         width={150}

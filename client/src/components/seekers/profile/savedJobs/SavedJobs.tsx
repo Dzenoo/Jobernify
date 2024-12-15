@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
-import LoadingJobsSkeleton from "@/components/loaders/seekers/LoadingJobsSkeleton";
+import LoadingJobsSkeleton from '@/components/loaders/seekers/LoadingJobsSkeleton';
 
-import { JobTypes } from "@/types";
+import { Job } from '@/types';
 
-const JobsList = dynamic(() => import("@/components/seekers/jobs/JobsList"), {
+const JobsList = dynamic(() => import('@/components/seekers/jobs/JobsList'), {
   loading: () => <LoadingJobsSkeleton />,
 });
 
 type SavedJobsProps = {
-  savedJobs: JobTypes[];
+  savedJobs: Job[];
 };
 
 const SavedJobs: React.FC<SavedJobsProps> = ({ savedJobs }) => {

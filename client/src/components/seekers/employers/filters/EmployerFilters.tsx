@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 enum EmployerType {
-  jobs = "jobs",
+  jobs = 'jobs',
 }
 
 type EmployerTypeFilters = {
@@ -17,9 +17,9 @@ const EmployerFilters: React.FC<EmployerTypeFilters> = ({ type }) => {
 
   const FilterButtons = [
     {
-      id: "1",
-      title: "Jobs",
-      filter: "jobs",
+      id: '1',
+      title: 'Jobs',
+      filter: 'jobs',
     },
   ];
 
@@ -28,8 +28,8 @@ const EmployerFilters: React.FC<EmployerTypeFilters> = ({ type }) => {
       {FilterButtons.map(({ id, filter, title }) => (
         <Button
           key={id}
-          variant={type === filter ? "default" : "outline"}
-          onClick={() => updateSearchParams("section", filter)}
+          variant={type === filter ? 'default' : 'outline'}
+          onClick={() => updateSearchParams('section', filter)}
         >
           {title}
         </Button>

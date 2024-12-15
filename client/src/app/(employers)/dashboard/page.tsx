@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query';
 
-import { getEmployerAnalyticsInfo } from "@/lib/actions/employers.actions";
+import { getEmployerAnalyticsInfo } from '@/lib/actions/employers.actions';
 
-import useGetEmployer from "@/hooks/queries/useGetEmployer.query";
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import useGetEmployer from '@/hooks/queries/useGetEmployer.query';
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
 
-import Followers from "@/components/employers/dashboard/overview/Followers";
-import JobsPerMonth from "@/components/employers/dashboard/overview/JobsPerMonth";
-import Statistics from "@/components/employers/dashboard/overview/Statistics";
-import Types from "@/components/employers/dashboard/overview/Types";
+import Followers from '@/components/employers/dashboard/overview/Followers';
+import JobsPerMonth from '@/components/employers/dashboard/overview/JobsPerMonth';
+import Statistics from '@/components/employers/dashboard/overview/Statistics';
+import Types from '@/components/employers/dashboard/overview/Types';
 
-import LoadingDashboard from "@/components/loaders/employers/LoadingDashboard";
+import LoadingDashboard from '@/components/loaders/employers/LoadingDashboard';
 
 const Dashboard = () => {
   const { token } = useAuthentication().getCookieHandler();
@@ -26,12 +26,12 @@ const Dashboard = () => {
   } = useQuery({
     queryFn: () => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return getEmployerAnalyticsInfo(token);
     },
-    queryKey: ["analytics"],
+    queryKey: ['analytics'],
   });
   const { data: fetchedEmployer } = useGetEmployer();
 

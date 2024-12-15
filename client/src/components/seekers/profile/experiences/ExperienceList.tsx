@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import ExperienceItem from "./ExperienceItem";
+import ExperienceItem from './ExperienceItem';
 
-import { ExperienceTypes } from "@/types";
+import { Experience } from '@/types';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 type ExperienceListProps = {
-  experiences: ExperienceTypes[];
+  experiences: Experience[];
   openForm: (id: string) => void;
 };
 
@@ -44,7 +44,7 @@ const ExperienceList: React.FC<ExperienceListProps> = ({
             onClick={() => setShowAll((prev) => !prev)}
             className="w-full"
           >
-            {showAll ? "Show Less" : "Show More"}
+            {showAll ? 'Show Less' : 'Show More'}
           </Button>
         </div>
       )}

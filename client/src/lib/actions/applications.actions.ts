@@ -1,6 +1,6 @@
-import { getApiHandler, patchApiHandler, postApiHandler } from "../api";
+import { getApiHandler, patchApiHandler, postApiHandler } from '../api';
 
-import { ApplicationsTypes } from "@/types";
+import { Application } from '@/types';
 
 /**
  * ===============================
@@ -18,12 +18,12 @@ import { ApplicationsTypes } from "@/types";
 export const updateApplicationStatus = async (
   applicationId: string,
   token: string,
-  status: string
+  status: string,
 ): Promise<ResponseMessageTypes> => {
   return await patchApiHandler(
     `applications/${applicationId}/status`,
     { status },
-    token
+    token,
   );
 };
 
@@ -35,7 +35,7 @@ export const updateApplicationStatus = async (
 export const getApplications = async ({
   token,
   jobId,
-  status = "",
+  status = '',
   page = 1,
 }: {
   token: string;
@@ -44,7 +44,7 @@ export const getApplications = async ({
   page: number;
 }): Promise<{
   job: string;
-  applications: ApplicationsTypes[];
+  applications: Application[];
   totalApplications: number;
   totalPendingStatus: number;
   totalInterviewStatus: number;
@@ -53,7 +53,7 @@ export const getApplications = async ({
 }> => {
   return await getApiHandler(
     `applications/${jobId}?page=${page}&limit=10&status=${status}`,
-    token
+    token,
   );
 };
 
@@ -67,12 +67,12 @@ export const getApplications = async ({
 export const applyToJob = async (
   jobId: string,
   token: string,
-  formData: FormData
+  formData: FormData,
 ): Promise<ResponseMessageTypes> => {
   return await postApiHandler(
     `applications/${jobId}/apply`,
     formData,
     token,
-    "multipart/form-data"
+    'multipart/form-data',
   );
 };

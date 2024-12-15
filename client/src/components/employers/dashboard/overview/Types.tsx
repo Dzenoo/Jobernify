@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
-import { Chart, registerables } from "chart.js";
-import { Pie } from "react-chartjs-2";
+import { Chart, registerables } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
 
 import {
   Card,
@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
   CardFooter,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 
 Chart.register(...registerables);
 
@@ -22,16 +22,16 @@ const Types: React.FC<{ data: any }> = ({ data }) => {
       {
         data: data?.map((item: any) => item.value),
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 133, 86, 0.2)",
-          "rgba(255, 206, 36, 0.2)",
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 133, 86, 0.2)',
+          'rgba(255, 206, 36, 0.2)',
         ],
         borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 133, 86, 1)",
-          "rgba(255, 206, 36, 1)",
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 133, 86, 1)',
+          'rgba(255, 206, 36, 1)',
         ],
         borderWidth: 1,
       },

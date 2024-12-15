@@ -1,4 +1,5 @@
 # compiled output
+*dist*
 /dist
 /node_modules
 /build
@@ -20,6 +21,8 @@ lerna-debug.log*
 /.nyc_output
 
 # IDEs and editors
+*next*
+/.next
 /.idea
 .project
 .classpath
@@ -36,6 +39,7 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 # dotenv environment variable files
+*env*
 /.env
 /.env.development
 /.env.development.local

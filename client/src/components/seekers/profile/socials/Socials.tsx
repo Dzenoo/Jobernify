@@ -1,23 +1,23 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState } from 'react';
 
-import { Edit, Github, Image, Linkedin } from "lucide-react";
+import { Edit, Github, Image, Linkedin } from 'lucide-react';
 
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
-import { formatURL } from "@/lib/utils";
+import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import { formatURL } from '@/lib/utils';
 
-import { SeekerTypes } from "@/types";
+import { Seeker } from '@/types';
 
-import { Button } from "@/components/ui/button";
-import { Dialog } from "@/components/ui/dialog";
-import { Drawer } from "@/components/ui/drawer";
-import EditSocialsForm from "./forms/EditSocialsForm";
+import { Button } from '@/components/ui/button';
+import { Dialog } from '@/components/ui/dialog';
+import { Drawer } from '@/components/ui/drawer';
+import EditSocialsForm from './forms/EditSocialsForm';
 
 type SocialsProps = {
-  seeker: SeekerTypes;
+  seeker: Seeker;
 };
 
 const Socials: React.FC<SocialsProps> = ({ seeker }) => {
-  const isLarge = useMediaQuery("(min-width: 1280px)");
+  const isLarge = useMediaQuery('(min-width: 1280px)');
   const [isEditSocialsOpen, setIsEditSocialsOpen] = useState(false);
 
   const openEditSocials = () => setIsEditSocialsOpen(true);
@@ -25,21 +25,21 @@ const Socials: React.FC<SocialsProps> = ({ seeker }) => {
 
   const SocialsArrays = [
     {
-      id: "1",
-      title: "Portfolio",
-      data: seeker?.portfolio || "",
+      id: '1',
+      title: 'Portfolio',
+      data: seeker?.portfolio || '',
       icon: <Image />,
     },
     {
-      id: "2",
-      title: "Github",
-      data: seeker?.github || "",
+      id: '2',
+      title: 'Github',
+      data: seeker?.github || '',
       icon: <Github />,
     },
     {
-      id: "3",
-      title: "Linkedin",
-      data: seeker?.linkedin || "",
+      id: '3',
+      title: 'Linkedin',
+      data: seeker?.linkedin || '',
       icon: <Linkedin />,
     },
   ];
@@ -95,7 +95,7 @@ const Socials: React.FC<SocialsProps> = ({ seeker }) => {
                 <h1 className="font-bold">{title}</h1>
               </div>
               <div className="text-center">
-                {data === "" ? (
+                {data === '' ? (
                   <p className="text-initial-gray">Add {title}</p>
                 ) : (
                   <a

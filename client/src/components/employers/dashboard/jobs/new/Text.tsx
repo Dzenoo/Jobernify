@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type AddJobTextProps = {
   title: string;
@@ -7,7 +7,7 @@ type AddJobTextProps = {
 };
 
 const Text: React.FC<AddJobTextProps> = ({ title, description, step }) => {
-  const steps = ["Details", "Overview", "Skills", "Scope"];
+  const steps = ['Details', 'Overview', 'Skills', 'Scope'];
 
   return (
     <div className="flex flex-col gap-3 max-w-xl">

@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { Edit, X } from "lucide-react";
+import { Edit, X } from 'lucide-react';
 
-import EmployerData from "./EmployerData";
-import EditEmployerProfileForm from "./forms/EditEmployerProfileForm";
+import EmployerData from './EmployerData';
+import EditEmployerProfileForm from './forms/EditEmployerProfileForm';
 
-import { EmployerTypes } from "@/types";
+import { Employer } from '@/types';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 type EmployerProfileProps = {
-  employer: EmployerTypes;
+  employer: Employer;
 };
 
 const EmployerProfile: React.FC<EmployerProfileProps> = ({ employer }) => {
@@ -24,12 +24,12 @@ const EmployerProfile: React.FC<EmployerProfileProps> = ({ employer }) => {
         </div>
         <div>
           <Button
-            variant={isEditMode ? "outline" : "default"}
+            variant={isEditMode ? 'outline' : 'default'}
             className="flex items-center gap-3"
             onClick={() => setIsEditMode((prevEditMode) => !prevEditMode)}
           >
             <div className="max-lg:hidden">
-              {isEditMode ? "Cancel" : "Edit Profile"}
+              {isEditMode ? 'Cancel' : 'Edit Profile'}
             </div>
             <div>{isEditMode ? <X /> : <Edit />}</div>
           </Button>

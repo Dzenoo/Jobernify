@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-import DOMPurify from "dompurify";
-import ReactMarkdown from "react-markdown";
+import DOMPurify from 'dompurify';
+import ReactMarkdown from 'react-markdown';
 
 import {
   Building,
@@ -14,14 +14,14 @@ import {
   LayoutTemplate,
   MapPinIcon,
   Timer,
-} from "lucide-react";
+} from 'lucide-react';
 
-import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
+import useGetSeeker from '@/hooks/queries/useGetSeeker.query';
 
-import SaveJobButton from "../SaveJobButton";
-import Navigator from "@/components/ui/navigator";
+import SaveJobButton from '../SaveJobButton';
+import Navigator from '@/components/ui/navigator';
 
-import { renderIconText, renderSkills } from "@/helpers";
+import { renderIconText, renderSkills } from '@/helpers';
 import {
   findIndustriesData,
   findLocationData,
@@ -29,16 +29,16 @@ import {
   getImageUrl,
   getSkillsData,
   getTime,
-} from "@/lib/utils";
+} from '@/lib/utils';
 
-import { ApplicationsTypes, JobTypes } from "@/types";
+import { Application, Job } from '@/types';
 
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Button } from '@/components/ui/button';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 type JobDetailsInfoProps = {
-  job: JobTypes;
+  job: Job;
   onApplyJob?: () => void;
 };
 
@@ -76,14 +76,14 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
 
     const CompanyInformationsData = [
       {
-        tooltip: "Location",
-        id: "1",
+        tooltip: 'Location',
+        id: '1',
         icon: <MapPinIcon />,
         data: company.address || findLocationData(location),
       },
       {
-        tooltip: "Size",
-        id: "2",
+        tooltip: 'Size',
+        id: '2',
         icon: <LayoutTemplate />,
         data: company.size,
       },
@@ -91,61 +91,61 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
 
     const JobInformationsData = [
       {
-        tooltip: "Created At",
-        id: "1",
+        tooltip: 'Created At',
+        id: '1',
         icon: <Calendar />,
         data: createdTime,
       },
       {
-        tooltip: "Expires At",
-        id: "2",
+        tooltip: 'Expires At',
+        id: '2',
         icon: <Timer />,
         data: expirationDate,
       },
       {
-        tooltip: "Applicants",
-        id: "3",
+        tooltip: 'Applicants',
+        id: '3',
         icon: <GraduationCap />,
-        data: applications.length + " Applications",
+        data: applications.length + ' Applications',
       },
     ];
 
     const JobDetailsData = [
       {
-        id: "1",
+        id: '1',
         icon: <Calendar />,
         data: position,
-        title: "Position",
+        title: 'Position',
       },
       {
-        id: "2",
+        id: '2',
         icon: <Timer />,
         data: type,
-        title: "Time",
+        title: 'Time',
       },
       {
-        id: "3",
+        id: '3',
         icon: <GraduationCap />,
         data: level,
-        title: "Level",
+        title: 'Level',
       },
       {
-        id: "4",
+        id: '4',
         icon: <CircleDollarSignIcon color="green" />,
         data: salary + `$/month`,
-        title: "Salary",
+        title: 'Salary',
       },
     ];
 
     const isAppliedToJob = data.seeker.applications.find(
-      (application: ApplicationsTypes) => application.job._id === _id
+      (application: Application) => application.job._id === _id,
     );
 
     const redirectToProfileApplications = () => router.push(`/profile`);
 
     return (
       <div className="flex flex-col gap-3">
-        <Navigator info="Jobs" href={"/jobs"} title={title} />
+        <Navigator info="Jobs" href={'/jobs'} title={title} />
         <Card>
           <CardHeader>
             <div className="flex justify-between gap-6 max-md:flex-col">
@@ -166,8 +166,8 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
                   </div>
                   {renderIconText({
                     tooltip: true,
-                    tooltipContent: "Industry",
-                    id: "3",
+                    tooltipContent: 'Industry',
+                    id: '3',
                     icon: <Building />,
                     data: findIndustriesData(company.industry),
                   })}
@@ -177,7 +177,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
                         ...data,
                         tooltip: true,
                         tooltipContent: data.tooltip,
-                      })
+                      }),
                     )}
                   </div>
                 </div>
@@ -186,14 +186,14 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
                 <div className="basis-full">
                   <Button
                     className="w-full px-6"
-                    variant={isAppliedToJob ? "outline" : "default"}
+                    variant={isAppliedToJob ? 'outline' : 'default'}
                     onClick={
                       isAppliedToJob
                         ? redirectToProfileApplications
                         : onApplyJob
                     }
                   >
-                    {isAppliedToJob ? "View Status" : "Apply to Job"}
+                    {isAppliedToJob ? 'View Status' : 'Apply to Job'}
                   </Button>
                 </div>
                 <SaveJobButton jobId={_id} />
@@ -210,7 +210,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
                   ...data,
                   tooltip: true,
                   tooltipContent: data.tooltip,
-                })
+                }),
               )}
             </div>
             <div className="px-10 border border-gray-100 dark:border-[#1b1b1b] rounded-xl flex items-center gap-6 justify-between py-4 max-sm:flex-col">
@@ -244,7 +244,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
         </Card>
       </div>
     );
-  }
+  },
 );
 
 const renderJobDetails = <
@@ -253,7 +253,7 @@ const renderJobDetails = <
     icon: React.JSX.Element;
     title: string;
     data: string | number;
-  }
+  },
 >({
   id,
   icon,

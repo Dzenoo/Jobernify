@@ -1,17 +1,17 @@
-import moment from "moment";
-import { format } from "date-fns";
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { jwtDecode } from "jwt-decode";
+import moment from 'moment';
+import { format } from 'date-fns';
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+import { jwtDecode } from 'jwt-decode';
 
 import {
   AWS_URL,
   industries,
   locations,
   SkillsInformationsData,
-} from "@/constants";
+} from '@/constants';
 
-import { FilterCounts, FilterGroup } from "@/types";
+import { FilterCounts, FilterGroup } from '@/types';
 
 // ===============================
 // Utility Functions
@@ -36,23 +36,23 @@ export function cn(...inputs: ClassValue[]) {
  */
 export const getMonthsLabels = (): string[] => {
   const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
   const currentMonth = new Date().getMonth();
   return Array.from(
     { length: 6 },
-    (_, i) => monthNames[(currentMonth - 5 + i + 12) % 12]
+    (_, i) => monthNames[(currentMonth - 5 + i + 12) % 12],
   );
 };
 
@@ -63,8 +63,8 @@ export const getMonthsLabels = (): string[] => {
  * @returns The formatted date string.
  */
 export const formatDate = (
-  date: string,
-  formatStr: string = "dd/MM/yyyy"
+  date: Date,
+  formatStr: string = 'dd/MM/yyyy',
 ): string => {
   return date ? format(new Date(date), formatStr) : date;
   // return date ? moment.utc(date).format(format) : date;
@@ -86,28 +86,28 @@ export const checkExpired = (date: string): boolean => {
  * @param date - The date string to compare.
  * @returns A string indicating how long ago the event occurred.
  */
-export const getTime = (date: string): string => {
+export const getTime = (date: Date): string => {
   const postedDateTime = moment(date);
   const currentDateTime = moment();
-  const diffInSeconds = currentDateTime.diff(postedDateTime, "seconds");
-  const diffInMinutes = currentDateTime.diff(postedDateTime, "minutes");
-  const diffInHours = currentDateTime.diff(postedDateTime, "hours");
-  const diffInDays = currentDateTime.diff(postedDateTime, "days");
-  const diffInMonths = currentDateTime.diff(postedDateTime, "months");
-  const diffInYears = currentDateTime.diff(postedDateTime, "years");
+  const diffInSeconds = currentDateTime.diff(postedDateTime, 'seconds');
+  const diffInMinutes = currentDateTime.diff(postedDateTime, 'minutes');
+  const diffInHours = currentDateTime.diff(postedDateTime, 'hours');
+  const diffInDays = currentDateTime.diff(postedDateTime, 'days');
+  const diffInMonths = currentDateTime.diff(postedDateTime, 'months');
+  const diffInYears = currentDateTime.diff(postedDateTime, 'years');
 
   if (diffInYears >= 1) {
-    return `Posted ${diffInYears} year${diffInYears > 1 ? "s" : ""} ago`;
+    return `Posted ${diffInYears} year${diffInYears > 1 ? 's' : ''} ago`;
   } else if (diffInMonths >= 1) {
-    return `Posted ${diffInMonths} month${diffInMonths > 1 ? "s" : ""} ago`;
+    return `Posted ${diffInMonths} month${diffInMonths > 1 ? 's' : ''} ago`;
   } else if (diffInDays >= 1) {
-    return `Posted ${diffInDays} day${diffInDays > 1 ? "s" : ""} ago`;
+    return `Posted ${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
   } else if (diffInHours >= 1) {
-    return `Posted ${diffInHours} hour${diffInHours > 1 ? "s" : ""} ago`;
+    return `Posted ${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
   } else if (diffInMinutes >= 1) {
-    return `Posted ${diffInMinutes} minute${diffInMinutes > 1 ? "s" : ""} ago`;
+    return `Posted ${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
   } else if (diffInSeconds >= 1) {
-    return `Posted ${diffInSeconds} second${diffInSeconds > 1 ? "s" : ""} ago`;
+    return `Posted ${diffInSeconds} second${diffInSeconds > 1 ? 's' : ''} ago`;
   } else {
     return `Posted just now`;
   }
@@ -123,7 +123,7 @@ export const getTime = (date: string): string => {
  * @returns The full image URL.
  */
 export const getImageUrl = (image: string): string => {
-  return image?.includes("https:") ? image : `${AWS_URL}/${image}`;
+  return image?.includes('https:') ? image : `${AWS_URL}/${image}`;
 };
 
 /**
@@ -149,7 +149,7 @@ export const formatURL = (url: string): string => {
  */
 export const findIndustriesData = (industry: string): string => {
   const industryData = industries.find((item) => item.value === industry);
-  return industryData ? industryData.label : "";
+  return industryData ? industryData.label : '';
 };
 
 /**
@@ -159,9 +159,9 @@ export const findIndustriesData = (industry: string): string => {
  */
 export const findLocationData = (selectedValue: string): string => {
   const selectedOption = locations.find(
-    (option) => option.value === selectedValue
+    (option) => option.value === selectedValue,
   );
-  return selectedOption ? selectedOption.label : "Location not found";
+  return selectedOption ? selectedOption.label : 'Location not found';
 };
 
 /**
@@ -171,7 +171,7 @@ export const findLocationData = (selectedValue: string): string => {
  * @returns The truncated text
  */
 export const truncate = (text: string, length: number): string => {
-  return text?.length > length ? text.substring(0, length) + "..." : text;
+  return text?.length > length ? text.substring(0, length) + '...' : text;
 };
 
 // -------------------------------
@@ -184,7 +184,7 @@ export const truncate = (text: string, length: number): string => {
  * @returns An object categorizing the skills.
  */
 export const getSkillsData = (
-  skills: string[]
+  skills: string[],
 ): { [key: string]: string[] } => {
   const categorizedSkills: { [key: string]: string[] } = {};
 
@@ -211,7 +211,7 @@ export const getSkillNames = (technologies: string[]): string[] => {
   return technologies
     .map((technology) => {
       const matchingSkill = SkillsInformationsData.flatMap(
-        (skill) => skill.data
+        (skill) => skill.data,
       ).find((data) => data.value === technology);
       return matchingSkill ? matchingSkill.title : null;
     })
@@ -225,7 +225,7 @@ export const multiselectSkills = SkillsInformationsData.flatMap((category) =>
   category.data.map((data) => ({
     label: data.title,
     value: data.value,
-  }))
+  })),
 );
 
 /**
@@ -247,7 +247,7 @@ export function decodeToken(token: string): any {
 export const injectCountsIntoFilters = (
   filtersData: FilterGroup[],
   filterCounts: FilterCounts,
-  typeToCountMap: { [key: string]: string }
+  typeToCountMap: { [key: string]: string },
 ): FilterGroup[] => {
   const counts = filterCounts?.length > 0 ? filterCounts[0] : {};
 
@@ -259,9 +259,9 @@ export const injectCountsIntoFilters = (
       if (counts[countKey]) {
         count =
           counts[countKey]?.find((item: any) => {
-            if (countKey === "salary") {
+            if (countKey === 'salary') {
               const range = item._id;
-              const [min, max] = filterOption.value.split("-").map(Number);
+              const [min, max] = filterOption.value.split('-').map(Number);
               return range.min === min && range.max === max;
             }
             return item._id === filterOption.value;
@@ -286,7 +286,7 @@ export const injectCountsIntoFilters = (
 export function getTruncatedPageRange(
   currentPage: number,
   totalPages: number,
-  maxVisible: number = 10
+  maxVisible: number = 10,
 ): (number | string)[] {
   const pages: (number | string)[] = [];
 
@@ -312,7 +312,7 @@ export function getTruncatedPageRange(
 
   // Insert '...' if the leftBound is more than 2 pages after the first page
   if (leftBound > 2) {
-    pages.push("...");
+    pages.push('...');
   }
 
   // Push pages from leftBound to rightBound
@@ -322,7 +322,7 @@ export function getTruncatedPageRange(
 
   // Insert '...' if the rightBound is at least 2 pages before the last page
   if (rightBound < totalPages - 1) {
-    pages.push("...");
+    pages.push('...');
   }
 
   // Lastly, push the last page

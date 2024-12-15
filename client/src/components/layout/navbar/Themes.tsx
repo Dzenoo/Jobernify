@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { useTheme } from "next-themes";
+import { useTheme } from 'next-themes';
 
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun } from 'lucide-react';
 
 const Themes: React.FC = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -17,16 +17,16 @@ const Themes: React.FC = () => {
   if (!isMounted) return null;
 
   function lightTheme(): void {
-    setTheme("light");
+    setTheme('light');
   }
 
   function darkTheme(): void {
-    setTheme("dark");
+    setTheme('dark');
   }
 
   return (
     <div className="flex gap-4">
-      {resolvedTheme === "dark" ? (
+      {resolvedTheme === 'dark' ? (
         <button onClick={lightTheme}>
           <Sun />
         </button>

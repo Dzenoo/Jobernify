@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useRouter } from "next/navigation";
+import React from 'react';
+import { useRouter } from 'next/navigation';
 
-import zod from "zod";
-import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ScaleLoader } from "react-spinners";
+import zod from 'zod';
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ScaleLoader } from 'react-spinners';
 
-import { EmployerRegistrationSchema } from "@/lib/zod/auth.validation";
-import { signupEmployer } from "@/lib/actions/auth.actions";
-import { industries } from "@/constants";
+import { EmployerRegistrationSchema } from '@/lib/zod/auth.validation';
+import { signupEmployer } from '@/lib/actions/auth.actions';
+import { industries } from '@/constants';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { useToast } from '@/components/ui/use-toast';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -24,14 +24,14 @@ import {
   FormLabel,
   FormMessage,
   FormDescription,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 const EmployersSignupForm: React.FC = () => {
   const router = useRouter();
@@ -40,33 +40,33 @@ const EmployersSignupForm: React.FC = () => {
   const form = useForm<zod.infer<typeof EmployerRegistrationSchema>>({
     resolver: zodResolver(EmployerRegistrationSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      industry: "",
-      size: "",
-      address: "",
+      name: '',
+      email: '',
+      password: '',
+      industry: undefined,
+      size: undefined,
+      address: '',
     },
-    mode: "all",
+    mode: 'all',
   });
 
   const { mutateAsync: signupEmployerMutation } = useMutation({
     mutationFn: signupEmployer,
     onSuccess: () => {
       form.reset();
-      localStorage.setItem("pendingVerification", "true");
-      router.push("/check-your-email");
+      localStorage.setItem('pendingVerification', 'true');
+      router.push('/check-your-email');
     },
     onError: (error: any) => {
       toast({
-        title: "Error",
+        title: 'Error',
         description: error?.response?.data.message,
       });
     },
   });
 
   const onSubmit = async (
-    values: zod.infer<typeof EmployerRegistrationSchema>
+    values: zod.infer<typeof EmployerRegistrationSchema>,
   ) => {
     await signupEmployerMutation(values);
   };
@@ -212,7 +212,7 @@ const EmployersSignupForm: React.FC = () => {
           {form.formState.isSubmitting ? (
             <ScaleLoader color="#fff" height={10} />
           ) : (
-            "Register"
+            'Register'
           )}
         </Button>
       </form>

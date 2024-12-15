@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { Mail } from "lucide-react";
+import { Mail } from 'lucide-react';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const CheckYourEmail = () => {
   const router = useRouter();
 
   const isPendingVerification =
-    typeof window !== "undefined"
-      ? localStorage.getItem("pendingVerification") === "true"
+    typeof window !== 'undefined'
+      ? localStorage.getItem('pendingVerification') === 'true'
       : false;
 
   useEffect(() => {
     if (!isPendingVerification) {
-      router.push("/login");
+      router.push('/login');
     }
   }, [isPendingVerification, router]);
 
   useEffect(() => {
     if (isPendingVerification) {
-      localStorage.removeItem("pendingVerification");
+      localStorage.removeItem('pendingVerification');
     }
   }, [isPendingVerification]);
 
@@ -41,7 +41,7 @@ const CheckYourEmail = () => {
             inbox and click the link to verify your account.
           </p>
           <div className="flex flex-col space-y-4">
-            <Button variant="outline" onClick={() => router.push("/login")}>
+            <Button variant="outline" onClick={() => router.push('/login')}>
               Back to Login
             </Button>
           </div>

@@ -1,18 +1,18 @@
-import React from "react";
-import { useRouter } from "next/navigation";
+import React from 'react';
+import { useRouter } from 'next/navigation';
 
-import zod from "zod";
-import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ScaleLoader } from "react-spinners";
+import zod from 'zod';
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ScaleLoader } from 'react-spinners';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import { signIn } from "@/lib/actions/auth.actions";
-import { LoginSchema } from "@/lib/zod/auth.validation";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { signIn } from '@/lib/actions/auth.actions';
+import { LoginSchema } from '@/lib/zod/auth.validation';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
+import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -20,8 +20,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 
 const LoginForm: React.FC = () => {
   const router = useRouter();
@@ -32,10 +32,10 @@ const LoginForm: React.FC = () => {
   const form = useForm<zod.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const { mutateAsync: loginToAccount } = useMutation({
@@ -43,11 +43,11 @@ const LoginForm: React.FC = () => {
     onSuccess: (data) => {
       form.reset();
       storeCookieHandler(data.access_token);
-      router.replace(data?.role === "seeker" ? "/jobs" : "/seekers");
+      router.replace(data?.role === 'seeker' ? '/jobs' : '/seekers');
     },
     onError: (error: any) => {
       toast({
-        title: "Error",
+        title: 'Error',
         description: error?.response?.data.message,
       });
     },
@@ -99,7 +99,7 @@ const LoginForm: React.FC = () => {
           {form.formState.isSubmitting ? (
             <ScaleLoader color="#fff" height={10} />
           ) : (
-            "Login"
+            'Login'
           )}
         </Button>
       </form>

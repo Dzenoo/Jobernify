@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react';
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { getImageUrl } from "@/lib/utils";
+import { getImageUrl } from '@/lib/utils';
 
-import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
+import useGetSeeker from '@/hooks/queries/useGetSeeker.query';
 
-import LoadingSeekerInfo from "@/components/loaders/employers/LoadingSeekerInfo";
+import LoadingSeekerInfo from '@/components/loaders/employers/LoadingSeekerInfo';
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const SeekerInfo: React.FC = React.memo(() => {
   const { data: fetchedSeeker, isLoading } = useGetSeeker();

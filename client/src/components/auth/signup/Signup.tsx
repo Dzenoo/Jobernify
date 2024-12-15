@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import EmployersSignupForm from "./forms/EmployersSignupForm";
-import SeekersSignupForm from "./forms/SeekersSignupForm";
-import RedirectToLoginLink from "./RedirectToLoginLink";
+import EmployersSignupForm from './forms/EmployersSignupForm';
+import SeekersSignupForm from './forms/SeekersSignupForm';
+import RedirectToLoginLink from './RedirectToLoginLink';
 
-import { TypeOfAccount } from "@/types";
+import { TypeOfAccount } from '@/types';
 
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 
 type UserDataTypes = {
   id: number;
@@ -23,14 +23,14 @@ type UserDataTypes = {
 const UserData: UserDataTypes[] = [
   {
     id: 1,
-    description: "Hiring a talent?",
-    title: "Sign up to find job you want",
+    description: 'Hiring a talent?',
+    title: 'Sign up to find job you want',
     type: TypeOfAccount.Seeker,
   },
   {
     id: 2,
-    description: "Looking for a job?",
-    title: "Sign up to hire a talent",
+    description: 'Looking for a job?',
+    title: 'Sign up to hire a talent',
     type: TypeOfAccount.Employer,
   },
 ];
@@ -45,7 +45,7 @@ const Signup: React.FC<SignupProps> = ({
   handleTypeSelection,
 }) => {
   const selectedUser = UserData.find(
-    (user) => user.type === typeOfAccount
+    (user) => user.type === typeOfAccount,
   ) as UserDataTypes;
 
   const isEmployer = selectedUser?.type === TypeOfAccount.Employer;
@@ -56,16 +56,16 @@ const Signup: React.FC<SignupProps> = ({
         <div className="flex items-center justify-center gap-3 flex-col">
           <div>
             <p className="text-low-gray">
-              {selectedUser?.description}{" "}
+              {selectedUser?.description}{' '}
               <button
                 className="text-blue-700 font-bold"
                 onClick={() =>
                   handleTypeSelection(
-                    isEmployer ? TypeOfAccount.Seeker : TypeOfAccount.Employer
+                    isEmployer ? TypeOfAccount.Seeker : TypeOfAccount.Employer,
                   )
                 }
               >
-                {isEmployer ? "Seeker" : "Employer"}
+                {isEmployer ? 'Seeker' : 'Employer'}
               </button>
             </p>
           </div>

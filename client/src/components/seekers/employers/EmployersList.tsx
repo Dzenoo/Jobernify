@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import { Search } from "lucide-react";
+import { Search } from 'lucide-react';
 
-import { EmployerTypes } from "@/types";
+import { Employer } from '@/types';
 
-import EmployerItem from "./EmployerItem";
+import EmployerItem from './EmployerItem';
 
 type EmployersListProps = {
-  employers: EmployerTypes[];
+  employers: Employer[];
 };
 
 const EmployersList: React.FC<EmployersListProps> = React.memo(
@@ -40,7 +40,7 @@ const EmployersList: React.FC<EmployersListProps> = React.memo(
         </ul>
       </div>
     );
-  }
+  },
 );
 
 export default EmployersList;

@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
-import { Github, Linkedin, LucideImage } from "lucide-react";
+import { Github, Linkedin, LucideImage } from 'lucide-react';
 
-import { formatURL, getImageUrl, getSkillsData } from "@/lib/utils";
-import { renderSkills } from "@/helpers";
+import { formatURL, getImageUrl, getSkillsData } from '@/lib/utils';
+import { renderSkills } from '@/helpers';
 
-import { SeekerTypes } from "@/types";
+import { Seeker } from '@/types';
 
-import EducationList from "@/components/seekers/profile/educations/EducationList";
-import ExperienceList from "@/components/seekers/profile/experiences/ExperienceList";
+import EducationList from '@/components/seekers/profile/educations/EducationList';
+import ExperienceList from '@/components/seekers/profile/experiences/ExperienceList';
 
-import Navigator from "@/components/ui/navigator";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import Navigator from '@/components/ui/navigator';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 type SeekerDetailsInfoProps = {
-  seeker: SeekerTypes;
+  seeker: Seeker;
 };
 
 const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
@@ -26,28 +26,28 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
 
   const SocialsArrays = [
     {
-      id: "1",
+      id: '1',
       href: seeker?.portfolio,
       icon: <LucideImage />,
-      label: "Portfolio",
+      label: 'Portfolio',
     },
     {
-      id: "2",
+      id: '2',
       href: seeker?.github,
       icon: <Github />,
-      label: "Github",
+      label: 'Github',
     },
     {
-      id: "3",
+      id: '3',
       href: seeker?.linkedin,
       icon: <Linkedin />,
-      label: "Linkedin",
+      label: 'Linkedin',
     },
   ];
 
   return (
     <div className="flex flex-col gap-6">
-      <Navigator info="Seekers" href={"/seekers"} title={seeker?.first_name} />
+      <Navigator info="Seekers" href={'/seekers'} title={seeker?.first_name} />
       <Card>
         <CardHeader>
           <div className="flex justify-between items-start gap-5 max-sm:flex-col">
@@ -91,7 +91,7 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
                   >
                     {socials.icon}
                   </div>
-                )
+                ),
               )}
             </div>
           </div>

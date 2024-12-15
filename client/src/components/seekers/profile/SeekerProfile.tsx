@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState } from 'react';
 
-import { Trash } from "lucide-react";
+import { Trash } from 'lucide-react';
 
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
+import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
 
-import { SeekerTypes } from "@/types";
+import { Seeker } from '@/types';
 
-import Informations from "./informations/Informations";
-import Educations from "./educations/Educations";
-import Skills from "./skills/Skills";
-import Socials from "./socials/Socials";
-import Experiences from "./experiences/Experiences";
-import DeleteSeekerProfile from "./DeleteSeekerProfile";
-import UploadSeekerImage from "./UploadSeekerImage";
+import Informations from './informations/Informations';
+import Educations from './educations/Educations';
+import Skills from './skills/Skills';
+import Socials from './socials/Socials';
+import Experiences from './experiences/Experiences';
+import DeleteSeekerProfile from './DeleteSeekerProfile';
+import UploadSeekerImage from './UploadSeekerImage';
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Dialog } from "@/components/ui/dialog";
-import { Drawer } from "@/components/ui/drawer";
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Dialog } from '@/components/ui/dialog';
+import { Drawer } from '@/components/ui/drawer';
 
 type SeekerProfileProps = {
-  seeker: SeekerTypes;
+  seeker: Seeker;
 };
 
 const SeekerProfile: React.FC<SeekerProfileProps> = React.memo(({ seeker }) => {
-  const isLarge = useMediaQuery("(min-width: 1280px)");
+  const isLarge = useMediaQuery('(min-width: 1280px)');
   const [isDeleteProfileOpen, setIsDeleteProfileOpen] = useState(false);
 
   return (

@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import React, { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import React, { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
 
-import { getSeekers } from "@/lib/actions/seekers.actions";
+import { getSeekers } from '@/lib/actions/seekers.actions';
 
-import FilterSeekers from "@/components/employers/seekers/filters/FilterSeekers";
+import FilterSeekers from '@/components/employers/seekers/filters/FilterSeekers';
 
-import dynamic from "next/dynamic";
-import LoadingSeekers from "@/components/loaders/employers/LoadingSeekers";
-import PaginatedList from "@/components/ui/paginate-list";
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
-import SearchSeekers from "@/components/employers/seekers/search/SearchSeekers";
-import ExploreSeekers from "@/components/employers/seekers/explore/ExploreSeekers";
+import dynamic from 'next/dynamic';
+import LoadingSeekers from '@/components/loaders/employers/LoadingSeekers';
+import PaginatedList from '@/components/ui/paginate-list';
+import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
+import SearchSeekers from '@/components/employers/seekers/search/SearchSeekers';
+import ExploreSeekers from '@/components/employers/seekers/explore/ExploreSeekers';
 
 const SeekersList = dynamic(
-  () => import("@/components/employers/seekers/SeekersList"),
+  () => import('@/components/employers/seekers/SeekersList'),
   {
     loading: () => <LoadingSeekers />,
-  }
+  },
 );
 
 const SeekersPage = ({
@@ -39,17 +39,17 @@ const SeekersPage = ({
   } = useQuery({
     queryFn: () => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return getSeekers({
         token: token,
         page: Number(searchParams.page) || 1,
-        search: searchParams.query || "",
-        skills: searchParams.skills || "",
+        search: searchParams.query || '',
+        skills: searchParams.skills || '',
       });
     },
-    queryKey: ["seekers", searchParams],
+    queryKey: ['seekers', searchParams],
   });
 
   useEffect(() => {
@@ -81,7 +81,7 @@ const SeekersPage = ({
         {totalSeekers > 12 && (
           <PaginatedList
             onPageChange={(value) =>
-              updateSearchParams("page", value.toString())
+              updateSearchParams('page', value.toString())
             }
             totalItems={totalSeekers}
             itemsPerPage={12}

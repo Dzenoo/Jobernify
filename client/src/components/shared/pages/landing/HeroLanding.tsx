@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import BlueButton from "./BlueButton";
+import BlueButton from './BlueButton';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 const HeroLanding: React.FC = () => {
   return (

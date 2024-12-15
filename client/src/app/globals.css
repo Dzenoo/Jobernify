@@ -80,7 +80,7 @@
   }
 
   .grid-background {
-    background-image: url("/images/hero-grid.png");
+    background-image: url('/images/hero-grid.png');
     background-position: center 70%;
   }
 

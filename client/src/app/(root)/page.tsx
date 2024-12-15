@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React from "react";
-import HeroLanding from "@/components/shared/pages/landing/HeroLanding";
-import HowItWorksLanding from "@/components/shared/pages/landing/HowItWorksLanding";
-import FeaturesLanding from "@/components/shared/pages/landing/FeaturesLanding";
-import BenefitsLanding from "@/components/shared/pages/landing/BenefitsLanding";
-import TechRolesOnlyLanding from "@/components/shared/pages/landing/TechRolesOnlyLanding";
-import FaqLanding from "@/components/shared/pages/landing/FaqLanding";
-import useZoomLevel from "@/hooks/defaults/useZoomLevel.hook";
+import React from 'react';
+import HeroLanding from '@/components/shared/pages/landing/HeroLanding';
+import HowItWorksLanding from '@/components/shared/pages/landing/HowItWorksLanding';
+import FeaturesLanding from '@/components/shared/pages/landing/FeaturesLanding';
+import BenefitsLanding from '@/components/shared/pages/landing/BenefitsLanding';
+import TechRolesOnlyLanding from '@/components/shared/pages/landing/TechRolesOnlyLanding';
+import FaqLanding from '@/components/shared/pages/landing/FaqLanding';
+import useZoomLevel from '@/hooks/defaults/useZoomLevel.hook';
 
 const HomePage = () => {
   const isZoomedOut = useZoomLevel();
@@ -16,7 +16,7 @@ const HomePage = () => {
     <div className="flex justify-center">
       <article
         className={`flex flex-col gap-72 w-full ${
-          isZoomedOut ? "max-w-screen-2xl" : ""
+          isZoomedOut ? 'max-w-screen-2xl' : ''
         }`}
       >
         <HeroLanding />

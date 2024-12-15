@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
-import useFollowEmployer from "@/hooks/mutations/useFollowEmployer.mutation";
-import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
+import useFollowEmployer from '@/hooks/mutations/useFollowEmployer.mutation';
+import useGetSeeker from '@/hooks/queries/useGetSeeker.query';
 
 type FollowEmployerProps = {
   employerId: string;
@@ -16,7 +16,7 @@ const FollowEmployerButton: React.FC<FollowEmployerProps> = ({
   const { mutateAsync: followEmployerMutate, status } =
     useFollowEmployer(employerId);
 
-  const isLoading = status === "pending";
+  const isLoading = status === 'pending';
 
   const isEmployerFollowed =
     fetchedSeekerProfile?.seeker?.following.includes(employerId);
@@ -29,12 +29,12 @@ const FollowEmployerButton: React.FC<FollowEmployerProps> = ({
   return (
     <div>
       <Button
-        variant={isEmployerFollowed ? "outline" : "default"}
+        variant={isEmployerFollowed ? 'outline' : 'default'}
         className="max-lg:w-full px-10"
         onClick={handleFollowToggle}
         disabled={isLoading}
       >
-        {isEmployerFollowed ? "Unfollow" : "Follow"}
+        {isEmployerFollowed ? 'Unfollow' : 'Follow'}
       </Button>
     </div>
   );

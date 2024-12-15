@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 // ===============================
 // Types
@@ -28,10 +28,10 @@ export const postApiHandler = <T>(
   url: string,
   data: {} | FormData,
   token?: string,
-  contentType: string = "application/json"
+  contentType: string = 'application/json',
 ): Promise<T> => {
   const headers: AxiosHeadersConfig = {
-    "Content-Type": contentType,
+    'Content-Type': contentType,
   };
 
   if (token) {
@@ -58,10 +58,10 @@ export const patchApiHandler = <T>(
   url: string,
   data: {} | FormData,
   token?: string,
-  contentType: string = "application/json"
+  contentType: string = 'application/json',
 ): Promise<T> => {
   const headers: AxiosHeadersConfig = {
-    "Content-Type": contentType,
+    'Content-Type': contentType,
   };
 
   if (token) {
@@ -84,10 +84,10 @@ export const patchApiHandler = <T>(
  */
 export const deleteApiHandler = <T>(
   url: string,
-  token?: string
+  token?: string,
 ): Promise<T> => {
   const headers: AxiosHeadersConfig = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   };
 
   if (token) {
@@ -110,7 +110,7 @@ export const deleteApiHandler = <T>(
  */
 export const getApiHandler = <T>(url: string, token?: string): Promise<T> => {
   const headers: AxiosHeadersConfig = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   };
 
   if (token) {

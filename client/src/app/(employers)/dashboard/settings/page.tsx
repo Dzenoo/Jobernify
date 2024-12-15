@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import React from "react";
-import dynamic from "next/dynamic";
+import React from 'react';
+import dynamic from 'next/dynamic';
 
-import useGetEmployer from "@/hooks/queries/useGetEmployer.query";
+import useGetEmployer from '@/hooks/queries/useGetEmployer.query';
 
-import LoadingEmployerSettings from "@/components/loaders/employers/LoadingEmployerSettings";
+import LoadingEmployerSettings from '@/components/loaders/employers/LoadingEmployerSettings';
 
-import NotFound from "@/components/shared/pages/NotFound";
+import NotFound from '@/components/shared/pages/NotFound';
 
 const EmployerProfileInformation = dynamic(
-  () => import("@/components/employers/dashboard/settings/EmployerSettings"),
+  () => import('@/components/employers/dashboard/settings/EmployerSettings'),
   {
     loading: () => <LoadingEmployerSettings />,
-  }
+  },
 );
 
 const SettingsPage = () => {

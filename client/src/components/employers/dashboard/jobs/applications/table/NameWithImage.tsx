@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import Image from "next/image";
+import Image from 'next/image';
 
-import { getImageUrl } from "@/lib/utils";
+import { getImageUrl } from '@/lib/utils';
 
-import { SeekerTypes } from "@/types";
-import Link from "next/link";
+import { Seeker } from '@/types';
+import Link from 'next/link';
 
 type NameWithImage = {
-  seeker: Pick<SeekerTypes, "_id" | "first_name" | "last_name" | "image">;
+  seeker: Pick<Seeker, '_id' | 'first_name' | 'last_name' | 'image'>;
 };
 
 const NameWithImage: React.FC<NameWithImage> = ({

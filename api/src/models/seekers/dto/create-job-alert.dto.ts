@@ -1,5 +1,5 @@
 import { IsEnum, IsString, MaxLength, MinLength } from 'class-validator';
-import { JobLevel, JobType } from 'src/models/jobs/schemas/job.schema';
+import { JobLevel, JobType } from 'shared';
 
 export class CreateJobAlertDto {
   @IsEnum(JobLevel)

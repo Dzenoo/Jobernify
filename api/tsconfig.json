@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "moduleResolution": "node",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -10,6 +11,10 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "paths": {
+      "shared": ["../shared/dist"],
+      "shared/*": ["../shared/dist/*"]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,

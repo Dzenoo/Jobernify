@@ -5,7 +5,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { CompanySize, IndustryType } from '../schemas/employer.schema';
+import { CompanySize, IndustryType } from 'shared';
 
 export class UpdateEmployerDto {
   @IsOptional()

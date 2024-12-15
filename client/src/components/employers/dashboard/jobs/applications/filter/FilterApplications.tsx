@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 type FilterApplicationsProps = {
   applicants: number;
@@ -25,44 +25,44 @@ const FilterApplications: React.FC<FilterApplicationsProps> = ({
   const { updateSearchParams } = useSearchParams();
 
   const updateApplicationsFilters = (filter: string) => {
-    updateSearchParams("status", filter);
+    updateSearchParams('status', filter);
   };
 
   const FilterApplicationsButtons = [
     {
       id: 1,
-      title: "All",
+      title: 'All',
       data: applicants,
-      filter: "",
-      className: "",
+      filter: '',
+      className: '',
     },
     {
       id: 2,
-      title: "Pending",
+      title: 'Pending',
       data: pending,
-      filter: "Pending",
-      className: "border-yellow-500",
+      filter: 'Pending',
+      className: 'border-yellow-500',
     },
     {
       id: 3,
-      title: "Interviews",
+      title: 'Interviews',
       data: interviews,
-      filter: "Interview",
-      className: "border-blue-500",
+      filter: 'Interview',
+      className: 'border-blue-500',
     },
     {
       id: 4,
-      title: "Rejected",
+      title: 'Rejected',
       data: rejected,
-      filter: "Rejected",
-      className: "border-red-500",
+      filter: 'Rejected',
+      className: 'border-red-500',
     },
     {
       id: 5,
-      title: "Accepted",
+      title: 'Accepted',
       data: accepted,
-      filter: "Accepted",
-      className: "border-green-500",
+      filter: 'Accepted',
+      className: 'border-green-500',
     },
   ];
 
@@ -75,12 +75,12 @@ const FilterApplications: React.FC<FilterApplicationsProps> = ({
               <Button
                 key={id}
                 className={className}
-                variant={status === filter ? "default" : "outline"}
+                variant={status === filter ? 'default' : 'outline'}
                 onClick={() => updateApplicationsFilters(filter)}
               >
                 {title} ({data})
               </Button>
-            )
+            ),
           )}
         </div>
       </CardContent>

@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import { ScaleLoader } from "react-spinners";
+import { ScaleLoader } from 'react-spinners';
 
-import useJobAlert from "@/hooks/mutations/useJobAlert.mutation";
-import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
+import useJobAlert from '@/hooks/mutations/useJobAlert.mutation';
+import useGetSeeker from '@/hooks/queries/useGetSeeker.query';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 
 type JobAlertProps = {
   level: string;
@@ -44,7 +44,7 @@ const AddJobAlert: React.FC<JobAlertProps> = React.memo(
 
     const { alerts } = data.seeker;
 
-    const isLoading = status === "pending";
+    const isLoading = status === 'pending';
 
     const isAlreadyAlertGeneratedWithProperties =
       alerts &&
@@ -73,15 +73,15 @@ const AddJobAlert: React.FC<JobAlertProps> = React.memo(
             {isLoading ? (
               <ScaleLoader color="#fff" height={10} />
             ) : isAlreadyAlertGeneratedWithProperties ? (
-              "Already Generated"
+              'Already Generated'
             ) : (
-              "Add Job Alert"
+              'Add Job Alert'
             )}
           </Button>
         </CardFooter>
       </Card>
     );
-  }
+  },
 );
 
 export default AddJobAlert;

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { HowItWorksEmployersData, HowItWorksSeekersData } from "@/constants";
+import { HowItWorksEmployersData, HowItWorksSeekersData } from '@/constants';
 
-import BlueButton from "./BlueButton";
+import BlueButton from './BlueButton';
 
 const HowItWorksLanding: React.FC = () => {
   const [activeTab, setActiveTab] = useState(true);
@@ -14,8 +14,8 @@ const HowItWorksLanding: React.FC = () => {
   }
 
   const description = activeTab
-    ? "Create your profile, browse curated job listings based on your skills, and easily apply to jobs that fit your career goals."
-    : "Post job listings, review resumes, and find top candidates who match your hiring needs.";
+    ? 'Create your profile, browse curated job listings based on your skills, and easily apply to jobs that fit your career goals.'
+    : 'Post job listings, review resumes, and find top candidates who match your hiring needs.';
 
   const list = activeTab ? HowItWorksSeekersData : HowItWorksEmployersData;
 

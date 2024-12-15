@@ -1,9 +1,9 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-import { GraduationCap, MapPin, Timer } from "lucide-react";
+import { GraduationCap, MapPin, Timer } from 'lucide-react';
 
-import SaveJobButton from "./SaveJobButton";
+import SaveJobButton from './SaveJobButton';
 
 import {
   checkExpired,
@@ -12,27 +12,27 @@ import {
   getImageUrl,
   getTime,
   truncate,
-} from "@/lib/utils";
-import { renderIconText } from "@/helpers";
+} from '@/lib/utils';
+import { renderIconText } from '@/helpers';
 
-import { JobTypes } from "@/types";
+import { Job } from '@/types';
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import {
   TooltipProvider,
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 
 type JobItemProps = {
-  job: JobTypes;
+  job: Job;
   showDescription?: boolean;
 };
 
@@ -56,22 +56,22 @@ const JobItem: React.FC<JobItemProps> = ({
 
   let FooterInfoData = [
     {
-      id: "1",
+      id: '1',
       data: findLocationData(location),
       icon: <MapPin />,
-      tooltip: "Location",
+      tooltip: 'Location',
     },
     {
-      id: "2",
+      id: '2',
       data: level,
       icon: <GraduationCap />,
-      tooltip: "Level",
+      tooltip: 'Level',
     },
     {
-      id: "3",
+      id: '3',
       data: expirationDate,
       icon: <Timer />,
-      tooltip: "Expiration",
+      tooltip: 'Expiration',
     },
   ];
 
@@ -138,7 +138,7 @@ const JobItem: React.FC<JobItemProps> = ({
                 ...data,
                 tooltip: true,
                 tooltipContent: data.tooltip,
-              })
+              }),
             )}
           </div>
           <div className="flex items-center gap-3">

@@ -1,37 +1,37 @@
-"use client";
+'use client';
 
-import React from "react";
-import dynamic from "next/dynamic";
-import { useQuery } from "@tanstack/react-query";
+import React from 'react';
+import dynamic from 'next/dynamic';
+import { useQuery } from '@tanstack/react-query';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
 
-import { getJobs } from "@/lib/actions/jobs.actions";
+import { getJobs } from '@/lib/actions/jobs.actions';
 
-import SearchJobs from "@/components/seekers/jobs/search/SearchJobs";
-import FilterJobs from "@/components/seekers/jobs/filters/FilterJobs";
-import PaginatedList from "@/components/ui/paginate-list";
-import NotFound from "@/components/shared/pages/NotFound";
+import SearchJobs from '@/components/seekers/jobs/search/SearchJobs';
+import FilterJobs from '@/components/seekers/jobs/filters/FilterJobs';
+import PaginatedList from '@/components/ui/paginate-list';
+import NotFound from '@/components/shared/pages/NotFound';
 
-import LoadingSeekerInfo from "@/components/loaders/employers/LoadingSeekerInfo";
+import LoadingSeekerInfo from '@/components/loaders/employers/LoadingSeekerInfo';
 const SeekerInfo = dynamic(
-  () => import("@/components/seekers/jobs/SeekerInfo"),
+  () => import('@/components/seekers/jobs/SeekerInfo'),
   {
     loading: () => <LoadingSeekerInfo />,
-  }
+  },
 );
 
-import LoadingPopularJobs from "@/components/loaders/seekers/LoadingPopularJobs";
+import LoadingPopularJobs from '@/components/loaders/seekers/LoadingPopularJobs';
 const PopularJobsInfo = dynamic(
-  () => import("@/components/seekers/jobs/PopularJobsInfo"),
+  () => import('@/components/seekers/jobs/PopularJobsInfo'),
   {
     loading: () => <LoadingPopularJobs />,
-  }
+  },
 );
 
-import LoadingJobsSkeleton from "@/components/loaders/seekers/LoadingJobsSkeleton";
-const JobsList = dynamic(() => import("@/components/seekers/jobs/JobsList"), {
+import LoadingJobsSkeleton from '@/components/loaders/seekers/LoadingJobsSkeleton';
+const JobsList = dynamic(() => import('@/components/seekers/jobs/JobsList'), {
   loading: () => <LoadingJobsSkeleton />,
 });
 
@@ -50,21 +50,21 @@ const Jobs = ({
   } = useQuery({
     queryFn: () => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return getJobs({
         token: token,
         page: Number(searchParams.page) || 1,
-        sort: searchParams.sort || "",
-        search: searchParams.query || "",
-        type: searchParams.type || "",
-        level: searchParams.level || "",
-        salary: searchParams.salary || "",
-        position: searchParams.position || "",
+        sort: searchParams.sort || '',
+        search: searchParams.query || '',
+        type: searchParams.type || '',
+        level: searchParams.level || '',
+        salary: searchParams.salary || '',
+        position: searchParams.position || '',
       });
     },
-    queryKey: ["jobs", searchParams],
+    queryKey: ['jobs', searchParams],
   });
 
   if (!fetchedJobs && !isLoading) {
@@ -106,7 +106,7 @@ const Jobs = ({
         {totalJobs > 10 && (
           <PaginatedList
             onPageChange={(value) =>
-              updateSearchParams("page", value.toString())
+              updateSearchParams('page', value.toString())
             }
             totalItems={totalJobs}
             itemsPerPage={10}

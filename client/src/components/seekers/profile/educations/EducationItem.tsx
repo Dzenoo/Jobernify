@@ -1,21 +1,21 @@
-import React from "react";
+import React from 'react';
 
-import { Calendar, Edit, GraduationCap, Trash } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
+import { Calendar, Edit, GraduationCap, Trash } from 'lucide-react';
+import { useMutation } from '@tanstack/react-query';
 
-import { useToast } from "@/components/ui/use-toast";
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import { useToast } from '@/components/ui/use-toast';
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
 
-import { deleteEducation } from "@/lib/actions/seekers.actions";
-import { formatDate } from "@/lib/utils";
-import { renderIconText } from "@/helpers";
-import { queryClient } from "@/context/react-query-client";
+import { deleteEducation } from '@/lib/actions/seekers.actions';
+import { formatDate } from '@/lib/utils';
+import { renderIconText } from '@/helpers';
+import { queryClient } from '@/context/react-query-client';
 
-import { EducationTypes } from "@/types";
+import { Education } from '@/types';
 
 export type EducationItemProps = {
   onEdit: () => void;
-} & EducationTypes;
+} & Education;
 
 const EducationItem: React.FC<EducationItemProps> = ({
   onEdit,
@@ -31,23 +31,23 @@ const EducationItem: React.FC<EducationItemProps> = ({
   const { mutateAsync: deleteEducationMutate } = useMutation({
     mutationFn: () => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return deleteEducation(_id, token);
     },
     onSuccess: (response) => {
-      toast({ title: "Success", description: response.message });
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      toast({ title: 'Success', description: response.message });
+      queryClient.invalidateQueries({ queryKey: ['profile'] });
     },
     onError: (error: any) => {
-      toast({ title: "Error", description: error?.response?.data?.message });
+      toast({ title: 'Error', description: error?.response?.data?.message });
     },
   });
 
   const handleDeleteEducation = async () => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this education entry?"
+      'Are you sure you want to delete this education entry?',
     );
     if (confirmDelete) {
       await deleteEducationMutate();
@@ -73,13 +73,13 @@ const EducationItem: React.FC<EducationItemProps> = ({
           </div>
           <div>
             {renderIconText({
-              id: "1",
+              id: '1',
               data: graduationDateFormatted,
               icon: <Calendar />,
             })}
           </div>
         </div>
-        {userType === "seeker" && (
+        {userType === 'seeker' && (
           <div className="flex items-center gap-2">
             <div>
               <button onClick={onEdit}>

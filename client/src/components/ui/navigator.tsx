@@ -1,7 +1,7 @@
-import { useTheme } from "next-themes";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import { useTheme } from 'next-themes';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
 type NavigatorProps = {
   href: string;
@@ -18,9 +18,9 @@ const Navigator: React.FC<NavigatorProps> = ({ href, title, info }) => {
         <Image
           className="min-w-[40px] min-h-[40px]"
           src={
-            resolvedTheme === "dark"
-              ? "/images/logo-icon-dark.png"
-              : "/images/logo-icon.png"
+            resolvedTheme === 'dark'
+              ? '/images/logo-icon-dark.png'
+              : '/images/logo-icon.png'
           }
           alt="logo_light_talentify"
           width={40}

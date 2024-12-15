@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const useZoomLevel = () => {
   const [isZoomedOut, setIsZoomedOut] = useState(false);
@@ -12,8 +12,8 @@ const useZoomLevel = () => {
     };
 
     checkZoomLevel();
-    window.addEventListener("resize", checkZoomLevel);
-    return () => window.removeEventListener("resize", checkZoomLevel);
+    window.addEventListener('resize', checkZoomLevel);
+    return () => window.removeEventListener('resize', checkZoomLevel);
   }, []);
 
   return isZoomedOut;

@@ -1,14 +1,14 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-import LoginForm from "./forms/LoginForm";
+import LoginForm from './forms/LoginForm';
 
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 
 const Login: React.FC = () => {
   return (
@@ -31,7 +31,7 @@ const Login: React.FC = () => {
       </CardContent>
       <CardFooter className="justify-center">
         <p className="text-gray-500">
-          Dont have account?{" "}
+          Dont have account?{' '}
           <Link href="/signup" className="text-blue-600 underline">
             Signup
           </Link>

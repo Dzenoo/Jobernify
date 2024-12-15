@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { DropzoneOptions, useDropzone } from "react-dropzone";
+import { DropzoneOptions, useDropzone } from 'react-dropzone';
 
 const useUploads = (options: DropzoneOptions) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);

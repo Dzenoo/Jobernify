@@ -1,20 +1,20 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState } from 'react';
 
-import zod from "zod";
-import { ScaleLoader } from "react-spinners";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus } from "lucide-react";
+import zod from 'zod';
+import { ScaleLoader } from 'react-spinners';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Plus } from 'lucide-react';
 
-import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
+import useEditSeeker from '@/hooks/mutations/useEditSeeker.mutation';
+import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
 
-import { SkillsSchema } from "@/lib/zod/seekers.validation";
-import { getSkillsData, multiselectSkills } from "@/lib/utils";
-import { renderSkills } from "@/helpers";
+import { SkillsSchema } from '@/lib/zod/seekers.validation';
+import { getSkillsData, multiselectSkills } from '@/lib/utils';
+import { renderSkills } from '@/helpers';
 
-import MultiSelect from "@/components/ui/multiselect";
-import { Button } from "@/components/ui/button";
+import MultiSelect from '@/components/ui/multiselect';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -23,19 +23,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer";
+} from '@/components/ui/drawer';
 
 type AddSkillsProps = {
   closeSkills: () => void;
@@ -53,7 +53,7 @@ const AddSkillsForm: React.FC<AddSkillsProps> = ({
     defaultValues: {
       skills: skills,
     },
-    mode: "all",
+    mode: 'all',
   });
 
   const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
@@ -77,7 +77,7 @@ const AddSkillsForm: React.FC<AddSkillsProps> = ({
                   options={multiselectSkills}
                   selectedValues={field.value}
                   onChange={(selectedValues) => {
-                    form.setValue("skills", selectedValues);
+                    form.setValue('skills', selectedValues);
                   }}
                 />
               </FormControl>
@@ -98,7 +98,7 @@ const AddSkillsForm: React.FC<AddSkillsProps> = ({
             {form.formState.isSubmitting ? (
               <ScaleLoader color="#fff" height={10} />
             ) : (
-              "Update"
+              'Update'
             )}
           </Button>
         </div>
@@ -132,7 +132,7 @@ type SkillsProps = {
 };
 
 const Skills: React.FC<SkillsProps> = ({ skills }) => {
-  const isLarge = useMediaQuery("(min-width: 1280px)");
+  const isLarge = useMediaQuery('(min-width: 1280px)');
   const [isSkillsOpen, setIsSkillsOpen] = useState(false);
 
   const openSkills = () => setIsSkillsOpen(true);

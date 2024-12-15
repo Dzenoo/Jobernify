@@ -1,125 +1,112 @@
-// ===============================
-// Enums
-// ===============================
-export enum SizeOfEmployers {
-  "Less-than-17" = "Less-than-17",
-  "20-50" = "20-50",
-  "50-100" = "50-100",
-  "100-250" = "100-250",
-  "250-500" = "250-500",
-  "500-1000" = "500-1000",
-}
-
-export enum ApplicationStatus {
-  Rejected = "Rejected",
-  Pending = "Pending",
-  Accepted = "Accepted",
-  Interview = "Interview",
-}
+import {
+  ApplicationStatus,
+  CompanySize,
+  IndustryType,
+  JobLevel,
+  JobPosition,
+  JobType,
+  Role,
+} from 'shared';
 
 export enum TypeOfAccount {
-  Seeker = "seeker",
-  Employer = "employer",
-  Default = "",
+  Seeker = 'seeker',
+  Employer = 'employer',
+  Default = '',
 }
 
-// ===============================
-// Types
-// ===============================
-export type EmployerTypes = {
+export type Employer = {
   _id: string;
-  image: string;
-  industry: string;
-  companyDescription: string;
-  size: keyof typeof SizeOfEmployers;
-  website: string;
-  address: string;
-  number: number;
   email: string;
   name: string;
-  password: string;
-  jobs: JobTypes[];
-  followers: SeekerTypes[];
+  industry: IndustryType;
+  size: CompanySize;
+  address: string;
+  image: string;
+  companyDescription: string;
+  website: string;
+  role: Role;
+  jobs: Job[];
+  followers: Seeker[];
 };
 
-export type JobTypes = {
-  title: string;
-  position: "Remote" | "On-Site" | "Hybrid";
-  location: string;
-  type: "Internship" | "Full-Time" | "Part-Time" | "Freelance";
-  skills: string[];
-  level: "Junior" | "Medior" | "Senior";
-  salary: number;
+export type Job = {
   _id: string;
+  title: string;
+  position: JobPosition;
+  location: string;
+  overview: string;
+  type: JobType;
+  skills: string[];
+  level: JobLevel;
+  company: Employer;
+  salary: number;
   expiration_date: string & Date;
   description: string;
-  overview: string;
-  createdAt: string;
-  applications: ApplicationsTypes[];
-  company: EmployerTypes;
+  applications: Application[];
+  createdAt: Date;
 };
 
-export type JobAlertsTypes = {
+export type JobAlerts = {
   title: string;
   type: string;
   level: string;
 };
 
-export type EducationTypes = {
+export type Education = {
   _id: string;
   institution: string;
-  graduationDate: string;
+  graduationDate: Date;
   fieldOfStudy: string;
   degree: string;
 };
 
-export type ExperienceTypes = {
+export type Experience = {
   _id: string;
   jobTitle: string;
   companyName: string;
-  startDate: string;
-  endDate: string;
-  level: string;
-  type: string;
+  startDate: Date;
+  endDate: Date;
+  level: keyof typeof JobLevel;
+  type: keyof typeof JobType;
   location: string;
-  position: string;
+  position: keyof typeof JobPosition;
   isCurrentlyWorking: boolean;
 };
 
-export type SeekerTypes = {
+export type Seeker = {
   _id: string;
-  biography: string;
-  image: string;
-  password: string;
   email: string;
   first_name: string;
   last_name: string;
+  headline: string;
+  biography: string;
+  image: string;
+  password: string;
   portfolio: string;
   linkedin: string;
   github: string;
-  resume?: string;
-  role: string;
-  receiveJobAlerts: boolean;
-  headline: string;
   skills: string[];
-  following: string[];
-  savedJobs: JobTypes[];
-  applications: ApplicationsTypes[];
-  education: EducationTypes[];
-  experience: ExperienceTypes[];
-  alerts: JobAlertsTypes;
+  education: Education[];
+  experience: Experience[];
+  alerts: JobAlerts;
+  resume?: string;
+  role: Role;
+  receiveJobAlerts: boolean;
+  savedJobs: Job[];
+  applications: Application[];
+  following: Employer[] & string[];
   createdAt: Date;
   updatedAt: Date;
 };
 
-export type ApplicationsTypes = {
+export type Application = {
   _id: string;
-  status: keyof typeof ApplicationStatus;
   cover_letter: string;
+  status: keyof typeof ApplicationStatus;
   resume: string;
-  seeker: SeekerTypes;
-  job: JobTypes;
-  createdAt: string;
+  seeker: Seeker;
+  job: Job;
+  createdAt: Date;
 };
 
 export type FilterCounts = {

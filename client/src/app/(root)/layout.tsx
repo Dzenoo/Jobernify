@@ -1,33 +1,33 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
-import { Libre_Franklin } from "next/font/google";
+import { Libre_Franklin } from 'next/font/google';
 
-import Footer from "@/components/layout/footer/Footer";
-import "../globals.css";
-import NavbarLanding from "@/components/shared/pages/landing/NavbarLanding";
+import Footer from '@/components/layout/footer/Footer';
+import '../globals.css';
+import NavbarLanding from '@/components/shared/pages/landing/NavbarLanding';
 
-const libre = Libre_Franklin({ subsets: ["latin"] });
+const libre = Libre_Franklin({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/images/logo-icon.png",
-        href: "/images/logo-icon.png",
+        url: '/images/logo-icon.png',
+        href: '/images/logo-icon.png',
       },
     ],
   },
-  title: "Jobernify",
+  title: 'Jobernify',
   description:
-    "Unlock your career potential with Jobernify. Explore opportunities, connect with others, and achieve your goals with our innovative platform. Begin your journey now!",
+    'Unlock your career potential with Jobernify. Explore opportunities, connect with others, and achieve your goals with our innovative platform. Begin your journey now!',
   openGraph: {
-    title: "Jobernify - Unlock Your Career Potential",
+    title: 'Jobernify - Unlock Your Career Potential',
     description:
-      "Unlock your career potential with Jobernify. Explore opportunities, connect with others, and achieve your goals with our innovative platform. Begin your journey now!",
-    type: "website",
-    locale: "en_US",
-    url: "https://jobernify.com",
-    siteName: "Jobernify",
+      'Unlock your career potential with Jobernify. Explore opportunities, connect with others, and achieve your goals with our innovative platform. Begin your journey now!',
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://jobernify.com',
+    siteName: 'Jobernify',
   },
 };
 

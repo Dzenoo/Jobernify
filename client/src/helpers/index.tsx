@@ -3,9 +3,9 @@ import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 type RenderIconTextDefault = {
   data: string | number;
@@ -59,9 +59,9 @@ export const renderIconText = ({
 export const renderSkills = <
   T extends {
     [key: string]: string[];
-  }
+  },
 >(
-  categorizedSkills: T
+  categorizedSkills: T,
 ) => {
   return (
     <div className="py-3 flex gap-6 flex-wrap">
@@ -84,7 +84,7 @@ export const renderSkills = <
                 ))}
               </div>
             </div>
-          )
+          ),
       )}
     </div>
   );
@@ -106,7 +106,7 @@ export function renderSignupTabCard<T extends RenderSignupTabCardProps>({
   return (
     <div
       className={`${
-        selected && "bg-blue-100"
+        selected && 'bg-blue-100'
       } border rounded-lg p-5 border-gray-100 cursor-pointer flex flex-col gap-7 w-full transition hover:bg-gray-50`}
       onClick={handler}
       key={text}

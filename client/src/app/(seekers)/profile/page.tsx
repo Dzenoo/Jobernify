@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import useGetSeeker from '@/hooks/queries/useGetSeeker.query';
+import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
 
-import LoadingSeekerProfileSkeleton from "@/components/loaders/seekers/LoadingSeekerProfile";
+import LoadingSeekerProfileSkeleton from '@/components/loaders/seekers/LoadingSeekerProfile';
 
-import SeekerProfileNavigation from "@/components/seekers/profile/navigation/SeekerProfileNavigation";
-import SeekerProfile from "@/components/seekers/profile/SeekerProfile";
-import SeekerAlerts from "@/components/seekers/profile/alerts/SeekerAlerts";
-import SavedJobs from "@/components/seekers/profile/savedJobs/SavedJobs";
-import Applications from "@/components/seekers/profile/applications/Applications";
-import PaginatedList from "@/components/ui/paginate-list";
-import NotFound from "@/components/shared/pages/NotFound";
+import SeekerProfileNavigation from '@/components/seekers/profile/navigation/SeekerProfileNavigation';
+import SeekerProfile from '@/components/seekers/profile/SeekerProfile';
+import SeekerAlerts from '@/components/seekers/profile/alerts/SeekerAlerts';
+import SavedJobs from '@/components/seekers/profile/savedJobs/SavedJobs';
+import Applications from '@/components/seekers/profile/applications/Applications';
+import PaginatedList from '@/components/ui/paginate-list';
+import NotFound from '@/components/shared/pages/NotFound';
 
 const SeekerProfilePage = ({
   searchParams,
@@ -31,7 +31,7 @@ const SeekerProfilePage = ({
 
   const isLoadingSeeker = isLoading || isFetching || isRefetching;
 
-  if (typeof window === "undefined" || isLoadingSeeker) {
+  if (typeof window === 'undefined' || isLoadingSeeker) {
     return <LoadingSeekerProfileSkeleton />;
   }
 
@@ -87,7 +87,7 @@ const SeekerProfilePage = ({
             <div>
               <PaginatedList
                 onPageChange={(value) =>
-                  updateSearchParams("page", value.toString())
+                  updateSearchParams('page', value.toString())
                 }
                 totalItems={fetchedSeeker.totalSavedJobs}
                 itemsPerPage={10}
@@ -108,7 +108,7 @@ const SeekerProfilePage = ({
             <div>
               <PaginatedList
                 onPageChange={(value) =>
-                  updateSearchParams("page", value.toString())
+                  updateSearchParams('page', value.toString())
                 }
                 totalItems={fetchedSeeker.totalApplications}
                 itemsPerPage={10}

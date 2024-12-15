@@ -1,5 +1,5 @@
-import React from "react";
-import LoadingJobsSkeleton from "./LoadingJobsSkeleton";
+import React from 'react';
+import LoadingJobsSkeleton from './LoadingJobsSkeleton';
 
 const LoadingJobDetails = () => {
   return (

@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import { Search } from "lucide-react";
+import { Search } from 'lucide-react';
 
-import { formatDate } from "@/lib/utils";
+import { formatDate } from '@/lib/utils';
 
-import { ApplicationsTypes } from "@/types";
+import { Application } from '@/types';
 
-import NameWithImage from "./table/NameWithImage";
-import StatusBadge from "./table/StatusBadge";
-import SocialLinks from "./table/SocialLinks";
-import CoverLetter from "./table/CoverLetter";
+import NameWithImage from './table/NameWithImage';
+import StatusBadge from './table/StatusBadge';
+import SocialLinks from './table/SocialLinks';
+import CoverLetter from './table/CoverLetter';
 
 import {
   Table,
@@ -19,11 +19,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import Resume from "./table/Resume";
+} from '@/components/ui/table';
+import Resume from './table/Resume';
 
 type ApplicationsProps = {
-  applications: ApplicationsTypes[];
+  applications: Application[];
   currentPage: number;
   itemsPerPage: number;
 };
@@ -51,14 +51,14 @@ const Applications: React.FC<ApplicationsProps> = ({
     );
 
   const columns = [
-    "Index",
-    "Name",
-    "Email",
-    "Resume",
-    "Cover Letter",
-    "Applied",
-    "Status",
-    "Socials",
+    'Index',
+    'Name',
+    'Email',
+    'Resume',
+    'Cover Letter',
+    'Applied',
+    'Status',
+    'Socials',
   ];
 
   return (

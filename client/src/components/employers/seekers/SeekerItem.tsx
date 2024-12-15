@@ -1,23 +1,23 @@
-import React from "react";
+import React from 'react';
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { Github, Linkedin, LucideImage } from "lucide-react";
+import { Github, Linkedin, LucideImage } from 'lucide-react';
 
-import { SeekerTypes } from "@/types";
-import { formatURL, getImageUrl, getSkillNames } from "@/lib/utils";
+import { Seeker } from '@/types';
+import { formatURL, getImageUrl, getSkillNames } from '@/lib/utils';
 
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 type SeekerItemProps = {
-  seeker: SeekerTypes;
+  seeker: Seeker;
 };
 
 const SeekerItem: React.FC<SeekerItemProps> = ({
@@ -35,17 +35,17 @@ const SeekerItem: React.FC<SeekerItemProps> = ({
 }) => {
   const SocialsArrays = [
     {
-      id: "1",
+      id: '1',
       href: portfolio,
       icon: <LucideImage />,
     },
     {
-      id: "2",
+      id: '2',
       href: github,
       icon: <Github />,
     },
     {
-      id: "3",
+      id: '3',
       href: linkedin,
       icon: <Linkedin />,
     },
@@ -99,7 +99,7 @@ const SeekerItem: React.FC<SeekerItemProps> = ({
               >
                 {socials.icon}
               </div>
-            )
+            ),
           )}
         </div>
       </CardContent>

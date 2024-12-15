@@ -1,5 +1,5 @@
-import React from "react";
-import { Control } from "react-hook-form";
+import React from 'react';
+import { Control } from 'react-hook-form';
 
 import {
   FormControl,
@@ -8,9 +8,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectTrigger,
@@ -19,8 +19,8 @@ import {
   SelectGroup,
   SelectItem,
   SelectLabel,
-} from "@/components/ui/select";
-import { locations } from "@/constants";
+} from '@/components/ui/select';
+import { locations } from '@/constants';
 
 type DetailsProps = {
   control: Control<any>;

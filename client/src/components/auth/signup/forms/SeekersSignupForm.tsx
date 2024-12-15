@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useRouter } from "next/navigation";
+import React from 'react';
+import { useRouter } from 'next/navigation';
 
-import zod from "zod";
-import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ScaleLoader } from "react-spinners";
+import zod from 'zod';
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ScaleLoader } from 'react-spinners';
 
-import { SeekerRegistrationSchema } from "@/lib/zod/auth.validation";
-import { signupSeeker } from "@/lib/actions/auth.actions";
+import { SeekerRegistrationSchema } from '@/lib/zod/auth.validation';
+import { signupSeeker } from '@/lib/actions/auth.actions';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 import {
   Form,
@@ -24,7 +24,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 
 const SeekersSignupForm: React.FC = () => {
   const router = useRouter();
@@ -32,31 +32,31 @@ const SeekersSignupForm: React.FC = () => {
   const form = useForm<zod.infer<typeof SeekerRegistrationSchema>>({
     resolver: zodResolver(SeekerRegistrationSchema),
     defaultValues: {
-      first_name: "",
-      last_name: "",
-      email: "",
-      password: "",
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: '',
     },
-    mode: "all",
+    mode: 'all',
   });
 
   const { mutateAsync: signupSeekerMutation } = useMutation({
     mutationFn: signupSeeker,
     onSuccess: () => {
       form.reset();
-      localStorage.setItem("pendingVerification", "true");
-      router.push("/check-your-email");
+      localStorage.setItem('pendingVerification', 'true');
+      router.push('/check-your-email');
     },
     onError: (error: any) => {
       toast({
-        title: "Error",
+        title: 'Error',
         description: error?.response?.data.message,
       });
     },
   });
 
   const onSubmit = async (
-    values: zod.infer<typeof SeekerRegistrationSchema>
+    values: zod.infer<typeof SeekerRegistrationSchema>,
   ) => {
     await signupSeekerMutation(values);
   };
@@ -137,7 +137,7 @@ const SeekersSignupForm: React.FC = () => {
           {form.formState.isSubmitting ? (
             <ScaleLoader color="#fff" height={10} />
           ) : (
-            "Register"
+            'Register'
           )}
         </Button>
       </form>

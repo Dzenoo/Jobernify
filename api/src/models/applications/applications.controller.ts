@@ -17,15 +17,13 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 
 import { ApplicationsService } from './applications.service';
-
-import { ApplicationStatus } from './schemas/application.schema';
+import { ApplicationStatus, Role } from 'shared';
 
 import { User } from 'src/common/decorators/user.decorator';
 
 import { JwtAuthGuard } from 'src/authentication/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/authentication/guards/role-auth.guard';
 
-import { Role } from '../shared/schemas/user.schema';
 import { Roles } from 'src/common/decorators/roles.decorator';
 
 @Controller('/applications')

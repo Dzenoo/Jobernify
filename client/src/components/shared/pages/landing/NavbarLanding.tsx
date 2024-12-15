@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { NavbarLandingLinks } from "@/constants";
+import { NavbarLandingLinks } from '@/constants';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 const NavbarLanding: React.FC = () => {
   const [isClient, setIsClient] = useState(false);
@@ -21,7 +21,7 @@ const NavbarLanding: React.FC = () => {
 
   if (!isClient) return null;
 
-  const isSeeker = userType === "seeker";
+  const isSeeker = userType === 'seeker';
 
   return (
     <header className="px-5 bg-[#03F7FF0D] py-5 flex justify-between items-center gap-5 md:px-28">
@@ -35,7 +35,7 @@ const NavbarLanding: React.FC = () => {
       </div>
       <div
         className={`max-lg:hidden relative ${
-          isSeeker ? "right-10" : "right-5"
+          isSeeker ? 'right-10' : 'right-5'
         }`}
       >
         <ul className="flex items-center gap-10">

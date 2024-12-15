@@ -1,21 +1,21 @@
-import React from "react";
+import React from 'react';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
-import { ApplicationsTypes } from "@/types";
+import { Application } from '@/types';
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
-import LoadingApplicationsSkeleton from "@/components/loaders/seekers/LoadingApplications";
+import LoadingApplicationsSkeleton from '@/components/loaders/seekers/LoadingApplications';
 const ApplicationsList = dynamic(
-  () => import("@/components/seekers/profile/applications/ApplicationsList"),
+  () => import('@/components/seekers/profile/applications/ApplicationsList'),
   {
     loading: () => <LoadingApplicationsSkeleton />,
-  }
+  },
 );
 
 type ApplicationsProps = {
-  applications: ApplicationsTypes[];
+  applications: Application[];
 };
 
 const Applications: React.FC<ApplicationsProps> = ({ applications }) => {

@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
 
-import { getJobById } from "@/lib/actions/jobs.actions";
+import { getJobById } from '@/lib/actions/jobs.actions';
 
-import LoadingJobDetails from "@/components/loaders/seekers/LoadingJobDetails";
+import LoadingJobDetails from '@/components/loaders/seekers/LoadingJobDetails';
 
-import AddJobAlert from "@/components/seekers/jobs/details/AddJobAlert";
-import JobDetailsInfo from "@/components/seekers/jobs/details/JobDetailsInfo";
-import SeekerInfo from "@/components/seekers/jobs/SeekerInfo";
-import JobsList from "@/components/seekers/jobs/JobsList";
-import ApplyToJobForm from "@/components/seekers/jobs/details/forms/ApplyToJobForm";
-import NotFound from "@/components/shared/pages/NotFound";
+import AddJobAlert from '@/components/seekers/jobs/details/AddJobAlert';
+import JobDetailsInfo from '@/components/seekers/jobs/details/JobDetailsInfo';
+import SeekerInfo from '@/components/seekers/jobs/SeekerInfo';
+import JobsList from '@/components/seekers/jobs/JobsList';
+import ApplyToJobForm from '@/components/seekers/jobs/details/forms/ApplyToJobForm';
+import NotFound from '@/components/shared/pages/NotFound';
 
 const JobDetailsPage = ({
   params: { jobId },
@@ -25,17 +25,17 @@ const JobDetailsPage = ({
   const [isApplyToJob, setIsApplyToJob] = useState(false);
   const { token } = useAuthentication().getCookieHandler();
 
-  const isLarge = useMediaQuery("(min-width: 1280px)");
+  const isLarge = useMediaQuery('(min-width: 1280px)');
 
   const { data: fetchedJobs, isLoading } = useQuery({
     queryFn: () => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return getJobById(jobId, token);
     },
-    queryKey: ["job", { jobId }],
+    queryKey: ['job', { jobId }],
   });
 
   if (isLoading) {

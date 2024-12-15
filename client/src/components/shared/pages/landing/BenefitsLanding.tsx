@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { BenefitsData } from "@/constants";
+import { BenefitsData } from '@/constants';
 
-import BlueButton from "./BlueButton";
+import BlueButton from './BlueButton';
 
 const BenefitsLanding: React.FC = () => {
   return (

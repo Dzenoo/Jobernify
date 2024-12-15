@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import EmployersDashboardNavbar from "@/components/employers/dashboard/navbar/EmployersDashboardNavbar";
+import EmployersDashboardNavbar from '@/components/employers/dashboard/navbar/EmployersDashboardNavbar';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (

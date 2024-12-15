@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import React from "react";
-import UpdateJobForm from "@/components/employers/dashboard/jobs/new/forms/UpdateJobForm";
+import React from 'react';
+import UpdateJobForm from '@/components/employers/dashboard/jobs/new/forms/UpdateJobForm';
 
-import { useQuery } from "@tanstack/react-query";
-import { getJobById } from "@/lib/actions/jobs.actions";
+import { useQuery } from '@tanstack/react-query';
+import { getJobById } from '@/lib/actions/jobs.actions';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import NotFound from "@/components/shared/pages/NotFound";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import NotFound from '@/components/shared/pages/NotFound';
 
-import { JobTypes } from "@/types";
+import { Job } from '@/types';
 
 const EditJobPage = ({ params }: { params: { jobId: string } }) => {
   const { token } = useAuthentication().getCookieHandler();
   const { data: fetchedJob, isLoading } = useQuery({
     queryFn: () => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return getJobById(params.jobId, token);
     },
-    queryKey: ["jobs"],
+    queryKey: ['jobs'],
   });
 
   if (!isLoading && !fetchedJob) {
@@ -33,7 +33,7 @@ const EditJobPage = ({ params }: { params: { jobId: string } }) => {
       <UpdateJobForm
         isEdit={true}
         jobId={params.jobId}
-        formData={fetchedJob?.job as JobTypes}
+        formData={fetchedJob?.job as Job}
       />
     </section>
   );

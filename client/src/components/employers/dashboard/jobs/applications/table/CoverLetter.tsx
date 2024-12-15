@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 type CoverLetterProps = {
   cover_letter: string;
@@ -21,7 +21,7 @@ const CoverLetter: React.FC<CoverLetterProps> = ({ cover_letter }) => {
       </DialogContent>
     </Dialog>
   ) : (
-    "Cover Letter Unassigned"
+    'Cover Letter Unassigned'
   );
 };
 

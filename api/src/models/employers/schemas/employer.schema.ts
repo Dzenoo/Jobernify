@@ -1,40 +1,14 @@
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { BaseUser, Role } from 'src/models/shared/schemas/user.schema';
+import { BaseUser } from 'src/models/shared/schemas/user.schema';
 import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 import { Job } from 'src/models/jobs/schemas/job.schema';
+import { CompanySize, IndustryType, Role } from 'shared';
 
 import * as bcrypt from 'bcrypt';
 
 export type EmployerDocument = HydratedDocument<Employer>;
-
-export enum IndustryType {
-  Technology = 'technology',
-  Healthcare = 'healthcare',
-  Finance = 'finance',
-  Education = 'education',
-  Manufacturing = 'manufacturing',
-  Retail = 'retail',
-  Hospitality = 'hospitality',
-  Automotive = 'automotive',
-  Construction = 'construction',
-  Media = 'media',
-  Marketing = 'marketing',
-  Telecommunications = 'telecommunications',
-  Government = 'government',
-  Nonprofit = 'nonprofit',
-  Other = 'other',
-}
-
-export enum CompanySize {
-  LessThan17 = 'Less-than-17',
-  Between20And50 = '20-50',
-  Between50And100 = '50-100',
-  Between100And250 = '100-250',
-  Between250And500 = '250-500',
-  Between500And1000 = '500-1000',
-}
 
 @Schema({ timestamps: true })
 export class Employer extends BaseUser {

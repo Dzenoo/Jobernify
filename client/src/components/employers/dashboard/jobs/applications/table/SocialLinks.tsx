@@ -1,12 +1,12 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-import { Github, ImageIcon, Linkedin } from "lucide-react";
+import { Github, ImageIcon, Linkedin } from 'lucide-react';
 
-import { SeekerTypes } from "@/types";
+import { Seeker } from '@/types';
 
 type SocialLinksProps = {
-  seeker: Pick<SeekerTypes, "github" | "linkedin" | "portfolio">;
+  seeker: Pick<Seeker, 'github' | 'linkedin' | 'portfolio'>;
 };
 
 const SocialLinks: React.FC<SocialLinksProps> = ({
@@ -14,7 +14,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
 }) => {
   return (
     <div className="flex items-center gap-6">
-      {github === "" ? (
+      {github === '' ? (
         <div className="text-initial-gray cursor-not-allowed">
           <Github />
         </div>
@@ -27,7 +27,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
           <Github />
         </Link>
       )}
-      {linkedin === "" ? (
+      {linkedin === '' ? (
         <div className="text-initial-gray cursor-not-allowed">
           <Linkedin />
         </div>
@@ -40,7 +40,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
           <Linkedin />
         </Link>
       )}
-      {portfolio === "" ? (
+      {portfolio === '' ? (
         <div className="text-initial-gray cursor-not-allowed">
           <ImageIcon />
         </div>

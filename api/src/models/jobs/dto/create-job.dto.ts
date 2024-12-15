@@ -9,7 +9,7 @@ import {
   Length,
   IsDateString,
 } from 'class-validator';
-import { JobType, JobLevel, JobPosition } from '../schemas/job.schema';
+import { JobLevel, JobPosition, JobType } from 'shared';
 
 export class CreateJobDto {
   @IsString()

@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState } from 'react';
 
-import { Trash } from "lucide-react";
+import { Trash } from 'lucide-react';
 
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
+import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
 
-import { EmployerTypes } from "@/types";
+import { Employer } from '@/types';
 
-import UploadEmployerImage from "./UploadEmployerImage";
-import DeleteEmployerProfile from "./DeleteEmployerProfile";
-import EmployerProfile from "./informations/EmployerProfile";
+import UploadEmployerImage from './UploadEmployerImage';
+import DeleteEmployerProfile from './DeleteEmployerProfile';
+import EmployerProfile from './informations/EmployerProfile';
 
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Dialog } from "@/components/ui/dialog";
-import { Drawer } from "@/components/ui/drawer";
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { Dialog } from '@/components/ui/dialog';
+import { Drawer } from '@/components/ui/drawer';
 
 type EmployerSettingsProps = {
-  employer: EmployerTypes;
+  employer: Employer;
 };
 
 const EmployerSettings: React.FC<EmployerSettingsProps> = ({ employer }) => {
-  const isLarge = useMediaQuery("(min-width: 1280px)");
+  const isLarge = useMediaQuery('(min-width: 1280px)');
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   return (

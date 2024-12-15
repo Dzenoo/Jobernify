@@ -9,7 +9,7 @@ import {
   IsDate,
   Length,
 } from 'class-validator';
-import { JobType, JobLevel, JobPosition } from '../schemas/job.schema';
+import { JobLevel, JobPosition, JobType } from 'shared';
 
 export class UpdateJobDto {
   @IsOptional()

@@ -1,20 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query';
 
-import { getEmployerProfile } from "@/lib/actions/employers.actions";
+import { getEmployerProfile } from '@/lib/actions/employers.actions';
 
-import useAuthentication from "../defaults/useAuthentication.hook";
-import { EmployerTypes } from "@/types";
+import useAuthentication from '../defaults/useAuthentication.hook';
+import { Employer } from '@/types';
 
 const useGetEmployer = (type?: string) => {
   const { token } = useAuthentication().getCookieHandler();
 
   return useQuery<{
     counts: { totalJobs: number };
-    employer: EmployerTypes;
+    employer: Employer;
   }>({
     queryFn: () => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return getEmployerProfile({
@@ -22,7 +22,7 @@ const useGetEmployer = (type?: string) => {
         type: type,
       });
     },
-    queryKey: ["profile"],
+    queryKey: ['profile'],
     enabled: !!token,
   });
 };

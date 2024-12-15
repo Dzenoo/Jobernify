@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import Themes from "./Themes";
+import Themes from './Themes';
 
-import { LogOut } from "lucide-react";
+import { LogOut } from 'lucide-react';
 
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 
 type NavbarActionsListProps = {
   data: {
@@ -39,7 +39,7 @@ const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
                 key={id}
                 href={href}
                 className={`flex items-center gap-3 transition-colors hover:text-blue-700 ${
-                  pathname === href && "text-[#0066ff]"
+                  pathname === href && 'text-[#0066ff]'
                 }`}
               >
                 {icon}

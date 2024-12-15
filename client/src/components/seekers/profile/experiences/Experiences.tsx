@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState } from 'react';
 
-import { ExperienceTypes } from "@/types";
-import { Plus } from "lucide-react";
+import { Experience } from '@/types';
+import { Plus } from 'lucide-react';
 
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
-import ExperienceList from "./ExperienceList";
-import ExperienceForm from "./forms/ExperienceForm";
+import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import ExperienceList from './ExperienceList';
+import ExperienceForm from './forms/ExperienceForm';
 
-import { Button } from "@/components/ui/button";
-import { Dialog } from "@/components/ui/dialog";
-import { Drawer } from "@/components/ui/drawer";
+import { Button } from '@/components/ui/button';
+import { Dialog } from '@/components/ui/dialog';
+import { Drawer } from '@/components/ui/drawer';
 
 type ExperiencesProps = {
-  experience: ExperienceTypes[] | [];
+  experience: Experience[] | [];
 };
 
 const Experiences: React.FC<ExperiencesProps> = ({ experience }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [experienceId, setExperienceId] = useState<string | null>(null);
   const isEdit = Boolean(experienceId);
-  const isLarge = useMediaQuery("(min-width: 1280px)");
+  const isLarge = useMediaQuery('(min-width: 1280px)');
   const seekerExperience = experience.find(
-    (experience) => experience._id === experienceId
+    (experience) => experience._id === experienceId,
   );
 
   const openForm = (id?: string) => {
@@ -44,7 +44,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ experience }) => {
             <ExperienceForm
               isEdit={isEdit}
               experienceId={experienceId}
-              experience={seekerExperience as ExperienceTypes}
+              experience={seekerExperience as Experience}
               isOpen={isOpen}
               closeForm={closeForm}
               isDialog={true}
@@ -58,7 +58,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ experience }) => {
             <ExperienceForm
               isEdit={isEdit}
               experienceId={experienceId}
-              experience={seekerExperience as ExperienceTypes}
+              experience={seekerExperience as Experience}
               isOpen={isOpen}
               closeForm={closeForm}
               isDialog={false}

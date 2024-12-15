@@ -1,14 +1,14 @@
-import React, { useState, useMemo } from "react";
-import { Button } from "@/components/ui/button";
+import React, { useState, useMemo } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandItem,
   CommandList,
   CommandGroup,
   CommandInput,
-} from "@/components/ui/command";
-import { Badge } from "@/components/ui/badge";
-import { getSkillNames } from "@/lib/utils";
+} from '@/components/ui/command';
+import { Badge } from '@/components/ui/badge';
+import { getSkillNames } from '@/lib/utils';
 
 type MultiSelectOption = {
   value: string;
@@ -26,10 +26,10 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   options,
   selectedValues,
   onChange,
-  placeholder = "Select options...",
+  placeholder = 'Select options...',
 }) => {
   const [open, setOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
 
   const toggleDropdown = () => setOpen((prev) => !prev);
 
@@ -37,9 +37,9 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     onChange(
       selectedValues.includes(value)
         ? selectedValues.filter((v) => v !== value)
-        : [...selectedValues, value]
+        : [...selectedValues, value],
     );
-    setSearchQuery("");
+    setSearchQuery('');
   };
   const skillsNames = getSkillNames(selectedValues);
 
@@ -49,7 +49,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         type="button"
         variant="outline"
         onClick={toggleDropdown}
-        className="w-full h-fit flex gap-2 flex-wrap items-start justify-start hover:border-[#2c2c2c] hover:bg-gray-100 dark:hover:bg-[#1b1b1b]"
+        className="w-full h-fit flex gap-2 flex-wrap items-start justify-start hover:border-gray-400 hover:bg-gray-100 dark:hover:bg-[#1b1b1b]"
       >
         {skillsNames.length > 0 ? (
           skillsNames.map((value) => (
@@ -78,8 +78,8 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                     onSelect={() => handleSelect(option.value)}
                     className={`flex justify-between p-2 ${
                       selectedValues.includes(option.value)
-                        ? "bg-blue-100 dark:bg-gray-500"
-                        : ""
+                        ? 'bg-blue-100 dark:bg-gray-500'
+                        : ''
                     }`}
                   >
                     <span>{option.label}</span>

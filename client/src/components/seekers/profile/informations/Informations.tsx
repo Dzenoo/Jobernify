@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import zod from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ScaleLoader } from "react-spinners";
-import { Edit, X } from "lucide-react";
+import zod from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ScaleLoader } from 'react-spinners';
+import { Edit, X } from 'lucide-react';
 
-import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
-import { SeekerProfileSchema } from "@/lib/zod/seekers.validation";
+import useEditSeeker from '@/hooks/mutations/useEditSeeker.mutation';
+import { SeekerProfileSchema } from '@/lib/zod/seekers.validation';
 
-import { SeekerTypes } from "@/types";
+import { Seeker } from '@/types';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import {
   Form,
   FormControl,
@@ -22,10 +22,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 
 type InformationsProps = {
-  seeker: SeekerTypes;
+  seeker: Seeker;
 };
 
 const Informations: React.FC<InformationsProps> = ({ seeker }) => {
@@ -33,29 +33,29 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
 
   const form = useForm<zod.infer<typeof SeekerProfileSchema>>({
     resolver: zodResolver(SeekerProfileSchema),
-    mode: "all",
+    mode: 'all',
   });
 
   const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
 
   useEffect(() => {
     if (isEditMode && seeker) {
-      form.setValue("first_name", seeker?.first_name || "");
-      form.setValue("last_name", seeker?.last_name || "");
-      form.setValue("headline", seeker?.headline || "");
-      form.setValue("biography", seeker?.biography || "");
+      form.setValue('first_name', seeker?.first_name || '');
+      form.setValue('last_name', seeker?.last_name || '');
+      form.setValue('headline', seeker?.headline || '');
+      form.setValue('biography', seeker?.biography || '');
     }
   }, [isEditMode, seeker, form.setValue]);
 
   const changeSeekerInformation = async (
-    values: zod.infer<typeof SeekerProfileSchema>
+    values: zod.infer<typeof SeekerProfileSchema>,
   ) => {
     const formData = new FormData();
 
-    formData.append("first_name", values.first_name);
-    formData.append("last_name", values.last_name);
-    formData.append("headline", values.headline);
-    formData.append("biography", values.biography);
+    formData.append('first_name', values.first_name);
+    formData.append('last_name', values.last_name);
+    formData.append('headline', values.headline);
+    formData.append('biography', values.biography);
 
     await editSeekerProfileMutate(formData);
 
@@ -64,13 +64,13 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
 
   const ProfileInformationArrays = [
     {
-      id: "1",
-      title: "First Name",
+      id: '1',
+      title: 'First Name',
       data: seeker?.first_name,
     },
     {
-      id: "2",
-      title: "Last Name",
+      id: '2',
+      title: 'Last Name',
       data: seeker?.last_name,
     },
   ];
@@ -83,12 +83,12 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
         </div>
         <div>
           <Button
-            variant={isEditMode ? "outline" : "default"}
+            variant={isEditMode ? 'outline' : 'default'}
             className="flex items-center gap-3"
             onClick={() => setIsEditMode((prevEditMode) => !prevEditMode)}
           >
             <div className="max-lg:hidden">
-              {isEditMode ? "Cancel" : "Edit Profile"}
+              {isEditMode ? 'Cancel' : 'Edit Profile'}
             </div>
             <div>{isEditMode ? <X /> : <Edit />}</div>
           </Button>
@@ -115,7 +115,7 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
               </div>
               <div>
                 <p className="text-initial-gray">
-                  {seeker.headline ? seeker.headline : "Headline not available"}
+                  {seeker.headline ? seeker.headline : 'Headline not available'}
                 </p>
               </div>
             </div>
@@ -127,7 +127,7 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
                 <p className="text-initial-gray">
                   {seeker.biography
                     ? seeker.biography
-                    : "Biography not available"}
+                    : 'Biography not available'}
                 </p>
               </div>
             </div>
@@ -218,7 +218,7 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
                   {form.formState.isSubmitting ? (
                     <ScaleLoader color="#fff" height={10} />
                   ) : (
-                    "Save"
+                    'Save'
                   )}
                 </Button>
               </div>

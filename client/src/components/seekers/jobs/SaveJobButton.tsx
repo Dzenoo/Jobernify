@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 
-import { Bookmark } from "lucide-react";
+import { Bookmark } from 'lucide-react';
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation } from '@tanstack/react-query';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import useGetSeeker from "@/hooks/queries/useGetSeeker.query";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import useGetSeeker from '@/hooks/queries/useGetSeeker.query';
 
-import { saveJob } from "@/lib/actions/jobs.actions";
-import { queryClient } from "@/context/react-query-client";
+import { saveJob } from '@/lib/actions/jobs.actions';
+import { queryClient } from '@/context/react-query-client';
 
-import { JobTypes } from "@/types";
+import { Job } from '@/types';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
+import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
 
 type SaveJobButtonProps = {
   jobId: string;
@@ -27,26 +27,26 @@ const SaveJobButton: React.FC<SaveJobButtonProps> = ({ jobId }) => {
   const { mutateAsync: saveJobMutate, status } = useMutation({
     mutationFn: () => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return saveJob(jobId, token);
     },
     onSuccess: (response) => {
-      toast({ title: "Success", description: response.message });
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      toast({ title: 'Success', description: response.message });
+      queryClient.invalidateQueries({ queryKey: ['profile'] });
     },
     onError: (error: any) => {
-      toast({ title: "Error", description: error.response.data.message });
+      toast({ title: 'Error', description: error.response.data.message });
     },
   });
 
-  const isLoading = status === "pending";
+  const isLoading = status === 'pending';
 
   const fetchedSeeker: any = data;
 
   const isJobSaved = fetchedSeeker?.seeker?.savedJobs.find(
-    (job: JobTypes) => job._id === jobId
+    (job: Job) => job._id === jobId,
   );
 
   return (
@@ -57,8 +57,8 @@ const SaveJobButton: React.FC<SaveJobButtonProps> = ({ jobId }) => {
         disabled={isLoading}
       >
         <Bookmark
-          color={isJobSaved ? "#0066FF" : "gray"}
-          fill={isJobSaved ? "#0066FF" : "#ffffff"}
+          color={isJobSaved ? '#0066FF' : 'gray'}
+          fill={isJobSaved ? '#0066FF' : '#ffffff'}
         />
       </Button>
     </div>

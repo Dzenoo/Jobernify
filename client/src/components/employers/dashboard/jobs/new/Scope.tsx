@@ -1,5 +1,5 @@
-import React from "react";
-import { Control } from "react-hook-form";
+import React from 'react';
+import { Control } from 'react-hook-form';
 
 import {
   FormControl,
@@ -7,9 +7,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Separator } from "@/components/ui/separator";
+} from '@/components/ui/form';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Separator } from '@/components/ui/separator';
 
 type ScopeProps = {
   control: Control<any>;
@@ -18,74 +18,74 @@ type ScopeProps = {
 const Scope: React.FC<ScopeProps> = ({ control }) => {
   const levels = [
     {
-      value: "Junior",
-      title: "Junior",
+      value: 'Junior',
+      title: 'Junior',
       description:
-        "Ideal for those new to the profession, with limited experience in the field.",
+        'Ideal for those new to the profession, with limited experience in the field.',
     },
     {
-      value: "Medior",
-      title: "Medior",
+      value: 'Medior',
+      title: 'Medior',
       description:
-        "Suited for professionals with a moderate level of experience and skill.",
+        'Suited for professionals with a moderate level of experience and skill.',
     },
     {
-      value: "Senior",
-      title: "Senior",
-      description: "Designed for highly experienced and skilled professionals.",
+      value: 'Senior',
+      title: 'Senior',
+      description: 'Designed for highly experienced and skilled professionals.',
     },
     {
-      value: "Lead",
-      title: "Lead",
+      value: 'Lead',
+      title: 'Lead',
       description:
-        "Leadership position for candidates with significant experience and leadership skills.",
+        'Leadership position for candidates with significant experience and leadership skills.',
     },
   ];
 
   const positions = [
     {
-      value: "Remote",
-      title: "Remote",
+      value: 'Remote',
+      title: 'Remote',
       description:
-        "Fully remote position with no requirement to work from a physical office.",
+        'Fully remote position with no requirement to work from a physical office.',
     },
     {
-      value: "Hybrid",
-      title: "Hybrid",
+      value: 'Hybrid',
+      title: 'Hybrid',
       description:
-        "Position that allows for a combination of remote and in-office work.",
+        'Position that allows for a combination of remote and in-office work.',
     },
     {
-      value: "On-Site",
-      title: "On-Site",
+      value: 'On-Site',
+      title: 'On-Site',
       description:
-        "Position that requires the employee to work from a physical office location.",
+        'Position that requires the employee to work from a physical office location.',
     },
   ];
 
   const types = [
     {
-      value: "Full-Time",
-      title: "Full-Time",
-      description: "Standard full-time position with regular working hours.",
+      value: 'Full-Time',
+      title: 'Full-Time',
+      description: 'Standard full-time position with regular working hours.',
     },
     {
-      value: "Internship",
-      title: "Internship",
+      value: 'Internship',
+      title: 'Internship',
       description:
-        "Position designed for students and recent graduates to gain hands-on experience.",
+        'Position designed for students and recent graduates to gain hands-on experience.',
     },
     {
-      value: "Part-Time",
-      title: "Part-Time",
+      value: 'Part-Time',
+      title: 'Part-Time',
       description:
-        "Position with reduced working hours, typically less than 40 hours per week.",
+        'Position with reduced working hours, typically less than 40 hours per week.',
     },
     {
-      value: "Freelance",
-      title: "Freelance",
+      value: 'Freelance',
+      title: 'Freelance',
       description:
-        "Contract-based position where the worker is self-employed, often on a project basis.",
+        'Contract-based position where the worker is self-employed, often on a project basis.',
     },
   ];
 

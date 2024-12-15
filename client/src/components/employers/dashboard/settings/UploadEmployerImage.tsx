@@ -1,15 +1,15 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
-import { ImagePlusIcon } from "lucide-react";
+import { ImagePlusIcon } from 'lucide-react';
 
-import { AWS_URL } from "@/constants";
+import { AWS_URL } from '@/constants';
 
-import useEditEmployer from "@/hooks/mutations/useEditEmployer.mutation";
-import useUploads from "@/hooks/defaults/useUploads.hook";
+import useEditEmployer from '@/hooks/mutations/useEditEmployer.mutation';
+import useUploads from '@/hooks/defaults/useUploads.hook';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
+import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
 
 type UploadEmployerImageProps = {
   image: string;
@@ -20,7 +20,7 @@ const UploadEmployerImage: React.FC<UploadEmployerImageProps> = ({ image }) => {
 
   const { getInputProps, getRootProps, selectedFile, restart } = useUploads({
     accept: {
-      "application/image": [".png", ".jpg", ".jpeg"],
+      'application/image': ['.png', '.jpg', '.jpeg'],
     },
     multiple: false,
   });
@@ -31,12 +31,12 @@ const UploadEmployerImage: React.FC<UploadEmployerImageProps> = ({ image }) => {
     e.preventDefault();
 
     if (!selectedFile) {
-      toast({ title: "Error", description: "Please Select Image" });
+      toast({ title: 'Error', description: 'Please Select Image' });
       return;
     }
 
     const formData = new FormData();
-    formData.append("image", selectedFile);
+    formData.append('image', selectedFile);
 
     await editEmployerProfileMutate(formData);
     restart();
@@ -44,9 +44,9 @@ const UploadEmployerImage: React.FC<UploadEmployerImageProps> = ({ image }) => {
 
   const profileImageUrl = selectedFile
     ? URL.createObjectURL(selectedFile)
-    : image?.includes("https:")
-    ? image
-    : `${AWS_URL}/${image}`;
+    : image?.includes('https:')
+      ? image
+      : `${AWS_URL}/${image}`;
 
   return (
     <div className="flex items-center gap-7 flex-wrap">

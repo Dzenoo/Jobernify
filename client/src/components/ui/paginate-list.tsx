@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { getTruncatedPageRange } from "@/lib/utils";
+import { getTruncatedPageRange } from '@/lib/utils';
 
-import usePagination from "@/hooks/defaults/usePagination.hook";
+import usePagination from '@/hooks/defaults/usePagination.hook';
 
 import {
   Pagination,
@@ -12,7 +12,7 @@ import {
   PaginationNext,
   PaginationPrevious,
   PaginationEllipsis,
-} from "@/components/ui/pagination";
+} from '@/components/ui/pagination';
 
 type PaginationProps = {
   totalItems: number;
@@ -46,7 +46,7 @@ const PaginatedList: React.FC<PaginationProps> = ({
         </PaginationItem>
 
         {pageRange.map((pageOrEllipsis, index) => {
-          if (pageOrEllipsis === "...") {
+          if (pageOrEllipsis === '...') {
             return (
               <PaginationItem key={`ellipsis-${index}`}>
                 <PaginationEllipsis />

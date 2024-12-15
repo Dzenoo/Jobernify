@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
 
-import { FilterGroup } from "@/types";
+import { FilterGroup } from '@/types';
 
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/ui/accordion";
+} from '@/components/ui/accordion';
 
 interface FilterHandlerProps {
   showCount: boolean;
@@ -31,9 +31,9 @@ const FilterHandler: React.FC<FilterHandlerProps> = ({
   const handleCheckboxChange = (
     checked: boolean,
     type: string,
-    value: string
+    value: string,
   ) => {
-    checkboxSearchParams(type, value, checked ? "add" : "remove");
+    checkboxSearchParams(type, value, checked ? 'add' : 'remove');
   };
 
   const handleShowMoreToggle = () => {
@@ -41,7 +41,7 @@ const FilterHandler: React.FC<FilterHandlerProps> = ({
   };
 
   return (
-    <Accordion type="multiple" defaultValue={["item-0"]}>
+    <Accordion type="multiple" defaultValue={['item-0']}>
       {filterGroups.map((filter, index) => {
         const visibleCheckboxes = showAll
           ? filter.data
@@ -69,7 +69,7 @@ const FilterHandler: React.FC<FilterHandlerProps> = ({
                         handleCheckboxChange(
                           checked as boolean,
                           checkbox.type,
-                          checkbox.value
+                          checkbox.value,
                         )
                       }
                     />
@@ -91,7 +91,7 @@ const FilterHandler: React.FC<FilterHandlerProps> = ({
                   className="mt-3 text-blue-500 text-sm cursor-pointer"
                   onClick={handleShowMoreToggle}
                 >
-                  {showAll ? "Show Less" : "Show More"}
+                  {showAll ? 'Show Less' : 'Show More'}
                 </button>
               )}
             </AccordionContent>

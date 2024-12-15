@@ -34,6 +34,8 @@ async function initializeServer() {
 
   app.setGlobalPrefix('api');
 
-  await app.listen(process.env.PORT);
+  await app.listen(process.env.PORT, () => {
+    console.log(`Server running on port ${process.env.PORT}`);
+  });
 }
 initializeServer();

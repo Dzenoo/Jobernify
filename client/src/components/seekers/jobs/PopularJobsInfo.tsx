@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { useToast } from "@/components/ui/use-toast";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { useToast } from '@/components/ui/use-toast';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 
 type PopularsJobsInfoProps = {
   jobs: {
@@ -27,7 +27,7 @@ const PopularJobsInfo: React.FC<PopularsJobsInfoProps> = React.memo(
       navigator.clipboard.writeText(title);
 
       toast({
-        title: "Success",
+        title: 'Success',
         description: `${title} copied to clipboard`,
       });
     };
@@ -54,7 +54,7 @@ const PopularJobsInfo: React.FC<PopularsJobsInfoProps> = React.memo(
                     <Button
                       variant="outline"
                       className={`w-full ${
-                        index < jobs.length - 1 ? "mb-2" : ""
+                        index < jobs.length - 1 ? 'mb-2' : ''
                       }`}
                       onClick={() => handleCopyPopularJobTitle(title)}
                     >
@@ -69,7 +69,7 @@ const PopularJobsInfo: React.FC<PopularsJobsInfoProps> = React.memo(
         )}
       </Card>
     );
-  }
+  },
 );
 
 export default PopularJobsInfo;

@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import { Search } from "lucide-react";
+import { Search } from 'lucide-react';
 
-import { SeekerTypes } from "@/types";
+import { Seeker } from '@/types';
 
-import SeekerItem from "./SeekerItem";
+import SeekerItem from './SeekerItem';
 
 type SeekersListProps = {
-  seekers: SeekerTypes[];
+  seekers: Seeker[];
 };
 
 const SeekersList: React.FC<SeekersListProps> = ({ seekers }) => {

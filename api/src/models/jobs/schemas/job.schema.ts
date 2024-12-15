@@ -4,25 +4,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Employer } from 'src/models/employers/schemas/employer.schema';
 import { Application } from 'src/models/applications/schemas/application.schema';
 
-export enum JobPosition {
-  Remote = 'Remote',
-  OnSite = 'On-Site',
-  Hybrid = 'Hybrid',
-}
-
-export enum JobType {
-  Internship = 'Internship',
-  FullTime = 'Full-Time',
-  PartTime = 'Part-Time',
-  Freelance = 'Freelance',
-}
-
-export enum JobLevel {
-  Junior = 'Junior',
-  Medior = 'Medior',
-  Senior = 'Senior',
-  Lead = 'Lead',
-}
+import { JobLevel, JobPosition, JobType } from 'shared';
 
 export type JobDocument = HydratedDocument<Job>;
 

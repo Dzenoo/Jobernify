@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { FeaturesData } from "@/constants";
+import { FeaturesData } from '@/constants';
 
-import BlueButton from "./BlueButton";
+import BlueButton from './BlueButton';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 const FeaturesLanding: React.FC = () => {
   return (
@@ -20,7 +20,7 @@ const FeaturesLanding: React.FC = () => {
         </div>
         <div className="max-w-xl">
           <h1 className="text-4xl font-bold leading-[55px] max-sm:text-3xl">
-            Explore Features That Simplify{" "}
+            Explore Features That Simplify{' '}
             <span className="text-[#0084FF]">Job Searching and Hiring</span> for
             Everyone
           </h1>

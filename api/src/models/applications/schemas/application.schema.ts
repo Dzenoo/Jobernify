@@ -4,14 +4,9 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Job } from 'src/models/jobs/schemas/job.schema';
 import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 
-export type ApplicationDocument = HydratedDocument<Application>;
+import { ApplicationStatus } from 'shared';
 
-export enum ApplicationStatus {
-  Rejected = 'Rejected',
-  Pending = 'Pending',
-  Accepted = 'Accepted',
-  Interview = 'Interview',
-}
+export type ApplicationDocument = HydratedDocument<Application>;
 
 @Schema({ timestamps: true })
 export class Application {

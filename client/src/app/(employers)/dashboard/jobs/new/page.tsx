@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React from "react";
-import UpdateJobForm from "@/components/employers/dashboard/jobs/new/forms/UpdateJobForm";
+import React from 'react';
+import UpdateJobForm from '@/components/employers/dashboard/jobs/new/forms/UpdateJobForm';
 
 const NewJobPage = () => {
   return (

@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
-import { useTheme } from "next-themes";
+import { useTheme } from 'next-themes';
 
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import { FooterLinks } from "@/constants";
+import { FooterLinks } from '@/constants';
 
 const Footer: React.FC = () => {
   const pathname = usePathname();
   const { resolvedTheme } = useTheme();
 
-  const isLanding = pathname === "/";
+  const isLanding = pathname === '/';
 
   return (
     <footer
       className={`p-5 shadow-lg border-t bg-white flex flex-col gap-6 dark:bg-[#0d0d0d] dark:border-[#1b1b1b] ${
-        isLanding && "px-5 py-10 md:px-28"
+        isLanding && 'px-5 py-10 md:px-28'
       }`}
     >
       <div className="flex justify-between gap-10 items-start border-b pb-6 max-xl:flex-wrap dark:border-[#1b1b1b]">
@@ -27,15 +27,15 @@ const Footer: React.FC = () => {
           <div>
             <Image
               src={
-                resolvedTheme === "dark"
-                  ? "/images/logo-dark.png"
-                  : "/images/logo-light.png"
+                resolvedTheme === 'dark'
+                  ? '/images/logo-dark.png'
+                  : '/images/logo-light.png'
               }
               alt="light-talentify-logo"
               width={100}
               height={100}
               loading="lazy"
-              style={{ objectFit: "cover", width: "auto", height: "auto" }}
+              style={{ objectFit: 'cover', width: 'auto', height: 'auto' }}
             />
           </div>
           <div>

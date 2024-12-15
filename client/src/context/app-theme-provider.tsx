@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { ThemeProvider } from "next-themes";
-import { type ReactNode } from "react";
+import { ThemeProvider } from 'next-themes';
+import { type ReactNode } from 'react';
 
 const AppThemeProvider = ({ children }: { children: ReactNode }) => {
   return (

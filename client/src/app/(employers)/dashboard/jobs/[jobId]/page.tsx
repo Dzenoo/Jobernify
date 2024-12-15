@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import dynamic from "next/dynamic";
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import dynamic from 'next/dynamic';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
 
-import { getApplications } from "@/lib/actions/applications.actions";
+import { getApplications } from '@/lib/actions/applications.actions';
 
-import FilterApplications from "@/components/employers/dashboard/jobs/applications/filter/FilterApplications";
-import LoadingJobApplications from "@/components/loaders/employers/LoadingJobApplications";
+import FilterApplications from '@/components/employers/dashboard/jobs/applications/filter/FilterApplications';
+import LoadingJobApplications from '@/components/loaders/employers/LoadingJobApplications';
 
-import PaginatedList from "@/components/ui/paginate-list";
-import NotFound from "@/components/shared/pages/NotFound";
+import PaginatedList from '@/components/ui/paginate-list';
+import NotFound from '@/components/shared/pages/NotFound';
 
 const Applications = dynamic(
   () =>
-    import("@/components/employers/dashboard/jobs/applications/Applications"),
+    import('@/components/employers/dashboard/jobs/applications/Applications'),
   {
     loading: () => <LoadingJobApplications />,
-  }
+  },
 );
 
 const JobApplicationsPage = ({
@@ -34,21 +34,21 @@ const JobApplicationsPage = ({
   const { token } = useAuthentication().getCookieHandler();
   const { data, isLoading, isFetching, isRefetching } = useQuery({
     queryKey: [
-      "applications",
+      'applications',
       params.jobId,
       searchParams.page,
       searchParams.status,
     ],
     queryFn: () => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return getApplications({
         token: token,
         jobId: params.jobId,
         page: Number(searchParams.page) || 1,
-        status: searchParams.status || "",
+        status: searchParams.status || '',
       });
     },
   });
@@ -99,7 +99,7 @@ const JobApplicationsPage = ({
         <div>
           <PaginatedList
             onPageChange={(value) =>
-              updateSearchParams("page", value.toString())
+              updateSearchParams('page', value.toString())
             }
             totalItems={totalApplications}
             itemsPerPage={itemsPerPage}

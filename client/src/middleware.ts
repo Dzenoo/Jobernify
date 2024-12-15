@@ -1,23 +1,23 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse, NextRequest } from 'next/server';
 
-import { decodeToken } from "./lib/utils";
+import { decodeToken } from './lib/utils';
 
 const protectedRoutes = {
-  "/dashboard": ["employer"],
-  "/seekers": ["employer"],
-  "/dashboard/jobs": ["employer"],
-  "/dashboard/jobs/new": ["employer"],
-  "/dashboard/jobs/jobId/edit": ["employer"],
-  "/dashboard/settings": ["employer"],
-  "/jobs": ["seeker"],
-  "/jobs/jobId": ["seeker"],
-  "/companies": ["seeker"],
-  "/profile": ["seeker"],
-  "/companies/seekerId": ["seeker"],
+  '/dashboard': ['employer'],
+  '/seekers': ['employer'],
+  '/dashboard/jobs': ['employer'],
+  '/dashboard/jobs/new': ['employer'],
+  '/dashboard/jobs/jobId/edit': ['employer'],
+  '/dashboard/settings': ['employer'],
+  '/jobs': ['seeker'],
+  '/jobs/jobId': ['seeker'],
+  '/companies': ['seeker'],
+  '/profile': ['seeker'],
+  '/companies/seekerId': ['seeker'],
 };
 
 export function middleware(req: NextRequest) {
-  const token = req.cookies.get("token");
+  const token = req.cookies.get('token');
 
   const userType = token ? decodeToken(token.value)?.role : null;
   const pathname = req.nextUrl.pathname;
@@ -30,8 +30,8 @@ export function middleware(req: NextRequest) {
     return redirectLoggedInUser(userType, req);
   }
 
-  if (pathname === "/" && userType === "employer") {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
+  if (pathname === '/' && userType === 'employer') {
+    return NextResponse.redirect(new URL('/dashboard', req.url));
   }
 
   return handleProtectedRoutes(pathname, userType, req);
@@ -41,31 +41,31 @@ function handleUnauthenticatedAccess(pathname: string, req: NextRequest) {
   if (isAuthPage(pathname)) {
     return NextResponse.next();
   }
-  return NextResponse.redirect(new URL("/login", req.url));
+  return NextResponse.redirect(new URL('/login', req.url));
 }
 
 function isAuthPage(pathname: string) {
   return (
-    pathname === "/login" ||
-    pathname === "/signup" ||
-    pathname === "/verify-email" ||
-    pathname === "/check-your-email"
+    pathname === '/login' ||
+    pathname === '/signup' ||
+    pathname === '/verify-email' ||
+    pathname === '/check-your-email'
   );
 }
 
 function redirectLoggedInUser(userType: string, req: NextRequest) {
-  const redirectUrl = userType === "employer" ? "/dashboard" : "/jobs";
+  const redirectUrl = userType === 'employer' ? '/dashboard' : '/jobs';
   return NextResponse.redirect(new URL(redirectUrl, req.url));
 }
 
 function handleProtectedRoutes(
   pathname: string,
   userType: string,
-  req: NextRequest
+  req: NextRequest,
 ) {
   for (const [route, roles] of Object.entries(protectedRoutes)) {
     if (pathname.startsWith(route) && !roles.includes(userType)) {
-      const redirectUrl = userType === "employer" ? "/seekers" : "/jobs";
+      const redirectUrl = userType === 'employer' ? '/seekers' : '/jobs';
       return NextResponse.redirect(new URL(redirectUrl, req.url));
     }
   }
@@ -74,14 +74,14 @@ function handleProtectedRoutes(
 
 export const config = {
   matcher: [
-    "/login",
-    "/signup",
-    "/verify-email",
-    "/check-your-email",
-    "/dashboard/:path*",
-    "/seekers",
-    "/profile",
-    "/companies/:path*",
-    "/jobs/:path*",
+    '/login',
+    '/signup',
+    '/verify-email',
+    '/check-your-email',
+    '/dashboard/:path*',
+    '/seekers',
+    '/profile',
+    '/companies/:path*',
+    '/jobs/:path*',
   ],
 };

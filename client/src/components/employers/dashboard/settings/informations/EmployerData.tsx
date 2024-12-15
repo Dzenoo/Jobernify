@@ -1,23 +1,23 @@
-import React from "react";
+import React from 'react';
 
-import { findIndustriesData } from "@/lib/utils";
+import { findIndustriesData } from '@/lib/utils';
 
-import { EmployerTypes } from "@/types";
+import { Employer } from '@/types';
 
 type EmployerInformationsProps = {
-  employer: EmployerTypes;
+  employer: Employer;
 };
 
 const EmployerData: React.FC<EmployerInformationsProps> = ({ employer }) => {
   const ProfileInformationArrays = [
     {
-      id: "1",
-      title: "Company Name",
+      id: '1',
+      title: 'Company Name',
       data: employer?.name,
     },
     {
-      id: "2",
-      title: "Address",
+      id: '2',
+      title: 'Address',
       data: employer?.address,
     },
   ];
@@ -42,7 +42,7 @@ const EmployerData: React.FC<EmployerInformationsProps> = ({ employer }) => {
         </div>
         <div>
           <p className="text-initial-gray">
-            {employer?.companyDescription || "No Description Available"}
+            {employer?.companyDescription || 'No Description Available'}
           </p>
         </div>
       </div>
@@ -53,7 +53,7 @@ const EmployerData: React.FC<EmployerInformationsProps> = ({ employer }) => {
         <div>
           <a href={employer?.website} target="_blank">
             <p className="text-blue-500 dark:text-blue-500">
-              {employer?.website || "No Website Available"}
+              {employer?.website || 'No Website Available'}
             </p>
           </a>
         </div>
@@ -64,8 +64,8 @@ const EmployerData: React.FC<EmployerInformationsProps> = ({ employer }) => {
         </div>
         <div>
           <p className="text-initial-gray">
-            {findIndustriesData(employer?.industry || "") ||
-              "No Industry Available"}
+            {findIndustriesData(employer?.industry || '') ||
+              'No Industry Available'}
           </p>
         </div>
       </div>
@@ -75,7 +75,7 @@ const EmployerData: React.FC<EmployerInformationsProps> = ({ employer }) => {
         </div>
         <div>
           <p className="text-initial-gray">
-            {employer?.size || "No Size Available"}
+            {employer?.size || 'No Size Available'}
           </p>
         </div>
       </div>

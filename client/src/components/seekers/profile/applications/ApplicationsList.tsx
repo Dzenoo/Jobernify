@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import { Search } from "lucide-react";
+import { Search } from 'lucide-react';
 
-import ApplicationsItem from "./ApplicationsItem";
+import ApplicationsItem from './ApplicationsItem';
 
-import { ApplicationsTypes } from "@/types";
+import { Application } from '@/types';
 
 type ApplicationsListProps = {
-  applications: ApplicationsTypes[];
+  applications: Application[];
 };
 
 const ApplicationsList: React.FC<ApplicationsListProps> = React.memo(
@@ -36,7 +36,7 @@ const ApplicationsList: React.FC<ApplicationsListProps> = React.memo(
         </div>
       </div>
     );
-  }
+  },
 );
 
 export default ApplicationsList;

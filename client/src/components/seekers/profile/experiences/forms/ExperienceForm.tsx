@@ -1,32 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import zod from "zod";
-import { CalendarIcon } from "lucide-react";
-import { ScaleLoader } from "react-spinners";
-import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
+import zod from 'zod';
+import { CalendarIcon } from 'lucide-react';
+import { ScaleLoader } from 'react-spinners';
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { format } from 'date-fns';
 
-import { useToast } from "@/components/ui/use-toast";
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import { JobsFiltersData } from "@/constants";
-import { queryClient } from "@/context/react-query-client";
-import { cn } from "@/lib/utils";
+import { useToast } from '@/components/ui/use-toast';
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { JobsFiltersData } from '@/constants';
+import { queryClient } from '@/context/react-query-client';
+import { cn } from '@/lib/utils';
 import {
   AddExperienceSchema,
   EditExperienceSchema,
-} from "@/lib/zod/seekers.validation";
+} from '@/lib/zod/seekers.validation';
 import {
   addNewExperience,
   editExperience,
-} from "@/lib/actions/seekers.actions";
-import { ExperienceTypes } from "@/types";
+} from '@/lib/actions/seekers.actions';
+import { Experience } from '@/types';
 
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -35,34 +35,34 @@ import {
   FormLabel,
   FormMessage,
   FormDescription,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/popover';
 import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer";
+} from '@/components/ui/drawer';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 type ExperienceFormProps = {
   isEdit: boolean;
   experienceId: string | null;
-  experience: ExperienceTypes;
+  experience: Experience;
   closeForm: () => void;
   isOpen: boolean;
   isDialog: boolean;
@@ -84,17 +84,17 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
   const form = useForm<zod.infer<typeof SchemaToInfer>>({
     resolver: zodResolver(SchemaToInfer),
     defaultValues: {
-      jobTitle: isEdit ? experience?.jobTitle : "",
-      companyName: isEdit ? experience?.companyName : "",
+      jobTitle: isEdit ? experience?.jobTitle : '',
+      companyName: isEdit ? experience?.companyName : '',
       startDate: isEdit ? new Date(experience?.startDate) : new Date(),
       endDate: isEdit ? new Date(experience?.endDate) : new Date(),
-      level: isEdit ? (experience?.level as any) : "",
-      type: isEdit ? (experience?.type as any) : "",
-      position: isEdit ? (experience?.position as any) : "",
-      location: isEdit ? experience?.location : "",
+      level: isEdit ? (experience?.level as any) : '',
+      type: isEdit ? (experience?.type as any) : '',
+      position: isEdit ? (experience?.position as any) : '',
+      location: isEdit ? experience?.location : '',
       isCurrentlyWorking: isEdit ? experience?.isCurrentlyWorking : false,
     },
-    mode: "all",
+    mode: 'all',
   });
 
   useEffect(() => {
@@ -104,7 +104,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
   const { mutateAsync: handleExperienceMutate } = useMutation({
     mutationFn: (formData: any) => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return isEdit
@@ -112,14 +112,14 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
         : addNewExperience(formData, token);
     },
     onSuccess: (response) => {
-      toast({ title: "Success", description: response.message });
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      toast({ title: 'Success', description: response.message });
+      queryClient.invalidateQueries({ queryKey: ['profile'] });
       closeForm();
     },
     onError: (error: any) => {
       toast({
-        title: "Error",
-        description: error?.response?.data?.message || "An error occurred",
+        title: 'Error',
+        description: error?.response?.data?.message || 'An error occurred',
       });
     },
   });
@@ -178,14 +178,14 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
-                      variant={"outline"}
+                      variant={'outline'}
                       className={cn(
-                        "pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
+                        'pl-3 text-left font-normal',
+                        !field.value && 'text-muted-foreground',
                       )}
                     >
                       {field.value ? (
-                        format(field.value, "PPP")
+                        format(field.value, 'PPP')
                       ) : (
                         <span>Pick a date</span>
                       )}
@@ -202,7 +202,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
                     selected={field.value as any}
                     onSelect={field.onChange}
                     disabled={(date) =>
-                      date > new Date() || date < new Date("1900-01-01")
+                      date > new Date() || date < new Date('1900-01-01')
                     }
                     initialFocus
                   />
@@ -223,15 +223,15 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
-                      variant={"outline"}
+                      variant={'outline'}
                       className={cn(
-                        "pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
+                        'pl-3 text-left font-normal',
+                        !field.value && 'text-muted-foreground',
                       )}
-                      disabled={form.getValues("isCurrentlyWorking")}
+                      disabled={form.getValues('isCurrentlyWorking')}
                     >
                       {field.value ? (
-                        format(field.value, "PPP")
+                        format(field.value, 'PPP')
                       ) : (
                         <span>Pick a date</span>
                       )}
@@ -248,7 +248,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
                     selected={field.value as any}
                     onSelect={field.onChange}
                     disabled={(date) =>
-                      date > new Date() || date < new Date("1900-01-01")
+                      date > new Date() || date < new Date('1900-01-01')
                     }
                     initialFocus
                   />
@@ -387,14 +387,14 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
           {form.formState.isSubmitting ? (
             <ScaleLoader color="#fff" height={10} />
           ) : (
-            "Add"
+            'Add'
           )}
         </Button>
       </form>
     </Form>
   );
 
-  const title = isEdit ? "Edit Experience" : "Add Experience";
+  const title = isEdit ? 'Edit Experience' : 'Add Experience';
 
   if (isDialog) {
     return (

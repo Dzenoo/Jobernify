@@ -1,21 +1,21 @@
-import React from "react";
+import React from 'react';
 
-import { useMutation } from "@tanstack/react-query";
-import { Briefcase, Edit, Trash } from "lucide-react";
+import { useMutation } from '@tanstack/react-query';
+import { Briefcase, Edit, Trash } from 'lucide-react';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
 
-import { queryClient } from "@/context/react-query-client";
-import { deleteExperience } from "@/lib/actions/seekers.actions";
-import { formatDate } from "@/lib/utils";
+import { queryClient } from '@/context/react-query-client';
+import { deleteExperience } from '@/lib/actions/seekers.actions';
+import { formatDate } from '@/lib/utils';
 
-import { ExperienceTypes } from "@/types";
+import { Experience } from '@/types';
 
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from '@/components/ui/use-toast';
 
 type ExperienceItemProps = {
   onEdit: () => void;
-} & ExperienceTypes;
+} & Experience;
 
 const ExperienceItem: React.FC<ExperienceItemProps> = ({
   onEdit,
@@ -36,23 +36,23 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
   const { mutateAsync: deleteExperienceMutate } = useMutation({
     mutationFn: () => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return deleteExperience(_id, token);
     },
     onSuccess: (response) => {
-      toast({ title: "Success", description: response.message });
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      toast({ title: 'Success', description: response.message });
+      queryClient.invalidateQueries({ queryKey: ['profile'] });
     },
     onError: (error: any) => {
-      toast({ title: "Error", description: error?.response?.data?.message });
+      toast({ title: 'Error', description: error?.response?.data?.message });
     },
   });
 
   const handleDeleteExperience = async () => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this experience?"
+      'Are you sure you want to delete this experience?',
     );
     if (confirmDelete) {
       await deleteExperienceMutate();
@@ -60,7 +60,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
   };
 
   const formattedStartDate = formatDate(startDate);
-  const formattedEndDate = endDate ? formatDate(endDate) : "";
+  const formattedEndDate = endDate ? formatDate(endDate) : '';
 
   return (
     <div className="flex items-start gap-5 dark:bg-transparent rounded-xl bg-white p-6 border border-gray-100 dark:border-[#3b3b3b] overflow-auto whitespace-nowrap">
@@ -77,7 +77,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
         />
         <InfoSection location={location} position={position} level={level} />
       </div>
-      {userType === "seeker" && (
+      {userType === 'seeker' && (
         <div className="flex gap-2">
           <button onClick={onEdit}>
             <Edit />

@@ -1,32 +1,33 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-import zod from "zod";
-import TurndownService from "turndown";
-import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ScaleLoader } from "react-spinners";
-import { useToast } from "@/components/ui/use-toast";
+import zod from 'zod';
+import TurndownService from 'turndown';
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ScaleLoader } from 'react-spinners';
+import { useToast } from '@/components/ui/use-toast';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
 
-import { queryClient } from "@/context/react-query-client";
-import { createNewJob, editJob } from "@/lib/actions/jobs.actions";
-import { UpdateJobSchema } from "@/lib/zod/jobs.validation";
+import { queryClient } from '@/context/react-query-client';
+import { createNewJob, editJob } from '@/lib/actions/jobs.actions';
+import { UpdateJobSchema } from '@/lib/zod/jobs.validation';
 
-import { JobTypes } from "@/types";
+import { Job } from '@/types';
 
-import Details from "@/components/employers/dashboard/jobs/new/Details";
-import Overview from "@/components/employers/dashboard/jobs/new/Overview";
-import Scope from "@/components/employers/dashboard/jobs/new/Scope";
-import Skills from "@/components/employers/dashboard/jobs/new/Skills";
-import Text from "@/components/employers/dashboard/jobs/new/Text";
+import Details from '@/components/employers/dashboard/jobs/new/Details';
+import Overview from '@/components/employers/dashboard/jobs/new/Overview';
+import Scope from '@/components/employers/dashboard/jobs/new/Scope';
+import Skills from '@/components/employers/dashboard/jobs/new/Skills';
+import Text from '@/components/employers/dashboard/jobs/new/Text';
 
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
+import { Button } from '@/components/ui/button';
+import { Form } from '@/components/ui/form';
+import { JobLevel, JobPosition, JobType } from 'shared';
 
 type UpdateJobFormProps =
   | {
@@ -34,7 +35,7 @@ type UpdateJobFormProps =
     }
   | {
       isEdit: true;
-      formData: JobTypes;
+      formData: Job;
       jobId: string;
     };
 
@@ -48,18 +49,18 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
   const jobId = isEdit ? props.jobId : undefined;
 
   const form = useForm<zod.infer<typeof UpdateJobSchema>>({
-    mode: "all",
+    mode: 'all',
     defaultValues: {
-      title: "",
-      overview: "",
-      location: "",
-      description: "",
-      expiration_date: "",
+      title: '',
+      overview: '',
+      location: '',
+      description: '',
+      expiration_date: '',
       salary: 0,
       skills: [],
-      position: "Hybrid",
-      level: "Junior",
-      type: "Freelance",
+      position: JobPosition.Hybrid,
+      level: JobLevel.Junior,
+      type: JobType.Freelance,
     },
     resolver: zodResolver(UpdateJobSchema),
   });
@@ -74,11 +75,11 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
         location: formData.location,
         description: formData.description,
         expiration_date: formData.expiration_date,
-        salary: formData.salary || 0,
-        skills: formData.skills || [],
-        position: formData.position || "Hybrid",
-        level: formData.level || "Junior",
-        type: formData.type || "Freelance",
+        salary: formData.salary,
+        skills: formData.skills,
+        position: formData.position,
+        level: formData.level,
+        type: formData.type,
       });
     }
   }, [formData, reset]);
@@ -86,7 +87,7 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
   const { mutateAsync: updateJobMutate, status } = useMutation({
     mutationFn: (formData: any) => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return isEdit
@@ -95,15 +96,15 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
     },
     onSuccess: (response) => {
       router.push(`/dashboard/jobs/?page=1`);
-      queryClient.invalidateQueries({ queryKey: ["jobs"] });
-      toast({ title: "Success", description: response.message });
+      queryClient.invalidateQueries({ queryKey: ['jobs'] });
+      toast({ title: 'Success', description: response.message });
     },
     onError: (error: any) => {
-      toast({ title: "Error", description: error?.response?.data?.message });
+      toast({ title: 'Error', description: error?.response?.data?.message });
     },
   });
 
-  const isLoading = status === "pending";
+  const isLoading = status === 'pending';
 
   const [currentJobForm, setCurrentJobForm] = useState<number>(0);
 
@@ -116,7 +117,7 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
   }
 
   const onSelectSkills = (skills: any) => {
-    form.setValue("skills", skills);
+    form.setValue('skills', skills);
   };
 
   function renderCurrentStep() {
@@ -143,22 +144,22 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
 
   const stepDetails = [
     {
-      title: "Begin by crafting a solid foundation for the job",
+      title: 'Begin by crafting a solid foundation for the job',
       description:
         "Crafting a compelling job title is key to attracting top-tier candidates. It's the first impression seekers will have of your job, so make it count.",
     },
     {
-      title: "Provide a detailed description of the job",
+      title: 'Provide a detailed description of the job',
       description:
-        "This information helps candidates assess their fit for the position and enhances the quality of applications you receive",
+        'This information helps candidates assess their fit for the position and enhances the quality of applications you receive',
     },
     {
-      title: "What key skills are essential for this role?",
+      title: 'What key skills are essential for this role?',
       description:
-        "Clearly defined skills help applicants gauge their qualifications and suitability for the role.",
+        'Clearly defined skills help applicants gauge their qualifications and suitability for the role.',
     },
     {
-      title: "Describe the scope of the job",
+      title: 'Describe the scope of the job',
       description:
         " A clear scope helps candidates understand the role's impact and envision their future within the organization",
     },
@@ -185,7 +186,7 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
                 {stepDetails.length - 1 === currentJobForm && (
                   <div className="flex gap-3 justify-end">
                     <Button type="submit" variant="default">
-                      {isLoading ? <ScaleLoader height={10} /> : "Submit"}
+                      {isLoading ? <ScaleLoader height={10} /> : 'Submit'}
                     </Button>
                   </div>
                 )}

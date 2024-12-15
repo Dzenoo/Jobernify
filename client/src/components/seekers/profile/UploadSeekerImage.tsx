@@ -1,17 +1,17 @@
-import React from "react";
-import Image from "next/image";
-import { useTheme } from "next-themes";
+import React from 'react';
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
 
-import { ImagePlusIcon } from "lucide-react";
-import { ScaleLoader } from "react-spinners";
+import { ImagePlusIcon } from 'lucide-react';
+import { ScaleLoader } from 'react-spinners';
 
-import { AWS_URL } from "@/constants";
+import { AWS_URL } from '@/constants';
 
-import useUploads from "@/hooks/defaults/useUploads.hook";
-import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
+import useUploads from '@/hooks/defaults/useUploads.hook';
+import useEditSeeker from '@/hooks/mutations/useEditSeeker.mutation';
 
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 
 type UploadSeekerImageProps = {
   image: string;
@@ -24,7 +24,7 @@ const UploadSeekerImage: React.FC<UploadSeekerImageProps> = ({ image }) => {
 
   const { getInputProps, getRootProps, selectedFile, restart } = useUploads({
     accept: {
-      "application/image": [".png", ".jpg", ".jpeg"],
+      'application/image': ['.png', '.jpg', '.jpeg'],
     },
     multiple: false,
   });
@@ -33,12 +33,12 @@ const UploadSeekerImage: React.FC<UploadSeekerImageProps> = ({ image }) => {
     e.preventDefault();
 
     if (!selectedFile) {
-      toast({ title: "Error", description: "Please Select Image" });
+      toast({ title: 'Error', description: 'Please Select Image' });
       return;
     }
 
     const formData = new FormData();
-    formData.append("image", selectedFile);
+    formData.append('image', selectedFile);
 
     await editSeekerProfileMutate(formData);
     restart();
@@ -46,9 +46,9 @@ const UploadSeekerImage: React.FC<UploadSeekerImageProps> = ({ image }) => {
 
   const profileImageUrl = selectedFile
     ? URL.createObjectURL(selectedFile)
-    : image?.includes("https:")
-    ? image
-    : `${AWS_URL}/${image}`;
+    : image?.includes('https:')
+      ? image
+      : `${AWS_URL}/${image}`;
 
   return (
     <div className="flex items-center gap-7 flex-wrap">
@@ -62,7 +62,7 @@ const UploadSeekerImage: React.FC<UploadSeekerImageProps> = ({ image }) => {
             className="border border-gray-000 rounded-full w-36 h-36 object-cover"
           />
         ) : (
-          <ScaleLoader color={theme === "dark" ? "#ffffff" : ""} height={10} />
+          <ScaleLoader color={theme === 'dark' ? '#ffffff' : ''} height={10} />
         )}
       </div>
       <div className="flex flex-col gap-3">

@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { ListFilter } from "lucide-react";
+import { ListFilter } from 'lucide-react';
 
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
-import { JobsFiltersData } from "@/constants";
-import { injectCountsIntoFilters } from "@/lib/utils";
-import { FilterCounts } from "@/types";
+import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import { JobsFiltersData } from '@/constants';
+import { injectCountsIntoFilters } from '@/lib/utils';
+import { FilterCounts } from '@/types';
 
-import FilterHandler from "@/components/shared/filters/FilterHandler";
+import FilterHandler from '@/components/shared/filters/FilterHandler';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer";
+} from '@/components/ui/drawer';
 
 type FilterJobsProps = {
   filterCounts: FilterCounts;
 };
 
 const FilterJobs: React.FC<FilterJobsProps> = React.memo(({ filterCounts }) => {
-  const isLarge = useMediaQuery("(min-width: 1280px)");
+  const isLarge = useMediaQuery('(min-width: 1280px)');
   const [open, setOpen] = useState(false);
 
   return (
@@ -62,16 +62,16 @@ const FiltersContent: React.FC<{
   filterCounts: FilterCounts;
 }> = ({ filterCounts }) => {
   const typeToCountMapForJobs = {
-    type: "type",
-    level: "level",
-    salary: "salary",
-    position: "position",
+    type: 'type',
+    level: 'level',
+    salary: 'salary',
+    position: 'position',
   };
 
   const updatedJobsFiltersData = injectCountsIntoFilters(
     JobsFiltersData,
     filterCounts,
-    typeToCountMapForJobs
+    typeToCountMapForJobs,
   );
 
   return (

@@ -3,9 +3,9 @@ import {
   postApiHandler,
   patchApiHandler,
   deleteApiHandler,
-} from "../api";
+} from '../api';
 
-import { FilterCounts, JobTypes } from "@/types";
+import { FilterCounts, Job } from '@/types';
 
 /**
  * ===============================
@@ -21,7 +21,7 @@ import { FilterCounts, JobTypes } from "@/types";
  */
 export const createNewJob = async (
   token: string,
-  formData: any
+  formData: any,
 ): Promise<ResponseMessageTypes> => {
   return await postApiHandler(`jobs/create-new-job`, formData, token);
 };
@@ -36,7 +36,7 @@ export const createNewJob = async (
 export const editJob = async (
   token: string,
   jobId: string,
-  formData: any
+  formData: any,
 ): Promise<ResponseMessageTypes> => {
   return await patchApiHandler(`jobs/${jobId}/edit`, formData, token);
 };
@@ -49,7 +49,7 @@ export const editJob = async (
  */
 export const deleteJob = async (
   token: string,
-  jobId: string
+  jobId: string,
 ): Promise<ResponseMessageTypes> => {
   return await deleteApiHandler(`jobs/${jobId}/delete`, token);
 };
@@ -62,7 +62,7 @@ export const deleteJob = async (
  */
 export const saveJob = async (
   jobId: string,
-  token: string
+  token: string,
 ): Promise<ResponseMessageTypes> => {
   return await postApiHandler(`jobs/${jobId}/save`, {}, token);
 };
@@ -75,12 +75,12 @@ export const saveJob = async (
 export const getJobs = async ({
   token,
   page = 1,
-  sort = "",
-  search = "",
-  salary = "",
-  type = "",
-  level = "",
-  position = "",
+  sort = '',
+  search = '',
+  salary = '',
+  type = '',
+  level = '',
+  position = '',
 }: {
   token: string;
   page?: number;
@@ -91,14 +91,14 @@ export const getJobs = async ({
   level?: string;
   position?: string;
 }): Promise<{
-  jobs: JobTypes[];
+  jobs: Job[];
   totalJobs: number;
-  popularJobs: JobTypes[];
+  popularJobs: Job[];
   filterCounts: FilterCounts;
 }> => {
   return await getApiHandler(
     `jobs/all?page=${page}&sort=${sort}&search=${search}&salary=${salary}&position=${position}&level=${level}&type=${type}`,
-    token
+    token,
   );
 };
 
@@ -110,7 +110,7 @@ export const getJobs = async ({
  */
 export const getJobById = async (
   jobId: string,
-  token: string
-): Promise<{ job: JobTypes; jobs: JobTypes[] }> => {
+  token: string,
+): Promise<{ job: Job; jobs: Job[] }> => {
   return await getApiHandler(`jobs/${jobId}`, token);
 };

@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import React from "react";
-import { usePathname } from "next/navigation";
+import React from 'react';
+import { usePathname } from 'next/navigation';
 
-import { SeekersNavbarLinks } from "@/constants";
+import { SeekersNavbarLinks } from '@/constants';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
 
-import NavbarLinksList from "./NavbarLinksList";
+import NavbarLinksList from './NavbarLinksList';
 
 const MobileBar: React.FC = () => {
   const { isAuthenticated, userType } = useAuthentication().getCookieHandler();
   const pathname = usePathname();
-  const isSeeker = userType === "seeker";
+  const isSeeker = userType === 'seeker';
 
   if (!isAuthenticated) return null;
 

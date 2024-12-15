@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import React from "react";
-import dynamic from "next/dynamic";
-import { useQuery } from "@tanstack/react-query";
+import React from 'react';
+import dynamic from 'next/dynamic';
+import { useQuery } from '@tanstack/react-query';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
 
-import { getEmployerById } from "@/lib/actions/employers.actions";
+import { getEmployerById } from '@/lib/actions/employers.actions';
 
-import LoadingCompanyDetails from "@/components/loaders/seekers/LoadingCompanyDetails";
-import EmployerDetailsInfo from "@/components/seekers/employers/details/EmployerDetailsInfo";
-import EmployerFilters from "@/components/seekers/employers/filters/EmployerFilters";
-import PaginatedList from "@/components/ui/paginate-list";
+import LoadingCompanyDetails from '@/components/loaders/seekers/LoadingCompanyDetails';
+import EmployerDetailsInfo from '@/components/seekers/employers/details/EmployerDetailsInfo';
+import EmployerFilters from '@/components/seekers/employers/filters/EmployerFilters';
+import PaginatedList from '@/components/ui/paginate-list';
 
-import NotFound from "@/components/shared/pages/NotFound";
+import NotFound from '@/components/shared/pages/NotFound';
 
-import LoadingJobsSkeleton from "@/components/loaders/seekers/LoadingJobsSkeleton";
-const JobsList = dynamic(() => import("@/components/seekers/jobs/JobsList"), {
+import LoadingJobsSkeleton from '@/components/loaders/seekers/LoadingJobsSkeleton';
+const JobsList = dynamic(() => import('@/components/seekers/jobs/JobsList'), {
   loading: () => <LoadingJobsSkeleton />,
 });
 
@@ -33,18 +33,18 @@ const CompanyDetails = ({
   const { data: fetchedCompany, isLoading } = useQuery({
     queryFn: () => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return getEmployerById(
         params.companyId,
         token,
         searchParams.section,
-        Number(searchParams.page) || 1
+        Number(searchParams.page) || 1,
       );
     },
     queryKey: [
-      "company",
+      'company',
       params.companyId,
       searchParams.section,
       searchParams.page,
@@ -59,7 +59,7 @@ const CompanyDetails = ({
     return <NotFound />;
   }
 
-  const searchParamsJobs = searchParams.section === "jobs";
+  const searchParamsJobs = searchParams.section === 'jobs';
 
   let totalItems = 0;
   if (searchParamsJobs && fetchedCompany.totalJobs) {
@@ -78,7 +78,7 @@ const CompanyDetails = ({
         {totalItems > 10 && (
           <PaginatedList
             onPageChange={(value) =>
-              updateSearchParams("page", value.toString())
+              updateSearchParams('page', value.toString())
             }
             totalItems={totalItems}
             itemsPerPage={10}

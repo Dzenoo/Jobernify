@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "prebuild": "cd ../shared && npm install && npm run build",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -47,7 +48,8 @@
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
-    "uuidv7": "^1.0.2"
+    "uuidv7": "^1.0.2",
+    "shared": "file:../shared"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

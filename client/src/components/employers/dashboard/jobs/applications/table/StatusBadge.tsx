@@ -1,11 +1,11 @@
-import React from "react";
-import { useMutation } from "@tanstack/react-query";
-import { queryClient } from "@/context/react-query-client";
+import React from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { queryClient } from '@/context/react-query-client';
 
-import { updateApplicationStatus } from "@/lib/actions/applications.actions";
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import { updateApplicationStatus } from '@/lib/actions/applications.actions';
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
 
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from '@/components/ui/use-toast';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -14,13 +14,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
   DropdownMenuGroup,
-} from "@/components/ui/dropdown-menu";
-import { CheckCircle, XCircle, Clock, UserCheck } from "lucide-react";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/dropdown-menu';
+import { CheckCircle, XCircle, Clock, UserCheck } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 type StatusBadgeProps = {
   applicationId: string;
-  status: "Pending" | "Interview" | "Accepted" | "Rejected";
+  status: 'Pending' | 'Interview' | 'Accepted' | 'Rejected';
 };
 
 const StatusBadge: React.FC<StatusBadgeProps> = ({ applicationId, status }) => {
@@ -30,18 +30,18 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ applicationId, status }) => {
   const { mutateAsync: updateStatusMutate } = useMutation({
     mutationFn: (newStatus: string) => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return updateApplicationStatus(applicationId, token, newStatus);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["applications"] });
+      queryClient.invalidateQueries({ queryKey: ['applications'] });
     },
     onError: (error: any) => {
       toast({
-        title: "Error",
-        description: error?.response?.data?.message || "Something went wrong.",
+        title: 'Error',
+        description: error?.response?.data?.message || 'Something went wrong.',
       });
     },
   });
@@ -49,26 +49,26 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ applicationId, status }) => {
   const StatusOptions = [
     {
       id: 1,
-      label: "Pending",
-      value: "Pending",
+      label: 'Pending',
+      value: 'Pending',
       icon: <Clock className="text-yellow-500" />,
     },
     {
       id: 2,
-      label: "Interview",
-      value: "Interview",
+      label: 'Interview',
+      value: 'Interview',
       icon: <UserCheck className="text-blue-500" />,
     },
     {
       id: 3,
-      label: "Accepted",
-      value: "Accepted",
+      label: 'Accepted',
+      value: 'Accepted',
       icon: <XCircle className="text-red-500" />,
     },
     {
       id: 4,
-      label: "Rejected",
-      value: "Rejected",
+      label: 'Rejected',
+      value: 'Rejected',
       icon: <CheckCircle className="text-green-500" />,
     },
   ];

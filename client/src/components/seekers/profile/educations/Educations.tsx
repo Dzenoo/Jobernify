@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState } from 'react';
 
-import { EducationTypes } from "@/types";
-import { Plus } from "lucide-react";
+import { Education } from '@/types';
+import { Plus } from 'lucide-react';
 
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
-import EducationList from "./EducationList";
-import EducationForm from "./forms/EducationForm";
+import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import EducationList from './EducationList';
+import EducationForm from './forms/EducationForm';
 
-import { Button } from "@/components/ui/button";
-import { Dialog } from "@/components/ui/dialog";
-import { Drawer } from "@/components/ui/drawer";
+import { Button } from '@/components/ui/button';
+import { Dialog } from '@/components/ui/dialog';
+import { Drawer } from '@/components/ui/drawer';
 
 type EducationsProps = {
-  education: EducationTypes[] | [];
+  education: Education[] | [];
 };
 
 const Educations: React.FC<EducationsProps> = ({ education }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [educationId, setEducationId] = useState<string | null>(null);
   const isEdit = Boolean(educationId);
-  const isLarge = useMediaQuery("(min-width: 1280px)");
+  const isLarge = useMediaQuery('(min-width: 1280px)');
   const seekerEducation = education.find(
-    (education) => education._id === educationId
+    (education) => education._id === educationId,
   );
 
   const openForm = (id?: string) => {
@@ -44,7 +44,7 @@ const Educations: React.FC<EducationsProps> = ({ education }) => {
             <EducationForm
               isEdit={isEdit}
               educationId={educationId}
-              education={seekerEducation as EducationTypes}
+              education={seekerEducation as Education}
               isOpen={isOpen}
               closeForm={closeForm}
               isDialog={true}
@@ -58,7 +58,7 @@ const Educations: React.FC<EducationsProps> = ({ education }) => {
             <EducationForm
               isEdit={isEdit}
               educationId={educationId}
-              education={seekerEducation as EducationTypes}
+              education={seekerEducation as Education}
               isOpen={isOpen}
               closeForm={closeForm}
               isDialog={false}

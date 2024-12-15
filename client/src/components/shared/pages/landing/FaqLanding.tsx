@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { EmployerFAQs, GeneralPlatformFAQs, JobSeekerFAQs } from "@/constants";
+import { EmployerFAQs, GeneralPlatformFAQs, JobSeekerFAQs } from '@/constants';
 
-import BlueButton from "./BlueButton";
+import BlueButton from './BlueButton';
 
 import {
   Accordion,
   AccordionTrigger,
   AccordionItem,
   AccordionContent,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
 
 const FaqLanding: React.FC = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -22,17 +22,17 @@ const FaqLanding: React.FC = () => {
   }
 
   const Buttons = [
-    { id: 0, title: "Seekers" },
-    { id: 1, title: "Employers" },
-    { id: 2, title: "General" },
+    { id: 0, title: 'Seekers' },
+    { id: 1, title: 'Employers' },
+    { id: 2, title: 'General' },
   ];
 
   const AccordionData =
     activeTab === 0
       ? JobSeekerFAQs
       : activeTab === 1
-      ? EmployerFAQs
-      : GeneralPlatformFAQs;
+        ? EmployerFAQs
+        : GeneralPlatformFAQs;
 
   return (
     <section id="faq" className="px-5 flex flex-col gap-28 md:landing-padding">

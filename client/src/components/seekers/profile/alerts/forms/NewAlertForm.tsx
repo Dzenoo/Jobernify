@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import zod from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ScaleLoader } from "react-spinners";
+import zod from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ScaleLoader } from 'react-spinners';
 
-import { JobAlertSchema } from "@/lib/zod/seekers.validation";
-import { JobAlertsTypes } from "@/types";
-import { JobsFiltersData } from "@/constants";
+import { JobAlertSchema } from '@/lib/zod/seekers.validation';
+import { JobAlerts } from '@/types';
+import { JobsFiltersData } from '@/constants';
 
-import useJobAlert from "@/hooks/mutations/useJobAlert.mutation";
+import useJobAlert from '@/hooks/mutations/useJobAlert.mutation';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -21,31 +21,31 @@ import {
   FormLabel,
   FormMessage,
   FormDescription,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer";
+} from '@/components/ui/drawer';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 type NewAlertFormProps = {
   closeAlerts: () => void;
-  alerts: JobAlertsTypes;
+  alerts: JobAlerts;
   isDialog: boolean;
 };
 
@@ -57,26 +57,26 @@ const NewAlertForm: React.FC<NewAlertFormProps> = ({
   const form = useForm<zod.infer<typeof JobAlertSchema>>({
     resolver: zodResolver(JobAlertSchema),
     defaultValues: {
-      title: "",
-      level: "",
-      type: "",
+      title: '',
+      level: '',
+      type: '',
     },
-    mode: "all",
+    mode: 'all',
   });
 
   const { mutateAsync: generateJobAlertMutate } = useJobAlert();
 
   useEffect(() => {
-    form.setValue("title", alerts?.title || "");
-    form.setValue("level", alerts?.level || "");
-    form.setValue("type", alerts?.type || "");
+    form.setValue('title', alerts?.title || '');
+    form.setValue('level', alerts?.level || '');
+    form.setValue('type', alerts?.type || '');
   }, [alerts, form]);
 
   const onSubmit = async (values: zod.infer<typeof JobAlertSchema>) => {
     const formData = new FormData();
-    formData.append("title", values.title || "");
-    formData.append("type", values.type || "");
-    formData.append("level", values.level || "");
+    formData.append('title', values.title || '');
+    formData.append('type', values.type || '');
+    formData.append('level', values.level || '');
 
     await generateJobAlertMutate(formData);
     closeAlerts();
@@ -170,7 +170,7 @@ const NewAlertForm: React.FC<NewAlertFormProps> = ({
             {form.formState.isSubmitting ? (
               <ScaleLoader color="#fff" height={10} />
             ) : (
-              "Add"
+              'Add'
             )}
           </Button>
         </DialogFooter>

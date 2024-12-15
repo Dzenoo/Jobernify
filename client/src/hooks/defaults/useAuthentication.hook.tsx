@@ -1,8 +1,8 @@
-import React from "react";
-import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
+import React from 'react';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 type AuthData = {
   isAuthenticated: boolean;
@@ -15,16 +15,16 @@ const useAuthentication = () => {
   const router = useRouter();
 
   const storeCookieHandler = React.useCallback((token: string) => {
-    Cookies.set("token", token, { expires: 1 / 24 });
+    Cookies.set('token', token, { expires: 1 / 24 });
   }, []);
 
   const deleteCookieHandler = React.useCallback(() => {
-    Cookies.remove("token");
-    router.push("/login");
+    Cookies.remove('token');
+    router.push('/login');
   }, []);
 
   const getCookieHandler = React.useCallback((): AuthData => {
-    const token = Cookies.get("token");
+    const token = Cookies.get('token');
 
     if (!token) {
       return {
@@ -47,7 +47,7 @@ const useAuthentication = () => {
       const currentTime = Math.floor(Date.now() / 1000);
 
       if (decoded.exp < currentTime) {
-        Cookies.remove("token");
+        Cookies.remove('token');
         return {
           isAuthenticated: false,
           userType: null,

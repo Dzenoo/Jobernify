@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from 'next/navigation';
 
 enum SearchParamsActions {
-  add = "add",
-  remove = "remove",
+  add = 'add',
+  remove = 'remove',
 }
 
 type SearchParamsFilters = {
@@ -18,7 +18,7 @@ type UseSearchParams = {
   checkboxSearchParams: (
     param: string,
     value: string,
-    action: keyof typeof SearchParamsActions
+    action: keyof typeof SearchParamsActions,
   ) => void;
   updateSearchParams: (param: string, value: string) => void;
   filters: SearchParamsFilters;
@@ -30,12 +30,12 @@ const useSearchParams = (): UseSearchParams => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams =
-    typeof window !== "undefined"
+    typeof window !== 'undefined'
       ? new URLSearchParams(window.location.search)
       : new URLSearchParams();
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       const paramsObj: SearchParamsFilters = {};
 
       searchParams.forEach((value, key) => {
@@ -50,19 +50,19 @@ const useSearchParams = (): UseSearchParams => {
     (
       param: string,
       value: string,
-      action: keyof typeof SearchParamsActions
+      action: keyof typeof SearchParamsActions,
     ) => {
       const newSearchParams =
-        typeof window !== "undefined"
+        typeof window !== 'undefined'
           ? new URLSearchParams(window.location.search)
           : new URLSearchParams();
       let values = newSearchParams.getAll(param);
 
-      if (action === "add") {
+      if (action === 'add') {
         if (!values.includes(value)) {
           values.push(value);
         }
-      } else if (action === "remove") {
+      } else if (action === 'remove') {
         values = values.filter((v) => v !== value);
       }
 
@@ -74,18 +74,18 @@ const useSearchParams = (): UseSearchParams => {
 
       setFilters((prev) => ({ ...prev, [param]: values }));
     },
-    []
+    [],
   );
 
   const updateSearchParams = (param: string, value: string) => {
     const newSearchParams =
-      typeof window !== "undefined"
+      typeof window !== 'undefined'
         ? new URLSearchParams(window.location.search)
         : new URLSearchParams();
 
     newSearchParams.set(param, value);
 
-    if (value === "") {
+    if (value === '') {
       newSearchParams.delete(param);
     }
 

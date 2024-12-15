@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
-import { Chart, registerables } from "chart.js";
-import { Line } from "react-chartjs-2";
-import { useTheme } from "next-themes";
+import { Chart, registerables } from 'chart.js';
+import { Line } from 'react-chartjs-2';
+import { useTheme } from 'next-themes';
 
-import { getMonthsLabels } from "@/lib/utils";
+import { getMonthsLabels } from '@/lib/utils';
 
 import {
   Card,
@@ -14,7 +14,7 @@ import {
   CardHeader,
   CardTitle,
   CardFooter,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 
 Chart.register(...registerables);
 
@@ -26,10 +26,10 @@ const Followers: React.FC<{ data: any }> = ({ data }) => {
     labels: labels,
     datasets: [
       {
-        label: "Followers",
+        label: 'Followers',
         data: data,
         fill: false,
-        borderColor: "rgba(75,192,192,1)",
+        borderColor: 'rgba(75,192,192,1)',
         tension: 0.1,
       },
     ],
@@ -42,42 +42,42 @@ const Followers: React.FC<{ data: any }> = ({ data }) => {
         beginAtZero: true,
         title: {
           display: true,
-          text: "Number of Followers",
-          color: resolvedTheme === "dark" ? "white" : "black",
+          text: 'Number of Followers',
+          color: resolvedTheme === 'dark' ? 'white' : 'black',
         },
         ticks: {
           stepSize: 1,
           precision: 0,
-          color: resolvedTheme === "dark" ? "white" : "black",
+          color: resolvedTheme === 'dark' ? 'white' : 'black',
         },
         grid: {
           color:
-            resolvedTheme === "dark"
-              ? "rgba(255, 255, 255, 0.1)"
-              : "rgba(0, 0, 0, 0.1)",
+            resolvedTheme === 'dark'
+              ? 'rgba(255, 255, 255, 0.1)'
+              : 'rgba(0, 0, 0, 0.1)',
         },
       },
       x: {
         title: {
           display: true,
-          text: "Month",
-          color: resolvedTheme === "dark" ? "white" : "black",
+          text: 'Month',
+          color: resolvedTheme === 'dark' ? 'white' : 'black',
         },
         ticks: {
-          color: resolvedTheme === "dark" ? "white" : "black",
+          color: resolvedTheme === 'dark' ? 'white' : 'black',
         },
         grid: {
           color:
-            resolvedTheme === "dark"
-              ? "rgba(255, 255, 255, 0.1)"
-              : "rgba(0, 0, 0, 0.1)",
+            resolvedTheme === 'dark'
+              ? 'rgba(255, 255, 255, 0.1)'
+              : 'rgba(0, 0, 0, 0.1)',
         },
       },
     },
     plugins: {
       legend: {
         labels: {
-          color: resolvedTheme === "dark" ? "white" : "black",
+          color: resolvedTheme === 'dark' ? 'white' : 'black',
         },
       },
     },

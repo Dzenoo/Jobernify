@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { JobTypes } from "@/types";
-import { findLocationData, formatDate } from "@/lib/utils";
+import { Job } from '@/types';
+import { findLocationData, formatDate } from '@/lib/utils';
 
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
-import DeleteJob from "./table/DeleteJob";
-import JobOptions from "./table/JobOptions";
+import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import DeleteJob from './table/DeleteJob';
+import JobOptions from './table/JobOptions';
 
 import {
   Table,
@@ -15,12 +15,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Dialog } from "@/components/ui/dialog";
-import { Drawer } from "@/components/ui/drawer";
+} from '@/components/ui/table';
+import { Dialog } from '@/components/ui/dialog';
+import { Drawer } from '@/components/ui/drawer';
 
 type DashboardEmployerJobsProps = {
-  jobs: JobTypes[];
+  jobs: Job[];
   currentPage: number;
   itemsPerPage: number;
 };
@@ -38,28 +38,28 @@ const DashboardEmployerJobs: React.FC<DashboardEmployerJobsProps> = ({
     );
   }
 
-  const [openedJobId, setOpenedJobId] = useState<string>("");
-  const isLarge = useMediaQuery("(min-width: 1280px)");
+  const [openedJobId, setOpenedJobId] = useState<string>('');
+  const isLarge = useMediaQuery('(min-width: 1280px)');
 
   const openDeleteJob = (jobId: string) => {
     setOpenedJobId(jobId);
   };
 
   const closeDeleteJob = () => {
-    setOpenedJobId("");
+    setOpenedJobId('');
   };
 
   const columns = [
-    "Index",
-    "Title",
-    "Type",
-    "Level",
-    "Position",
-    "Location",
-    "Salary",
-    "Expiration Date",
-    "Applications",
-    "Options",
+    'Index',
+    'Title',
+    'Type',
+    'Level',
+    'Position',
+    'Location',
+    'Salary',
+    'Expiration Date',
+    'Applications',
+    'Options',
   ];
 
   return (

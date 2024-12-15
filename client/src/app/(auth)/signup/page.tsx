@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
-import SelectAccount from "@/components/auth/signup/SelectAccount";
+import SelectAccount from '@/components/auth/signup/SelectAccount';
 
 const SignupPage: React.FC = () => {
   return (

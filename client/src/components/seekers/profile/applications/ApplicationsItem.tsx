@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 import {
   Briefcase,
@@ -10,23 +10,23 @@ import {
   GraduationCap,
   MapPin,
   LayoutTemplate,
-} from "lucide-react";
+} from 'lucide-react';
 
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 
-import { findIndustriesData, formatDate, getImageUrl } from "@/lib/utils";
-import { renderIconText } from "@/helpers";
+import { findIndustriesData, formatDate, getImageUrl } from '@/lib/utils';
+import { renderIconText } from '@/helpers';
 
-import { ApplicationsTypes } from "@/types";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Application } from '@/types';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 
 type ApplicationItemProps = {
-  application: Pick<ApplicationsTypes, "_id" | "status" | "createdAt" | "job">;
+  application: Pick<Application, '_id' | 'status' | 'createdAt' | 'job'>;
 };
 
 const ApplicationsItem: React.FC<ApplicationItemProps> = ({
@@ -43,21 +43,21 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
     },
   },
 }) => {
-  const appliedDate = formatDate(createdAt || "");
+  const appliedDate = formatDate(createdAt || '');
 
   const ApplicationCompanyInfo = [
     {
-      id: "1",
+      id: '1',
       icon: <Building />,
       data: findIndustriesData(industry),
     },
     {
-      id: "2",
+      id: '2',
       icon: <MapPin />,
       data: address,
     },
     {
-      id: "3",
+      id: '3',
       icon: <LayoutTemplate />,
       data: size,
     },
@@ -65,25 +65,25 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
 
   const ApplicationJobInfo = [
     {
-      id: "1",
+      id: '1',
       icon: <GraduationCap />,
       data: level,
     },
     {
-      id: "2",
+      id: '2',
       icon: <Briefcase />,
       data: type,
     },
     {
-      id: "3",
+      id: '3',
       icon: <Calendar />,
       data: position,
     },
   ];
 
-  const applicationStatusAccepted = status === "Accepted";
-  const applicationStatusRejected = status === "Rejected";
-  const applicationsStatusInterview = status === "Interview";
+  const applicationStatusAccepted = status === 'Accepted';
+  const applicationStatusRejected = status === 'Rejected';
+  const applicationsStatusInterview = status === 'Interview';
 
   return (
     <Card className="dark:border-[#3b3b3b]">
@@ -121,9 +121,9 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
           </div>
           <div>
             {renderIconText({
-              id: "1",
+              id: '1',
               icon: <CalendarCheck />,
-              data: "Applied" + ` ${appliedDate}`,
+              data: 'Applied' + ` ${appliedDate}`,
             })}
           </div>
         </div>
@@ -132,24 +132,24 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
         <div
           className={`p-3 rounded-full border w-full overflow-auto text-center ${
             applicationStatusAccepted
-              ? "bg-green-100 dark:bg-green-200"
+              ? 'bg-green-100 dark:bg-green-200'
               : applicationStatusRejected
-              ? "bg-red-100 dark:bg-red-200"
-              : applicationsStatusInterview
-              ? "bg-yellow-100 dark:bg-yellow-200"
-              : "bg-blue-100 dark:bg-blue-200"
+                ? 'bg-red-100 dark:bg-red-200'
+                : applicationsStatusInterview
+                  ? 'bg-yellow-100 dark:bg-yellow-200'
+                  : 'bg-blue-100 dark:bg-blue-200'
           }`}
         >
           <p
             className={`
            ${
              applicationStatusAccepted
-               ? "text-green-500"
+               ? 'text-green-500'
                : applicationStatusRejected
-               ? "text-red-500"
-               : applicationsStatusInterview
-               ? "text-yellow-500"
-               : "text-blue-500"
+                 ? 'text-red-500'
+                 : applicationsStatusInterview
+                   ? 'text-yellow-500'
+                   : 'text-blue-500'
            }`}
           >
             {status}

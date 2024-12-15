@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import React from "react";
-import dynamic from "next/dynamic";
-import { useQuery } from "@tanstack/react-query";
+import React from 'react';
+import dynamic from 'next/dynamic';
+import { useQuery } from '@tanstack/react-query';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
 
-import { getEmployers } from "@/lib/actions/employers.actions";
+import { getEmployers } from '@/lib/actions/employers.actions';
 
-import SearchEmployers from "@/components/seekers/employers/search/SearchEmployers";
-import PaginatedList from "@/components/ui/paginate-list";
-import NotFound from "@/components/shared/pages/NotFound";
+import SearchEmployers from '@/components/seekers/employers/search/SearchEmployers';
+import PaginatedList from '@/components/ui/paginate-list';
+import NotFound from '@/components/shared/pages/NotFound';
 
-import LoadingCompaniesSkeleton from "@/components/loaders/seekers/LoadingCompanies";
+import LoadingCompaniesSkeleton from '@/components/loaders/seekers/LoadingCompanies';
 const EmployersList = dynamic(
-  () => import("@/components/seekers/employers/EmployersList"),
+  () => import('@/components/seekers/employers/EmployersList'),
   {
     loading: () => <LoadingCompaniesSkeleton />,
-  }
+  },
 );
 
 const Companies = ({
@@ -36,20 +36,20 @@ const Companies = ({
   } = useQuery({
     queryFn: () => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return getEmployers({
         token: token,
         page: Number(searchParams.page) || 1,
-        sort: searchParams.sort || "",
-        search: searchParams.query || "",
-        industry: searchParams.industry || "",
-        size: searchParams.size || "",
-        location: searchParams.location || "",
+        sort: searchParams.sort || '',
+        search: searchParams.query || '',
+        industry: searchParams.industry || '',
+        size: searchParams.size || '',
+        location: searchParams.location || '',
       });
     },
-    queryKey: ["companies", searchParams],
+    queryKey: ['companies', searchParams],
   });
 
   if (!fetchedCompanies && !isLoading) {
@@ -80,7 +80,7 @@ const Companies = ({
 
       {totalEmployers > 10 && (
         <PaginatedList
-          onPageChange={(value) => updateSearchParams("page", value.toString())}
+          onPageChange={(value) => updateSearchParams('page', value.toString())}
           totalItems={totalEmployers}
           itemsPerPage={10}
           currentPage={Number(searchParams.page) || 1}

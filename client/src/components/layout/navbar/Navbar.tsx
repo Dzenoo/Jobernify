@@ -1,42 +1,42 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import { ScaleLoader } from "react-spinners";
+import { ScaleLoader } from 'react-spinners';
 
-import { getImageUrl } from "@/lib/utils";
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
-import useFetchProfile from "@/hooks/queries/useFetchProfile.query";
+import { getImageUrl } from '@/lib/utils';
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import useFetchProfile from '@/hooks/queries/useFetchProfile.query';
 
 import {
   EmployersNavbarActions,
   SeekersNavbarActions,
   SeekersNavbarLinks,
-} from "@/constants";
+} from '@/constants';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+} from '@/components/ui/tooltip';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-import Logo from "./Logo";
-import NavbarActionsList from "./NavbarActionsList";
-import NavbarLinksList from "./NavbarLinksList";
+import Logo from './Logo';
+import NavbarActionsList from './NavbarActionsList';
+import NavbarLinksList from './NavbarLinksList';
 
 const AuthenticationDivLinks: React.FC = () => {
   return (
     <div className="flex items-center gap-3">
-      <Link href={"/login"}>
-        <Button variant={"outline"}>Login</Button>
+      <Link href={'/login'}>
+        <Button variant={'outline'}>Login</Button>
       </Link>
-      <Link href={"/signup"}>
-        <Button variant={"default"}>Signup</Button>
+      <Link href={'/signup'}>
+        <Button variant={'default'}>Signup</Button>
       </Link>
     </div>
   );
@@ -58,7 +58,7 @@ const Navbar: React.FC<{ href?: string }> = ({ href }) => {
 
   if (!isMounted) return null;
 
-  const isSeeker = userType === "seeker";
+  const isSeeker = userType === 'seeker';
 
   return (
     <header className="px-5 py-2 dark:bg-[#0d0d0d] base-margin flex justify-between items-center gap-3 overflow-hidden border-b border-base-gray dark:border-[#1b1b1b] bg-white">
@@ -82,14 +82,14 @@ const Navbar: React.FC<{ href?: string }> = ({ href }) => {
             <TooltipProvider delayDuration={400}>
               <Tooltip>
                 <TooltipTrigger>
-                  <Link href={isSeeker ? "/profile" : "/dashboard/settings"}>
+                  <Link href={isSeeker ? '/profile' : '/dashboard/settings'}>
                     <Avatar>
                       <AvatarImage
                         className="object-cover"
                         src={getImageUrl(
                           isSeeker
                             ? fetchedProfile?.seeker?.image
-                            : fetchedProfile?.employer?.image
+                            : fetchedProfile?.employer?.image,
                         )}
                       />
                       <AvatarFallback>
@@ -99,7 +99,7 @@ const Navbar: React.FC<{ href?: string }> = ({ href }) => {
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent>
-                  {isSeeker ? "Profile" : "Dashboard"}
+                  {isSeeker ? 'Profile' : 'Dashboard'}
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

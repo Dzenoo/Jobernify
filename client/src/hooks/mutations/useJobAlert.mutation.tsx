@@ -1,11 +1,11 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation } from '@tanstack/react-query';
 
-import { queryClient } from "@/context/react-query-client";
-import { generateJobAlert } from "@/lib/actions/seekers.actions";
+import { queryClient } from '@/context/react-query-client';
+import { generateJobAlert } from '@/lib/actions/seekers.actions';
 
-import useAuthentication from "../defaults/useAuthentication.hook";
+import useAuthentication from '../defaults/useAuthentication.hook';
 
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from '@/components/ui/use-toast';
 
 const useJobAlert = () => {
   const { toast } = useToast();
@@ -14,17 +14,17 @@ const useJobAlert = () => {
   return useMutation({
     mutationFn: (formData: FormData | any) => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return generateJobAlert(formData, token);
     },
     onSuccess: (response) => {
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
-      toast({ title: "Success", description: response.message });
+      queryClient.invalidateQueries({ queryKey: ['profile'] });
+      toast({ title: 'Success', description: response.message });
     },
     onError: (error: any) => {
-      toast({ title: "Error", description: error?.data?.response?.message });
+      toast({ title: 'Error', description: error?.data?.response?.message });
     },
   });
 };

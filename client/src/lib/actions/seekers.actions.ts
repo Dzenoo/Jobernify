@@ -3,9 +3,9 @@ import {
   postApiHandler,
   patchApiHandler,
   deleteApiHandler,
-} from "../api";
+} from '../api';
 
-import { SeekerTypes } from "@/types";
+import { Seeker } from '@/types';
 
 /**
  * ===============================
@@ -21,15 +21,15 @@ import { SeekerTypes } from "@/types";
 export const getSeekerProfile = async (
   token: string,
   page: number = 1,
-  limit: number = 10
+  limit: number = 10,
 ): Promise<{
-  seeker: SeekerTypes;
+  seeker: Seeker;
   totalSavedJobs: number;
   totalApplications: number;
 }> => {
   return await getApiHandler(
     `seekers/profile?page=${page}&limit=${limit}`,
-    token
+    token,
   );
 };
 
@@ -41,13 +41,13 @@ export const getSeekerProfile = async (
  */
 export const editSeekerProfile = async (
   formData: FormData,
-  token: string
+  token: string,
 ): Promise<ResponseMessageTypes> => {
   return await patchApiHandler(
     `seekers/edit-profile`,
     formData,
     token,
-    "multipart/form-data"
+    'multipart/form-data',
   );
 };
 
@@ -57,7 +57,7 @@ export const editSeekerProfile = async (
  * @returns A promise resolving to a response message.
  */
 export const deleteSeekerProfile = async (
-  token: string
+  token: string,
 ): Promise<ResponseMessageTypes> => {
   return await deleteApiHandler(`seekers/delete-profile`, token);
 };
@@ -70,7 +70,7 @@ export const deleteSeekerProfile = async (
  */
 export const addNewEducation = async (
   data: any,
-  token: string
+  token: string,
 ): Promise<ResponseMessageTypes> => {
   return await patchApiHandler(`seekers/add-new-education`, data, token);
 };
@@ -84,12 +84,12 @@ export const addNewEducation = async (
 export const editEducation = async (
   data: any,
   token: string,
-  educationId: string
+  educationId: string,
 ): Promise<ResponseMessageTypes> => {
   return await patchApiHandler(
     `seekers/edit-education/${educationId}`,
     data,
-    token
+    token,
   );
 };
 
@@ -101,11 +101,11 @@ export const editEducation = async (
  */
 export const deleteEducation = async (
   educationId: string,
-  token: string
+  token: string,
 ): Promise<ResponseMessageTypes> => {
   return await deleteApiHandler(
     `seekers/delete-education/${educationId}`,
-    token
+    token,
   );
 };
 
@@ -117,7 +117,7 @@ export const deleteEducation = async (
  */
 export const addNewExperience = async (
   data: any,
-  token: string
+  token: string,
 ): Promise<ResponseMessageTypes> => {
   return await patchApiHandler(`seekers/add-new-experience`, data, token);
 };
@@ -131,12 +131,12 @@ export const addNewExperience = async (
 export const editExperience = async (
   data: any,
   token: string,
-  experienceId: string
+  experienceId: string,
 ): Promise<ResponseMessageTypes> => {
   return await patchApiHandler(
     `seekers/edit-experience/${experienceId}`,
     data,
-    token
+    token,
   );
 };
 
@@ -148,11 +148,11 @@ export const editExperience = async (
  */
 export const deleteExperience = async (
   experienceId: string,
-  token: string
+  token: string,
 ): Promise<ResponseMessageTypes> => {
   return await deleteApiHandler(
     `seekers/delete-experience/${experienceId}`,
-    token
+    token,
   );
 };
 
@@ -164,7 +164,7 @@ export const deleteExperience = async (
  */
 export const generateJobAlert = async (
   formData: FormData,
-  token: string
+  token: string,
 ): Promise<ResponseMessageTypes> => {
   return await postApiHandler(`seekers/create-job-alert`, formData, token);
 };
@@ -177,7 +177,7 @@ export const generateJobAlert = async (
  */
 export const followEmployer = async (
   employerId: string,
-  token: string
+  token: string,
 ): Promise<ResponseMessageTypes> => {
   return await postApiHandler(`seekers/${employerId}/follow`, {}, token);
 };
@@ -190,17 +190,17 @@ export const followEmployer = async (
 export const getSeekers = async ({
   token,
   page = 1,
-  search = "",
-  skills = "",
+  search = '',
+  skills = '',
 }: {
   token: string;
   page: number;
   skills?: string | string[];
   search?: string;
-}): Promise<{ seekers: SeekerTypes[]; totalSeekers: number }> => {
+}): Promise<{ seekers: Seeker[]; totalSeekers: number }> => {
   return await getApiHandler(
     `seekers/all?page=${page}&search=${search}&skills=${skills}`,
-    token
+    token,
   );
 };
 
@@ -212,7 +212,7 @@ export const getSeekers = async ({
  */
 export const getSeekerById = async (
   seekerId: string,
-  token: string
-): Promise<{ seeker: SeekerTypes }> => {
+  token: string,
+): Promise<{ seeker: Seeker }> => {
   return await getApiHandler(`seekers/${seekerId}`, token);
 };

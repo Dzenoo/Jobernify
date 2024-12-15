@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import zod from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ScaleLoader } from "react-spinners";
+import zod from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ScaleLoader } from 'react-spinners';
 
-import useEditSeeker from "@/hooks/mutations/useEditSeeker.mutation";
-import { SeekerSocialsSchema } from "@/lib/zod/seekers.validation";
+import useEditSeeker from '@/hooks/mutations/useEditSeeker.mutation';
+import { SeekerSocialsSchema } from '@/lib/zod/seekers.validation';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -18,17 +18,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer";
+} from '@/components/ui/drawer';
 
 type EditSocialsFormProps = {
   isEditSocialsOpen: boolean;
@@ -50,11 +50,11 @@ const EditSocialsForm: React.FC<EditSocialsFormProps> = ({
   const form = useForm<zod.infer<typeof SeekerSocialsSchema>>({
     resolver: zodResolver(SeekerSocialsSchema),
     defaultValues: {
-      portfolio: seeker?.portfolio || "",
-      github: seeker?.github || "",
-      linkedin: seeker?.linkedin || "",
+      portfolio: seeker?.portfolio || '',
+      github: seeker?.github || '',
+      linkedin: seeker?.linkedin || '',
     },
-    mode: "all",
+    mode: 'all',
   });
 
   const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
@@ -62,18 +62,18 @@ const EditSocialsForm: React.FC<EditSocialsFormProps> = ({
   React.useEffect(() => {
     if (!isEditSocialsOpen)
       form.reset({
-        portfolio: seeker?.portfolio || "",
-        github: seeker?.github || "",
-        linkedin: seeker?.linkedin || "",
+        portfolio: seeker?.portfolio || '',
+        github: seeker?.github || '',
+        linkedin: seeker?.linkedin || '',
       });
   }, [isEditSocialsOpen]);
 
   const onSubmit = async (values: zod.infer<typeof SeekerSocialsSchema>) => {
     const formData = new FormData();
 
-    formData.append("portfolio", values.portfolio || "");
-    formData.append("github", values.github || "");
-    formData.append("linkedin", values.linkedin || "");
+    formData.append('portfolio', values.portfolio || '');
+    formData.append('github', values.github || '');
+    formData.append('linkedin', values.linkedin || '');
 
     await editSeekerProfileMutate(formData);
 
@@ -148,7 +148,7 @@ const EditSocialsForm: React.FC<EditSocialsFormProps> = ({
               {form.formState.isSubmitting ? (
                 <ScaleLoader color="#fff" height={10} />
               ) : (
-                "Save"
+                'Save'
               )}
             </Button>
           </div>

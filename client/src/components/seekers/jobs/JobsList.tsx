@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 
-import { Search } from "lucide-react";
+import { Search } from 'lucide-react';
 
-import JobItem from "./JobItem";
+import JobItem from './JobItem';
 
-import { JobTypes } from "@/types";
+import { Job } from '@/types';
 
 type JobListProps = {
-  jobs: JobTypes[];
+  jobs: Job[];
   message?: string;
 };
 
 const JobsList: React.FC<JobListProps> = React.memo(
   ({
     jobs,
-    message = "It seems there are no jobs available at the moment.",
+    message = 'It seems there are no jobs available at the moment.',
   }) => {
     return (
       <div>
@@ -41,7 +41,7 @@ const JobsList: React.FC<JobListProps> = React.memo(
         )}
       </div>
     );
-  }
+  },
 );
 
 export default JobsList;

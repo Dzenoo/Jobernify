@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { Edit, Eye, Trash, MoreHorizontal } from "lucide-react";
+import { Edit, Eye, Trash, MoreHorizontal } from 'lucide-react';
 
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
 type JobOptionsProps = {
   jobId: string;
@@ -33,7 +33,7 @@ const JobOptions: React.FC<JobOptionsProps> = ({ jobId, onDelete }) => {
   const options: MenuOption[] = [
     {
       id: 1,
-      label: "View Applications",
+      label: 'View Applications',
       icon: <Eye className="w-4 h-4 text-blue-600" />,
       action: closeDropdown,
       asLink: true,
@@ -41,7 +41,7 @@ const JobOptions: React.FC<JobOptionsProps> = ({ jobId, onDelete }) => {
     },
     {
       id: 2,
-      label: "Edit Job",
+      label: 'Edit Job',
       icon: <Edit className="w-4 h-4 text-green-600" />,
       action: closeDropdown,
       asLink: true,
@@ -49,7 +49,7 @@ const JobOptions: React.FC<JobOptionsProps> = ({ jobId, onDelete }) => {
     },
     {
       id: 3,
-      label: "Delete Job",
+      label: 'Delete Job',
       icon: <Trash className="w-4 h-4 text-red-600" />,
       action: () => {
         closeDropdown();

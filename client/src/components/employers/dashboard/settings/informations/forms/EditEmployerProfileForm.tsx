@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { ScaleLoader } from "react-spinners";
-import { zodResolver } from "@hookform/resolvers/zod";
-import zod from "zod";
-import { useForm } from "react-hook-form";
+import { ScaleLoader } from 'react-spinners';
+import { zodResolver } from '@hookform/resolvers/zod';
+import zod from 'zod';
+import { useForm } from 'react-hook-form';
 
-import { industries } from "@/constants";
-import { EmployerProfileSchema } from "@/lib/zod/employers.validation";
+import { industries } from '@/constants';
+import { EmployerProfileSchema } from '@/lib/zod/employers.validation';
 
-import useEditEmployer from "@/hooks/mutations/useEditEmployer.mutation";
+import useEditEmployer from '@/hooks/mutations/useEditEmployer.mutation';
 
-import { EmployerTypes } from "@/types";
+import { Employer } from '@/types';
 
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -23,19 +23,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 type EditEmployerProfileFormProps = {
   isEditMode: boolean;
   setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
-  employer: EmployerTypes;
+  employer: Employer;
 };
 
 const EditEmployerProfileForm: React.FC<EditEmployerProfileFormProps> = ({
@@ -47,31 +47,31 @@ const EditEmployerProfileForm: React.FC<EditEmployerProfileFormProps> = ({
 
   const form = useForm<zod.infer<typeof EmployerProfileSchema>>({
     resolver: zodResolver(EmployerProfileSchema),
-    mode: "all",
+    mode: 'all',
   });
 
   useEffect(() => {
     if (isEditMode && employer) {
-      form.setValue("name", employer.name || "");
-      form.setValue("address", employer.address || "");
-      form.setValue("companyDescription", employer.companyDescription || "");
-      form.setValue("industry", employer.industry || "");
-      form.setValue("website", employer.website || "");
-      form.setValue("size", employer.size || "");
+      form.setValue('name', employer.name || '');
+      form.setValue('address', employer.address || '');
+      form.setValue('companyDescription', employer.companyDescription || '');
+      form.setValue('industry', employer.industry || '');
+      form.setValue('website', employer.website || '');
+      form.setValue('size', employer.size || '');
     }
   }, [isEditMode, employer, form.setValue]);
 
   const changeEmployerInformation = async (
-    values: zod.infer<typeof EmployerProfileSchema>
+    values: zod.infer<typeof EmployerProfileSchema>,
   ) => {
     const formData = new FormData();
 
-    formData.append("name", values.name);
-    formData.append("address", values.address);
-    formData.append("companyDescription", values.companyDescription);
-    formData.append("industry", values.industry);
-    formData.append("website", values.website);
-    formData.append("size", values.size);
+    formData.append('name', values.name);
+    formData.append('address', values.address);
+    formData.append('companyDescription', values.companyDescription);
+    formData.append('industry', values.industry);
+    formData.append('website', values.website);
+    formData.append('size', values.size);
 
     await editEmployerProfileMutate(formData);
 
@@ -222,7 +222,7 @@ const EditEmployerProfileForm: React.FC<EditEmployerProfileFormProps> = ({
             {form.formState.isSubmitting ? (
               <ScaleLoader color="#fff" height={10} />
             ) : (
-              "Save"
+              'Save'
             )}
           </Button>
         </div>

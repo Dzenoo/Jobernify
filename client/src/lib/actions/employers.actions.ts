@@ -1,6 +1,6 @@
-import { deleteApiHandler, getApiHandler, patchApiHandler } from "../api";
+import { deleteApiHandler, getApiHandler, patchApiHandler } from '../api';
 
-import { EmployerTypes } from "@/types";
+import { Employer } from '@/types';
 
 /**
  * ===============================
@@ -16,9 +16,9 @@ import { EmployerTypes } from "@/types";
 export const getEmployerProfile = async ({
   token,
   page = 1,
-  srt = "",
-  search = "",
-  type = "",
+  srt = '',
+  search = '',
+  type = '',
 }: {
   token: string;
   page?: number;
@@ -27,11 +27,11 @@ export const getEmployerProfile = async ({
   type?: string;
 }): Promise<{
   counts: { totalJobs: number };
-  employer: EmployerTypes;
+  employer: Employer;
 }> => {
   return await getApiHandler(
     `employers/profile?type=${type}&page=${page}&sort=${srt}&search=${search}`,
-    token
+    token,
   );
 };
 
@@ -43,13 +43,13 @@ export const getEmployerProfile = async ({
  */
 export const editEmployerProfile = async (
   formData: FormData,
-  token: string
+  token: string,
 ): Promise<ResponseMessageTypes> => {
   return await patchApiHandler(
-    "employers/edit-profile",
+    'employers/edit-profile',
     formData,
     token,
-    "multipart/form-data"
+    'multipart/form-data',
   );
 };
 
@@ -63,7 +63,7 @@ export const deleteEmployerProfile = async ({
 }: {
   token: string;
 }): Promise<ResponseMessageTypes> => {
-  return await deleteApiHandler("employers/delete-profile", token);
+  return await deleteApiHandler('employers/delete-profile', token);
 };
 
 /**
@@ -72,7 +72,7 @@ export const deleteEmployerProfile = async ({
  * @returns A promise resolving to various employer statistics.
  */
 export const getEmployerAnalyticsInfo = async (
-  token: string
+  token: string,
 ): Promise<{
   totalJobs: number;
   totalApplications: number;
@@ -84,7 +84,7 @@ export const getEmployerAnalyticsInfo = async (
   applicationsThisMonth: number;
   followersThisMonth: number;
 }> => {
-  return await getApiHandler("employers/analytics", token);
+  return await getApiHandler('employers/analytics', token);
 };
 
 /**
@@ -97,12 +97,12 @@ export const getEmployerAnalyticsInfo = async (
  */
 export const getEmployers = async ({
   page = 1,
-  sort = "",
-  search = "",
+  sort = '',
+  search = '',
   token,
-  industry = "",
-  size = "",
-  location = "",
+  industry = '',
+  size = '',
+  location = '',
 }: {
   page: number;
   sort: string;
@@ -111,10 +111,10 @@ export const getEmployers = async ({
   industry: string;
   size: string;
   location: string;
-}): Promise<{ employers: EmployerTypes[]; totalEmployers: number }> => {
+}): Promise<{ employers: Employer[]; totalEmployers: number }> => {
   return await getApiHandler(
     `employers/all?page=${page}&sort=${sort}&search=${search}&industry=${industry}&size=${size}&location=${location}`,
-    token
+    token,
   );
 };
 
@@ -129,14 +129,14 @@ export const getEmployers = async ({
 export const getEmployerById = async (
   employerId: string,
   token: string,
-  type: string = "",
-  page: number = 1
+  type: string = '',
+  page: number = 1,
 ): Promise<{
-  employer: EmployerTypes;
+  employer: Employer;
   totalJobs: number;
 }> => {
   return await getApiHandler(
     `employers/${employerId}?page=${page}&limit=10&type=${type}`,
-    token
+    token,
   );
 };

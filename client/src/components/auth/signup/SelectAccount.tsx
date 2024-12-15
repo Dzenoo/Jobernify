@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { Briefcase, Building } from "lucide-react";
+import { Briefcase, Building } from 'lucide-react';
 
-import { renderSignupTabCard } from "@/helpers";
+import { renderSignupTabCard } from '@/helpers';
 
-import Signup from "./Signup";
-import RedirectToLoginLink from "./RedirectToLoginLink";
+import Signup from './Signup';
+import RedirectToLoginLink from './RedirectToLoginLink';
 
-import { TypeOfAccount } from "@/types";
+import { TypeOfAccount } from '@/types';
 
 const SelectAccount: React.FC = () => {
   const [typeOfAccount, setTypeOfAccount] = useState<TypeOfAccount>(
-    TypeOfAccount.Default
+    TypeOfAccount.Default,
   );
 
   const handleTypeSelection = (type: TypeOfAccount): void => {
@@ -30,13 +30,13 @@ const SelectAccount: React.FC = () => {
   const SelectCardsArrayData = [
     {
       icon: <Building />,
-      text: "Im a Employer, looking for talents",
+      text: 'Im a Employer, looking for talents',
       handler: () => handleTypeSelection(TypeOfAccount.Employer),
       selected: employer,
     },
     {
       icon: <Briefcase />,
-      text: "Im a Seeker, looking for job",
+      text: 'Im a Seeker, looking for job',
       handler: () => handleTypeSelection(TypeOfAccount.Seeker),
       selected: seeker,
     },

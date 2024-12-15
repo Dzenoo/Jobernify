@@ -1,29 +1,29 @@
-import React from "react";
+import React from 'react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { Briefcase, Building, Camera } from "lucide-react";
+import { Briefcase, Building, Camera } from 'lucide-react';
 
-import { renderIconText } from "@/helpers";
-import { findIndustriesData, getImageUrl, truncate } from "@/lib/utils";
+import { renderIconText } from '@/helpers';
+import { findIndustriesData, getImageUrl, truncate } from '@/lib/utils';
 
-import { EmployerTypes } from "@/types";
+import { Employer } from '@/types';
 
-import FollowEmployerButton from "./FollowEmployerButton";
+import FollowEmployerButton from './FollowEmployerButton';
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 
 type EmployersItemProps = {
   employer: Pick<
-    EmployerTypes,
-    | "followers"
-    | "_id"
-    | "image"
-    | "name"
-    | "companyDescription"
-    | "jobs"
-    | "industry"
+    Employer,
+    | 'followers'
+    | '_id'
+    | 'image'
+    | 'name'
+    | 'companyDescription'
+    | 'jobs'
+    | 'industry'
   >;
 };
 
@@ -32,23 +32,23 @@ const EmployerItem: React.FC<EmployersItemProps> = ({
 }) => {
   const FooterEmployerData = [
     {
-      id: "1",
+      id: '1',
       icon: <Camera />,
       data:
-        followers?.length + ` Follower${followers?.length !== 1 ? "s" : ""}`,
-      tooltip: "Followers",
+        followers?.length + ` Follower${followers?.length !== 1 ? 's' : ''}`,
+      tooltip: 'Followers',
     },
     {
-      id: "2",
+      id: '2',
       icon: <Briefcase />,
-      data: jobs?.length + ` Job${jobs?.length !== 1 ? "s" : ""}`,
-      tooltip: "Jobs",
+      data: jobs?.length + ` Job${jobs?.length !== 1 ? 's' : ''}`,
+      tooltip: 'Jobs',
     },
     {
-      id: "3",
+      id: '3',
       icon: <Building />,
       data: findIndustriesData(industry),
-      tooltip: "Industry",
+      tooltip: 'Industry',
     },
   ];
 
@@ -90,7 +90,7 @@ const EmployerItem: React.FC<EmployersItemProps> = ({
               ...data,
               tooltip: true,
               tooltipContent: data.tooltip,
-            })
+            }),
           )}
         </div>
       </CardFooter>

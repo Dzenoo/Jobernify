@@ -1,25 +1,25 @@
-import React from "react";
+import React from 'react';
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation } from '@tanstack/react-query';
 
-import { deleteEmployerProfile } from "@/lib/actions/employers.actions";
+import { deleteEmployerProfile } from '@/lib/actions/employers.actions';
 
-import useAuthentication from "@/hooks/defaults/useAuthentication.hook";
+import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
+import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
 import {
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   DrawerContent,
   DrawerFooter,
   DrawerTitle,
   DrawerHeader,
-} from "@/components/ui/drawer";
+} from '@/components/ui/drawer';
 
 type DeleteEmployerProfileProps = {
   closeDelete: () => void;
@@ -36,14 +36,14 @@ const DeleteEmployerProfile: React.FC<DeleteEmployerProfileProps> = ({
   const { mutateAsync: deleteEmployerProfileMutate } = useMutation({
     mutationFn: () => {
       if (!token) {
-        throw new Error("Unauthorized!");
+        throw new Error('Unauthorized!');
       }
 
       return deleteEmployerProfile({ token });
     },
     onSuccess: () => {},
     onError: (error: any) => {
-      toast({ title: "Error", description: error?.response?.data?.message });
+      toast({ title: 'Error', description: error?.response?.data?.message });
     },
   });
 
