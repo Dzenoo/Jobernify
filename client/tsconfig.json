@@ -23,7 +23,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@jobernify/shared": ["../shared/dist"],
-      "@jobernify/shared/*": ["../shared/dist/*"],
+      "@jobernify/shared/*": ["../shared/dist/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
