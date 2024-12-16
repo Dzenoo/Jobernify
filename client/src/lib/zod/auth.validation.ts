@@ -2,7 +2,7 @@ import zod from 'zod';
 
 import { PASSWORD_REGEX } from '@/constants';
 
-import { CompanySize, IndustryType } from 'shared';
+import { CompanySize, IndustryType } from '@jobernify/shared';
 
 export const SeekerRegistrationSchema = zod.object({
   first_name: zod

@@ -27,7 +27,7 @@ import Text from '@/components/employers/dashboard/jobs/new/Text';
 
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import { JobLevel, JobPosition, JobType } from 'shared';
+import { JobLevel, JobPosition, JobType } from '@jobernify/shared';
 
 type UpdateJobFormProps =
   | {

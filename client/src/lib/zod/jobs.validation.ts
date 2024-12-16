@@ -1,7 +1,7 @@
 import DOMPurify from 'dompurify';
 import zod from 'zod';
 
-import { JobLevel, JobPosition, JobType } from 'shared';
+import { JobLevel, JobPosition, JobType } from '@jobernify/shared';
 
 export const ApplyToJobSchema = zod.object({
   coverLetter: zod.string().optional(),

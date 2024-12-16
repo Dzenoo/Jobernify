@@ -12,8 +12,8 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "shared": ["../shared/dist"],
-      "shared/*": ["../shared/dist/*"]
+      "@jobernify/shared": ["../shared/dist"],
+      "@jobernify/shared/*": ["../shared/dist/*"]
     },
     "incremental": true,
     "skipLibCheck": true,

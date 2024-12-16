@@ -1,13 +1,13 @@
 {
   "name": "jobernify",
   "version": "1.0.0",
+  "private": true,
   "description": "This application is designed to provide a platform for users to find new jobs or new candidates It aims to connect easily Seekers and Employers.",
   "scripts": {
-    "dev": "concurrently \"npm run start:api\" \"npm run start:client\"",
     "build": "npm run build -w shared && npm run build -w api && npm run build -w client",
-    "start:client": "npm run dev -w client",
-    "start:api": "npm run start:dev -w api",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:shared": "npm run build -w shared",
+    "build:api": "npm run build:shared && npm run build -w api",
+    "build:client": "npm run build:shared && npm run build -w client"
   },
   "workspaces": [
     "client",

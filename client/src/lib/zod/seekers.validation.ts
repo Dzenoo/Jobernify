@@ -1,6 +1,6 @@
 import zod from 'zod';
 
-import { JobLevel, JobPosition, JobType } from 'shared';
+import { JobLevel, JobPosition, JobType } from '@jobernify/shared';
 
 export const SeekerProfileSchema = zod.object({
   first_name: zod.string().min(1).max(30),

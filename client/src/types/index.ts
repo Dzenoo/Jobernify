@@ -6,7 +6,7 @@ import {
   JobPosition,
   JobType,
   Role,
-} from 'shared';
+} from '@jobernify/shared';
 
 export enum TypeOfAccount {
   Seeker = 'seeker',

@@ -1,6 +1,6 @@
 import zod from 'zod';
 
-import { CompanySize, IndustryType } from 'shared';
+import { CompanySize, IndustryType } from '@jobernify/shared';
 
 export const EmployerProfileSchema = zod.object({
   name: zod.string().min(5).max(50),

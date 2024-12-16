@@ -20,6 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@jobernify/shared": "1.0.0",
     "@aws-sdk/client-s3": "^3.693.0",
     "@aws-sdk/credential-providers": "^3.693.0",
     "@aws-sdk/lib-storage": "^3.693.0",
@@ -47,8 +48,7 @@
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
-    "uuidv7": "^1.0.2",
-    "shared": "file:../shared"
+    "uuidv7": "^1.0.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
