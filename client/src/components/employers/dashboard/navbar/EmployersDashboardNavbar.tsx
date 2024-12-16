@@ -55,7 +55,7 @@ const EmployersDashboardNavbar: React.FC = () => {
       />
 
       <div
-        className={`h-screen fixed top-0 bottom-0 left-0 z-50 p-3 bg-white border-r border-gray-300 dark:bg-transparent dark:border-[#1b1b1b] transform transition-transform duration-300 md:static md:translate-x-0 ${
+        className={`min-h-screen h-full fixed top-0 bottom-0 left-0 z-50 p-3 bg-white border-r border-gray-300 dark:bg-[#0d0d0d] dark:border-[#1b1b1b] transform transition-transform duration-300 md:static md:translate-x-0 ${
           isDrawerOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

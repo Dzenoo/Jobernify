@@ -8,6 +8,7 @@ import { getJobById } from '@/lib/actions/jobs.actions';
 
 import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
 import NotFound from '@/components/shared/pages/NotFound';
+import LoadingUpdateJob from '@/components/loaders/employers/LoadingUpdateJob';
 
 import { Job } from '@/types';
 
@@ -24,7 +25,11 @@ const EditJobPage = ({ params }: { params: { jobId: string } }) => {
     queryKey: ['jobs'],
   });
 
-  if (!isLoading && !fetchedJob) {
+  if (isLoading) {
+    return <LoadingUpdateJob />;
+  }
+
+  if (!fetchedJob) {
     return <NotFound href="/dashboard/jobs" />;
   }
 
@@ -33,7 +38,7 @@ const EditJobPage = ({ params }: { params: { jobId: string } }) => {
       <UpdateJobForm
         isEdit={true}
         jobId={params.jobId}
-        formData={fetchedJob?.job as Job}
+        formData={fetchedJob.job}
       />
     </section>
   );

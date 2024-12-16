@@ -27,6 +27,7 @@ import Text from '@/components/employers/dashboard/jobs/new/Text';
 
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
+import { findLocationData } from '@/lib/utils';
 
 type UpdateJobFormProps =
   | {
@@ -81,7 +82,7 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
         type: formData.type,
       });
     }
-  }, [formData, reset]);
+  }, [formData]);
 
   const { mutateAsync: updateJobMutate, status } = useMutation({
     mutationFn: (formData: any) => {

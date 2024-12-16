@@ -21,8 +21,7 @@ export const UpdateJobSchema = zod.object({
   location: zod
     .string()
     .min(3, 'Location should have at least 3 characters.')
-    .max(30, 'Location can be up to 30 characters long.')
-    .trim(),
+    .max(30, 'Location can be up to 30 characters long.'),
   overview: zod
     .string()
     .min(

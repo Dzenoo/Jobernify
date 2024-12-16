@@ -16,9 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
 } from '@/components/ui/select';
 import { locations } from '@/constants';
 
@@ -77,19 +75,19 @@ const Details: React.FC<DetailsProps> = ({ control }) => {
           <FormItem>
             <FormLabel>Select the location for your job post</FormLabel>
             <FormControl>
-              <Select onValueChange={field.onChange} value={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value.toString()}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select Location" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Locations</SelectLabel>
-                    {locations.map((location) => (
-                      <SelectItem key={location.value} value={location.value}>
-                        {location.label}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
+                  {locations.map((location) => (
+                    <SelectItem key={location.value} value={location.value}>
+                      {location.label}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </FormControl>
