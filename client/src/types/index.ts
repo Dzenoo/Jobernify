@@ -18,13 +18,13 @@ export type Employer = {
   _id: string;
   email: string;
   name: string;
-  industry: IndustryType;
-  size: CompanySize;
+  industry: keyof typeof IndustryType;
+  size: keyof typeof CompanySize;
   address: string;
   image: string;
   companyDescription: string;
   website: string;
-  role: Role;
+  role: keyof typeof Role;
   jobs: Job[];
   followers: Seeker[];
 };
@@ -32,12 +32,12 @@ export type Employer = {
 export type Job = {
   _id: string;
   title: string;
-  position: JobPosition;
+  position: keyof typeof JobPosition;
   location: string;
   overview: string;
-  type: JobType;
+  type: keyof typeof JobType;
   skills: string[];
-  level: JobLevel;
+  level: keyof typeof JobLevel;
   company: Employer;
   salary: number;
   expiration_date: string & Date;
@@ -90,7 +90,7 @@ export type Seeker = {
   experience: Experience[];
   alerts: JobAlerts;
   resume?: string;
-  role: Role;
+  role: keyof typeof Role;
   receiveJobAlerts: boolean;
   savedJobs: Job[];
   applications: Application[];
