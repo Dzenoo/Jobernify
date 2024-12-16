@@ -12,7 +12,6 @@ import { ScaleLoader } from 'react-spinners';
 import { EmployerRegistrationSchema } from '@/lib/zod/auth.validation';
 import { signupEmployer } from '@/lib/actions/auth.actions';
 import { industries } from '@/constants';
-import { CompanySize, IndustryType } from '@jobernify/shared';
 
 import { useToast } from '@/components/ui/use-toast';
 import { Input } from '@/components/ui/input';
@@ -44,11 +43,9 @@ const EmployersSignupForm: React.FC = () => {
       name: '',
       email: '',
       password: '',
-      industry: IndustryType.Automotive,
-      size: CompanySize.Between100And250,
       address: '',
     },
-    mode: 'all',
+    mode: 'onChange',
   });
 
   const { mutateAsync: signupEmployerMutation } = useMutation({

@@ -27,7 +27,6 @@ import Text from '@/components/employers/dashboard/jobs/new/Text';
 
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import { JobLevel, JobPosition, JobType } from '@jobernify/shared';
 
 type UpdateJobFormProps =
   | {
@@ -58,9 +57,6 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
       expiration_date: '',
       salary: 0,
       skills: [],
-      position: JobPosition.Hybrid,
-      level: JobLevel.Junior,
-      type: JobType.Freelance,
     },
     resolver: zodResolver(UpdateJobSchema),
   });
