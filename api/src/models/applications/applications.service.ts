@@ -11,7 +11,7 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Application, ApplicationDocument } from './schemas/application.schema';
-import { ApplicationStatus } from 'shared';
+import { ApplicationStatus } from '@jobernify/shared';
 
 import { DeleteResult, FilterQuery, Model } from 'mongoose';
 

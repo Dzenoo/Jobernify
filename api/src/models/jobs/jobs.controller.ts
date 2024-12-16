@@ -21,7 +21,7 @@ import { JwtAuthGuard } from 'src/authentication/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/authentication/guards/role-auth.guard';
 
 import { Roles } from 'src/common/decorators/roles.decorator';
-import { Role } from 'shared';
+import { Role } from '@jobernify/shared';
 import { User } from 'src/common/decorators/user.decorator';
 
 @Controller('/jobs')

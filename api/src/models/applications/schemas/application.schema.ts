@@ -4,7 +4,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Job } from 'src/models/jobs/schemas/job.schema';
 import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 
-import { ApplicationStatus } from 'shared';
+import { ApplicationStatus } from '@jobernify/shared';
 
 export type ApplicationDocument = HydratedDocument<Application>;
 

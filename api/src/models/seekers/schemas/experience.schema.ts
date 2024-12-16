@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { JobLevel, JobPosition, JobType } from 'shared';
+import { JobLevel, JobPosition, JobType } from '@jobernify/shared';
 
 @Schema({ timestamps: true })
 export class Experience {

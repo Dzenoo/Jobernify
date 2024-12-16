@@ -17,7 +17,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 
 import { ApplicationsService } from './applications.service';
-import { ApplicationStatus, Role } from 'shared';
+import { ApplicationStatus, Role } from '@jobernify/shared';
 
 import { User } from 'src/common/decorators/user.decorator';
 

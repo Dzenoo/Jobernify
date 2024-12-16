@@ -1,5 +1,5 @@
 import { IsEnum, IsString, MaxLength, MinLength } from 'class-validator';
-import { JobLevel, JobType } from 'shared';
+import { JobLevel, JobType } from '@jobernify/shared';
 
 export class CreateJobAlertDto {
   @IsEnum(JobLevel)

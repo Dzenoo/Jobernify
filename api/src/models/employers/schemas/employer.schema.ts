@@ -4,7 +4,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { BaseUser } from 'src/models/shared/schemas/user.schema';
 import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 import { Job } from 'src/models/jobs/schemas/job.schema';
-import { CompanySize, IndustryType, Role } from 'shared';
+import { CompanySize, IndustryType, Role } from '@jobernify/shared';
 
 import * as bcrypt from 'bcrypt';
 

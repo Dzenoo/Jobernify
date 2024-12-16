@@ -7,7 +7,7 @@ import {
   ValidateIf,
   IsBoolean,
 } from 'class-validator';
-import { JobLevel, JobPosition, JobType } from 'shared';
+import { JobLevel, JobPosition, JobType } from '@jobernify/shared';
 
 export class UpdateExperienceDto {
   @IsString()

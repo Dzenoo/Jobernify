@@ -4,12 +4,9 @@
   "private": true,
   "description": "This application is designed to provide a platform for users to find new jobs or new candidates It aims to connect easily Seekers and Employers.",
   "scripts": {
-    "build": "npm run build -w shared && npm run build -w api && npm run build -w client",
-    "build:shared": "npm run build -w shared",
-    "build:api": "npm run build:shared && npm run build -w api",
-    "build:client": "npm run build:shared && npm run build -w client",
-    "start:client": "npm run dev -w client",
-    "start:api": "npm run start:dev -w api"
+    "build": "yarn workspaces run build",
+    "start:client": "yarn workspace client dev",
+    "start:api": "yarn workspace api start:dev"
   },
   "workspaces": [
     "client",

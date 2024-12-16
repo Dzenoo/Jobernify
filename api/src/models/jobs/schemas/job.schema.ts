@@ -4,7 +4,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Employer } from 'src/models/employers/schemas/employer.schema';
 import { Application } from 'src/models/applications/schemas/application.schema';
 
-import { JobLevel, JobPosition, JobType } from 'shared';
+import { JobLevel, JobPosition, JobType } from '@jobernify/shared';
 
 export type JobDocument = HydratedDocument<Job>;
 

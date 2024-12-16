@@ -6,7 +6,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { CompanySize, IndustryType } from 'shared';
+import { CompanySize, IndustryType } from '@jobernify/shared';
 
 export class SignUpEmployerDto {
   @IsString()
