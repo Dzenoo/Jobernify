@@ -64,7 +64,7 @@ const EducationItem: React.FC<EducationItemProps> = ({
       <div className="flex items-start justify-between gap-3 basis-full">
         <div className="flex flex-col gap-2">
           <div>
-            <h1 className="font-bold">{institution}</h1>
+            <h1 className="font-semibold">{institution}</h1>
           </div>
           <div>
             <p className="text-initial-gray">

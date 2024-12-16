@@ -16,7 +16,7 @@ const CoverLetter: React.FC<CoverLetterProps> = ({ cover_letter }) => {
         </Button>
       </DialogTrigger>
       <DialogContent>
-        <h2 className="text-lg font-bold">Cover Letter</h2>
+        <h2 className="text-lg font-semibold">Cover Letter</h2>
         <p className="mt-2">{cover_letter}</p>
       </DialogContent>
     </Dialog>

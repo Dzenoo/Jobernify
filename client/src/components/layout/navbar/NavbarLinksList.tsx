@@ -23,7 +23,7 @@ const NavbarLinksList: React.FC<NavbarLinksListProps> = ({
         <Link
           key={id}
           href={href}
-          className={`font-extralight flex items-center gap-3 transition-colors hover:text-[#0066ff] dark:hover:text-[#0066ff] ${
+          className={` flex items-center gap-3 transition-colors hover:text-[#0066ff] dark:hover:text-[#0066ff] ${
             pathname === href
               ? 'text-[#0066ff]'
               : 'text-[--black-base-color] dark:text-white'

@@ -95,7 +95,7 @@ const JobItem: React.FC<JobItemProps> = ({
                     <Tooltip>
                       <TooltipTrigger>
                         <Link href={`/jobs/${_id}`}>
-                          <h1 className="transition-all hover:text-blue-700 text-base-black font-bold max-sm:text-lg">
+                          <h1 className="transition-all hover:text-blue-700 text-base-black max-sm:text-lg">
                             {title}
                           </h1>
                         </Link>

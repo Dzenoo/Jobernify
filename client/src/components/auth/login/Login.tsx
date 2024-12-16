@@ -16,7 +16,7 @@ const Login: React.FC = () => {
       <CardHeader>
         <div className="flex flex-col items-center justify-center text-center gap-3">
           <div>
-            <h1 className="text-2xl font-bold">Login to Jobernify</h1>
+            <h1 className="text-2xl font-semibold">Login to Jobernify</h1>
           </div>
           <div>
             <p className="text-gray-500">

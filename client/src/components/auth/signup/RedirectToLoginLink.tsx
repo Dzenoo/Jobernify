@@ -4,7 +4,7 @@ import Link from 'next/link';
 const RedirectToLoginLink: React.FC = () => {
   return (
     <div className="text-center">
-      <p className="text-low-gray">
+      <p className="text-gray-500">
         Already have account?{' '}
         <Link href="/login" className="text-blue-600 underline">
           Login

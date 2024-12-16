@@ -7,7 +7,7 @@ import AppThemeProvider from '@/context/app-theme-provider';
 
 import { Toaster } from '@/components/ui/toaster';
 
-import { Libre_Franklin } from 'next/font/google';
+import { GeistSans } from 'geist/font/sans';
 
 import Footer from '@/components/layout/footer/Footer';
 import '../globals.css';
@@ -15,8 +15,6 @@ import '../globals.css';
 const Navbar = dynamic(() => import('@/components/layout/navbar/Navbar'), {
   ssr: false,
 });
-
-const libre = Libre_Franklin({ subsets: ['latin'], weight: '400' });
 
 export const metadata: Metadata = {
   icons: {
@@ -49,7 +47,7 @@ export default function EmployersLayout({
   return (
     <QueryContextProvider>
       <html suppressHydrationWarning={true} lang="en">
-        <body className={libre.className}>
+        <body className={GeistSans.className}>
           <AppThemeProvider>
             <div className="flex flex-col min-h-screen">
               <Navbar href="/seekers" />

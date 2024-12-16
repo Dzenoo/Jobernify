@@ -108,7 +108,7 @@ const Scope: React.FC<ScopeProps> = ({ control }) => {
                 {levels.map(({ value, title, description }) => (
                   <div key={value}>
                     <RadioGroupItem value={value} id={value} />
-                    <label htmlFor={value} className="ml-2 font-medium">
+                    <label htmlFor={value} className="ml-2 ">
                       {title}
                     </label>
                     <FormMessage />
@@ -138,7 +138,7 @@ const Scope: React.FC<ScopeProps> = ({ control }) => {
                 {positions.map(({ value, title, description }) => (
                   <div key={value}>
                     <RadioGroupItem value={value} id={value} />
-                    <label htmlFor={value} className="ml-2 font-medium">
+                    <label htmlFor={value} className="ml-2 ">
                       {title}
                     </label>
                     <FormMessage />
@@ -168,7 +168,7 @@ const Scope: React.FC<ScopeProps> = ({ control }) => {
                 {types.map(({ value, title, description }) => (
                   <div key={value}>
                     <RadioGroupItem value={value} id={value} />
-                    <label htmlFor={value} className="ml-2 font-medium">
+                    <label htmlFor={value} className="ml-2 ">
                       {title}
                     </label>
                     <FormMessage />

@@ -6,15 +6,13 @@ import { QueryContextProvider } from '@/context/react-query-client';
 
 import { Toaster } from '@/components/ui/toaster';
 
-import { Libre_Franklin } from 'next/font/google';
+import { GeistSans } from 'geist/font/sans';
 
 import '../globals.css';
 
 const Navbar = dynamic(() => import('@/components/layout/navbar/Navbar'), {
   ssr: false,
 });
-
-const libre = Libre_Franklin({ subsets: ['latin'], weight: '400' });
 
 export const metadata: Metadata = {
   icons: {
@@ -47,7 +45,7 @@ export default function AuthLayout({
   return (
     <QueryContextProvider>
       <html lang="en">
-        <body className={libre.className}>
+        <body className={GeistSans.className}>
           <Navbar />
           <main>{children}</main>
           <Toaster />

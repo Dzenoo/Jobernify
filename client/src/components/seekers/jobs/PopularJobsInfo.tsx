@@ -36,7 +36,7 @@ const PopularJobsInfo: React.FC<PopularsJobsInfoProps> = React.memo(
       <Card>
         <CardHeader>
           <div>
-            <h1 className="text-lg font-bold">Popular Job Titles</h1>
+            <h1 className="text-lg font-semibold">Popular Job Titles</h1>
           </div>
           <div>
             <p className="text-gray-500 dark:text-gray-400">

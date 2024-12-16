@@ -15,7 +15,7 @@ const BenefitsLanding: React.FC = () => {
           <BlueButton>Benefits</BlueButton>
         </div>
         <div>
-          <h1 className="text-center text-4xl font-bold max-sm:text-3xl">
+          <h1 className="text-center text-4xl font-semibold max-sm:text-3xl">
             Why <span className="text-[#0084FF]">Choose</span> Our Platform?
           </h1>
         </div>
@@ -41,7 +41,7 @@ const BenefitsLanding: React.FC = () => {
                 {React.createElement(icon)}
               </div>
               <div>
-                <h1 className="font-bold text-xl">{title}</h1>
+                <h1 className="font-semibold text-xl">{title}</h1>
               </div>
               <div className="max-w-xl">
                 <p className="text-[#A8A8A8] font-light leading-7">

@@ -112,7 +112,7 @@ const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(
                 ]).map((alertsInfoData) => (
                   <div key={alertsInfoData.id} className="flex flex-col gap-3">
                     <div>
-                      <h1 className="font-bold">{alertsInfoData.title}</h1>
+                      <h1 className="font-semibold">{alertsInfoData.title}</h1>
                     </div>
                     <div>
                       <p className="text-initial-gray">

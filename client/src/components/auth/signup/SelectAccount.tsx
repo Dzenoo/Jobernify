@@ -47,7 +47,9 @@ const SelectAccount: React.FC = () => {
       {!isSelectedAccount && (
         <div className="flex flex-col justify-center items-center gap-16">
           <div>
-            <h1 className="text-2xl font-bold">Join as a Employer or Seeker</h1>
+            <h1 className="text-2xl font-semibold">
+              Join as a Employer or Seeker
+            </h1>
           </div>
           <div className="flex justify-between gap-3 max-sm:flex-col">
             {SelectCardsArrayData.map((tab) => renderSignupTabCard(tab))}

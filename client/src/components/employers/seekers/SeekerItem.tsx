@@ -72,7 +72,7 @@ const SeekerItem: React.FC<SeekerItemProps> = ({
             className="hover:text-blue-700 hover:underline"
             href={`/seekers/${_id}`}
           >
-            <h1 className="font-bold">
+            <h1 className="font-semibold">
               {first_name} {last_name}
             </h1>
           </Link>

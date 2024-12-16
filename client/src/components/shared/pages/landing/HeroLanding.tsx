@@ -15,7 +15,7 @@ const HeroLanding: React.FC = () => {
             <BlueButton>Perfect Opportunities</BlueButton>
           </div>
           <div className="max-w-2xl">
-            <h1 className="text-[40px] font-bold leading-[50px] text-[#050505] text-center max-md:text-[30px] max-md:leading-[40px]">
+            <h1 className="text-[40px] font-semibold leading-[50px] text-[#050505] text-center max-md:text-[30px] max-md:leading-[40px]">
               Where Job Seekers and Employers Find the Perfect Match
             </h1>
           </div>

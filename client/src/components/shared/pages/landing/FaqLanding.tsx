@@ -41,7 +41,7 @@ const FaqLanding: React.FC = () => {
           <BlueButton>FAQ</BlueButton>
         </div>
         <div>
-          <h1 className="text-4xl font-bold text-center max-sm:text-3xl">
+          <h1 className="text-4xl font-semibold text-center max-sm:text-3xl">
             Frequently Asked <span className="text-[#0084FF]">Questions</span>
           </h1>
         </div>
@@ -79,7 +79,7 @@ const FaqLanding: React.FC = () => {
       </div>
       <div className="pb-28 flex flex-col justify-center items-center gap-10">
         <div>
-          <h1 className="text-4xl font-bold text-center max-sm:text-3xl ">
+          <h1 className="text-4xl font-semibold text-center max-sm:text-3xl ">
             Still Have Questions?
           </h1>
         </div>

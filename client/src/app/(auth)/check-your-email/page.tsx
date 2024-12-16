@@ -33,7 +33,9 @@ const CheckYourEmail = () => {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <Mail className="w-12 h-12 mx-auto mb-4 text-blue-500" />
-          <CardTitle className="text-2xl font-bold">Check Your Email</CardTitle>
+          <CardTitle className="text-2xl font-semibold">
+            Check Your Email
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-center text-gray-600 dark:text-gray-400 mb-6">

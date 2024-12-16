@@ -104,7 +104,7 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
                     <p className="text-initial-gray">{title}</p>
                   </div>
                   <div>
-                    <h1 className="font-bold">{data}</h1>
+                    <h1 className="font-semibold">{data}</h1>
                   </div>
                 </div>
               ))}

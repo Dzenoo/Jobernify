@@ -60,7 +60,7 @@ const Statistics: React.FC<StatisticsProps> = ({
           <CardContent>
             <div className="flex items-center gap-3 justify-between">
               <div>
-                <p className="font-bold text-3xl">{statistics.data}</p>
+                <p className="font-semibold text-3xl">{statistics.data}</p>
               </div>
               <div>
                 <p

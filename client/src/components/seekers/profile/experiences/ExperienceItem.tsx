@@ -96,7 +96,7 @@ const HeaderSection: React.FC<{ jobTitle: string; type: string }> = ({
   type,
 }) => (
   <div className="flex items-center gap-2">
-    <h1 className="font-bold">{jobTitle}</h1>
+    <h1 className="font-semibold">{jobTitle}</h1>
     <span className="text-sm">·</span>
     <p className="text-initial-gray">{type}</p>
   </div>

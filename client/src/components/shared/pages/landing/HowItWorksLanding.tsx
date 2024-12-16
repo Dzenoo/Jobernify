@@ -41,7 +41,7 @@ const HowItWorksLanding: React.FC = () => {
           </div>
         </div>
         <div>
-          <h1 className="text-4xl font-bold text-center max-sm:text-3xl">
+          <h1 className="text-4xl font-semibold text-center max-sm:text-3xl">
             How It <span className="text-[#0084FF]">Works</span>
           </h1>
         </div>

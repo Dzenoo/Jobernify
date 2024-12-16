@@ -70,7 +70,7 @@ export const renderSkills = <
           skills.length > 0 && (
             <div key={category} className="flex flex-col gap-3">
               <div>
-                <h1 className="font-bold">{category}</h1>
+                <h1 className="font-semibold">{category}</h1>
               </div>
               <div className="flex flex-wrap gap-3">
                 {skills.map((skill, index) => (
@@ -107,7 +107,7 @@ export function renderSignupTabCard<T extends RenderSignupTabCardProps>({
     <div
       className={`${
         selected && 'bg-blue-100'
-      } border rounded-lg p-5 border-gray-100 cursor-pointer flex flex-col gap-7 w-full transition hover:bg-gray-50`}
+      } bg-white border rounded-lg p-5 border-gray-100 cursor-pointer flex flex-col gap-7 w-full transition hover:bg-gray-50`}
       onClick={handler}
       key={text}
     >

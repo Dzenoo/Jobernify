@@ -92,7 +92,7 @@ const Socials: React.FC<SocialsProps> = ({ seeker }) => {
             >
               <div>{icon}</div>
               <div>
-                <h1 className="font-bold">{title}</h1>
+                <h1 className="font-semibold">{title}</h1>
               </div>
               <div className="text-center">
                 {data === '' ? (

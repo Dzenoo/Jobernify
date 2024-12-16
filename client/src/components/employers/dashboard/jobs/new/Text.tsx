@@ -17,7 +17,7 @@ const Text: React.FC<AddJobTextProps> = ({ title, description, step }) => {
         </span>
       </div>
       <div>
-        <h1 className="text-3xl text-[#00388C] font-bold dark:text-[#4883dc]">
+        <h1 className="text-3xl text-[#00388C] font-semibold dark:text-[#4883dc]">
           {title}
         </h1>
       </div>

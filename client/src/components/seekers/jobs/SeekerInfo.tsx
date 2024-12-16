@@ -41,7 +41,7 @@ const SeekerInfo: React.FC = React.memo(() => {
         </div>
         <div className="flex flex-col gap-3 items-center justify-center text-center">
           <div>
-            <h1 className="font-bold">
+            <h1 className="font-semibold">
               {seeker.first_name} {seeker.last_name}
             </h1>
           </div>

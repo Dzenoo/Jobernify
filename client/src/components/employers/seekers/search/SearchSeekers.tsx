@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
-import useSearchParams from "@/hooks/defaults/useSearchParams.hook";
+import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
 
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input';
 
 type SearchSeekersProps = {
   query: string;
@@ -15,16 +15,16 @@ const SearchSeekers: React.FC<SearchSeekersProps> = ({ query }) => {
 
   const handleInputChange = debounce(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      updateSearchParams("query", e.target.value);
+      updateSearchParams('query', e.target.value);
     },
-    300
+    300,
   );
 
   return (
     <div className="flex flex-col gap-5">
       <div className="shadow-lg rounded-lg w-full h-full bg-gradient-to-br from-[#0c39b3] via-[#02fcfc8c] to-[#035770]">
         <div className="flex flex-col gap-3 bg-black/20 p-8 rounded-md">
-          <h1 className="text-white font-bold text-xl">
+          <h1 className="text-white font-semibold text-xl">
             Find Your Ideal Candidate
           </h1>
           <div className="max-w-lg mt-2">

@@ -1,12 +1,10 @@
 import type { Metadata } from 'next';
 
-import { Libre_Franklin } from 'next/font/google';
+import { GeistSans } from 'geist/font/sans';
 
 import Footer from '@/components/layout/footer/Footer';
 import '../globals.css';
 import NavbarLanding from '@/components/shared/pages/landing/NavbarLanding';
-
-const libre = Libre_Franklin({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   icons: {
@@ -38,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={libre.className}>
+      <body className={GeistSans.className}>
         <div className="flex flex-col min-h-screen">
           <NavbarLanding />
           <main className="flex-1">{children}</main>

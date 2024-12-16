@@ -113,7 +113,7 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
         <div className="flex flex-col gap-6">
           <div>
             <Link href={`/jobs/${jobId}`}>
-              <h1 className="font-bold text-xl overflow-auto">{title}</h1>
+              <h1 className="font-semibold text-xl overflow-auto">{title}</h1>
             </Link>
           </div>
           <div className="flex gap-6 items-center flex-wrap justify-between">

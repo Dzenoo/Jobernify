@@ -58,7 +58,7 @@ const Signup: React.FC<SignupProps> = ({
             <p className="text-low-gray">
               {selectedUser?.description}{' '}
               <button
-                className="text-blue-700 font-bold"
+                className="text-blue-700 font-semibold"
                 onClick={() =>
                   handleTypeSelection(
                     isEmployer ? TypeOfAccount.Seeker : TypeOfAccount.Employer,
@@ -70,7 +70,7 @@ const Signup: React.FC<SignupProps> = ({
             </p>
           </div>
           <div>
-            <h1 className="text-2xl font-bold">{selectedUser?.title}</h1>
+            <h1 className="text-2xl font-semibold">{selectedUser?.title}</h1>
           </div>
         </div>
       </CardHeader>

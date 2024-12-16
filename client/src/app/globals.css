@@ -72,7 +72,7 @@
   }
 
   body {
-    @apply bg-white dark:bg-[#0d0d0d];
+    @apply bg-[#fafafa] dark:bg-[#0d0d0d];
   }
 
   .landing-padding {
@@ -101,19 +101,19 @@
   }
 
   .text-base-black {
-    @apply text-2xl font-bold text-black dark:text-white;
+    @apply text-2xl font-semibold text-black dark:text-white;
   }
 
   .text-base-blue {
-    @apply text-2xl font-bold text-blue-700 dark:text-white;
+    @apply text-2xl font-semibold text-blue-700 dark:text-white;
   }
 
   .text-base-gray {
-    @apply text-2xl font-bold text-gray-500 dark:text-white;
+    @apply text-2xl font-semibold text-gray-500 dark:text-white;
   }
 
   .text-base-white {
-    @apply text-2xl font-bold text-white dark:text-white;
+    @apply text-2xl font-semibold text-white dark:text-white;
   }
 
   .text-initial-black {

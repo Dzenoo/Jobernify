@@ -74,11 +74,11 @@ const FilterHandler: React.FC<FilterHandlerProps> = ({
                       }
                     />
                     <div className="flex justify-between items-center gap-2 w-full">
-                      <p className="flex justify-between gap-2 max-sm:flex-col text-sm font-medium leading-none cursor-pointer transition-all hover:text-gray-500 dark:hover:text-gray-500">
+                      <p className="flex justify-between gap-2 max-sm:flex-col text-sm  leading-none cursor-pointer transition-all hover:text-gray-500 dark:hover:text-gray-500">
                         {checkbox.title}
                       </p>
                       {showCount && checkbox.count !== undefined && (
-                        <p className="font-medium text-gray-400 text-sm">
+                        <p className=" text-gray-400 text-sm">
                           ({checkbox.count})
                         </p>
                       )}

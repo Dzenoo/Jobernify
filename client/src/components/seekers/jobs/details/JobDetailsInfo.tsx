@@ -202,7 +202,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
           </CardHeader>
           <CardContent className="flex flex-col gap-6 pt-0">
             <div>
-              <h1 className="text-base-black font-bold">{title}</h1>
+              <h1 className="text-base-black font-semibold">{title}</h1>
             </div>
             <div className="flex items-center gap-6 max-sm:justify-between max-sm:flex-wrap">
               {JobInformationsData.map((data) =>
@@ -218,7 +218,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
             </div>
             <div>
               <div>
-                <h1 className="font-bold">Overview</h1>
+                <h1 className="font-semibold">Overview</h1>
               </div>
               <div className="py-3">
                 <p>{overview}</p>
@@ -226,7 +226,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
             </div>
             <div>
               <div>
-                <h1 className="font-bold">Description</h1>
+                <h1 className="font-semibold">Description</h1>
               </div>
               <div>
                 <ReactMarkdown className="jobDescription">
@@ -236,7 +236,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
             </div>
             <div>
               <div>
-                <h1 className="font-bold">Skills</h1>
+                <h1 className="font-semibold">Skills</h1>
               </div>
               {renderSkills(categorizedSkills)}
             </div>
@@ -267,7 +267,7 @@ const renderJobDetails = <
     >
       <div>{icon}</div>
       <div>
-        <h1 className="font-bold">{data}</h1>
+        <h1 className="font-semibold">{data}</h1>
       </div>
       <div>
         <p className="text-initial-gray">{title}</p>
