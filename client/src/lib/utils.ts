@@ -17,6 +17,10 @@ import { FilterCounts, FilterGroup } from '@/types';
 // Utility Functions
 // ===============================
 
+export const uppercaseFirstLetter = (str: string): string => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 /**
  * Merges and returns Tailwind CSS classes.
  * @param inputs - The list of class values.

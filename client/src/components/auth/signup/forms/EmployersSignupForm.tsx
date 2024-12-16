@@ -11,7 +11,8 @@ import { ScaleLoader } from 'react-spinners';
 
 import { EmployerRegistrationSchema } from '@/lib/zod/auth.validation';
 import { signupEmployer } from '@/lib/actions/auth.actions';
-import { industries } from '@/constants';
+import { companySizes, industries } from '@/constants';
+import { uppercaseFirstLetter } from '@/lib/utils';
 
 import { useToast } from '@/components/ui/use-toast';
 import { Input } from '@/components/ui/input';
@@ -44,6 +45,8 @@ const EmployersSignupForm: React.FC = () => {
       email: '',
       password: '',
       address: '',
+      industry: '',
+      size: '',
     },
     mode: 'onChange',
   });
@@ -139,8 +142,8 @@ const EmployersSignupForm: React.FC = () => {
                     </SelectTrigger>
                     <SelectContent>
                       {industries.map((industry) => (
-                        <SelectItem key={industry.value} value={industry.value}>
-                          {industry.label}
+                        <SelectItem key={industry} value={industry}>
+                          {uppercaseFirstLetter(industry)}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -168,12 +171,11 @@ const EmployersSignupForm: React.FC = () => {
                       <SelectValue placeholder="Select Size" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Less-than-17">Less than 17</SelectItem>
-                      <SelectItem value="20-50">20-50</SelectItem>
-                      <SelectItem value="50-100">50-100</SelectItem>
-                      <SelectItem value="100-250">100-250</SelectItem>
-                      <SelectItem value="250-500">250-500</SelectItem>
-                      <SelectItem value="500-1000">500-1000</SelectItem>
+                      {companySizes.map((size) => (
+                        <SelectItem key={size} value={size}>
+                          {uppercaseFirstLetter(size)}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </FormControl>

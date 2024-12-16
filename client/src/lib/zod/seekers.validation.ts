@@ -1,6 +1,6 @@
 import zod from 'zod';
 
-import { JobLevel, JobPosition, JobType } from '@jobernify/shared';
+import { jobLevels, jobPositions, jobTypes } from '@/constants';
 
 export const SeekerProfileSchema = zod.object({
   first_name: zod.string().min(1).max(30),
@@ -49,19 +49,19 @@ export const AddExperienceSchema = zod.object({
   companyName: zod.string().min(3).max(300),
   startDate: zod.date(),
   endDate: zod.date().optional(),
-  level: zod.nativeEnum(JobLevel, {
+  level: zod.enum(jobLevels, {
     errorMap: () => ({
       message: "Level must be 'Junior', 'Medior', 'Senior', or 'Lead'.",
     }),
   }),
-  type: zod.nativeEnum(JobType, {
+  type: zod.enum(jobTypes, {
     errorMap: () => ({
       message:
         "Job type must be 'Internship', 'Full-Time', 'Part-Time', or 'Freelance'.",
     }),
   }),
   location: zod.string().min(3).max(100),
-  position: zod.nativeEnum(JobPosition, {
+  position: zod.enum(jobPositions, {
     errorMap: () => ({
       message: "Position must be either 'Remote', 'On-Site', or 'Hybrid'.",
     }),
@@ -75,14 +75,14 @@ export const EditExperienceSchema = zod.object({
   startDate: zod.date().optional(),
   endDate: zod.date().optional(),
   level: zod
-    .nativeEnum(JobLevel, {
+    .enum(jobLevels, {
       errorMap: () => ({
         message: "Level must be 'Junior', 'Medior', 'Senior', or 'Lead'.",
       }),
     })
     .optional(),
   type: zod
-    .nativeEnum(JobType, {
+    .enum(jobTypes, {
       errorMap: () => ({
         message:
           "Job type must be 'Internship', 'Full-Time', 'Part-Time', or 'Freelance'.",
@@ -91,7 +91,7 @@ export const EditExperienceSchema = zod.object({
     .optional(),
   location: zod.string().min(3).max(100).optional(),
   position: zod
-    .nativeEnum(JobPosition, {
+    .enum(jobPositions, {
       errorMap: () => ({
         message: "Position must be either 'Remote', 'On-Site', or 'Hybrid'.",
       }),

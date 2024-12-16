@@ -1,8 +1,6 @@
 import zod from 'zod';
 
-import { PASSWORD_REGEX } from '@/constants';
-
-import { CompanySize, IndustryType } from '@jobernify/shared';
+import { companySizes, industries, PASSWORD_REGEX } from '@/constants';
 
 export const SeekerRegistrationSchema = zod.object({
   first_name: zod
@@ -44,10 +42,10 @@ export const EmployerRegistrationSchema = zod.object({
       /^[A-Z][a-zA-Z\s-]*$/,
       'Name must start with an uppercase letter and can include letters, spaces, and hyphens',
     ),
-  industry: zod.nativeEnum(IndustryType, {
+  industry: zod.enum(industries, {
     message: 'Please select a valid industry',
   }),
-  size: zod.nativeEnum(CompanySize, {
+  size: zod.enum(companySizes, {
     message: 'Please select a valid company size',
   }),
   address: zod

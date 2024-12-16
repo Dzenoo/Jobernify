@@ -5,11 +5,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import zod from 'zod';
 import { useForm } from 'react-hook-form';
 
-import { industries } from '@/constants';
+import { companySizes, industries } from '@/constants';
 import { EmployerProfileSchema } from '@/lib/zod/employers.validation';
 
 import useEditEmployer from '@/hooks/mutations/useEditEmployer.mutation';
 
+import { uppercaseFirstLetter } from '@/lib/utils';
 import { Employer } from '@/types';
 
 import { Input } from '@/components/ui/input';
@@ -167,8 +168,8 @@ const EditEmployerProfileForm: React.FC<EditEmployerProfileFormProps> = ({
                   </SelectTrigger>
                   <SelectContent>
                     {industries.map((industry) => (
-                      <SelectItem key={industry.value} value={industry.value}>
-                        {industry.label}
+                      <SelectItem key={industry} value={industry}>
+                        {uppercaseFirstLetter(industry)}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -196,12 +197,11 @@ const EditEmployerProfileForm: React.FC<EditEmployerProfileFormProps> = ({
                     <SelectValue placeholder="Select Size" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Less-than-17">Less than 17</SelectItem>
-                    <SelectItem value="20-50">20-50</SelectItem>
-                    <SelectItem value="50-100">50-100</SelectItem>
-                    <SelectItem value="100-250">100-250</SelectItem>
-                    <SelectItem value="250-500">250-500</SelectItem>
-                    <SelectItem value="500-1000">500-1000</SelectItem>
+                    {companySizes.map((size) => (
+                      <SelectItem key={size} value={size}>
+                        {uppercaseFirstLetter(size)}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </FormControl>

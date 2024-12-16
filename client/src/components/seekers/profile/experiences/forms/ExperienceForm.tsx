@@ -10,9 +10,14 @@ import { format } from 'date-fns';
 
 import { useToast } from '@/components/ui/use-toast';
 import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
-import { JobsFiltersData } from '@/constants';
+import {
+  jobLevels,
+  jobPositions,
+  JobsFiltersData,
+  jobTypes,
+} from '@/constants';
 import { queryClient } from '@/context/react-query-client';
-import { cn } from '@/lib/utils';
+import { cn, uppercaseFirstLetter } from '@/lib/utils';
 import {
   AddExperienceSchema,
   EditExperienceSchema,
@@ -88,9 +93,9 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
       companyName: isEdit ? experience?.companyName : '',
       startDate: isEdit ? new Date(experience?.startDate) : new Date(),
       endDate: isEdit ? new Date(experience?.endDate) : new Date(),
-      level: isEdit ? (experience?.level as any) : '',
-      type: isEdit ? (experience?.type as any) : '',
-      position: isEdit ? (experience?.position as any) : '',
+      level: isEdit ? experience?.level : '',
+      type: isEdit ? experience?.type : '',
+      position: isEdit ? experience?.position : '',
       location: isEdit ? experience?.location : '',
       isCurrentlyWorking: isEdit ? experience?.isCurrentlyWorking : false,
     },
@@ -289,9 +294,9 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
                     <SelectValue placeholder="Level" />
                   </SelectTrigger>
                   <SelectContent>
-                    {JobsFiltersData[1].data.map((level) => (
-                      <SelectItem key={level.value} value={level.value}>
-                        {level.title}
+                    {jobLevels.map((level) => (
+                      <SelectItem key={level} value={level}>
+                        {uppercaseFirstLetter(level)}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -319,9 +324,9 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
                     <SelectValue placeholder="Select Type" />
                   </SelectTrigger>
                   <SelectContent>
-                    {JobsFiltersData[0].data.map((type) => (
-                      <SelectItem key={type.value} value={type.value}>
-                        {type.title}
+                    {jobTypes.map((type) => (
+                      <SelectItem key={type} value={type}>
+                        {uppercaseFirstLetter(type)}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -349,9 +354,9 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
                     <SelectValue placeholder="Select Position" />
                   </SelectTrigger>
                   <SelectContent>
-                    {JobsFiltersData[3].data.map((type) => (
-                      <SelectItem key={type.value} value={type.value}>
-                        {type.title}
+                    {jobPositions.map((position) => (
+                      <SelectItem key={position} value={position}>
+                        {uppercaseFirstLetter(position)}
                       </SelectItem>
                     ))}
                   </SelectContent>

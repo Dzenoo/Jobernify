@@ -1,4 +1,11 @@
 import {
+  CompanySize,
+  IndustryType,
+  JobLevel,
+  JobPosition,
+  JobType,
+} from '@jobernify/shared';
+import {
   GaugeCircle,
   LayoutDashboard,
   MonitorSmartphone,
@@ -86,55 +93,39 @@ export const EmployersNavbarActions = [
 // Footer Links
 // ===============================
 export const FooterLinks = [
-  // {
-  //   id: "1",
-  //   title: "Pages",
-  //   links: [
-  //     { id: "1", name: "Home", href: "/" },
-  //     { id: "2", name: "About", href: "/about" },
-  //     { id: "3", name: "Contact Us", href: "/contact" },
-  //   ],
-  // },
-  // {
-  //   id: "2",
-  //   title: "Policies",
-  //   links: [
-  //     { id: "1", name: "Privacy Policy", href: "/privacy-policy" },
-  //     { id: "2", name: "Terms and Conditions", href: "/terms-and-conditions" },
-  //     { id: "3", name: "Agreements", href: "/agreements" },
-  //   ],
-  // },
+  {
+    id: '1',
+    title: 'Pages',
+    links: [
+      { id: '1', name: 'Home', href: '/' },
+      { id: '2', name: 'About', href: '/' },
+      { id: '3', name: 'Contact Us', href: '/' },
+    ],
+  },
+  {
+    id: '2',
+    title: 'Policies',
+    links: [
+      { id: '1', name: 'Privacy Policy', href: '/' },
+      { id: '2', name: 'Terms and Conditions', href: '/' },
+      { id: '3', name: 'Agreements', href: '/' },
+    ],
+  },
 ];
 
 // ===============================
-// Dropdown Options
+// Data
 // ===============================
-export const companySizes = [
-  { value: 'less-than-17', label: 'Less than 17' },
-  { value: '20-50', label: '20-50' },
-  { value: '50-100', label: '50-100' },
-  { value: '100-250', label: '100-250' },
-  { value: '250-500', label: '250-500' },
-  { value: '500-1000', label: '500-1000' },
-];
 
-export const industries = [
-  { value: 'technology', label: 'Technology' },
-  { value: 'healthcare', label: 'Healthcare' },
-  { value: 'finance', label: 'Finance' },
-  { value: 'education', label: 'Education' },
-  { value: 'manufacturing', label: 'Manufacturing' },
-  { value: 'retail', label: 'Retail' },
-  { value: 'hospitality', label: 'Hospitality' },
-  { value: 'automotive', label: 'Automotive' },
-  { value: 'construction', label: 'Construction' },
-  { value: 'media', label: 'Media' },
-  { value: 'marketing', label: 'Marketing' },
-  { value: 'telecommunications', label: 'Telecommunications' },
-  { value: 'government', label: 'Government' },
-  { value: 'nonprofit', label: 'Nonprofit' },
-  { value: 'other', label: 'Other' },
-];
+export const industries = Object.values(IndustryType) as [string, ...string[]];
+
+export const companySizes = Object.values(CompanySize) as [string, ...string[]];
+
+export const jobLevels = Object.values(JobLevel) as [string, ...string[]];
+
+export const jobTypes = Object.values(JobType) as [string, ...string[]];
+
+export const jobPositions = Object.values(JobPosition) as [string, ...string[]];
 
 export const locations = [
   { label: 'Afghanistan', value: 'afg' },

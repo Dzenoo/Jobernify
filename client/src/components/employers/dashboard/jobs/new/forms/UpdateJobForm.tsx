@@ -57,6 +57,9 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
       expiration_date: '',
       salary: 0,
       skills: [],
+      position: '',
+      level: '',
+      type: '',
     },
     resolver: zodResolver(UpdateJobSchema),
   });
