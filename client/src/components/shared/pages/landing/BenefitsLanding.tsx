@@ -38,7 +38,7 @@ const BenefitsLanding: React.FC = () => {
                 style={{ backgroundColor: color }}
                 className="w-fit p-4 rounded-xl"
               >
-                {icon}
+                {React.createElement(icon)}
               </div>
               <div>
                 <h1 className="font-bold text-xl">{title}</h1>

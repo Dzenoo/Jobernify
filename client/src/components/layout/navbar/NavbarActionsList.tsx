@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import Themes from './Themes';
 
-import { LogOut } from 'lucide-react';
+import { LogOut, LucideIcon } from 'lucide-react';
 
 import {
   Tooltip,
@@ -17,7 +17,7 @@ type NavbarActionsListProps = {
   data: {
     id: string;
     href: string;
-    icon: React.JSX.Element;
+    icon: LucideIcon;
     tooltip: string;
   }[];
   logout: () => void;
@@ -42,7 +42,7 @@ const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
                   pathname === href && 'text-[#0066ff]'
                 }`}
               >
-                {icon}
+                {React.createElement(icon)}
               </Link>
             </TooltipTrigger>
             <TooltipContent>{tooltip}</TooltipContent>
