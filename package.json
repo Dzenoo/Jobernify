@@ -7,7 +7,9 @@
     "build": "npm run build -w shared && npm run build -w api && npm run build -w client",
     "build:shared": "npm run build -w shared",
     "build:api": "npm run build:shared && npm run build -w api",
-    "build:client": "npm run build:shared && npm run build -w client"
+    "build:client": "npm run build:shared && npm run build -w client",
+    "start:client": "npm run dev -w client",
+    "start:api": "npm run start:dev -w api"
   },
   "workspaces": [
     "client",
