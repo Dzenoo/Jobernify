@@ -152,8 +152,8 @@ export const formatURL = (url: string): string => {
  * @returns The industry label.
  */
 export const findIndustriesData = (industry: string): string => {
-  const industryData = industries.find((item) => item.value === industry);
-  return industryData ? industryData.label : '';
+  const industryData = industries.find((item) => item === industry);
+  return industryData ? industryData : '';
 };
 
 /**

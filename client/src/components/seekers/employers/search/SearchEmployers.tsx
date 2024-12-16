@@ -14,6 +14,7 @@ import {
   SelectItem,
   SelectValue,
 } from '@/components/ui/select';
+import { uppercaseFirstLetter } from '@/lib/utils';
 
 type SearchEmployersProps = {
   searchParams: { [key: string]: string };
@@ -72,7 +73,13 @@ const SearchEmployers: React.FC<SearchEmployersProps> = ({ searchParams }) => {
             <SelectValue placeholder="Industry" />
           </SelectTrigger>
           <SelectContent>
-            {getUpdatedData('Industries', industries).map((industry) => (
+            {getUpdatedData(
+              'Industries',
+              industries.map((industry) => ({
+                value: industry,
+                label: uppercaseFirstLetter(industry),
+              })),
+            ).map((industry) => (
               <SelectItem key={industry.label} value={industry.value}>
                 {industry.label}
               </SelectItem>
@@ -89,7 +96,13 @@ const SearchEmployers: React.FC<SearchEmployersProps> = ({ searchParams }) => {
             <SelectValue placeholder="Size" />
           </SelectTrigger>
           <SelectContent>
-            {getUpdatedData('Sizes', companySizes).map((size) => (
+            {getUpdatedData(
+              'Sizes',
+              companySizes.map((size) => ({
+                value: size,
+                label: uppercaseFirstLetter(size),
+              })),
+            ).map((size) => (
               <SelectItem key={size.label} value={size.value}>
                 {size.label}
               </SelectItem>
