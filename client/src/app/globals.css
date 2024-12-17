@@ -72,7 +72,7 @@
   }
 
   body {
-    @apply bg-[#fafafa] dark:bg-[#0d0d0d];
+    @apply bg-[#fafafa] dark:bg-[#000000];
   }
 
   .landing-padding {

@@ -48,12 +48,8 @@ const JobDetailsPage = ({
 
   return (
     <section className="flex gap-5 justify-between max-xl:flex-col">
-      <div className="max-xl:basis-full basis-[38em]">
-        <AddJobAlert
-          level={fetchedJobs.job.level}
-          type={fetchedJobs.job.type}
-          title={fetchedJobs.job.title}
-        />
+      <div className="max-xl:basis-full basis-2/5">
+        <SeekerInfo />
       </div>
 
       <div className="basis-full grow">
@@ -63,8 +59,12 @@ const JobDetailsPage = ({
         />
       </div>
 
-      <div className="basis-1/2">
-        <SeekerInfo />
+      <div className="basis-2/5">
+        <AddJobAlert
+          level={fetchedJobs.job.level}
+          type={fetchedJobs.job.type}
+          title={fetchedJobs.job.title}
+        />
         <JobsList
           jobs={fetchedJobs.jobs}
           message="No similar jobs found at the moment."

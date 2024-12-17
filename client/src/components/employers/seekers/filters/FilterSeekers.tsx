@@ -1,30 +1,35 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { ListFilter } from "lucide-react";
+import { ListFilter } from 'lucide-react';
 
-import useMediaQuery from "@/hooks/defaults/useMediaQuery.hook";
-import { SkillsInformationsData } from "@/constants";
+import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import { SkillsInformationsData } from '@/constants';
 
-import FilterHandler from "@/components/shared/filters/FilterHandler";
+import FilterHandler from '@/components/shared/filters/FilterHandler';
 
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/drawer';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 
 const FilterSeekers: React.FC = () => {
-  const isLarge = useMediaQuery("(min-width: 1280px)");
+  const isLarge = useMediaQuery('(min-width: 1280px)');
   const [open, setOpen] = useState(false);
 
   return (
     <div className="flex flex-col gap-6">
       <div className="hidden xl:block">
-        <FiltersContent />
+        <Card>
+          <CardContent>
+            <FiltersContent />
+          </CardContent>
+        </Card>
       </div>
       <div className="xl:hidden">
         <Button
@@ -54,7 +59,7 @@ const FilterSeekers: React.FC = () => {
 
 const FiltersContent: React.FC = () => {
   const transformedSkillsInformationsData = SkillsInformationsData.map(
-    (item) => ({ id: item.id, title: item.category, data: item.data })
+    (item) => ({ id: item.id, title: item.category, data: item.data }),
   );
 
   return (

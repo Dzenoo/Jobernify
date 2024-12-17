@@ -18,6 +18,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
+import { Card, CardContent } from '@/components/ui/card';
 
 type FilterJobsProps = {
   filterCounts: FilterCounts;
@@ -30,7 +31,11 @@ const FilterJobs: React.FC<FilterJobsProps> = React.memo(({ filterCounts }) => {
   return (
     <div className="flex flex-col gap-6">
       <div className="hidden xl:block">
-        <FiltersContent filterCounts={filterCounts} />
+        <Card>
+          <CardContent>
+            <FiltersContent filterCounts={filterCounts} />
+          </CardContent>
+        </Card>
       </div>
       <div className="xl:hidden">
         <Button
