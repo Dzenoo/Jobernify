@@ -233,31 +233,4 @@ export const SkillsInformationsData = [
       },
     ],
   },
-  // Project Management
-  {
-    id: '9',
-    category: 'Project Management',
-    data: [
-      { id: '1', title: 'Agile Methodology', value: 'agile', type: 'skills' },
-      { id: '2', title: 'Scrum', value: 'scrum', type: 'skills' },
-      { id: '3', title: 'Kanban', value: 'kanban', type: 'skills' },
-      { id: '4', title: 'PRINCE2', value: 'prince2', type: 'skills' },
-      {
-        id: '5',
-        title: 'Stakeholder Management',
-        value: 'stakeholdermanagement',
-        type: 'skills',
-      },
-      {
-        id: '6',
-        title: 'Microsoft Project',
-        value: 'msproject',
-        type: 'skills',
-      },
-      { id: '7', title: 'JIRA', value: 'jira', type: 'skills' },
-      { id: '8', title: 'Trello', value: 'trello', type: 'skills' },
-      { id: '9', title: 'Asana', value: 'asana', type: 'skills' },
-      { id: '10', title: 'Basecamp', value: 'basecamp', type: 'skills' },
-    ],
-  },
 ];

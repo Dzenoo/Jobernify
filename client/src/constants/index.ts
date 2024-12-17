@@ -1,9 +1,9 @@
-export * from './nav';
-export * from './footer';
-export * from './data';
-export * from './filters';
-export * from './skills';
-export * from './landing';
-export * from './regex';
+export * from './nav.constants';
+export * from './footer.constants';
+export * from './data.constants';
+export * from './filters.constants';
+export * from './skills.constants';
+export * from './landing.constants';
+export * from './regex.constants';
 
 export const AWS_URL = 'https://jobernify.s3.eu-north-1.amazonaws.com';
