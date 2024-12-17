@@ -1,6 +1,10 @@
 import React from 'react';
 import { Control } from 'react-hook-form';
 
+import { locations } from '@/constants';
+
+import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
 import {
   FormControl,
   FormDescription,
@@ -9,8 +13,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Textarea } from '@/components/ui/textarea';
-import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectTrigger,
@@ -18,7 +20,6 @@ import {
   SelectContent,
   SelectItem,
 } from '@/components/ui/select';
-import { locations } from '@/constants';
 
 type DetailsProps = {
   control: Control<any>;
@@ -93,8 +94,7 @@ const Details: React.FC<DetailsProps> = ({ control }) => {
             </FormControl>
             <FormDescription>
               Choose a location that accurately reflects where the job is based.
-              This should be a location between 3 to 30 characters long, and it
-              helps in filtering and matching with candidates looking in
+              It helps in filtering and matching with candidates looking in
               specific areas.
             </FormDescription>
             <FormMessage />
