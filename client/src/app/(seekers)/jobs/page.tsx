@@ -56,6 +56,7 @@ const Jobs = ({
       return getJobs({
         token: token,
         page: Number(searchParams.page) || 1,
+        limit: Number(searchParams.limit) || 10,
         sort: searchParams.sort || '',
         search: searchParams.query || '',
         type: searchParams.type || '',

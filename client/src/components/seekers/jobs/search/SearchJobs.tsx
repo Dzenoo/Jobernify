@@ -74,6 +74,23 @@ const SearchJobs: React.FC<SearchJobsProps> = ({ query, sort }) => {
             </SelectContent>
           </Select>
         </div>
+        <div className="basis-52 max-sm:basis-full">
+          <Select
+            onValueChange={(value) => handleSelectChange(value, 'limit')}
+            defaultValue={sort}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Per Page" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="5">5</SelectItem>
+              <SelectItem value="10">10</SelectItem>
+              <SelectItem value="15">15</SelectItem>
+              <SelectItem value="20">20</SelectItem>
+              <SelectItem value="25">25</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
     </div>
   );

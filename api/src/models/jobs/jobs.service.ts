@@ -336,11 +336,14 @@ export class JobsService {
       { $project: { title: 1, _id: 1 } },
     ]);
 
+    const regex = new RegExp(String(search), 'i');
+
     if (search) {
       conditions.$or = [
-        { title: { $regex: new RegExp(String(search), 'i') } },
-        { description: { $regex: new RegExp(String(search), 'i') } },
-        { location: { $regex: new RegExp(String(search), 'i') } },
+        { title: { $regex: regex } },
+        { description: { $regex: regex } },
+        { overview: { $regex: regex } },
+        { skills: { $elemMatch: { $regex: regex } } },
       ];
     }
 
@@ -398,6 +401,7 @@ export class JobsService {
       .select(
         '_id title overview employer applications location expiration_date level createdAt',
       )
+      .lean()
       .exec();
 
     const totalJobs = await this.jobModel.countDocuments(conditions);

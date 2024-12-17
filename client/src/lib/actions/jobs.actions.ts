@@ -75,6 +75,7 @@ export const saveJob = async (
 export const getJobs = async ({
   token,
   page = 1,
+  limit = 10,
   sort = '',
   search = '',
   salary = '',
@@ -84,6 +85,7 @@ export const getJobs = async ({
 }: {
   token: string;
   page?: number;
+  limit?: number;
   sort?: string;
   search?: string;
   salary?: string;
@@ -97,7 +99,7 @@ export const getJobs = async ({
   filterCounts: FilterCounts;
 }> => {
   return await getApiHandler(
-    `jobs/all?page=${page}&sort=${sort}&search=${search}&salary=${salary}&position=${position}&level=${level}&type=${type}`,
+    `jobs/all?page=${page}&limit=${limit}&sort=${sort}&search=${search}&salary=${salary}&position=${position}&level=${level}&type=${type}`,
     token,
   );
 };
