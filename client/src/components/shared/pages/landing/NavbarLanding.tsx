@@ -35,7 +35,7 @@ const NavbarLanding: React.FC = () => {
       </div>
       <div
         className={`max-lg:hidden relative ${
-          isSeeker ? 'right-10' : 'right-5'
+          isSeeker ? 'right-10' : 'right-8'
         }`}
       >
         <ul className="flex items-center gap-10">
