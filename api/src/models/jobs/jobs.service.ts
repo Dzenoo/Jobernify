@@ -81,7 +81,7 @@ export class JobsService {
   ): Promise<ResponseObject> {
     const newJob = await this.jobModel.create({
       ...body,
-      company: new mongoose.Types.ObjectId(employerId),
+      employer: new mongoose.Types.ObjectId(employerId),
     });
 
     if (!newJob) {
@@ -176,7 +176,7 @@ export class JobsService {
       );
     }
 
-    if (employerId.toString() !== job.company.toString()) {
+    if (employerId.toString() !== job.employer.toString()) {
       throw new UnauthorizedException(
         'You are not authorized to edit this job posting.',
       );
@@ -206,7 +206,7 @@ export class JobsService {
       );
     }
 
-    if (employerId.toString() !== job.company.toString()) {
+    if (employerId.toString() !== job.employer.toString()) {
       throw new UnauthorizedException(
         'You are not authorized to edit this job posting.',
       );
@@ -284,11 +284,11 @@ export class JobsService {
     const job = await this.jobModel
       .findById(id)
       .populate({
-        path: 'company',
+        path: 'employer',
         select: 'name companyDescription followers size image industry',
       })
       .select(
-        '_id title overview company position applications location expiration_date level createdAt salary skills description type',
+        '_id title overview employer position applications location expiration_date level createdAt salary skills description type',
       );
 
     if (!job) {
@@ -300,10 +300,10 @@ export class JobsService {
         title: job.title,
       })
       .select(
-        '_id title overview company position applications location expiration_date level createdAt',
+        '_id title overview employer position applications location expiration_date level createdAt',
       )
       .populate({
-        path: 'company',
+        path: 'employer',
         select: 'name companyDescription followers size image industry',
       })
       .exec();
@@ -394,9 +394,9 @@ export class JobsService {
       .sort(sortOptions)
       .skip((page - 1) * limit)
       .limit(limit)
-      .populate({ path: 'company', select: 'image name _id' })
+      .populate({ path: 'employer', select: 'image name _id' })
       .select(
-        '_id title overview company applications location expiration_date level createdAt',
+        '_id title overview employer applications location expiration_date level createdAt',
       )
       .exec();
 

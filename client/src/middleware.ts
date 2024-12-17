@@ -11,9 +11,9 @@ const protectedRoutes = {
   '/dashboard/settings': ['employer'],
   '/jobs': ['seeker'],
   '/jobs/jobId': ['seeker'],
-  '/companies': ['seeker'],
+  '/employers': ['seeker'],
   '/profile': ['seeker'],
-  '/companies/seekerId': ['seeker'],
+  '/employers/employerId': ['seeker'],
 };
 
 export function middleware(req: NextRequest) {
@@ -81,7 +81,7 @@ export const config = {
     '/dashboard/:path*',
     '/seekers',
     '/profile',
-    '/companies/:path*',
+    '/employers/:path*',
     '/jobs/:path*',
   ],
 };

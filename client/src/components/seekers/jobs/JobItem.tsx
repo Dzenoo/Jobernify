@@ -40,7 +40,7 @@ const JobItem: React.FC<JobItemProps> = ({
   job: {
     _id,
     title,
-    company,
+    employer,
     overview,
     expiration_date,
     createdAt,
@@ -81,10 +81,10 @@ const JobItem: React.FC<JobItemProps> = ({
         <CardHeader>
           <div className="flex justify-between sm:items-center">
             <div className="flex items-center gap-3 flex-wrap">
-              <Link href={`/companies/${company._id}?section=jobs`}>
+              <Link href={`/employers/${employer._id}?section=jobs`}>
                 <Avatar className="border border-blue-100 dark:border-[#1b1b1b] w-14 h-14">
                   <AvatarImage
-                    src={getImageUrl(company?.image)}
+                    src={getImageUrl(employer?.image)}
                     className="object-cover w-auto h-auto"
                   />
                 </Avatar>
@@ -106,8 +106,8 @@ const JobItem: React.FC<JobItemProps> = ({
                 </div>
                 <div className="flex items-center gap-3 max-sm:flex-wrap">
                   <div>
-                    <Link href={`/companies/${company._id}?section=jobs`}>
-                      <p className="text-low-gray">{company?.name}</p>
+                    <Link href={`/employers/${employer._id}?section=jobs`}>
+                      <p className="text-low-gray">{employer?.name}</p>
                     </Link>
                   </div>
                   <div>

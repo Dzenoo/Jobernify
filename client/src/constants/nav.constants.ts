@@ -9,7 +9,7 @@ export const NavbarLandingLinks = [
 
 export const SeekersNavbarLinks = [
   { id: '1', title: 'Find Jobs', href: '/jobs' },
-  { id: '2', title: 'Find Companies', href: '/companies' },
+  { id: '2', title: 'Search Employers', href: '/employers' },
 ];
 
 export const SeekersNavbarActions = [

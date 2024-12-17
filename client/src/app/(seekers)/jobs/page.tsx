@@ -78,6 +78,8 @@ const Jobs = ({
     filterCounts: [],
   };
 
+  console.log(jobsData.jobs);
+
   const totalJobs = jobsData.totalJobs;
   const isFiltering = isLoading || isFetching || isRefetching;
 

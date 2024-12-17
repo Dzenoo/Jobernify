@@ -1,4 +1,4 @@
-const LoadingCompaniesSkeleton: React.FC = () => {
+const LoadingEmployersSkeleton: React.FC = () => {
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {Array.from({ length: 10 }).map((_job, ind) => (
@@ -24,4 +24,4 @@ const LoadingCompaniesSkeleton: React.FC = () => {
   );
 };
 
-export default LoadingCompaniesSkeleton;
+export default LoadingEmployersSkeleton;

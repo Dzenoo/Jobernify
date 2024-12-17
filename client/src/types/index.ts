@@ -38,7 +38,7 @@ export type Job = {
   type: keyof typeof JobType;
   skills: string[];
   level: keyof typeof JobLevel;
-  company: Employer;
+  employer: Employer;
   salary: number;
   expiration_date: string & Date;
   description: string;

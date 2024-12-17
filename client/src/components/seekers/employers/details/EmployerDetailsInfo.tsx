@@ -57,7 +57,7 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
 
   return (
     <div className="flex flex-col gap-6">
-      <Navigator info="Employers" href={'/companies'} title={name} />
+      <Navigator info="Employers" href={'/employers'} title={name} />
       <Card>
         <div className="flex overflow-auto justify-between max-lg:flex-col hide-scrollbar">
           <div className="flex sm:items-center max-sm:flex-col">

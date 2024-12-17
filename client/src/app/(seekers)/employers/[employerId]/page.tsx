@@ -9,7 +9,7 @@ import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
 
 import { getEmployerById } from '@/lib/actions/employers.actions';
 
-import LoadingCompanyDetails from '@/components/loaders/seekers/LoadingCompanyDetails';
+import LoadingEmployerDetails from '@/components/loaders/seekers/LoadingEmployerDetails';
 import EmployerDetailsInfo from '@/components/seekers/employers/details/EmployerDetailsInfo';
 import EmployerFilters from '@/components/seekers/employers/filters/EmployerFilters';
 import PaginatedList from '@/components/ui/paginate-list';
@@ -21,60 +21,62 @@ const JobsList = dynamic(() => import('@/components/seekers/jobs/JobsList'), {
   loading: () => <LoadingJobsSkeleton />,
 });
 
-const CompanyDetails = ({
+const EmployerDetails = ({
   params,
   searchParams,
 }: {
-  params: { companyId: string };
+  params: { employerId: string };
   searchParams: { [key: string]: any };
 }) => {
   const { updateSearchParams } = useSearchParams();
   const { token } = useAuthentication().getCookieHandler();
-  const { data: fetchedCompany, isLoading } = useQuery({
+  const { data: fetchedEmployer, isLoading } = useQuery({
     queryFn: () => {
       if (!token) {
         throw new Error('Unauthorized!');
       }
 
       return getEmployerById(
-        params.companyId,
+        params.employerId,
         token,
         searchParams.section,
         Number(searchParams.page) || 1,
       );
     },
     queryKey: [
-      'company',
-      params.companyId,
+      'employer',
+      params.employerId,
       searchParams.section,
       searchParams.page,
     ],
   });
 
   if (isLoading) {
-    return <LoadingCompanyDetails />;
+    return <LoadingEmployerDetails />;
   }
 
-  if (!fetchedCompany) {
+  if (!fetchedEmployer) {
     return <NotFound />;
   }
+
+  console.log(fetchedEmployer);
 
   const searchParamsJobs = searchParams.section === 'jobs';
 
   let totalItems = 0;
-  if (searchParamsJobs && fetchedCompany.totalJobs) {
-    totalItems = fetchedCompany.totalJobs;
+  if (searchParamsJobs && fetchedEmployer.totalJobs) {
+    totalItems = fetchedEmployer.totalJobs;
   }
 
   return (
     <section className="overflow-hidden mx-40 max-xl:mx-0">
       <div className="flex flex-col gap-6 justify-center overflow-auto">
-        <EmployerDetailsInfo employer={fetchedCompany.employer} />
+        <EmployerDetailsInfo employer={fetchedEmployer.employer} />
         <EmployerFilters type={searchParams.section} />
       </div>
 
       <div className="flex flex-col gap-6 justify-center overflow-auto py-6">
-        {searchParamsJobs && <JobsList jobs={fetchedCompany.employer.jobs} />}
+        {searchParamsJobs && <JobsList jobs={fetchedEmployer.employer.jobs} />}
         {totalItems > 10 && (
           <PaginatedList
             onPageChange={(value) =>
@@ -90,4 +92,4 @@ const CompanyDetails = ({
   );
 };
 
-export default CompanyDetails;
+export default EmployerDetails;

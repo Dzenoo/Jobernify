@@ -13,15 +13,15 @@ import SearchEmployers from '@/components/seekers/employers/search/SearchEmploye
 import PaginatedList from '@/components/ui/paginate-list';
 import NotFound from '@/components/shared/pages/NotFound';
 
-import LoadingCompaniesSkeleton from '@/components/loaders/seekers/LoadingCompanies';
+import LoadingEmployersSkeleton from '@/components/loaders/seekers/LoadingEmployers';
 const EmployersList = dynamic(
   () => import('@/components/seekers/employers/EmployersList'),
   {
-    loading: () => <LoadingCompaniesSkeleton />,
+    loading: () => <LoadingEmployersSkeleton />,
   },
 );
 
-const Companies = ({
+const Employers = ({
   searchParams,
 }: {
   searchParams: { [key: string]: string };
@@ -29,7 +29,7 @@ const Companies = ({
   const { updateSearchParams } = useSearchParams();
   const { token } = useAuthentication().getCookieHandler();
   const {
-    data: fetchedCompanies,
+    data: fetchedEmployers,
     isLoading,
     isFetching,
     isRefetching,
@@ -49,19 +49,19 @@ const Companies = ({
         location: searchParams.location || '',
       });
     },
-    queryKey: ['companies', searchParams],
+    queryKey: ['employers', searchParams],
   });
 
-  if (!fetchedCompanies && !isLoading) {
+  if (!fetchedEmployers && !isLoading) {
     return <NotFound />;
   }
 
-  const companiesData = fetchedCompanies || {
+  const employersData = fetchedEmployers || {
     employers: [],
     totalEmployers: 0,
   };
 
-  const totalEmployers = companiesData.totalEmployers;
+  const totalEmployers = employersData.totalEmployers;
   const isFiltering = isLoading || isFetching || isRefetching;
 
   return (
@@ -72,9 +72,9 @@ const Companies = ({
 
       <div>
         {isFiltering ? (
-          <LoadingCompaniesSkeleton />
+          <LoadingEmployersSkeleton />
         ) : (
-          <EmployersList employers={companiesData.employers} />
+          <EmployersList employers={employersData.employers} />
         )}
       </div>
 
@@ -90,4 +90,4 @@ const Companies = ({
   );
 };
 
-export default Companies;
+export default Employers;

@@ -135,9 +135,9 @@ export class ApplicationsService {
       .populate('seeker', 'email')
       .populate({
         path: 'job',
-        select: 'company',
+        select: 'employer',
         populate: {
-          path: 'company',
+          path: 'employer',
           select: 'name',
         },
       });
@@ -154,7 +154,7 @@ export class ApplicationsService {
 
     const emailContent = this.generateApplicationEmailContent(
       status,
-      existingApplication.job.company.name,
+      existingApplication.job.employer.name,
     );
 
     await this.nodemailerService.sendMail(

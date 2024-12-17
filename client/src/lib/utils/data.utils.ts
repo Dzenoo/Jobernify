@@ -6,9 +6,9 @@ import { uppercaseFirstLetter } from '../utils';
  * @param industry - The industry value.
  * @returns The industry label.
  */
-export const findIndustriesData = (industry: string): string | undefined => {
+export const findIndustriesData = (industry: string): string => {
   const foundedIndustry = industries.find((item) => item === industry);
-  if (!foundedIndustry) return undefined;
+  if (!foundedIndustry) return '';
   return uppercaseFirstLetter(foundedIndustry);
 };
 

@@ -69,7 +69,7 @@ export class Job {
     ref: 'Employer',
     required: true,
   })
-  company: Employer & string;
+  employer: Employer & string;
 
   @Prop({
     type: Number,

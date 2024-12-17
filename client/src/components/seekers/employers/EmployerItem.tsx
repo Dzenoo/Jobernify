@@ -70,8 +70,8 @@ const EmployerItem: React.FC<EmployersItemProps> = ({
         </div>
         <div className="flex flex-col gap-3">
           <div>
-            <Link href={`/companies/${_id}?section=jobs`}>
-              <h1 className="hover:text-blue-700 hover:underline text-base-black font-semibold">
+            <Link href={`/employers/${_id}?section=jobs`}>
+              <h1 className="hover:text-blue-700 hover:underline text-base-black">
                 {name}
               </h1>
             </Link>

@@ -148,7 +148,7 @@ export class EmployersService {
     const counts: any = {};
     if (type === 'jobs' || !type) {
       counts.totalJobs = await this.jobsService.countDocuments({
-        company: id,
+        employer: id,
         ...searchQuery,
       });
     }
@@ -216,7 +216,7 @@ export class EmployersService {
       );
     }
 
-    await this.jobsService.findAndDeleteMany({ company: id });
+    await this.jobsService.findAndDeleteMany({ employer: id });
 
     await this.seekersService.findAndUpdateMany(
       {
@@ -266,9 +266,9 @@ export class EmployersService {
           path: 'jobs',
           options: { skip, limit },
           select:
-            'title position _id location level applications expiration_date createdAt overview',
+            'title position employer _id location level applications expiration_date createdAt overview',
           populate: {
-            path: 'company',
+            path: 'employer',
             select: '_id image name',
           },
         };
@@ -291,7 +291,7 @@ export class EmployersService {
       );
     }
 
-    const totalJobs = await this.jobsService.countDocuments({ company: id });
+    const totalJobs = await this.jobsService.countDocuments({ employer: id });
 
     return {
       statusCode: HttpStatus.OK,
@@ -375,11 +375,11 @@ export class EmployersService {
     startOfMonth.setDate(1);
     startOfMonth.setHours(0, 0, 0, 0);
 
-    const totalJobs = await this.jobsService.countDocuments({ company: id });
+    const totalJobs = await this.jobsService.countDocuments({ employer: id });
 
     const totalApplications = await this.applicationsService.countDocuments({
       job: {
-        $in: (await this.jobsService.find({ company: id })).map(
+        $in: (await this.jobsService.find({ employer: id })).map(
           (job) => job._id,
         ),
       },
@@ -390,14 +390,14 @@ export class EmployersService {
     ).followers.length;
 
     const jobsThisMonth = await this.jobsService.countDocuments({
-      company: id,
+      employer: id,
       createdAt: { $gte: startOfMonth },
     });
 
     const applicationsThisMonth = await this.applicationsService.countDocuments(
       {
         job: {
-          $in: (await this.jobsService.find({ company: id })).map(
+          $in: (await this.jobsService.find({ employer: id })).map(
             (job) => job._id,
           ),
         },
@@ -448,7 +448,7 @@ export class EmployersService {
     const jobs = await this.jobsService.aggregate([
       {
         $match: {
-          company: objectIdEmployerId,
+          employer: objectIdEmployerId,
           createdAt: { $gte: sixMonthsAgo },
         },
       },
@@ -498,7 +498,7 @@ export class EmployersService {
     const objectIdEmployerId = new mongoose.Types.ObjectId(id);
 
     const jobTypes = await this.jobsService.aggregate([
-      { $match: { company: objectIdEmployerId } },
+      { $match: { employer: objectIdEmployerId } },
       {
         $group: {
           _id: '$type',

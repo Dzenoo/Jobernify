@@ -35,7 +35,7 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
     createdAt,
     job: {
       _id: jobId,
-      company: { _id: companyId, industry, name, size, address, image },
+      employer: { _id: employerId, industry, name, size, address, image },
       level,
       position,
       title,
@@ -45,7 +45,7 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
 }) => {
   const appliedDate = formatDate(createdAt || '');
 
-  const ApplicationCompanyInfo = [
+  const ApplicationEmployerInfo = [
     {
       id: '1',
       icon: <Building />,
@@ -89,7 +89,7 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
     <Card className="dark:border-[#3b3b3b]">
       <CardHeader>
         <div className="flex gap-3 items-center max-xl:flex-wrap">
-          <Link href={`/companies/${companyId}?section=jobs`}>
+          <Link href={`/employers/${employerId}?section=jobs`}>
             <Avatar className="w-28 h-28 border border-blue-100 dark:border-[#1b1b1b] ">
               <AvatarImage
                 src={getImageUrl(image)}
@@ -99,12 +99,12 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
           </Link>
           <div className="flex flex-col gap-3">
             <div>
-              <Link href={`/companies/${companyId}?section=jobs`}>
+              <Link href={`/employers/${employerId}?section=jobs`}>
                 <h1>{name}</h1>
               </Link>
             </div>
             <div className="flex gap-3 items-center flex-wrap">
-              {ApplicationCompanyInfo.map((data) => renderIconText(data))}
+              {ApplicationEmployerInfo.map((data) => renderIconText(data))}
             </div>
           </div>
         </div>

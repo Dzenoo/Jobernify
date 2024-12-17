@@ -46,7 +46,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
   ({
     job: {
       _id,
-      company,
+      employer,
       title,
       description,
       expiration_date,
@@ -74,18 +74,18 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
     const createdTime = getTime(createdAt);
     const categorizedSkills = getSkillsData(skills);
 
-    const CompanyInformationsData = [
+    const EmployerInformationsData = [
       {
         tooltip: 'Location',
         id: '1',
         icon: <MapPinIcon />,
-        data: company.address || findLocationData(location),
+        data: employer.address || findLocationData(location),
       },
       {
         tooltip: 'Size',
         id: '2',
         icon: <LayoutTemplate />,
-        data: company.size,
+        data: employer.size,
       },
     ];
 
@@ -150,18 +150,18 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
           <CardHeader>
             <div className="flex justify-between gap-6 max-md:flex-col">
               <div className="flex gap-3 max-sm:flex-col sm:items-center">
-                <Link href={`/companies/${company._id}?section=jobs`}>
+                <Link href={`/employers/${employer._id}?section=jobs`}>
                   <Avatar className="border border-blue-100 dark:border-[#1b1b1b] w-28 h-28">
                     <AvatarImage
-                      src={getImageUrl(company.image)}
+                      src={getImageUrl(employer.image)}
                       className="object-cover w-auto h-auto"
                     />
                   </Avatar>
                 </Link>
                 <div className="flex flex-col gap-3">
                   <div>
-                    <Link href={`/companies/${company._id}?section=jobs`}>
-                      <h3 className="text-initial-black">{company.name}</h3>
+                    <Link href={`/employers/${employer._id}?section=jobs`}>
+                      <h3 className="text-initial-black">{employer.name}</h3>
                     </Link>
                   </div>
                   {renderIconText({
@@ -169,10 +169,10 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
                     tooltipContent: 'Industry',
                     id: '3',
                     icon: <Building />,
-                    data: findIndustriesData(company.industry),
+                    data: findIndustriesData(employer.industry),
                   })}
                   <div className="flex items-center gap-3 flex-wrap">
-                    {CompanyInformationsData.map((data) =>
+                    {EmployerInformationsData.map((data) =>
                       renderIconText({
                         ...data,
                         tooltip: true,

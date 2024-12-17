@@ -100,7 +100,7 @@ export class SeekersService {
         select:
           '_id title location level expiration_date createdAt applications overview',
         populate: {
-          path: 'company',
+          path: 'employer',
           select: '_id image name',
         },
       })
@@ -111,7 +111,7 @@ export class SeekersService {
           path: 'job',
           select: '_id title type level position',
           populate: {
-            path: 'company',
+            path: 'employer',
             select: '_id image name size address industry',
           },
         },

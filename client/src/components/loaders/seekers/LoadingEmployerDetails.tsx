@@ -1,4 +1,4 @@
-const LoadingCompanyDetails: React.FC = () => {
+const LoadingEmployerDetails: React.FC = () => {
   return (
     <div className="mx-40 max-xl:mx-0 flex flex-col gap-6">
       <div className="h-6 bg-gray-300 rounded w-48"></div>
@@ -31,4 +31,4 @@ const LoadingCompanyDetails: React.FC = () => {
   );
 };
 
-export default LoadingCompanyDetails;
+export default LoadingEmployerDetails;

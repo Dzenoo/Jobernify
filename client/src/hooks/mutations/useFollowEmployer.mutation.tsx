@@ -19,10 +19,10 @@ const useFollowEmployer = (employerId: string) => {
 
       return followEmployer(employerId, token);
     },
-    mutationKey: ['profile', 'company', 'companies'],
+    mutationKey: ['profile', 'employer', 'employers'],
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['profile', 'company', 'companies'],
+        queryKey: ['profile', 'employer', 'employers'],
       });
     },
     onError: (error: any) => {
