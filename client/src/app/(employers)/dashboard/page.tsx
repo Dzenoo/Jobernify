@@ -43,7 +43,7 @@ const Dashboard = () => {
 
   return (
     <section className="flex flex-col gap-3">
-      <div className="flex flex-col gap-[3px]">
+      <div className="flex flex-col gap-1">
         <div>
           <h1 className="text-base-black">
             Hi There, {fetchedEmployer?.employer.name}
