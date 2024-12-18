@@ -1,6 +1,6 @@
 import { JobLevel, JobPosition, JobType } from '@jobernify/shared';
-import { Employer } from './employers';
-import { Application } from './applications';
+import { Employer } from './employers.types';
+import { Application } from './applications.types';
 
 export type Job = {
   _id: string;

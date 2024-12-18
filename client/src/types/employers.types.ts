@@ -1,6 +1,6 @@
 import { CompanySize, IndustryType, Role } from '@jobernify/shared';
-import { Job } from './jobs';
-import { Seeker } from './seekers';
+import { Job } from './jobs.types';
+import { Seeker } from './seekers.types';
 
 export type Employer = {
   _id: string;
