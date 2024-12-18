@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getEmployerProfile } from '@/lib/actions/employers.actions';
 
-import useAuthentication from '../defaults/useAuthentication.hook';
+import { useAuthentication } from '../core/useAuthentication.hook';
 import { Employer } from '@/types';
 
 const useGetEmployer = (type?: string) => {
@@ -27,4 +27,4 @@ const useGetEmployer = (type?: string) => {
   });
 };
 
-export default useGetEmployer;
+export { useGetEmployer };

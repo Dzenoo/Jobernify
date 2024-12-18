@@ -4,8 +4,8 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { useQuery } from '@tanstack/react-query';
 
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
-import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
+import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
 import { getEmployerById } from '@/lib/actions/employers.actions';
 
@@ -58,8 +58,6 @@ const EmployerDetails = ({
   if (!fetchedEmployer) {
     return <NotFound />;
   }
-
-  console.log(fetchedEmployer);
 
   const searchParamsJobs = searchParams.section === 'jobs';
 

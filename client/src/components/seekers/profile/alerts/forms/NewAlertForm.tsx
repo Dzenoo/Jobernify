@@ -9,7 +9,7 @@ import { JobAlertSchema } from '@/lib/zod/seekers.validation';
 import { JobAlerts } from '@/types';
 import { JobsFiltersData } from '@/constants';
 
-import useJobAlert from '@/hooks/mutations/useJobAlert.mutation';
+import { useJobAlert } from '@/hooks/mutations/useJobAlert.mutation';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

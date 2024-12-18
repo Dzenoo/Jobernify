@@ -6,11 +6,9 @@ import UpdateJobForm from '@/components/employers/dashboard/jobs/new/forms/Updat
 import { useQuery } from '@tanstack/react-query';
 import { getJobById } from '@/lib/actions/jobs.actions';
 
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import NotFound from '@/components/shared/pages/NotFound';
 import LoadingUpdateJob from '@/components/loaders/employers/LoadingUpdateJob';
-
-import { Job } from '@/types';
 
 const EditJobPage = ({ params }: { params: { jobId: string } }) => {
   const { token } = useAuthentication().getCookieHandler();

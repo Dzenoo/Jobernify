@@ -18,4 +18,4 @@ const usePagination = ({
   };
 };
 
-export default usePagination;
+export { usePagination };

@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import { getSeekers } from '@/lib/actions/seekers.actions';
 
@@ -12,7 +12,7 @@ import FilterSeekers from '@/components/employers/seekers/filters/FilterSeekers'
 import dynamic from 'next/dynamic';
 import LoadingSeekers from '@/components/loaders/employers/LoadingSeekers';
 import PaginatedList from '@/components/ui/paginate-list';
-import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
+import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 import SearchSeekers from '@/components/employers/seekers/search/SearchSeekers';
 import ExploreSeekers from '@/components/employers/seekers/explore/ExploreSeekers';
 

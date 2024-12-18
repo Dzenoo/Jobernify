@@ -4,7 +4,7 @@ import { Calendar, Edit, GraduationCap, Trash } from 'lucide-react';
 import { useMutation } from '@tanstack/react-query';
 
 import { useToast } from '@/components/ui/use-toast';
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import { deleteEducation } from '@/lib/actions/seekers.actions';
 import { formatDate } from '@/lib/utils';

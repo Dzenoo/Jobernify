@@ -7,7 +7,7 @@ import FeaturesLanding from '@/components/shared/pages/landing/FeaturesLanding';
 import BenefitsLanding from '@/components/shared/pages/landing/BenefitsLanding';
 import TechRolesOnlyLanding from '@/components/shared/pages/landing/TechRolesOnlyLanding';
 import FaqLanding from '@/components/shared/pages/landing/FaqLanding';
-import useZoomLevel from '@/hooks/defaults/useZoomLevel.hook';
+import { useZoomLevel } from '@/hooks/core/useZoomLevel.hook';
 
 const HomePage = () => {
   const isZoomedOut = useZoomLevel();

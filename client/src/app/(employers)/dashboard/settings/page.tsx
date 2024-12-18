@@ -3,7 +3,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-import useGetEmployer from '@/hooks/queries/useGetEmployer.query';
+import { useGetEmployer } from '@/hooks/queries/useGetEmployer.query';
 
 import LoadingEmployerSettings from '@/components/loaders/employers/LoadingEmployerSettings';
 

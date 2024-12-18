@@ -11,7 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ScaleLoader } from 'react-spinners';
 import { useToast } from '@/components/ui/use-toast';
 
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import { queryClient } from '@/context/react-query-client';
 import { createNewJob, editJob } from '@/lib/actions/jobs.actions';

@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ScaleLoader } from 'react-spinners';
 import { Edit, X } from 'lucide-react';
 
-import useEditSeeker from '@/hooks/mutations/useEditSeeker.mutation';
+import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
 import { SeekerProfileSchema } from '@/lib/zod/seekers.validation';
 
 import { Seeker } from '@/types';

@@ -21,4 +21,4 @@ const useFetchProfile = (userType: string | null, token: string | null) => {
   });
 };
 
-export default useFetchProfile;
+export { useFetchProfile };

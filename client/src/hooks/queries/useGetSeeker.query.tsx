@@ -2,7 +2,7 @@ import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 import { getSeekerProfile } from '@/lib/actions/seekers.actions';
 
-import useAuthentication from '../defaults/useAuthentication.hook';
+import { useAuthentication } from '../core/useAuthentication.hook';
 
 import { Seeker } from '@/types';
 
@@ -32,4 +32,4 @@ const useGetSeeker = (
   });
 };
 
-export default useGetSeeker;
+export { useGetSeeker };

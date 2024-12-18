@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/context/react-query-client';
 import { editSeekerProfile } from '@/lib/actions/seekers.actions';
 
-import useAuthentication from '../defaults/useAuthentication.hook';
+import { useAuthentication } from '../core/useAuthentication.hook';
 
 import { useToast } from '@/components/ui/use-toast';
 
@@ -14,7 +14,7 @@ const useEditSeeker = () => {
   return useMutation({
     mutationFn: (formData: FormData | any) => {
       if (!token) {
-        throw new Error('Unauthorized');
+        throw new Error('Unauthorized!');
       }
 
       return editSeekerProfile(formData, token);
@@ -29,4 +29,4 @@ const useEditSeeker = () => {
   });
 };
 
-export default useEditSeeker;
+export { useEditSeeker };

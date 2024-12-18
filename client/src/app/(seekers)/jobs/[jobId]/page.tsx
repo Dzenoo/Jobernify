@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
-import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
+import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 
 import { getJobById } from '@/lib/actions/jobs.actions';
 

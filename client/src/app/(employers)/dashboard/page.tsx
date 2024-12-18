@@ -6,8 +6,8 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getEmployerAnalyticsInfo } from '@/lib/actions/employers.actions';
 
-import useGetEmployer from '@/hooks/queries/useGetEmployer.query';
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useGetEmployer } from '@/hooks/queries/useGetEmployer.query';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import Followers from '@/components/employers/dashboard/overview/Followers';
 import JobsPerMonth from '@/components/employers/dashboard/overview/JobsPerMonth';

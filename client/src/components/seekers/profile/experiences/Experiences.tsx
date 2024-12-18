@@ -5,7 +5,7 @@ import React, { Fragment, useState } from 'react';
 import { Experience } from '@/types';
 import { Plus } from 'lucide-react';
 
-import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 import ExperienceList from './ExperienceList';
 import ExperienceForm from './forms/ExperienceForm';
 

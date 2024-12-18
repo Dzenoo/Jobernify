@@ -13,7 +13,7 @@ import {
   EditEducationSchema,
 } from '@/lib/zod/seekers.validation';
 import { addNewEducation, editEducation } from '@/lib/actions/seekers.actions';
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { queryClient } from '@/context/react-query-client';
 import { cn } from '@/lib/utils';
 import { Education } from '@/types';

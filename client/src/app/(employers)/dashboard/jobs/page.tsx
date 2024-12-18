@@ -3,8 +3,8 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
-import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
+import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
 import { getEmployerProfile } from '@/lib/actions/employers.actions';
 

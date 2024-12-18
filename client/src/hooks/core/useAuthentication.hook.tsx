@@ -75,4 +75,4 @@ const useAuthentication = () => {
   return { deleteCookieHandler, storeCookieHandler, getCookieHandler };
 };
 
-export default useAuthentication;
+export { useAuthentication };

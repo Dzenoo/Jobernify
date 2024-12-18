@@ -16,7 +16,7 @@ import {
   Timer,
 } from 'lucide-react';
 
-import useGetSeeker from '@/hooks/queries/useGetSeeker.query';
+import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
 
 import SaveJobButton from '../SaveJobButton';
 import Navigator from '@/components/ui/navigator';

@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
+import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';

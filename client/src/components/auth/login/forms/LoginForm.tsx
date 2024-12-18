@@ -7,7 +7,7 @@ import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ScaleLoader } from 'react-spinners';
 
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { signIn } from '@/lib/actions/auth.actions';
 import { LoginSchema } from '@/lib/zod/auth.validation';
 

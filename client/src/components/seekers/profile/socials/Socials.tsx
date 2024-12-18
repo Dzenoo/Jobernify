@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 
 import { Edit, Github, Image, Linkedin } from 'lucide-react';
 
-import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 import { formatURL } from '@/lib/utils';
 
 import { Seeker } from '@/types';

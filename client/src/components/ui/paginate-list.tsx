@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getTruncatedPageRange } from '@/lib/utils';
 
-import usePagination from '@/hooks/defaults/usePagination.hook';
+import { usePagination } from '@/hooks/core/usePagination.hook';
 
 import {
   Pagination,

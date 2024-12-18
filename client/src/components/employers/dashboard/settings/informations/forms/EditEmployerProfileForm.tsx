@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { companySizes, industries } from '@/constants';
 import { EmployerProfileSchema } from '@/lib/zod/employers.validation';
 
-import useEditEmployer from '@/hooks/mutations/useEditEmployer.mutation';
+import { useEditEmployer } from '@/hooks/mutations/useEditEmployer.mutation';
 
 import { uppercaseFirstLetter } from '@/lib/utils';
 import { Employer } from '@/types';

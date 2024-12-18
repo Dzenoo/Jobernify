@@ -18,4 +18,4 @@ const useOverflow = (name: string) => {
   }, [pathname]);
 };
 
-export default useOverflow;
+export { useOverflow };

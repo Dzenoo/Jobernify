@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ReceiveJobAlertsSchema } from '@/lib/zod/seekers.validation';
 
-import useEditSeeker from '@/hooks/mutations/useEditSeeker.mutation';
+import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
 
 import {
   Form,

@@ -3,7 +3,7 @@ import React from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { Briefcase, Edit, Trash } from 'lucide-react';
 
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import { queryClient } from '@/context/react-query-client';
 import { deleteExperience } from '@/lib/actions/seekers.actions';

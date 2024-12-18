@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
+import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
 import { Input } from '@/components/ui/input';
 

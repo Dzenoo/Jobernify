@@ -5,8 +5,8 @@ import { ImagePlusIcon } from 'lucide-react';
 
 import { AWS_URL } from '@/constants';
 
-import useEditEmployer from '@/hooks/mutations/useEditEmployer.mutation';
-import useUploads from '@/hooks/defaults/useUploads.hook';
+import { useEditEmployer } from '@/hooks/mutations/useEditEmployer.mutation';
+import { useUploads } from '@/hooks/core/useUploads.hook';
 
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';

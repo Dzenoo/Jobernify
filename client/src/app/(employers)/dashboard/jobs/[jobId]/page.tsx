@@ -4,8 +4,8 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
 
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
-import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
+import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
 import { getApplications } from '@/lib/actions/applications.actions';
 

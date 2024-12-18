@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/context/react-query-client';
 
 import { updateApplicationStatus } from '@/lib/actions/applications.actions';
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import { useToast } from '@/components/ui/use-toast';
 import {

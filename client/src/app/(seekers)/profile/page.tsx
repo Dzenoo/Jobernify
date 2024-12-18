@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 
-import useGetSeeker from '@/hooks/queries/useGetSeeker.query';
-import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
+import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
+import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
 import LoadingSeekerProfileSkeleton from '@/components/loaders/seekers/LoadingSeekerProfile';
 

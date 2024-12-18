@@ -7,9 +7,9 @@ import { useMutation } from '@tanstack/react-query';
 import { ScaleLoader } from 'react-spinners';
 import { queryClient } from '@/context/react-query-client';
 
-import useUploads from '@/hooks/defaults/useUploads.hook';
-import useGetSeeker from '@/hooks/queries/useGetSeeker.query';
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useUploads } from '@/hooks/core/useUploads.hook';
+import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import { ApplyToJobSchema } from '@/lib/zod/jobs.validation';
 import { applyToJob } from '@/lib/actions/applications.actions';

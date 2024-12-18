@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 
 import NewAlertForm from './forms/NewAlertForm';
 import ReceiveJobAlertsForm from './forms/ReceiveJobAlertsForm';

@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
 
 import { useToast } from '@/components/ui/use-toast';
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import {
   jobLevels,
   jobPositions,

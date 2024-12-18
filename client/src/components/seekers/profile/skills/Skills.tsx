@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Plus } from 'lucide-react';
 
-import useEditSeeker from '@/hooks/mutations/useEditSeeker.mutation';
-import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
+import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 
 import { SkillsSchema } from '@/lib/zod/seekers.validation';
 import { getSkillsData, multiselectSkills } from '@/lib/utils';

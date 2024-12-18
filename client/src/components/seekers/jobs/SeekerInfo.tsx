@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { getImageUrl } from '@/lib/utils';
 
-import useGetSeeker from '@/hooks/queries/useGetSeeker.query';
+import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
 
 import LoadingSeekerInfo from '@/components/loaders/employers/LoadingSeekerInfo';
 

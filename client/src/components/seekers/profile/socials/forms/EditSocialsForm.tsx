@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ScaleLoader } from 'react-spinners';
 
-import useEditSeeker from '@/hooks/mutations/useEditSeeker.mutation';
+import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
 import { SeekerSocialsSchema } from '@/lib/zod/seekers.validation';
 
 import { Button } from '@/components/ui/button';

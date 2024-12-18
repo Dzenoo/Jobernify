@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { ScaleLoader } from 'react-spinners';
 
 import { deleteJob } from '@/lib/actions/jobs.actions';
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { queryClient } from '@/context/react-query-client';
 
 import { useToast } from '@/components/ui/use-toast';

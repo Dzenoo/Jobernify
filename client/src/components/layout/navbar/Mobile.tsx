@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 
 import { SeekersNavbarLinks } from '@/constants';
 
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import NavbarLinksList from './NavbarLinksList';
 

@@ -112,4 +112,4 @@ const useSearchParams = (): UseSearchParams => {
   };
 };
 
-export default useSearchParams;
+export { useSearchParams };

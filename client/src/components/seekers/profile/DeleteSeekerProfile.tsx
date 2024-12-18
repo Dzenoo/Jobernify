@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import { deleteSeekerProfile } from '@/lib/actions/seekers.actions';
 
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';

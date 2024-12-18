@@ -5,7 +5,7 @@ import React, { Fragment, useState } from 'react';
 import { Education } from '@/types';
 import { Plus } from 'lucide-react';
 
-import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 import EducationList from './EducationList';
 import EducationForm from './forms/EducationForm';
 

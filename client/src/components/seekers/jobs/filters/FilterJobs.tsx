@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import { ListFilter } from 'lucide-react';
 
-import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 import { JobsFiltersData } from '@/constants';
 import { injectCountsIntoFilters } from '@/lib/utils';
 import { FilterCounts } from '@/types';

@@ -23,4 +23,4 @@ const useUploads = (options: DropzoneOptions) => {
   };
 };
 
-export default useUploads;
+export { useUploads };

@@ -4,7 +4,7 @@ import React, { Fragment, useState } from 'react';
 
 import { Trash } from 'lucide-react';
 
-import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 
 import { Employer } from '@/types';
 

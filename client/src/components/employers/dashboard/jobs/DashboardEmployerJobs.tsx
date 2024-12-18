@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Job } from '@/types';
 import { findLocationData, formatDate } from '@/lib/utils';
 
-import useMediaQuery from '@/hooks/defaults/useMediaQuery.hook';
+import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 import DeleteJob from './table/DeleteJob';
 import JobOptions from './table/JobOptions';
 

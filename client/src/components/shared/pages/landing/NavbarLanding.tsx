@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import { NavbarLandingLinks } from '@/constants';
 
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
+import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import { Button } from '@/components/ui/button';
 

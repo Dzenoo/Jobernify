@@ -19,4 +19,4 @@ const useZoomLevel = () => {
   return isZoomedOut;
 };
 
-export default useZoomLevel;
+export { useZoomLevel };

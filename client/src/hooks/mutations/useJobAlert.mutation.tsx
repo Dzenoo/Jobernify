@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/context/react-query-client';
 import { generateJobAlert } from '@/lib/actions/seekers.actions';
 
-import useAuthentication from '../defaults/useAuthentication.hook';
+import { useAuthentication } from '../core/useAuthentication.hook';
 
 import { useToast } from '@/components/ui/use-toast';
 
@@ -29,4 +29,4 @@ const useJobAlert = () => {
   });
 };
 
-export default useJobAlert;
+export { useJobAlert };

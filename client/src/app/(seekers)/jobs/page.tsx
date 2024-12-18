@@ -2,12 +2,9 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { useQuery } from '@tanstack/react-query';
 
-import useAuthentication from '@/hooks/defaults/useAuthentication.hook';
-import useSearchParams from '@/hooks/defaults/useSearchParams.hook';
-
-import { getJobs } from '@/lib/actions/jobs.actions';
+import { useGetJobs } from '@/hooks/queries/useGetJobs.query';
+import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
 import SearchJobs from '@/components/seekers/jobs/search/SearchJobs';
 import FilterJobs from '@/components/seekers/jobs/filters/FilterJobs';
@@ -41,32 +38,12 @@ const Jobs = ({
   searchParams: { [key: string]: string };
 }) => {
   const { updateSearchParams } = useSearchParams();
-  const { token } = useAuthentication().getCookieHandler();
   const {
     data: fetchedJobs,
     isLoading,
     isFetching,
     isRefetching,
-  } = useQuery({
-    queryFn: () => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
-      return getJobs({
-        token: token,
-        page: Number(searchParams.page) || 1,
-        limit: Number(searchParams.limit) || 10,
-        sort: searchParams.sort || '',
-        search: searchParams.query || '',
-        type: searchParams.type || '',
-        level: searchParams.level || '',
-        salary: searchParams.salary || '',
-        position: searchParams.position || '',
-      });
-    },
-    queryKey: ['jobs', searchParams],
-  });
+  } = useGetJobs({ params: searchParams });
 
   if (!fetchedJobs && !isLoading) {
     return <NotFound />;
@@ -78,8 +55,6 @@ const Jobs = ({
     popularJobs: [],
     filterCounts: [],
   };
-
-  console.log(jobsData.jobs);
 
   const totalJobs = jobsData.totalJobs;
   const isFiltering = isLoading || isFetching || isRefetching;
