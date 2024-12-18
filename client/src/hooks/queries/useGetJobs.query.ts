@@ -4,7 +4,7 @@ import { getJobs } from '@/lib/actions/jobs.actions';
 
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
-const useGetJobs = ({ params }: { params: { [key: string]: string } }) => {
+const useGetJobs = (params?: { [key: string]: string }) => {
   const { token } = useAuthentication().getCookieHandler();
 
   return useQuery({

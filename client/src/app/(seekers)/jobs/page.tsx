@@ -43,7 +43,7 @@ const Jobs = ({
     isLoading,
     isFetching,
     isRefetching,
-  } = useGetJobs({ params: searchParams });
+  } = useGetJobs(searchParams);
 
   if (!fetchedJobs && !isLoading) {
     return <NotFound />;

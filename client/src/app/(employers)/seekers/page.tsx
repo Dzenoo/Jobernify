@@ -1,21 +1,17 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
-
-import { getSeekers } from '@/lib/actions/seekers.actions';
-
-import FilterSeekers from '@/components/employers/seekers/filters/FilterSeekers';
-
+import React from 'react';
 import dynamic from 'next/dynamic';
-import LoadingSeekers from '@/components/loaders/employers/LoadingSeekers';
-import PaginatedList from '@/components/ui/paginate-list';
+
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
+import { useGetSeekers } from '@/hooks/queries/useGetSeekers.query';
+
 import SearchSeekers from '@/components/employers/seekers/search/SearchSeekers';
+import FilterSeekers from '@/components/employers/seekers/filters/FilterSeekers';
+import PaginatedList from '@/components/ui/paginate-list';
 import ExploreSeekers from '@/components/employers/seekers/explore/ExploreSeekers';
 
+import LoadingSeekers from '@/components/loaders/employers/LoadingSeekers';
 const SeekersList = dynamic(
   () => import('@/components/employers/seekers/SeekersList'),
   {
@@ -29,32 +25,12 @@ const SeekersPage = ({
   searchParams: { [key: string]: string & number };
 }) => {
   const { updateSearchParams } = useSearchParams();
-  const { token } = useAuthentication().getCookieHandler();
   const {
     data: fetchedSeekers,
-    refetch,
     isLoading,
     isRefetching,
     isFetching,
-  } = useQuery({
-    queryFn: () => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
-      return getSeekers({
-        token: token,
-        page: Number(searchParams.page) || 1,
-        search: searchParams.query || '',
-        skills: searchParams.skills || '',
-      });
-    },
-    queryKey: ['seekers', searchParams],
-  });
-
-  useEffect(() => {
-    refetch();
-  }, [searchParams]);
+  } = useGetSeekers(searchParams);
 
   const totalSeekers = fetchedSeekers?.totalSeekers || 0;
   const isFiltering = isLoading || isFetching || isRefetching;
@@ -64,13 +40,16 @@ const SeekersPage = ({
       <div className="basis-1/2">
         <ExploreSeekers />
       </div>
+
       <div className="basis-full grow flex flex-col gap-6">
         <div>
           <SearchSeekers query={searchParams.query} />
         </div>
+
         <div className="xl:hidden">
           <FilterSeekers />
         </div>
+
         <div>
           {isFiltering ? (
             <LoadingSeekers />
@@ -78,6 +57,7 @@ const SeekersPage = ({
             <SeekersList seekers={fetchedSeekers?.seekers || []} />
           )}
         </div>
+
         {totalSeekers > 12 && (
           <PaginatedList
             onPageChange={(value) =>
@@ -89,6 +69,7 @@ const SeekersPage = ({
           />
         )}
       </div>
+
       <div className="max-xl:hidden basis-1/2">
         <FilterSeekers />
       </div>

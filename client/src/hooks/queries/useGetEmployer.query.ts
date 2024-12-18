@@ -3,15 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { getEmployerProfile } from '@/lib/actions/employers.actions';
 
 import { useAuthentication } from '../core/useAuthentication.hook';
-import { Employer } from '@/types';
 
-const useGetEmployer = (type?: string) => {
+const useGetEmployer = (params?: { [key: string]: string }) => {
   const { token } = useAuthentication().getCookieHandler();
 
-  return useQuery<{
-    counts: { totalJobs: number };
-    employer: Employer;
-  }>({
+  return useQuery({
     queryFn: () => {
       if (!token) {
         throw new Error('Unauthorized!');
@@ -19,7 +15,10 @@ const useGetEmployer = (type?: string) => {
 
       return getEmployerProfile({
         token: token,
-        type: type,
+        page: Number(params?.page) || 1,
+        srt: params?.sort || '',
+        search: params?.query || '',
+        type: 'jobs',
       });
     },
     queryKey: ['profile'],

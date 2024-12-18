@@ -1,12 +1,9 @@
 'use client';
 
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
 
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
-
-import { getEmployerProfile } from '@/lib/actions/employers.actions';
+import { useGetEmployer } from '@/hooks/queries/useGetEmployer.query';
 
 import dynamic from 'next/dynamic';
 import LoadingDashboardJobs from '@/components/loaders/employers/LoadingDashboardJobs';
@@ -27,28 +24,12 @@ const DashboardJobsPage = ({
   searchParams: { [key: string]: string };
 }) => {
   const { updateSearchParams } = useSearchParams();
-  const { token } = useAuthentication().getCookieHandler();
   const {
     data: fetchedEmployer,
     isFetching,
     isRefetching,
     isLoading,
-  } = useQuery({
-    queryFn: () => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
-      return getEmployerProfile({
-        token: token,
-        page: Number(searchParams.page) || 1,
-        srt: searchParams.sort || '',
-        search: searchParams.query || '',
-        type: 'jobs',
-      });
-    },
-    queryKey: ['jobs', searchParams],
-  });
+  } = useGetEmployer(searchParams);
 
   const isLoadingJobs = isLoading || isFetching || isRefetching;
   const totalJobs = fetchedEmployer?.counts.totalJobs || 0;
@@ -59,14 +40,21 @@ const DashboardJobsPage = ({
     <section className="flex flex-col gap-6">
       <div className="flex justify-between gap-3 max-xl:flex-col xl:items-center">
         <div>
-          <h1 className="text-base-black">Jobs</h1>
-          <p className="text-initial-gray">
-            Easily edit, update, or remove listings to find the perfect
-            candidates
-          </p>
+          <div>
+            <h1 className="text-base-black">Jobs</h1>
+          </div>
+
+          <div>
+            <p className="text-initial-gray">
+              Easily edit, update, or remove listings to find the perfect
+              candidates
+            </p>
+          </div>
         </div>
+
         <SearchJobs query={searchParams.query} sort={searchParams.sort} />
       </div>
+
       {isLoadingJobs ? (
         <LoadingDashboardJobs />
       ) : (
@@ -76,6 +64,7 @@ const DashboardJobsPage = ({
           itemsPerPage={itemsPerPage}
         />
       )}
+
       {totalJobs > 10 && (
         <PaginatedList
           onPageChange={(value) => updateSearchParams('page', value.toString())}

@@ -2,12 +2,8 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { useQuery } from '@tanstack/react-query';
 
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
-
-import { getEmployerById } from '@/lib/actions/employers.actions';
 
 import LoadingEmployerDetails from '@/components/loaders/seekers/LoadingEmployerDetails';
 import EmployerDetailsInfo from '@/components/seekers/employers/details/EmployerDetailsInfo';
@@ -17,6 +13,7 @@ import PaginatedList from '@/components/ui/paginate-list';
 import NotFound from '@/components/shared/pages/NotFound';
 
 import LoadingJobsSkeleton from '@/components/loaders/seekers/LoadingJobsSkeleton';
+import { useGetEmployerById } from '@/hooks/queries/useGetEmployerById.query';
 const JobsList = dynamic(() => import('@/components/seekers/jobs/JobsList'), {
   loading: () => <LoadingJobsSkeleton />,
 });
@@ -29,27 +26,10 @@ const EmployerDetails = ({
   searchParams: { [key: string]: any };
 }) => {
   const { updateSearchParams } = useSearchParams();
-  const { token } = useAuthentication().getCookieHandler();
-  const { data: fetchedEmployer, isLoading } = useQuery({
-    queryFn: () => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
-      return getEmployerById(
-        params.employerId,
-        token,
-        searchParams.section,
-        Number(searchParams.page) || 1,
-      );
-    },
-    queryKey: [
-      'employer',
-      params.employerId,
-      searchParams.section,
-      searchParams.page,
-    ],
-  });
+  const { data: fetchedEmployer, isLoading } = useGetEmployerById(
+    params.employerId,
+    searchParams,
+  );
 
   if (isLoading) {
     return <LoadingEmployerDetails />;

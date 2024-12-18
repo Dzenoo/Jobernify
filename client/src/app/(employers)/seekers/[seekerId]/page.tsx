@@ -1,16 +1,15 @@
 'use client';
 
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
-import { getSeekerById } from '@/lib/actions/seekers.actions';
-
 import dynamic from 'next/dynamic';
-import LoadingSeekerDetails from '@/components/loaders/employers/LoadingSeekerDetails';
-import NotFound from '@/components/shared/pages/NotFound';
+
+import { useGetSeekerById } from '@/hooks/queries/useGetSeekerById.query';
+
 import { Seeker } from '@/types';
 
+import NotFound from '@/components/shared/pages/NotFound';
+
+import LoadingSeekerDetails from '@/components/loaders/employers/LoadingSeekerDetails';
 const SeekerDetailsInfo = dynamic(
   () => import('@/components/employers/seekers/details/SeekerDetailsInfo'),
   {
@@ -23,18 +22,7 @@ const SeekerDetailsPage = ({
 }: {
   params: { seekerId: string };
 }) => {
-  const { token } = useAuthentication().getCookieHandler();
-
-  const { data: fetchedSeeker, isLoading } = useQuery({
-    queryFn: () => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
-      return getSeekerById(seekerId, token);
-    },
-    queryKey: ['seeker', { seekerId }],
-  });
+  const { data: fetchedSeeker, isLoading } = useGetSeekerById(seekerId);
 
   if (!isLoading && !fetchedSeeker) {
     return <NotFound href="/seekers" />;

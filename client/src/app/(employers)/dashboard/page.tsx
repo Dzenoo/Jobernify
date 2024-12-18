@@ -2,12 +2,8 @@
 
 import React from 'react';
 
-import { useQuery } from '@tanstack/react-query';
-
-import { getEmployerAnalyticsInfo } from '@/lib/actions/employers.actions';
-
 import { useGetEmployer } from '@/hooks/queries/useGetEmployer.query';
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
+import { useGetEmployerAnalytics } from '@/hooks/queries/useGetEmployerAnalytics.query';
 
 import Followers from '@/components/employers/dashboard/overview/Followers';
 import JobsPerMonth from '@/components/employers/dashboard/overview/JobsPerMonth';
@@ -17,23 +13,13 @@ import Types from '@/components/employers/dashboard/overview/Types';
 import LoadingDashboard from '@/components/loaders/employers/LoadingDashboard';
 
 const Dashboard = () => {
-  const { token } = useAuthentication().getCookieHandler();
+  const { data: fetchedEmployer } = useGetEmployer();
   const {
     data: analytics,
     isLoading,
     isFetching,
     isRefetching,
-  } = useQuery({
-    queryFn: () => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
-      return getEmployerAnalyticsInfo(token);
-    },
-    queryKey: ['analytics'],
-  });
-  const { data: fetchedEmployer } = useGetEmployer();
+  } = useGetEmployerAnalytics();
 
   const isFiltering = isLoading || isFetching || isRefetching;
 
@@ -49,10 +35,12 @@ const Dashboard = () => {
             Hi There, {fetchedEmployer?.employer.name}
           </h1>
         </div>
+
         <div>
           <p className="text-initial-gray">Gain Valuable Insights</p>
         </div>
       </div>
+
       <div>
         <Statistics
           totalJobs={analytics?.totalJobs || 0}
@@ -63,17 +51,21 @@ const Dashboard = () => {
           followersThisMonth={analytics?.followersThisMonth || 0}
         />
       </div>
+
       <div className="grid gap-3 grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1">
         <div>
           <JobsPerMonth data={analytics?.jobsPerMonth} />
         </div>
+
         <div>
           <Followers data={analytics?.followersOverTime} />
         </div>
+
         <div>
           <Types data={analytics?.jobTypes} />
         </div>
       </div>
+
       <div></div>
     </section>
   );
