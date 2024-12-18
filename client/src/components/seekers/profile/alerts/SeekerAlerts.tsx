@@ -56,8 +56,16 @@ const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(
         <Card>
           <CardHeader className="flex flex-col gap-5">
             <div className="flex justify-between gap-3">
-              <div>
-                <h1 className="text-base-black">Job Alerts</h1>
+              <div className="flex flex-col gap-3">
+                <div>
+                  <h1 className="text-base-black">Job Alerts</h1>
+                </div>
+                <div>
+                  <p className="text-initial-gray">
+                    Receive alerts for job opportunities that match your
+                    preferences
+                  </p>
+                </div>
               </div>
               {!areObjectKeysEmpty(alerts) && (
                 <div>

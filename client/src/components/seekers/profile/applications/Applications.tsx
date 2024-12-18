@@ -24,7 +24,9 @@ const Applications: React.FC<ApplicationsProps> = ({ applications }) => {
       <CardHeader>
         <div className="flex flex-col gap-3">
           <div>
-            <h1 className="text-base-black">Applications</h1>
+            <h1 className="text-base-black">
+              Applications ({applications.length})
+            </h1>
           </div>
           <div>
             <p className="text-initial-gray">
@@ -34,7 +36,7 @@ const Applications: React.FC<ApplicationsProps> = ({ applications }) => {
           </div>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-0">
         <ApplicationsList applications={applications} />
       </CardContent>
     </Card>

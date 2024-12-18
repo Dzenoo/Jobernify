@@ -6,6 +6,8 @@ import LoadingJobsSkeleton from '@/components/loaders/seekers/LoadingJobsSkeleto
 
 import { Job } from '@/types';
 
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+
 const JobsList = dynamic(() => import('@/components/seekers/jobs/JobsList'), {
   loading: () => <LoadingJobsSkeleton />,
 });
@@ -16,21 +18,23 @@ type SavedJobsProps = {
 
 const SavedJobs: React.FC<SavedJobsProps> = ({ savedJobs }) => {
   return (
-    <div className="pt-5 flex flex-col gap-10">
-      <div className="flex flex-col gap-3">
-        <div>
-          <h1 className="text-base-black">Saved Jobs ({savedJobs.length})</h1>
+    <Card>
+      <CardHeader>
+        <div className="flex flex-col gap-3">
+          <div>
+            <h1 className="text-base-black">Saved Jobs ({savedJobs.length})</h1>
+          </div>
+          <div>
+            <p className="text-initial-gray">
+              Here are your saved jobs. You can remove them easily.
+            </p>
+          </div>
         </div>
-        <div>
-          <p className="text-initial-gray">
-            Here are your saved jobs. You can remove them easily.
-          </p>
-        </div>
-      </div>
-      <div>
+      </CardHeader>
+      <CardContent className="pt-0">
         <JobsList jobs={savedJobs} message="You have no saved jobs." />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

@@ -57,7 +57,7 @@ const EducationItem: React.FC<EducationItemProps> = ({
   const graduationDateFormatted = formatDate(graduationDate);
 
   return (
-    <div className="dark:bg-transparent rounded-xl bg-white p-6 flex gap-5 items-start border border-gray-100 dark:border-[#3b3b3b] overflow-auto whitespace-nowrap">
+    <div className="bg-card text-card-foreground border shadow-sm rounded-lg p-6 flex items-start gap-5 transition-all overflow-auto whitespace-nowrap hover:border-gray-300 dark:hover:border-[#585858]">
       <div className="max-sm:hidden">
         <GraduationCap width={25} height={25} />
       </div>

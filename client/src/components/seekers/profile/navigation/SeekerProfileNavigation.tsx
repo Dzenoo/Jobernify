@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '@/components/ui/button';
 
 type SeekerProfileNavigationProps = {
   onSearchParamsChange: (param: string, value: string) => void;
@@ -32,12 +33,11 @@ const SeekerProfileNavigation: React.FC<SeekerProfileNavigationProps> =
         <div>
           <h1 className="text-base-black">Profile</h1>
         </div>
-        <div className="flex items-center gap-3 overflow-auto hide-scrollbar">
+        <div className="flex items-center gap-2 overflow-auto hide-scrollbar">
           {SeekerNavList.map((item) => (
-            <button
-              className={`transition cursor-pointer hover:text-blue-700 whitespace-nowrap ${
-                currentTab === item.id ? 'text-blue-700' : ''
-              }`}
+            <Button
+              variant={currentTab === item.id ? 'outline' : 'ghost'}
+              className={'whitespace-nowrap'}
               key={item.id}
               onClick={() => {
                 onSearchParamsChange('page', '');
@@ -45,7 +45,7 @@ const SeekerProfileNavigation: React.FC<SeekerProfileNavigationProps> =
               }}
             >
               {item.title}
-            </button>
+            </Button>
           ))}
         </div>
       </div>

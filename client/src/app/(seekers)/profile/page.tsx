@@ -41,7 +41,7 @@ const SeekerProfilePage = ({
 
   const isValidTab = currentTab >= 0 && currentTab <= 3;
   if (!isValidTab) {
-    return <NotFound />;
+    return <NotFound href="/jobs" />;
   }
 
   const updateTab = (tab: number) => {
