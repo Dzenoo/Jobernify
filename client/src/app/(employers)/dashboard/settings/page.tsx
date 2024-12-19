@@ -18,7 +18,11 @@ const SettingsPage = () => {
   const { data: fetchedEmployerProfile } = useGetEmployer();
 
   if (!fetchedEmployerProfile) {
-    return <LoadingEmployerSettings />;
+    return (
+      <div className="py-6 mx-40 max-xl:mx-0">
+        <LoadingEmployerSettings />;
+      </div>
+    );
   }
 
   return (
