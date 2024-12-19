@@ -17,7 +17,7 @@ type SocialsProps = {
 };
 
 const Socials: React.FC<SocialsProps> = ({ seeker }) => {
-  const isLarge = useMediaQuery('(min-width: 1280px)');
+  const isSmall = useMediaQuery('(min-width: 650px)');
   const [isEditSocialsOpen, setIsEditSocialsOpen] = useState(false);
 
   const openEditSocials = () => setIsEditSocialsOpen(true);
@@ -46,7 +46,7 @@ const Socials: React.FC<SocialsProps> = ({ seeker }) => {
 
   return (
     <Fragment>
-      {isLarge && (
+      {isSmall && (
         <Dialog open={isEditSocialsOpen} onOpenChange={setIsEditSocialsOpen}>
           <EditSocialsForm
             isEditSocialsOpen={isEditSocialsOpen}
@@ -56,7 +56,7 @@ const Socials: React.FC<SocialsProps> = ({ seeker }) => {
           />
         </Dialog>
       )}
-      {!isLarge && (
+      {!isSmall && (
         <Drawer open={isEditSocialsOpen} onOpenChange={setIsEditSocialsOpen}>
           <EditSocialsForm
             isEditSocialsOpen={isEditSocialsOpen}

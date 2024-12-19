@@ -27,12 +27,14 @@ import {
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
 import {
   Drawer,
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
@@ -106,11 +108,15 @@ const AddSkillsForm: React.FC<AddSkillsProps> = ({
     </Form>
   );
 
+  const title = 'Add Skills';
+  const description = 'Show your skills to employers';
+
   if (isDialog) {
     return (
       <DialogContent className="sm:max-w-lg p-6">
         <DialogHeader>
-          <DialogTitle>Add Skills</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         {children}
       </DialogContent>
@@ -118,9 +124,10 @@ const AddSkillsForm: React.FC<AddSkillsProps> = ({
   }
 
   return (
-    <DrawerContent className="flex flex-col justify-center items-center">
-      <DrawerHeader className="text-center">
-        <DrawerTitle>Add Skills</DrawerTitle>
+    <DrawerContent>
+      <DrawerHeader>
+        <DrawerTitle>{title}</DrawerTitle>
+        <DrawerDescription>{description}</DrawerDescription>
       </DrawerHeader>
       <div className="overflow-y-scroll p-5">{children}</div>
     </DrawerContent>
@@ -132,7 +139,7 @@ type SkillsProps = {
 };
 
 const Skills: React.FC<SkillsProps> = ({ skills }) => {
-  const isLarge = useMediaQuery('(min-width: 1280px)');
+  const isSmall = useMediaQuery('(min-width: 650px)');
   const [isSkillsOpen, setIsSkillsOpen] = useState(false);
 
   const openSkills = () => setIsSkillsOpen(true);
@@ -142,7 +149,7 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
 
   return (
     <Fragment>
-      {isLarge && (
+      {isSmall && (
         <Dialog onOpenChange={setIsSkillsOpen} open={isSkillsOpen}>
           <AddSkillsForm
             closeSkills={closeSkills}
@@ -151,7 +158,7 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
           />
         </Dialog>
       )}
-      {!isLarge && (
+      {!isSmall && (
         <Drawer onOpenChange={setIsSkillsOpen} open={isSkillsOpen}>
           <AddSkillsForm
             closeSkills={closeSkills}

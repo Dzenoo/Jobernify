@@ -26,12 +26,12 @@ type SeekerProfileProps = {
 };
 
 const SeekerProfile: React.FC<SeekerProfileProps> = React.memo(({ seeker }) => {
-  const isLarge = useMediaQuery('(min-width: 1280px)');
+  const isSmall = useMediaQuery('(min-width: 650px)');
   const [isDeleteProfileOpen, setIsDeleteProfileOpen] = useState(false);
 
   return (
     <Fragment>
-      {isLarge && (
+      {isSmall && (
         <Dialog
           onOpenChange={setIsDeleteProfileOpen}
           open={isDeleteProfileOpen}
@@ -42,7 +42,7 @@ const SeekerProfile: React.FC<SeekerProfileProps> = React.memo(({ seeker }) => {
           />
         </Dialog>
       )}
-      {!isLarge && (
+      {!isSmall && (
         <Drawer
           onOpenChange={setIsDeleteProfileOpen}
           open={isDeleteProfileOpen}

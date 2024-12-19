@@ -22,12 +22,12 @@ type EmployerSettingsProps = {
 };
 
 const EmployerSettings: React.FC<EmployerSettingsProps> = ({ employer }) => {
-  const isLarge = useMediaQuery('(min-width: 1280px)');
+  const isSmall = useMediaQuery('(min-width: 650px)');
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   return (
     <Fragment>
-      {isLarge && (
+      {isSmall && (
         <Dialog onOpenChange={setIsDeleteOpen} open={isDeleteOpen}>
           <DeleteEmployerProfile
             closeDelete={() => setIsDeleteOpen(false)}
@@ -35,7 +35,7 @@ const EmployerSettings: React.FC<EmployerSettingsProps> = ({ employer }) => {
           />
         </Dialog>
       )}
-      {!isLarge && (
+      {!isSmall && (
         <Drawer onOpenChange={setIsDeleteOpen} open={isDeleteOpen}>
           <DeleteEmployerProfile
             closeDelete={() => setIsDeleteOpen(false)}

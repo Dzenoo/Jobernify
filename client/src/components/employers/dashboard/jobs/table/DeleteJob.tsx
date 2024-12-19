@@ -56,50 +56,43 @@ const DeleteJob: React.FC<DeleteJobProps> = ({ onClose, id, isDialog }) => {
 
   const isLoading = status === 'pending';
 
-  const onDeleteJob = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onDeleteJob = async () => {
     await deleteJobMutate();
   };
+
+  const title = 'Delete Job';
+  const description =
+    'Deleting this job will remove it from the platform, including all associated applications and information. Seekers will no longer be able to apply. Are you sure you want to proceed?';
+  const button = (
+    <Button
+      variant="destructive"
+      type="submit"
+      className="w-full"
+      onClick={onDeleteJob}
+    >
+      {isLoading ? <ScaleLoader height={10} /> : 'Delete'}
+    </Button>
+  );
 
   if (isDialog) {
     return (
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete Job</DialogTitle>
-          <DialogDescription>
-            Deleting this job will remove it from the platform, including all
-            associated applications and information. Seekers will no longer be
-            able to apply. Are you sure you want to proceed?
-          </DialogDescription>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
-        <form onSubmit={onDeleteJob}>
-          <DialogFooter>
-            <Button variant="destructive" type="submit" className="w-full">
-              {isLoading ? <ScaleLoader height={10} /> : 'Delete'}
-            </Button>
-          </DialogFooter>
-        </form>
+        <DialogFooter>{button}</DialogFooter>
       </DialogContent>
     );
   }
 
   return (
     <DrawerContent>
-      <DrawerHeader className="flex flex-col justify-center items-center">
-        <DrawerTitle>Delete Job</DrawerTitle>
-        <DrawerDescription className="max-w-lg text-center">
-          Deleting this job will remove it from the platform, including all
-          associated applications and information. Seekers will no longer be
-          able to apply. Are you sure you want to proceed?
-        </DrawerDescription>
+      <DrawerHeader>
+        <DrawerTitle>{title}</DrawerTitle>
+        <DrawerDescription>{description}</DrawerDescription>
       </DrawerHeader>
-      <form onSubmit={onDeleteJob}>
-        <DrawerFooter>
-          <Button variant="destructive" type="submit" className="w-full">
-            {isLoading ? <ScaleLoader height={10} /> : 'Delete'}
-          </Button>
-        </DrawerFooter>
-      </form>
+      <DrawerFooter>{button}</DrawerFooter>
     </DrawerContent>
   );
 };

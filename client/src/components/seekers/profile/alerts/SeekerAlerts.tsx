@@ -18,7 +18,7 @@ type SeekerAlertsProps = {
 
 const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(
   ({ alertsData }) => {
-    const isLarge = useMediaQuery('(min-width: 1280px)');
+    const isSmall = useMediaQuery('(min-width: 650px)');
     const [isOpen, setIsOpen] = React.useState(false);
 
     const closeAlerts = () => setIsOpen(false);
@@ -35,7 +35,7 @@ const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(
 
     return (
       <Fragment>
-        {isLarge && (
+        {isSmall && (
           <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <NewAlertForm
               alerts={alerts!}
@@ -44,7 +44,7 @@ const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(
             />
           </Dialog>
         )}
-        {!isLarge && (
+        {!isSmall && (
           <Drawer open={isOpen} onOpenChange={setIsOpen}>
             <NewAlertForm
               alerts={alerts!}

@@ -21,7 +21,7 @@ const Educations: React.FC<EducationsProps> = ({ education }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [educationId, setEducationId] = useState<string | null>(null);
   const isEdit = Boolean(educationId);
-  const isLarge = useMediaQuery('(min-width: 1280px)');
+  const isSmall = useMediaQuery('(min-width: 650px)');
   const seekerEducation = education.find(
     (education) => education._id === educationId,
   );
@@ -38,7 +38,7 @@ const Educations: React.FC<EducationsProps> = ({ education }) => {
 
   return (
     <Fragment>
-      {isLarge && (
+      {isSmall && (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           {isOpen && (
             <EducationForm
@@ -52,7 +52,7 @@ const Educations: React.FC<EducationsProps> = ({ education }) => {
           )}
         </Dialog>
       )}
-      {!isLarge && (
+      {!isSmall && (
         <Drawer open={isOpen} onOpenChange={setIsOpen}>
           {isOpen && (
             <EducationForm

@@ -38,11 +38,13 @@ import {
 } from '@/components/ui/popover';
 import {
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
 import {
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
@@ -220,18 +222,15 @@ const EducationForm: React.FC<EducationFormProps> = ({
   );
 
   const title = isEdit ? 'Edit Education' : 'Add Education';
+  const description =
+    "Add education to complete your profile. Employers can learn more about you and view if you're a good fit.";
 
   if (isDialog) {
     return (
-      <DialogContent className="sm:max-w-lg p-6">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          <div className="text-center mb-4">
-            <p className="text-initial-gray">
-              Add education to complete your profile. Employers can learn more
-              about you and view if you're a good fit.
-            </p>
-          </div>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         {children}
       </DialogContent>
@@ -241,13 +240,8 @@ const EducationForm: React.FC<EducationFormProps> = ({
   return (
     <DrawerContent>
       <DrawerHeader>
-        <DrawerTitle className="text-center">{title}</DrawerTitle>
-        <div className="text-center mb-4">
-          <p className="text-initial-gray">
-            Add education to complete your profile. Employers can learn more
-            about you and view if you're a good fit.
-          </p>
-        </div>
+        <DrawerTitle>{title}</DrawerTitle>
+        <DrawerDescription>{description}</DrawerDescription>
       </DrawerHeader>
       <div className="p-5">{children}</div>
     </DrawerContent>

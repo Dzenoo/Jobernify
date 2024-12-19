@@ -13,12 +13,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
+  DialogDescription,
 } from '@/components/ui/dialog';
 import {
   DrawerContent,
   DrawerFooter,
   DrawerTitle,
   DrawerHeader,
+  DrawerDescription,
 } from '@/components/ui/drawer';
 
 type DeleteEmployerProfileProps = {
@@ -55,32 +57,28 @@ const DeleteEmployerProfile: React.FC<DeleteEmployerProfileProps> = ({
     closeDelete();
   };
 
+  const title = 'Delete Profile';
+  const description =
+    'Deleting your account will remove all your information, including applications and jobs. Employer will no longer be able to view you. Are you sure you want to proceed?';
+
   if (isDialog) {
     return (
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete Profile</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription className="text-gray-500">
+            {description}
+          </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col gap-6">
-          <div className="max-w-lg">
-            <div className="flex items-center justify-center gap-3 flex-col">
-              <p className="text-initial-gray text-center">
-                Deleting your account will remove all your information,
-                including applications and jobs. Seeker will no longer be able
-                to view your profile. Are you sure you want to proceed?
-              </p>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button
-              className="w-full"
-              variant="destructive"
-              onClick={onDeleteAccount}
-            >
-              Delete
-            </Button>
-          </DialogFooter>
-        </div>
+        <DialogFooter>
+          <Button
+            className="w-full"
+            variant="destructive"
+            onClick={onDeleteAccount}
+          >
+            Delete
+          </Button>
+        </DialogFooter>
       </DialogContent>
     );
   }
@@ -88,19 +86,11 @@ const DeleteEmployerProfile: React.FC<DeleteEmployerProfileProps> = ({
   return (
     <DrawerContent>
       <DrawerHeader>
-        <DrawerTitle className="text-center">Delete Profile</DrawerTitle>
+        <DrawerTitle>{title}</DrawerTitle>
+        <DrawerDescription className="text-gray-500">
+          {description}
+        </DrawerDescription>
       </DrawerHeader>
-      <div className="p-5 flex flex-col items-center justify-center gap-6">
-        <div className="max-w-lg">
-          <div className="flex items-center justify-center gap-3 flex-col">
-            <p className="text-initial-gray text-center">
-              Deleting your account will remove all your information, including
-              applications and jobs. Seeker will no longer be able to vi you.
-              Are you sure you want to proceed?
-            </p>
-          </div>
-        </div>
-      </div>
       <DrawerFooter>
         <Button variant="destructive" onClick={onDeleteAccount}>
           Delete

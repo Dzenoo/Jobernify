@@ -123,7 +123,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
         {existingResume && !willSeekerUploadResume ? (
           <div className="flex flex-col gap-5 border border-blue-200 bg-blue-50 p-4 rounded-md">
-            <p className="text-center text-blue-700 font-semibold">
+            <p className="text-center text-blue-700">
               Your existing resume will be used for this application.
             </p>
             <Button
@@ -191,16 +191,17 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
     </Form>
   );
 
+  const title = 'Apply to Job';
+  const description =
+    'Ready to take the next step? Apply for this job opportunity by uploading your resume and cover letter.';
+
   if (isDialog) {
     return (
       <Dialog open={isApplyToJob} onOpenChange={setIsApplyToJob}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Apply to Job</DialogTitle>
-            <DialogDescription>
-              Ready to take the next step? Apply for this job opportunity by
-              uploading your resume and cover letter.
-            </DialogDescription>
+            <DialogTitle>{title}</DialogTitle>
+            <DialogDescription>{description}</DialogDescription>
           </DialogHeader>
           {children}
         </DialogContent>
@@ -211,12 +212,9 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
   return (
     <Drawer open={isApplyToJob} onOpenChange={setIsApplyToJob}>
       <DrawerContent>
-        <DrawerHeader className="flex-col justify-center items-center text-center">
-          <DrawerTitle>Apply to Job</DrawerTitle>
-          <DrawerDescription>
-            Ready to take the next step? Apply for this job opportunity by
-            uploading your resume and cover letter.
-          </DrawerDescription>
+        <DrawerHeader>
+          <DrawerTitle>{title}</DrawerTitle>
+          <DrawerDescription>{description}</DrawerDescription>
         </DrawerHeader>
         <div className="p-5">{children}</div>
       </DrawerContent>

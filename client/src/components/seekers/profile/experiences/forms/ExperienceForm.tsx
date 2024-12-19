@@ -48,11 +48,13 @@ import {
 } from '@/components/ui/popover';
 import {
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
 import {
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
@@ -400,19 +402,15 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
   );
 
   const title = isEdit ? 'Edit Experience' : 'Add Experience';
+  const description =
+    'Enhance your profile by adding your work experiences. This will give employers a better understanding of your skills and qualifications, increasing your chances of being noticed.';
 
   if (isDialog) {
     return (
       <DialogContent className="sm:max-w-lg p-6">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          <div className="text-center mb-4">
-            <p className="text-initial-gray">
-              Enhance your profile by adding your work experiences. This will
-              give employers a better understanding of your skills and
-              qualifications, increasing your chances of being noticed.
-            </p>
-          </div>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <div className="p-5 overflow-auto max-h-96">{children}</div>
       </DialogContent>
@@ -422,14 +420,8 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
   return (
     <DrawerContent>
       <DrawerHeader>
-        <DrawerTitle className="text-center">{title}</DrawerTitle>
-        <div className="text-center mb-4">
-          <p className="text-initial-gray">
-            Enhance your profile by adding your work experiences. This will give
-            employers a better understanding of your skills and qualifications,
-            increasing your chances of being noticed.
-          </p>
-        </div>
+        <DrawerTitle>{title}</DrawerTitle>
+        <DrawerDescription>{description}</DrawerDescription>
       </DrawerHeader>
       <div className="p-5 overflow-auto max-h-96">{children}</div>
     </DrawerContent>

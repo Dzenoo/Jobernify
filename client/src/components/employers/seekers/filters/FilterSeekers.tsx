@@ -9,7 +9,13 @@ import { SkillsInformationsData } from '@/constants';
 
 import FilterHandler from '@/components/shared/filters/FilterHandler';
 
-import { Drawer, DrawerContent } from '@/components/ui/drawer';
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -38,6 +44,12 @@ const FilterSeekers: React.FC = () => {
         {!isLarge && (
           <Drawer open={open} onOpenChange={setOpen}>
             <DrawerContent>
+              <DrawerHeader>
+                <DrawerTitle>Filters</DrawerTitle>
+                <DrawerDescription>
+                  Filter seekers by skills to find the best candidates.
+                </DrawerDescription>
+              </DrawerHeader>
               <div className="hide-scrollbar overflow-auto p-5 space-y-6 mt-4 h-96">
                 <FiltersContent />
               </div>

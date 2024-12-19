@@ -13,9 +13,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
+  DialogDescription,
 } from '@/components/ui/dialog';
 import {
   DrawerContent,
+  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -54,57 +56,41 @@ const DeleteSeekerProfile: React.FC<DeleteSeekerProfileProps> = ({
     closeDialog();
   };
 
+  const title = 'Delete Profile';
+  const description =
+    'Deleting your account will remove all your information, including applications and jobs. Employers will no longer be able to contact you. Are you sure you want to proceed?';
+
   if (isDialog) {
     return (
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete Profile</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col gap-6">
-          <div className="max-w-lg">
-            <div className="flex items-center justify-center gap-3 flex-col">
-              <p className="text-initial-gray text-center">
-                Deleting your account will remove all your information,
-                including applications and jobs. Employers will no longer be
-                able to contact you. Are you sure you want to proceed?
-              </p>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button
-              className="w-full"
-              variant="destructive"
-              onClick={onDeleteAccount}
-            >
-              Delete
-            </Button>
-          </DialogFooter>
-        </div>
+        <DialogFooter>
+          <Button
+            className="w-full"
+            variant="destructive"
+            onClick={onDeleteAccount}
+          >
+            Delete
+          </Button>
+        </DialogFooter>
       </DialogContent>
     );
   }
 
   return (
-    <DrawerContent className="flex-col items-center justify-center">
-      <DrawerHeader className="text-center">
-        <DrawerTitle>Delete Profile</DrawerTitle>
+    <DrawerContent>
+      <DrawerHeader>
+        <DrawerTitle>{title}</DrawerTitle>
+        <DrawerDescription>{description}</DrawerDescription>
       </DrawerHeader>
-      <div className="p-5 flex flex-col gap-6">
-        <div className="max-w-lg">
-          <div className="flex items-center justify-center gap-3 flex-col">
-            <p className="text-initial-gray text-center">
-              Deleting your account will remove all your information, including
-              applications and jobs. Employers will no longer be able to contact
-              you. Are you sure you want to proceed?
-            </p>
-          </div>
-        </div>
-        <DrawerFooter className="pt-2">
-          <Button variant="destructive" onClick={onDeleteAccount}>
-            Delete
-          </Button>
-        </DrawerFooter>
-      </div>
+      <DrawerFooter className="pt-2">
+        <Button variant="destructive" onClick={onDeleteAccount}>
+          Delete
+        </Button>
+      </DrawerFooter>
     </DrawerContent>
   );
 };

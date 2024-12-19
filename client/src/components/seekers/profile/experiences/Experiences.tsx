@@ -21,7 +21,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ experience }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [experienceId, setExperienceId] = useState<string | null>(null);
   const isEdit = Boolean(experienceId);
-  const isLarge = useMediaQuery('(min-width: 1280px)');
+  const isSmall = useMediaQuery('(min-width: 650px)');
   const seekerExperience = experience.find(
     (experience) => experience._id === experienceId,
   );
@@ -38,7 +38,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ experience }) => {
 
   return (
     <Fragment>
-      {isLarge && (
+      {isSmall && (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           {isOpen && (
             <ExperienceForm
@@ -52,7 +52,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ experience }) => {
           )}
         </Dialog>
       )}
-      {!isLarge && (
+      {!isSmall && (
         <Drawer open={isOpen} onOpenChange={setIsOpen}>
           {isOpen && (
             <ExperienceForm

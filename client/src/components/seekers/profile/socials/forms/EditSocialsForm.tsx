@@ -21,11 +21,13 @@ import {
 } from '@/components/ui/form';
 import {
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
 import {
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
@@ -157,11 +159,16 @@ const EditSocialsForm: React.FC<EditSocialsFormProps> = ({
     </div>
   );
 
+  const title = 'Edit Socials';
+  const description =
+    'Sharing your socials is a great way to connect with employers.';
+
   if (isDialog) {
     return (
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit Socials</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         {children}
       </DialogContent>
@@ -169,9 +176,10 @@ const EditSocialsForm: React.FC<EditSocialsFormProps> = ({
   }
 
   return (
-    <DrawerContent className="flex-col justify-center">
-      <DrawerHeader className="text-center">
-        <DrawerTitle>Edit Socials</DrawerTitle>
+    <DrawerContent>
+      <DrawerHeader>
+        <DrawerTitle>{title}</DrawerTitle>
+        <DrawerDescription>{description}</DrawerDescription>
       </DrawerHeader>
       <div className="p-5">{children}</div>
     </DrawerContent>

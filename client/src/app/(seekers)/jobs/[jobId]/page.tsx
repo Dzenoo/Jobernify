@@ -21,7 +21,7 @@ const JobDetailsPage = ({
 }) => {
   const [isApplyToJob, setIsApplyToJob] = useState(false);
 
-  const isLarge = useMediaQuery('(min-width: 1280px)');
+  const isSmall = useMediaQuery('(min-width: 650px)');
 
   const { data: fetchedJobs, isLoading } = useGetJobById(jobId);
 
@@ -62,7 +62,7 @@ const JobDetailsPage = ({
         isApplyToJob={isApplyToJob}
         setIsApplyToJob={setIsApplyToJob}
         jobId={jobId}
-        isDialog={isLarge ? true : false}
+        isDialog={isSmall ? true : false}
       />
     </section>
   );

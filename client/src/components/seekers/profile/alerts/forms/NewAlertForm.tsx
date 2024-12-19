@@ -178,15 +178,16 @@ const NewAlertForm: React.FC<NewAlertFormProps> = ({
     </Form>
   );
 
+  const title = 'Add Job Alert';
+  const description =
+    'Stay updated with personalized alerts tailored to your job preferences. Receive notifications about new job postings.';
+
   if (isDialog) {
     return (
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add Job Alert</DialogTitle>
-          <DialogDescription>
-            Stay updated with personalized alerts tailored to your job
-            preferences. Receive notifications about new job postings.
-          </DialogDescription>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         {children}
       </DialogContent>
@@ -195,12 +196,9 @@ const NewAlertForm: React.FC<NewAlertFormProps> = ({
 
   return (
     <DrawerContent>
-      <DrawerHeader className="text-center">
-        <DrawerTitle>Add Job Alert</DrawerTitle>
-        <DrawerDescription>
-          Stay updated with personalized alerts tailored to your job
-          preferences. Receive notifications about new job postings.
-        </DrawerDescription>
+      <DrawerHeader>
+        <DrawerTitle>{title}</DrawerTitle>
+        <DrawerDescription>{description}</DrawerDescription>
       </DrawerHeader>
       <div className="p-5">{children}</div>
     </DrawerContent>

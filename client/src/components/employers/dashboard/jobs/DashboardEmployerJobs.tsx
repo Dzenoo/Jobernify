@@ -39,7 +39,7 @@ const DashboardEmployerJobs: React.FC<DashboardEmployerJobsProps> = ({
   }
 
   const [openedJobId, setOpenedJobId] = useState<string>('');
-  const isLarge = useMediaQuery('(min-width: 1280px)');
+  const isSmall = useMediaQuery('(min-width: 650px)');
 
   const openDeleteJob = (jobId: string) => {
     setOpenedJobId(jobId);
@@ -64,7 +64,7 @@ const DashboardEmployerJobs: React.FC<DashboardEmployerJobsProps> = ({
 
   return (
     <>
-      {isLarge && (
+      {isSmall && (
         <Dialog open={!!openedJobId} onOpenChange={closeDeleteJob}>
           <DeleteJob
             onClose={closeDeleteJob}
@@ -73,7 +73,7 @@ const DashboardEmployerJobs: React.FC<DashboardEmployerJobsProps> = ({
           />
         </Dialog>
       )}
-      {!isLarge && (
+      {!isSmall && (
         <Drawer open={!!openedJobId} onOpenChange={closeDeleteJob}>
           <DeleteJob
             onClose={closeDeleteJob}

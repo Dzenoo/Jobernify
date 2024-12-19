@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 
 import { useGetJobs } from '@/hooks/queries/useGetJobs.query';
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
+import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 
 import SearchJobs from '@/components/seekers/jobs/search/SearchJobs';
 import FilterJobs from '@/components/seekers/jobs/filters/FilterJobs';
@@ -37,6 +38,7 @@ const Jobs = ({
 }: {
   searchParams: { [key: string]: string };
 }) => {
+  const isLarge = useMediaQuery('(min-width: 1280px)');
   const { updateSearchParams } = useSearchParams();
   const {
     data: fetchedJobs,
@@ -62,7 +64,7 @@ const Jobs = ({
   return (
     <section className="flex justify-between gap-10 max-xl:flex-col">
       <div className="basis-2/5 flex flex-col gap-5">
-        <SeekerInfo />
+        {isLarge && <SeekerInfo />}
         <PopularJobsInfo jobs={jobsData.popularJobs} />
       </div>
 
