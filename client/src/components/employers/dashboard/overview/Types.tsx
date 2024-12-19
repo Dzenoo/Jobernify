@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
   CardFooter,
+  CardDescription,
 } from '@/components/ui/card';
 
 Chart.register(...registerables);
@@ -46,6 +47,9 @@ const Types: React.FC<{ data: any }> = ({ data }) => {
     <Card className="h-full">
       <CardHeader>
         <CardTitle>Distribution of Job Types</CardTitle>
+        <CardDescription>
+          View the distribution of job types in your company
+        </CardDescription>
       </CardHeader>
       {data?.length !== 0 ? (
         <CardContent className="p-4">

@@ -14,6 +14,7 @@ import {
   CardHeader,
   CardTitle,
   CardFooter,
+  CardDescription,
 } from '@/components/ui/card';
 
 Chart.register(...registerables);
@@ -87,6 +88,9 @@ const JobsPerMonth: React.FC<{ data: any }> = ({ data }) => {
     <Card className="flex flex-col h-full">
       <CardHeader>
         <CardTitle>Number of Jobs Posted Per Month</CardTitle>
+        <CardDescription>
+          See how many jobs have been posted in the last 6 months
+        </CardDescription>
       </CardHeader>
       {data ? (
         <CardContent className="flex-1 p-4">

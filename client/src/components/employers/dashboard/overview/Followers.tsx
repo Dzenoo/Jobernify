@@ -14,6 +14,7 @@ import {
   CardHeader,
   CardTitle,
   CardFooter,
+  CardDescription,
 } from '@/components/ui/card';
 
 Chart.register(...registerables);
@@ -87,6 +88,9 @@ const Followers: React.FC<{ data: any }> = ({ data }) => {
     <Card className="flex flex-col h-full">
       <CardHeader>
         <CardTitle>Total Followers Over Time</CardTitle>
+        <CardDescription>
+          This graph shows the total number of followers over last 6 months.
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 p-4">
         {data ? (

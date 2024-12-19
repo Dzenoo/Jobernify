@@ -27,6 +27,10 @@ const Dashboard = () => {
     return <LoadingDashboard />;
   }
 
+  if (!analytics) {
+    return <LoadingDashboard />;
+  }
+
   return (
     <section className="flex flex-col gap-3">
       <div className="flex flex-col gap-1">
@@ -43,26 +47,26 @@ const Dashboard = () => {
 
       <div>
         <Statistics
-          totalJobs={analytics?.totalJobs || 0}
-          totalApplications={analytics?.totalApplications || 0}
-          totalFollowers={analytics?.totalFollowers || 0}
-          jobsThisMonth={analytics?.jobsThisMonth || 0}
-          applicationsThisMonth={analytics?.applicationsThisMonth || 0}
-          followersThisMonth={analytics?.followersThisMonth || 0}
+          totalJobs={analytics.totalJobs}
+          totalApplications={analytics.totalApplications}
+          totalFollowers={analytics.totalFollowers}
+          jobsThisMonth={analytics.jobsThisMonth}
+          applicationsThisMonth={analytics.applicationsThisMonth}
+          followersThisMonth={analytics.followersThisMonth}
         />
       </div>
 
       <div className="grid gap-3 grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1">
         <div>
-          <JobsPerMonth data={analytics?.jobsPerMonth} />
+          <JobsPerMonth data={analytics.jobsPerMonth} />
         </div>
 
         <div>
-          <Followers data={analytics?.followersOverTime} />
+          <Followers data={analytics.followersOverTime} />
         </div>
 
         <div>
-          <Types data={analytics?.jobTypes} />
+          <Types data={analytics.jobTypes} />
         </div>
       </div>
 
