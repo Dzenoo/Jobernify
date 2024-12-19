@@ -50,6 +50,7 @@
     "react-quill": "^2.0.0",
     "react-window": "^1.8.10",
     "recharts": "^2.15.0",
+    "socket.io-client": "^4.8.1",
     "tailwindcss-animate": "^1.0.7",
     "turndown": "^7.2.0",
     "vaul": "^1.1.1",

@@ -11,6 +11,9 @@ import { useZoomLevel } from '@/hooks/core/useZoomLevel.hook';
 
 const HomePage = () => {
   const isZoomedOut = useZoomLevel();
+  // const { connected, connect, disconnect } = useWebSocket({
+  //   url: 'http://localhost:8080',
+  // });
 
   return (
     <div className="flex justify-center">

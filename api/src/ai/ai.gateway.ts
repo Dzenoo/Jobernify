@@ -8,7 +8,7 @@ import {
 
 import { AiService } from './ai.service';
 
-@WebSocketGateway({ cors: { origin: 'http://localhost:3000' } })
+@WebSocketGateway({ cors: { origin: '*' } })
 export class AiGateway implements OnGatewayConnection, OnGatewayDisconnect {
   constructor(private readonly aiService: AiService) {}
 
