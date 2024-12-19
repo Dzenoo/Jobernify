@@ -45,24 +45,24 @@ const FilterApplications: React.FC<FilterApplicationsProps> = ({
     },
     {
       id: 3,
-      title: 'Interviews',
+      title: 'Interview',
       data: interviews,
       filter: 'Interview',
       className: 'border-blue-500',
     },
     {
       id: 4,
-      title: 'Rejected',
-      data: rejected,
-      filter: 'Rejected',
-      className: 'border-red-500',
-    },
-    {
-      id: 5,
       title: 'Accepted',
       data: accepted,
       filter: 'Accepted',
       className: 'border-green-500',
+    },
+    {
+      id: 5,
+      title: 'Rejected',
+      data: rejected,
+      filter: 'Rejected',
+      className: 'border-red-500',
     },
   ];
 

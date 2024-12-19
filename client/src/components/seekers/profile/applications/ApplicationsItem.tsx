@@ -136,8 +136,8 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
               : applicationStatusRejected
                 ? 'bg-red-100 dark:bg-red-200'
                 : applicationsStatusInterview
-                  ? 'bg-yellow-100 dark:bg-yellow-200'
-                  : 'bg-blue-100 dark:bg-blue-200'
+                  ? 'bg-blue-100 dark:bg-blue-200'
+                  : 'bg-yellow-100 dark:bg-yellow-200'
           }`}
         >
           <p
@@ -148,8 +148,8 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
                : applicationStatusRejected
                  ? 'text-red-500'
                  : applicationsStatusInterview
-                   ? 'text-yellow-500'
-                   : 'text-blue-500'
+                   ? 'text-blue-500'
+                   : 'text-yellow-500'
            }`}
           >
             {status}

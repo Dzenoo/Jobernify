@@ -63,13 +63,13 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ applicationId, status }) => {
       id: 3,
       label: 'Accepted',
       value: 'Accepted',
-      icon: <XCircle className="text-red-500" />,
+      icon: <CheckCircle className="text-green-500" />,
     },
     {
       id: 4,
       label: 'Rejected',
       value: 'Rejected',
-      icon: <CheckCircle className="text-green-500" />,
+      icon: <XCircle className="text-red-500" />,
     },
   ];
 
