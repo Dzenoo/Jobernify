@@ -11,6 +11,7 @@ import { SeekersModule } from './models/seekers/seekers.module';
 import { EmployersModule } from './models/employers/employers.module';
 import { JobsModule } from './models/jobs/jobs.module';
 import { ApplicationsModule } from './models/applications/applications.module';
+import { AiModule } from './ai/ai.module';
 
 import { APP_GUARD } from '@nestjs/core';
 
@@ -44,6 +45,7 @@ import { CleanupService } from './common/cleanup/cleanup.service';
     EmployersModule,
     JobsModule,
     ApplicationsModule,
+    AiModule,
   ],
   providers: [
     CleanupService,
