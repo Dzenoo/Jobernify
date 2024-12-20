@@ -9,18 +9,12 @@ interface WebSocketHookOptions {
 }
 
 interface UseWebSocketReturn {
-  connected: boolean;
+  isConnected: boolean;
+  socket: Socket | null;
   connect: () => void;
   disconnect: () => void;
-  socket: Socket | null;
 }
 
-/**
- * Custom React hook for managing a WebSocket connection using Socket.IO.
- *
- * @param options - Configuration options for the WebSocket connection
- * @returns An object containing connection status, control functions, and the socket instance
- */
 const useWebSocket = ({
   url,
   onConnect,
@@ -28,68 +22,44 @@ const useWebSocket = ({
   onError,
 }: WebSocketHookOptions): UseWebSocketReturn => {
   const [socket, setSocket] = useState<Socket | null>(null);
-  const [connected, setConnected] = useState<boolean>(false);
+  const [isConnected, setIsConnected] = useState(false);
 
   const connect = useCallback(() => {
     if (socket) return;
 
     const newSocket = io(url, { transports: ['websocket'] });
 
-    const handleConnect = () => {
-      if (!connected) {
-        setConnected(true);
-        console.log('WebSocket connected');
-        onConnect?.();
-      }
-    };
+    newSocket.on('connect', () => {
+      setIsConnected(true);
+      onConnect?.();
+    });
 
-    const handleDisconnect = () => {
-      if (connected) {
-        setConnected(false);
-        console.log('WebSocket disconnected');
-        onDisconnect?.();
-      }
-    };
+    newSocket.on('disconnect', () => {
+      setIsConnected(false);
+      onDisconnect?.();
+    });
 
-    const handleError = (error: Error) => {
-      console.error('WebSocket connection error:', error);
+    newSocket.on('connect_error', (error: Error) => {
+      console.error('WebSocket error:', error);
       onError?.(error);
-    };
-
-    newSocket.on('connect', handleConnect);
-    newSocket.on('disconnect', handleDisconnect);
-    newSocket.on('connect_error', handleError);
+    });
 
     setSocket(newSocket);
-  }, [socket, url, connected, onConnect, onDisconnect, onError]);
+  }, [socket, url, onConnect, onDisconnect, onError]);
 
   const disconnect = useCallback(() => {
     if (socket) {
-      socket.off('connect');
-      socket.off('disconnect');
-      socket.off('connect_error');
       socket.disconnect();
       setSocket(null);
-      setConnected(false);
-      console.log('WebSocket connection terminated');
+      setIsConnected(false);
     }
   }, [socket]);
 
   useEffect(() => {
-    // Optionally
-    // connect();
-
-    return () => {
-      disconnect();
-    };
+    return () => disconnect();
   }, [disconnect]);
 
-  return {
-    connected,
-    connect,
-    disconnect,
-    socket,
-  };
+  return { isConnected, socket, connect, disconnect };
 };
 
 export { useWebSocket };

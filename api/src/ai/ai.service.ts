@@ -43,9 +43,19 @@ export class AiService {
       },
     );
 
+    const messages = await this.getMessagesFromThread(threadId);
+
+    const assistantMessageObj: any = messages
+      .filter((msg) => msg.role === 'assistant')
+      .pop();
+
+    const assistantMessage =
+      assistantMessageObj?.content[0]?.text.value ||
+      'No response from assistant.';
+
     return {
       userMessage: messageResponse,
-      assistantMessage: runResponse,
+      assistantMessage,
     };
   }
 
