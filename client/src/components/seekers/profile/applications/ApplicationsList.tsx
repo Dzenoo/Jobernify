@@ -23,7 +23,7 @@ const ApplicationsList: React.FC<ApplicationsListProps> = React.memo(
               <h2 className="text-lg font-semibold ">No Applications Found</h2>
             </div>
             <div>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-muted-foreground dark:text-muted-foreground">
                 You haven't applied to any job
               </p>
             </div>

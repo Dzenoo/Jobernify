@@ -12,7 +12,7 @@ const Text: React.FC<AddJobTextProps> = ({ title, description, step }) => {
   return (
     <div className="flex flex-col gap-3 max-w-xl">
       <div>
-        <span className="text-initial-gray">
+        <span className="text-muted-foreground text-base">
           {step + 1} / 4 {steps[step]}
         </span>
       </div>
@@ -22,7 +22,7 @@ const Text: React.FC<AddJobTextProps> = ({ title, description, step }) => {
         </h1>
       </div>
       <div>
-        <p className="text-initial-gray">{description}</p>
+        <p className="text-muted-foreground text-base">{description}</p>
       </div>
     </div>
   );

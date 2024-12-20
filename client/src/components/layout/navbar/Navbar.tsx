@@ -61,7 +61,7 @@ const Navbar: React.FC<{ href?: string }> = ({ href }) => {
   const isSeeker = userType === 'seeker';
 
   return (
-    <header className="px-5 py-2 dark:bg-[#0d0d0d] base-margin flex justify-between items-center gap-3 overflow-hidden border-b border-base-gray dark:border-[#1b1b1b] bg-white">
+    <header className="px-5 py-2 dark:bg-[#0d0d0d] base-margin flex justify-between items-center gap-3 overflow-hidden border-b border-gray-100 dark:border-[#1b1b1b] bg-white">
       <Logo href={href} />
       {isAuthenticated && (
         <div className="max-xl:hidden">

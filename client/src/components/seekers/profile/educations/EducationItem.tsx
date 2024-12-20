@@ -67,7 +67,7 @@ const EducationItem: React.FC<EducationItemProps> = ({
             <h1 className="font-semibold">{institution}</h1>
           </div>
           <div>
-            <p className="text-initial-gray">
+            <p className="text-muted-foreground text-base">
               {degree} degree, {fieldOfStudy}
             </p>
           </div>

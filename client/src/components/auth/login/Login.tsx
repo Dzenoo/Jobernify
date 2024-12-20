@@ -19,7 +19,7 @@ const Login: React.FC = () => {
             <h1 className="text-2xl font-semibold">Login to Jobernify</h1>
           </div>
           <div>
-            <p className="text-gray-500">
+            <p className="text-muted-foreground">
               Welcome back! Please enter your email and password to access your
               account.
             </p>
@@ -30,7 +30,7 @@ const Login: React.FC = () => {
         <LoginForm />
       </CardContent>
       <CardFooter className="justify-center">
-        <p className="text-gray-500">
+        <p className="text-muted-foreground">
           Dont have account?{' '}
           <Link href="/signup" className="text-blue-600 underline">
             Signup

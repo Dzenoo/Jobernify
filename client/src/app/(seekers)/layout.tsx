@@ -17,6 +17,13 @@ const MobileBar = dynamic(() => import('@/components/layout/navbar/Mobile'), {
   ssr: false,
 });
 
+const JobernifyAi = dynamic(
+  () => import('@/components/shared/chatbot/JobernifyAi'),
+  {
+    ssr: false,
+  },
+);
+
 export const metadata: Metadata = {
   icons: {
     icon: [
@@ -52,7 +59,10 @@ export default function SeekersLayout({
           <AppThemeProvider>
             <div className="flex flex-col min-h-screen">
               <Navbar href="/jobs" />
-              <main className="flex-1 base-margin">{children}</main>
+              <main className="flex-1 base-margin">
+                {children}
+                <JobernifyAi />
+              </main>
               <Footer />
             </div>
             <Toaster />

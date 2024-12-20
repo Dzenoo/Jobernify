@@ -60,7 +60,7 @@ const JobApplicationsPage = ({
         </div>
 
         <div>
-          <p className="text-initial-gray">
+          <p className="text-muted-foreground text-base">
             Manage your applications to find the perfect candidates for this job
           </p>
         </div>

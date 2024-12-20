@@ -53,7 +53,9 @@ const Statistics: React.FC<StatisticsProps> = ({
             <div className="flex items-center gap-3">
               <div>{statistics.icon}</div>
               <div>
-                <h1 className="text-initial-gray">{statistics.title}</h1>
+                <h1 className="text-muted-foreground text-base">
+                  {statistics.title}
+                </h1>
               </div>
             </div>
           </CardHeader>

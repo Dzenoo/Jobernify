@@ -2,6 +2,7 @@ export const JobsFiltersData = [
   {
     id: '1',
     title: 'Job type',
+    description: 'Filter jobs based on the type of employment.',
     data: [
       { id: '1', title: 'Internship', value: 'Internship', type: 'type' },
       { id: '2', title: 'Full-Time', value: 'Full-Time', type: 'type' },
@@ -12,6 +13,7 @@ export const JobsFiltersData = [
   {
     id: '2',
     title: 'Job level',
+    description: 'Filter jobs based on experience or seniority level.',
     data: [
       { id: '1', title: 'Junior', value: 'Junior', type: 'level' },
       { id: '2', title: 'Medior', value: 'Medior', type: 'level' },
@@ -22,6 +24,7 @@ export const JobsFiltersData = [
   {
     id: '3',
     title: 'Salary range',
+    description: 'Filter jobs based on the offered salary range.',
     data: [
       { id: '1', title: '0$ - 50 000$', value: '0-50000', type: 'salary' },
       {
@@ -53,6 +56,7 @@ export const JobsFiltersData = [
   {
     id: '4',
     title: 'Job position',
+    description: 'Filter jobs based on the working arrangement or location.',
     data: [
       { id: '1', title: 'Hybrid', value: 'Hybrid', type: 'position' },
       { id: '2', title: 'On-Site', value: 'On-Site', type: 'position' },

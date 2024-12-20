@@ -188,7 +188,9 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
         <div>
           <div>
             {skills?.length === 0 && (
-              <p className="text-initial-gray">No skills listed</p>
+              <p className="text-muted-foreground text-base">
+                No skills listed
+              </p>
             )}
           </div>
           {renderSkills(categorizedSkills)}

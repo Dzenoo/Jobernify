@@ -41,7 +41,9 @@ const Dashboard = () => {
         </div>
 
         <div>
-          <p className="text-initial-gray">Gain Valuable Insights</p>
+          <p className="text-muted-foreground text-base">
+            Gain Valuable Insights
+          </p>
         </div>
       </div>
 

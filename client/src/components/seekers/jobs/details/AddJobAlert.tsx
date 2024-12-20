@@ -8,9 +8,10 @@ import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
 import { Button } from '@/components/ui/button';
 import {
   Card,
-  CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 
 type JobAlertProps = {
@@ -28,11 +29,11 @@ const AddJobAlert: React.FC<JobAlertProps> = React.memo(
       return (
         <Card>
           <CardHeader>
-            <h1 className="text-base-black">Generate Job Alert</h1>
+            <CardTitle>Generate Job Alert</CardTitle>
+            <CardDescription className="pt-2">
+              Loading seeker data...
+            </CardDescription>
           </CardHeader>
-          <CardContent className="pt-0">
-            <p className="text-initial-gray">Loading seeker data...</p>
-          </CardContent>
           <CardFooter>
             <Button variant="default" className="w-full" disabled>
               Loading...
@@ -55,14 +56,12 @@ const AddJobAlert: React.FC<JobAlertProps> = React.memo(
     return (
       <Card>
         <CardHeader>
-          <h1 className="text-base-black">Generate Job Alert</h1>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <p className="text-initial-gray">
+          <CardTitle>Generate Job Alert</CardTitle>
+          <CardDescription className="text-base pt-2">
             Get notified when job like this show. Set up alerts now and never
             miss a matching opportunity.
-          </p>
-        </CardContent>
+          </CardDescription>
+        </CardHeader>
         <CardFooter>
           <Button
             variant="default"

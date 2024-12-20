@@ -101,7 +101,7 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
               {ProfileInformationArrays.map(({ id, data, title }) => (
                 <div key={id} className="flex flex-col gap-[3px]">
                   <div>
-                    <p className="text-initial-gray">{title}</p>
+                    <p className="text-muted-foreground text-base">{title}</p>
                   </div>
                   <div>
                     <h1 className="font-semibold">{data}</h1>
@@ -114,7 +114,7 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
                 <h1>Headline</h1>
               </div>
               <div>
-                <p className="text-initial-gray">
+                <p className="text-muted-foreground text-base">
                   {seeker.headline ? seeker.headline : 'Headline not available'}
                 </p>
               </div>
@@ -124,7 +124,7 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
                 <h1 className="text-initial-black">Biography</h1>
               </div>
               <div>
-                <p className="text-initial-gray">
+                <p className="text-muted-foreground text-base">
                   {seeker.biography
                     ? seeker.biography
                     : 'Biography not available'}

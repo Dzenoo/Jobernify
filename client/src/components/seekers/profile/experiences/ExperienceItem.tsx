@@ -69,7 +69,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
       </div>
       <div className="flex-1 flex flex-col gap-2">
         <HeaderSection jobTitle={jobTitle} type={type} />
-        <p className="text-initial-gray">{companyName}</p>
+        <p className="text-muted-foreground text-base">{companyName}</p>
         <DateSection
           isCurrentlyWorking={isCurrentlyWorking}
           startDate={formattedStartDate}
@@ -98,7 +98,7 @@ const HeaderSection: React.FC<{ jobTitle: string; type: string }> = ({
   <div className="flex items-center gap-2">
     <h1 className="font-semibold">{jobTitle}</h1>
     <span className="text-sm">·</span>
-    <p className="text-initial-gray">{type}</p>
+    <p className="text-muted-foreground text-base">{type}</p>
   </div>
 );
 
@@ -108,12 +108,12 @@ const DateSection: React.FC<{
   endDate?: string;
 }> = ({ isCurrentlyWorking, startDate, endDate }) => (
   <div className="flex items-center gap-2">
-    <p className="text-initial-gray">{startDate}</p>
+    <p className="text-muted-foreground text-base">{startDate}</p>
     <span className="text-sm">·</span>
     {isCurrentlyWorking ? (
-      <p className="text-initial-gray">Present</p>
+      <p className="text-muted-foreground text-base">Present</p>
     ) : (
-      <p className="text-initial-gray">{endDate}</p>
+      <p className="text-muted-foreground text-base">{endDate}</p>
     )}
   </div>
 );
@@ -124,11 +124,11 @@ const InfoSection: React.FC<{
   level: string;
 }> = ({ location, position, level }) => (
   <div className="flex items-center gap-2">
-    <p className="text-initial-gray">{location}</p>
+    <p className="text-muted-foreground text-base">{location}</p>
     <span className="text-sm">·</span>
-    <p className="text-initial-gray">{position}</p>
+    <p className="text-muted-foreground text-base">{position}</p>
     <span className="text-sm">·</span>
-    <p className="text-initial-gray">{level}</p>
+    <p className="text-muted-foreground text-base">{level}</p>
   </div>
 );
 

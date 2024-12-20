@@ -107,11 +107,13 @@ const JobItem: React.FC<JobItemProps> = ({
                 <div className="flex items-center gap-3 max-sm:flex-wrap">
                   <div>
                     <Link href={`/employers/${employer._id}?section=jobs`}>
-                      <p className="text-low-gray">{employer?.name}</p>
+                      <p className="text-muted-foreground text-sm font-light">
+                        {employer?.name}
+                      </p>
                     </Link>
                   </div>
                   <div>
-                    <p className="text-low-gray">
+                    <p className="text-muted-foreground text-sm font-light">
                       {applications?.length} Applicants
                     </p>
                   </div>
@@ -153,7 +155,7 @@ const JobItem: React.FC<JobItemProps> = ({
               </div>
             )}
             <div className="max-sm:hidden">
-              <p className="text-initial-gray truncate">{createdTime}</p>
+              <p className="text-muted-foreground truncate">{createdTime}</p>
             </div>
           </div>
         </CardFooter>

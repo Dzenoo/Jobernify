@@ -270,7 +270,7 @@ const renderJobDetails = <
         <h1 className="font-semibold">{data}</h1>
       </div>
       <div>
-        <p className="text-initial-gray">{title}</p>
+        <p className="text-muted-foreground text-base">{title}</p>
       </div>
     </div>
   );

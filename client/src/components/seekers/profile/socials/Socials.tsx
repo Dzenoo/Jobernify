@@ -96,7 +96,7 @@ const Socials: React.FC<SocialsProps> = ({ seeker }) => {
               </div>
               <div className="text-center">
                 {data === '' ? (
-                  <p className="text-initial-gray">Add {title}</p>
+                  <p className="text-muted-foreground text-base">Add {title}</p>
                 ) : (
                   <a
                     className="text-blue-500"

@@ -22,7 +22,7 @@ const SearchSeekers: React.FC<SearchSeekersProps> = ({ query }) => {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="shadow-lg rounded-lg w-full h-full bg-gradient-to-br from-[#0c39b3] via-[#02fcfc8c] to-[#035770]">
+      <div className="shadow-lg rounded-lg w-full h-full bg-gradient-to-br from-[#0c39b3] via-[#02fcfc8c] to-indigo-700">
         <div className="flex flex-col gap-3 bg-black/20 p-8 rounded-md">
           <h1 className="text-white font-semibold text-xl">
             Find Your Ideal Candidate

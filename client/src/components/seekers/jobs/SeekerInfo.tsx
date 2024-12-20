@@ -47,7 +47,7 @@ const SeekerInfo: React.FC = React.memo(() => {
           </div>
           {seeker.headline && (
             <div>
-              <p className="text-gray-500 dark:text-gray-400">
+              <p className="text-muted-foreground dark:text-muted-foreground">
                 {seeker.headline}
               </p>
             </div>

@@ -28,7 +28,7 @@ const EmployerData: React.FC<EmployerInformationsProps> = ({ employer }) => {
         {ProfileInformationArrays.map(({ id, data, title }) => (
           <div key={id} className="flex flex-col gap-[3px]">
             <div>
-              <p className="text-initial-gray">{title}</p>
+              <p className="text-muted-foreground text-base">{title}</p>
             </div>
             <div>
               <h1 className="font-semibold">{data}</h1>
@@ -41,7 +41,7 @@ const EmployerData: React.FC<EmployerInformationsProps> = ({ employer }) => {
           <h1>Description</h1>
         </div>
         <div>
-          <p className="text-initial-gray">
+          <p className="text-muted-foreground text-base">
             {employer?.companyDescription || 'No Description Available'}
           </p>
         </div>
@@ -63,7 +63,7 @@ const EmployerData: React.FC<EmployerInformationsProps> = ({ employer }) => {
           <h1>Industry</h1>
         </div>
         <div>
-          <p className="text-initial-gray">
+          <p className="text-muted-foreground text-base">
             {findIndustriesData(employer?.industry || '') ||
               'No Industry Available'}
           </p>
@@ -74,7 +74,7 @@ const EmployerData: React.FC<EmployerInformationsProps> = ({ employer }) => {
           <h1>Size</h1>
         </div>
         <div>
-          <p className="text-initial-gray">
+          <p className="text-muted-foreground text-base">
             {employer?.size || 'No Size Available'}
           </p>
         </div>

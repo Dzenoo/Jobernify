@@ -34,7 +34,7 @@ const Navigator: React.FC<NavigatorProps> = ({ href, title, info }) => {
         </Link>
       </div>
       <div>
-        <p className="text-initial-gray">{title}</p>
+        <p className="text-muted-foreground text-base">{title}</p>
       </div>
     </div>
   );

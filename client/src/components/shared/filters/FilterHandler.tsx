@@ -49,8 +49,13 @@ const FilterHandler: React.FC<FilterHandlerProps> = ({
 
         return (
           <AccordionItem key={filter.id} value={`item-${index}`} border={false}>
-            <AccordionTrigger>
-              <h3 className="text-lg font-semibold">{filter.title}</h3>
+            <AccordionTrigger className="items-start">
+              <div className="flex flex-col justify-start items-start gap-1">
+                <h3 className="text-lg font-semibold">{filter.title}</h3>
+                <p className="text-sm text-left text-muted-foreground">
+                  {filter.description}
+                </p>
+              </div>
             </AccordionTrigger>
             <AccordionContent>
               <div className="space-y-5">
@@ -74,11 +79,11 @@ const FilterHandler: React.FC<FilterHandlerProps> = ({
                       }
                     />
                     <div className="flex justify-between items-center gap-2 w-full">
-                      <p className="flex justify-between gap-2 max-sm:flex-col text-sm  leading-none cursor-pointer transition-all hover:text-gray-500 dark:hover:text-gray-500">
+                      <p className="flex justify-between gap-2 max-sm:flex-col text-sm  leading-none cursor-pointer transition-all hover:text-muted-foreground dark:hover:text-muted-foreground">
                         {checkbox.title}
                       </p>
                       {showCount && checkbox.count !== undefined && (
-                        <p className=" text-gray-400 text-sm">
+                        <p className=" text-muted-foreground text-sm">
                           ({checkbox.count})
                         </p>
                       )}

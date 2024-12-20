@@ -61,7 +61,7 @@ const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(
                   <h1 className="text-base-black">Job Alerts</h1>
                 </div>
                 <div>
-                  <p className="text-initial-gray">
+                  <p className="text-muted-foreground text-base">
                     Receive alerts for job opportunities that match your
                     preferences
                   </p>
@@ -88,7 +88,7 @@ const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(
                   <h1 className="text-base-black">No alert generated</h1>
                 </div>
                 <div>
-                  <p className="text-initial-gray">
+                  <p className="text-muted-foreground text-base">
                     Consider enabling alerts to help you find the best job and
                     opportunity.
                   </p>
@@ -123,7 +123,7 @@ const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(
                       <h1 className="font-semibold">{alertsInfoData.title}</h1>
                     </div>
                     <div>
-                      <p className="text-initial-gray">
+                      <p className="text-muted-foreground text-base">
                         {alertsInfoData?.data}
                       </p>
                     </div>

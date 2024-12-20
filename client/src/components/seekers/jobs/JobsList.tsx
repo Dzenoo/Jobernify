@@ -27,7 +27,7 @@ const JobsList: React.FC<JobListProps> = React.memo(
               <h2 className="text-lg font-semibold ">No Jobs Found</h2>
             </div>
             <div>
-              <p className="text-gray-600 dark:text-gray-400 text-center">
+              <p className="text-muted-foreground dark:text-muted-foreground text-center">
                 {message}
               </p>
             </div>

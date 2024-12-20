@@ -58,7 +58,9 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
             </Badge>
           ))
         ) : (
-          <span className=" text-left text-gray-400">{placeholder}</span>
+          <span className=" text-left text-muted-foreground">
+            {placeholder}
+          </span>
         )}
       </Button>
       {open && (
@@ -90,7 +92,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                 ))}
               </CommandGroup>
             ) : (
-              <div className="p-3 text-center text-gray-500 dark:text-gray-400">
+              <div className="p-3 text-center text-muted-foreground dark:text-muted-foreground">
                 No results found.
               </div>
             )}

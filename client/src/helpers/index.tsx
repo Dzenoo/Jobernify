@@ -37,7 +37,7 @@ export const renderIconText = ({
           <div key={id} className="flex items-center gap-3">
             <TooltipTrigger>{icon}</TooltipTrigger>
             <div>
-              <p className="text-initial-gray cursor-default">{data}</p>
+              <p className="text-muted-foreground cursor-default">{data}</p>
             </div>
           </div>
           <TooltipContent>{tooltipContent}</TooltipContent>
@@ -50,7 +50,7 @@ export const renderIconText = ({
     <div key={id} className="flex items-center gap-3">
       <div>{icon}</div>
       <div>
-        <p className="text-initial-gray cursor-default">{data}</p>
+        <p className="text-muted-foreground cursor-default">{data}</p>
       </div>
     </div>
   );

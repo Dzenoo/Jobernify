@@ -3,7 +3,13 @@
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
 import {
   Tooltip,
@@ -35,15 +41,11 @@ const PopularJobsInfo: React.FC<PopularsJobsInfoProps> = React.memo(
     return (
       <Card>
         <CardHeader>
-          <div>
-            <h1 className="text-lg font-semibold">Popular Job Titles</h1>
-          </div>
-          <div>
-            <p className="text-gray-500 dark:text-gray-400">
-              Popular job titles are based on current market trends and seekers
-              interests.
-            </p>
-          </div>
+          <CardTitle className="text-xl">Popular Job Titles</CardTitle>
+          <CardDescription className="text-base">
+            Popular job titles are based on current market trends and seekers
+            interests.
+          </CardDescription>
         </CardHeader>
         {jobs && jobs.length > 0 && (
           <CardContent className="pt-0">

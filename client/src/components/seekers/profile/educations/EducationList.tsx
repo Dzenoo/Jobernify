@@ -27,7 +27,9 @@ const EducationList: React.FC<EducationListProps> = ({
     <div>
       <div>
         {educations?.length === 0 && (
-          <p className="text-initial-gray">No educations listed</p>
+          <p className="text-muted-foreground text-base">
+            No educations listed
+          </p>
         )}
       </div>
       <div className="flex flex-col gap-3">

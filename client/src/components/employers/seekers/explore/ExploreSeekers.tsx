@@ -10,7 +10,7 @@ const ExploreSeekers: React.FC = () => {
           <h1 className="text-initial-black font-semibold">Explore Seekers</h1>
         </div>
         <div>
-          <p className="text-initial-gray">
+          <p className="text-muted-foreground text-base">
             Discover and connect with seekers who possess the skills you're
             looking for through their social media profiles
           </p>

@@ -29,7 +29,7 @@ const Applications: React.FC<ApplicationsProps> = ({ applications }) => {
             </h1>
           </div>
           <div>
-            <p className="text-initial-gray">
+            <p className="text-muted-foreground text-base">
               View the status of your job applications below. Stay updated on
               your application progress
             </p>

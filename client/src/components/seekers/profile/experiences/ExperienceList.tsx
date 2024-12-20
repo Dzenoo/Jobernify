@@ -26,7 +26,7 @@ const ExperienceList: React.FC<ExperienceListProps> = ({
   return (
     <div className="flex flex-col gap-5">
       {!experiences.length && (
-        <p className="text-initial-gray">No experiences listed</p>
+        <p className="text-muted-foreground text-base">No experiences listed</p>
       )}
       <div className="flex flex-col gap-3">
         {experiencesList.map((experience) => (

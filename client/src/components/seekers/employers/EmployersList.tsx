@@ -26,7 +26,7 @@ const EmployersList: React.FC<EmployersListProps> = React.memo(
               <h2 className="text-lg font-semibold ">No Employers Found</h2>
             </div>
             <div>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-muted-foreground dark:text-muted-foreground">
                 We're sorry, but it appears there are no employers to display at
                 this time.
               </p>

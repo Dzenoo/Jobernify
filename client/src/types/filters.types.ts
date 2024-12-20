@@ -8,6 +8,7 @@ export type FilterCounts = {
 export type FilterGroup = {
   id: string;
   title: string;
+  description: string;
   data: {
     id: string;
     title: string;

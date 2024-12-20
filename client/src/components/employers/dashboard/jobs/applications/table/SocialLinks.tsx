@@ -15,7 +15,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
   return (
     <div className="flex items-center gap-6">
       {github === '' ? (
-        <div className="text-initial-gray cursor-not-allowed">
+        <div className="text-muted-foreground cursor-not-allowed">
           <Github />
         </div>
       ) : (
@@ -28,7 +28,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
         </Link>
       )}
       {linkedin === '' ? (
-        <div className="text-initial-gray cursor-not-allowed">
+        <div className="text-muted-foreground cursor-not-allowed">
           <Linkedin />
         </div>
       ) : (
@@ -41,7 +41,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
         </Link>
       )}
       {portfolio === '' ? (
-        <div className="text-initial-gray cursor-not-allowed">
+        <div className="text-muted-foreground cursor-not-allowed">
           <ImageIcon />
         </div>
       ) : (

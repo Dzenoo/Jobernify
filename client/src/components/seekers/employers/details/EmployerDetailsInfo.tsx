@@ -71,7 +71,9 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
             </CardHeader>
             <CardContent className="flex flex-col justify-between gap-5 sm:pl-0">
               <div className="rounded-full bg-gray-100 p-3 w-fit dark:bg-[#1b1b1b]">
-                <p className="text-low-gray">{address || 'Location'}</p>
+                <p className="text-muted-foreground text-sm font-light">
+                  {address || 'Location'}
+                </p>
               </div>
               <div>
                 <h1 className="text-base-black">{name}</h1>
@@ -104,7 +106,7 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
           <h1 className="text-base-black">About</h1>
         </div>
         <div>
-          <p className="text-initial-gray">
+          <p className="text-muted-foreground text-base">
             {companyDescription || 'No Biography Available'}
           </p>
         </div>

@@ -104,60 +104,8 @@
     @apply text-2xl font-semibold text-black dark:text-white;
   }
 
-  .text-base-blue {
-    @apply text-2xl font-semibold text-blue-700 dark:text-white;
-  }
-
-  .text-base-gray {
-    @apply text-2xl font-semibold text-gray-500 dark:text-white;
-  }
-
-  .text-base-white {
-    @apply text-2xl font-semibold text-white dark:text-white;
-  }
-
   .text-initial-black {
     @apply text-base font-normal text-black dark:text-white;
-  }
-
-  .text-initial-blue {
-    @apply text-base font-normal text-blue-700 dark:text-white;
-  }
-
-  .text-initial-gray {
-    @apply text-base font-normal text-gray-500 dark:text-gray-400;
-  }
-
-  .text-initial-white {
-    @apply text-base font-normal text-white dark:text-white;
-  }
-
-  .text-low-black {
-    @apply text-sm font-light text-black dark:text-white;
-  }
-
-  .text-low-blue {
-    @apply text-sm font-light text-blue-700 dark:text-white;
-  }
-
-  .text-low-gray {
-    @apply text-sm font-light text-gray-500 dark:text-gray-400;
-  }
-
-  .text-low-white {
-    @apply text-sm font-light text-white dark:text-white;
-  }
-
-  .border-base-gray {
-    @apply dark:border-[#404040] border-gray-100;
-  }
-
-  .border-base-blue {
-    @apply border-blue-700;
-  }
-
-  .border-base-black {
-    @apply border-black;
   }
 
   .hide-scrollbar::-webkit-scrollbar {

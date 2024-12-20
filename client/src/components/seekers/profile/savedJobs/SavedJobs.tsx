@@ -25,7 +25,7 @@ const SavedJobs: React.FC<SavedJobsProps> = ({ savedJobs }) => {
             <h1 className="text-base-black">Saved Jobs ({savedJobs.length})</h1>
           </div>
           <div>
-            <p className="text-initial-gray">
+            <p className="text-muted-foreground text-base">
               Here are your saved jobs. You can remove them easily.
             </p>
           </div>

@@ -45,7 +45,7 @@ const DashboardJobsPage = ({
           </div>
 
           <div>
-            <p className="text-initial-gray">
+            <p className="text-muted-foreground text-base">
               Easily edit, update, or remove listings to find the perfect
               candidates
             </p>

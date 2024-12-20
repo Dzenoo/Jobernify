@@ -33,7 +33,9 @@ const DashboardEmployerJobs: React.FC<DashboardEmployerJobsProps> = ({
   if (jobs.length === 0) {
     return (
       <div className="text-center flex items-center justify-center h-screen overflow-hidden">
-        <p className="text-initial-gray">You haven't created any jobs yet.</p>
+        <p className="text-muted-foreground text-base">
+          You haven't created any jobs yet.
+        </p>
       </div>
     );
   }

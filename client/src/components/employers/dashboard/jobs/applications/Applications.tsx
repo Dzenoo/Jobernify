@@ -40,10 +40,10 @@ const Applications: React.FC<ApplicationsProps> = ({
           <Search size={50} className="mb-4" />
         </div>
         <div>
-          <h2 className="text-lg font-semibold ">No Applications Found</h2>
+          <h2 className="text-lg font-semibold">No Applications Found</h2>
         </div>
         <div>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-muted-foreground dark:text-muted-foreground">
             You don't have new applications
           </p>
         </div>

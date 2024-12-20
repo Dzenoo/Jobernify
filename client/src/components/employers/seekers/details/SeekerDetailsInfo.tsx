@@ -86,7 +86,7 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
                   </a>
                 ) : (
                   <div
-                    className="text-initial-gray cursor-not-allowed"
+                    className="text-muted-foreground cursor-not-allowed"
                     key={socials.id}
                   >
                     {socials.icon}
@@ -103,11 +103,15 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
             </div>
             {seeker?.biography ? (
               <div>
-                <p className="text-initial-gray">{seeker?.biography}</p>
+                <p className="text-muted-foreground text-base">
+                  {seeker?.biography}
+                </p>
               </div>
             ) : (
               <div>
-                <p className="text-initial-gray">No biography available</p>
+                <p className="text-muted-foreground text-base">
+                  No biography available
+                </p>
               </div>
             )}
           </div>
@@ -141,7 +145,9 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
               renderSkills(categorizedSkills)
             ) : (
               <div>
-                <p className="text-initial-gray">No skills listed</p>
+                <p className="text-muted-foreground text-base">
+                  No skills listed
+                </p>
               </div>
             )}
           </div>

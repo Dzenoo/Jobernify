@@ -77,7 +77,7 @@ const EmployerItem: React.FC<EmployersItemProps> = ({
             </Link>
           </div>
           <div>
-            <p className="text-initial-gray">
+            <p className="text-muted-foreground text-base">
               {truncate(companyDescription, 150)}
             </p>
           </div>

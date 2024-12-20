@@ -86,7 +86,7 @@ const UploadSeekerImage: React.FC<UploadSeekerImageProps> = ({ image }) => {
             </Button>
           )}
         </form>
-        <p className="text-initial-gray">
+        <p className="text-muted-foreground text-base">
           Please upload your photo in JPG or PNG format.
         </p>
       </div>

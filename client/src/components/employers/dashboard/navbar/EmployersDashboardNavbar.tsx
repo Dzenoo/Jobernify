@@ -4,7 +4,13 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { Briefcase, LayoutDashboard, Settings, Menu, X } from 'lucide-react';
+import {
+  Briefcase,
+  LayoutDashboard,
+  Settings,
+  X,
+  PanelRight,
+} from 'lucide-react';
 
 import {
   Tooltip,
@@ -12,6 +18,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { Button } from '@/components/ui/button';
 
 const EmployersDashboardNavbar: React.FC = () => {
   const pathname = usePathname();
@@ -40,12 +47,13 @@ const EmployersDashboardNavbar: React.FC = () => {
 
   return (
     <header>
-      <button
+      <Button
+        variant="ghost"
         onClick={() => setIsDrawerOpen(!isDrawerOpen)}
         className="p-5 md:hidden"
       >
-        {isDrawerOpen ? <X /> : <Menu />}
-      </button>
+        {isDrawerOpen ? <X /> : <PanelRight />}
+      </Button>
 
       <div
         className={`fixed inset-0 z-50 bg-black bg-opacity-50 transition-opacity duration-300 md:hidden ${

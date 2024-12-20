@@ -94,7 +94,7 @@ const SeekerItem: React.FC<SeekerItemProps> = ({
               </a>
             ) : (
               <div
-                className="text-initial-gray cursor-not-allowed"
+                className="text-muted-foreground cursor-not-allowed"
                 key={socials.id}
               >
                 {socials.icon}

@@ -66,7 +66,7 @@ const DeleteEmployerProfile: React.FC<DeleteEmployerProfileProps> = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          <DialogDescription className="text-gray-500">
+          <DialogDescription className="text-muted-foreground">
             {description}
           </DialogDescription>
         </DialogHeader>
@@ -87,7 +87,7 @@ const DeleteEmployerProfile: React.FC<DeleteEmployerProfileProps> = ({
     <DrawerContent>
       <DrawerHeader>
         <DrawerTitle>{title}</DrawerTitle>
-        <DrawerDescription className="text-gray-500">
+        <DrawerDescription className="text-muted-foreground">
           {description}
         </DrawerDescription>
       </DrawerHeader>

@@ -55,7 +55,7 @@ const Signup: React.FC<SignupProps> = ({
       <CardHeader>
         <div className="flex items-center justify-center gap-3 flex-col">
           <div>
-            <p className="text-low-gray">
+            <p className="text-muted-foreground text-sm font-light">
               {selectedUser?.description}{' '}
               <button
                 className="text-blue-700 font-semibold"

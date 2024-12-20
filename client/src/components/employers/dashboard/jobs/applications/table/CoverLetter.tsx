@@ -11,7 +11,7 @@ const CoverLetter: React.FC<CoverLetterProps> = ({ cover_letter }) => {
   return cover_letter ? (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="link" className="text-initial-blue">
+        <Button variant="link" className="text-blue-500">
           Read
         </Button>
       </DialogTrigger>
