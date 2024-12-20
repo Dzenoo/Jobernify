@@ -141,4 +141,25 @@
   .jobDescription p {
     margin: 0.5em 0;
   }
+
+  .aiChat ul,
+  .aiChat ol {
+    margin: 1em 0;
+    padding-left: 1.5em;
+  }
+
+  .aiChat ul {
+    list-style-type: disc;
+  }
+
+  .aiChat ol {
+    list-style-type: decimal;
+  }
+
+  .aiChat li {
+    margin: 0.5em 0;
+  }
+
+  .aiChat p {
+  }
 }

@@ -3,7 +3,8 @@ import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 
 import { QueryContextProvider } from '@/context/react-query-client';
-import AppThemeProvider from '@/context/app-theme-provider';
+import { AppThemeProvider } from '@/context/app-theme-provider';
+import { AiAssistantProvider } from '@/context/ai-assistant';
 
 import { Toaster } from '@/components/ui/toaster';
 
@@ -17,12 +18,9 @@ const MobileBar = dynamic(() => import('@/components/layout/navbar/Mobile'), {
   ssr: false,
 });
 
-const JobernifyAi = dynamic(
-  () => import('@/components/shared/chatbot/JobernifyAi'),
-  {
-    ssr: false,
-  },
-);
+const Ai = dynamic(() => import('@/components/shared/ai/Ai'), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   icons: {
@@ -53,23 +51,25 @@ export default function SeekersLayout({
   children: React.ReactNode;
 }) {
   return (
-    <QueryContextProvider>
-      <html suppressHydrationWarning={true} lang="en">
-        <body className={GeistSans.className}>
+    <html suppressHydrationWarning={true} lang="en">
+      <body className={GeistSans.className}>
+        <QueryContextProvider>
           <AppThemeProvider>
-            <div className="flex flex-col min-h-screen">
-              <Navbar href="/jobs" />
-              <main className="flex-1 base-margin">
-                {children}
-                <JobernifyAi />
-              </main>
-              <Footer />
-            </div>
-            <Toaster />
-            <MobileBar />
+            <AiAssistantProvider>
+              <div className="flex flex-col min-h-screen">
+                <Navbar href="/jobs" />
+                <main className="flex-1 base-margin">
+                  {children}
+                  <Ai />
+                </main>
+                <Footer />
+              </div>
+              <Toaster />
+              <MobileBar />
+            </AiAssistantProvider>
           </AppThemeProvider>
-        </body>
-      </html>
-    </QueryContextProvider>
+        </QueryContextProvider>
+      </body>
+    </html>
   );
 }

@@ -3,12 +3,10 @@
 import { ThemeProvider } from 'next-themes';
 import { type ReactNode } from 'react';
 
-const AppThemeProvider = ({ children }: { children: ReactNode }) => {
+export const AppThemeProvider = ({ children }: { children: ReactNode }) => {
   return (
     <ThemeProvider defaultTheme="light" attribute="class">
       {children}
     </ThemeProvider>
   );
 };
-
-export default AppThemeProvider;
