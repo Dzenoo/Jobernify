@@ -57,7 +57,7 @@ const FilterHandler: React.FC<FilterHandlerProps> = ({
                 </p>
               </div>
             </AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="pt-2">
               <div className="space-y-5">
                 {visibleCheckboxes.map((checkbox) => (
                   <div
