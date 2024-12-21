@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { WsException } from '@nestjs/websockets';
+import * as cookie from 'cookie';
 
 @Injectable()
 export class WsJwtGuard implements CanActivate {
@@ -17,20 +17,17 @@ export class WsJwtGuard implements CanActivate {
 
   canActivate(context: ExecutionContext): boolean {
     const client = context.switchToWs().getClient();
-    const cookies = client.handshake.headers?.cookie;
+    const cookieHeader = client.handshake.headers?.cookie;
 
-    if (!cookies) {
-      throw new WsException('Cookies not found');
+    if (!cookieHeader) {
+      throw new UnauthorizedException('Cookies not found');
     }
 
-    const token = cookies
-      .split(';')
-      .map((cookie) => cookie.trim())
-      .find((cookie) => cookie.startsWith('token='))
-      ?.split('=')[1];
+    const cookies = cookie.parse(cookieHeader);
+    const token = cookies.token;
 
     if (!token) {
-      throw new UnauthorizedException('Token not found in cookies');
+      throw new UnauthorizedException('Unauthorized!');
     }
 
     try {
