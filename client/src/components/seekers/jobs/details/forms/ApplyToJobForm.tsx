@@ -111,7 +111,6 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
       queryClient.invalidateQueries({
         queryKey: ['jobs', 'job', 'profile', { jobId }],
       });
-
       setIsApplyToJob(false);
     },
     onError: (error: any) => {
@@ -223,7 +222,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
             className="w-full"
           >
             {form.formState.isSubmitting ? (
-              <ScaleLoader height={10} />
+              <ScaleLoader height={10} className="text-white" />
             ) : (
               'Apply'
             )}
