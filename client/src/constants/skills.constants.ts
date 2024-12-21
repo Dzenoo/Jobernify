@@ -2,6 +2,7 @@ export const SkillsInformationsData = [
   {
     id: '1',
     category: 'Databases',
+    description: 'Filter seekers based on their knowledge of databases.',
     data: [
       { id: '1', title: 'MySQL', value: 'mysql', type: 'skills' },
       { id: '2', title: 'PostgreSQL', value: 'postgresql', type: 'skills' },
@@ -28,6 +29,8 @@ export const SkillsInformationsData = [
   {
     id: '2',
     category: 'Programming Languages',
+    description:
+      'Filter seekers based on their knowledge of programming languages.',
     data: [
       { id: '1', title: 'JavaScript', value: 'javascript', type: 'skills' },
       { id: '2', title: 'TypeScript', value: 'typescript', type: 'skills' },
@@ -55,6 +58,7 @@ export const SkillsInformationsData = [
   {
     id: '3',
     category: 'Web Development',
+    description: 'Filter seekers based on their knowledge of web development.',
     data: [
       { id: '1', title: 'HTML', value: 'html', type: 'skills' },
       { id: '2', title: 'CSS', value: 'css', type: 'skills' },
@@ -87,6 +91,7 @@ export const SkillsInformationsData = [
   {
     id: '4',
     category: 'Cloud Platforms',
+    description: 'Filter seekers based on their knowledge of cloud platforms.',
     data: [
       { id: '1', title: 'AWS', value: 'aws', type: 'skills' },
       { id: '2', title: 'Microsoft Azure', value: 'azure', type: 'skills' },
@@ -104,6 +109,7 @@ export const SkillsInformationsData = [
   {
     id: '5',
     category: 'DevOps Tools',
+    description: 'Filter seekers based on their knowledge of DevOps tools.',
     data: [
       { id: '1', title: 'Docker', value: 'docker', type: 'skills' },
       { id: '2', title: 'Kubernetes', value: 'kubernetes', type: 'skills' },
@@ -126,6 +132,8 @@ export const SkillsInformationsData = [
   {
     id: '6',
     category: 'Data Science & Machine Learning',
+    description:
+      'Filter seekers based on their knowledge of data science and machine learning.',
     data: [
       { id: '1', title: 'TensorFlow', value: 'tensorflow', type: 'skills' },
       { id: '2', title: 'PyTorch', value: 'pytorch', type: 'skills' },
@@ -150,6 +158,8 @@ export const SkillsInformationsData = [
   {
     id: '7',
     category: 'Mobile Development',
+    description:
+      'Filter seekers based on their knowledge of mobile development.',
     data: [
       { id: '1', title: 'Android', value: 'android', type: 'skills' },
       { id: '2', title: 'iOS', value: 'ios', type: 'skills' },
@@ -168,6 +178,7 @@ export const SkillsInformationsData = [
   {
     id: '8',
     category: 'Cybersecurity',
+    description: 'Filter seekers based on their knowledge of cybersecurity.',
     data: [
       {
         id: '1',

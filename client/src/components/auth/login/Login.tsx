@@ -6,25 +6,21 @@ import LoginForm from './forms/LoginForm';
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 
 const Login: React.FC = () => {
   return (
     <Card className="flex flex-col sm:w-[450px]">
       <CardHeader>
-        <div className="flex flex-col items-center justify-center text-center gap-3">
-          <div>
-            <h1 className="text-2xl font-semibold">Login to Jobernify</h1>
-          </div>
-          <div>
-            <p className="text-muted-foreground">
-              Welcome back! Please enter your email and password to access your
-              account.
-            </p>
-          </div>
-        </div>
+        <CardTitle>Login to Jobernify</CardTitle>
+        <CardDescription>
+          Welcome back! Please enter your email and password to access your
+          account.
+        </CardDescription>
       </CardHeader>
       <CardContent className="pt-0">
         <LoginForm />

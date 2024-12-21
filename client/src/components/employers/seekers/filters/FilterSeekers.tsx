@@ -63,7 +63,12 @@ const FilterSeekers: React.FC = () => {
 
 const FiltersContent: React.FC = () => {
   const transformedSkillsInformationsData = SkillsInformationsData.map(
-    (item) => ({ id: item.id, title: item.category, data: item.data }),
+    (item) => ({
+      id: item.id,
+      title: item.category,
+      description: item.description,
+      data: item.data,
+    }),
   );
 
   return (

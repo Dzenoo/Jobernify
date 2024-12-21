@@ -9,8 +9,10 @@ import { TypeOfAccount } from '@/types';
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
+  CardTitle,
 } from '@/components/ui/card';
 
 type UserDataTypes = {
@@ -52,27 +54,21 @@ const Signup: React.FC<SignupProps> = ({
 
   return (
     <Card className="flex flex-col gap-2 lg:w-[600px]">
-      <CardHeader>
-        <div className="flex items-center justify-center gap-3 flex-col">
-          <div>
-            <p className="text-muted-foreground text-sm font-light">
-              {selectedUser?.description}{' '}
-              <button
-                className="text-blue-700 font-semibold"
-                onClick={() =>
-                  handleTypeSelection(
-                    isEmployer ? TypeOfAccount.Seeker : TypeOfAccount.Employer,
-                  )
-                }
-              >
-                {isEmployer ? 'Seeker' : 'Employer'}
-              </button>
-            </p>
-          </div>
-          <div>
-            <h1 className="text-2xl font-semibold">{selectedUser?.title}</h1>
-          </div>
-        </div>
+      <CardHeader className="text-center">
+        <CardDescription>
+          {selectedUser?.description}{' '}
+          <button
+            className="text-blue-700 font-semibold"
+            onClick={() =>
+              handleTypeSelection(
+                isEmployer ? TypeOfAccount.Seeker : TypeOfAccount.Employer,
+              )
+            }
+          >
+            {isEmployer ? 'Seeker' : 'Employer'}
+          </button>
+        </CardDescription>
+        <CardTitle>{selectedUser?.title}</CardTitle>
       </CardHeader>
       <CardContent>
         {isEmployer ? <EmployersSignupForm /> : <SeekersSignupForm />}
