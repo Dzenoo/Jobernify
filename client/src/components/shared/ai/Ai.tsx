@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 
-import { Bot, MessageCircle } from 'lucide-react';
+import { Bot } from 'lucide-react';
 
 import AiContainer from './AiContainer';
 import { useWebSocket } from '@/hooks/core/useWebSocket.hook';
@@ -16,12 +16,9 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 
-const JobernifyAi: React.FC = () => {
+const Ai: React.FC = () => {
   const { connect, disconnect, socket } = useWebSocket({
     url: 'ws://localhost:8080',
-    onConnect: () => {
-      console.log('WebSocket connected');
-    },
   });
 
   useEffect(() => {
@@ -30,11 +27,8 @@ const JobernifyAi: React.FC = () => {
 
   return (
     <Sheet>
-      <SheetTrigger
-        onClick={connect}
-        className="z-50 fixed bottom-5 right-5 w-[4em] h-[4em] bg-gradient-to-r from-blue-500 to-indigo-600 shadow-xl rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110 hover:shadow-2xl active:scale-95"
-      >
-        <MessageCircle className="text-white" />
+      <SheetTrigger onClick={connect}>
+        <Bot />
       </SheetTrigger>
       <SheetContent className="p-4 flex flex-col">
         <SheetHeader className="pt-5">
@@ -42,7 +36,7 @@ const JobernifyAi: React.FC = () => {
             <Bot />
             JobernifyAI
           </SheetTitle>
-          <SheetDescription>
+          <SheetDescription className="text-left">
             Chat with JobernifyAI for job recommendations, career advice, and
             more.
           </SheetDescription>
@@ -53,4 +47,4 @@ const JobernifyAi: React.FC = () => {
   );
 };
 
-export default JobernifyAi;
+export default Ai;

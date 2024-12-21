@@ -18,7 +18,7 @@ import { SocketAuthMiddleware } from 'src/authentication/middlewares/ws.middlewa
 
 import { AiService } from './ai.service';
 
-@WebSocketGateway({ cors: { origin: '*' } })
+@WebSocketGateway({ cors: { origin: '*' }, transports: ['websocket'] })
 @UseGuards(WsJwtGuard)
 export class AiGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect

@@ -60,7 +60,7 @@ const Jobs = ({
   const isFiltering = isLoading || isFetching || isRefetching;
 
   return (
-    <section className="flex justify-between gap-10 max-xl:flex-col">
+    <section className="flex justify-between gap-5 max-xl:flex-col">
       <div className="basis-2/5 flex flex-col gap-5">
         <div className="max-xl:hidden">
           <SeekerInfo />
@@ -68,7 +68,7 @@ const Jobs = ({
         <PopularJobsInfo jobs={jobsData.popularJobs} />
       </div>
 
-      <div className="basis-full grow flex flex-col gap-4">
+      <div className="basis-full grow flex flex-col gap-5">
         <SearchJobs query={searchParams.query} sort={searchParams.sort} />
 
         <div className="xl:hidden">

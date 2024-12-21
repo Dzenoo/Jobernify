@@ -49,11 +49,10 @@ const AiForm: React.FC<AiFormProps> = ({ socket }) => {
   };
 
   const createThread = useCallback(() => {
-    if (socket) {
-      setIsTyping(true);
+    if (!threadId && socket) {
       socket.emit('create_thread');
     }
-  }, [socket]);
+  }, [threadId, socket]);
 
   useEffect(() => {
     if (socket) {
@@ -69,12 +68,6 @@ const AiForm: React.FC<AiFormProps> = ({ socket }) => {
     };
   }, [socket, handleAssistantMessage, handleThreadCreated]);
 
-  useEffect(() => {
-    if (!threadId && socket) {
-      createThread();
-    }
-  }, [createThread, threadId, socket]);
-
   return (
     <Form {...form}>
       <form className="relative" onSubmit={form.handleSubmit(onSubmit)}>
@@ -85,6 +78,7 @@ const AiForm: React.FC<AiFormProps> = ({ socket }) => {
             <FormItem>
               <FormControl>
                 <Textarea
+                  onClick={createThread}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
                       e.preventDefault();
@@ -101,7 +95,7 @@ const AiForm: React.FC<AiFormProps> = ({ socket }) => {
         />
         <Button
           variant="ghost"
-          disabled={!form.formState.isValid || isTyping}
+          disabled={!form.formState.isValid || isTyping || !threadId}
           type="submit"
           className="absolute bottom-1.5 right-1.5 p-2 w-8 h-8 rounded-full"
         >

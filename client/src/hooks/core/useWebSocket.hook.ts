@@ -31,8 +31,9 @@ const useWebSocket = ({
     if (socket) return;
 
     const newSocket = io(url, {
-      extraHeaders: {
-        Authorization: `Bearer ${token}`,
+      transports: ['websocket'],
+      query: {
+        token,
       },
     });
 

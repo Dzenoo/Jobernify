@@ -3,13 +3,11 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
 import { ScaleLoader } from 'react-spinners';
 
 import { getImageUrl } from '@/lib/utils';
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { useFetchProfile } from '@/hooks/queries/useFetchProfile.query';
-
 import {
   EmployersNavbarActions,
   SeekersNavbarActions,

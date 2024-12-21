@@ -36,12 +36,12 @@ const SeekersPage = ({
   const isFiltering = isLoading || isFetching || isRefetching;
 
   return (
-    <section className="base-margin overflow-auto flex gap-[25px] max-xl:flex-col">
+    <section className="base-margin overflow-auto flex gap-5 max-xl:flex-col">
       <div className="basis-1/2">
         <ExploreSeekers />
       </div>
 
-      <div className="basis-full grow flex flex-col gap-6">
+      <div className="basis-full grow flex flex-col gap-5">
         <div>
           <SearchSeekers query={searchParams.query} />
         </div>

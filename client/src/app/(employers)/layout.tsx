@@ -11,12 +11,9 @@ import { GeistSans } from 'geist/font/sans';
 
 import Footer from '@/components/layout/footer/Footer';
 import '../globals.css';
+import { AiAssistantProvider } from '@/context/ai-assistant';
 
 const Navbar = dynamic(() => import('@/components/layout/navbar/Navbar'), {
-  ssr: false,
-});
-
-const Ai = dynamic(() => import('@/components/shared/ai/Ai'), {
   ssr: false,
 });
 
@@ -49,22 +46,21 @@ export default function EmployersLayout({
   children: React.ReactNode;
 }) {
   return (
-    <QueryContextProvider>
-      <html suppressHydrationWarning={true} lang="en">
-        <body className={GeistSans.className}>
+    <html suppressHydrationWarning={true} lang="en">
+      <body className={GeistSans.className}>
+        <QueryContextProvider>
           <AppThemeProvider>
-            <div className="flex flex-col min-h-screen">
-              <Navbar href="/seekers" />
-              <main className="flex-1">
-                {children}
-                <Ai />
-              </main>
-              <Footer />
-            </div>
+            <AiAssistantProvider>
+              <div className="flex flex-col min-h-screen">
+                <Navbar href="/seekers" />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </div>
+            </AiAssistantProvider>
             <Toaster />
           </AppThemeProvider>
-        </body>
-      </html>
-    </QueryContextProvider>
+        </QueryContextProvider>
+      </body>
+    </html>
   );
 }

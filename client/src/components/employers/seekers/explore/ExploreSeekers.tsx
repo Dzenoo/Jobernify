@@ -12,7 +12,7 @@ const ExploreSeekers: React.FC = () => {
   return (
     <Card>
       <CardContent>
-        <CardHeader>
+        <CardHeader className="p-0">
           <CardTitle>Explore Seekers</CardTitle>
           <CardDescription>
             Discover and connect with seekers who possess the skills you're

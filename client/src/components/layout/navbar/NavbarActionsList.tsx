@@ -1,10 +1,10 @@
 import React from 'react';
 
 import Link from 'next/link';
-
-import Themes from './Themes';
-
 import { LogOut, LucideIcon } from 'lucide-react';
+
+import Ai from '@/components/shared/ai/Ai';
+import Themes from './Themes';
 
 import {
   Tooltip,
@@ -31,6 +31,7 @@ const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
 }) => {
   return (
     <ul className="flex items-center gap-4">
+      <Ai />
       {Array.from(data).map(({ id, href, icon, tooltip }) => (
         <TooltipProvider key={id} delayDuration={400}>
           <Tooltip>

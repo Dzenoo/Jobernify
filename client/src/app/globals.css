@@ -97,7 +97,7 @@
   }
 
   .base-margin {
-    @apply p-10 overflow-auto max-lg:p-8 max-sm:p-5;
+    @apply p-5 overflow-auto;
   }
 
   .text-base-black {
