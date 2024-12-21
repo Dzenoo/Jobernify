@@ -7,7 +7,13 @@ import ReceiveJobAlertsForm from './forms/ReceiveJobAlertsForm';
 
 import { Seeker } from '@/types';
 
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Dialog } from '@/components/ui/dialog';
 import { Drawer } from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
@@ -56,16 +62,12 @@ const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(
         <Card>
           <CardHeader className="flex flex-col gap-5">
             <div className="flex justify-between gap-3">
-              <div className="flex flex-col gap-3">
-                <div>
-                  <h1 className="text-base-black">Job Alerts</h1>
-                </div>
-                <div>
-                  <p className="text-muted-foreground text-base">
-                    Receive alerts for job opportunities that match your
-                    preferences
-                  </p>
-                </div>
+              <div className="space-y-1.5">
+                <CardTitle>Job Alerts</CardTitle>
+                <CardDescription>
+                  Receive alerts for job opportunities that match your
+                  preferences
+                </CardDescription>
               </div>
               {!areObjectKeysEmpty(alerts) && (
                 <div>
