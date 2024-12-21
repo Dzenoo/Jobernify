@@ -1,5 +1,4 @@
-// src/ai/ai.gateway.ts
-
+import { Logger, UseGuards } from '@nestjs/common';
 import {
   MessageBody,
   OnGatewayConnection,
@@ -11,9 +10,9 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { AiService } from './ai.service';
-import { Logger } from '@nestjs/common';
+import { WsJwtGuard } from 'src/authentication/guards/ws-jwt.guard';
 
-@WebSocketGateway({ cors: { origin: '*' } })
+@WebSocketGateway({ cors: { origin: '*', allowedHeaders: ['Authorization'] } })
 export class AiGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer()
   server: Server;
@@ -22,6 +21,7 @@ export class AiGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   constructor(private readonly aiService: AiService) {}
 
+  @UseGuards(WsJwtGuard)
   handleConnection(client: Socket) {
     this.logger.log(`Client connected: ${client.id}`);
   }
@@ -30,6 +30,7 @@ export class AiGateway implements OnGatewayConnection, OnGatewayDisconnect {
     this.logger.log(`Client disconnected: ${client.id}`);
   }
 
+  @UseGuards(WsJwtGuard)
   @SubscribeMessage('send_message')
   async handleSendMessage(
     @MessageBody() payload: { threadId: string; message: string },
@@ -48,6 +49,7 @@ export class AiGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
   }
 
+  @UseGuards(WsJwtGuard)
   @SubscribeMessage('create_thread')
   async handleCreateThread(@ConnectedSocket() client: Socket) {
     try {
@@ -59,6 +61,7 @@ export class AiGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
   }
 
+  @UseGuards(WsJwtGuard)
   @SubscribeMessage('get_messages')
   async handleGetMessages(
     @MessageBody() payload: { threadId: string },

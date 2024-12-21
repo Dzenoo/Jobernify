@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { io, Socket } from 'socket.io-client';
+import { useAuthentication } from './useAuthentication.hook';
 
 interface WebSocketHookOptions {
   url: string;
@@ -21,13 +22,19 @@ const useWebSocket = ({
   onDisconnect,
   onError,
 }: WebSocketHookOptions): UseWebSocketReturn => {
+  const { token } = useAuthentication().getCookieHandler();
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
 
   const connect = useCallback(() => {
     if (socket) return;
 
-    const newSocket = io(url, { transports: ['websocket'] });
+    const newSocket = io(url, {
+      extraHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
+      transports: ['websocket'],
+    });
 
     newSocket.on('connect', () => {
       setIsConnected(true);

@@ -52,10 +52,12 @@ const JobDetailsPage = ({
           type={fetchedJobs.job.type}
           title={fetchedJobs.job.title}
         />
-        <JobsList
-          jobs={fetchedJobs.jobs}
-          message="No similar jobs found at the moment."
-        />
+        {fetchedJobs.jobs.length > 0 && (
+          <JobsList
+            jobs={fetchedJobs.jobs}
+            message="No similar jobs found at the moment."
+          />
+        )}
       </div>
 
       <ApplyToJobForm
