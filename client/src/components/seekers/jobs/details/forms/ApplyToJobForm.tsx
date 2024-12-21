@@ -43,6 +43,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
+import { generateCoverLetter } from '@/lib/actions/jobs.actions';
 
 type ApplyToJobFormProps = {
   isApplyToJob: boolean;
@@ -79,6 +80,23 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
     mode: 'all',
   });
 
+  const { mutateAsync: generateCoverLetterMutate, status: coverLetterStatus } =
+    useMutation({
+      mutationFn: () => {
+        if (!token) {
+          throw new Error('Unauthorized!');
+        }
+
+        return generateCoverLetter(jobId, token);
+      },
+      onSuccess: (data) => {
+        form.setValue('coverLetter', data.coverLetter);
+      },
+      onError: (error: any) => {
+        toast({ title: 'Error', description: error.response.data.message });
+      },
+    });
+
   const { mutateAsync: applyToJobMutate } = useMutation({
     mutationFn: (formData: FormData) => {
       if (!token) {
@@ -101,8 +119,16 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
     },
   });
 
+  const isCoverLetterGenerated =
+    coverLetterStatus === 'success' && !!form.getValues('coverLetter');
+  const isCoverLetterGenerating = coverLetterStatus === 'pending';
   const existingResume = seekerData?.seeker?.resume;
   const resumeToSubmit = selectedFile || existingResume;
+
+  const handleGenerateCoverLetter = async () => {
+    if (isCoverLetterGenerated || isCoverLetterGenerating) return;
+    await generateCoverLetterMutate();
+  };
 
   const onSubmit = async (values: zod.infer<typeof ApplyToJobSchema>) => {
     if (!resumeToSubmit) {
@@ -159,13 +185,25 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
             <FormItem>
               <div className="flex justify-between gap-2 items-center flex-wrap">
                 <FormLabel>Cover Letter (optional)</FormLabel>
-                <Button type="button" variant="outline">
-                  <Sparkles className="w-5 h-5 mr-2 text-indigo-500" /> Generate
+                <Button
+                  onClick={handleGenerateCoverLetter}
+                  disabled={isCoverLetterGenerating || isCoverLetterGenerated}
+                  type="button"
+                  variant="outline"
+                >
+                  {isCoverLetterGenerating ? (
+                    <ScaleLoader height={10} />
+                  ) : (
+                    <>
+                      <Sparkles className="w-5 h-5 mr-2 text-indigo-500" />{' '}
+                      Generate
+                    </>
+                  )}
                 </Button>
               </div>
               <FormControl>
                 <Textarea
-                  className="max-h-10"
+                  className="min-h-52 resize-none"
                   placeholder="Cover Letter"
                   {...field}
                 />

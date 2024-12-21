@@ -75,7 +75,7 @@ export class JobsController {
     return await this.jobsService.getAll(query);
   }
 
-  @Throttle({ default: { limit: 20, ttl: 60000 } })
+  @Throttle({ default: { limit: 5, ttl: 60000 } })
   @Post('/:jobId/generate-cover-letter')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)

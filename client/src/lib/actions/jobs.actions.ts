@@ -116,3 +116,16 @@ export const getJobById = async (
 ): Promise<{ job: Job; jobs: Job[] }> => {
   return await getApiHandler(`jobs/${jobId}`, token);
 };
+
+/**
+ * Generates a cover letter for a job
+ * @param jobId The ID of the job to generate a cover letter for
+ * @param token The authentication token
+ * @returns A promise resolving to the generated cover letter
+ */
+export const generateCoverLetter = async (
+  jobId: string,
+  token: string,
+): Promise<{ coverLetter: string }> => {
+  return await postApiHandler(`jobs/${jobId}/generate-cover-letter`, {}, token);
+};
