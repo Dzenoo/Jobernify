@@ -1,44 +1,22 @@
-import {
-  Injectable,
-  CanActivate,
-  ExecutionContext,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
-import * as cookie from 'cookie';
+import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+
+import { verify } from 'jsonwebtoken';
+import { Socket } from 'socket.io';
 
 @Injectable()
 export class WsJwtGuard implements CanActivate {
-  constructor(
-    private readonly jwtService: JwtService,
-    private readonly configService: ConfigService,
-  ) {}
-
   canActivate(context: ExecutionContext): boolean {
-    const client = context.switchToWs().getClient();
-    const cookieHeader = client.handshake.headers?.cookie;
+    const client: Socket = context.switchToWs().getClient();
 
-    if (!cookieHeader) {
-      throw new UnauthorizedException('Cookies not found');
-    }
+    WsJwtGuard.validateToken(client);
 
-    const cookies = cookie.parse(cookieHeader);
-    const token = cookies.token;
+    return true;
+  }
 
-    if (!token) {
-      throw new UnauthorizedException('Unauthorized!');
-    }
-
-    try {
-      const payload = this.jwtService.verify(token, {
-        secret: process.env.JWT_SECRET,
-      });
-
-      context.switchToHttp().getRequest().user = payload;
-      return true;
-    } catch (err) {
-      throw new UnauthorizedException('Invalid token');
-    }
+  static validateToken(client: Socket) {
+    const { authorization } = client.handshake.headers;
+    const token: string = authorization.split(' ')[1];
+    const payload = verify(token, process.env.JWT_SECRET);
+    return payload;
   }
 }

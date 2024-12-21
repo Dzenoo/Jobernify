@@ -1,4 +1,5 @@
-import { Logger, UseGuards } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
+
 import {
   MessageBody,
   OnGatewayConnection,
@@ -7,30 +8,38 @@ import {
   WebSocketGateway,
   WebSocketServer,
   ConnectedSocket,
+  OnGatewayInit,
 } from '@nestjs/websockets';
-import { Server, Socket } from 'socket.io';
-import { AiService } from './ai.service';
-import { WsJwtGuard } from 'src/authentication/guards/ws-jwt.guard';
 
-@WebSocketGateway({ cors: { origin: '*', allowedHeaders: ['Authorization'] } })
-export class AiGateway implements OnGatewayConnection, OnGatewayDisconnect {
+import { Server, Socket } from 'socket.io';
+
+import { WsJwtGuard } from 'src/authentication/guards/ws-jwt.guard';
+import { SocketAuthMiddleware } from 'src/authentication/middlewares/ws.middleware';
+
+import { AiService } from './ai.service';
+
+@WebSocketGateway({ cors: { origin: '*' } })
+@UseGuards(WsJwtGuard)
+export class AiGateway
+  implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
+{
   @WebSocketServer()
   server: Server;
 
-  private readonly logger = new Logger(AiGateway.name);
-
   constructor(private readonly aiService: AiService) {}
 
-  @UseGuards(WsJwtGuard)
+  afterInit(client: Socket) {
+    client.use(SocketAuthMiddleware() as any);
+  }
+
   handleConnection(client: Socket) {
-    this.logger.log(`Client connected: ${client.id}`);
+    console.log(`Client connected: ${client.id}`);
   }
 
   handleDisconnect(client: Socket) {
-    this.logger.log(`Client disconnected: ${client.id}`);
+    console.log(`Client disconnected: ${client.id}`);
   }
 
-  @UseGuards(WsJwtGuard)
   @SubscribeMessage('send_message')
   async handleSendMessage(
     @MessageBody() payload: { threadId: string; message: string },
@@ -44,24 +53,20 @@ export class AiGateway implements OnGatewayConnection, OnGatewayDisconnect {
       );
       client.emit('assistant_message', { message: response.assistantMessage });
     } catch (error) {
-      this.logger.error('Error handling send_message', error);
       client.emit('error', { message: 'Failed to send message.' });
     }
   }
 
-  @UseGuards(WsJwtGuard)
   @SubscribeMessage('create_thread')
   async handleCreateThread(@ConnectedSocket() client: Socket) {
     try {
       const thread = await this.aiService.createThread();
       client.emit('thread_created', { threadId: thread.id });
     } catch (error) {
-      this.logger.error('Error handling create_thread', error);
       client.emit('error', { message: 'Failed to create thread.' });
     }
   }
 
-  @UseGuards(WsJwtGuard)
   @SubscribeMessage('get_messages')
   async handleGetMessages(
     @MessageBody() payload: { threadId: string },
@@ -72,7 +77,6 @@ export class AiGateway implements OnGatewayConnection, OnGatewayDisconnect {
       const messages = await this.aiService.getMessagesFromThread(threadId);
       client.emit('messages', { messages });
     } catch (error) {
-      this.logger.error('Error handling get_messages', error);
       client.emit('error', { message: 'Failed to fetch messages.' });
     }
   }
