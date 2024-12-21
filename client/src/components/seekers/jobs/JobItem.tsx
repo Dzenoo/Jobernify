@@ -54,7 +54,7 @@ const JobItem: React.FC<JobItemProps> = ({
   const expirationDate = formatDate(expiration_date);
   const createdTime = getTime(createdAt);
 
-  let FooterInfoData = [
+  let JobInfoData = [
     {
       id: '1',
       data: findLocationData(location),
@@ -135,7 +135,7 @@ const JobItem: React.FC<JobItemProps> = ({
         )}
         <CardFooter className="border-t border-gray-100 dark:border-[#5c5c5c] pt-6 flex items-center justify-between gap-3 flex-wrap">
           <div className="flex items-center gap-6 justify-between flex-wrap">
-            {FooterInfoData.map((data) =>
+            {JobInfoData.map((data) =>
               renderIconText({
                 ...data,
                 tooltip: true,

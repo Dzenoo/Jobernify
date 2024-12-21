@@ -50,13 +50,7 @@ const AiChat: React.FC<AiChatProps> = ({ socket }) => {
   const isUser = (role: string) => (role === 'user' ? true : false);
 
   if (messages?.length === 0) {
-    return (
-      <div className="pt-10 flex justify-center items-center text-center">
-        <p className="text-sm italic text-muted-foreground">
-          Type a question and press enter to start a conversation with the AI.
-        </p>
-      </div>
-    );
+    return;
   }
 
   return (
