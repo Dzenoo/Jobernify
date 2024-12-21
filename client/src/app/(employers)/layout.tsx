@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 
 import { QueryContextProvider } from '@/context/react-query-client';
-import AppThemeProvider from '@/context/app-theme-provider';
+import { AppThemeProvider } from '@/context/app-theme-provider';
 
 import { Toaster } from '@/components/ui/toaster';
 
@@ -13,6 +13,10 @@ import Footer from '@/components/layout/footer/Footer';
 import '../globals.css';
 
 const Navbar = dynamic(() => import('@/components/layout/navbar/Navbar'), {
+  ssr: false,
+});
+
+const Ai = dynamic(() => import('@/components/shared/ai/Ai'), {
   ssr: false,
 });
 
@@ -51,7 +55,10 @@ export default function EmployersLayout({
           <AppThemeProvider>
             <div className="flex flex-col min-h-screen">
               <Navbar href="/seekers" />
-              <main className="flex-1">{children}</main>
+              <main className="flex-1">
+                {children}
+                <Ai />
+              </main>
               <Footer />
             </div>
             <Toaster />

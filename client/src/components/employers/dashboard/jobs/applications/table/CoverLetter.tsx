@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ReactMarkdown from 'react-markdown';
+
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
@@ -15,9 +17,10 @@ const CoverLetter: React.FC<CoverLetterProps> = ({ cover_letter }) => {
           Read
         </Button>
       </DialogTrigger>
-      <DialogContent>
-        <h2 className="text-lg font-semibold">Cover Letter</h2>
-        <p className="mt-2">{cover_letter}</p>
+      <DialogContent className="p-10">
+        <div className="overflow-auto max-h-96 hide-scrollbar">
+          <ReactMarkdown>{cover_letter}</ReactMarkdown>
+        </div>
       </DialogContent>
     </Dialog>
   ) : (
