@@ -75,6 +75,17 @@ export class JobsController {
     return await this.jobsService.getAll(query);
   }
 
+  @Throttle({ default: { limit: 20, ttl: 60000 } })
+  @Post('/:jobId/generate-cover-letter')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Seeker)
+  async generateCoverLetter(
+    @Param('jobId') jobId: string,
+    @User('userId') userId: string,
+  ) {
+    return await this.jobsService.createCoverLetter(jobId, userId);
+  }
+
   @Throttle({ default: { limit: 50, ttl: 60000 } })
   @Get('/:jobId')
   @UseGuards(JwtAuthGuard, RolesGuard)

@@ -2,6 +2,7 @@ import { forwardRef, Module } from '@nestjs/common';
 
 import { MongooseModule } from '@nestjs/mongoose';
 import { NodemailerModule } from 'src/common/email/nodemailer.module';
+import { AiModule } from 'src/ai/ai.module';
 import { SeekersModule } from '../seekers/seekers.module';
 import { EmployersModule } from '../employers/employers.module';
 import { ApplicationsModule } from '../applications/applications.module';
@@ -14,6 +15,7 @@ import { Job, JobSchema } from './schemas/job.schema';
   imports: [
     MongooseModule.forFeature([{ name: Job.name, schema: JobSchema }]),
     NodemailerModule,
+    AiModule,
     forwardRef(() => SeekersModule),
     forwardRef(() => EmployersModule),
     forwardRef(() => ApplicationsModule),

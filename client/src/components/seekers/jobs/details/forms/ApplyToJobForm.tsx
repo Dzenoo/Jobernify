@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { ScaleLoader } from 'react-spinners';
 import { queryClient } from '@/context/react-query-client';
+import { Sparkles } from 'lucide-react';
 
 import { useUploads } from '@/hooks/core/useUploads.hook';
 import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
@@ -138,7 +139,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
           <FormItem>
             <div
               {...getRootProps()}
-              className="border-4 border-dashed border-gray-300 rounded-md p-4 cursor-pointer transition-colors hover:border-blue-600 h-40 flex items-center justify-center"
+              className="border-4 border-dashed border-gray-300 rounded-md p-4 cursor-pointer transition-colors hover:border-blue-600 h-40 flex items-center justify-center text-center"
             >
               <input {...getInputProps()} />
               {selectedFile ? (
@@ -158,6 +159,9 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
             <FormItem>
               <div className="flex justify-between gap-2 items-center flex-wrap">
                 <FormLabel>Cover Letter (optional)</FormLabel>
+                <Button type="button" variant="outline">
+                  <Sparkles className="w-5 h-5 mr-2 text-indigo-500" /> Generate
+                </Button>
               </div>
               <FormControl>
                 <Textarea

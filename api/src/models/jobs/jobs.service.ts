@@ -27,6 +27,7 @@ import { EmployersService } from '../employers/employers.service';
 import { SeekersService } from '../seekers/seekers.service';
 import { ApplicationsService } from '../applications/applications.service';
 import { NodemailerService } from 'src/common/email/nodemailer.service';
+import { AiService } from 'src/ai/ai.service';
 
 @Injectable()
 export class JobsService {
@@ -38,6 +39,7 @@ export class JobsService {
     @Inject(forwardRef(() => ApplicationsService))
     private readonly applicationsService: ApplicationsService,
     private readonly emailService: NodemailerService,
+    private readonly aiService: AiService,
     @InjectModel(Job.name) private readonly jobModel: Model<Job>,
   ) {}
 
@@ -73,6 +75,58 @@ export class JobsService {
 
   async aggregate(pipeline: any): Promise<any[]> {
     return await this.jobModel.aggregate(pipeline).exec();
+  }
+
+  async createCoverLetter(jobId: string, seekerId: string) {
+    const job = await this.findOneById(
+      jobId,
+      'title description overview skills',
+    );
+
+    if (!job) {
+      throw new NotFoundException(
+        'Job not found. Could not create cover letter.',
+      );
+    }
+
+    const seeker = await this.seekersService.findOneById(
+      seekerId,
+      'first_name last_name experience education github linkedin portfolio skills',
+    );
+
+    if (!seeker) {
+      throw new NotFoundException(
+        'Seeker not found. Could not create cover letter.',
+      );
+    }
+
+    const jobData = {
+      title: job.title,
+      description: job.description,
+      overview: job.overview,
+      skills: job.skills,
+    };
+
+    const seekerData = {
+      first_name: seeker.first_name,
+      last_name: seeker.last_name,
+      experience: seeker.experience,
+      education: seeker.education,
+      github: seeker.github,
+      linkedin: seeker.linkedin,
+      portfolio: seeker.portfolio,
+      skills: seeker.skills,
+    };
+
+    const coverLetter = await this.aiService.generateCoverLetter({
+      jobData,
+      seekerData,
+    });
+
+    return {
+      coverLetter,
+      statusCode: HttpStatus.CREATED,
+    };
   }
 
   async createOne(
