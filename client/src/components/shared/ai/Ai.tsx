@@ -15,6 +15,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
 
 type AiProps = {
   isSeeker: boolean;
@@ -36,7 +37,9 @@ const Ai: React.FC<AiProps> = ({ isSeeker }) => {
   return (
     <Sheet>
       <SheetTrigger onClick={connect}>
-        <Bot />
+        <TooltipWrapper tooltip="JobernifyAI">
+          <Bot />
+        </TooltipWrapper>
       </SheetTrigger>
       <SheetContent className="p-4 flex flex-col">
         <SheetHeader className="pt-5">

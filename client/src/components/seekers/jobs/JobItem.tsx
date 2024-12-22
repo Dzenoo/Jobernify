@@ -19,17 +19,12 @@ import { Job } from '@/types';
 
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import {
-  TooltipProvider,
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from '@/components/ui/tooltip';
-import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
 } from '@/components/ui/card';
+import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
 
 type JobItemProps = {
   job: Job;
@@ -91,18 +86,13 @@ const JobItem: React.FC<JobItemProps> = ({
               </Link>
               <div className="flex flex-col gap-[3px]">
                 <div>
-                  <TooltipProvider delayDuration={400}>
-                    <Tooltip>
-                      <TooltipTrigger>
-                        <Link href={`/jobs/${_id}`}>
-                          <h1 className="transition-all hover:text-blue-700 text-base-black max-sm:text-lg">
-                            {title}
-                          </h1>
-                        </Link>
-                      </TooltipTrigger>
-                      <TooltipContent side="right">View Job</TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
+                  <TooltipWrapper tooltip={'View Job'} side="right">
+                    <Link href={`/jobs/${_id}`}>
+                      <h1 className="transition-all hover:text-blue-700 text-base-black max-sm:text-lg">
+                        {title}
+                      </h1>
+                    </Link>
+                  </TooltipWrapper>
                 </div>
                 <div className="flex items-center gap-3 max-sm:flex-wrap">
                   <div>
