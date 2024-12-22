@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Trash } from 'lucide-react';
 import { useMutation } from '@tanstack/react-query';
 
 import { deleteSeekerProfile } from '@/lib/actions/seekers.actions';
@@ -7,31 +8,11 @@ import { deleteSeekerProfile } from '@/lib/actions/seekers.actions';
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import { useToast } from '@/components/ui/use-toast';
-import { Button } from '@/components/ui/button';
-import {
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-  DialogDescription,
-} from '@/components/ui/dialog';
-import {
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-} from '@/components/ui/drawer';
+import AlertDialogWrapper from '@/components/ui/alert-dialog-wrapper';
 
-type DeleteSeekerProfileProps = {
-  closeDialog: () => void;
-  isDialog: boolean;
-};
+type DeleteSeekerProfileProps = {};
 
-const DeleteSeekerProfile: React.FC<DeleteSeekerProfileProps> = ({
-  closeDialog,
-  isDialog,
-}) => {
+const DeleteSeekerProfile: React.FC<DeleteSeekerProfileProps> = ({}) => {
   const { toast } = useToast();
   const { deleteCookieHandler } = useAuthentication();
   const { token } = useAuthentication().getCookieHandler();
@@ -53,45 +34,22 @@ const DeleteSeekerProfile: React.FC<DeleteSeekerProfileProps> = ({
     e.preventDefault();
     await deleteSeekerProfileMutate();
     deleteCookieHandler();
-    closeDialog();
   };
 
-  const title = 'Delete Profile';
-  const description =
-    'Deleting your account will remove all your information, including applications and jobs. Employers will no longer be able to contact you. Are you sure you want to proceed?';
-
-  if (isDialog) {
-    return (
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
-        </DialogHeader>
-        <DialogFooter>
-          <Button
-            className="w-full"
-            variant="destructive"
-            onClick={onDeleteAccount}
-          >
-            Delete
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    );
-  }
-
   return (
-    <DrawerContent>
-      <DrawerHeader>
-        <DrawerTitle>{title}</DrawerTitle>
-        <DrawerDescription>{description}</DrawerDescription>
-      </DrawerHeader>
-      <DrawerFooter className="pt-2">
-        <Button variant="destructive" onClick={onDeleteAccount}>
-          Delete
-        </Button>
-      </DrawerFooter>
-    </DrawerContent>
+    <AlertDialogWrapper
+      title="Delete Profile"
+      description="Deleting your account will remove all your information, including applications and jobs. Employers will no longer be able to contact you. Are you sure you want to proceed?"
+      onAction={onDeleteAccount}
+      actionText="Delete"
+      cancelText="Cancel"
+      buttonTriggerProps={{ variant: 'destructive' }}
+      triggerContent={
+        <div className="flex gap-2 items-center">
+          Delete Profile <Trash />
+        </div>
+      }
+    />
   );
 };
 

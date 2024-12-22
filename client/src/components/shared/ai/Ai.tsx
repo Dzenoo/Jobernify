@@ -32,7 +32,7 @@ const Ai: React.FC<AiProps> = ({ isSeeker }) => {
 
   const sheetDescription = isSeeker
     ? 'Chat with JobernifyAI for job recommendations, career advice, and more.'
-    : 'Chat with JobernifyAI for finding best fit seekers for your job, advice, and more.';
+    : 'Chat with JobernifyAI for finding best fit seekers for your job, hiring advice, and more.';
 
   return (
     <Sheet>

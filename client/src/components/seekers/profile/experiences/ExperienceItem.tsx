@@ -11,6 +11,8 @@ import { formatDate } from '@/lib/utils';
 
 import { Experience } from '@/types';
 
+import AlertDialogWrapper from '@/components/ui/alert-dialog-wrapper';
+import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 
 type ExperienceItemProps = {
@@ -51,12 +53,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
   });
 
   const handleDeleteExperience = async () => {
-    const confirmDelete = window.confirm(
-      'Are you sure you want to delete this experience?',
-    );
-    if (confirmDelete) {
-      await deleteExperienceMutate();
-    }
+    await deleteExperienceMutate();
   };
 
   const formattedStartDate = formatDate(startDate);
@@ -78,13 +75,19 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
         <InfoSection location={location} position={position} level={level} />
       </div>
       {userType === 'seeker' && (
-        <div className="flex gap-2">
-          <button onClick={onEdit}>
+        <div>
+          <Button variant="ghost" onClick={onEdit}>
             <Edit />
-          </button>
-          <button onClick={handleDeleteExperience}>
-            <Trash color="red" />
-          </button>
+          </Button>
+          <AlertDialogWrapper
+            title="Delete Experience"
+            description="This will delete your experience and remove it from your profile."
+            onAction={handleDeleteExperience}
+            actionText="Delete"
+            cancelText="Cancel"
+            triggerContent={<Trash color="red" />}
+            buttonTriggerProps={{ variant: 'ghost' }}
+          />
         </div>
       )}
     </div>

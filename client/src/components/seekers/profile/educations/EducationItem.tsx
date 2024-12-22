@@ -13,6 +13,9 @@ import { queryClient } from '@/context/react-query-client';
 
 import { Education } from '@/types';
 
+import AlertDialogWrapper from '@/components/ui/alert-dialog-wrapper';
+import { Button } from '@/components/ui/button';
+
 export type EducationItemProps = {
   onEdit: () => void;
 } & Education;
@@ -46,12 +49,7 @@ const EducationItem: React.FC<EducationItemProps> = ({
   });
 
   const handleDeleteEducation = async () => {
-    const confirmDelete = window.confirm(
-      'Are you sure you want to delete this education entry?',
-    );
-    if (confirmDelete) {
-      await deleteEducationMutate();
-    }
+    await deleteEducationMutate();
   };
 
   const graduationDateFormatted = formatDate(graduationDate);
@@ -80,17 +78,19 @@ const EducationItem: React.FC<EducationItemProps> = ({
           </div>
         </div>
         {userType === 'seeker' && (
-          <div className="flex items-center gap-2">
-            <div>
-              <button onClick={onEdit}>
-                <Edit />
-              </button>
-            </div>
-            <div>
-              <button onClick={handleDeleteEducation}>
-                <Trash color="red" />
-              </button>
-            </div>
+          <div>
+            <Button variant="ghost" onClick={onEdit}>
+              <Edit />
+            </Button>
+            <AlertDialogWrapper
+              title="Delete Education"
+              description="This will delete your education and remove it from your profile."
+              onAction={handleDeleteEducation}
+              actionText="Delete"
+              cancelText="Cancel"
+              triggerContent={<Trash color="red" />}
+              buttonTriggerProps={{ variant: 'ghost' }}
+            />
           </div>
         )}
       </div>

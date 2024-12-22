@@ -21,7 +21,7 @@ const useGetEmployer = (params?: { [key: string]: string }) => {
         type: 'jobs',
       });
     },
-    queryKey: ['profile'],
+    queryKey: ['profile', { params }],
     enabled: !!token,
   });
 };

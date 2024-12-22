@@ -32,6 +32,11 @@ const DashboardJobsPage = ({
   } = useGetEmployer(searchParams);
 
   const isLoadingJobs = isLoading || isFetching || isRefetching;
+
+  if (typeof window === 'undefined' || isLoadingJobs) {
+    return <LoadingDashboardJobs />;
+  }
+
   const totalJobs = fetchedEmployer?.counts.totalJobs || 0;
   const itemsPerPage = 10;
   const currentPage = Number(searchParams.page) || 1;
@@ -55,15 +60,11 @@ const DashboardJobsPage = ({
         <SearchJobs query={searchParams.query} sort={searchParams.sort} />
       </div>
 
-      {isLoadingJobs ? (
-        <LoadingDashboardJobs />
-      ) : (
-        <DashboardEmployerJobs
-          jobs={fetchedEmployer?.employer.jobs || []}
-          currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
-        />
-      )}
+      <DashboardEmployerJobs
+        jobs={fetchedEmployer?.employer.jobs || []}
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+      />
 
       {totalJobs > 10 && (
         <PaginatedList

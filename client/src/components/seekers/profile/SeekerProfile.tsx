@@ -1,10 +1,6 @@
 'use client';
 
-import React, { Fragment, useState } from 'react';
-
-import { Trash } from 'lucide-react';
-
-import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
+import React, { Fragment } from 'react';
 
 import { Seeker } from '@/types';
 
@@ -17,56 +13,19 @@ import DeleteSeekerProfile from './DeleteSeekerProfile';
 import UploadSeekerImage from './UploadSeekerImage';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Dialog } from '@/components/ui/dialog';
-import { Drawer } from '@/components/ui/drawer';
 
 type SeekerProfileProps = {
   seeker: Seeker;
 };
 
 const SeekerProfile: React.FC<SeekerProfileProps> = React.memo(({ seeker }) => {
-  const isSmall = useMediaQuery('(min-width: 650px)');
-  const [isDeleteProfileOpen, setIsDeleteProfileOpen] = useState(false);
-
   return (
     <Fragment>
-      {isSmall && (
-        <Dialog
-          onOpenChange={setIsDeleteProfileOpen}
-          open={isDeleteProfileOpen}
-        >
-          <DeleteSeekerProfile
-            closeDialog={() => setIsDeleteProfileOpen(false)}
-            isDialog={true}
-          />
-        </Dialog>
-      )}
-      {!isSmall && (
-        <Drawer
-          onOpenChange={setIsDeleteProfileOpen}
-          open={isDeleteProfileOpen}
-        >
-          <DeleteSeekerProfile
-            closeDialog={() => setIsDeleteProfileOpen(false)}
-            isDialog={false}
-          />
-        </Drawer>
-      )}
       <Card>
         <CardHeader>
           <div className="flex justify-between items-start gap-5">
             <UploadSeekerImage image={seeker?.image} />
-            <Button
-              className="flex items-center gap-3"
-              variant="destructive"
-              onClick={() => setIsDeleteProfileOpen(true)}
-            >
-              <div className="max-sm:hidden whitespace-nowrap">
-                Delete Profile
-              </div>
-              <Trash color="#fff" />
-            </Button>
+            <DeleteSeekerProfile />
           </div>
         </CardHeader>
         <CardContent className="flex flex-col gap-10">

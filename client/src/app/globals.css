@@ -112,6 +112,10 @@
     display: none;
   }
 
+  .custom-scrollbar {
+    scrollbar-width: thin;
+  }
+
   .hide-scrollbar {
     scrollbar-width: none;
   }

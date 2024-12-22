@@ -3,7 +3,14 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 
 type CoverLetterProps = {
   cover_letter: string;
@@ -18,6 +25,12 @@ const CoverLetter: React.FC<CoverLetterProps> = ({ cover_letter }) => {
         </Button>
       </DialogTrigger>
       <DialogContent className="p-10">
+        <DialogHeader>
+          <DialogTitle>Cover Letter</DialogTitle>
+          <DialogDescription>
+            Read the cover letter for this job application
+          </DialogDescription>
+        </DialogHeader>
         <div className="overflow-auto max-h-96 hide-scrollbar">
           <ReactMarkdown>{cover_letter}</ReactMarkdown>
         </div>

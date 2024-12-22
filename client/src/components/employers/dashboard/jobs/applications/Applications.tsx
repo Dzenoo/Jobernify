@@ -66,7 +66,9 @@ const Applications: React.FC<ApplicationsProps> = ({
       <TableHeader>
         <TableRow>
           {columns.map((column) => (
-            <TableHead key={column}>{column}</TableHead>
+            <TableHead className="whitespace-nowrap" key={column}>
+              {column}
+            </TableHead>
           ))}
         </TableRow>
       </TableHeader>
