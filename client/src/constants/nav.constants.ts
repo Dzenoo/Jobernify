@@ -1,4 +1,4 @@
-import { User, LayoutDashboard } from 'lucide-react';
+import { User, Users, LayoutDashboard } from 'lucide-react';
 
 export const NavbarLandingLinks = [
   { id: 1, title: 'Home', href: 'hero' },
@@ -17,5 +17,6 @@ export const SeekersNavbarActions = [
 ];
 
 export const EmployersNavbarActions = [
-  { id: '3', href: '/dashboard', icon: LayoutDashboard, tooltip: 'Dashboard' },
+  { id: '1', href: '/seekers', icon: Users, tooltip: 'Seekers' },
+  { id: '2', href: '/dashboard', icon: LayoutDashboard, tooltip: 'Dashboard' },
 ];
