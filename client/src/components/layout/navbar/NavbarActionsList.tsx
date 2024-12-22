@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/tooltip';
 
 type NavbarActionsListProps = {
+  isSeeker: boolean;
   data: {
     id: string;
     href: string;
@@ -25,13 +26,14 @@ type NavbarActionsListProps = {
 };
 
 const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
+  isSeeker,
   data,
   logout,
   pathname,
 }) => {
   return (
     <ul className="flex items-center gap-4">
-      <Ai />
+      <Ai isSeeker={isSeeker} />
       {Array.from(data).map(({ id, href, icon, tooltip }) => (
         <TooltipProvider key={id} delayDuration={400}>
           <Tooltip>

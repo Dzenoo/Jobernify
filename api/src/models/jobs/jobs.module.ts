@@ -15,7 +15,7 @@ import { Job, JobSchema } from './schemas/job.schema';
   imports: [
     MongooseModule.forFeature([{ name: Job.name, schema: JobSchema }]),
     NodemailerModule,
-    AiModule,
+    forwardRef(() => AiModule),
     forwardRef(() => SeekersModule),
     forwardRef(() => EmployersModule),
     forwardRef(() => ApplicationsModule),

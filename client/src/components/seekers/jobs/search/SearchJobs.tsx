@@ -39,7 +39,7 @@ const SearchJobs: React.FC<SearchJobsProps> = ({ query, sort }) => {
   return (
     <div className="flex flex-col gap-5">
       <div className="shadow-lg rounded-lg w-full h-full bg-gradient-to-br from-[#0c39b3] via-[#02fcfc8c] to-indigo-700">
-        <div className="flex flex-col gap-3 p-8 rounded-md backdrop-brightness-75">
+        <div className="flex flex-col p-5 rounded-md backdrop-brightness-75">
           <h1 className="text-white font-semibold text-xl">
             Unlock Your Dream Career
           </h1>

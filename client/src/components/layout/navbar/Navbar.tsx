@@ -73,6 +73,7 @@ const Navbar: React.FC<{ href?: string }> = ({ href }) => {
         {isAuthenticated ? (
           <>
             <NavbarActionsList
+              isSeeker={isSeeker}
               pathname={pathname}
               logout={deleteCookieHandler}
               data={isSeeker ? SeekersNavbarActions : EmployersNavbarActions}

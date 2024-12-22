@@ -16,7 +16,11 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 
-const Ai: React.FC = () => {
+type AiProps = {
+  isSeeker: boolean;
+};
+
+const Ai: React.FC<AiProps> = ({ isSeeker }) => {
   const { connect, disconnect, socket } = useWebSocket({
     url: 'ws://localhost:8080',
   });
@@ -24,6 +28,10 @@ const Ai: React.FC = () => {
   useEffect(() => {
     return () => disconnect();
   }, [disconnect]);
+
+  const sheetDescription = isSeeker
+    ? 'Chat with JobernifyAI for job recommendations, career advice, and more.'
+    : 'Chat with JobernifyAI for finding best fit seekers for your job, advice, and more.';
 
   return (
     <Sheet>
@@ -37,8 +45,7 @@ const Ai: React.FC = () => {
             JobernifyAI
           </SheetTitle>
           <SheetDescription className="text-left">
-            Chat with JobernifyAI for job recommendations, career advice, and
-            more.
+            {sheetDescription}
           </SheetDescription>
         </SheetHeader>
         <AiContainer socket={socket} />

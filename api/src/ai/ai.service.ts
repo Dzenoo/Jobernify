@@ -1,13 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 
 import OpenAI from 'openai';
+
+import { ConfigService } from '@nestjs/config';
+import { JobsService } from 'src/models/jobs/jobs.service';
 
 @Injectable()
 export class AiService {
   private readonly openai: OpenAI;
 
-  constructor(private readonly configService: ConfigService) {
+  constructor(
+    private readonly configService: ConfigService,
+    @Inject(forwardRef(() => JobsService))
+    private readonly jobsService: JobsService,
+  ) {
     this.openai = new OpenAI({
       apiKey: this.configService.get('OPENAI_API_KEY'),
       project: this.configService.get('OPENAI_PROJECT_ID'),
@@ -66,23 +72,20 @@ export class AiService {
     return thread;
   }
 
-  async addMessageToThread(threadId: string, message: string) {
+  async addMessageToThread(threadId: string, userMessage: string) {
     const messageResponse = await this.openai.beta.threads.messages.create(
       threadId,
       {
         role: 'user',
-        content: message,
+        content: userMessage,
       },
     );
 
-    const assistant = await this.getAssistant();
-
     await this.openai.beta.threads.runs.createAndPoll(threadId, {
-      assistant_id: assistant.id,
+      assistant_id: (await this.getAssistant()).id,
     });
 
     const messages = await this.getMessagesFromThread(threadId);
-
     const assistantMessageObj: any = messages
       .filter((msg) => msg.role === 'assistant')
       .pop();

@@ -32,6 +32,8 @@ import { AiService } from 'src/ai/ai.service';
 @Injectable()
 export class JobsService {
   constructor(
+    @Inject(forwardRef(() => AiService))
+    private readonly aiService: AiService,
     @Inject(forwardRef(() => SeekersService))
     private readonly seekersService: SeekersService,
     @Inject(forwardRef(() => EmployersService))
@@ -39,7 +41,6 @@ export class JobsService {
     @Inject(forwardRef(() => ApplicationsService))
     private readonly applicationsService: ApplicationsService,
     private readonly emailService: NodemailerService,
-    private readonly aiService: AiService,
     @InjectModel(Job.name) private readonly jobModel: Model<Job>,
   ) {}
 
