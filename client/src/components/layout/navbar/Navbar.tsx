@@ -14,18 +14,13 @@ import {
   SeekersNavbarLinks,
 } from '@/constants';
 
-import { Button } from '@/components/ui/button';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-
 import Logo from './Logo';
 import NavbarActionsList from './NavbarActionsList';
 import NavbarLinksList from './NavbarLinksList';
+
+import { Button } from '@/components/ui/button';
+import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const AuthenticationDivLinks: React.FC = () => {
   return (
@@ -78,30 +73,23 @@ const Navbar: React.FC<{ href?: string }> = ({ href }) => {
               logout={deleteCookieHandler}
               data={isSeeker ? SeekersNavbarActions : EmployersNavbarActions}
             />
-            <TooltipProvider delayDuration={400}>
-              <Tooltip>
-                <TooltipTrigger>
-                  <Link href={isSeeker ? '/profile' : '/dashboard/settings'}>
-                    <Avatar>
-                      <AvatarImage
-                        className="object-cover"
-                        src={getImageUrl(
-                          isSeeker
-                            ? fetchedProfile?.seeker?.image
-                            : fetchedProfile?.employer?.image,
-                        )}
-                      />
-                      <AvatarFallback>
-                        <ScaleLoader height={10} />
-                      </AvatarFallback>
-                    </Avatar>
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent>
-                  {isSeeker ? 'Profile' : 'Dashboard'}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <TooltipWrapper tooltip={isSeeker ? 'Profile' : 'Dashboard'}>
+              <Link href={isSeeker ? '/profile' : '/dashboard/settings'}>
+                <Avatar>
+                  <AvatarImage
+                    className="object-cover"
+                    src={getImageUrl(
+                      isSeeker
+                        ? fetchedProfile?.seeker?.image
+                        : fetchedProfile?.employer?.image,
+                    )}
+                  />
+                  <AvatarFallback>
+                    <ScaleLoader height={10} />
+                  </AvatarFallback>
+                </Avatar>
+              </Link>
+            </TooltipWrapper>
           </>
         ) : (
           <AuthenticationDivLinks />

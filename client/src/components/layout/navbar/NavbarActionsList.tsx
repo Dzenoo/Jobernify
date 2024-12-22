@@ -6,12 +6,7 @@ import { LogOut, LucideIcon } from 'lucide-react';
 import Ai from '@/components/shared/ai/Ai';
 import Themes from './Themes';
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
 
 type NavbarActionsListProps = {
   isSeeker: boolean;
@@ -35,22 +30,17 @@ const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
     <ul className="flex items-center gap-4">
       <Ai isSeeker={isSeeker} />
       {Array.from(data).map(({ id, href, icon, tooltip }) => (
-        <TooltipProvider key={id} delayDuration={400}>
-          <Tooltip>
-            <TooltipTrigger>
-              <Link
-                key={id}
-                href={href}
-                className={`flex items-center gap-3 transition-colors hover:text-blue-700 ${
-                  pathname === href && 'text-[#0066ff]'
-                }`}
-              >
-                {React.createElement(icon)}
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent>{tooltip}</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <TooltipWrapper key={id} tooltip={tooltip}>
+          <Link
+            key={id}
+            href={href}
+            className={`flex items-center gap-3 transition-colors hover:text-blue-700 ${
+              pathname === href && 'text-[#0066ff]'
+            }`}
+          >
+            {React.createElement(icon)}
+          </Link>
+        </TooltipWrapper>
       ))}
       <div>
         <Themes />

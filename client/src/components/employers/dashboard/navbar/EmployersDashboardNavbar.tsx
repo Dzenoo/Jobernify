@@ -12,13 +12,8 @@ import {
   PanelRight,
 } from 'lucide-react';
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
+import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
 
 const EmployersDashboardNavbar: React.FC = () => {
   const pathname = usePathname();
@@ -69,25 +64,18 @@ const EmployersDashboardNavbar: React.FC = () => {
       >
         <div className="flex flex-col gap-3">
           {NavbarActionsLinks.map(({ tooltip, id, icon, href }) => (
-            <TooltipProvider delayDuration={400} key={id}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link
-                    href={href}
-                    className={`transition dark:hover:bg-[#252525] p-3 rounded-lg hover:bg-gray-100 ${
-                      pathname === href &&
-                      'bg-blue-100 dark:bg-[#0066ff] overflow-auto'
-                    }`}
-                    onClick={() => setIsDrawerOpen(false)}
-                  >
-                    {icon}
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="right">
-                  <p>{tooltip}</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <TooltipWrapper key={id} tooltip={tooltip} side="right">
+              <Link
+                href={href}
+                className={`transition dark:hover:bg-[#252525] p-3 rounded-lg hover:bg-gray-100 ${
+                  pathname === href &&
+                  'bg-blue-100 dark:bg-[#0066ff] overflow-auto'
+                }`}
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                {icon}
+              </Link>
+            </TooltipWrapper>
           ))}
         </div>
       </div>

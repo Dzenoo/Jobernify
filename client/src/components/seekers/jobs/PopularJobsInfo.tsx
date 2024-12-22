@@ -11,12 +11,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
 
 type PopularsJobsInfoProps = {
   jobs: {
@@ -50,22 +45,15 @@ const PopularJobsInfo: React.FC<PopularsJobsInfoProps> = React.memo(
         {jobs && jobs.length > 0 && (
           <CardContent className="pt-0">
             {jobs.map(({ _id, title }, index) => (
-              <TooltipProvider key={_id} delayDuration={400}>
-                <Tooltip>
-                  <TooltipTrigger asChild className="w-full">
-                    <Button
-                      variant="outline"
-                      className={`w-full ${
-                        index < jobs.length - 1 ? 'mb-2' : ''
-                      }`}
-                      onClick={() => handleCopyPopularJobTitle(title)}
-                    >
-                      {title}
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Copy to clipboard</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <TooltipWrapper key={_id} tooltip={title}>
+                <Button
+                  variant="outline"
+                  className={`w-full ${index < jobs.length - 1 ? 'mb-2' : ''}`}
+                  onClick={() => handleCopyPopularJobTitle(title)}
+                >
+                  {title}
+                </Button>
+              </TooltipWrapper>
             ))}
           </CardContent>
         )}
