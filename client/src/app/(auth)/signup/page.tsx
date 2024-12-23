@@ -6,7 +6,7 @@ import SelectAccount from '@/components/auth/signup/SelectAccount';
 
 const SignupPage: React.FC = () => {
   return (
-    <section className="py-16 flex justify-center h-screen">
+    <section className="h-screen flex justify-center items-center">
       <SelectAccount />
     </section>
   );

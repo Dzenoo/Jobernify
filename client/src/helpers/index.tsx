@@ -107,7 +107,7 @@ export function renderSignupTabCard<T extends RenderSignupTabCardProps>({
     <div
       className={`${
         selected && 'bg-blue-100'
-      } bg-white border rounded-lg p-5 border-gray-100 cursor-pointer flex flex-col gap-7 w-full transition hover:bg-gray-50`}
+      } bg-white border rounded-lg p-5 border-gray-100 cursor-pointer flex flex-col gap-7 w-full transition hover:bg-gray-50 hover:scale-105`}
       onClick={handler}
       key={text}
     >

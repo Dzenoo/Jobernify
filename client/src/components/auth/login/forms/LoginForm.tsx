@@ -109,7 +109,7 @@ const LoginForm: React.FC = () => {
           </Button>
           <p className="text-muted-foreground">Or</p>
           <Button
-            variant="outline"
+            variant="default"
             type="button"
             onClick={() => handleGoogleSignIn()}
           >

@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
 
-import dynamic from 'next/dynamic';
-
 import { QueryContextProvider } from '@/context/react-query-client';
 
 import { Toaster } from '@/components/ui/toaster';
@@ -9,10 +7,6 @@ import { Toaster } from '@/components/ui/toaster';
 import { GeistSans } from 'geist/font/sans';
 
 import '../globals.css';
-
-const Navbar = dynamic(() => import('@/components/layout/navbar/Navbar'), {
-  ssr: false,
-});
 
 export const metadata: Metadata = {
   icons: {
@@ -46,7 +40,6 @@ export default function AuthLayout({
     <QueryContextProvider>
       <html lang="en">
         <body className={GeistSans.className}>
-          <Navbar />
           <main>{children}</main>
           <Toaster />
         </body>

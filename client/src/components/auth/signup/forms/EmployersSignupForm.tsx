@@ -78,12 +78,23 @@ const EmployersSignupForm: React.FC = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="max-h-[40em] overflow-y-auto space-y-8 py-2 px-5"
+      >
+        <Button
+          variant="default"
+          className="w-full"
+          type="button"
+          onClick={() => handleEmployerGoogleSignUp()}
+        >
+          Register With Google
+        </Button>
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="w-full">
               <FormLabel>Name Of Company</FormLabel>
               <FormControl>
                 <Input {...field} placeholder="Name" />
@@ -207,28 +218,18 @@ const EmployersSignupForm: React.FC = () => {
             </FormItem>
           )}
         />
-        <div className="flex flex-col text-center gap-3">
-          <Button
-            variant="default"
-            type="submit"
-            disabled={!form.formState.isValid || form.formState.isSubmitting}
-            className="w-full"
-          >
-            {form.formState.isSubmitting ? (
-              <ScaleLoader color="#fff" height={10} />
-            ) : (
-              'Register'
-            )}
-          </Button>
-          <p className="text-muted-foreground">Or</p>
-          <Button
-            variant="outline"
-            type="button"
-            onClick={() => handleEmployerGoogleSignUp()}
-          >
-            Register With With Google
-          </Button>
-        </div>
+        <Button
+          variant="default"
+          type="submit"
+          disabled={!form.formState.isValid || form.formState.isSubmitting}
+          className="w-full"
+        >
+          {form.formState.isSubmitting ? (
+            <ScaleLoader color="#fff" height={10} />
+          ) : (
+            'Register'
+          )}
+        </Button>
       </form>
     </Form>
   );

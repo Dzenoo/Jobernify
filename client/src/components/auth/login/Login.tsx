@@ -11,12 +11,14 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import Logo from '@/components/layout/navbar/Logo';
 
 const Login: React.FC = () => {
   return (
     <Card className="flex flex-col sm:w-[450px]">
-      <CardHeader>
-        <CardTitle>Login to Jobernify</CardTitle>
+      <CardHeader className="space-y-5">
+        <Logo />
+        <CardTitle>Login</CardTitle>
         <CardDescription>
           Welcome back! Please enter your email and password to access your
           account.

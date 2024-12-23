@@ -147,11 +147,11 @@ const SeekersSignupForm: React.FC = () => {
           </Button>
           <p className="text-muted-foreground">Or</p>
           <Button
-            variant="outline"
+            variant="default"
             type="button"
             onClick={() => handleSeekerGoogleSignUp()}
           >
-            Register With With Google
+            Register With Google
           </Button>
         </div>
       </form>

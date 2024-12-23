@@ -18,22 +18,8 @@ import Logo from './Logo';
 import NavbarActionsList from './NavbarActionsList';
 import NavbarLinksList from './NavbarLinksList';
 
-import { Button } from '@/components/ui/button';
 import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-
-const AuthenticationDivLinks: React.FC = () => {
-  return (
-    <div className="flex items-center gap-3">
-      <Link href={'/login'}>
-        <Button variant={'outline'}>Login</Button>
-      </Link>
-      <Link href={'/signup'}>
-        <Button variant={'default'}>Signup</Button>
-      </Link>
-    </div>
-  );
-};
 
 const Navbar: React.FC<{ href?: string }> = ({ href }) => {
   const [isMounted, setIsMounted] = React.useState(false);
@@ -65,7 +51,7 @@ const Navbar: React.FC<{ href?: string }> = ({ href }) => {
         </div>
       )}
       <div className="flex items-center gap-6">
-        {isAuthenticated ? (
+        {isAuthenticated && (
           <>
             <NavbarActionsList
               isSeeker={isSeeker}
@@ -91,8 +77,6 @@ const Navbar: React.FC<{ href?: string }> = ({ href }) => {
               </Link>
             </TooltipWrapper>
           </>
-        ) : (
-          <AuthenticationDivLinks />
         )}
       </div>
     </header>

@@ -6,7 +6,7 @@ import Login from '@/components/auth/login/Login';
 
 const LoginPage: React.FC = () => {
   return (
-    <section className="py-16 flex justify-center">
+    <section className="h-screen flex justify-center items-center">
       <Login />
     </section>
   );

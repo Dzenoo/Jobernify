@@ -14,6 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import Logo from '@/components/layout/navbar/Logo';
 
 type UserDataTypes = {
   id: number;
@@ -53,8 +54,9 @@ const Signup: React.FC<SignupProps> = ({
   const isEmployer = selectedUser?.type === TypeOfAccount.Employer;
 
   return (
-    <Card className="flex flex-col gap-2 lg:w-[600px]">
-      <CardHeader className="text-center">
+    <Card className="flex flex-col lg:w-[600px]">
+      <CardHeader className="flex flex-col items-center justify-center text-center">
+        <Logo />
         <CardDescription>
           {selectedUser?.description}{' '}
           <button
@@ -70,7 +72,7 @@ const Signup: React.FC<SignupProps> = ({
         </CardDescription>
         <CardTitle>{selectedUser?.title}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className={isEmployer ? 'pt-0' : ''}>
         {isEmployer ? <EmployersSignupForm /> : <SeekersSignupForm />}
       </CardContent>
       <CardFooter className="justify-center">
