@@ -25,7 +25,7 @@ export class GoogleAuthService {
       throw new UnauthorizedException('No user from Google');
     }
 
-    const { email, firstName, lastName, picture } = req.user;
+    const { email, firstName, lastName } = req.user;
 
     // 1. Check if user is found in Seeker or Employer
     const [existingSeeker, existingEmployer] = (await Promise.all([
@@ -53,7 +53,6 @@ export class GoogleAuthService {
         email,
         first_name: firstName,
         last_name: lastName,
-        image: picture,
         isGoogleAccount: true,
         password: null,
         emailVerified: true,
@@ -63,7 +62,6 @@ export class GoogleAuthService {
       newUser = (await this.employersService.createOne({
         email,
         name: firstName + ' ' + lastName,
-        image: picture,
         address: '',
         size: '',
         industry: '',
@@ -93,7 +91,7 @@ export class GoogleAuthService {
       throw new UnauthorizedException('No user from Google');
     }
 
-    const { email, firstName, lastName, picture } = req.user;
+    const { email } = req.user;
 
     // 1. Check if a user with this email exists in Seekers or Employers
     const [existingSeeker, existingEmployer] = (await Promise.all([
@@ -116,7 +114,6 @@ export class GoogleAuthService {
           { _id: existingSeeker._id },
           {
             isGoogleAccount: true,
-            image: picture,
           },
         );
       }
@@ -136,7 +133,7 @@ export class GoogleAuthService {
       if (!existingEmployer.isGoogleAccount) {
         await this.employersService.findOneByIdAndUpdate(
           String(existingEmployer._id),
-          { isGoogleAccount: true, image: picture },
+          { isGoogleAccount: true },
         );
       }
 
