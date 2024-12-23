@@ -4,14 +4,14 @@ import dynamic from 'next/dynamic';
 
 import { QueryContextProvider } from '@/context/react-query-client';
 import { AppThemeProvider } from '@/context/app-theme-provider';
+import { AiAssistantProvider } from '@/context/ai-assistant';
 
 import { Toaster } from '@/components/ui/info/toaster';
 
 import { GeistSans } from 'geist/font/sans';
 
-import Footer from '@/components/layout/footer/Footer';
+import EmployerLayoutWrapper from './_EmployerLayoutWrapper';
 import '../globals.css';
-import { AiAssistantProvider } from '@/context/ai-assistant';
 
 const Navbar = dynamic(() => import('@/components/layout/navbar/Navbar'), {
   ssr: false,
@@ -51,11 +51,7 @@ export default function EmployersLayout({
         <QueryContextProvider>
           <AppThemeProvider>
             <AiAssistantProvider>
-              <div className="flex flex-col min-h-screen">
-                <Navbar href="/seekers" />
-                <main className="flex-1">{children}</main>
-                <Footer />
-              </div>
+              <EmployerLayoutWrapper>{children}</EmployerLayoutWrapper>
             </AiAssistantProvider>
             <Toaster />
           </AppThemeProvider>

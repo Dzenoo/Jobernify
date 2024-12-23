@@ -10,8 +10,7 @@ import { Toaster } from '@/components/ui/info/toaster';
 
 import { GeistSans } from 'geist/font/sans';
 
-import Navbar from '@/components/layout/navbar/Navbar';
-import Footer from '@/components/layout/footer/Footer';
+import SeekersLayoutWrapper from './_SeekersLayoutWrapper';
 import '../globals.css';
 
 const MobileBar = dynamic(() => import('@/components/layout/navbar/Mobile'), {
@@ -52,11 +51,7 @@ export default function SeekersLayout({
         <QueryContextProvider>
           <AppThemeProvider>
             <AiAssistantProvider>
-              <div className="flex flex-col min-h-screen">
-                <Navbar href="/jobs" />
-                <main className="flex-1 base-margin">{children}</main>
-                <Footer />
-              </div>
+              <SeekersLayoutWrapper>{children}</SeekersLayoutWrapper>
               <Toaster />
               <MobileBar />
             </AiAssistantProvider>

@@ -2,9 +2,8 @@ import type { Metadata } from 'next';
 
 import { GeistSans } from 'geist/font/sans';
 
-import Footer from '@/components/layout/footer/Footer';
+import RootLayoutWrapper from './_RootLayoutWrapper';
 import '../globals.css';
-import NavbarLanding from '@/components/shared/pages/landing/NavbarLanding';
 
 export const metadata: Metadata = {
   icons: {
@@ -37,11 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={GeistSans.className}>
-        <div className="flex flex-col min-h-screen">
-          <NavbarLanding />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+        <RootLayoutWrapper>{children}</RootLayoutWrapper>
       </body>
     </html>
   );

@@ -6,6 +6,7 @@ import { Toaster } from '@/components/ui/info/toaster';
 
 import { GeistSans } from 'geist/font/sans';
 
+import AuthLayoutWrapper from './_AuthLayoutWrapper';
 import '../globals.css';
 
 export const metadata: Metadata = {
@@ -40,7 +41,7 @@ export default function AuthLayout({
     <QueryContextProvider>
       <html lang="en">
         <body className={GeistSans.className}>
-          <main>{children}</main>
+          <AuthLayoutWrapper>{children}</AuthLayoutWrapper>
           <Toaster />
         </body>
       </html>
