@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import LoginForm from './forms/LoginForm';
+import Logo from '@/components/layout/navbar/Logo';
 
 import {
   Card,
@@ -11,7 +12,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import Logo from '@/components/layout/navbar/Logo';
 
 const Login: React.FC = () => {
   return (

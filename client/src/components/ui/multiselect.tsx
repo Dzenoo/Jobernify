@@ -64,7 +64,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         )}
       </Button>
       {open && (
-        <Command className="h-52 absolute top-full left-0 mt-2 w-full z-10 bg-white border rounded-md shadow-lg dark:bg-[#1b1b1b]">
+        <Command className="h-52 absolute top-full left-0 mt-2 w-full z-10 bg-white border rounded-xl shadow-lg dark:bg-[#1b1b1b]">
           <CommandInput
             value={searchQuery}
             onValueChange={setSearchQuery}

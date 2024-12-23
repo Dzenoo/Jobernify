@@ -1,6 +1,7 @@
 import React from 'react';
 
 import EmployersSignupForm from './forms/EmployersSignupForm';
+import Logo from '@/components/layout/navbar/Logo';
 import SeekersSignupForm from './forms/SeekersSignupForm';
 import RedirectToLoginLink from './RedirectToLoginLink';
 
@@ -14,7 +15,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import Logo from '@/components/layout/navbar/Logo';
 
 type UserDataTypes = {
   id: number;

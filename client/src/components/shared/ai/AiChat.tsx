@@ -65,7 +65,7 @@ const AiChat: React.FC<AiChatProps> = ({ socket }) => {
               {isUser(message.role) ? <User size={20} /> : <Bot size={20} />}
             </div>
             <div
-              className={`border border-input p-2.5 rounded-md w-fit ${isUser(message.role) ? 'ml-5 bg-muted' : 'mr-5'}`}
+              className={`border border-input p-2.5 rounded-xl w-fit ${isUser(message.role) ? 'ml-5 bg-muted' : 'mr-5'}`}
             >
               <ReactMarkdown className="aiChat space-y-5 text-sm">
                 {typeof message.content === 'string'

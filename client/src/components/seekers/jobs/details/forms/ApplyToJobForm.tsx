@@ -148,7 +148,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
         {existingResume && !willSeekerUploadResume ? (
-          <div className="flex flex-col gap-5 border border-blue-200 bg-blue-50 p-4 rounded-md">
+          <div className="flex flex-col gap-5 border border-blue-200 bg-blue-50 p-4 rounded-xl">
             <p className="text-center text-blue-700">
               Your existing resume will be used for this application.
             </p>
@@ -164,7 +164,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
           <FormItem>
             <div
               {...getRootProps()}
-              className="border-4 border-dashed border-gray-300 rounded-md p-4 cursor-pointer transition-colors hover:border-blue-600 h-40 flex items-center justify-center text-center"
+              className="border-4 border-dashed border-gray-300 rounded-xl p-4 cursor-pointer transition-colors hover:border-blue-600 h-40 flex items-center justify-center text-center"
             >
               <input {...getInputProps()} />
               {selectedFile ? (

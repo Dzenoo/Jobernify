@@ -8,6 +8,7 @@ import { renderSignupTabCard } from '@/helpers';
 
 import Signup from './Signup';
 import RedirectToLoginLink from './RedirectToLoginLink';
+import Logo from '@/components/layout/navbar/Logo';
 
 import { TypeOfAccount } from '@/types';
 
@@ -46,6 +47,9 @@ const SelectAccount: React.FC = () => {
     <div className="px-5">
       {!isSelectedAccount && (
         <div className="flex flex-col justify-center items-center gap-16">
+          <div>
+            <Logo />
+          </div>
           <div>
             <h1 className="text-2xl font-semibold">
               Join as a Employer or Seeker
