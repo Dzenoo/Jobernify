@@ -5,7 +5,7 @@ import { queryClient } from '@/context/react-query-client';
 import { updateApplicationStatus } from '@/lib/actions/applications.actions';
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/components/ui/info/use-toast';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -14,9 +14,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
   DropdownMenuGroup,
-} from '@/components/ui/dropdown-menu';
+} from '@/components/ui/utilies/dropdown-menu';
 import { CheckCircle, XCircle, Clock, UserCheck } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons/button';
 
 type StatusBadgeProps = {
   applicationId: string;

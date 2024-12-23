@@ -6,13 +6,13 @@ import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
 import { FilterGroup } from '@/types';
 
-import { Checkbox } from '@/components/ui/checkbox';
+import { Checkbox } from '@/components/ui/buttons/checkbox';
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from '@/components/ui/accordion';
+} from '@/components/ui/navigation/accordion';
 
 interface FilterHandlerProps {
   showCount: boolean;

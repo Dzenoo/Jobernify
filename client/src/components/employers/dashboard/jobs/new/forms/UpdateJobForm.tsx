@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ScaleLoader } from 'react-spinners';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/components/ui/info/use-toast';
 
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
@@ -25,8 +25,8 @@ import Scope from '@/components/employers/dashboard/jobs/new/Scope';
 import Skills from '@/components/employers/dashboard/jobs/new/Skills';
 import Text from '@/components/employers/dashboard/jobs/new/Text';
 
-import { Button } from '@/components/ui/button';
-import { Form } from '@/components/ui/form';
+import { Button } from '@/components/ui/buttons/button';
+import { Form } from '@/components/ui/form/form';
 import { findLocationData } from '@/lib/utils';
 
 type UpdateJobFormProps =

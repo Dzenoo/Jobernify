@@ -4,7 +4,7 @@ import React from 'react';
 
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/ui/form/input';
 
 type SearchSeekersProps = {
   query: string;

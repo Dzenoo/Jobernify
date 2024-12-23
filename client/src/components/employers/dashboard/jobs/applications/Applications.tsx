@@ -19,7 +19,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
+} from '@/components/ui/utilies/table';
 import Resume from './table/Resume';
 
 type ApplicationsProps = {

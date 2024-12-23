@@ -8,8 +8,8 @@ import { AWS_URL } from '@/constants';
 import { useEditEmployer } from '@/hooks/mutations/useEditEmployer.mutation';
 import { useUploads } from '@/hooks/core/useUploads.hook';
 
-import { useToast } from '@/components/ui/use-toast';
-import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/info/use-toast';
+import { Button } from '@/components/ui/buttons/button';
 
 type UploadEmployerImageProps = {
   image: string;

@@ -4,7 +4,7 @@ import EducationItem from './EducationItem';
 
 import { Education } from '@/types';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons/button';
 
 type EducationListProps = {
   educations?: Education[];

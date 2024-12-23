@@ -4,7 +4,7 @@ import ExperienceItem from './ExperienceItem';
 
 import { Experience } from '@/types';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons/button';
 
 type ExperienceListProps = {
   experiences: Experience[];

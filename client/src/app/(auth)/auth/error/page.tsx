@@ -1,14 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from '@/components/ui/layout/card';
 
 const AuthenticationError = ({
   searchParams,

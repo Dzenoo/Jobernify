@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
 import SearchEmployers from '@/components/seekers/employers/search/SearchEmployers';
-import PaginatedList from '@/components/ui/paginate-list';
+import PaginatedList from '@/components/ui/pagination/paginate-list';
 import NotFound from '@/components/shared/pages/NotFound';
 
 import LoadingEmployersSkeleton from '@/components/loaders/seekers/LoadingEmployers';

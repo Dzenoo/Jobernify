@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Briefcase, CalendarSearch, Folder } from 'lucide-react';
 
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/layout/card';
 
 type StatisticsProps = {
   totalJobs: number;

@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { QueryContextProvider } from '@/context/react-query-client';
 import { AppThemeProvider } from '@/context/app-theme-provider';
 
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/info/toaster';
 
 import { GeistSans } from 'geist/font/sans';
 

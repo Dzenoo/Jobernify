@@ -5,8 +5,8 @@ import Link from 'next/link';
 
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/form/input';
+import { Button } from '@/components/ui/buttons/button';
 import {
   Select,
   SelectTrigger,
@@ -15,7 +15,7 @@ import {
   SelectGroup,
   SelectItem,
   SelectLabel,
-} from '@/components/ui/select';
+} from '@/components/ui/form/select';
 
 type SearchJobsProps = {
   query: string;

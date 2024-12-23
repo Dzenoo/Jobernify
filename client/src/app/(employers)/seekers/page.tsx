@@ -8,7 +8,7 @@ import { useGetSeekers } from '@/hooks/queries/useGetSeekers.query';
 
 import SearchSeekers from '@/components/employers/seekers/search/SearchSeekers';
 import FilterSeekers from '@/components/employers/seekers/filters/FilterSeekers';
-import PaginatedList from '@/components/ui/paginate-list';
+import PaginatedList from '@/components/ui/pagination/paginate-list';
 import ExploreSeekers from '@/components/employers/seekers/explore/ExploreSeekers';
 
 import LoadingSeekers from '@/components/loaders/employers/LoadingSeekers';

@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from '@/components/ui/dropdown-menu';
+} from '@/components/ui/utilies/dropdown-menu';
 
 type JobOptionsProps = {
   jobId: string;

@@ -10,8 +10,8 @@ import { AWS_URL } from '@/constants';
 import { useUploads } from '@/hooks/core/useUploads.hook';
 import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
 
-import { Button } from '@/components/ui/button';
-import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/buttons/button';
+import { useToast } from '@/components/ui/info/use-toast';
 
 type UploadSeekerImageProps = {
   image: string;

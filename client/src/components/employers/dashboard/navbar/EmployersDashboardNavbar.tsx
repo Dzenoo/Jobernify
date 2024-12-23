@@ -12,7 +12,7 @@ import {
   PanelRight,
 } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons/button';
 import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
 
 const EmployersDashboardNavbar: React.FC = () => {

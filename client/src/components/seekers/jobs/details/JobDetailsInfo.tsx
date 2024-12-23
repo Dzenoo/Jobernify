@@ -19,7 +19,7 @@ import {
 import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
 
 import SaveJobButton from '../SaveJobButton';
-import Navigator from '@/components/ui/navigator';
+import Navigator from '@/components/ui/navigation/navigator';
 
 import { renderIconText, renderSkills } from '@/helpers';
 import {
@@ -33,9 +33,9 @@ import {
 
 import { Application, Job } from '@/types';
 
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Button } from '@/components/ui/buttons/button';
+import { Avatar, AvatarImage } from '@/components/ui/utilies/avatar';
+import { Card, CardContent, CardHeader } from '@/components/ui/layout/card';
 
 type JobDetailsInfoProps = {
   job: Job;

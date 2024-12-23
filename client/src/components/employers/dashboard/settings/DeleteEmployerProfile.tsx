@@ -6,8 +6,8 @@ import { useMutation } from '@tanstack/react-query';
 import { deleteEmployerProfile } from '@/lib/actions/employers.actions';
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
-import { useToast } from '@/components/ui/use-toast';
-import AlertDialogWrapper from '@/components/ui/alert-dialog-wrapper';
+import { useToast } from '@/components/ui/info/use-toast';
+import AlertDialogWrapper from '@/components/ui/info/alert-dialog-wrapper';
 
 type DeleteEmployerProfileProps = {};
 

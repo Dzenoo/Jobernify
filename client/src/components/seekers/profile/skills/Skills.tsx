@@ -13,8 +13,8 @@ import { SkillsSchema } from '@/lib/zod/seekers.validation';
 import { getSkillsData, multiselectSkills } from '@/lib/utils';
 import { renderSkills } from '@/helpers';
 
-import MultiSelect from '@/components/ui/multiselect';
-import { Button } from '@/components/ui/button';
+import MultiSelect from '@/components/ui/form/multiselect';
+import { Button } from '@/components/ui/buttons/button';
 import {
   Form,
   FormControl,
@@ -23,21 +23,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from '@/components/ui/form/form';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
+} from '@/components/ui/layout/dialog';
 import {
   Drawer,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from '@/components/ui/drawer';
+} from '@/components/ui/layout/drawer';
 
 type AddSkillsProps = {
   closeSkills: () => void;

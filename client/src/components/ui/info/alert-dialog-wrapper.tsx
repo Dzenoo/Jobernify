@@ -11,7 +11,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from './alert-dialog';
-import { Button, ButtonProps } from './button';
+import { Button, ButtonProps } from '../buttons/button';
 
 type AlertDialogWrapperProps = {
   triggerContent: React.ReactNode;

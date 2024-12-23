@@ -15,8 +15,8 @@ import {
   FormItem,
   FormLabel,
   FormDescription,
-} from '@/components/ui/form';
-import { Switch } from '@/components/ui/switch';
+} from '@/components/ui/form/form';
+import { Switch } from '@/components/ui/buttons/switch';
 
 type ReceiveJobAlertsFormProps = {
   receiveJobAlerts: boolean;

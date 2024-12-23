@@ -13,9 +13,9 @@ import { useEditEmployer } from '@/hooks/mutations/useEditEmployer.mutation';
 import { uppercaseFirstLetter } from '@/lib/utils';
 import { Employer } from '@/types';
 
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/form/input';
+import { Textarea } from '@/components/ui/form/textarea';
+import { Button } from '@/components/ui/buttons/button';
 import {
   Form,
   FormControl,
@@ -24,14 +24,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from '@/components/ui/form/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/ui/form/select';
 
 type EditEmployerProfileFormProps = {
   isEditMode: boolean;

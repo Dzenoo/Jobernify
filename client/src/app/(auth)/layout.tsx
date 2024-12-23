@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import { QueryContextProvider } from '@/context/react-query-client';
 
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/info/toaster';
 
 import { GeistSans } from 'geist/font/sans';
 

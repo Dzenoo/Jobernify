@@ -3,7 +3,7 @@ import React from 'react';
 import { Calendar, Edit, GraduationCap, Trash } from 'lucide-react';
 import { useMutation } from '@tanstack/react-query';
 
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/components/ui/info/use-toast';
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import { deleteEducation } from '@/lib/actions/seekers.actions';
@@ -13,8 +13,8 @@ import { queryClient } from '@/context/react-query-client';
 
 import { Education } from '@/types';
 
-import AlertDialogWrapper from '@/components/ui/alert-dialog-wrapper';
-import { Button } from '@/components/ui/button';
+import AlertDialogWrapper from '@/components/ui/info/alert-dialog-wrapper';
+import { Button } from '@/components/ui/buttons/button';
 
 export type EducationItemProps = {
   onEdit: () => void;

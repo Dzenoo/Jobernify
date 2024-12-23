@@ -12,7 +12,7 @@ import {
   PaginationNext,
   PaginationPrevious,
   PaginationEllipsis,
-} from '@/components/ui/pagination';
+} from '@/components/ui/pagination/pagination';
 
 type PaginationProps = {
   totalItems: number;

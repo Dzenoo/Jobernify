@@ -13,10 +13,10 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Dialog } from '@/components/ui/dialog';
-import { Drawer } from '@/components/ui/drawer';
-import { Button } from '@/components/ui/button';
+} from '@/components/ui/layout/card';
+import { Dialog } from '@/components/ui/layout/dialog';
+import { Drawer } from '@/components/ui/layout/drawer';
+import { Button } from '@/components/ui/buttons/button';
 
 type SeekerAlertsProps = {
   alertsData: Pick<Seeker, 'alerts' | 'receiveJobAlerts'>;

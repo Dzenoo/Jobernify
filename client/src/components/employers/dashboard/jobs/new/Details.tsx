@@ -3,8 +3,8 @@ import { Control } from 'react-hook-form';
 
 import { locations } from '@/constants';
 
-import { Textarea } from '@/components/ui/textarea';
-import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/form/textarea';
+import { Input } from '@/components/ui/form/input';
 import {
   FormControl,
   FormDescription,
@@ -12,14 +12,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from '@/components/ui/form/form';
 import {
   Select,
   SelectTrigger,
   SelectValue,
   SelectContent,
   SelectItem,
-} from '@/components/ui/select';
+} from '@/components/ui/form/select';
 
 type DetailsProps = {
   control: Control<any>;

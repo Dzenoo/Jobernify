@@ -9,9 +9,9 @@ import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 import EducationList from './EducationList';
 import EducationForm from './forms/EducationForm';
 
-import { Button } from '@/components/ui/button';
-import { Dialog } from '@/components/ui/dialog';
-import { Drawer } from '@/components/ui/drawer';
+import { Button } from '@/components/ui/buttons/button';
+import { Dialog } from '@/components/ui/layout/dialog';
+import { Drawer } from '@/components/ui/layout/drawer';
 
 type EducationsProps = {
   education: Education[] | [];

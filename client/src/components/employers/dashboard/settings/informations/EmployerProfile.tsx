@@ -7,7 +7,7 @@ import EditEmployerProfileForm from './forms/EditEmployerProfileForm';
 
 import { Employer } from '@/types';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons/button';
 
 type EmployerProfileProps = {
   employer: Employer;

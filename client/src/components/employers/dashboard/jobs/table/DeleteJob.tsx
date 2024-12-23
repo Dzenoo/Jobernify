@@ -7,22 +7,22 @@ import { deleteJob } from '@/lib/actions/jobs.actions';
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { queryClient } from '@/context/react-query-client';
 
-import { useToast } from '@/components/ui/use-toast';
-import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/info/use-toast';
+import { Button } from '@/components/ui/buttons/button';
 import {
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@/components/ui/dialog';
+} from '@/components/ui/layout/dialog';
 import {
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-} from '@/components/ui/drawer';
+} from '@/components/ui/layout/drawer';
 
 type DeleteJobProps = {
   onClose: () => void;

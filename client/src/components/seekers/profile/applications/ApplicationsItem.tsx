@@ -17,13 +17,13 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-} from '@/components/ui/card';
+} from '@/components/ui/layout/card';
 
 import { findIndustriesData, formatDate, getImageUrl } from '@/lib/utils';
 import { renderIconText } from '@/helpers';
 
 import { Application } from '@/types';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarImage } from '@/components/ui/utilies/avatar';
 
 type ApplicationItemProps = {
   application: Pick<Application, '_id' | 'status' | 'createdAt' | 'job'>;

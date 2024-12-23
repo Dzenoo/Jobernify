@@ -8,7 +8,7 @@ import UploadEmployerImage from './UploadEmployerImage';
 import DeleteEmployerProfile from './DeleteEmployerProfile';
 import EmployerProfile from './informations/EmployerProfile';
 
-import { Separator } from '@/components/ui/separator';
+import { Separator } from '@/components/ui/layout/separator';
 
 type EmployerSettingsProps = {
   employer: Employer;

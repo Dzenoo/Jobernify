@@ -11,9 +11,9 @@ import { formatDate } from '@/lib/utils';
 
 import { Experience } from '@/types';
 
-import AlertDialogWrapper from '@/components/ui/alert-dialog-wrapper';
-import { Button } from '@/components/ui/button';
-import { useToast } from '@/components/ui/use-toast';
+import AlertDialogWrapper from '@/components/ui/info/alert-dialog-wrapper';
+import { Button } from '@/components/ui/buttons/button';
+import { useToast } from '@/components/ui/info/use-toast';
 
 type ExperienceItemProps = {
   onEdit: () => void;

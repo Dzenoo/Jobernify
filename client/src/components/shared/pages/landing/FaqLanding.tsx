@@ -11,8 +11,8 @@ import {
   AccordionTrigger,
   AccordionItem,
   AccordionContent,
-} from '@/components/ui/accordion';
-import { Button } from '@/components/ui/button';
+} from '@/components/ui/navigation/accordion';
+import { Button } from '@/components/ui/buttons/button';
 
 const FaqLanding: React.FC = () => {
   const [activeTab, setActiveTab] = useState<number>(0);

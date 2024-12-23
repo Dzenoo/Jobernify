@@ -12,7 +12,7 @@ import Experiences from './experiences/Experiences';
 import DeleteSeekerProfile from './DeleteSeekerProfile';
 import UploadSeekerImage from './UploadSeekerImage';
 
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/layout/card';
 
 type SeekerProfileProps = {
   seeker: Seeker;

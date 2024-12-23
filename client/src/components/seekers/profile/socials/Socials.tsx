@@ -7,9 +7,9 @@ import { formatURL } from '@/lib/utils';
 
 import { Seeker } from '@/types';
 
-import { Button } from '@/components/ui/button';
-import { Dialog } from '@/components/ui/dialog';
-import { Drawer } from '@/components/ui/drawer';
+import { Button } from '@/components/ui/buttons/button';
+import { Dialog } from '@/components/ui/layout/dialog';
+import { Drawer } from '@/components/ui/layout/drawer';
 import EditSocialsForm from './forms/EditSocialsForm';
 
 type SocialsProps = {

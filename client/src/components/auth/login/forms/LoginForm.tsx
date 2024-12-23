@@ -11,8 +11,8 @@ import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { signIn } from '@/lib/actions/auth.actions';
 import { LoginSchema } from '@/lib/zod/auth.validation';
 
-import { useToast } from '@/components/ui/use-toast';
-import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/info/use-toast';
+import { Button } from '@/components/ui/buttons/button';
 import {
   Form,
   FormControl,
@@ -20,8 +20,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from '@/components/ui/form/form';
+import { Input } from '@/components/ui/form/input';
 
 const LoginForm: React.FC = () => {
   const router = useRouter();

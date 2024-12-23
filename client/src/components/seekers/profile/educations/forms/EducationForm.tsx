@@ -18,9 +18,9 @@ import { queryClient } from '@/context/react-query-client';
 import { cn } from '@/lib/utils';
 import { Education } from '@/types';
 
-import { useToast } from '@/components/ui/use-toast';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/info/use-toast';
+import { Button } from '@/components/ui/buttons/button';
+import { Input } from '@/components/ui/form/input';
 import { Calendar } from '@/components/ui/calendar';
 import {
   Form,
@@ -30,24 +30,24 @@ import {
   FormLabel,
   FormMessage,
   FormDescription,
-} from '@/components/ui/form';
+} from '@/components/ui/form/form';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
+} from '@/components/ui/utilies/popover';
 import {
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
+} from '@/components/ui/layout/dialog';
 import {
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from '@/components/ui/drawer';
+} from '@/components/ui/layout/drawer';
 
 type EducationFormProps = {
   isEdit: boolean;

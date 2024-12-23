@@ -14,9 +14,9 @@ import { signupEmployer } from '@/lib/actions/auth.actions';
 import { companySizes, industries } from '@/constants';
 import { uppercaseFirstLetter } from '@/lib/utils';
 
-import { useToast } from '@/components/ui/use-toast';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/info/use-toast';
+import { Input } from '@/components/ui/form/input';
+import { Button } from '@/components/ui/buttons/button';
 import {
   Form,
   FormControl,
@@ -25,14 +25,14 @@ import {
   FormLabel,
   FormMessage,
   FormDescription,
-} from '@/components/ui/form';
+} from '@/components/ui/form/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/ui/form/select';
 
 const EmployersSignupForm: React.FC = () => {
   const router = useRouter();

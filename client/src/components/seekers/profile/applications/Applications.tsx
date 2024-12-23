@@ -10,7 +10,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from '@/components/ui/layout/card';
 
 import LoadingApplicationsSkeleton from '@/components/loaders/seekers/LoadingApplications';
 const ApplicationsList = dynamic(

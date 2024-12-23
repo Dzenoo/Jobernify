@@ -2,8 +2,8 @@ import React from 'react';
 
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/layout/card';
+import { Button } from '@/components/ui/buttons/button';
 
 type FilterApplicationsProps = {
   applicants: number;

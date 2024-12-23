@@ -12,8 +12,8 @@ import { queryClient } from '@/context/react-query-client';
 
 import { Job } from '@/types';
 
-import { useToast } from '@/components/ui/use-toast';
-import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/info/use-toast';
+import { Button } from '@/components/ui/buttons/button';
 
 type SaveJobButtonProps = {
   jobId: string;

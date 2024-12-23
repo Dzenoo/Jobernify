@@ -5,7 +5,7 @@ import { followEmployer } from '@/lib/actions/seekers.actions';
 
 import { useAuthentication } from '../core/useAuthentication.hook';
 
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/components/ui/info/use-toast';
 
 const useFollowEmployer = (employerId: string) => {
   const { toast } = useToast();

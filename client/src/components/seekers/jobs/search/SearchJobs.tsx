@@ -4,14 +4,14 @@ import React from 'react';
 
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/ui/form/input';
 import {
   Select,
   SelectTrigger,
   SelectContent,
   SelectItem,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/ui/form/select';
 
 type SearchJobsProps = {
   query: string;

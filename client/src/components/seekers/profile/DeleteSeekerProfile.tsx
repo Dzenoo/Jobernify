@@ -7,8 +7,8 @@ import { deleteSeekerProfile } from '@/lib/actions/seekers.actions';
 
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
-import { useToast } from '@/components/ui/use-toast';
-import AlertDialogWrapper from '@/components/ui/alert-dialog-wrapper';
+import { useToast } from '@/components/ui/info/use-toast';
+import AlertDialogWrapper from '@/components/ui/info/alert-dialog-wrapper';
 
 type DeleteSeekerProfileProps = {};
 

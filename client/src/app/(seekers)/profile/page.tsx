@@ -12,7 +12,7 @@ import SeekerProfile from '@/components/seekers/profile/SeekerProfile';
 import SeekerAlerts from '@/components/seekers/profile/alerts/SeekerAlerts';
 import SavedJobs from '@/components/seekers/profile/savedJobs/SavedJobs';
 import Applications from '@/components/seekers/profile/applications/Applications';
-import PaginatedList from '@/components/ui/paginate-list';
+import PaginatedList from '@/components/ui/pagination/paginate-list';
 import NotFound from '@/components/shared/pages/NotFound';
 
 const SeekerProfilePage = ({

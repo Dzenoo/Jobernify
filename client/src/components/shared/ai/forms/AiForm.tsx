@@ -11,9 +11,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useAiAssistant } from '@/context/ai-assistant';
 import { AiFormSchema } from '@/lib/zod/ai.validation';
 
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
+import { Button } from '@/components/ui/buttons/button';
+import { Textarea } from '@/components/ui/form/textarea';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+} from '@/components/ui/form/form';
 
 type AiFormProps = {
   socket: any;

@@ -18,8 +18,12 @@ import Logo from './Logo';
 import NavbarActionsList from './NavbarActionsList';
 import NavbarLinksList from './NavbarLinksList';
 
-import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { TooltipWrapper } from '@/components/ui/info/tooltip-wrapper';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@/components/ui/utilies/avatar';
 
 const Navbar: React.FC<{ href?: string }> = ({ href }) => {
   const [isMounted, setIsMounted] = React.useState(false);

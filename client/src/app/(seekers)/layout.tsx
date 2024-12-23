@@ -6,7 +6,7 @@ import { QueryContextProvider } from '@/context/react-query-client';
 import { AppThemeProvider } from '@/context/app-theme-provider';
 import { AiAssistantProvider } from '@/context/ai-assistant';
 
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/info/toaster';
 
 import { GeistSans } from 'geist/font/sans';
 

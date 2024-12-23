@@ -1,13 +1,13 @@
 import React, { useState, useMemo } from 'react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons/button';
 import {
   Command,
   CommandItem,
   CommandList,
   CommandGroup,
   CommandInput,
-} from '@/components/ui/command';
-import { Badge } from '@/components/ui/badge';
+} from '@/components/ui/utilies/command';
+import { Badge } from '@/components/ui/utilies/badge';
 import { getSkillNames } from '@/lib/utils';
 
 type MultiSelectOption = {

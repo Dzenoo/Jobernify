@@ -12,7 +12,7 @@ import {
   CardTitle,
   CardFooter,
   CardDescription,
-} from '@/components/ui/card';
+} from '@/components/ui/layout/card';
 
 Chart.register(...registerables);
 

@@ -3,9 +3,9 @@ import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from '@/components/ui/tooltip';
+} from '@/components/ui/info/tooltip';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons/button';
 
 type RenderIconTextDefault = {
   data: string | number;

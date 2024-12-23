@@ -5,7 +5,7 @@ import { editEmployerProfile } from '@/lib/actions/employers.actions';
 
 import { useAuthentication } from '../core/useAuthentication.hook';
 
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/components/ui/info/use-toast';
 
 const useEditEmployer = () => {
   const { toast } = useToast();

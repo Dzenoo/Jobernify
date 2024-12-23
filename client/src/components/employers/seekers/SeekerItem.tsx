@@ -13,8 +13,8 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+} from '@/components/ui/layout/card';
+import { Button } from '@/components/ui/buttons/button';
 
 type SeekerItemProps = {
   seeker: Seeker;

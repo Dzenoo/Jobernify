@@ -5,14 +5,14 @@ import { ScaleLoader } from 'react-spinners';
 import { useJobAlert } from '@/hooks/mutations/useJobAlert.mutation';
 import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons/button';
 import {
   Card,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from '@/components/ui/layout/card';
 
 type JobAlertProps = {
   level: string;

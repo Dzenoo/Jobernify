@@ -8,7 +8,7 @@ import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
 import SearchJobs from '@/components/seekers/jobs/search/SearchJobs';
 import FilterJobs from '@/components/seekers/jobs/filters/FilterJobs';
-import PaginatedList from '@/components/ui/paginate-list';
+import PaginatedList from '@/components/ui/pagination/paginate-list';
 import NotFound from '@/components/shared/pages/NotFound';
 
 import LoadingSeekerInfo from '@/components/loaders/employers/LoadingSeekerInfo';

@@ -3,7 +3,7 @@ import React from 'react';
 import { Control } from 'react-hook-form';
 import { multiselectSkills } from '@/lib/utils';
 
-import MultiSelect from '@/components/ui/multiselect';
+import MultiSelect from '@/components/ui/form/multiselect';
 
 import {
   FormControl,
@@ -12,7 +12,7 @@ import {
   FormLabel,
   FormMessage,
   FormDescription,
-} from '@/components/ui/form';
+} from '@/components/ui/form/form';
 
 type SkillsProps = {
   control: Control<any>;

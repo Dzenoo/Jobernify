@@ -12,9 +12,9 @@ import { ScaleLoader } from 'react-spinners';
 import { SeekerRegistrationSchema } from '@/lib/zod/auth.validation';
 import { signupSeeker } from '@/lib/actions/auth.actions';
 
-import { useToast } from '@/components/ui/use-toast';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/info/use-toast';
+import { Button } from '@/components/ui/buttons/button';
+import { Input } from '@/components/ui/form/input';
 
 import {
   Form,
@@ -24,7 +24,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from '@/components/ui/form/form';
 
 const SeekersSignupForm: React.FC = () => {
   const router = useRouter();

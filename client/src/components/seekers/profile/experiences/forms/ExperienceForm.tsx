@@ -8,7 +8,7 @@ import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
 
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/components/ui/info/use-toast';
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import {
   jobLevels,
@@ -28,10 +28,10 @@ import {
 } from '@/lib/actions/seekers.actions';
 import { Experience } from '@/types';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons/button';
 import { Calendar } from '@/components/ui/calendar';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/buttons/checkbox';
+import { Input } from '@/components/ui/form/input';
 import {
   Form,
   FormControl,
@@ -40,31 +40,31 @@ import {
   FormLabel,
   FormMessage,
   FormDescription,
-} from '@/components/ui/form';
+} from '@/components/ui/form/form';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
+} from '@/components/ui/utilies/popover';
 import {
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
+} from '@/components/ui/layout/dialog';
 import {
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from '@/components/ui/drawer';
+} from '@/components/ui/layout/drawer';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/ui/form/select';
 
 type ExperienceFormProps = {
   isEdit: boolean;

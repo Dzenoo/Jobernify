@@ -15,9 +15,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Dialog } from '@/components/ui/dialog';
-import { Drawer } from '@/components/ui/drawer';
+} from '@/components/ui/utilies/table';
+import { Dialog } from '@/components/ui/layout/dialog';
+import { Drawer } from '@/components/ui/layout/drawer';
 
 type DashboardEmployerJobsProps = {
   jobs: Job[];

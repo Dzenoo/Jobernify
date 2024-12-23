@@ -15,9 +15,9 @@ import {
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from '@/components/ui/drawer';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+} from '@/components/ui/layout/drawer';
+import { Button } from '@/components/ui/buttons/button';
+import { Card, CardContent } from '@/components/ui/layout/card';
 
 const FilterSeekers: React.FC = () => {
   const isLarge = useMediaQuery('(min-width: 1280px)');

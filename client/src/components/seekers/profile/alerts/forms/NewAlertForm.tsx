@@ -11,8 +11,8 @@ import { JobsFiltersData } from '@/constants';
 
 import { useJobAlert } from '@/hooks/mutations/useJobAlert.mutation';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/buttons/button';
+import { Input } from '@/components/ui/form/input';
 import {
   Form,
   FormControl,
@@ -21,27 +21,27 @@ import {
   FormLabel,
   FormMessage,
   FormDescription,
-} from '@/components/ui/form';
+} from '@/components/ui/form/form';
 import {
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
+} from '@/components/ui/layout/dialog';
 import {
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from '@/components/ui/drawer';
+} from '@/components/ui/layout/drawer';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/ui/form/select';
 
 type NewAlertFormProps = {
   closeAlerts: () => void;

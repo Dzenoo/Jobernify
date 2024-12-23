@@ -8,8 +8,8 @@ import { ScaleLoader } from 'react-spinners';
 import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
 import { SeekerSocialsSchema } from '@/lib/zod/seekers.validation';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/buttons/button';
+import { Input } from '@/components/ui/form/input';
 import {
   Form,
   FormControl,
@@ -18,19 +18,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from '@/components/ui/form/form';
 import {
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
+} from '@/components/ui/layout/dialog';
 import {
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from '@/components/ui/drawer';
+} from '@/components/ui/layout/drawer';
 
 type EditSocialsFormProps = {
   isEditSocialsOpen: boolean;

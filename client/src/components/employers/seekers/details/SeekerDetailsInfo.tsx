@@ -13,8 +13,8 @@ import { Seeker } from '@/types';
 import EducationList from '@/components/seekers/profile/educations/EducationList';
 import ExperienceList from '@/components/seekers/profile/experiences/ExperienceList';
 
-import Navigator from '@/components/ui/navigator';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import Navigator from '@/components/ui/navigation/navigator';
+import { Card, CardContent, CardHeader } from '@/components/ui/layout/card';
 
 type SeekerDetailsInfoProps = {
   seeker: Seeker;

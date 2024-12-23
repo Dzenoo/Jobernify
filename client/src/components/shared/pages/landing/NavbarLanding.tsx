@@ -9,7 +9,7 @@ import { NavbarLandingLinks } from '@/constants';
 
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons/button';
 
 const NavbarLanding: React.FC = () => {
   const [isClient, setIsClient] = useState(false);

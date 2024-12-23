@@ -7,9 +7,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Separator } from '@/components/ui/separator';
+} from '@/components/ui/form/form';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/form/radio-group';
+import { Separator } from '@/components/ui/layout/separator';
 
 type ScopeProps = {
   control: Control<any>;

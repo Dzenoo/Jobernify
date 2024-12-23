@@ -11,15 +11,15 @@ import { FilterCounts } from '@/types';
 
 import FilterHandler from '@/components/shared/filters/FilterHandler';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons/button';
 import {
   Drawer,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from '@/components/ui/drawer';
-import { Card, CardContent } from '@/components/ui/card';
+} from '@/components/ui/layout/drawer';
+import { Card, CardContent } from '@/components/ui/layout/card';
 
 type FilterJobsProps = {
   filterCounts: FilterCounts;

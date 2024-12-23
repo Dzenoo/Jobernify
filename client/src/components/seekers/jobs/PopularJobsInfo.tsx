@@ -2,15 +2,15 @@
 
 import React from 'react';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { useToast } from '@/components/ui/use-toast';
+} from '@/components/ui/layout/card';
+import { useToast } from '@/components/ui/info/use-toast';
 import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
 
 type PopularsJobsInfoProps = {

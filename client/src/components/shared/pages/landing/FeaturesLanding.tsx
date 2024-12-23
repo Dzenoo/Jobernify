@@ -6,7 +6,7 @@ import { FeaturesData } from '@/constants';
 
 import BlueButton from './BlueButton';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/buttons/button';
 
 const FeaturesLanding: React.FC = () => {
   return (

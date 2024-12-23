@@ -8,7 +8,7 @@ import { useGetEmployer } from '@/hooks/queries/useGetEmployer.query';
 import dynamic from 'next/dynamic';
 import LoadingDashboardJobs from '@/components/loaders/employers/LoadingDashboardJobs';
 
-import PaginatedList from '@/components/ui/paginate-list';
+import PaginatedList from '@/components/ui/pagination/paginate-list';
 import SearchJobs from '@/components/employers/dashboard/jobs/search/SearchJobs';
 
 const DashboardEmployerJobs = dynamic(

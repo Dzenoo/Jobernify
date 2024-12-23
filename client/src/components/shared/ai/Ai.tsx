@@ -14,8 +14,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet';
-import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
+} from '@/components/ui/layout/sheet';
+import { TooltipWrapper } from '@/components/ui/info/tooltip-wrapper';
 
 type AiProps = {
   isSeeker: boolean;

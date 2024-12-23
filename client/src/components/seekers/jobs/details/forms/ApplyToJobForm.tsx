@@ -17,9 +17,9 @@ import { applyToJob } from '@/lib/actions/applications.actions';
 
 import { Seeker } from '@/types';
 
-import { useToast } from '@/components/ui/use-toast';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/info/use-toast';
+import { Textarea } from '@/components/ui/form/textarea';
+import { Button } from '@/components/ui/buttons/button';
 import {
   Form,
   FormControl,
@@ -28,21 +28,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from '@/components/ui/form/form';
 import {
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
   Dialog,
-} from '@/components/ui/dialog';
+} from '@/components/ui/layout/dialog';
 import {
   Drawer,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from '@/components/ui/drawer';
+} from '@/components/ui/layout/drawer';
 import { generateCoverLetter } from '@/lib/actions/jobs.actions';
 
 type ApplyToJobFormProps = {

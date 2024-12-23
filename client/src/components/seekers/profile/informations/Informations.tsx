@@ -11,9 +11,9 @@ import { SeekerProfileSchema } from '@/lib/zod/seekers.validation';
 
 import { Seeker } from '@/types';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/buttons/button';
+import { Input } from '@/components/ui/form/input';
+import { Textarea } from '@/components/ui/form/textarea';
 import {
   Form,
   FormControl,
@@ -22,7 +22,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from '@/components/ui/form/form';
 
 type InformationsProps = {
   seeker: Seeker;

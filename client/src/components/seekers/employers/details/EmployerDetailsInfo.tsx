@@ -7,16 +7,16 @@ import { findIndustriesData, getImageUrl } from '@/lib/utils';
 import { renderIconText } from '@/helpers';
 
 import FollowEmployerButton from '../FollowEmployerButton';
-import Navigator from '@/components/ui/navigator';
+import Navigator from '@/components/ui/navigation/navigator';
 
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+} from '@/components/ui/layout/card';
+import { Button } from '@/components/ui/buttons/button';
+import { Avatar, AvatarImage } from '@/components/ui/utilies/avatar';
 
 type EmployerDetailsInfoProps = {
   employer: Employer;
