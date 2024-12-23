@@ -1,32 +1,29 @@
 import {
-  Injectable,
   ConflictException,
+  HttpStatus,
+  Injectable,
   InternalServerErrorException,
   NotAcceptableException,
-  UnauthorizedException,
-  HttpStatus,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
-
-import { VerificationService } from './verification/verification.service';
-import { NodemailerService } from 'src/common/email/nodemailer.service';
 import { JwtService } from '@nestjs/jwt';
+
 import { SeekersService } from 'src/models/seekers/seekers.service';
 import { EmployersService } from 'src/models/employers/employers.service';
+import { SignupSeekerDto } from 'src/models/seekers/dto/signup-seeker.dto';
+import { VerificationService } from '../verification/verification.service';
+import { SignUpEmployerDto } from 'src/models/employers/dto/signup-employer.dto';
 
 import * as bcrypt from 'bcrypt';
 
-import { SignupSeekerDto } from 'src/models/seekers/dto/signup-seeker.dto';
-import { SignUpEmployerDto } from 'src/models/employers/dto/signup-employer.dto';
-
 @Injectable()
-export class AuthService {
+export class LocalAuthService {
   constructor(
-    private readonly verificationService: VerificationService,
-    private readonly emailService: NodemailerService,
-    private readonly jwtService: JwtService,
-    private readonly seekersService: SeekersService,
-    private readonly employersService: EmployersService,
+    private seekersService: SeekersService,
+    private employersService: EmployersService,
+    private jwtService: JwtService,
+    private verificationService: VerificationService,
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
@@ -41,6 +38,12 @@ export class AuthService {
     if (!user) {
       throw new NotFoundException(
         'User not found. Please check your email and password.',
+      );
+    }
+
+    if (user.isGoogleAccount && user.password === null) {
+      throw new NotFoundException(
+        'Your account is registered via Google. Please log in with Google.',
       );
     }
 
@@ -115,7 +118,7 @@ export class AuthService {
       );
     }
 
-    await this.sendVerificationEmail(
+    await this.verificationService.sendVerificationEmail(
       newUser.email,
       verificationToken,
       userType,
@@ -125,14 +128,6 @@ export class AuthService {
       statusCode: HttpStatus.CREATED,
       message: 'Signup successful! Please verify your email.',
     };
-  }
-
-  async signupSeeker(body: SignupSeekerDto) {
-    return this.signup(body, 'seeker');
-  }
-
-  async signupEmployer(body: SignUpEmployerDto) {
-    return this.signup(body, 'employer');
   }
 
   private async checkEmailExistence(email: string) {
@@ -153,27 +148,5 @@ export class AuthService {
     }
 
     return null;
-  }
-
-  private async sendVerificationEmail(
-    email: string,
-    verificationToken: string,
-    userType: string,
-  ) {
-    const emailContent = `
-                          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
-                            <h2 style="color: #333;">Jobernify - Verify your email</h2>
-                            <p style="color: #555;">Please verify your email by clicking on this link: 
-                            <a href="${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}&type=${userType}" 
-                            style="color: #1a73e8;">Verify Email</a></p>
-                            <p style="color: #555;">This token expires in 24 hours, so please verify your account within this timeframe.</p>
-                          </div>
-                         `;
-
-    await this.emailService.sendMail(
-      email,
-      'Jobernify - Verify your email',
-      emailContent,
-    );
   }
 }

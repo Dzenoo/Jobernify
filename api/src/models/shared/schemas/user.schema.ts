@@ -18,12 +18,13 @@ export abstract class BaseUser {
 
   @Prop({
     type: String,
-    required: true,
-    minlength: 8,
     trim: true,
     select: false,
   })
-  password: string;
+  password?: string;
+
+  @Prop({ default: false })
+  isGoogleAccount?: boolean;
 
   @Prop({ default: false, select: false })
   emailVerified: boolean;

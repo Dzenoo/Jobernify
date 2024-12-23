@@ -61,6 +61,10 @@ const SeekersSignupForm: React.FC = () => {
     await signupSeekerMutation(values);
   };
 
+  const handleSeekerGoogleSignUp = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google?type=seeker`;
+  };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
@@ -128,18 +132,28 @@ const SeekersSignupForm: React.FC = () => {
             </FormItem>
           )}
         />
-        <Button
-          variant="default"
-          type="submit"
-          disabled={!form.formState.isValid || form.formState.isSubmitting}
-          className="w-full"
-        >
-          {form.formState.isSubmitting ? (
-            <ScaleLoader color="#fff" height={10} />
-          ) : (
-            'Register'
-          )}
-        </Button>
+        <div className="flex flex-col text-center gap-3">
+          <Button
+            variant="default"
+            type="submit"
+            disabled={!form.formState.isValid || form.formState.isSubmitting}
+            className="w-full"
+          >
+            {form.formState.isSubmitting ? (
+              <ScaleLoader color="#fff" height={10} />
+            ) : (
+              'Register'
+            )}
+          </Button>
+          <p className="text-muted-foreground">Or</p>
+          <Button
+            variant="outline"
+            type="button"
+            onClick={() => handleSeekerGoogleSignUp()}
+          >
+            Register With With Google
+          </Button>
+        </div>
       </form>
     </Form>
   );

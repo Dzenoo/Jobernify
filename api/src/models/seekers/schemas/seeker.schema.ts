@@ -140,7 +140,7 @@ export const SeekerSchema = SchemaFactory.createForClass(Seeker);
 SeekerSchema.pre('save', async function (next) {
   const seeker = this as SeekerDocument;
 
-  if (seeker.isModified('password')) {
+  if (seeker.isModified('password') && seeker.password) {
     const salt = await bcrypt.genSalt(10);
     seeker.password = await bcrypt.hash(seeker.password, salt);
   }

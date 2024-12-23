@@ -24,26 +24,19 @@ export class Employer extends BaseUser {
 
   @Prop({
     type: String,
-    required: true,
-    enum: Object.values(IndustryType),
   })
-  industry: IndustryType;
+  industry?: IndustryType;
 
   @Prop({
     type: String,
-    required: true,
-    enum: Object.values(CompanySize),
   })
-  size: CompanySize;
+  size?: CompanySize;
 
   @Prop({
     type: String,
-    required: true,
     trim: true,
-    minlength: 5,
-    maxlength: 100,
   })
-  address: string;
+  address?: string;
 
   @Prop({
     type: String,
@@ -79,7 +72,7 @@ export const EmployerSchema = SchemaFactory.createForClass(Employer);
 EmployerSchema.pre('save', async function (next) {
   const employer = this as EmployerDocument;
 
-  if (employer.isModified('password')) {
+  if (employer.isModified('password') && employer.password) {
     const salt = await bcrypt.genSalt(10);
     employer.password = await bcrypt.hash(employer.password, salt);
   }

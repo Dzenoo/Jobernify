@@ -1,19 +1,16 @@
 'use client';
 
 import React from 'react';
+import { useZoomLevel } from '@/hooks/core/useZoomLevel.hook';
 import HeroLanding from '@/components/shared/pages/landing/HeroLanding';
 import HowItWorksLanding from '@/components/shared/pages/landing/HowItWorksLanding';
 import FeaturesLanding from '@/components/shared/pages/landing/FeaturesLanding';
 import BenefitsLanding from '@/components/shared/pages/landing/BenefitsLanding';
 import TechRolesOnlyLanding from '@/components/shared/pages/landing/TechRolesOnlyLanding';
 import FaqLanding from '@/components/shared/pages/landing/FaqLanding';
-import { useZoomLevel } from '@/hooks/core/useZoomLevel.hook';
 
 const HomePage = () => {
   const isZoomedOut = useZoomLevel();
-  // const { connected, connect, disconnect } = useWebSocket({
-  //   url: 'http://localhost:8080',
-  // });
 
   return (
     <div className="flex justify-center">

@@ -57,6 +57,10 @@ const LoginForm: React.FC = () => {
     await loginToAccount({ loginData });
   };
 
+  const handleGoogleSignIn = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google`;
+  };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
@@ -86,22 +90,32 @@ const LoginForm: React.FC = () => {
             </FormItem>
           )}
         />
-        <Button
-          variant="default"
-          type="submit"
-          disabled={
-            !form.formState.isValid ||
-            form.formState.isSubmitting ||
-            isAuthenticated
-          }
-          className="w-full"
-        >
-          {form.formState.isSubmitting ? (
-            <ScaleLoader color="#fff" height={10} />
-          ) : (
-            'Login'
-          )}
-        </Button>
+        <div className="flex flex-col text-center gap-3">
+          <Button
+            variant="default"
+            type="submit"
+            disabled={
+              !form.formState.isValid ||
+              form.formState.isSubmitting ||
+              isAuthenticated
+            }
+            className="w-full"
+          >
+            {form.formState.isSubmitting ? (
+              <ScaleLoader color="#fff" height={10} />
+            ) : (
+              'Login'
+            )}
+          </Button>
+          <p className="text-muted-foreground">Or</p>
+          <Button
+            variant="outline"
+            type="button"
+            onClick={() => handleGoogleSignIn()}
+          >
+            Sign In With Google
+          </Button>
+        </div>
       </form>
     </Form>
   );
