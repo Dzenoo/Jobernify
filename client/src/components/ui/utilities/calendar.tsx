@@ -12,7 +12,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from './form/select';
+} from '../form/select';
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 

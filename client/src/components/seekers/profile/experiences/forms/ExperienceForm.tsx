@@ -29,7 +29,7 @@ import {
 import { Experience } from '@/types';
 
 import { Button } from '@/components/ui/buttons/button';
-import { Calendar } from '@/components/ui/calendar';
+import { Calendar } from '@/components/ui/utilities/calendar';
 import { Checkbox } from '@/components/ui/buttons/checkbox';
 import { Input } from '@/components/ui/form/input';
 import {
@@ -45,7 +45,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/utilies/popover';
+} from '@/components/ui/utilities/popover';
 import {
   DialogContent,
   DialogDescription,

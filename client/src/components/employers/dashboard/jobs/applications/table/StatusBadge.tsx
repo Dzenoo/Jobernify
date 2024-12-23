@@ -14,7 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
   DropdownMenuGroup,
-} from '@/components/ui/utilies/dropdown-menu';
+} from '@/components/ui/utilities/dropdown-menu';
 import { CheckCircle, XCircle, Clock, UserCheck } from 'lucide-react';
 import { Button } from '@/components/ui/buttons/button';
 

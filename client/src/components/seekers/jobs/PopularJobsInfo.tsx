@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from '@/components/ui/layout/card';
 import { useToast } from '@/components/ui/info/use-toast';
-import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
+import { TooltipWrapper } from '@/components/ui/info/tooltip-wrapper';
 
 type PopularsJobsInfoProps = {
   jobs: {

@@ -16,7 +16,7 @@ import {
   CardHeader,
 } from '@/components/ui/layout/card';
 import { Button } from '@/components/ui/buttons/button';
-import { Avatar, AvatarImage } from '@/components/ui/utilies/avatar';
+import { Avatar, AvatarImage } from '@/components/ui/utilities/avatar';
 
 type EmployerDetailsInfoProps = {
   employer: Employer;

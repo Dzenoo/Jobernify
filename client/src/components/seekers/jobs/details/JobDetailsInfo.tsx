@@ -34,7 +34,7 @@ import {
 import { Application, Job } from '@/types';
 
 import { Button } from '@/components/ui/buttons/button';
-import { Avatar, AvatarImage } from '@/components/ui/utilies/avatar';
+import { Avatar, AvatarImage } from '@/components/ui/utilities/avatar';
 import { Card, CardContent, CardHeader } from '@/components/ui/layout/card';
 
 type JobDetailsInfoProps = {

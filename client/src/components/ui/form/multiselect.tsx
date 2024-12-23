@@ -6,8 +6,8 @@ import {
   CommandList,
   CommandGroup,
   CommandInput,
-} from '@/components/ui/utilies/command';
-import { Badge } from '@/components/ui/utilies/badge';
+} from '@/components/ui/utilities/command';
+import { Badge } from '@/components/ui/utilities/badge';
 import { getSkillNames } from '@/lib/utils';
 
 type MultiSelectOption = {

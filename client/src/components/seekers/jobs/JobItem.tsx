@@ -17,14 +17,14 @@ import { renderIconText } from '@/helpers';
 
 import { Job } from '@/types';
 
-import { Avatar, AvatarImage } from '@/components/ui/utilies/avatar';
+import { Avatar, AvatarImage } from '@/components/ui/utilities/avatar';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
 } from '@/components/ui/layout/card';
-import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
+import { TooltipWrapper } from '@/components/ui/info/tooltip-wrapper';
 
 type JobItemProps = {
   job: Job;

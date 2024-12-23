@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/buttons/button';
-import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
+import { TooltipWrapper } from '@/components/ui/info/tooltip-wrapper';
 
 const EmployersDashboardNavbar: React.FC = () => {
   const pathname = usePathname();

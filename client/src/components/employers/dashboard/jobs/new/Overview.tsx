@@ -23,8 +23,8 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/utilies/popover';
-import { Calendar } from '@/components/ui/calendar';
+} from '@/components/ui/utilities/popover';
+import { Calendar } from '@/components/ui/utilities/calendar';
 import { Input } from '@/components/ui/form/input';
 import { Button } from '@/components/ui/buttons/button';
 

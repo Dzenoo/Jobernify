@@ -15,7 +15,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/utilies/table';
+} from '@/components/ui/utilities/table';
 import { Dialog } from '@/components/ui/layout/dialog';
 import { Drawer } from '@/components/ui/layout/drawer';
 

@@ -21,7 +21,7 @@ import { Education } from '@/types';
 import { useToast } from '@/components/ui/info/use-toast';
 import { Button } from '@/components/ui/buttons/button';
 import { Input } from '@/components/ui/form/input';
-import { Calendar } from '@/components/ui/calendar';
+import { Calendar } from '@/components/ui/utilities/calendar';
 import {
   Form,
   FormControl,
@@ -35,7 +35,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/utilies/popover';
+} from '@/components/ui/utilities/popover';
 import {
   DialogContent,
   DialogDescription,

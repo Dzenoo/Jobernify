@@ -23,7 +23,7 @@ import { findIndustriesData, formatDate, getImageUrl } from '@/lib/utils';
 import { renderIconText } from '@/helpers';
 
 import { Application } from '@/types';
-import { Avatar, AvatarImage } from '@/components/ui/utilies/avatar';
+import { Avatar, AvatarImage } from '@/components/ui/utilities/avatar';
 
 type ApplicationItemProps = {
   application: Pick<Application, '_id' | 'status' | 'createdAt' | 'job'>;

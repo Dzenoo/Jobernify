@@ -6,7 +6,7 @@ import { LogOut, LucideIcon } from 'lucide-react';
 import Ai from '@/components/shared/ai/Ai';
 import Themes from './Themes';
 
-import { TooltipWrapper } from '@/components/ui/tooltip-wrapper';
+import { TooltipWrapper } from '@/components/ui/info/tooltip-wrapper';
 
 type NavbarActionsListProps = {
   isSeeker: boolean;

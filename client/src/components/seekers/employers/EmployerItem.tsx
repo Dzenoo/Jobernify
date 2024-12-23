@@ -11,7 +11,7 @@ import { Employer } from '@/types';
 
 import FollowEmployerButton from './FollowEmployerButton';
 
-import { Avatar, AvatarImage } from '@/components/ui/utilies/avatar';
+import { Avatar, AvatarImage } from '@/components/ui/utilities/avatar';
 import { Card, CardContent, CardFooter } from '@/components/ui/layout/card';
 
 type EmployersItemProps = {

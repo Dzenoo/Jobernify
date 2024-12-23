@@ -23,7 +23,7 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@/components/ui/utilies/avatar';
+} from '@/components/ui/utilities/avatar';
 
 const Navbar: React.FC<{ href?: string }> = ({ href }) => {
   const [isMounted, setIsMounted] = React.useState(false);
