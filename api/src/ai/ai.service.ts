@@ -36,7 +36,6 @@ export class AiService {
   }
 
   async addMessageToThread(client: any, threadId: string, userMessage: string) {
-    console.log(client);
     const messageResponse = await this.openai.beta.threads.messages.create(
       threadId,
       {
