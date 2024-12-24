@@ -66,7 +66,7 @@ const Socials: React.FC<SocialsProps> = ({ seeker }) => {
           />
         </Drawer>
       )}
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center gap-3">
           <div>
             <h1 className="text-base-black">Socials</h1>
@@ -88,7 +88,7 @@ const Socials: React.FC<SocialsProps> = ({ seeker }) => {
           {SocialsArrays.map(({ id, title, data, icon }) => (
             <div
               key={id}
-              className="bg-card text-card-foreground border rounded-lg px-16 py-7 flex flex-col gap-3 items-center justify-center transition-all overflow-hidden hover:border-gray-300 dark:hover:border-[#585858]"
+              className={`bg-card text-card-foreground border rounded-lg px-16 py-7 flex flex-col gap-3 items-center justify-center transition-all overflow-hidden hover:border-gray-300 dark:hover:border-[#585858] ${title === 'Linkedin' && 'max-lg:col-span-2 max-sm:col-span-1'}`}
             >
               <div>{icon}</div>
               <div>

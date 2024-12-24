@@ -76,7 +76,7 @@ const Informations: React.FC<InformationsProps> = ({ seeker }) => {
   ];
 
   return (
-    <div className="flex flex-col gap-[16px] dark:border-[#3b3b3b]">
+    <div className="flex flex-col gap-5 dark:border-[#3b3b3b]">
       <div className="flex justify-between items-center gap-3">
         <div>
           <h1 className="text-base-black">Profile Information</h1>
