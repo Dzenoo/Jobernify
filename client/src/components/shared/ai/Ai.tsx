@@ -41,7 +41,10 @@ const Ai: React.FC<AiProps> = ({ isSeeker }) => {
           <Bot />
         </TooltipWrapper>
       </SheetTrigger>
-      <SheetContent className="p-4 flex flex-col">
+      <SheetContent
+        onOpenAutoFocus={(e) => e.preventDefault()}
+        className="p-4 flex flex-col"
+      >
         <SheetHeader className="pt-5">
           <SheetTitle className="flex items-center gap-2">
             <Bot />

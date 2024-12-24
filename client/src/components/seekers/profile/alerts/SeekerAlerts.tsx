@@ -106,26 +106,26 @@ const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(
                 {Array.from([
                   {
                     id: '1',
-                    title: 'Title',
+                    title: 'Job Title',
                     data: alerts?.title,
                   },
                   {
                     id: '2',
-                    title: 'Type',
+                    title: 'Job Type',
                     data: alerts?.type,
                   },
                   {
                     id: '3',
-                    title: 'Level',
+                    title: 'Job Level',
                     data: alerts?.level,
                   },
                 ]).map((alertsInfoData) => (
                   <div key={alertsInfoData.id} className="flex flex-col gap-3">
                     <div>
-                      <h1 className="font-semibold">{alertsInfoData.title}</h1>
+                      <h1>{alertsInfoData.title}</h1>
                     </div>
                     <div>
-                      <p className="text-muted-foreground text-base">
+                      <p className="text-sm text-muted-foreground">
                         {alertsInfoData?.data}
                       </p>
                     </div>

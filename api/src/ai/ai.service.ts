@@ -80,6 +80,14 @@ export class AiService {
     };
   }
 
+  async getMessagesFromThread(threadId: string) {
+    const messages = await this.openai.beta.threads.messages.list(threadId);
+    return messages.data.reverse().map((msg) => ({
+      role: msg.role,
+      content: msg.content,
+    }));
+  }
+
   private async handleToolCalls(client: any, threadId: string, run: any) {
     const toolCalls = run.required_action.submit_tool_outputs.tool_calls;
     const toolOutputs = [];
@@ -91,17 +99,11 @@ export class AiService {
       if (funcName === 'searchJobs') {
         // const seekerId = args.seekerId;
         const seekerId = client.handshake.auth?.seekerId;
-        let matchedJobs = await this.jobsService.findMatchingJobs(seekerId);
-
-        // Ensure each job has a link
-        const refactoredMatchedJobs = matchedJobs.map((job) => ({
-          ...job,
-          link: `${process.env.FRONTEND_URL}/jobs/${job._id}`,
-        }));
+        const matchingJobs = await this.jobsService.findMatchingJobs(seekerId);
 
         toolOutputs.push({
           tool_call_id: call.id,
-          output: JSON.stringify(refactoredMatchedJobs),
+          output: JSON.stringify(matchingJobs),
         });
       }
       // else if (funcName === 'someOtherFunction') { ... }
@@ -110,14 +112,6 @@ export class AiService {
     return this.openai.beta.threads.runs.submitToolOutputs(threadId, run.id, {
       tool_outputs: toolOutputs,
     });
-  }
-
-  async getMessagesFromThread(threadId: string) {
-    const messages = await this.openai.beta.threads.messages.list(threadId);
-    return messages.data.reverse().map((msg) => ({
-      role: msg.role,
-      content: msg.content,
-    }));
   }
 
   async generateCoverLetter({

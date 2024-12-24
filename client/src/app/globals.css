@@ -166,4 +166,8 @@
 
   .aiChat p {
   }
+
+  .aiChat a {
+    @apply text-blue-500;
+  }
 }

@@ -100,7 +100,7 @@ const AiForm: React.FC<AiFormProps> = ({ socket }) => {
         />
         <Button
           variant="ghost"
-          disabled={!form.formState.isValid || isTyping || !threadId}
+          disabled={!form.formState.isValid || isTyping}
           type="submit"
           className="absolute bottom-1.5 right-1.5 p-2 w-8 h-8 rounded-full"
         >

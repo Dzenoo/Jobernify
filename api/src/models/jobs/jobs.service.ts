@@ -517,37 +517,69 @@ export class JobsService {
     };
   }
 
-  async findMatchingJobs(seeker: Seeker): Promise<JobDocument[]> {
+  async findMatchingJobs(seekerId: string) {
+    const seeker = await this.seekersService.findOneById(seekerId);
+    if (!seeker) return [];
+
     const { alerts: { level, type, title } = {}, skills, experience } = seeker;
 
-    const query: any = {};
+    const orConditions: any[] = [];
 
+    // If user has some 'type' fields
     if (type && type.length > 0) {
-      query.type = { $in: type };
+      orConditions.push({ type: { $in: type } });
     }
 
+    // If user has some 'level' fields
     if (level && level.length > 0) {
-      query.level = { $in: level };
+      orConditions.push({ level: { $in: level } });
     }
 
+    // If user has some 'title' fields
     if (title && title.length > 0) {
-      query.title = { $in: title };
+      orConditions.push({ title: { $in: title } });
     }
 
+    // If user has 'skills'
     if (skills && skills.length > 0) {
-      query.skills = { $in: skills };
+      orConditions.push({ skills: { $in: skills } });
     }
 
+    // If user has 'experience' arrays
     if (experience && experience.length > 0) {
-      query['experience.level'] = { $in: experience.map((exp) => exp.level) };
-      query['experience.type'] = { $in: experience.map((exp) => exp.type) };
-      query['experience.position'] = {
-        $in: experience.map((exp) => exp.position),
-      };
+      const levels = experience.map((exp) => exp.level);
+      const types = experience.map((exp) => exp.type);
+      const positions = experience.map((exp) => exp.position);
+
+      if (levels.length > 0) {
+        orConditions.push({ 'experience.level': { $in: levels } });
+      }
+      if (types.length > 0) {
+        orConditions.push({ 'experience.type': { $in: types } });
+      }
+      if (positions.length > 0) {
+        orConditions.push({ 'experience.position': { $in: positions } });
+      }
     }
 
-    const matchingJobs = await this.jobModel.find(query);
+    // If the user provided NO data (orConditions is empty), return []
+    if (orConditions.length === 0) {
+      return [];
+    }
 
-    return matchingJobs;
+    // Build the final query with $or
+    const query = { $or: orConditions };
+
+    const matchingJobs = await this.jobModel
+      .find(query)
+      .select('_id title salary location type level overview')
+      .exec();
+
+    const refactoredMatchingJobs = matchingJobs.map((job) => ({
+      ...(job.toObject?.() || job), // in case job is a Mongoose doc
+      link: `${process.env.FRONTEND_URL}/jobs/${job._id}`,
+    }));
+
+    return refactoredMatchingJobs;
   }
 }
