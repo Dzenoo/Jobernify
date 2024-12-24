@@ -47,7 +47,7 @@ const EmployerItem: React.FC<EmployersItemProps> = ({
     {
       id: '3',
       icon: <Building />,
-      data: findIndustriesData(industry),
+      data: findIndustriesData(industry) || 'N/A',
       tooltip: 'Industry',
     },
   ];

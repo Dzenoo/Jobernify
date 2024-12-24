@@ -2,17 +2,20 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 
 import OpenAI from 'openai';
 
-import { ConfigService } from '@nestjs/config';
+import { SeekersService } from 'src/models/seekers/seekers.service';
 import { JobsService } from 'src/models/jobs/jobs.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AiService {
   private readonly openai: OpenAI;
 
   constructor(
-    private readonly configService: ConfigService,
+    @Inject(forwardRef(() => SeekersService))
+    private readonly seekersService: SeekersService,
     @Inject(forwardRef(() => JobsService))
     private readonly jobsService: JobsService,
+    private readonly configService: ConfigService,
   ) {
     this.openai = new OpenAI({
       apiKey: this.configService.get('OPENAI_API_KEY'),
@@ -27,6 +30,97 @@ export class AiService {
     );
   }
 
+  async createThread() {
+    const thread = await this.openai.beta.threads.create();
+    return thread;
+  }
+
+  async addMessageToThread(client: any, threadId: string, userMessage: string) {
+    console.log(client);
+    const messageResponse = await this.openai.beta.threads.messages.create(
+      threadId,
+      {
+        role: 'user',
+        content: userMessage,
+      },
+    );
+
+    let run = await this.openai.beta.threads.runs.create(threadId, {
+      assistant_id: (await this.getAssistant()).id,
+    });
+
+    while (true) {
+      run = await this.openai.beta.threads.runs.retrieve(threadId, run.id);
+
+      if (run.status === 'requires_action') {
+        // We need to parse the function calls
+        run = await this.handleToolCalls(client, threadId, run);
+      } else if (run.status === 'in_progress') {
+        // Wait a bit, then poll again
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      } else if (run.status === 'completed') {
+        // The run is finished; let's get the final assistant message
+        break;
+      } else if (run.status === 'failed') {
+        throw new Error('Assistant run failed.');
+      }
+    }
+
+    const messages = await this.getMessagesFromThread(threadId);
+    const assistantMessageObj: any = messages
+      .filter((msg) => msg.role === 'assistant')
+      .pop();
+
+    const assistantMessage =
+      assistantMessageObj?.content[0]?.text.value ||
+      'No response from assistant.';
+
+    return {
+      userMessage: messageResponse,
+      assistantMessage,
+    };
+  }
+
+  private async handleToolCalls(client: any, threadId: string, run: any) {
+    const toolCalls = run.required_action.submit_tool_outputs.tool_calls;
+    const toolOutputs = [];
+
+    for (const call of toolCalls) {
+      const funcName = call.function.name;
+      // const args = JSON.parse(call.function.arguments || '{}');
+
+      if (funcName === 'searchJobs') {
+        // const seekerId = args.seekerId;
+        const seekerId = client.handshake.auth?.seekerId;
+        let matchedJobs = await this.jobsService.findMatchingJobs(seekerId);
+
+        // Ensure each job has a link
+        const refactoredMatchedJobs = matchedJobs.map((job) => ({
+          ...job,
+          link: `${process.env.FRONTEND_URL}/jobs/${job._id}`,
+        }));
+
+        toolOutputs.push({
+          tool_call_id: call.id,
+          output: JSON.stringify(refactoredMatchedJobs),
+        });
+      }
+      // else if (funcName === 'someOtherFunction') { ... }
+    }
+
+    return this.openai.beta.threads.runs.submitToolOutputs(threadId, run.id, {
+      tool_outputs: toolOutputs,
+    });
+  }
+
+  async getMessagesFromThread(threadId: string) {
+    const messages = await this.openai.beta.threads.messages.list(threadId);
+    return messages.data.reverse().map((msg) => ({
+      role: msg.role,
+      content: msg.content,
+    }));
+  }
+
   async generateCoverLetter({
     jobData,
     seekerData,
@@ -38,7 +132,7 @@ export class AiService {
       model: 'gpt-3.5-turbo',
       messages: [
         {
-          role: 'developer',
+          role: 'system',
           content:
             'You are an AI assistant helping users craft professional and personalized cover letters for job applications. Ensure the cover letter is formal, tailored to the job description, and highlights relevant skills and experiences.',
         },
@@ -65,46 +159,5 @@ export class AiService {
     });
 
     return completion.choices[0].message.content;
-  }
-
-  async createThread() {
-    const thread = await this.openai.beta.threads.create();
-    return thread;
-  }
-
-  async addMessageToThread(threadId: string, userMessage: string) {
-    const messageResponse = await this.openai.beta.threads.messages.create(
-      threadId,
-      {
-        role: 'user',
-        content: userMessage,
-      },
-    );
-
-    await this.openai.beta.threads.runs.createAndPoll(threadId, {
-      assistant_id: (await this.getAssistant()).id,
-    });
-
-    const messages = await this.getMessagesFromThread(threadId);
-    const assistantMessageObj: any = messages
-      .filter((msg) => msg.role === 'assistant')
-      .pop();
-
-    const assistantMessage =
-      assistantMessageObj?.content[0]?.text.value ||
-      'No response from assistant.';
-
-    return {
-      userMessage: messageResponse,
-      assistantMessage,
-    };
-  }
-
-  async getMessagesFromThread(threadId: string) {
-    const messages = await this.openai.beta.threads.messages.list(threadId);
-    return messages.data.reverse().map((msg) => ({
-      role: msg.role,
-      content: msg.content,
-    }));
   }
 }

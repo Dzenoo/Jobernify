@@ -15,11 +15,6 @@ const EmployerData: React.FC<EmployerInformationsProps> = ({ employer }) => {
       title: 'Company Name',
       data: employer?.name,
     },
-    {
-      id: '2',
-      title: 'Address',
-      data: employer?.address,
-    },
   ];
 
   return (
@@ -35,7 +30,18 @@ const EmployerData: React.FC<EmployerInformationsProps> = ({ employer }) => {
             </div>
           </div>
         ))}
+        <div>
+          <div>
+            <h1>Address</h1>
+          </div>
+          <div>
+            <p className="text-muted-foreground text-base">
+              {employer?.address || 'No Address Available'}
+            </p>
+          </div>
+        </div>
       </div>
+
       <div>
         <div>
           <h1>Description</h1>

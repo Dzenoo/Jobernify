@@ -8,7 +8,13 @@ export class WsJwtGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
     const client: Socket = context.switchToWs().getClient();
 
-    WsJwtGuard.validateToken(client);
+    const payload = WsJwtGuard.validateToken(client);
+
+    if ((payload as any).role === 'seeker') {
+      client.handshake.auth.seekerId = payload.sub;
+    } else {
+      client.handshake.auth.employerId = payload.sub;
+    }
 
     return true;
   }

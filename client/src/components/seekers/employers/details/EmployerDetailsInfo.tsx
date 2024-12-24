@@ -46,12 +46,12 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
     {
       id: '2',
       icon: <Building />,
-      data: employerIndustry,
+      data: employerIndustry || 'N/A',
     },
     {
       id: '3',
       icon: <LayoutTemplate />,
-      data: size + ' Employees',
+      data: size || 'N/A' + ' Employees',
     },
   ];
 

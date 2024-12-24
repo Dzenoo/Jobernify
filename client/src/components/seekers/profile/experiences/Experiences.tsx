@@ -69,9 +69,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ experience }) => {
       <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center gap-3">
           <div>
-            <h1 className="text-base-black">
-              Experience ({experience.length})
-            </h1>
+            <h1 className="text-base-black">Experience</h1>
           </div>
           <div>
             <Button

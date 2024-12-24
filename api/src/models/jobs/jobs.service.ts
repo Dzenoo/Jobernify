@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
+import { Seeker } from '../seekers/schemas/seeker.schema';
 import { Job, JobDocument } from './schemas/job.schema';
 
 import mongoose, {
@@ -514,5 +515,39 @@ export class JobsService {
       popularJobs,
       filterCounts,
     };
+  }
+
+  async findMatchingJobs(seeker: Seeker): Promise<JobDocument[]> {
+    const { alerts: { level, type, title } = {}, skills, experience } = seeker;
+
+    const query: any = {};
+
+    if (type && type.length > 0) {
+      query.type = { $in: type };
+    }
+
+    if (level && level.length > 0) {
+      query.level = { $in: level };
+    }
+
+    if (title && title.length > 0) {
+      query.title = { $in: title };
+    }
+
+    if (skills && skills.length > 0) {
+      query.skills = { $in: skills };
+    }
+
+    if (experience && experience.length > 0) {
+      query['experience.level'] = { $in: experience.map((exp) => exp.level) };
+      query['experience.type'] = { $in: experience.map((exp) => exp.type) };
+      query['experience.position'] = {
+        $in: experience.map((exp) => exp.position),
+      };
+    }
+
+    const matchingJobs = await this.jobModel.find(query);
+
+    return matchingJobs;
   }
 }

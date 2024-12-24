@@ -85,7 +85,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
         tooltip: 'Size',
         id: '2',
         icon: <LayoutTemplate />,
-        data: employer.size,
+        data: employer.size || 'N/A',
       },
     ];
 
@@ -169,7 +169,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
                     tooltipContent: 'Industry',
                     id: '3',
                     icon: <Building />,
-                    data: findIndustriesData(employer.industry),
+                    data: findIndustriesData(employer.industry) || 'N/A',
                   })}
                   <div className="flex items-center gap-3 flex-wrap">
                     {EmployerInformationsData.map((data) =>

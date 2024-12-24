@@ -48,6 +48,7 @@ export class AiGateway
     const { threadId, message } = payload;
     try {
       const response = await this.aiService.addMessageToThread(
+        client,
         threadId,
         message,
       );
