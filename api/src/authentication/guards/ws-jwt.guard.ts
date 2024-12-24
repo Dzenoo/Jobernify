@@ -23,14 +23,14 @@ export class WsJwtGuard implements CanActivate {
     const token = client.handshake.query.token as string;
 
     if (!token) {
-      throw new Error('Token missing in query');
+      throw new Error('Token missing!');
     }
 
     try {
       const payload = verify(token, process.env.JWT_SECRET);
       return payload;
     } catch (error) {
-      throw new Error('Invalid token');
+      throw new Error('Invalid token!');
     }
   }
 }

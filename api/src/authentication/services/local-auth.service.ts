@@ -80,13 +80,15 @@ export class LocalAuthService {
     const emailCheckResult = await this.checkEmailExistence(body.email);
 
     if (emailCheckResult) {
-      const errorMessage = emailCheckResult.emailVerified
-        ? 'An account with this email already exists.'
-        : 'An account with this email already exists but is not verified. Please check your email for the verification link or request a new one.';
-
-      throw emailCheckResult.emailVerified
-        ? new ConflictException(errorMessage)
-        : new NotAcceptableException(errorMessage);
+      if (emailCheckResult.emailVerified) {
+        throw new ConflictException(
+          `An account with this email already exists as a ${emailCheckResult.userType}.`,
+        );
+      } else {
+        throw new NotAcceptableException(
+          `An account with this email already exists as a ${emailCheckResult.userType} but is not verified. Please check your email for the verification link or request a new one.`,
+        );
+      }
     }
 
     const { verificationToken, verificationExpiration } =
@@ -95,16 +97,20 @@ export class LocalAuthService {
     let newUser;
 
     if (userType === 'seeker') {
+      const seekerSignUpBody = body as SignupSeekerDto;
+
       const seekerBody = {
-        ...(body as SignupSeekerDto),
+        ...seekerSignUpBody,
         verificationToken,
         verificationExpiration,
       };
 
       newUser = await this.seekersService.createOne(seekerBody);
     } else {
+      const employerSignUpBody = body as SignUpEmployerDto;
+
       const employerBody = {
-        ...(body as SignUpEmployerDto),
+        ...employerSignUpBody,
         verificationToken,
         verificationExpiration,
       };
@@ -131,7 +137,10 @@ export class LocalAuthService {
   }
 
   private async checkEmailExistence(email: string) {
-    const existingSeeker = await this.seekersService.findOneByEmail(email);
+    const existingSeeker = await this.seekersService.findOneByEmail(
+      email,
+      '+emailVerified',
+    );
     if (existingSeeker) {
       return {
         userType: 'seeker',
@@ -139,7 +148,10 @@ export class LocalAuthService {
       };
     }
 
-    const existingEmployer = await this.employersService.findOneByEmail(email);
+    const existingEmployer = await this.employersService.findOneByEmail(
+      email,
+      '+emailVerified',
+    );
     if (existingEmployer) {
       return {
         userType: 'employer',

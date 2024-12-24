@@ -1,6 +1,8 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 
 import OpenAI from 'openai';
+import { Run } from 'openai/resources/beta/threads/runs/runs';
+import { Socket } from 'socket.io';
 
 import { SeekersService } from 'src/models/seekers/seekers.service';
 import { JobsService } from 'src/models/jobs/jobs.service';
@@ -35,7 +37,11 @@ export class AiService {
     return thread;
   }
 
-  async addMessageToThread(client: any, threadId: string, userMessage: string) {
+  async addMessageToThread(
+    client: Socket,
+    threadId: string,
+    userMessage: string,
+  ) {
     const messageResponse = await this.openai.beta.threads.messages.create(
       threadId,
       {
@@ -88,7 +94,7 @@ export class AiService {
     }));
   }
 
-  private async handleToolCalls(client: any, threadId: string, run: any) {
+  private async handleToolCalls(client: Socket, threadId: string, run: Run) {
     const toolCalls = run.required_action.submit_tool_outputs.tool_calls;
     const toolOutputs = [];
 
