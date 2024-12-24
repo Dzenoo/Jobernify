@@ -572,7 +572,7 @@ export class JobsService {
 
     const matchingJobs = await this.jobModel
       .find(query)
-      .select('_id title salary location type level overview')
+      .select('_id title salary location type level skills')
       .exec();
 
     const refactoredMatchingJobs = matchingJobs.map((job) => ({

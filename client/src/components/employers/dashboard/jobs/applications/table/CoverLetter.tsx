@@ -1,6 +1,8 @@
 import React from 'react';
 
-import ReactMarkdown from 'react-markdown';
+import MarkdownRenderer from '@/components/shared/markdown/MarkdownRenderer';
+
+import { sanitize } from '@/lib/utils';
 
 import { Button } from '@/components/ui/buttons/button';
 import {
@@ -17,6 +19,8 @@ type CoverLetterProps = {
 };
 
 const CoverLetter: React.FC<CoverLetterProps> = ({ cover_letter }) => {
+  const sanitizedCoverLetter = sanitize(cover_letter);
+
   return cover_letter ? (
     <Dialog>
       <DialogTrigger asChild>
@@ -32,7 +36,7 @@ const CoverLetter: React.FC<CoverLetterProps> = ({ cover_letter }) => {
           </DialogDescription>
         </DialogHeader>
         <div className="overflow-auto max-h-96 hide-scrollbar">
-          <ReactMarkdown>{cover_letter}</ReactMarkdown>
+          <MarkdownRenderer content={sanitizedCoverLetter} />
         </div>
       </DialogContent>
     </Dialog>

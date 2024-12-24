@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 
-import ReactMarkdown from 'react-markdown';
 import { Bot, User } from 'lucide-react';
 import { ScaleLoader } from 'react-spinners';
 
 import { useAiAssistant } from '@/context/ai-assistant';
+import { sanitize } from '@/lib/utils';
+
+import MarkdownRenderer from '../markdown/MarkdownRenderer';
 
 type AiChatProps = {
   socket: any;
@@ -67,11 +69,14 @@ const AiChat: React.FC<AiChatProps> = ({ socket }) => {
             <div
               className={`border border-input p-2.5 rounded-xl w-fit ${isUser(message.role) ? 'ml-5 bg-muted' : 'mr-5'}`}
             >
-              <ReactMarkdown className="aiChat space-y-5 text-sm">
-                {typeof message.content === 'string'
-                  ? message.content
-                  : message.content[0].text.value}
-              </ReactMarkdown>
+              <MarkdownRenderer
+                className="aiChat space-y-5 text-sm"
+                content={sanitize(
+                  typeof message.content === 'string'
+                    ? message.content
+                    : message.content[0].text.value,
+                )}
+              />
             </div>
           </div>
         );

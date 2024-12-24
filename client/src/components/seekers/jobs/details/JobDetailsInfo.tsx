@@ -3,9 +3,6 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import DOMPurify from 'dompurify';
-import ReactMarkdown from 'react-markdown';
-
 import {
   Building,
   Calendar,
@@ -18,6 +15,7 @@ import {
 
 import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
 
+import MarkdownRenderer from '@/components/shared/markdown/MarkdownRenderer';
 import SaveJobButton from '../SaveJobButton';
 import Navigator from '@/components/ui/navigation/navigator';
 
@@ -29,6 +27,7 @@ import {
   getImageUrl,
   getSkillsData,
   getTime,
+  sanitize,
 } from '@/lib/utils';
 
 import { Application, Job } from '@/types';
@@ -69,7 +68,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
       return;
     }
 
-    const sanitizedDescription = DOMPurify.sanitize(description);
+    const sanitizedDescription = sanitize(description);
     const expirationDate = formatDate(expiration_date);
     const createdTime = getTime(createdAt);
     const categorizedSkills = getSkillsData(skills);
@@ -229,9 +228,10 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
                 <h1 className="font-semibold">Description</h1>
               </div>
               <div>
-                <ReactMarkdown className="jobDescription">
-                  {sanitizedDescription}
-                </ReactMarkdown>
+                <MarkdownRenderer
+                  className="jobDescription"
+                  content={sanitizedDescription}
+                />
               </div>
             </div>
             <div>
