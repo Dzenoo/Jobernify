@@ -15,6 +15,7 @@ import {
   CardHeader,
 } from '@/components/ui/layout/card';
 import { Button } from '@/components/ui/buttons/button';
+import { TooltipWrapper } from '@/components/ui/info/tooltip-wrapper';
 
 type SeekerItemProps = {
   seeker: Seeker;
@@ -38,16 +39,19 @@ const SeekerItem: React.FC<SeekerItemProps> = ({
       id: '1',
       href: portfolio,
       icon: <LucideImage />,
+      tooltip: 'Portfolio',
     },
     {
       id: '2',
       href: github,
       icon: <Github />,
+      tooltip: 'Github',
     },
     {
       id: '3',
       href: linkedin,
       icon: <Linkedin />,
+      tooltip: 'Linkedin',
     },
   ];
 
@@ -81,26 +85,28 @@ const SeekerItem: React.FC<SeekerItemProps> = ({
           <p>{headline}</p>
         </div>
         <div className="flex items-center gap-10 pt-3">
-          {SocialsArrays.map((socials) =>
-            socials.href ? (
-              <a
-                className="text-[--blue-base-color]"
-                href={formatURL(socials.href)}
-                target="_blank"
-                rel="noopener noreferrer"
-                key={socials.id}
-              >
-                {socials.icon}
-              </a>
-            ) : (
-              <div
-                className="text-muted-foreground cursor-not-allowed"
-                key={socials.id}
-              >
-                {socials.icon}
-              </div>
-            ),
-          )}
+          {SocialsArrays.map((socials) => (
+            <TooltipWrapper key={socials.id} tooltip={socials.tooltip}>
+              {socials.href ? (
+                <a
+                  className="text-[--blue-base-color]"
+                  href={formatURL(socials.href)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={socials.id}
+                >
+                  {socials.icon}
+                </a>
+              ) : (
+                <div
+                  className="text-muted-foreground cursor-not-allowed"
+                  key={socials.id}
+                >
+                  {socials.icon}
+                </div>
+              )}
+            </TooltipWrapper>
+          ))}
         </div>
       </CardContent>
       <CardFooter>
