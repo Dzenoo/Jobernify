@@ -5,7 +5,9 @@ import React, { useState } from 'react';
 import { ListFilter } from 'lucide-react';
 
 import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
+import { injectCountsIntoFilters } from '@/lib/utils';
 import { SkillsInformationsData } from '@/constants';
+import { FilterCounts } from '@/types';
 
 import FilterHandler from '@/components/shared/filters/FilterHandler';
 
@@ -19,7 +21,11 @@ import {
 import { Button } from '@/components/ui/buttons/button';
 import { Card, CardContent } from '@/components/ui/layout/card';
 
-const FilterSeekers: React.FC = () => {
+type FilterSeekersProps = {
+  filterCounts: FilterCounts;
+};
+
+const FilterSeekers: React.FC<FilterSeekersProps> = ({ filterCounts }) => {
   const isLarge = useMediaQuery('(min-width: 1280px)');
   const [open, setOpen] = useState(false);
 
@@ -28,7 +34,7 @@ const FilterSeekers: React.FC = () => {
       <div className="hidden xl:block">
         <Card>
           <CardContent>
-            <FiltersContent />
+            <FiltersContent filterCounts={filterCounts} />
           </CardContent>
         </Card>
       </div>
@@ -51,7 +57,7 @@ const FilterSeekers: React.FC = () => {
                 </DrawerDescription>
               </DrawerHeader>
               <div className="hide-scrollbar overflow-auto p-5 space-y-6 mt-4 h-96">
-                <FiltersContent />
+                <FiltersContent filterCounts={filterCounts} />
               </div>
             </DrawerContent>
           </Drawer>
@@ -61,7 +67,9 @@ const FilterSeekers: React.FC = () => {
   );
 };
 
-const FiltersContent: React.FC = () => {
+const FiltersContent: React.FC<{ filterCounts: FilterCounts }> = ({
+  filterCounts,
+}) => {
   const transformedSkillsInformationsData = SkillsInformationsData.map(
     (item) => ({
       id: item.id,
@@ -71,9 +79,19 @@ const FiltersContent: React.FC = () => {
     }),
   );
 
+  const typeToCountMapForSeekers = {
+    skills: 'skills',
+  };
+
+  const updatedJobsFiltersData = injectCountsIntoFilters(
+    transformedSkillsInformationsData,
+    filterCounts,
+    typeToCountMapForSeekers,
+  );
+
   return (
     <div className="flex flex-col gap-5">
-      {transformedSkillsInformationsData.map((filterGroup) => (
+      {updatedJobsFiltersData.map((filterGroup) => (
         <FilterHandler
           key={filterGroup.id}
           filterGroups={[filterGroup]}

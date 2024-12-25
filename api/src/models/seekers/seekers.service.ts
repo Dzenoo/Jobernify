@@ -274,6 +274,25 @@ export class SeekersService {
       conditions.skills = { $in: filteredSkills };
     }
 
+    const filterCounts = await this.seekerModel.aggregate([
+      {
+        $match: { emailVerified: true },
+      },
+      {
+        $facet: {
+          skills: [
+            { $unwind: '$skills' },
+            {
+              $group: {
+                _id: '$skills',
+                count: { $sum: 1 },
+              },
+            },
+          ],
+        },
+      },
+    ]);
+
     const seekers = await this.seekerModel
       .find(conditions)
       .skip((page - 1) * limit)
@@ -288,6 +307,7 @@ export class SeekersService {
     return {
       statusCode: HttpStatus.OK,
       seekers,
+      filterCounts,
       totalSeekers,
     };
   }

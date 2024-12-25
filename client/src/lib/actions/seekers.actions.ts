@@ -5,7 +5,7 @@ import {
   deleteApiHandler,
 } from '../api';
 
-import { Seeker } from '@/types';
+import { FilterCounts, Seeker } from '@/types';
 
 /**
  * ===============================
@@ -197,7 +197,11 @@ export const getSeekers = async ({
   page: number;
   skills?: string | string[];
   search?: string;
-}): Promise<{ seekers: Seeker[]; totalSeekers: number }> => {
+}): Promise<{
+  seekers: Seeker[];
+  totalSeekers: number;
+  filterCounts: FilterCounts;
+}> => {
   return await getApiHandler(
     `seekers/all?page=${page}&search=${search}&skills=${skills}`,
     token,

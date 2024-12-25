@@ -147,3 +147,8 @@ SeekerSchema.pre('save', async function (next) {
 
   next();
 });
+
+SeekerSchema.index(
+  { skills: 1 },
+  { partialFilterExpression: { emailVerified: true } },
+);

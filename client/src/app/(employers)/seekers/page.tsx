@@ -10,6 +10,7 @@ import SearchSeekers from '@/components/employers/seekers/search/SearchSeekers';
 import FilterSeekers from '@/components/employers/seekers/filters/FilterSeekers';
 import PaginatedList from '@/components/ui/pagination/paginate-list';
 import ExploreSeekers from '@/components/employers/seekers/explore/ExploreSeekers';
+import NotFound from '@/components/shared/pages/NotFound';
 
 import LoadingSeekers from '@/components/loaders/employers/LoadingSeekers';
 const SeekersList = dynamic(
@@ -32,7 +33,17 @@ const SeekersPage = ({
     isFetching,
   } = useGetSeekers(searchParams);
 
-  const totalSeekers = fetchedSeekers?.totalSeekers || 0;
+  if (!fetchedSeekers && !isLoading) {
+    return <NotFound />;
+  }
+
+  const seekersData = fetchedSeekers || {
+    seekers: [],
+    totalSeekers: 0,
+    filterCounts: [],
+  };
+
+  const totalSeekers = seekersData.totalSeekers || 0;
   const isFiltering = isLoading || isFetching || isRefetching;
 
   return (
@@ -47,14 +58,14 @@ const SeekersPage = ({
         </div>
 
         <div className="xl:hidden">
-          <FilterSeekers />
+          <FilterSeekers filterCounts={seekersData.filterCounts} />
         </div>
 
         <div>
           {isFiltering ? (
             <LoadingSeekers />
           ) : (
-            <SeekersList seekers={fetchedSeekers?.seekers || []} />
+            <SeekersList seekers={seekersData.seekers || []} />
           )}
         </div>
 
@@ -71,7 +82,7 @@ const SeekersPage = ({
       </div>
 
       <div className="max-xl:hidden basis-1/2">
-        <FilterSeekers />
+        <FilterSeekers filterCounts={seekersData.filterCounts} />
       </div>
     </section>
   );
