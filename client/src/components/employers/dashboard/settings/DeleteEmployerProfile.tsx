@@ -39,7 +39,7 @@ const DeleteEmployerProfile: React.FC<DeleteEmployerProfileProps> = ({}) => {
   return (
     <AlertDialogWrapper
       title="Delete Profile"
-      description="Deleting your account will remove all your information, including applications and jobs. Employer will no longer be able to view you. Are you sure you want to proceed?"
+      description="Deleting your account will remove all your information, including applications and jobs. Seekers will no longer be able to find you. Are you sure you want to proceed?"
       onAction={onDeleteAccount}
       actionText="Delete"
       cancelText="Cancel"

@@ -24,6 +24,7 @@ import { EmployersService } from '../employers/employers.service';
 import { JobsService } from '../jobs/jobs.service';
 import { ApplicationsService } from '../applications/applications.service';
 import { S3Service } from 'src/common/s3/s3.service';
+import { escapeRegExp } from 'src/common/constants';
 
 import { uuidv7 } from 'uuidv7';
 import { CreateEducationDto } from './dto/create-education.dto';
@@ -258,7 +259,7 @@ export class SeekersService {
     };
 
     if (search) {
-      const searchRegex = new RegExp(String(search), 'i');
+      const searchRegex = new RegExp(escapeRegExp(String(search)), 'i');
 
       conditions.$or = [
         { first_name: { $regex: searchRegex } },
