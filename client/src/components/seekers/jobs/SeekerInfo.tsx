@@ -8,7 +8,7 @@ import { getImageUrl } from '@/lib/utils';
 import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
 import { renderIconText } from '@/helpers';
 
-import LoadingSeekerInfo from '@/components/loaders/employers/LoadingSeekerInfo';
+import LoadingSeekerInfo from '@/components/templates/employers/LoadingSeekerInfo';
 
 import { Card, CardContent } from '@/components/ui/layout/card';
 import { Button } from '@/components/ui/buttons/button';

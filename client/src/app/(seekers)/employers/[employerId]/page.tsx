@@ -5,14 +5,14 @@ import dynamic from 'next/dynamic';
 
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
-import LoadingEmployerDetails from '@/components/loaders/seekers/LoadingEmployerDetails';
+import LoadingEmployerDetails from '@/components/templates/seekers/LoadingEmployerDetails';
 import EmployerDetailsInfo from '@/components/seekers/employers/details/EmployerDetailsInfo';
 import EmployerFilters from '@/components/seekers/employers/filters/EmployerFilters';
 import PaginatedList from '@/components/ui/pagination/paginate-list';
 
 import NotFound from '@/components/shared/pages/NotFound';
 
-import LoadingJobsSkeleton from '@/components/loaders/seekers/LoadingJobsSkeleton';
+import LoadingJobsSkeleton from '@/components/templates/seekers/LoadingJobsSkeleton';
 import { useGetEmployerById } from '@/hooks/queries/useGetEmployerById.query';
 const JobsList = dynamic(() => import('@/components/seekers/jobs/JobsList'), {
   loading: () => <LoadingJobsSkeleton />,

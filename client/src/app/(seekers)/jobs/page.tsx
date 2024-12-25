@@ -11,7 +11,7 @@ import FilterJobs from '@/components/seekers/jobs/filters/FilterJobs';
 import PaginatedList from '@/components/ui/pagination/paginate-list';
 import NotFound from '@/components/shared/pages/NotFound';
 
-import LoadingSeekerInfo from '@/components/loaders/employers/LoadingSeekerInfo';
+import LoadingSeekerInfo from '@/components/templates/employers/LoadingSeekerInfo';
 const SeekerInfo = dynamic(
   () => import('@/components/seekers/jobs/SeekerInfo'),
   {
@@ -19,7 +19,7 @@ const SeekerInfo = dynamic(
   },
 );
 
-import LoadingPopularJobs from '@/components/loaders/seekers/LoadingPopularJobs';
+import LoadingPopularJobs from '@/components/templates/seekers/LoadingPopularJobs';
 const PopularJobsInfo = dynamic(
   () => import('@/components/seekers/jobs/PopularJobsInfo'),
   {
@@ -27,7 +27,7 @@ const PopularJobsInfo = dynamic(
   },
 );
 
-import LoadingJobsSkeleton from '@/components/loaders/seekers/LoadingJobsSkeleton';
+import LoadingJobsSkeleton from '@/components/templates/seekers/LoadingJobsSkeleton';
 const JobsList = dynamic(() => import('@/components/seekers/jobs/JobsList'), {
   loading: () => <LoadingJobsSkeleton />,
 });

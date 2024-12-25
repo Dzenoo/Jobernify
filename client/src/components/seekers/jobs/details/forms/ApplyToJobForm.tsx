@@ -214,7 +214,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
             </FormItem>
           )}
         />
-        <div className="pt-7">
+        <div>
           <Button
             variant="default"
             type="submit"

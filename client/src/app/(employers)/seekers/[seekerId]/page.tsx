@@ -9,7 +9,7 @@ import { Seeker } from '@/types';
 
 import NotFound from '@/components/shared/pages/NotFound';
 
-import LoadingSeekerDetails from '@/components/loaders/employers/LoadingSeekerDetails';
+import LoadingSeekerDetails from '@/components/templates/employers/LoadingSeekerDetails';
 const SeekerDetailsInfo = dynamic(
   () => import('@/components/employers/seekers/details/SeekerDetailsInfo'),
   {

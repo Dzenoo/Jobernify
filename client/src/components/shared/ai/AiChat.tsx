@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 
 import { Bot, User } from 'lucide-react';
-import { ScaleLoader } from 'react-spinners';
 
 import { useAiAssistant } from '@/context/ai-assistant';
 import { sanitize } from '@/lib/utils';
 
 import MarkdownRenderer from '../markdown/MarkdownRenderer';
+import Loader from '../loaders/Loader';
 
 type AiChatProps = {
   socket: any;
@@ -81,7 +81,8 @@ const AiChat: React.FC<AiChatProps> = ({ socket }) => {
           </div>
         );
       })}
-      {isTyping && <ScaleLoader height={15} />}
+
+      {isTyping && <Loader type="ScaleLoader" height={15} />}
       <div ref={messagesEndRef} />
     </div>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 
 import dynamic from 'next/dynamic';
 
-import LoadingJobsSkeleton from '@/components/loaders/seekers/LoadingJobsSkeleton';
+import LoadingJobsSkeleton from '@/components/templates/seekers/LoadingJobsSkeleton';
 
 import { Job } from '@/types';
 

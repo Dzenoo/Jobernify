@@ -9,7 +9,7 @@ import SearchEmployers from '@/components/seekers/employers/search/SearchEmploye
 import PaginatedList from '@/components/ui/pagination/paginate-list';
 import NotFound from '@/components/shared/pages/NotFound';
 
-import LoadingEmployersSkeleton from '@/components/loaders/seekers/LoadingEmployers';
+import LoadingEmployersSkeleton from '@/components/templates/seekers/LoadingEmployers';
 import { useGetEmployers } from '@/hooks/queries/useGetEmployers.query';
 const EmployersList = dynamic(
   () => import('@/components/seekers/employers/EmployersList'),

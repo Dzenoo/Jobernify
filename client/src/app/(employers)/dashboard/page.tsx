@@ -10,7 +10,7 @@ import JobsPerMonth from '@/components/employers/dashboard/overview/JobsPerMonth
 import Statistics from '@/components/employers/dashboard/overview/Statistics';
 import Types from '@/components/employers/dashboard/overview/Types';
 
-import LoadingDashboard from '@/components/loaders/employers/LoadingDashboard';
+import LoadingDashboard from '@/components/templates/employers/LoadingDashboard';
 
 const Dashboard = () => {
   const { data: fetchedEmployer } = useGetEmployer();

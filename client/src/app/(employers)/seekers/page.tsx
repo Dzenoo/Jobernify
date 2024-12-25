@@ -12,7 +12,7 @@ import PaginatedList from '@/components/ui/pagination/paginate-list';
 import ExploreSeekers from '@/components/employers/seekers/explore/ExploreSeekers';
 import NotFound from '@/components/shared/pages/NotFound';
 
-import LoadingSeekers from '@/components/loaders/employers/LoadingSeekers';
+import LoadingSeekers from '@/components/templates/employers/LoadingSeekers';
 const SeekersList = dynamic(
   () => import('@/components/employers/seekers/SeekersList'),
   {

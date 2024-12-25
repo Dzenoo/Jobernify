@@ -42,16 +42,19 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
       id: '1',
       icon: <Camera />,
       data: followers?.length + ' Followers',
+      tooltip: 'Followers',
     },
     {
       id: '2',
       icon: <Building />,
       data: employerIndustry || 'N/A',
+      tooltip: 'Industry',
     },
     {
       id: '3',
       icon: <LayoutTemplate />,
       data: size || 'N/A' + ' Employees',
+      tooltip: 'Size',
     },
   ];
 
@@ -79,7 +82,13 @@ const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({
                 <h1 className="text-base-black">{name}</h1>
               </div>
               <div className="flex items-center gap-5 whitespace-nowrap max-sm:flex-col max-sm:items-start">
-                {FooterEmployerData.map((data) => renderIconText(data))}
+                {FooterEmployerData.map((data) =>
+                  renderIconText({
+                    ...data,
+                    tooltip: true,
+                    tooltipContent: data.tooltip,
+                  }),
+                )}
               </div>
             </CardContent>
           </div>

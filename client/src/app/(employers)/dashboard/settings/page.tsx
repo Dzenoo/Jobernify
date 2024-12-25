@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 
 import { useGetEmployer } from '@/hooks/queries/useGetEmployer.query';
 
-import LoadingEmployerSettings from '@/components/loaders/employers/LoadingEmployerSettings';
+import LoadingEmployerSettings from '@/components/templates/employers/LoadingEmployerSettings';
 
 const EmployerProfileInformation = dynamic(
   () => import('@/components/employers/dashboard/settings/EmployerSettings'),

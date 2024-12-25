@@ -12,7 +12,7 @@ import {
   CardTitle,
 } from '@/components/ui/layout/card';
 
-import LoadingApplicationsSkeleton from '@/components/loaders/seekers/LoadingApplications';
+import LoadingApplicationsSkeleton from '@/components/templates/seekers/LoadingApplications';
 const ApplicationsList = dynamic(
   () => import('@/components/seekers/profile/applications/ApplicationsList'),
   {

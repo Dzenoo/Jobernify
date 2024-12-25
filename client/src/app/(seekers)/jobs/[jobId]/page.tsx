@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 
-import LoadingJobDetails from '@/components/loaders/seekers/LoadingJobDetails';
+import LoadingJobDetails from '@/components/templates/seekers/LoadingJobDetails';
 
 import AddJobAlert from '@/components/seekers/jobs/details/AddJobAlert';
 import JobDetailsInfo from '@/components/seekers/jobs/details/JobDetailsInfo';
