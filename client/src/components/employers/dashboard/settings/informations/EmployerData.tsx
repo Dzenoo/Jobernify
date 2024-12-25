@@ -11,41 +11,48 @@ type EmployerDataProps = {
 const EmployerData: React.FC<EmployerDataProps> = ({ employer }) => {
   const profileFields = [
     {
-      id: 'companyName',
+      id: 1,
       title: 'Company Name',
-      value: employer?.name ?? 'No Company Name Available',
+      value: employer?.name || 'N/A',
     },
     {
-      id: 'address',
+      id: 2,
       title: 'Address',
-      value: employer?.address ?? 'No Address Available',
+      value: employer?.address || 'N/A',
+    },
+    {
+      id: 3,
+      title: 'Description',
+      value: employer?.companyDescription || 'N/A',
+    },
+    {
+      id: 4,
+      title: 'Industry',
+      value: findIndustriesData(employer?.industry) || 'N/A',
+    },
+    {
+      id: 5,
+      title: 'Size',
+      value: employer?.size || 'N/A',
+    },
+    {
+      id: 6,
+      title: 'Website',
+      value: employer?.website || 'N/A',
+      href: true,
     },
   ];
 
   return (
-    <div className="flex flex-col gap-10">
-      <div className="flex flex-wrap items-center gap-12 max-md:gap-3">
-        {profileFields.map((field) => (
-          <FieldGroup key={field.id} title={field.title} value={field.value} />
-        ))}
-      </div>
-
-      <FieldGroup
-        title="Description"
-        value={employer?.companyDescription || 'No Description Available'}
-      />
-
-      <WebsiteField website={employer?.website} />
-
-      <FieldGroup
-        title="Industry"
-        value={
-          findIndustriesData(employer?.industry ?? '') ??
-          'No Industry Available'
-        }
-      />
-
-      <FieldGroup title="Size" value={employer?.size || 'No Size Available'} />
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      {profileFields.map((field) => (
+        <FieldGroup
+          key={field.id}
+          title={field.title}
+          value={field.value}
+          href={field.href}
+        />
+      ))}
     </div>
   );
 };
@@ -55,37 +62,29 @@ export default EmployerData;
 type FieldGroupProps = {
   title: string;
   value: string | number;
+  href?: boolean;
 };
 
-const FieldGroup: React.FC<FieldGroupProps> = ({ title, value }) => {
+const FieldGroup: React.FC<FieldGroupProps> = ({ title, value, href }) => {
   return (
-    <div className="flex flex-col gap-[3px]">
-      <h2 className="text-muted-foreground text-base">{title}</h2>
-      <h1 className="font-semibold">{value}</h1>
-    </div>
-  );
-};
-
-type WebsiteFieldProps = {
-  website?: string | null;
-};
-
-const WebsiteField: React.FC<WebsiteFieldProps> = ({ website }) => {
-  return (
-    <div className="flex flex-col gap-[3px]">
-      <h2 className="text-initial-black">Website</h2>
-      {website ? (
-        <a
-          href={website}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 dark:text-blue-500"
-        >
-          {website}
-        </a>
-      ) : (
-        <p className="text-muted-foreground text-base">No Website Available</p>
-      )}
+    <div className="flex flex-col gap-2">
+      <div>
+        <h2>{title}</h2>
+      </div>
+      <div>
+        {href && value.toString().includes('http') ? (
+          <a
+            href={value as string}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 dark:text-blue-500"
+          >
+            {value}
+          </a>
+        ) : (
+          <p className="text-muted-foreground text-base">{value}</p>
+        )}
+      </div>
     </div>
   );
 };

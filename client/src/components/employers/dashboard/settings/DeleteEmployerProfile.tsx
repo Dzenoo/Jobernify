@@ -46,7 +46,7 @@ const DeleteEmployerProfile: React.FC<DeleteEmployerProfileProps> = ({}) => {
       buttonTriggerProps={{ variant: 'destructive' }}
       triggerContent={
         <div className="flex items-center gap-2">
-          Delete Profile <Trash />
+          <span className="max-sm:hidden">Delete Profile</span> <Trash />
         </div>
       }
     />
