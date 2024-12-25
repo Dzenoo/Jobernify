@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from 'react';
 
 import zod from 'zod';
-import { ScaleLoader } from 'react-spinners';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Plus } from 'lucide-react';
@@ -12,6 +11,8 @@ import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 import { SkillsSchema } from '@/lib/zod/seekers.validation';
 import { getSkillsData, multiselectSkills } from '@/lib/utils';
 import { renderSkills } from '@/helpers';
+
+import Loader from '@/components/shared/loaders/Loader';
 
 import MultiSelect from '@/components/ui/form/multiselect';
 import { Button } from '@/components/ui/buttons/button';
@@ -98,7 +99,7 @@ const AddSkillsForm: React.FC<AddSkillsProps> = ({
             className="w-full"
           >
             {form.formState.isSubmitting ? (
-              <ScaleLoader color="#fff" height={10} />
+              <Loader type="ScaleLoader" height={10} />
             ) : (
               'Update'
             )}

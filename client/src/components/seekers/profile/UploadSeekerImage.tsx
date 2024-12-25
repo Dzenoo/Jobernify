@@ -1,14 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
-import { useTheme } from 'next-themes';
 
 import { ImagePlusIcon } from 'lucide-react';
-import { ScaleLoader } from 'react-spinners';
 
 import { AWS_URL } from '@/constants';
-
 import { useUploads } from '@/hooks/core/useUploads.hook';
 import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
+
+import Loader from '@/components/shared/loaders/Loader';
 
 import { Button } from '@/components/ui/buttons/button';
 import { useToast } from '@/components/ui/info/use-toast';
@@ -19,7 +18,6 @@ type UploadSeekerImageProps = {
 
 const UploadSeekerImage: React.FC<UploadSeekerImageProps> = ({ image }) => {
   const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
-  const { theme } = useTheme();
   const { toast } = useToast();
 
   const { getInputProps, getRootProps, selectedFile, restart } = useUploads({
@@ -62,7 +60,7 @@ const UploadSeekerImage: React.FC<UploadSeekerImageProps> = ({ image }) => {
             className="border border-gray-000 rounded-full w-36 h-36 object-cover"
           />
         ) : (
-          <ScaleLoader color={theme === 'dark' ? '#ffffff' : ''} height={10} />
+          <Loader type="ScaleLoader" height={10} />
         )}
       </div>
       <div className="flex flex-col gap-3">

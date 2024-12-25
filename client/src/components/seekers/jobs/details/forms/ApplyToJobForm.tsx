@@ -4,7 +4,6 @@ import zod from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { ScaleLoader } from 'react-spinners';
 import { queryClient } from '@/context/react-query-client';
 import { Sparkles } from 'lucide-react';
 
@@ -16,6 +15,8 @@ import { ApplyToJobSchema } from '@/lib/zod/jobs.validation';
 import { applyToJob } from '@/lib/actions/applications.actions';
 
 import { Seeker } from '@/types';
+
+import Loader from '@/components/shared/loaders/Loader';
 
 import { useToast } from '@/components/ui/info/use-toast';
 import { Textarea } from '@/components/ui/form/textarea';
@@ -191,7 +192,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
                   variant="outline"
                 >
                   {isCoverLetterGenerating ? (
-                    <ScaleLoader height={10} />
+                    <Loader type="ScaleLoader" height={10} />
                   ) : (
                     <>
                       <Sparkles className="w-5 h-5 mr-2 text-indigo-500" />{' '}
@@ -222,7 +223,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
             className="w-full"
           >
             {form.formState.isSubmitting ? (
-              <ScaleLoader height={10} className="text-white" />
+              <Loader type="ScaleLoader" height={10} />
             ) : (
               'Apply'
             )}

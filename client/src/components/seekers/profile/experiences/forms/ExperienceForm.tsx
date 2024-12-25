@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 import zod from 'zod';
 import { CalendarIcon } from 'lucide-react';
-import { ScaleLoader } from 'react-spinners';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,12 +9,7 @@ import { format } from 'date-fns';
 
 import { useToast } from '@/components/ui/info/use-toast';
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
-import {
-  jobLevels,
-  jobPositions,
-  JobsFiltersData,
-  jobTypes,
-} from '@/constants';
+import { jobLevels, jobPositions, jobTypes } from '@/constants';
 import { queryClient } from '@/context/react-query-client';
 import { cn, uppercaseFirstLetter } from '@/lib/utils';
 import {
@@ -27,6 +21,8 @@ import {
   editExperience,
 } from '@/lib/actions/seekers.actions';
 import { Experience } from '@/types';
+
+import Loader from '@/components/shared/loaders/Loader';
 
 import { Button } from '@/components/ui/buttons/button';
 import { Calendar } from '@/components/ui/utilities/calendar';
@@ -392,7 +388,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
           className="w-full"
         >
           {form.formState.isSubmitting ? (
-            <ScaleLoader color="#fff" height={10} />
+            <Loader type="ScaleLoader" height={10} />
           ) : (
             'Add'
           )}

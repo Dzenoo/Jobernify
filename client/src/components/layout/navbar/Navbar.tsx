@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ScaleLoader } from 'react-spinners';
 
 import { getImageUrl } from '@/lib/utils';
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
@@ -15,6 +14,7 @@ import {
 } from '@/constants';
 
 import Logo from './Logo';
+import Loader from '@/components/shared/loaders/Loader';
 import NavbarActionsList from './NavbarActionsList';
 import NavbarLinksList from './NavbarLinksList';
 
@@ -75,7 +75,7 @@ const Navbar: React.FC<{ href?: string }> = ({ href }) => {
                     )}
                   />
                   <AvatarFallback>
-                    <ScaleLoader height={10} />
+                    <Loader type="ScaleLoader" height={10} />
                   </AvatarFallback>
                 </Avatar>
               </Link>

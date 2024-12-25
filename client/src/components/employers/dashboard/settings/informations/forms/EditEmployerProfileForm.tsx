@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-import { ScaleLoader } from 'react-spinners';
 import { zodResolver } from '@hookform/resolvers/zod';
 import zod from 'zod';
 import { useForm } from 'react-hook-form';
@@ -12,6 +11,8 @@ import { useEditEmployer } from '@/hooks/mutations/useEditEmployer.mutation';
 
 import { uppercaseFirstLetter } from '@/lib/utils';
 import { Employer } from '@/types';
+
+import Loader from '@/components/shared/loaders/Loader';
 
 import { Input } from '@/components/ui/form/input';
 import { Textarea } from '@/components/ui/form/textarea';
@@ -220,7 +221,7 @@ const EditEmployerProfileForm: React.FC<EditEmployerProfileFormProps> = ({
             className="px-10"
           >
             {form.formState.isSubmitting ? (
-              <ScaleLoader color="#fff" height={10} />
+              <Loader type="ScaleLoader" height={10} />
             ) : (
               'Save'
             )}

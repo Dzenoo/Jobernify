@@ -3,13 +3,14 @@ import React, { useEffect } from 'react';
 import zod from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ScaleLoader } from 'react-spinners';
 
 import { JobAlertSchema } from '@/lib/zod/seekers.validation';
 import { JobAlerts } from '@/types';
 import { JobsFiltersData } from '@/constants';
 
 import { useJobAlert } from '@/hooks/mutations/useJobAlert.mutation';
+
+import Loader from '@/components/shared/loaders/Loader';
 
 import { Button } from '@/components/ui/buttons/button';
 import { Input } from '@/components/ui/form/input';
@@ -168,7 +169,7 @@ const NewAlertForm: React.FC<NewAlertFormProps> = ({
             className="w-full"
           >
             {form.formState.isSubmitting ? (
-              <ScaleLoader color="#fff" height={10} />
+              <Loader type="ScaleLoader" height={10} />
             ) : (
               'Add'
             )}

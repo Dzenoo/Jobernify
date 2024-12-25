@@ -5,11 +5,12 @@ import zod from 'zod';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ScaleLoader } from 'react-spinners';
 
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { signIn } from '@/lib/actions/auth.actions';
 import { LoginSchema } from '@/lib/zod/auth.validation';
+
+import Loader from '@/components/shared/loaders/Loader';
 
 import { useToast } from '@/components/ui/info/use-toast';
 import { Button } from '@/components/ui/buttons/button';
@@ -102,7 +103,7 @@ const LoginForm: React.FC = () => {
             className="w-full"
           >
             {form.formState.isSubmitting ? (
-              <ScaleLoader color="#fff" height={10} />
+              <Loader type="ScaleLoader" height={10} />
             ) : (
               'Login'
             )}

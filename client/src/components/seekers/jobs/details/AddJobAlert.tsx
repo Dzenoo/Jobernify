@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ScaleLoader } from 'react-spinners';
+import Loader from '@/components/shared/loaders/Loader';
 
 import { useJobAlert } from '@/hooks/mutations/useJobAlert.mutation';
 import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
@@ -70,7 +70,7 @@ const AddJobAlert: React.FC<JobAlertProps> = React.memo(
             disabled={isLoading || isAlreadyAlertGeneratedWithProperties}
           >
             {isLoading ? (
-              <ScaleLoader color="#fff" height={10} />
+              <Loader type="ScaleLoader" height={10} />
             ) : isAlreadyAlertGeneratedWithProperties ? (
               'Already Generated'
             ) : (

@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { useMutation } from '@tanstack/react-query';
-import { ScaleLoader } from 'react-spinners';
 
 import { deleteJob } from '@/lib/actions/jobs.actions';
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { queryClient } from '@/context/react-query-client';
+
+import Loader from '@/components/shared/loaders/Loader';
 
 import { useToast } from '@/components/ui/info/use-toast';
 import { Button } from '@/components/ui/buttons/button';
@@ -70,7 +71,7 @@ const DeleteJob: React.FC<DeleteJobProps> = ({ onClose, id, isDialog }) => {
       className="w-full"
       onClick={onDeleteJob}
     >
-      {isLoading ? <ScaleLoader height={10} /> : 'Delete'}
+      {isLoading ? <Loader type="ScaleLoader" height={10} /> : 'Delete'}
     </Button>
   );
 

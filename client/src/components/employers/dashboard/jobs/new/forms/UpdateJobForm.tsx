@@ -8,7 +8,6 @@ import TurndownService from 'turndown';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ScaleLoader } from 'react-spinners';
 import { useToast } from '@/components/ui/info/use-toast';
 
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
@@ -19,6 +18,7 @@ import { UpdateJobSchema } from '@/lib/zod/jobs.validation';
 
 import { Job } from '@/types';
 
+import Loader from '@/components/shared/loaders/Loader';
 import Details from '@/components/employers/dashboard/jobs/new/Details';
 import Overview from '@/components/employers/dashboard/jobs/new/Overview';
 import Scope from '@/components/employers/dashboard/jobs/new/Scope';
@@ -186,7 +186,11 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
                 {stepDetails.length - 1 === currentJobForm && (
                   <div className="flex gap-3 justify-end">
                     <Button type="submit" variant="default">
-                      {isLoading ? <ScaleLoader height={10} /> : 'Submit'}
+                      {isLoading ? (
+                        <Loader type="ScaleLoader" height={10} />
+                      ) : (
+                        'Submit'
+                      )}
                     </Button>
                   </div>
                 )}

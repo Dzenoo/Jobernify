@@ -3,10 +3,11 @@ import React from 'react';
 import zod from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ScaleLoader } from 'react-spinners';
 
 import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
 import { SeekerSocialsSchema } from '@/lib/zod/seekers.validation';
+
+import Loader from '@/components/shared/loaders/Loader';
 
 import { Button } from '@/components/ui/buttons/button';
 import { Input } from '@/components/ui/form/input';
@@ -148,7 +149,7 @@ const EditSocialsForm: React.FC<EditSocialsFormProps> = ({
               className="w-full"
             >
               {form.formState.isSubmitting ? (
-                <ScaleLoader color="#fff" height={10} />
+                <Loader type="ScaleLoader" height={10} />
               ) : (
                 'Save'
               )}
