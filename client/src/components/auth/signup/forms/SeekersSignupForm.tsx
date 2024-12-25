@@ -125,8 +125,8 @@ const SeekersSignupForm: React.FC = () => {
                 <Input {...field} type="password" placeholder="Password" />
               </FormControl>
               <FormDescription>
-                Create a strong password with at least 8 characters, one
-                uppercase including symbols and numbers.
+                Start with uppercase letter, minimum 8 characters and contain
+                symbols and numbers
               </FormDescription>
               <FormMessage />
             </FormItem>

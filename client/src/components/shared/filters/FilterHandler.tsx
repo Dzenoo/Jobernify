@@ -82,7 +82,7 @@ const FilterHandler: React.FC<FilterHandlerProps> = ({
                       <p className="flex justify-between gap-2 max-sm:flex-col text-sm  leading-none cursor-pointer transition-all hover:text-muted-foreground dark:hover:text-muted-foreground">
                         {checkbox.title}
                       </p>
-                      {showCount && checkbox.count !== undefined && (
+                      {showCount && (
                         <p className=" text-muted-foreground text-sm">
                           ({checkbox.count})
                         </p>
