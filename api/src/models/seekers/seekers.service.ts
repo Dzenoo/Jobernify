@@ -248,8 +248,8 @@ export class SeekersService {
     search = '',
     skills = '',
   }: {
-    page: number;
-    limit: number;
+    page?: number;
+    limit?: number;
     search?: string;
     skills?: string;
   }): Promise<ResponseObject> {
@@ -585,5 +585,16 @@ export class SeekersService {
     return {
       statusCode: HttpStatus.OK,
     };
+  }
+
+  async findMatchingSeekers() {
+    const allSeekers = await this.seekerModel.find({}).select('skills').exec();
+
+    const refactoredSeekers = allSeekers.map((seeker) => ({
+      ...(seeker.toObject?.() || seeker),
+      link: `${process.env.FRONTEND_URL}/seekers/${seeker._id}`,
+    }));
+
+    return refactoredSeekers;
   }
 }

@@ -41,7 +41,7 @@ const EducationList: React.FC<EducationListProps> = ({
           />
         ))}
       </div>
-      {educations!.length > 2 && (
+      {educations?.length > 2 && (
         <div>
           <Button
             variant="outline"

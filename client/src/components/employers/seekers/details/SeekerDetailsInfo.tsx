@@ -5,11 +5,13 @@ import Image from 'next/image';
 
 import { Github, Linkedin, LucideImage } from 'lucide-react';
 
-import { formatURL, getImageUrl, getSkillsData } from '@/lib/utils';
+import { getImageUrl, getSkillsData } from '@/lib/utils';
 import { renderSkills } from '@/helpers';
 
 import { Seeker } from '@/types';
 
+import CardSection from './CardSection';
+import SocialLinks from './SocialLinks';
 import EducationList from '@/components/seekers/profile/educations/EducationList';
 import ExperienceList from '@/components/seekers/profile/experiences/ExperienceList';
 
@@ -24,7 +26,7 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
   const profileImageUrl = getImageUrl(seeker?.image);
   const categorizedSkills = getSkillsData(seeker?.skills);
 
-  const SocialsArrays = [
+  const socialLinks = [
     {
       id: '1',
       href: seeker?.portfolio,
@@ -47,110 +49,70 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
 
   return (
     <div className="flex flex-col gap-6">
-      <Navigator info="Seekers" href={'/seekers'} title={seeker?.first_name} />
+      <Navigator
+        info="Seekers"
+        href={'/seekers'}
+        title={seeker?.first_name || 'Unknown'}
+      />
+
       <Card>
         <CardHeader>
-          <div className="flex justify-between items-start gap-5 max-sm:flex-col">
+          <div className="flex items-start justify-between gap-5 max-sm:flex-col">
             <div className="flex items-start gap-7 max-md:flex-col">
-              <div>
-                <Image
-                  src={profileImageUrl}
-                  width={100}
-                  height={100}
-                  className="rounded-full w-28 h-28 object-cover"
-                  alt="seeker"
-                />
-              </div>
+              <Image
+                src={profileImageUrl}
+                width={100}
+                height={100}
+                className="w-28 h-28 rounded-full object-cover"
+                alt={`${seeker?.first_name ?? ''} ${seeker?.last_name ?? ''} profile picture`}
+              />
               <div className="flex flex-col gap-[3px]">
-                <div>
-                  <h1 className="text-base-black">
-                    {seeker?.first_name} {seeker?.last_name}
-                  </h1>
-                </div>
-                <div>
-                  <p className="font-semibold">{seeker?.headline}</p>
-                </div>
+                <h1 className="text-base-black">
+                  {seeker?.first_name} {seeker?.last_name}
+                </h1>
+                <p className="font-semibold">
+                  {seeker?.headline ?? 'No headline provided'}
+                </p>
               </div>
             </div>
-            <div className="flex items-center gap-10 flex-wrap">
-              {SocialsArrays.map((socials) =>
-                socials.href ? (
-                  <a
-                    className="text-[--blue-base-color]"
-                    href={formatURL(socials.href)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    key={socials.id}
-                  >
-                    {socials.icon}
-                  </a>
-                ) : (
-                  <div
-                    className="text-muted-foreground cursor-not-allowed"
-                    key={socials.id}
-                  >
-                    {socials.icon}
-                  </div>
-                ),
-              )}
-            </div>
+
+            <SocialLinks links={socialLinks} />
           </div>
         </CardHeader>
+
         <CardContent className="flex flex-col gap-10">
-          <div className="flex flex-col gap-3">
-            <div>
-              <h1 className="font-semibold">Biography</h1>
-            </div>
+          <CardSection title="Biography">
             {seeker?.biography ? (
-              <div>
-                <p className="text-muted-foreground text-base">
-                  {seeker?.biography}
-                </p>
-              </div>
+              <p className="text-base text-muted-foreground">
+                {seeker.biography}
+              </p>
             ) : (
-              <div>
-                <p className="text-muted-foreground text-base">
-                  No biography available
-                </p>
-              </div>
+              <p className="text-base text-muted-foreground">
+                No biography available
+              </p>
             )}
-          </div>
-          <div className="flex flex-col gap-3">
-            <div>
-              <h1 className="font-semibold">Experience</h1>
-            </div>
-            <div>
-              <ExperienceList
-                openForm={() => {}}
-                experiences={seeker?.experience}
-              />
-            </div>
-          </div>
-          <div className="flex flex-col gap-3">
-            <div>
-              <h1 className="font-semibold">Education</h1>
-            </div>
-            <div>
-              <EducationList
-                openForm={() => {}}
-                educations={seeker?.education}
-              />
-            </div>
-          </div>
-          <div className="flex flex-col gap-3">
-            <div>
-              <h1 className="font-semibold">Skills</h1>
-            </div>
-            {seeker?.skills.length > 0 ? (
+          </CardSection>
+
+          <CardSection title="Experience">
+            <ExperienceList
+              openForm={() => {}}
+              experiences={seeker?.experience}
+            />
+          </CardSection>
+
+          <CardSection title="Education">
+            <EducationList openForm={() => {}} educations={seeker?.education} />
+          </CardSection>
+
+          <CardSection title="Skills">
+            {seeker?.skills?.length ? (
               renderSkills(categorizedSkills)
             ) : (
-              <div>
-                <p className="text-muted-foreground text-base">
-                  No skills listed
-                </p>
-              </div>
+              <p className="text-base text-muted-foreground">
+                No skills listed
+              </p>
             )}
-          </div>
+          </CardSection>
         </CardContent>
       </Card>
     </div>

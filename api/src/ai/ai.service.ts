@@ -111,6 +111,13 @@ export class AiService {
           tool_call_id: call.id,
           output: JSON.stringify(matchingJobs),
         });
+      } else if (funcName === 'searchSeekers') {
+        const seekers = await this.seekersService.findMatchingSeekers();
+
+        toolOutputs.push({
+          tool_call_id: call.id,
+          output: JSON.stringify(seekers),
+        });
       }
       // else if (funcName === 'someOtherFunction') { ... }
     }

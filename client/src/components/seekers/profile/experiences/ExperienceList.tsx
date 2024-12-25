@@ -24,10 +24,15 @@ const ExperienceList: React.FC<ExperienceListProps> = ({
       : experiences;
 
   return (
-    <div className="flex flex-col gap-5">
-      {!experiences.length && (
-        <p className="text-muted-foreground text-base">No experiences listed</p>
-      )}
+    <div>
+      <div>
+        {experiences?.length === 0 && (
+          <p className="text-muted-foreground text-base">
+            No experiences listed
+          </p>
+        )}
+      </div>
+
       <div className="flex flex-col gap-3">
         {experiencesList.map((experience) => (
           <ExperienceItem
@@ -37,7 +42,8 @@ const ExperienceList: React.FC<ExperienceListProps> = ({
           />
         ))}
       </div>
-      {experiences.length > 2 && (
+
+      {experiences?.length > 2 && (
         <div>
           <Button
             variant="outline"
