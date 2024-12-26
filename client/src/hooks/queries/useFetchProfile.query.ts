@@ -4,7 +4,7 @@ import { getSeekerProfile } from '@/lib/actions/seekers.actions';
 import { getEmployerProfile } from '@/lib/actions/employers.actions';
 
 const useFetchProfile = (userType: string | null, token: string | null) => {
-  if (!userType || !token) return { data: null };
+  if (!userType || !token) throw new Error('Unauthorized!');
 
   return useQuery({
     queryFn: async () => {

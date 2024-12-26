@@ -29,6 +29,7 @@ const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
   return (
     <ul className="flex items-center gap-4">
       <Ai isSeeker={isSeeker} />
+
       {Array.from(data).map(({ id, href, icon, tooltip }) => (
         <TooltipWrapper key={id} tooltip={tooltip}>
           <Link
@@ -42,9 +43,11 @@ const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
           </Link>
         </TooltipWrapper>
       ))}
+
       <div>
         <Themes />
       </div>
+
       <button onClick={logout}>
         <LogOut />
       </button>

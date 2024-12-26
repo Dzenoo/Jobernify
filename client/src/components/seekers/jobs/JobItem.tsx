@@ -123,8 +123,8 @@ const JobItem: React.FC<JobItemProps> = ({
             </div>
           </CardContent>
         )}
-        <CardFooter className="border-t border-gray-100 dark:border-[#1b1b1b] pt-6 flex items-center justify-between gap-3 flex-wrap">
-          <div className="flex items-center gap-6 justify-between flex-wrap">
+        <CardFooter className="border-t border-gray-100 dark:border-[#1b1b1b] pt-6 flex items-center justify-between gap-10 whitespace-nowrap overflow-x-auto hide-scrollbar">
+          <div className="flex items-center gap-6 justify-between">
             {JobInfoData.map((data) =>
               renderIconText({
                 ...data,
@@ -144,7 +144,7 @@ const JobItem: React.FC<JobItemProps> = ({
                 </div>
               </div>
             )}
-            <div className="max-sm:hidden">
+            <div>
               <p className="text-muted-foreground truncate">{createdTime}</p>
             </div>
           </div>

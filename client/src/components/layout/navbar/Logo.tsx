@@ -33,4 +33,5 @@ const Logo: React.FC<{ href?: string }> = ({ href = '/' }) => {
     </Link>
   );
 };
+
 export default Logo;

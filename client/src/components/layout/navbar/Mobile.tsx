@@ -4,7 +4,6 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 
 import { SeekersNavbarLinks } from '@/constants';
-
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import NavbarLinksList from './NavbarLinksList';

@@ -4,7 +4,7 @@ import React from 'react';
 
 import { useZoomLevel } from '@/hooks/core/useZoomLevel.hook';
 
-import NavbarLanding from '@/components/shared/pages/landing/layout/NavbarLanding';
+import NavbarLanding from '@/components/layout/navbar/NavbarLanding';
 import Footer from '@/components/layout/footer/Footer';
 
 const RootLayoutWrapper = ({ children }: { children: React.ReactNode }) => {
