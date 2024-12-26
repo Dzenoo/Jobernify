@@ -1,6 +1,4 @@
-**Terms and Conditions**
-
-Effective Date: [Insert Date]
+Last updated: 26 December 2023
 
 **1\. Introduction**
 
@@ -68,4 +66,4 @@ We may update these Terms periodically. Continued use of the Platform constitute
 
 **11\. Contact Us**
 
-For questions or concerns about these Terms, please contact us at [email].
+For questions or concerns about these Terms, please contact us at jobernify@gmail.com.

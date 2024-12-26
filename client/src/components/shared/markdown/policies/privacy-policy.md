@@ -1,6 +1,4 @@
-**Privacy Policy**
-
-Effective Date: [Insert Date]
+Last updated: 26 December 2023
 
 **1\. Introduction**
 
@@ -106,7 +104,7 @@ Under GDPR, you have the following rights:
 
 - **Withdraw Consent:** Where processing is based on consent, you can withdraw it at any time.
 
-To exercise your rights, contact us at [email].
+To exercise your rights, contact us at jobernify@gmail.com.
 
 **8\. Data Security**
 
@@ -138,4 +136,4 @@ We reserve the right to update this Privacy Policy at any time. Substantial chan
 
 **12\. Contact Us**
 
-If you have questions about this Privacy Policy, please contact us at [email].
+If you have questions about this Privacy Policy, please contact us at jobernify@gmail.com.

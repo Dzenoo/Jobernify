@@ -1,6 +1,4 @@
-**Cookie Policy**
-
-Effective Date: [Insert Date]
+Last updated: 26 December 2023
 
 **1\. Introduction**
 
@@ -34,4 +32,4 @@ We may revise this Cookie Policy from time to time. Changes will be posted on th
 
 **7\. Contact Us**
 
-For questions about our Cookie Policy, please contact us at [email].
+For questions about our Cookie Policy, please contact us at jobernify@gmail.com.

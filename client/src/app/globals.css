@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+  /* Root Variables */
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -30,20 +31,22 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
   }
+
+  /* Dark Mode Variables */
   .dark {
-    --background: 0, 0%, 5%, 1; /* Very dark grayish-blue */
+    --background: 0, 0%, 5%, 1;
     --foreground: 210 40% 98%;
-    --card: 0, 0%, 5%, 1; /* Very dark grayish-blue */
+    --card: 0, 0%, 5%, 1;
     --card-foreground: 210 40% 98%;
-    --popover: 0, 0%, 5%, 1; /* Very dark grayish-blue */
+    --popover: 0, 0%, 5%, 1;
     --popover-foreground: 210 40% 98%;
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 0, 0%, 12%, 1; /* Darker, but not black */
+    --secondary: 0, 0%, 12%, 1;
     --secondary-foreground: 210 40% 98%;
-    --muted: 0, 0%, 12%, 1; /* Darker, but not black */
+    --muted: 0, 0%, 12%, 1;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 0, 0%, 12%, 1; /* Darker, but not black */
+    --accent: 0, 0%, 12%, 1;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
@@ -56,9 +59,8 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-}
 
-@layer base {
+  /* Global Element Styles */
   * {
     @apply border-border;
   }
@@ -75,6 +77,7 @@
     @apply bg-[#fafafa] dark:bg-[#000000];
   }
 
+  /* Utility Classes */
   .landing-padding {
     @apply px-28;
   }
@@ -108,6 +111,7 @@
     @apply text-base font-normal text-black dark:text-white;
   }
 
+  /* Scrollbar Styles */
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -118,56 +122,27 @@
 
   .hide-scrollbar {
     scrollbar-width: none;
-  }
-
-  .hide-scrollbar {
     -ms-overflow-style: none;
   }
 
-  .jobDescription ul,
-  .jobDescription ol {
-    margin: 1em 0;
-    padding-left: 1.5em;
+  /* Markdown Styles */
+  .markdown ul {
+    @apply my-4 pl-6 list-disc;
   }
 
-  .jobDescription ul {
-    list-style-type: disc;
+  .markdown ol {
+    @apply my-4 pl-6 list-decimal;
   }
 
-  .jobDescription ol {
-    list-style-type: decimal;
+  .markdown li {
+    @apply my-2;
   }
 
-  .jobDescription li {
-    margin: 0.5em 0;
+  .markdown p {
+    @apply my-2;
   }
 
-  .jobDescription p {
-    margin: 0.5em 0;
-  }
-
-  .aiChat ul,
-  .aiChat ol {
-    margin: 1em 0;
-    padding-left: 1.5em;
-  }
-
-  .aiChat ul {
-    list-style-type: disc;
-  }
-
-  .aiChat ol {
-    list-style-type: decimal;
-  }
-
-  .aiChat li {
-    margin: 0.5em 0;
-  }
-
-  .aiChat p {
-  }
-
-  .aiChat a {
+  .markdown a {
     @apply text-blue-500;
   }
 }
