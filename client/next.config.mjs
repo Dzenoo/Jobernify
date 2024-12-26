@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  productionBrowserSourceMaps: false,
   webpack: (config, { isServer }) => {
     config.module.rules.push({
       test: /\.md$/,
