@@ -6,55 +6,45 @@ import { useTheme } from 'next-themes';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 import { FooterLinks } from '@/constants';
 
 const Footer: React.FC = () => {
-  const pathname = usePathname();
   const { resolvedTheme } = useTheme();
 
-  const isLanding = pathname === '/';
-
   return (
-    <footer
-      className={`p-5 shadow-lg border-t bg-white flex flex-col gap-6 dark:bg-[#0d0d0d] dark:border-[#1b1b1b] ${
-        isLanding && 'px-5 py-10 md:px-28'
-      }`}
-    >
-      <div className="flex justify-between gap-10 items-start border-b pb-6 max-xl:flex-wrap dark:border-[#1b1b1b]">
-        <div className="flex flex-col gap-3 basis-[36em] max-xl:basis-full">
-          <div>
-            <Image
-              src={
-                resolvedTheme === 'dark'
-                  ? '/images/logo-dark.png'
-                  : '/images/logo-light.png'
-              }
-              alt="light-talentify-logo"
-              width={100}
-              height={100}
-              loading="lazy"
-              style={{ objectFit: 'cover', width: 'auto', height: 'auto' }}
-            />
+    <footer className="px-5 py-8 shadow-lg bg-white dark:bg-[#0d0d0d]">
+      <div className="flex justify-between gap-10 items-start dark:border-[#1b1b1b] max-xl:flex-wrap">
+        <div className="flex flex-col gap-5 basis-[36em] max-xl:basis-full">
+          <div className="w-fit">
+            <Link href="/">
+              <Image
+                src={
+                  resolvedTheme === 'dark'
+                    ? '/images/logo-dark.png'
+                    : '/images/logo-light.png'
+                }
+                alt="light-talentify-logo"
+                width={100}
+                height={100}
+                loading="lazy"
+                className="w-fit"
+              />
+            </Link>
           </div>
           <div>
-            <p className="text-[#1b1b1b] dark:text-white leading-[28px]">
+            <p className="text-muted-foreground text-sm leading-[25px]">
               Founded with a passion for connecting job seekers with their dream
               careers, our mission is to simplify the job search process and
               empower individuals to find fulfilling employment opportunities.
             </p>
           </div>
+          <div className="text-muted-foreground text-sm">
+            &copy; 2024 Copyright, Jobernify. All rights reserved
+          </div>
         </div>
-        <div className="flex items-center justify-between gap-16 max-lg:flex-wrap">
+        <div className="flex items-start justify-between gap-16 max-lg:flex-wrap">
           {FooterLinks.map((footer) => renderFooterLinks(footer))}
-        </div>
-      </div>
-      <div>
-        <div>
-          <p className="text-[#1b1b1b] dark:text-white">
-            &copy; 2024 Copyright, Jobernify
-          </p>
         </div>
       </div>
     </footer>
@@ -77,15 +67,18 @@ function renderFooterLinks<T extends FooterLinkDivProps>({
   id,
 }: T) {
   return (
-    <div key={id} className="flex flex-col gap-3">
+    <div key={id} className="space-y-3">
       <div>
-        <h1 className="text-blue-500">{title}</h1>
+        <h1 className="text-sm font-medium uppercase">{title}</h1>
       </div>
       <div>
-        <ul className="flex flex-col gap-4">
+        <ul className="flex flex-col gap-2">
           {links.map((link) => (
             <li key={link.id}>
-              <Link href={link.href} className="text-[#1b1b1b] dark:text-white">
+              <Link
+                href={link.href}
+                className="text-muted-foreground text-sm transition-all dark:text-white hover:text-gray-900"
+              >
                 {link.name}
               </Link>
             </li>

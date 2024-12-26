@@ -5,8 +5,6 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { NavbarLandingLinks } from '@/constants';
-
 import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import { Button } from '@/components/ui/buttons/button';
@@ -24,32 +22,16 @@ const NavbarLanding: React.FC = () => {
   const isSeeker = userType === 'seeker';
 
   return (
-    <header className="px-5 bg-[#03F7FF0D] py-5 flex justify-between items-center gap-5 md:px-28">
+    <header className="px-5 py-3 bg-white flex justify-between items-center gap-5 md:px-28">
       <div>
-        <Image
-          src="/images/logo-light.png"
-          alt="logo"
-          width={150}
-          height={150}
-        />
-      </div>
-      <div
-        className={`max-lg:hidden relative ${
-          isSeeker ? 'right-10' : 'right-8'
-        }`}
-      >
-        <ul className="flex items-center gap-10">
-          {NavbarLandingLinks.map((link) => (
-            <li key={link.id}>
-              <a
-                className="transition-all hover:text-blue-700"
-                href={`#${link.href}`}
-              >
-                {link.title}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <Link href="/">
+          <Image
+            src="/images/logo-light.png"
+            alt="logo"
+            width={150}
+            height={150}
+          />
+        </Link>
       </div>
       <div className="flex items-stretch">
         {userType && isSeeker && (

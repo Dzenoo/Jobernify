@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/buttons/button';
 
 const HeroLanding: React.FC = () => {
   return (
-    <section id="hero" className="bg-[#03F7FF0D]">
+    <section id="hero">
       <div className="px-5 pt-20 flex flex-col gap-28 items-center justify-center grid-background md:landing-padding">
         <div className="flex flex-col gap-5 items-center justify-center">
           <div>
