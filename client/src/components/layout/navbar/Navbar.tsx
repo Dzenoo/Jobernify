@@ -13,7 +13,11 @@ import NavbarLinksList from './NavbarLinksList';
 import NavbarActionsList from './NavbarActionsList';
 import NavbarAvatar from './NavbarAvatar';
 
-const Navbar: React.FC = () => {
+type NavbarProps = {
+  href?: string;
+};
+
+const Navbar: React.FC<NavbarProps> = ({ href }) => {
   const pathname = usePathname();
   const { deleteCookieHandler, getCookieHandler } = useAuthentication();
   const { isAuthenticated, userType, token } = getCookieHandler();
@@ -24,7 +28,7 @@ const Navbar: React.FC = () => {
 
   return (
     <header className="px-5 py-3 base-margin flex justify-between items-center gap-3 border-b border-gray-100 bg-white dark:bg-[#0d0d0d] dark:border-[#1b1b1b]">
-      <Logo />
+      <Logo href={href} />
 
       {isAuthenticated && !isLoading && (
         <div className="max-xl:hidden">

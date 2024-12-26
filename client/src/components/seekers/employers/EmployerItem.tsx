@@ -83,16 +83,14 @@ const EmployerItem: React.FC<EmployersItemProps> = ({
           </div>
         </div>
       </CardContent>
-      <CardFooter className="border-t border-gray-100 pt-6 dark:border-[#1b1b1b]">
-        <div className="w-full gap-6 flex items-center justify-between flex-wrap">
-          {FooterEmployerData.map((data) =>
-            renderIconText({
-              ...data,
-              tooltip: true,
-              tooltipContent: data.tooltip,
-            }),
-          )}
-        </div>
+      <CardFooter className="w-full flex items-center justify-between gap-6 border-t border-gray-100 pt-6 dark:border-[#1b1b1b] whitespace-nowrap overflow-x-auto">
+        {FooterEmployerData.map((data) =>
+          renderIconText({
+            ...data,
+            tooltip: true,
+            tooltipContent: data.tooltip,
+          }),
+        )}
       </CardFooter>
     </Card>
   );
