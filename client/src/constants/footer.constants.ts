@@ -37,7 +37,7 @@ export const FooterLinks = [
       {
         id: '3',
         name: 'Seekers Guidelines',
-        href: '/seekers-guidelines',
+        href: '/seeker-guidelines',
       },
     ],
   },

@@ -17,11 +17,11 @@ const NavbarLanding: React.FC = () => {
     setIsHydrated(true);
   }, []);
 
-  const isSeeker = userType === 'seeker';
-
   if (!isHydrated) {
     return null;
   }
+
+  const isSeeker = userType === 'seeker';
 
   return (
     <header className="px-5 py-3 bg-white flex justify-between items-center gap-5 md:px-28">

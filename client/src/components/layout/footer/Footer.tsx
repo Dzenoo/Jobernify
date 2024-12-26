@@ -51,21 +51,17 @@ const Footer: React.FC = () => {
   );
 };
 
-type FooterLinkDivProps = {
-  title: string;
-  links: {
+function renderFooterLinks<
+  T extends {
+    title: string;
+    links: {
+      id: string;
+      href: string;
+      name: string;
+    }[];
     id: string;
-    href: string;
-    name: string;
-  }[];
-  id: string;
-};
-
-function renderFooterLinks<T extends FooterLinkDivProps>({
-  title,
-  links,
-  id,
-}: T) {
+  },
+>({ title, links, id }: T): React.JSX.Element {
   return (
     <div key={id} className="space-y-3">
       <div>
