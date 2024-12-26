@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import rehypeSanitize from 'rehype-sanitize';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -14,6 +15,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
 }) => {
   return (
     <ReactMarkdown
+      rehypePlugins={[rehypeSanitize]}
       className={cn(className)}
       components={{
         a: ({ href, children, ...props }) => {

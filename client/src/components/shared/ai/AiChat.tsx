@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { Bot, User } from 'lucide-react';
 
 import { useAiAssistant } from '@/context/ai-assistant';
-import { sanitize } from '@/lib/utils';
 
 import MarkdownRenderer from '../markdown/MarkdownRenderer';
 import Loader from '../loaders/Loader';
@@ -71,11 +70,11 @@ const AiChat: React.FC<AiChatProps> = ({ socket }) => {
             >
               <MarkdownRenderer
                 className="aiChat space-y-5 text-sm"
-                content={sanitize(
+                content={
                   typeof message.content === 'string'
                     ? message.content
-                    : message.content[0].text.value,
-                )}
+                    : message.content[0].text.value
+                }
               />
             </div>
           </div>

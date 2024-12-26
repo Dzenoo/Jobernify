@@ -27,7 +27,6 @@ import {
   getImageUrl,
   getSkillsData,
   getTime,
-  sanitize,
 } from '@/lib/utils';
 
 import { Application, Job } from '@/types';
@@ -68,7 +67,6 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
       return;
     }
 
-    const sanitizedDescription = sanitize(description);
     const expirationDate = formatDate(expiration_date);
     const createdTime = getTime(createdAt);
     const categorizedSkills = getSkillsData(skills);
@@ -230,7 +228,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
               <div>
                 <MarkdownRenderer
                   className="jobDescription"
-                  content={sanitizedDescription}
+                  content={description}
                 />
               </div>
             </div>
