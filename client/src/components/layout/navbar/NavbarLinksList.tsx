@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 type NavbarLinksListProps = {
   pathname: string;
@@ -17,20 +17,22 @@ const NavbarLinksList: React.FC<NavbarLinksListProps> = ({
   pathname,
   data,
 }) => {
+  const router = useRouter();
+
   return (
     <div className="flex items-center gap-6">
       {Array.from(data).map(({ href, title, id }) => (
-        <Link
+        <button
           key={id}
-          href={href}
           className={` flex items-center gap-3 transition-colors hover:text-[#0066ff] dark:hover:text-[#0066ff] ${
             pathname === href
               ? 'text-[#0066ff]'
               : 'text-[--black-base-color] dark:text-white'
           }`}
+          onClick={() => router.push(href)}
         >
           {title}
-        </Link>
+        </button>
       ))}
     </div>
   );

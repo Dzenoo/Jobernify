@@ -1,13 +1,12 @@
 import React from 'react';
 
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { LogOut, LucideIcon } from 'lucide-react';
 
 import Ai from '@/components/shared/ai/Ai';
 import Themes from './Themes';
 
 import { TooltipWrapper } from '@/components/ui/info/tooltip-wrapper';
-import { useRouter } from 'next/navigation';
 
 type NavbarActionsListProps = {
   isSeeker: boolean;
@@ -28,25 +27,21 @@ const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
   pathname,
 }) => {
   const router = useRouter();
+
   return (
     <ul className="flex items-center gap-4">
       <Ai isSeeker={isSeeker} />
 
       {Array.from(data).map(({ id, href, icon, tooltip }) => (
         <TooltipWrapper key={id} tooltip={tooltip}>
-          <button onClick={() => router.push(href)}>
-            {React.createElement(icon)}
-          </button>
-
-          {/* <Link
-            key={id}
-            href={href}
+          <button
             className={`flex items-center gap-3 transition-colors hover:text-blue-700 ${
               pathname === href && 'text-[#0066ff]'
             }`}
+            onClick={() => router.push(href)}
           >
             {React.createElement(icon)}
-          </Link> */}
+          </button>
         </TooltipWrapper>
       ))}
 
