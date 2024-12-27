@@ -35,25 +35,25 @@ const FaqLanding: React.FC = () => {
         : GeneralPlatformFAQs;
 
   return (
-    <section id="faq" className="px-5 flex flex-col gap-28 md:landing-padding">
-      <div className="flex flex-col justify-center items-center gap-8">
+    <section id="faq" className="space-y-28 md:landing-padding">
+      <div className="text-center space-y-5">
         <div>
           <BlueButton>FAQ</BlueButton>
         </div>
         <div>
-          <h1 className="text-4xl font-semibold text-center max-sm:text-3xl">
+          <h1 className="text-4xl font-semibold leading-tight max-sm:text-3xl">
             Frequently Asked <span className="text-[#0084FF]">Questions</span>
           </h1>
         </div>
-        <div className="max-w-2xl">
-          <p className="text-center text-[#A8A8A8] leading-[28px]">
+        <div className="max-w-2xl m-auto">
+          <p className="text-muted-foreground leading-relaxed">
             Have questions about how our platform works? We have got you
             covered! Whether you are a job seeker looking for your next
             opportunity or an employer searching for top tech talent, here are
             the answers to the most commonly asked questions.
           </p>
         </div>
-        <div className="flex items-center gap-5">
+        <div className="pt-5 space-x-5">
           {Buttons.map(({ id, title }) => (
             <BlueButton
               key={id}
@@ -68,23 +68,29 @@ const FaqLanding: React.FC = () => {
       <div>
         <Accordion type="single" collapsible>
           {AccordionData.map(({ id, title, description }) => (
-            <AccordionItem className="py-5" key={id} value={`item-${id}`}>
-              <AccordionTrigger className="font-semibold max-sm:text-sm text-left">
+            <AccordionItem
+              className="space-y-3 py-7"
+              key={id}
+              value={`item-${id}`}
+            >
+              <AccordionTrigger className="font-semibold max-sm:text-sm text-left pb-0">
                 {title}
               </AccordionTrigger>
-              <AccordionContent>{description}</AccordionContent>
+              <AccordionContent className="text-muted-foreground pb-0">
+                {description}
+              </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
       </div>
-      <div className="pb-28 flex flex-col justify-center items-center gap-10">
+      <div className="pb-28 space-y-5 text-center">
         <div>
-          <h1 className="text-4xl font-semibold text-center max-sm:text-3xl ">
+          <h1 className="text-4xl font-semibold leading-tight max-sm:text-3xl">
             Still Have Questions?
           </h1>
         </div>
-        <div className="max-w-lg">
-          <p className="text-center text-[#A8A8A8] leading-[28px]">
+        <div className="max-w-lg m-auto">
+          <p className="text-muted-foreground leading-relaxed">
             If you have any further questions or concerns, please don't hesitate
             to reach out to us. Our dedicated support team is always ready to
             assist you with any inquiries you may have.

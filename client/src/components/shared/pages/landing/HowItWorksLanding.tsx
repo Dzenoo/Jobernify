@@ -20,38 +20,32 @@ const HowItWorksLanding: React.FC = () => {
   const list = activeTab ? HowItWorksSeekersData : HowItWorksEmployersData;
 
   return (
-    <section className="px-5 flex flex-col gap-10 items-center justify-center md:landing-padding">
-      <div className="flex flex-col gap-7 items-center justify-center">
-        <div className="flex gap-2 items-center">
-          <div>
-            <BlueButton
-              onClick={() => handleActiveTab(true)}
-              isActive={activeTab}
-            >
-              Seekers
-            </BlueButton>
-          </div>
-          <div>
-            <BlueButton
-              onClick={() => handleActiveTab(false)}
-              isActive={!activeTab}
-            >
-              Employers
-            </BlueButton>
-          </div>
+    <section className="px-5 flex flex-col gap-20 items-center justify-center md:landing-padding">
+      <div className="text-center space-y-5">
+        <div className="space-x-5">
+          <BlueButton
+            onClick={() => handleActiveTab(true)}
+            isActive={activeTab}
+          >
+            Seekers
+          </BlueButton>
+          <BlueButton
+            onClick={() => handleActiveTab(false)}
+            isActive={!activeTab}
+          >
+            Employers
+          </BlueButton>
         </div>
         <div>
-          <h1 className="text-4xl font-semibold text-center max-sm:text-3xl">
+          <h1 className="text-4xl font-semibold leading-tight max-sm:text-3xl">
             How It <span className="text-[#0084FF]">Works</span>
           </h1>
         </div>
         <div className="max-w-xl">
-          <p className="text-center text-[#A8A8A8] leading-[28px]">
-            {description}
-          </p>
+          <p className="text-muted-foreground leading-relaxed">{description}</p>
         </div>
       </div>
-      <div className="pt-10">
+      <div>
         <ul className="grid grid-cols-3 gap-20 max-lg:grid-cols-1">
           {list.map(({ id, title, color, description }) => {
             return (
@@ -60,12 +54,14 @@ const HowItWorksLanding: React.FC = () => {
                   style={{ backgroundColor: color }}
                   className="w-2 h-20 rounded-xl"
                 />
-                <div className="flex flex-col gap-2">
+                <div className="space-y-2">
                   <div>
                     <h1 className="font-semibold text-lg">{title}</h1>
                   </div>
                   <div className="max-w-72 max-lg:max-w-full">
-                    <p className="text-[#A8A8A8] font-light">{description}</p>
+                    <p className="text-muted-foreground font-light leading-relaxed">
+                      {description}
+                    </p>
                   </div>
                 </div>
               </li>

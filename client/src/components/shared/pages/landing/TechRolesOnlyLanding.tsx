@@ -9,18 +9,18 @@ import { Button } from '@/components/ui/buttons/button';
 const TechRolesOnlyLanding: React.FC = () => {
   return (
     <div className="px-5 flex justify-between gap-5 md:landing-padding max-xl:flex-col max-xl:gap-28">
-      <div className="basis-full flex flex-col gap-8">
+      <div className="basis-full space-y-5">
         <div>
           <BlueButton>App for Tech Roles Only</BlueButton>
         </div>
         <div className="max-w-lg">
-          <h1 className="text-4xl font-semibold leading-[55px] max-sm:text-3xl">
+          <h1 className="text-4xl font-semibold leading-tight max-sm:text-3xl">
             Tailored for All Tech Roles:{' '}
             <span className="text-[#0084FF]">Your Career Starts Here</span>
           </h1>
         </div>
         <div className="max-w-xl">
-          <p className="text-[#A8A8A8] leading-[28px]">
+          <p className="text-muted-foreground leading-relaxed">
             Unlike general job boards, our platform is built specifically for
             tech professionals across a variety of roles. Whether you are a
             programmer, designer, marketing specialist, product manager, or

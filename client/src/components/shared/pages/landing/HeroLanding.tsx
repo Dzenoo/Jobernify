@@ -10,7 +10,7 @@ const HeroLanding: React.FC = () => {
   return (
     <section id="hero">
       <div className="px-5 pt-20 flex flex-col gap-28 items-center justify-center grid-background md:landing-padding">
-        <div className="flex flex-col gap-5 items-center justify-center">
+        <div className="space-y-5 text-center">
           <div>
             <BlueButton>Perfect Opportunities</BlueButton>
           </div>
@@ -19,8 +19,8 @@ const HeroLanding: React.FC = () => {
               Where Job Seekers and Employers Find the Perfect Match
             </h1>
           </div>
-          <div className="max-w-lg">
-            <p className="text-[18px] font-normal leading-[27px] text-[#777777] text-center">
+          <div className="max-w-lg m-auto">
+            <p className="text-[18px] leading-relaxed text-muted-foreground">
               Job hunting made simple, hiring made effective. Your career
               journey or your next hire is only a click away.
             </p>

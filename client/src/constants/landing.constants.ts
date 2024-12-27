@@ -1,9 +1,4 @@
-import {
-  GaugeCircle,
-  MonitorSmartphone,
-  Paintbrush,
-  Scale3D,
-} from 'lucide-react';
+import { GaugeCircle, MonitorSmartphone, Paintbrush, Bot } from 'lucide-react';
 
 export const HowItWorksSeekersData = [
   {
@@ -59,9 +54,9 @@ export const FeaturesData = [
   },
   {
     id: 2,
-    title: 'Easy Profile Building',
+    title: 'Powerful AI Assistant',
     description:
-      'Quickly create a professional profile by uploading your resume and adding key details, or post job listings with ease.',
+      'Our AI assistant simplifies your job search or hiring process, offering tailored matches and instant support at every step.',
   },
   {
     id: 3,
@@ -116,26 +111,32 @@ export const BenefitsData = [
   },
   {
     id: 4,
-    title: 'Scalability',
+    title: 'AI-Powered Platform',
     description:
-      'As your hiring or job search needs grow, our platform scales with you. From individual job seekers to large teams of employers, we provide a flexible, scalable solution that adapts to your needs.',
-    icon: Scale3D,
+      'Our platform leverages advanced AI technology, including an intelligent assistant, to enhance your job search or hiring process. From personalized job recommendations to instant support, our AI-powered tools provide a seamless and efficient experience.',
+    icon: Bot,
     color: '#034BFF33',
   },
 ];
 
 export const EmployerFAQs = [
   {
+    id: 0,
+    title: 'How do I create a profile on the platform?',
+    description:
+      'You can create profile by filling required company information. Our team will review your profile and if your company is approved, you can start posting jobs.',
+  },
+  {
     id: 1,
     title: 'How do I post a job listing?',
     description:
-      "To post a job listing, log in to your employer account, navigate to the 'Post a Job' section, and fill out the required details. Your listing will be reviewed and published shortly.",
+      "To post a job listing, log in to your employer account, navigate to the dashboard/jobs section, then click 'Post a Job' and fill out the required details. Your listing will be reviewed and published shortly.",
   },
   {
     id: 2,
     title: 'Can I search for candidates instead of waiting for applications?',
     description:
-      'Yes, our platform offers a candidate search feature that allows you to actively search and filter profiles based on specific criteria like skills, experience, and location.',
+      'Yes, our platform offers a candidate search feature that allows you to actively search and filter profiles based on specific criteria like skills.',
   },
   {
     id: 3,
@@ -147,13 +148,25 @@ export const EmployerFAQs = [
     id: 4,
     title: 'Is there a cost to post jobs on the platform?',
     description:
-      'Our platform offers both free and premium job posting options. Premium posts provide better visibility and additional features.',
+      'Our platform is completely free for employers, including features like job postings, and application tracking.',
   },
   {
     id: 5,
     title: 'Can I create multiple job listings?',
     description:
-      'Yes, you can create multiple job listings. Our platform supports both individual postings and bulk uploads for larger requirements.',
+      'Yes, you can create multiple job listings. Our platform supports individual postings for larger requirements.',
+  },
+  {
+    id: 6,
+    title: 'How I can contact job seekers?',
+    description:
+      'You can contact job seekers by email or through their social profiles.',
+  },
+  {
+    id: 7,
+    title: 'How AI can help me finding perfect candidates?',
+    description:
+      'You can easily chat with our JobernifyAI assistant to simplify your search for job seekers. Ask the assistant to find seekers based on skills, education, or experience. Additionally, you can inquire about any job-related topics or request suggestions to enhance your seeker search experience.',
   },
 ];
 
@@ -174,7 +187,7 @@ export const JobSeekerFAQs = [
     id: 3,
     title: 'How do job alerts work?',
     description:
-      "Set up job alerts by selecting your preferred job criteria. You'll receive email notifications whenever new jobs matching your criteria are posted.",
+      'Set up job alerts by specifying the job title, level, and type. You will receive email notifications whenever new postings match all three criteria.',
   },
   {
     id: 4,
@@ -186,16 +199,34 @@ export const JobSeekerFAQs = [
     id: 5,
     title: 'How can I track my application status?',
     description:
-      "You can track your application status in your dashboard, which provides updates such as 'Under Review,' 'Interview Scheduled,' or 'Hired.'",
+      "You can track your application status in your profile, which provides updates such as 'Pending,' 'Interview', 'Accepted' or 'Rejected'",
+  },
+  {
+    id: 6,
+    title: 'Why should I follow an employer?',
+    description:
+      'Following an employer allows you to stay updated with their latest job postings. You will receive email notifications whenever they list a new opportunity.',
+  },
+  {
+    id: 7,
+    title: 'How will I know if an employer has selected me?',
+    description:
+      'If an employer selects you, they will update your application status and may contact you directly through your socials',
+  },
+  {
+    id: 8,
+    title: 'How AI can help me find my dream job?',
+    description:
+      'You can easily chat with our JobernifyAI assistant, which will help you find your dream job. Fill your profile, and the assistant will automatically suggest the perfect job matches for you. Additionally, you can ask the assistant any job-related questions or seek suggestions to enhance your job search experience. ',
   },
 ];
 
 export const GeneralPlatformFAQs = [
   {
     id: 1,
-    title: 'Is this platform focused only on tech jobs?',
+    title: 'Does this platform focus exclusively on tech jobs?',
     description:
-      'No, while we cater to tech professionals, our platform also hosts job opportunities across various industries and domains.',
+      'Yes, our platform specializes in connecting job seekers and employers in the tech industry, ensuring tailored opportunities and expertise.',
   },
   {
     id: 2,
@@ -207,7 +238,7 @@ export const GeneralPlatformFAQs = [
     id: 3,
     title: 'What makes this platform different from general job boards?',
     description:
-      'Our platform combines modern UI/UX, powerful search tools, and tailored features to provide a superior experience for both job seekers and employers.',
+      'Our platform stands out with its modern UI/UX, powerful search tools, AI-powered features like personalized job recommendations and instant assistance, and tailored tools to enhance the experience for both job seekers and employers.',
   },
   {
     id: 4,
@@ -219,6 +250,6 @@ export const GeneralPlatformFAQs = [
     id: 5,
     title: 'How do I contact support if I have an issue?',
     description:
-      "You can reach out to our support team via the 'Contact Us' page or through in-app chat. We’re here to help with any issues or inquiries.",
+      "You can reach out to our support team via the 'Contact Us' page or through email. We are here to help with any issues or inquiries.",
   },
 ];

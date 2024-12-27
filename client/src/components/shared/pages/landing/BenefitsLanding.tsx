@@ -10,17 +10,17 @@ const BenefitsLanding: React.FC = () => {
       id="benefits"
       className="px-5 flex flex-col gap-36 justify-center items-center md:landing-padding"
     >
-      <div className="max-w-xl flex flex-col justify-center items-center gap-8">
+      <div className="max-w-xl text-center space-y-5">
         <div>
           <BlueButton>Benefits</BlueButton>
         </div>
         <div>
-          <h1 className="text-center text-4xl font-semibold max-sm:text-3xl">
+          <h1 className="text-4xl font-semibold leading-tight max-sm:text-3xl">
             Why <span className="text-[#0084FF]">Choose</span> Our Platform?
           </h1>
         </div>
         <div>
-          <p className="text-center text-[#A8A8A8] leading-[28px]">
+          <p className="text-muted-foreground leading-relaxed">
             Our platform offers unique benefits to both job seekers and
             employers in the programming industry. Designed with cutting-edge
             technology and a user-centered approach.
@@ -32,7 +32,7 @@ const BenefitsLanding: React.FC = () => {
           {BenefitsData.map(({ id, title, description, icon, color }) => (
             <li
               key={id}
-              className="bg-white box-shadow-blue rounded-xl p-10 flex flex-col gap-5"
+              className="bg-white rounded-xl p-10 space-y-5 transition-all hover:box-shadow-blue"
             >
               <div
                 style={{ backgroundColor: color }}
@@ -44,7 +44,7 @@ const BenefitsLanding: React.FC = () => {
                 <h1 className="font-semibold text-xl">{title}</h1>
               </div>
               <div className="max-w-xl">
-                <p className="text-[#A8A8A8] font-light leading-7">
+                <p className="text-muted-foreground font-light leading-relaxed">
                   {description}
                 </p>
               </div>
