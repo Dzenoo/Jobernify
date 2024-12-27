@@ -37,7 +37,7 @@ const HowItWorksLanding: React.FC = () => {
           </BlueButton>
         </div>
         <div>
-          <h1 className="text-4xl font-semibold leading-tight max-sm:text-3xl">
+          <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
             How It <span className="text-[#0084FF]">Works</span>
           </h1>
         </div>
@@ -46,17 +46,19 @@ const HowItWorksLanding: React.FC = () => {
         </div>
       </div>
       <div>
-        <ul className="grid grid-cols-3 gap-20 max-lg:grid-cols-1">
+        <ul className="grid grid-cols-3 gap-20 max-md:grid-cols-1 max-md:gap-10">
           {list.map(({ id, title, color, description }) => {
             return (
-              <li className="flex gap-5 items-center" key={id}>
+              <li className="flex gap-5 items-stretch" key={id}>
                 <div
                   style={{ backgroundColor: color }}
-                  className="w-2 h-20 rounded-xl"
+                  className="w-2 h-full rounded-xl"
                 />
                 <div className="space-y-2">
                   <div>
-                    <h1 className="font-semibold text-lg">{title}</h1>
+                    <h1 className="text-white font-semibold text-lg">
+                      {title}
+                    </h1>
                   </div>
                   <div className="max-w-72 max-lg:max-w-full">
                     <p className="text-muted-foreground font-light leading-relaxed">

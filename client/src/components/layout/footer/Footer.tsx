@@ -8,21 +8,36 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { FooterLinks } from '@/constants';
+import { cn } from '@/lib/utils';
 
-const Footer: React.FC = () => {
+type FooterProps = {
+  className?: string;
+  theme?: string;
+};
+
+const Footer: React.FC<FooterProps> = ({ className, theme }) => {
   const { resolvedTheme } = useTheme();
 
   return (
-    <footer className="px-5 py-8 shadow-lg bg-white dark:bg-[#0d0d0d]">
+    <footer
+      className={cn(
+        'px-5 py-8 shadow-lg bg-white border-t dark:border-[#1b1b1b] border-gray-100 dark:bg-[#0d0d0d]',
+        className,
+      )}
+    >
       <div className="flex justify-between gap-10 items-start dark:border-[#1b1b1b] max-xl:flex-wrap">
         <div className="flex flex-col gap-5 basis-[36em] max-xl:basis-full">
           <div className="w-fit">
             <Link href="/">
               <Image
                 src={
-                  resolvedTheme === 'dark'
-                    ? '/images/logo-dark.png'
-                    : '/images/logo-light.png'
+                  !theme
+                    ? resolvedTheme === 'dark'
+                      ? '/images/logo-dark.png'
+                      : '/images/logo-light.png'
+                    : theme === 'dark'
+                      ? '/images/logo-dark.png'
+                      : '/images/logo-light.png'
                 }
                 alt="light-talentify-logo"
                 width={100}
@@ -44,7 +59,9 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="flex items-start justify-between gap-16 max-lg:flex-wrap">
-          {FooterLinks.map((footer) => renderFooterLinks(footer))}
+          {FooterLinks.map((footer) =>
+            renderFooterLinks({ ...footer, theme } as const),
+          )}
         </div>
       </div>
     </footer>
@@ -53,6 +70,7 @@ const Footer: React.FC = () => {
 
 function renderFooterLinks<
   T extends {
+    theme?: string;
     title: string;
     links: {
       id: string;
@@ -61,11 +79,15 @@ function renderFooterLinks<
     }[];
     id: string;
   },
->({ title, links, id }: T): React.JSX.Element {
+>({ theme, title, links, id }: T): React.JSX.Element {
   return (
     <div key={id} className="space-y-3">
       <div>
-        <h1 className="text-sm font-medium uppercase">{title}</h1>
+        <h1
+          className={`text-sm font-medium uppercase ${theme === 'dark' ? 'text-white' : ''}`}
+        >
+          {title}
+        </h1>
       </div>
       <div>
         <ul className="flex flex-col gap-2">
@@ -73,7 +95,7 @@ function renderFooterLinks<
             <li key={link.id}>
               <Link
                 href={link.href}
-                className="text-muted-foreground text-sm transition-all dark:text-white hover:text-gray-900"
+                className={`text-muted-foreground text-sm transition-all dark:text-white hover:text-gray-900 dark:hover:text-gray-300 ${theme === 'dark' ? 'hover:text-gray-100' : 'hover:text-gray-900'}`}
               >
                 {link.name}
               </Link>

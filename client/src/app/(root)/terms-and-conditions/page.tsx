@@ -7,16 +7,16 @@ const TermsAndConditionsPage = () => {
   return (
     <section className="px-5 py-20 space-y-10 md:landing-padding">
       <div>
-        <h1 className="font-semibold text-5xl max-sm:text-2xl">
+        <h1 className="text-white font-semibold text-5xl max-sm:text-2xl">
           Terms And Conditions
         </h1>
       </div>
       <MarkdownRenderer
         customStyles={{
-          p: 'font-light',
-          strong: 'font-medium',
+          p: 'font-extralight',
+          strong: 'font-bold',
         }}
-        className="space-y-5"
+        className="text-white space-y-5"
         content={TermsAndConditionsMarkdown}
       />
     </section>

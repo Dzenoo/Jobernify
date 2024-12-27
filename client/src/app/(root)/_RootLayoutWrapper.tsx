@@ -12,13 +12,13 @@ const RootLayoutWrapper = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div
-      className={`flex flex-col min-h-screen ${
+      className={`bg-black flex flex-col min-h-screen ${
         isZoomedOut ? 'm-auto max-w-screen-2xl' : ''
       }`}
     >
       <NavbarLanding />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Footer className="border-t border-[#1b1b1b] bg-black" theme="dark" />
     </div>
   );
 };

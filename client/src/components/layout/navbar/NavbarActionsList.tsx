@@ -7,6 +7,7 @@ import Ai from '@/components/shared/ai/Ai';
 import Themes from './Themes';
 
 import { TooltipWrapper } from '@/components/ui/info/tooltip-wrapper';
+import { useRouter } from 'next/navigation';
 
 type NavbarActionsListProps = {
   isSeeker: boolean;
@@ -26,13 +27,18 @@ const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
   logout,
   pathname,
 }) => {
+  const router = useRouter();
   return (
     <ul className="flex items-center gap-4">
       <Ai isSeeker={isSeeker} />
 
       {Array.from(data).map(({ id, href, icon, tooltip }) => (
         <TooltipWrapper key={id} tooltip={tooltip}>
-          <Link
+          <button onClick={() => router.push(href)}>
+            {React.createElement(icon)}
+          </button>
+
+          {/* <Link
             key={id}
             href={href}
             className={`flex items-center gap-3 transition-colors hover:text-blue-700 ${
@@ -40,7 +46,7 @@ const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
             }`}
           >
             {React.createElement(icon)}
-          </Link>
+          </Link> */}
         </TooltipWrapper>
       ))}
 

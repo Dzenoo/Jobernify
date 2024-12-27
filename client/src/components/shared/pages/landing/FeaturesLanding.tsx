@@ -19,7 +19,7 @@ const FeaturesLanding: React.FC = () => {
           <BlueButton>Features</BlueButton>
         </div>
         <div className="max-w-xl">
-          <h1 className="text-4xl font-semibold leading-tight max-sm:text-3xl">
+          <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
             Explore Features That Simplify{' '}
             <span className="text-[#0084FF]">Job Searching and Hiring</span> for
             Everyone
@@ -34,7 +34,9 @@ const FeaturesLanding: React.FC = () => {
         </div>
         <div>
           <Link href="/signup">
-            <Button className="px-10">Sign Up</Button>
+            <Button variant="outline" className="px-10">
+              Sign Up
+            </Button>
           </Link>
         </div>
       </div>
@@ -43,7 +45,7 @@ const FeaturesLanding: React.FC = () => {
           {FeaturesData.map(({ id, title, description }) => (
             <li key={id} className="space-y-3">
               <div>
-                <h1 className="font-semibold text-lg">{title}</h1>
+                <h1 className="text-white font-semibold text-lg">{title}</h1>
               </div>
               <div>
                 <p className="text-muted-foreground font-light leading-relaxed">

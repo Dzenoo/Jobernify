@@ -14,7 +14,7 @@ const TechRolesOnlyLanding: React.FC = () => {
           <BlueButton>App for Tech Roles Only</BlueButton>
         </div>
         <div className="max-w-lg">
-          <h1 className="text-4xl font-semibold leading-tight max-sm:text-3xl">
+          <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
             Tailored for All Tech Roles:{' '}
             <span className="text-[#0084FF]">Your Career Starts Here</span>
           </h1>
@@ -30,7 +30,9 @@ const TechRolesOnlyLanding: React.FC = () => {
         </div>
         <div>
           <Link href="/signup">
-            <Button className="px-10">Sign Up</Button>
+            <Button variant="outline" className="px-10">
+              Sign Up
+            </Button>
           </Link>
         </div>
       </div>
@@ -38,7 +40,7 @@ const TechRolesOnlyLanding: React.FC = () => {
         <img
           src="/images/jobs.png"
           alt="jobs"
-          className="max-w-[700px] box-shadow-blue transform rotate-[25deg] scale-90 max-lg:max-w-[400px] max-sm:max-w-[350px]"
+          className="max-w-[700px] rounded-xl box-shadow-custom transform rotate-[25deg] scale-90 max-lg:max-w-[400px] max-sm:max-w-[350px]"
         />
       </div>
     </div>

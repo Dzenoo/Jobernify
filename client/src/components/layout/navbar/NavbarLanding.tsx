@@ -24,11 +24,11 @@ const NavbarLanding: React.FC = () => {
   const isSeeker = userType === 'seeker';
 
   return (
-    <header className="px-5 py-3 bg-white flex justify-between items-center gap-5 md:px-28">
+    <header className="px-5 py-3 bg-black flex justify-between items-center gap-5 border-b border-[#1b1b1b] md:px-28">
       <div>
         <Link href="/">
           <Image
-            src="/images/logo-light.png"
+            src="/images/logo-dark.png"
             alt="logo"
             width={150}
             height={150}
@@ -48,7 +48,7 @@ const NavbarLanding: React.FC = () => {
           )
         ) : (
           <Link href="/login">
-            <Button>Login</Button>
+            <Button variant="outline">Login</Button>
           </Link>
         )}
       </div>

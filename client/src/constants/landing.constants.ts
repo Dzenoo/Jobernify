@@ -91,7 +91,7 @@ export const BenefitsData = [
     description:
       "Navigate with ease thanks to our sleek, intuitive design. Our user interface ensures a smooth experience, whether you're a job seeker exploring opportunities or an employer managing job listings.",
     icon: Paintbrush,
-    color: '#03F7FF33',
+    color: '#00BFFF', // Bright Cyan
   },
   {
     id: 2,
@@ -99,7 +99,7 @@ export const BenefitsData = [
     description:
       'Access the platform from any device—desktop, tablet, or mobile. Our fully responsive design ensures that your experience is seamless and optimized no matter where you are.',
     icon: MonitorSmartphone,
-    color: '#FFA70333',
+    color: '#FFA500', // Vibrant Orange
   },
   {
     id: 3,
@@ -107,7 +107,7 @@ export const BenefitsData = [
     description:
       'Enjoy fast, reliable performance, even with large datasets and high traffic. Our platform is optimized to load quickly and function flawlessly, so you can focus on what matters most.',
     icon: GaugeCircle,
-    color: '#03FF1433',
+    color: '#32CD32', // Bright Green
   },
   {
     id: 4,
@@ -115,7 +115,7 @@ export const BenefitsData = [
     description:
       'Our platform leverages advanced AI technology, including an intelligent assistant, to enhance your job search or hiring process. From personalized job recommendations to instant support, our AI-powered tools provide a seamless and efficient experience.',
     icon: Bot,
-    color: '#034BFF33',
+    color: '#1E90FF', // Vivid Blue
   },
 ];
 
