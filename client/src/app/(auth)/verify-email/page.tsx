@@ -46,7 +46,9 @@ const VerifyEmail = ({
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <h1 className="text-lg">{renderMessage()}</h1>
+      <p className="text-muted-foreground text-sm animate-pulse">
+        {renderMessage()}
+      </p>
     </div>
   );
 };

@@ -4,8 +4,8 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
+import { MailModule } from './common/email/mail.module';
 import { AuthModule } from './authentication/auth.module';
-
 import { MongooseModule } from '@nestjs/mongoose';
 import { SeekersModule } from './models/seekers/seekers.module';
 import { EmployersModule } from './models/employers/employers.module';
@@ -40,6 +40,7 @@ import { CleanupService } from './common/cleanup/cleanup.service';
         };
       },
     }),
+    MailModule,
     AuthModule,
     SeekersModule,
     EmployersModule,
