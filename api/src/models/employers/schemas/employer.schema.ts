@@ -54,6 +54,9 @@ export class Employer extends BaseUser {
   @Prop({ type: String, default: 'employer', enum: Role })
   role: Role;
 
+  @Prop({ type: Boolean, default: false })
+  isApproved: boolean;
+
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
     default: [],

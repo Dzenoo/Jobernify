@@ -135,6 +135,17 @@ export class JobsService {
     body: CreateJobDto,
     employerId: string,
   ): Promise<ResponseObject> {
+    const employer = await this.employersService.findOneById(
+      employerId,
+      'isApproved',
+    );
+
+    if (!employer.isApproved) {
+      throw new UnauthorizedException(
+        'Your account has not been approved yet. Please try again later.',
+      );
+    }
+
     const newJob = await this.jobModel.create({
       ...body,
       employer: new mongoose.Types.ObjectId(employerId),

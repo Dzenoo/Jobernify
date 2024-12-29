@@ -317,7 +317,10 @@ export class EmployersService {
     size?: string;
     location?: string;
   }): Promise<ResponseObject> {
-    const conditions: any = {};
+    const conditions: any = {
+      isApproved: true,
+      emailVerified: true,
+    };
 
     if (search) {
       const regex = new RegExp(String(search), 'i');

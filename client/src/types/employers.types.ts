@@ -15,4 +15,5 @@ export type Employer = {
   role: keyof typeof Role;
   jobs: Job[];
   followers: Seeker[];
+  isApproved: boolean;
 };

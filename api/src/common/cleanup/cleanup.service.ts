@@ -25,6 +25,7 @@ export class CleanupService {
         verificationExpiration: { $lt: expirationDate },
       });
       await this.employersService.findAndDeleteMany({
+        isApproved: false,
         emailVerified: false,
         verificationExpiration: { $lt: expirationDate },
       });
