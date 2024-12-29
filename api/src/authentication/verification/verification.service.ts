@@ -26,7 +26,7 @@ export class VerificationService {
   constructor(
     @InjectModel(Seeker.name) private readonly seekerModel: Model<Seeker>,
     @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
-    private readonly emailService: MailService,
+    private readonly mailService: MailService,
   ) {}
 
   async verifyEmail(
@@ -76,7 +76,7 @@ export class VerificationService {
                           </div>
                          `;
 
-    await this.emailService.sendMail(
+    await this.mailService.sendMail(
       email,
       'Jobernify - Verify your email',
       emailContent,
