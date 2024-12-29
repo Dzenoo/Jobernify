@@ -14,7 +14,7 @@ import {
   Seeker,
   SeekerDocument,
 } from 'src/models/seekers/schemas/seeker.schema';
-import { NodemailerService } from 'src/common/email/nodemailer.service';
+import { MailService } from 'src/common/email/mail.service';
 
 import { Model } from 'mongoose';
 
@@ -26,7 +26,7 @@ export class VerificationService {
   constructor(
     @InjectModel(Seeker.name) private readonly seekerModel: Model<Seeker>,
     @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
-    private readonly emailService: NodemailerService,
+    private readonly emailService: MailService,
   ) {}
 
   async verifyEmail(

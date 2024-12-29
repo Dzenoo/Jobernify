@@ -27,7 +27,7 @@ import { GetJobsDto } from './dto/get-jobs.dto';
 import { EmployersService } from '../employers/employers.service';
 import { SeekersService } from '../seekers/seekers.service';
 import { ApplicationsService } from '../applications/applications.service';
-import { NodemailerService } from 'src/common/email/nodemailer.service';
+import { MailService } from 'src/common/email/mail.service';
 import { AiService } from 'src/ai/ai.service';
 
 @Injectable()
@@ -41,7 +41,7 @@ export class JobsService {
     private readonly employersService: EmployersService,
     @Inject(forwardRef(() => ApplicationsService))
     private readonly applicationsService: ApplicationsService,
-    private readonly emailService: NodemailerService,
+    private readonly emailService: MailService,
     @InjectModel(Job.name) private readonly jobModel: Model<Job>,
   ) {}
 

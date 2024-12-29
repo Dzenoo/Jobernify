@@ -18,7 +18,7 @@ import { DeleteResult, FilterQuery, Model } from 'mongoose';
 import { SeekersService } from '../seekers/seekers.service';
 import { JobsService } from '../jobs/jobs.service';
 import { S3Service } from 'src/common/s3/s3.service';
-import { NodemailerService } from 'src/common/email/nodemailer.service';
+import { MailService } from 'src/common/email/mail.service';
 
 @Injectable()
 export class ApplicationsService {
@@ -28,7 +28,7 @@ export class ApplicationsService {
     @Inject(forwardRef(() => JobsService))
     private readonly jobsService: JobsService,
     private readonly s3Service: S3Service,
-    private readonly nodemailerService: NodemailerService,
+    private readonly mailService: MailService,
     @InjectModel(Application.name)
     private readonly applicationModel: Model<Application>,
   ) {}
@@ -157,7 +157,7 @@ export class ApplicationsService {
       existingApplication.job.employer.name,
     );
 
-    await this.nodemailerService.sendMail(
+    await this.mailService.sendMail(
       existingApplication.seeker.email,
       'Application Status Update',
       emailContent,

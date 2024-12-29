@@ -1,7 +1,7 @@
 import { forwardRef, Module } from '@nestjs/common';
 
 import { S3Module } from 'src/common/s3/s3.module';
-import { NodemailerModule } from 'src/common/email/nodemailer.module';
+import { MailModule } from 'src/common/email/mail.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { SeekersModule } from '../seekers/seekers.module';
 import { JobsModule } from '../jobs/jobs.module';
@@ -16,7 +16,7 @@ import { Application, ApplicationSchema } from './schemas/application.schema';
       { name: Application.name, schema: ApplicationSchema },
     ]),
     S3Module,
-    NodemailerModule,
+    MailModule,
     forwardRef(() => SeekersModule),
     forwardRef(() => JobsModule),
   ],
