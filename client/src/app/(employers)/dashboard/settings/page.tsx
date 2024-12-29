@@ -27,7 +27,10 @@ const SettingsPage = () => {
 
   return (
     <div className="flex justify-between gap-[10px] flex-col mx-40 py-6 max-xl:mx-0">
-      <EmployerProfileInformation employer={fetchedEmployerProfile.employer} />
+      <EmployerProfileInformation
+        isApproved={fetchedEmployerProfile.employer.isApproved}
+        employer={fetchedEmployerProfile.employer}
+      />
     </div>
   );
 };

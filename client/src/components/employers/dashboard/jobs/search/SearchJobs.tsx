@@ -18,11 +18,12 @@ import {
 } from '@/components/ui/form/select';
 
 type SearchJobsProps = {
+  isApproved: boolean;
   query: string;
   sort: string;
 };
 
-const SearchJobs: React.FC<SearchJobsProps> = ({ query, sort }) => {
+const SearchJobs: React.FC<SearchJobsProps> = ({ isApproved, query, sort }) => {
   const { updateSearchParams, debounce } = useSearchParams();
 
   const handleInputChange = debounce(
@@ -67,13 +68,15 @@ const SearchJobs: React.FC<SearchJobsProps> = ({ query, sort }) => {
           </SelectContent>
         </Select>
       </div>
-      <div className="max-sm:basis-full">
-        <Link href="/dashboard/jobs/new">
-          <Button className="w-full" variant="default">
-            Add New Job
-          </Button>
-        </Link>
-      </div>
+      {isApproved && (
+        <div className="max-sm:basis-full">
+          <Link href="/dashboard/jobs/new">
+            <Button className="w-full" variant="default">
+              Add New Job
+            </Button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

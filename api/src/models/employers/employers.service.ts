@@ -165,6 +165,18 @@ export class EmployersService {
     updatedData: UpdateEmployerDto,
     image?: Express.Multer.File,
   ): Promise<ResponseObject> {
+    const employer = await this.employerModel.findById(id);
+
+    if (!employer) {
+      throw new NotFoundException();
+    }
+
+    if (!employer.isApproved) {
+      throw new NotAcceptableException(
+        'Your account has not been approved yet. Please try again later.',
+      );
+    }
+
     if (image) {
       const currentEmployer = await this.employerModel.findById(id);
 

@@ -12,10 +12,14 @@ import { useToast } from '@/components/ui/info/use-toast';
 import { Button } from '@/components/ui/buttons/button';
 
 type UploadEmployerImageProps = {
+  isApproved: boolean;
   image: string;
 };
 
-const UploadEmployerImage: React.FC<UploadEmployerImageProps> = ({ image }) => {
+const UploadEmployerImage: React.FC<UploadEmployerImageProps> = ({
+  isApproved,
+  image,
+}) => {
   const { toast } = useToast();
 
   const { getInputProps, getRootProps, selectedFile, restart } = useUploads({
@@ -59,34 +63,36 @@ const UploadEmployerImage: React.FC<UploadEmployerImageProps> = ({ image }) => {
           className="border border-gray-100 rounded-full w-36 h-36 object-cover dark:border-[#1b1b1b]"
         />
       </div>
-      <div className="flex flex-col gap-3">
-        <h1 className="text-initial-black">Profile Image</h1>
-        <form
-          onSubmit={changeEmployerImage}
-          className="flex items-center gap-3"
-        >
-          <div
-            {...getRootProps()}
-            className="tag flex items-center gap-3 w-fit cursor-pointer"
+      {isApproved && (
+        <div className="flex flex-col gap-3">
+          <h1 className="text-initial-black">Profile Image</h1>
+          <form
+            onSubmit={changeEmployerImage}
+            className="flex items-center gap-3"
           >
-            <input {...getInputProps()} type="file" />
-            <div className="flex items-center gap-3">
-              <Button type="button" variant="outline">
-                Upload new photo
-              </Button>
-              <ImagePlusIcon />
+            <div
+              {...getRootProps()}
+              className="tag flex items-center gap-3 w-fit cursor-pointer"
+            >
+              <input {...getInputProps()} type="file" />
+              <div className="flex items-center gap-3">
+                <Button type="button" variant="outline">
+                  Upload new photo
+                </Button>
+                <ImagePlusIcon />
+              </div>
             </div>
-          </div>
-          {selectedFile && (
-            <Button variant="default" type="submit">
-              Save
-            </Button>
-          )}
-        </form>
-        <p className="text-muted-foreground text-base">
-          Please upload your photo in JPG or PNG format.
-        </p>
-      </div>
+            {selectedFile && (
+              <Button variant="default" type="submit">
+                Save
+              </Button>
+            )}
+          </form>
+          <p className="text-muted-foreground text-base">
+            Please upload your photo in JPG or PNG format.
+          </p>
+        </div>
+      )}
     </div>
   );
 };
