@@ -26,7 +26,7 @@ const EmployerGuidelinesPage = () => {
               <h2 className="text-white font-semibold">{guideline.title}</h2>
             </div>
             <div>
-              <ul className="space-y-4">
+              <ul className="space-y-4 list-disc">
                 {guideline.list.map((item) => (
                   <li key={item} className="text-sm text-muted-foreground">
                     {item}
