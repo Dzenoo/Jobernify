@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { Seeker, SeekerDocument } from './schemas/seeker.schema';
+import { Seeker } from './schemas/seeker.schema';
 
 import {
   DeleteResult,
