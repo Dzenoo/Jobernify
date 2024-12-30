@@ -5,6 +5,24 @@ import { Prop } from '@nestjs/mongoose';
 export type BaseUserDocument = HydratedDocument<BaseUser>;
 
 export abstract class BaseUser {
+  @Prop({ type: String, select: false })
+  verificationToken: string;
+
+  @Prop({ type: Date, select: false })
+  verificationExpiration: Date;
+
+  @Prop({ type: String, select: false })
+  twoFactorAuthSecret?: string;
+
+  @Prop({ default: false })
+  isTwoFactorAuthEnabled?: boolean;
+
+  @Prop({ default: false })
+  isGoogleAccount?: boolean;
+
+  @Prop({ default: false, select: false })
+  emailVerified: boolean;
+
   @Prop({
     type: String,
     required: true,
@@ -22,22 +40,4 @@ export abstract class BaseUser {
     select: false,
   })
   password?: string;
-
-  @Prop({ default: false })
-  isGoogleAccount?: boolean;
-
-  @Prop({ default: false, select: false })
-  emailVerified: boolean;
-
-  @Prop({ type: String, select: false })
-  verificationToken: string;
-
-  @Prop({ type: Date, select: false })
-  verificationExpiration: Date;
-
-  @Prop({ type: String, select: false })
-  twoFactorAuthSecret?: string; // to store the TOTP secret (base32)
-
-  @Prop({ default: false })
-  isTwoFactorAuthEnabled?: boolean; // whether 2FA is enabled for this user
 }

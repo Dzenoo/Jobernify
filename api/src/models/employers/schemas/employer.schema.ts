@@ -10,7 +10,17 @@ import * as bcrypt from 'bcrypt';
 
 export type EmployerDocument = HydratedDocument<Employer>;
 
-@Schema({ timestamps: true })
+@Schema({
+  timestamps: true,
+  toJSON: {
+    transform: (_, ret) => {
+      delete ret.password;
+      delete ret.twoFactorAuthSecret;
+      delete ret.verificationToken;
+      return ret;
+    },
+  },
+})
 export class Employer extends BaseUser {
   @Prop({
     type: String,

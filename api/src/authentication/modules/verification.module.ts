@@ -1,24 +1,13 @@
 import { Module } from '@nestjs/common';
 
-import { MongooseModule } from '@nestjs/mongoose';
+import { SeekersModule } from 'src/models/seekers/seekers.module';
+import { EmployersModule } from 'src/models/employers/employers.module';
 import { MailModule } from 'src/common/email/mail.module';
 
 import { VerificationService } from '../services/verification.service';
 
-import { Seeker, SeekerSchema } from 'src/models/seekers/schemas/seeker.schema';
-import {
-  Employer,
-  EmployerSchema,
-} from 'src/models/employers/schemas/employer.schema';
-
 @Module({
-  imports: [
-    MongooseModule.forFeature([
-      { name: Seeker.name, schema: SeekerSchema },
-      { name: Employer.name, schema: EmployerSchema },
-    ]),
-    MailModule,
-  ],
+  imports: [SeekersModule, EmployersModule, MailModule],
   providers: [VerificationService],
   exports: [VerificationService],
 })

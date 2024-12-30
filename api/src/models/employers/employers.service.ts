@@ -62,6 +62,10 @@ export class EmployersService {
     return await this.employerModel.deleteMany(query).exec();
   }
 
+  async findOne(query: FilterQuery<Employer> = {}): Promise<Employer> {
+    return await this.employerModel.findOne(query).exec();
+  }
+
   async findOneById(id: string, select?: string): Promise<Employer> {
     return await this.employerModel.findById(id).select(select);
   }

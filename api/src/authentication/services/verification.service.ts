@@ -4,19 +4,10 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
 
-import {
-  Employer,
-  EmployerDocument,
-} from 'src/models/employers/schemas/employer.schema';
-import {
-  Seeker,
-  SeekerDocument,
-} from 'src/models/seekers/schemas/seeker.schema';
+import { SeekersService } from 'src/models/seekers/seekers.service';
+import { EmployersService } from 'src/models/employers/employers.service';
 import { MailService } from 'src/common/email/mail.service';
-
-import { Model } from 'mongoose';
 
 import { uuidv7 } from 'uuidv7';
 import { VERIFICATION_TOKEN_EXPIRATION_TIME } from 'src/common/constants';
@@ -24,8 +15,8 @@ import { VERIFICATION_TOKEN_EXPIRATION_TIME } from 'src/common/constants';
 @Injectable()
 export class VerificationService {
   constructor(
-    @InjectModel(Seeker.name) private readonly seekerModel: Model<Seeker>,
-    @InjectModel(Employer.name) private readonly employerModel: Model<Employer>,
+    private readonly seekersService: SeekersService,
+    private readonly employersService: EmployersService,
     private readonly mailService: MailService,
   ) {}
 
@@ -33,12 +24,12 @@ export class VerificationService {
     token: string,
     userType: 'seeker' | 'employer',
   ): Promise<any> {
-    let user: SeekerDocument | EmployerDocument;
+    let user: any;
 
     if (userType === 'seeker') {
-      user = await this.seekerModel.findOne({ verificationToken: token });
+      user = await this.seekersService.findOne({ verificationToken: token });
     } else if (userType === 'employer') {
-      user = await this.employerModel.findOne({ verificationToken: token });
+      user = await this.employersService.findOne({ verificationToken: token });
     }
 
     if (!user) {

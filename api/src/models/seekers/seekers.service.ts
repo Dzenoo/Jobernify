@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { Seeker } from './schemas/seeker.schema';
+import { Seeker, SeekerDocument } from './schemas/seeker.schema';
 
 import {
   DeleteResult,
@@ -68,6 +68,10 @@ export class SeekersService {
     query: FilterQuery<Seeker> = {},
   ): Promise<DeleteResult> {
     return await this.seekerModel.deleteMany(query).exec();
+  }
+
+  async findOne(query: FilterQuery<Seeker> = {}): Promise<Seeker> {
+    return await this.seekerModel.findOne(query).exec();
   }
 
   async findOneById(id: string, select?: string): Promise<Seeker> {
