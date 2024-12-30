@@ -27,6 +27,7 @@ export type Seeker = {
   following: Employer[] & string[];
   createdAt: Date;
   updatedAt: Date;
+  isTwoFactorAuthEnabled: boolean;
 };
 
 export type Education = {

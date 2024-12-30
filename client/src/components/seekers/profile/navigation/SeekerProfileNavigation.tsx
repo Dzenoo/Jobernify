@@ -26,6 +26,10 @@ const SeekerProfileNavigation: React.FC<SeekerProfileNavigationProps> =
         id: 3,
         title: 'My Applications',
       },
+      {
+        id: 4,
+        title: 'Settings',
+      },
     ];
 
     return (

@@ -53,6 +53,13 @@ export class AuthController {
         );
       } else {
         const result = await this.googleAuthService.googleLogin(req);
+
+        if (result.twoFactorRequired) {
+          return res.redirect(
+            `${process.env.FRONTEND_URL}/login/2fa?userId=${result.userId}&role=${result.role}`,
+          );
+        }
+
         return res.redirect(
           `${process.env.FRONTEND_URL}/auth/success?token=${result.access_token}&role=${result.role}`,
         );
@@ -86,7 +93,7 @@ export class AuthController {
     };
   }
 
-  @Post('2fa/login-verify')
+  @Post('/2fa/login-verify')
   async verify2FALogin(
     @Body() body: { userId: string; role: 'seeker' | 'employer'; code: string },
   ) {

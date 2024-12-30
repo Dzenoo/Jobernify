@@ -17,6 +17,7 @@ import {
 import { Dialog } from '@/components/ui/layout/dialog';
 import { Drawer } from '@/components/ui/layout/drawer';
 import { Button } from '@/components/ui/buttons/button';
+import { Separator } from '@/components/ui/layout/separator';
 
 type SeekerAlertsProps = {
   alertsData: Pick<Seeker, 'alerts' | 'receiveJobAlerts'>;
@@ -83,7 +84,8 @@ const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(
               </div>
             )}
           </CardHeader>
-          <CardContent className="pt-0">
+          <Separator />
+          <CardContent>
             {areObjectKeysEmpty(alerts) ? (
               <div className="text-center flex flex-col gap-[10px]">
                 <div>

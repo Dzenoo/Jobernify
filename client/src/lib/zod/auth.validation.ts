@@ -76,3 +76,9 @@ export const LoginSchema = zod.object({
       'Password must be at least 8 characters long, start with uppercase letter and contain symbols and numbers',
     ),
 });
+
+export const Verify2FACodeSchema = zod.object({
+  code: zod.string().min(6, {
+    message: 'Your code must be 6 characters.',
+  }),
+});

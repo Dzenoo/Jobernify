@@ -45,3 +45,41 @@ export const signupEmployer = async (data: {
 }) => {
   return await postApiHandler('auth/employers-signup', data);
 };
+
+export const verify2FALogin = async (
+  userId: string,
+  role: string,
+  code: string,
+): Promise<{ access_token: string; role: string }> => {
+  return await postApiHandler(`auth/2fa/login-verify`, { userId, role, code });
+};
+
+/**
+ * Generates a 2FA code.
+ * @param role User role
+ * @param token Auth token
+ * @returns Genereated otp auth url
+ */
+export const generate2FACode = async (
+  role: string,
+  token: string,
+): Promise<{
+  otpauthUrl: string;
+}> => {
+  return await postApiHandler(`2fa/generate?role=${role}`, {}, token);
+};
+
+/**
+ * Verifies a 2FA code.
+ * @param role Which user to verify
+ * @param token Auth token
+ * @param code Code to verify
+ * @returns Success message
+ */
+export const verify2FACode = async (
+  role: string,
+  token: string,
+  code: string,
+): Promise<{ message: string }> => {
+  return await postApiHandler(`2fa/verify-setup?role=${role}`, { code }, token);
+};

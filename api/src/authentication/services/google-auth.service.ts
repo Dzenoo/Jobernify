@@ -113,12 +113,12 @@ export class GoogleAuthService {
       if (!existingSeeker.isGoogleAccount) {
         throw new UnauthorizedException('Please log in with credentials.');
 
-        await this.seekersService.findAndUpdateOne(
-          { _id: existingSeeker._id },
-          {
-            isGoogleAccount: true,
-          },
-        );
+        // await this.seekersService.findAndUpdateOne(
+        //   { _id: existingSeeker._id },
+        //   {
+        //     isGoogleAccount: true,
+        //   },
+        // );
       }
 
       if (existingSeeker.isTwoFactorAuthEnabled) {
@@ -146,10 +146,10 @@ export class GoogleAuthService {
       if (!existingEmployer.isGoogleAccount) {
         throw new UnauthorizedException('Please log in with credentials.');
 
-        await this.employersService.findOneByIdAndUpdate(
-          String(existingEmployer._id),
-          { isGoogleAccount: true },
-        );
+        // await this.employersService.findOneByIdAndUpdate(
+        //   String(existingEmployer._id),
+        //   { isGoogleAccount: true },
+        // );
       }
 
       if (existingEmployer.isTwoFactorAuthEnabled) {

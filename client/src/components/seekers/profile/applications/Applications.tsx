@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/layout/card';
+import { Separator } from '@/components/ui/layout/separator';
 
 import LoadingApplicationsSkeleton from '@/components/templates/seekers/LoadingApplications';
 const ApplicationsList = dynamic(
@@ -34,6 +35,7 @@ const Applications: React.FC<ApplicationsProps> = ({ applications }) => {
           application progress
         </CardDescription>
       </CardHeader>
+      <Separator />
       <CardContent className="pt-0">
         <ApplicationsList applications={applications} />
       </CardContent>

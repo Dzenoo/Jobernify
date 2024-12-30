@@ -123,7 +123,7 @@ export class SeekersService {
         select: '_id status createdAt updatedAt',
       })
       .select(
-        '_id first_name last_name biography image education experience skills alerts github linkedin portfolio following headline resume receiveJobAlerts',
+        '_id first_name last_name biography image education experience skills alerts github linkedin portfolio following headline resume receiveJobAlerts isTwoFactorAuthEnabled',
       )
       .exec();
 

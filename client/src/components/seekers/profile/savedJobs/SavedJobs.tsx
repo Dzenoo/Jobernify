@@ -13,6 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/layout/card';
+import { Separator } from '@/components/ui/layout/separator';
 
 const JobsList = dynamic(() => import('@/components/seekers/jobs/JobsList'), {
   loading: () => <LoadingJobsSkeleton />,
@@ -31,6 +32,7 @@ const SavedJobs: React.FC<SavedJobsProps> = ({ savedJobs }) => {
           Here are your saved jobs. You can remove them easily.
         </CardDescription>
       </CardHeader>
+      <Separator />
       <CardContent className="pt-0">
         <JobsList jobs={savedJobs} message="You have no saved jobs." />
       </CardContent>

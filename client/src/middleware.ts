@@ -47,6 +47,7 @@ function handleUnauthenticatedAccess(pathname: string, req: NextRequest) {
 function isAuthPage(pathname: string) {
   return (
     pathname === '/login' ||
+    pathname === '/login/2fa' ||
     pathname === '/signup' ||
     pathname === '/verify-email' ||
     pathname === '/check-your-email' ||
@@ -76,7 +77,7 @@ function handleProtectedRoutes(
 
 export const config = {
   matcher: [
-    '/login',
+    '/login/:path*',
     '/signup',
     '/verify-email',
     '/check-your-email',

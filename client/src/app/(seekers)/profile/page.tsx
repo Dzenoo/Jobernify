@@ -14,6 +14,7 @@ import SavedJobs from '@/components/seekers/profile/savedJobs/SavedJobs';
 import Applications from '@/components/seekers/profile/applications/Applications';
 import PaginatedList from '@/components/ui/pagination/paginate-list';
 import NotFound from '@/components/shared/pages/NotFound';
+import SeekerSettings from '@/components/seekers/profile/settings/SeekerSettings';
 
 const SeekerProfilePage = ({
   searchParams,
@@ -39,7 +40,7 @@ const SeekerProfilePage = ({
     return <NotFound />;
   }
 
-  const isValidTab = currentTab >= 0 && currentTab <= 3;
+  const isValidTab = currentTab >= 0 && currentTab <= 4;
   if (!isValidTab) {
     return <NotFound href="/jobs" />;
   }
@@ -116,6 +117,14 @@ const SeekerProfilePage = ({
               />
             </div>
           )}
+        </div>
+      )}
+
+      {currentTab === 4 && (
+        <div>
+          <SeekerSettings
+            isTwoFactorAuthEnabled={fetchedSeeker.seeker.isTwoFactorAuthEnabled}
+          />
         </div>
       )}
     </section>
