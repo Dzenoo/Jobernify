@@ -110,12 +110,24 @@ export class GoogleAuthService {
     if (existingSeeker) {
       // If it’s not flagged as Google account, unify it
       if (!existingSeeker.isGoogleAccount) {
+        throw new UnauthorizedException('Please log in with credentials.');
+
         await this.seekersService.findAndUpdateOne(
           { _id: existingSeeker._id },
           {
             isGoogleAccount: true,
           },
         );
+      }
+
+      if (existingSeeker.isTwoFactorAuthEnabled) {
+        // Do the 2FA pending approach
+        return {
+          message: '2FA code required',
+          twoFactorRequired: true,
+          userId: existingSeeker._id,
+          role: 'seeker',
+        };
       }
 
       const payload = { sub: existingSeeker._id, role: 'seeker' };
@@ -131,10 +143,22 @@ export class GoogleAuthService {
     // 4. If found in Employer => log them in
     if (existingEmployer) {
       if (!existingEmployer.isGoogleAccount) {
+        throw new UnauthorizedException('Please log in with credentials.');
+
         await this.employersService.findOneByIdAndUpdate(
           String(existingEmployer._id),
           { isGoogleAccount: true },
         );
+      }
+
+      if (existingEmployer.isTwoFactorAuthEnabled) {
+        // Do the 2FA pending approach
+        return {
+          message: '2FA code required',
+          twoFactorRequired: true,
+          userId: existingEmployer._id,
+          role: 'employer',
+        };
       }
 
       const payload = { sub: existingEmployer._id, role: 'employer' };

@@ -2,28 +2,36 @@ import {
   Body,
   Controller,
   Get,
+  NotFoundException,
   Post,
   Query,
   Request,
   Response,
+  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 
 import { LocalAuthService } from './services/local-auth.service';
 import { GoogleAuthService } from './services/google-auth.service';
+import { TwoFactorAuthService } from './2fa/2fa.service';
 
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { GoogleOAuthGuard } from './guards/google-oauth.guard';
 
 import { SignupSeekerDto } from 'src/models/seekers/dto/signup-seeker.dto';
 import { SignUpEmployerDto } from 'src/models/employers/dto/signup-employer.dto';
+import { SeekersService } from 'src/models/seekers/seekers.service';
+import { EmployersService } from 'src/models/employers/employers.service';
 
 @Controller('/auth')
 export class AuthController {
   constructor(
     private localAuthService: LocalAuthService,
     private googleAuthService: GoogleAuthService,
+    private twoFactorAuthService: TwoFactorAuthService,
+    private seekersService: SeekersService,
+    private employersService: EmployersService,
   ) {}
 
   @Get('/google')
@@ -62,7 +70,49 @@ export class AuthController {
   @Post('/signin')
   @UseGuards(LocalAuthGuard)
   async signIn(@Request() req) {
-    return this.localAuthService.login(req.user);
+    const user = req.user;
+
+    const { isTwoFactorAuthEnabled } = user._doc;
+
+    if (!isTwoFactorAuthEnabled) {
+      return this.localAuthService.login(user);
+    }
+
+    return {
+      message: '2FA code required',
+      twoFactorRequired: true,
+      userId: user._doc._id,
+      role: user._doc.role,
+    };
+  }
+
+  @Post('2fa/login-verify')
+  async verify2FALogin(
+    @Body() body: { userId: string; role: 'seeker' | 'employer'; code: string },
+  ) {
+    const isValid = await this.twoFactorAuthService.verifyTwoFactorAuthToken(
+      body.userId,
+      body.role,
+      body.code,
+    );
+    if (!isValid) {
+      throw new UnauthorizedException('Invalid 2FA code');
+    }
+
+    // If valid, fetch user from DB and generate final JWT
+    let user;
+    if (body.role === 'seeker') {
+      user = await this.seekersService.findOneById(body.userId);
+    } else {
+      user = await this.employersService.findOneById(body.userId);
+    }
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    // Use your existing localAuthService to generate the token
+    return this.localAuthService.login(user);
   }
 
   @Throttle({ default: { ttl: 60000, limit: 5 } })

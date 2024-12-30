@@ -16,7 +16,7 @@ const AuthenticationError = ({
   searchParams: { [key: string]: string };
 }) => {
   return (
-    <div className="flex justify-center items-center text-center h-96">
+    <div className="flex justify-center items-center text-center h-screen">
       <Card>
         <CardHeader>
           <CardTitle>Authentication Error</CardTitle>
@@ -25,7 +25,7 @@ const AuthenticationError = ({
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-0">
-          <Button asChild>
+          <Button className="w-full" asChild>
             <Link href="/login">Login</Link>
           </Button>
         </CardContent>

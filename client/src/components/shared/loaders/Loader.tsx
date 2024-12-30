@@ -29,7 +29,7 @@ const Loader: React.FC<LoaderProps> = (props) => {
 
   return (
     <SelectedLoader
-      color={theme === 'dark' ? '#ffffff' : '#000000'}
+      color={theme ? (theme === 'dark' ? '#ffffff' : '#000000') : '#ffffff'}
       {...rest}
     />
   );

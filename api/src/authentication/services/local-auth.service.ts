@@ -55,6 +55,7 @@ export class LocalAuthService {
 
     if (user && isPasswordValid) {
       const { password, ...result } = user;
+      // IMPORTANT: Do not return the password
       return result;
     }
 

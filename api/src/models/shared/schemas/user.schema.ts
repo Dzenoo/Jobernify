@@ -34,4 +34,10 @@ export abstract class BaseUser {
 
   @Prop({ type: Date, select: false })
   verificationExpiration: Date;
+
+  @Prop({ type: String, select: false })
+  twoFactorAuthSecret?: string; // to store the TOTP secret (base32)
+
+  @Prop({ default: false })
+  isTwoFactorAuthEnabled?: boolean; // whether 2FA is enabled for this user
 }
