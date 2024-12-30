@@ -46,6 +46,13 @@ export const signupEmployer = async (data: {
   return await postApiHandler('auth/employers-signup', data);
 };
 
+/**
+ * Verifies the 2FA code for a user.
+ * @param userId The ID of the user to verify the 2FA code for.
+ * @param role The role of the user (seeker or employer).
+ * @param code The 2FA code to be verified.
+ * @returns A promise resolving to the authentication token and the role of the user.
+ */
 export const verify2FALogin = async (
   userId: string,
   role: string,
@@ -55,10 +62,10 @@ export const verify2FALogin = async (
 };
 
 /**
- * Generates a 2FA code.
- * @param role User role
- * @param token Auth token
- * @returns Genereated otp auth url
+ * Generates a new 2FA code.
+ * @param role The role of the user (seeker or employer).
+ * @param token The authentication token.
+ * @returns A promise resolving to the generated 2FA code.
  */
 export const generate2FACode = async (
   role: string,
@@ -71,10 +78,10 @@ export const generate2FACode = async (
 
 /**
  * Verifies a 2FA code.
- * @param role Which user to verify
- * @param token Auth token
- * @param code Code to verify
- * @returns Success message
+ * @param role The role of the user (seeker or employer).
+ * @param token The authentication token.
+ * @param code The 2FA code to be verified.
+ * @returns A promise resolving to a success message.
  */
 export const verify2FACode = async (
   role: string,

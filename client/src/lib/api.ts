@@ -1,20 +1,10 @@
 import axios from 'axios';
 
-// ===============================
-// Types
-// ===============================
 type AxiosHeadersConfig = {
   [key: string]: string;
 };
 
-// ===============================
-// Constants
-// ===============================
 const DEFAULT_API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-// ===============================
-// API Handlers
-// ===============================
 
 /**
  * Handles POST API requests.

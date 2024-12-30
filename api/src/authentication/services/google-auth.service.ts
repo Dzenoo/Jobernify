@@ -100,7 +100,7 @@ export class GoogleAuthService {
       this.employersService.findOneByEmail(email),
     ])) as [SeekerDocument, EmployerDocument];
 
-    // 2. If found in both => conflict (unlikely, but you can handle it)
+    // 2. If found in both => conflict
     if (existingSeeker && existingEmployer) {
       throw new ConflictException(
         'Email is already registered as both Seeker and Employer.',
@@ -109,22 +109,13 @@ export class GoogleAuthService {
 
     // 3. If found in Seeker => log them in
     if (existingSeeker) {
-      // If it’s not flagged as Google account, unify it
       if (!existingSeeker.isGoogleAccount) {
         throw new UnauthorizedException('Please log in with credentials.');
-
-        // await this.seekersService.findAndUpdateOne(
-        //   { _id: existingSeeker._id },
-        //   {
-        //     isGoogleAccount: true,
-        //   },
-        // );
       }
 
       if (existingSeeker.isTwoFactorAuthEnabled) {
         // Do the 2FA pending approach
         return {
-          message: '2FA code required',
           twoFactorRequired: true,
           userId: existingSeeker._id,
           role: 'seeker',
@@ -145,17 +136,11 @@ export class GoogleAuthService {
     if (existingEmployer) {
       if (!existingEmployer.isGoogleAccount) {
         throw new UnauthorizedException('Please log in with credentials.');
-
-        // await this.employersService.findOneByIdAndUpdate(
-        //   String(existingEmployer._id),
-        //   { isGoogleAccount: true },
-        // );
       }
 
       if (existingEmployer.isTwoFactorAuthEnabled) {
         // Do the 2FA pending approach
         return {
-          message: '2FA code required',
           twoFactorRequired: true,
           userId: existingEmployer._id,
           role: 'employer',

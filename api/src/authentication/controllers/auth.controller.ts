@@ -106,7 +106,6 @@ export class AuthController {
       throw new UnauthorizedException('Invalid 2FA code');
     }
 
-    // If valid, fetch user from DB and generate final JWT
     let user;
     if (body.role === 'seeker') {
       user = await this.seekersService.findOneById(body.userId);
@@ -118,7 +117,6 @@ export class AuthController {
       throw new NotFoundException('User not found');
     }
 
-    // Use your existing localAuthService to generate the token
     return this.localAuthService.login(user);
   }
 

@@ -3,12 +3,6 @@ import { deleteApiHandler, getApiHandler, patchApiHandler } from '../api';
 import { Employer } from '@/types';
 
 /**
- * ===============================
- * Employer API Handlers
- * ===============================
- */
-
-/**
  * Fetches the employer profile along with job counts.
  * @param params - An object containing token, page, srt, search, and type.
  * @returns A promise resolving to the employer profile and associated counts.

@@ -3,12 +3,6 @@ import { getApiHandler, patchApiHandler, postApiHandler } from '../api';
 import { Application } from '@/types';
 
 /**
- * ===============================
- * Applications API Handlers
- * ===============================
- */
-
-/**
  * Updates the status of a specific job application.
  * @param applicationId - The ID of the application.
  * @param token - The authentication token.

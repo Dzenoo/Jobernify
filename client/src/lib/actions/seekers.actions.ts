@@ -8,12 +8,6 @@ import {
 import { FilterCounts, Seeker } from '@/types';
 
 /**
- * ===============================
- * Seeker API Handlers
- * ===============================
- */
-
-/**
  * Fetches the seeker's profile.
  * @param token - The authentication token.
  * @returns A promise resolving to the seeker profile.

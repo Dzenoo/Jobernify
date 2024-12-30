@@ -2,6 +2,10 @@ import zod from 'zod';
 
 import { companySizes, industries, PASSWORD_REGEX } from '@/constants';
 
+/**
+ * Schema for seeker registration validation.
+ * Ensures that the seeker details adhere to the specified constraints.
+ */
 export const SeekerRegistrationSchema = zod.object({
   first_name: zod
     .string()
@@ -66,6 +70,10 @@ export const EmployerRegistrationSchema = zod.object({
     ),
 });
 
+/**
+ * Schema for login validation.
+ * Ensures that the login details adhere to the specified constraints.
+ */
 export const LoginSchema = zod.object({
   email: zod.string().min(1, { message: 'Email must not be empty' }).email(),
   password: zod
@@ -77,6 +85,10 @@ export const LoginSchema = zod.object({
     ),
 });
 
+/**
+ * Schema for 2FA code verification.
+ * Ensures that the 2FA code adheres to the specified constraints.
+ */
 export const Verify2FACodeSchema = zod.object({
   code: zod.string().min(6, {
     message: 'Your code must be 6 characters.',

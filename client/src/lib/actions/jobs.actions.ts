@@ -8,12 +8,6 @@ import {
 import { FilterCounts, Job } from '@/types';
 
 /**
- * ===============================
- * Job API Handlers
- * ===============================
- */
-
-/**
  * Creates a new job.
  * @param token - The authentication token.
  * @param formData - The form data containing job details.
