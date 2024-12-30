@@ -50,23 +50,18 @@ export const FooterLinks = [
         name: 'Home',
         href: '/',
       },
-      {
-        id: '2',
-        name: 'Newsroom',
-        href: '/newsroom',
-      },
+      // {
+      //   id: '2',
+      //   name: 'Newsroom',
+      //   href: '/newsroom',
+      // },
       {
         id: '3',
-        name: 'Contact us',
-        href: '/contact-us',
-      },
-      {
-        id: '4',
         name: 'FAQ',
         href: '/faq',
       },
       {
-        id: '5',
+        id: '4',
         name: 'About us',
         href: '/about-us',
       },

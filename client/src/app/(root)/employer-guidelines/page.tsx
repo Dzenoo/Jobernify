@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { EmployersGuidelines } from '@/constants/guidelines.constants';
+import { EmployersGuidelines } from '@/constants';
 
 const EmployerGuidelinesPage = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SeekersGuidelines } from '@/constants/guidelines.constants';
+import { SeekersGuidelines } from '@/constants';
 
 const SeekerGuidelinesPage = () => {
   return (
