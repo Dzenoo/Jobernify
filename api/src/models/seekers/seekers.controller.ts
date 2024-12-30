@@ -15,7 +15,6 @@ import {
   ParseFilePipe,
   UseInterceptors,
 } from '@nestjs/common';
-import { Throttle } from '@nestjs/throttler';
 
 import { SeekersService } from './seekers.service';
 import { VerificationService } from '../../authentication/services/verification.service';
@@ -177,7 +176,6 @@ export class SeekersController {
     return await this.verificationService.verifyEmail(token, 'seeker');
   }
 
-  @Throttle({ default: { limit: 20, ttl: 60000 } })
   @Get('/all')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Employer)
@@ -192,7 +190,6 @@ export class SeekersController {
     });
   }
 
-  @Throttle({ default: { limit: 20, ttl: 60000 } })
   @Get('/:seekerId')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Employer)

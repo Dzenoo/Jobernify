@@ -14,7 +14,6 @@ import {
   FileTypeValidator,
   MaxFileSizeValidator,
 } from '@nestjs/common';
-import { Throttle } from '@nestjs/throttler';
 
 import { EmployersService } from './employers.service';
 
@@ -39,7 +38,6 @@ export class EmployersController {
     private readonly verificationService: VerificationService,
   ) {}
 
-  @Throttle({ default: { limit: 100 } })
   @Get('/profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Employer)
@@ -90,7 +88,6 @@ export class EmployersController {
     return await this.employersService.deleteOne(userId);
   }
 
-  @Throttle({ default: { limit: 20, ttl: 60000 } })
   @Get('/analytics')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Employer)
@@ -103,7 +100,6 @@ export class EmployersController {
     return await this.verificationService.verifyEmail(token, 'employer');
   }
 
-  @Throttle({ default: { limit: 20, ttl: 60000 } })
   @Get('/all')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)
@@ -121,7 +117,6 @@ export class EmployersController {
     });
   }
 
-  @Throttle({ default: { limit: 20, ttl: 60000 } })
   @Get('/:employerId')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)

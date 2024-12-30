@@ -59,7 +59,6 @@ export class JobsController {
     return await this.jobsService.deleteOne(jobId, userId);
   }
 
-  @Throttle({ default: { limit: 50, ttl: 60000 } })
   @Post('/:jobId/save')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)
@@ -86,7 +85,6 @@ export class JobsController {
     return await this.jobsService.createCoverLetter(jobId, userId);
   }
 
-  @Throttle({ default: { limit: 50, ttl: 60000 } })
   @Get('/:jobId')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker, Role.Employer)

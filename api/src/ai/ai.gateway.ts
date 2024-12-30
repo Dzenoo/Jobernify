@@ -10,6 +10,7 @@ import {
   ConnectedSocket,
   OnGatewayInit,
 } from '@nestjs/websockets';
+import { Throttle } from '@nestjs/throttler';
 
 import { Server, Socket } from 'socket.io';
 
@@ -40,6 +41,7 @@ export class AiGateway
     console.log(`Client disconnected: ${client.id}`);
   }
 
+  @Throttle({ default: { limit: 10, ttl: 60000 } })
   @SubscribeMessage('send_message')
   async handleSendMessage(
     @MessageBody() payload: { threadId: string; message: string },
@@ -58,6 +60,7 @@ export class AiGateway
     }
   }
 
+  @Throttle({ default: { limit: 10, ttl: 60000 } })
   @SubscribeMessage('create_thread')
   async handleCreateThread(@ConnectedSocket() client: Socket) {
     try {
