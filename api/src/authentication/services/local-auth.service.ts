@@ -7,12 +7,13 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 
 import { SeekersService } from 'src/models/seekers/seekers.service';
 import { EmployersService } from 'src/models/employers/employers.service';
+import { JwtService } from '@nestjs/jwt';
+import { VerificationService } from './verification.service';
+
 import { SignupSeekerDto } from 'src/models/seekers/dto/signup-seeker.dto';
-import { VerificationService } from '../verification/verification.service';
 import { SignUpEmployerDto } from 'src/models/employers/dto/signup-employer.dto';
 
 import * as bcrypt from 'bcrypt';

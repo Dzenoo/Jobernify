@@ -13,9 +13,6 @@ export class TwoFactorAuthService {
     private employersService: EmployersService,
   ) {}
 
-  /**
-   * 1) Generate a TOTP secret and store it on the user object
-   */
   async generateTwoFactorAuthSecret(
     userId: string,
     role: 'seeker' | 'employer',
@@ -43,9 +40,6 @@ export class TwoFactorAuthService {
     };
   }
 
-  /**
-   * 2) Verify the TOTP code submitted by the user
-   */
   async verifyTwoFactorAuthToken(
     userId: string,
     role: 'seeker' | 'employer',
@@ -73,13 +67,10 @@ export class TwoFactorAuthService {
       secret: user.twoFactorAuthSecret,
       encoding: 'base32',
       token: code,
-      window: 1, // optional; how lenient you want to be with timing
+      window: 1,
     });
   }
 
-  /**
-   * Enable or disable 2FA after successful verification
-   */
   async setTwoFactorAuthEnabled(
     userId: string,
     role: 'seeker' | 'employer',

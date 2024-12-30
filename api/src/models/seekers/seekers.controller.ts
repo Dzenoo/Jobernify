@@ -18,7 +18,7 @@ import {
 import { Throttle } from '@nestjs/throttler';
 
 import { SeekersService } from './seekers.service';
-import { VerificationService } from '../../authentication/verification/verification.service';
+import { VerificationService } from '../../authentication/services/verification.service';
 
 import { UpdateSeekerDto } from './dto/update-seeker.dto';
 import { GetSeekersDto } from './dto/get-seekers.dto';

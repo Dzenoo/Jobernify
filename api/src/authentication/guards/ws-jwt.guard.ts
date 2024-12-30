@@ -1,5 +1,4 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-
 import { verify } from 'jsonwebtoken';
 import { Socket } from 'socket.io';
 

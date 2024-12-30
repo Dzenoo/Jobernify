@@ -5,10 +5,11 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 
 import { SeekersService } from 'src/models/seekers/seekers.service';
 import { EmployersService } from 'src/models/employers/employers.service';
+import { JwtService } from '@nestjs/jwt';
+
 import { SeekerDocument } from 'src/models/seekers/schemas/seeker.schema';
 import { EmployerDocument } from 'src/models/employers/schemas/employer.schema';
 

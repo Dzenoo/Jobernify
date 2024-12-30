@@ -28,7 +28,7 @@ import { RolesGuard } from 'src/authentication/guards/role-auth.guard';
 import { Roles } from 'src/common/decorators/roles.decorator';
 import { Role } from '@jobernify/shared';
 import { User } from 'src/common/decorators/user.decorator';
-import { VerificationService } from 'src/authentication/verification/verification.service';
+import { VerificationService } from 'src/authentication/services/verification.service';
 
 import { FileInterceptor } from '@nestjs/platform-express';
 

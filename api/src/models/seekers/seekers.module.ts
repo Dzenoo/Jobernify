@@ -2,7 +2,7 @@ import { forwardRef, Module } from '@nestjs/common';
 
 import { MongooseModule } from '@nestjs/mongoose';
 import { S3Module } from 'src/common/s3/s3.module';
-import { VerificationModule } from 'src/authentication/verification/verification.module';
+import { VerificationModule } from 'src/authentication/modules/verification.module';
 import { EmployersModule } from '../employers/employers.module';
 import { JobsModule } from '../jobs/jobs.module';
 import { ApplicationsModule } from '../applications/applications.module';

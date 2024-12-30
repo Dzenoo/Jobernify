@@ -12,17 +12,17 @@ import {
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 
-import { LocalAuthService } from './services/local-auth.service';
-import { GoogleAuthService } from './services/google-auth.service';
-import { TwoFactorAuthService } from './2fa/2fa.service';
+import { LocalAuthService } from '../services/local-auth.service';
+import { GoogleAuthService } from '../services/google-auth.service';
+import { TwoFactorAuthService } from '../services/two-factor-auth.service';
+import { SeekersService } from 'src/models/seekers/seekers.service';
+import { EmployersService } from 'src/models/employers/employers.service';
 
-import { LocalAuthGuard } from './guards/local-auth.guard';
-import { GoogleOAuthGuard } from './guards/google-oauth.guard';
+import { LocalAuthGuard } from '../guards/local-auth.guard';
+import { GoogleOAuthGuard } from '../guards/google-oauth.guard';
 
 import { SignupSeekerDto } from 'src/models/seekers/dto/signup-seeker.dto';
 import { SignUpEmployerDto } from 'src/models/employers/dto/signup-employer.dto';
-import { SeekersService } from 'src/models/seekers/seekers.service';
-import { EmployersService } from 'src/models/employers/employers.service';
 
 @Controller('/auth')
 export class AuthController {
