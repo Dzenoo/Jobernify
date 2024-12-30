@@ -52,11 +52,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         className="w-full h-fit flex gap-2 flex-wrap items-start justify-start hover:border-gray-400 hover:bg-gray-100 dark:hover:bg-[#1b1b1b]"
       >
         {skillsNames.length > 0 ? (
-          skillsNames.map((value) => (
-            <Badge key={value} variant="secondary">
-              {value}
-            </Badge>
-          ))
+          skillsNames.map((value) => <Badge key={value}>{value}</Badge>)
         ) : (
           <span className=" text-left text-muted-foreground">
             {placeholder}
@@ -78,11 +74,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                   <CommandItem
                     key={option.value}
                     onSelect={() => handleSelect(option.value)}
-                    className={`flex justify-between p-2 ${
-                      selectedValues.includes(option.value)
-                        ? 'bg-blue-100 dark:bg-gray-500'
-                        : ''
-                    }`}
+                    className="flex justify-between p-2"
                   >
                     <span>{option.label}</span>
                     {selectedValues.includes(option.value) && (
