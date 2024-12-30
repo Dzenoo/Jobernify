@@ -95,7 +95,7 @@ function renderFooterLinks<
             <li key={link.id}>
               <Link
                 href={link.href}
-                className={`text-muted-foreground text-sm transition-all dark:text-white hover:text-gray-900 dark:hover:text-gray-300 ${theme === 'dark' ? 'hover:text-gray-100' : 'hover:text-gray-900'}`}
+                className={`text-muted-foreground text-sm transition-all hover:text-white dark:hover:text-white`}
               >
                 {link.name}
               </Link>
