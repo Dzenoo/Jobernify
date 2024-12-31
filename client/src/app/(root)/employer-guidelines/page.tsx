@@ -1,6 +1,12 @@
 import React from 'react';
+import { Metadata } from 'next';
 
 import { EmployersGuidelines } from '@/constants';
+
+export const metadata: Metadata = {
+  title: 'Employer Guidelines | Jobernify',
+  description: 'Follow our guidelines to optimize your hiring process.',
+};
 
 const EmployerGuidelinesPage = () => {
   return (

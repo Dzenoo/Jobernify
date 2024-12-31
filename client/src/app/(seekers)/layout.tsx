@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
   title: 'Jobernify',
   description:
-    'Find your dream job with ease using Jobernify. Read employer reviews, and stay informed with our intuitive platform. Start your job search journey today!',
+    'Find your dream job or perfect candidate with ease using Jobernify. Start today!',
   openGraph: {
     title: 'Jobernify - Unlock Your Career Potential',
     description:
