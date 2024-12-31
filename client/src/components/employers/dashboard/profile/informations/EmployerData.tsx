@@ -3,13 +3,14 @@ import React from 'react';
 import { findIndustriesData } from '@/lib/utils';
 
 import { Employer } from '@/types';
+import { FieldGroup } from '@/helpers';
 
 type EmployerDataProps = {
   employer: Employer;
 };
 
 const EmployerData: React.FC<EmployerDataProps> = ({ employer }) => {
-  const profileFields = [
+  const EmployerDataArray = [
     {
       id: 1,
       title: 'Company Name',
@@ -45,7 +46,7 @@ const EmployerData: React.FC<EmployerDataProps> = ({ employer }) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-      {profileFields.map((field) => (
+      {EmployerDataArray.map((field) => (
         <FieldGroup
           key={field.id}
           title={field.title}
@@ -58,33 +59,3 @@ const EmployerData: React.FC<EmployerDataProps> = ({ employer }) => {
 };
 
 export default EmployerData;
-
-type FieldGroupProps = {
-  title: string;
-  value: string | number;
-  href?: boolean;
-};
-
-const FieldGroup: React.FC<FieldGroupProps> = ({ title, value, href }) => {
-  return (
-    <div className="flex flex-col gap-2">
-      <div>
-        <h2>{title}</h2>
-      </div>
-      <div>
-        {href && value.toString().includes('http') ? (
-          <a
-            href={value as string}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 dark:text-blue-500"
-          >
-            {value}
-          </a>
-        ) : (
-          <p className="text-muted-foreground text-base">{value}</p>
-        )}
-      </div>
-    </div>
-  );
-};

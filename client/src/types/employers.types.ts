@@ -16,4 +16,5 @@ export type Employer = {
   jobs: Job[];
   followers: Seeker[];
   isApproved: boolean;
+  isTwoFactorAuthEnabled: boolean;
 };

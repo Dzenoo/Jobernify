@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 
 import TwoFactorAuthForm from '@/components/auth/2fa/TwoFactorAuthForm';
-import ReceiveJobAlertsForm from '../alerts/forms/ReceiveJobAlertsForm';
 
 import { Badge } from '@/components/ui/utilities/badge';
 import { Button } from '@/components/ui/buttons/button';
@@ -24,14 +23,12 @@ import {
   CardTitle,
 } from '@/components/ui/layout/card';
 
-type SeekerSettingsProps = {
+type EmployerSettingsProps = {
   isTwoFactorAuthEnabled: boolean;
-  receiveJobAlerts: boolean;
 };
 
-const SeekerSettings: React.FC<SeekerSettingsProps> = ({
+const EmployerSettings: React.FC<EmployerSettingsProps> = ({
   isTwoFactorAuthEnabled,
-  receiveJobAlerts,
 }) => {
   const [is2faDialogOpen, setIs2faDialogOpen] = useState(false);
 
@@ -95,18 +92,9 @@ const SeekerSettings: React.FC<SeekerSettingsProps> = ({
             )}
           </div>
         </div>
-        <Separator />
-        <div className="space-y-5">
-          <div>
-            <h1 className="font-semibold">Notifications</h1>
-          </div>
-          <div>
-            <ReceiveJobAlertsForm receiveJobAlerts={receiveJobAlerts} />
-          </div>
-        </div>
       </CardContent>
     </Card>
   );
 };
 
-export default SeekerSettings;
+export default EmployerSettings;

@@ -72,7 +72,6 @@ const SeekerProfilePage = ({
           <SeekerAlerts
             alertsData={{
               alerts: fetchedSeeker.seeker.alerts,
-              receiveJobAlerts: fetchedSeeker.seeker.receiveJobAlerts,
             }}
           />
         </div>

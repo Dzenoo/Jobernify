@@ -37,27 +37,33 @@ import {
 } from '@/components/ui/form/input-otp';
 import { Button } from '@/components/ui/buttons/button';
 import { useToast } from '@/components/ui/info/use-toast';
+import { cn } from '@/lib/utils';
 
 type TwoFactorAuthFormProps =
   | {
       mode: 'ENABLE';
       userId?: never;
       role?: never;
+      onSuccess?: () => void;
+      formClassName?: string;
     }
   | {
       mode: 'LOGIN_VERIFY';
       userId: string;
       role: string;
       onSuccess?: () => void;
+      formClassName?: string;
     }
   | {
       mode: 'DISABLE';
       userId?: never;
       role?: never;
+      onSuccess?: () => void;
+      formClassName?: string;
     };
 
 const TwoFactorAuthForm: React.FC<TwoFactorAuthFormProps> = (props) => {
-  const { mode } = props;
+  const { mode, formClassName, onSuccess } = props;
 
   const { getCookieHandler, storeCookieHandler } = useAuthentication();
   const { token, userType } = getCookieHandler();
@@ -100,6 +106,7 @@ const TwoFactorAuthForm: React.FC<TwoFactorAuthFormProps> = (props) => {
         title: 'Success',
         description: data.message,
       });
+      if (onSuccess) onSuccess();
     },
     onError: (error: any) => {
       console.log(error);
@@ -144,15 +151,16 @@ const TwoFactorAuthForm: React.FC<TwoFactorAuthFormProps> = (props) => {
   const isVerifyingOther = verify2FAOther.status === 'pending';
 
   return (
-    <div>
+    <div className="space-y-5">
       {mode === 'ENABLE' && (
         <div className="p-5 border rounded-xl border-muted flex flex-col items-center justify-center">
           {qrCodeDataUrl ? (
             <Image
-              width={400}
-              height={400}
+              width={200}
+              height={200}
               src={qrCodeDataUrl}
               alt="QR code for TOTP"
+              className="object-cover"
             />
           ) : (
             <Button
@@ -171,7 +179,7 @@ const TwoFactorAuthForm: React.FC<TwoFactorAuthFormProps> = (props) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
-          className="sm:w-[25em] space-y-5"
+          className={cn('space-y-5', formClassName)}
         >
           <FormField
             control={form.control}

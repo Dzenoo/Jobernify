@@ -89,3 +89,37 @@ export const renderSkills = <
     </div>
   );
 };
+
+type FieldGroupProps = {
+  title: string;
+  value: string | number;
+  href?: boolean;
+};
+
+export const FieldGroup: React.FC<FieldGroupProps> = ({
+  title,
+  value,
+  href,
+}) => {
+  return (
+    <div className="flex flex-col gap-2">
+      <div>
+        <h2>{title}</h2>
+      </div>
+      <div>
+        {href && value.toString().includes('http') ? (
+          <a
+            href={value as string}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 dark:text-blue-500"
+          >
+            {value}
+          </a>
+        ) : (
+          <p className="text-muted-foreground text-base truncate">{value}</p>
+        )}
+      </div>
+    </div>
+  );
+};

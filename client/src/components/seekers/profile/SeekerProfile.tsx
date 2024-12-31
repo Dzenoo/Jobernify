@@ -1,25 +1,30 @@
 'use client';
 
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
+import { Edit, X } from 'lucide-react';
 
 import { Seeker } from '@/types';
 
-import Informations from './informations/Informations';
+import SeekerData from './informations/SeekerData';
 import Educations from './educations/Educations';
 import Skills from './skills/Skills';
 import Socials from './socials/Socials';
-import Experiences from './experiences/Experiences';
-import DeleteSeekerProfile from './DeleteSeekerProfile';
+import EditSeekerProfileForm from './informations/forms/EditSeekerProfileForm';
 import UploadSeekerImage from './UploadSeekerImage';
+import DeleteSeekerProfile from './DeleteSeekerProfile';
+import Experiences from './experiences/Experiences';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/layout/card';
 import { Separator } from '@/components/ui/layout/separator';
+import { Button } from '@/components/ui/buttons/button';
 
 type SeekerProfileProps = {
   seeker: Seeker;
 };
 
 const SeekerProfile: React.FC<SeekerProfileProps> = React.memo(({ seeker }) => {
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+
   return (
     <Fragment>
       <Card>
@@ -31,7 +36,36 @@ const SeekerProfile: React.FC<SeekerProfileProps> = React.memo(({ seeker }) => {
         </CardHeader>
         <Separator />
         <CardContent className="flex flex-col gap-10">
-          <Informations seeker={seeker} />
+          <div className="space-y-10">
+            <div className="flex justify-between items-center gap-3">
+              <div>
+                <h1 className="text-base-black">Profile Information</h1>
+              </div>
+              <div>
+                <Button
+                  variant={isEditMode ? 'outline' : 'default'}
+                  className="flex items-center gap-3"
+                  onClick={() => setIsEditMode((prevEditMode) => !prevEditMode)}
+                >
+                  <div className="max-lg:hidden">
+                    {isEditMode ? 'Cancel' : 'Edit Profile'}
+                  </div>
+                  <div>{isEditMode ? <X /> : <Edit />}</div>
+                </Button>
+              </div>
+            </div>
+            <div>
+              {!isEditMode ? (
+                <SeekerData seeker={seeker} />
+              ) : (
+                <EditSeekerProfileForm
+                  isEditMode={isEditMode}
+                  setIsEditMode={setIsEditMode}
+                  seeker={seeker}
+                />
+              )}
+            </div>
+          </div>
           <Separator />
 
           <Socials seeker={seeker} />
