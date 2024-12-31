@@ -3,7 +3,6 @@ import React, { Fragment } from 'react';
 import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 
 import NewAlertForm from './forms/NewAlertForm';
-import ReceiveJobAlertsForm from './forms/ReceiveJobAlertsForm';
 
 import { Seeker } from '@/types';
 
@@ -20,7 +19,7 @@ import { Button } from '@/components/ui/buttons/button';
 import { Separator } from '@/components/ui/layout/separator';
 
 type SeekerAlertsProps = {
-  alertsData: Pick<Seeker, 'alerts' | 'receiveJobAlerts'>;
+  alertsData: Pick<Seeker, 'alerts'>;
 };
 
 const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(
@@ -31,7 +30,7 @@ const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(
     const closeAlerts = () => setIsOpen(false);
     const openAlerts = () => setIsOpen(true);
 
-    const { alerts, receiveJobAlerts } = alertsData;
+    const { alerts } = alertsData;
 
     function areObjectKeysEmpty(obj: any) {
       if (obj == null || typeof obj !== 'object') {
@@ -78,11 +77,6 @@ const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(
                 </div>
               )}
             </div>
-            {!areObjectKeysEmpty(alerts) && (
-              <div>
-                <ReceiveJobAlertsForm receiveJobAlerts={receiveJobAlerts} />
-              </div>
-            )}
           </CardHeader>
           <Separator />
           <CardContent>

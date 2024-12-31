@@ -124,6 +124,7 @@ const SeekerProfilePage = ({
         <div>
           <SeekerSettings
             isTwoFactorAuthEnabled={fetchedSeeker.seeker.isTwoFactorAuthEnabled}
+            receiveJobAlerts={fetchedSeeker.seeker.receiveJobAlerts}
           />
         </div>
       )}

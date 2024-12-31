@@ -7,7 +7,7 @@ import { useAuthentication } from '../core/useAuthentication.hook';
 
 import { useToast } from '@/components/ui/info/use-toast';
 
-const useEditSeeker = () => {
+const useEditSeeker = (showToast?: boolean) => {
   const { toast } = useToast();
   const { token } = useAuthentication().getCookieHandler();
 
@@ -20,7 +20,7 @@ const useEditSeeker = () => {
       return editSeekerProfile(formData, token);
     },
     onSuccess: (response) => {
-      toast({ title: 'Success', description: response.message });
+      showToast && toast({ title: 'Success', description: response.message });
       queryClient.invalidateQueries({ queryKey: ['profile'] });
     },
     onError: (error: any) => {

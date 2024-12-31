@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TwoFactorAuthForm from '@/components/auth/2fa/TwoFactorAuthForm';
+import ReceiveJobAlertsForm from '../alerts/forms/ReceiveJobAlertsForm';
 
 import { Badge } from '@/components/ui/utilities/badge';
 import { Button } from '@/components/ui/buttons/button';
@@ -23,10 +24,12 @@ import {
 
 type SeekerSettingsProps = {
   isTwoFactorAuthEnabled: boolean;
+  receiveJobAlerts: boolean;
 };
 
 const SeekerSettings: React.FC<SeekerSettingsProps> = ({
   isTwoFactorAuthEnabled,
+  receiveJobAlerts,
 }) => {
   return (
     <Card>
@@ -37,7 +40,7 @@ const SeekerSettings: React.FC<SeekerSettingsProps> = ({
         </CardDescription>
       </CardHeader>
       <Separator />
-      <CardContent>
+      <CardContent className="space-y-5">
         <div className="space-y-5">
           <div>
             <h1 className="font-semibold">Security</h1>
@@ -75,6 +78,15 @@ const SeekerSettings: React.FC<SeekerSettingsProps> = ({
                 </DialogContent>
               </Dialog>
             )}
+          </div>
+        </div>
+        <Separator />
+        <div className="space-y-5">
+          <div>
+            <h1 className="font-semibold">Notifications</h1>
+          </div>
+          <div>
+            <ReceiveJobAlertsForm receiveJobAlerts={receiveJobAlerts} />
           </div>
         </div>
       </CardContent>

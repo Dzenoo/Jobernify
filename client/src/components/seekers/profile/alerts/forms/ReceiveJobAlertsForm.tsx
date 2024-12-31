@@ -32,7 +32,7 @@ const ReceiveJobAlertsForm: React.FC<ReceiveJobAlertsFormProps> = ({
     },
   });
 
-  const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
+  const { mutateAsync: editSeekerProfileMutate } = useEditSeeker(false);
 
   useEffect(() => {
     form.setValue('receiveJobAlerts', receiveJobAlerts);

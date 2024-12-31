@@ -36,7 +36,7 @@ const Applications: React.FC<ApplicationsProps> = ({ applications }) => {
         </CardDescription>
       </CardHeader>
       <Separator />
-      <CardContent className="pt-0">
+      <CardContent>
         <ApplicationsList applications={applications} />
       </CardContent>
     </Card>

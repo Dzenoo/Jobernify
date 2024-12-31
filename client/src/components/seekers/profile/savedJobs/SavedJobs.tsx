@@ -33,7 +33,7 @@ const SavedJobs: React.FC<SavedJobsProps> = ({ savedJobs }) => {
         </CardDescription>
       </CardHeader>
       <Separator />
-      <CardContent className="pt-0">
+      <CardContent>
         <JobsList jobs={savedJobs} message="You have no saved jobs." />
       </CardContent>
     </Card>

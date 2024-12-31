@@ -1,14 +1,12 @@
 'use client';
 
 import React from 'react';
-
-import { useTheme } from 'next-themes';
-
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { FooterLinks } from '@/constants';
 import { cn } from '@/lib/utils';
+
+import Logo from '../navbar/Logo';
 
 type FooterProps = {
   className?: string;
@@ -16,8 +14,6 @@ type FooterProps = {
 };
 
 const Footer: React.FC<FooterProps> = ({ className, theme }) => {
-  const { resolvedTheme } = useTheme();
-
   return (
     <footer
       className={cn(
@@ -28,24 +24,7 @@ const Footer: React.FC<FooterProps> = ({ className, theme }) => {
       <div className="flex justify-between gap-10 items-start dark:border-[#1b1b1b] max-xl:flex-wrap">
         <div className="flex flex-col gap-5 basis-[36em] max-xl:basis-full">
           <div className="w-fit">
-            <Link href="/">
-              <Image
-                src={
-                  !theme
-                    ? resolvedTheme === 'dark'
-                      ? '/images/logo-dark.png'
-                      : '/images/logo-light.png'
-                    : theme === 'dark'
-                      ? '/images/logo-dark.png'
-                      : '/images/logo-light.png'
-                }
-                alt="light-talentify-logo"
-                width={100}
-                height={100}
-                loading="lazy"
-                className="w-fit"
-              />
-            </Link>
+            <Logo />
           </div>
           <div>
             <p className="text-muted-foreground text-sm leading-[25px]">
