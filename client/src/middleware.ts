@@ -8,7 +8,7 @@ const protectedRoutes = {
   '/dashboard/jobs': ['employer'],
   '/dashboard/jobs/new': ['employer'],
   '/dashboard/jobs/jobId/edit': ['employer'],
-  '/dashboard/settings': ['employer'],
+  '/dashboard/profile': ['employer'],
   '/jobs': ['seeker'],
   '/jobs/jobId': ['seeker'],
   '/employers': ['seeker'],

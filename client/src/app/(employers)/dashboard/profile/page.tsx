@@ -18,7 +18,7 @@ const EmployerProfile = dynamic(
   },
 );
 
-const SettingsPage = () => {
+const EmployerProfilePage = () => {
   const [currentTab, setCurrentTab] = useState<number>(0);
   const { updateSearchParams } = useSearchParams();
   const { data: fetchedEmployerProfile } = useGetEmployer();
@@ -74,4 +74,4 @@ const SettingsPage = () => {
   );
 };
 
-export default SettingsPage;
+export default EmployerProfilePage;

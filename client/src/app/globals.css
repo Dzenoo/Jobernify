@@ -139,7 +139,7 @@
   }
 
   .markdown p {
-    @apply my-2;
+    @apply my-1;
   }
 
   .markdown a {

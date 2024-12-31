@@ -69,7 +69,7 @@ const AiChat: React.FC<AiChatProps> = ({ socket }) => {
               className={`border border-input p-2.5 rounded-xl w-fit ${isUser(message.role) ? 'ml-5 bg-muted' : 'mr-5'}`}
             >
               <MarkdownRenderer
-                className="aiChat space-y-5 text-sm"
+                className="space-y-5 text-sm"
                 content={
                   typeof message.content === 'string'
                     ? message.content

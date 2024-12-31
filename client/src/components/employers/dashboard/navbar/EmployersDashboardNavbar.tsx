@@ -4,13 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import {
-  Briefcase,
-  LayoutDashboard,
-  Settings,
-  X,
-  PanelRight,
-} from 'lucide-react';
+import { Briefcase, LayoutDashboard, X, PanelRight, User } from 'lucide-react';
 
 import { Button } from '@/components/ui/buttons/button';
 import { TooltipWrapper } from '@/components/ui/info/tooltip-wrapper';
@@ -28,9 +22,9 @@ const EmployersDashboardNavbar: React.FC = () => {
     },
     {
       id: '2',
-      icon: <Settings />,
-      href: '/dashboard/settings',
-      tooltip: 'Settings',
+      icon: <User />,
+      href: '/dashboard/profile',
+      tooltip: 'Profile',
     },
     {
       id: '3',
