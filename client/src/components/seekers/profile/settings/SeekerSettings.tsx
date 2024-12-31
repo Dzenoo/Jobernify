@@ -1,21 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 
-import TwoFactorAuthForm from '@/components/auth/2fa/TwoFactorAuthForm';
+import { FieldGroup } from '@/helpers';
+
 import ReceiveJobAlertsForm from '../alerts/forms/ReceiveJobAlertsForm';
+import Enable2FA from '@/components/shared/Enable2FA';
 
 import { Badge } from '@/components/ui/utilities/badge';
-import { Button } from '@/components/ui/buttons/button';
 import { Separator } from '@/components/ui/layout/separator';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTrigger,
-  DialogTitle,
-} from '@/components/ui/layout/dialog';
 import {
   Card,
   CardContent,
@@ -33,16 +26,6 @@ const SeekerSettings: React.FC<SeekerSettingsProps> = ({
   isTwoFactorAuthEnabled,
   receiveJobAlerts,
 }) => {
-  const [is2faDialogOpen, setIs2faDialogOpen] = useState(false);
-
-  const handleOpen2faDialog = () => {
-    setIs2faDialogOpen(true);
-  };
-
-  const handleClose2faDialog = () => {
-    setIs2faDialogOpen(false);
-  };
-
   return (
     <Card>
       <CardHeader>
@@ -53,10 +36,10 @@ const SeekerSettings: React.FC<SeekerSettingsProps> = ({
       </CardHeader>
       <Separator />
       <CardContent className="space-y-5">
-        <div className="space-y-5">
-          <div>
-            <h1 className="font-semibold">Security</h1>
-          </div>
+        <FieldGroup
+          customStyles={{ div: 'gap-5', h1: 'font-semibold' }}
+          title="Security"
+        >
           <div className="flex justify-between gap-5 items-center">
             <div className="max-sm:space-y-2">
               <div className="flex gap-2 max-sm:flex-wrap-reverse sm:items-center">
@@ -65,45 +48,21 @@ const SeekerSettings: React.FC<SeekerSettingsProps> = ({
                   <Badge className="w-fit">Activated</Badge>
                 )}
               </div>
-              <div>
-                <p className="text-muted-foreground text-sm">
-                  Setup two-factor authentication (2FA) to enhance your account
-                  security and protect your account from unauthorized access.
-                </p>
-              </div>
+              <p className="text-muted-foreground text-sm">
+                Setup two-factor authentication (2FA) to enhance your account
+                security and protect your account from unauthorized access.
+              </p>
             </div>
-            {!isTwoFactorAuthEnabled && (
-              <Dialog open={is2faDialogOpen} onOpenChange={setIs2faDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button onClick={handleOpen2faDialog}>Activate 2FA</Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader className="pb-5 text-left">
-                    <DialogTitle>Two-Factor Authentication</DialogTitle>
-                    <DialogDescription>
-                      To be able to log in to your account, you will need to
-                      scan the QR code with Google Authenticator App and enter
-                      code below.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <TwoFactorAuthForm
-                    mode="ENABLE"
-                    onSuccess={handleClose2faDialog}
-                  />
-                </DialogContent>
-              </Dialog>
-            )}
+            {!isTwoFactorAuthEnabled && <Enable2FA />}
           </div>
-        </div>
+        </FieldGroup>
         <Separator />
-        <div className="space-y-5">
-          <div>
-            <h1 className="font-semibold">Notifications</h1>
-          </div>
-          <div>
-            <ReceiveJobAlertsForm receiveJobAlerts={receiveJobAlerts} />
-          </div>
-        </div>
+        <FieldGroup
+          customStyles={{ div: 'gap-5', h1: 'font-semibold' }}
+          title="Notifications"
+        >
+          <ReceiveJobAlertsForm receiveJobAlerts={receiveJobAlerts} />
+        </FieldGroup>
       </CardContent>
     </Card>
   );

@@ -1,20 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 
-import TwoFactorAuthForm from '@/components/auth/2fa/TwoFactorAuthForm';
+import Enable2FA from '@/components/shared/Enable2FA';
 
 import { Badge } from '@/components/ui/utilities/badge';
-import { Button } from '@/components/ui/buttons/button';
 import { Separator } from '@/components/ui/layout/separator';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTrigger,
-  DialogTitle,
-} from '@/components/ui/layout/dialog';
 import {
   Card,
   CardContent,
@@ -30,16 +21,6 @@ type EmployerSettingsProps = {
 const EmployerSettings: React.FC<EmployerSettingsProps> = ({
   isTwoFactorAuthEnabled,
 }) => {
-  const [is2faDialogOpen, setIs2faDialogOpen] = useState(false);
-
-  const handleOpen2faDialog = () => {
-    setIs2faDialogOpen(true);
-  };
-
-  const handleClose2faDialog = () => {
-    setIs2faDialogOpen(false);
-  };
-
   return (
     <Card>
       <CardHeader>
@@ -69,27 +50,7 @@ const EmployerSettings: React.FC<EmployerSettingsProps> = ({
                 </p>
               </div>
             </div>
-            {!isTwoFactorAuthEnabled && (
-              <Dialog open={is2faDialogOpen} onOpenChange={setIs2faDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button onClick={handleOpen2faDialog}>Activate 2FA</Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader className="pb-5 text-left">
-                    <DialogTitle>Two-Factor Authentication</DialogTitle>
-                    <DialogDescription>
-                      To be able to log in to your account, you will need to
-                      scan the QR code with Google Authenticator App and enter
-                      code below.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <TwoFactorAuthForm
-                    mode="ENABLE"
-                    onSuccess={handleClose2faDialog}
-                  />
-                </DialogContent>
-              </Dialog>
-            )}
+            {!isTwoFactorAuthEnabled && <Enable2FA />}
           </div>
         </div>
       </CardContent>

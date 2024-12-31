@@ -51,7 +51,7 @@ const EmployerData: React.FC<EmployerDataProps> = ({ employer }) => {
           key={field.id}
           title={field.title}
           value={field.value}
-          href={field.href}
+          autoLink={field.href}
         />
       ))}
     </div>

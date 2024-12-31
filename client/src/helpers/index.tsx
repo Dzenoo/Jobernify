@@ -1,3 +1,5 @@
+import { cn } from '@/lib/utils';
+
 import {
   TooltipProvider,
   Tooltip,
@@ -90,36 +92,68 @@ export const renderSkills = <
   );
 };
 
-type FieldGroupProps = {
-  title: string;
-  value: string | number;
-  href?: boolean;
-};
+type FieldGroupProps =
+  | {
+      title: string;
+      value: string | number;
+      autoLink?: boolean;
+      children?: undefined;
+    }
+  | {
+      title: string;
+      children: React.ReactNode;
+    };
 
-export const FieldGroup: React.FC<FieldGroupProps> = ({
-  title,
-  value,
-  href,
-}) => {
-  return (
-    <div className="flex flex-col gap-2">
-      <div>
-        <h2>{title}</h2>
-      </div>
-      <div>
-        {href && value.toString().includes('http') ? (
-          <a
-            href={value as string}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 dark:text-blue-500"
-          >
-            {value}
-          </a>
-        ) : (
-          <p className="text-muted-foreground text-base truncate">{value}</p>
+export const FieldGroup: React.FC<
+  FieldGroupProps & {
+    customStyles?: {
+      h1?: string;
+      p?: string;
+      a?: string;
+      div?: string;
+    };
+  }
+> = (props) => {
+  const { title, customStyles } = props;
+
+  const content = (() => {
+    if ('children' in props) {
+      return <div>{props.children}</div>;
+    }
+
+    const { value, autoLink } = props;
+    const isHttpLink =
+      autoLink && typeof value === 'string' && value.startsWith('http');
+
+    if (isHttpLink) {
+      return (
+        <a
+          href={value}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cn('text-blue-500 dark:text-blue-500', customStyles?.a)}
+        >
+          {value}
+        </a>
+      );
+    }
+
+    return (
+      <p
+        className={cn(
+          'text-muted-foreground text-base truncate',
+          customStyles?.p,
         )}
-      </div>
+      >
+        {value}
+      </p>
+    );
+  })();
+
+  return (
+    <div className={cn('flex flex-col gap-2', customStyles?.div)}>
+      <h2 className={cn('', customStyles?.h1)}>{title}</h2>
+      {content}
     </div>
   );
 };

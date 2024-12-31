@@ -4,23 +4,31 @@ import Image from 'next/image';
 import { ImagePlusIcon } from 'lucide-react';
 
 import { AWS_URL } from '@/constants';
-
-import { useEditEmployer } from '@/hooks/mutations/useEditEmployer.mutation';
 import { useUploads } from '@/hooks/core/useUploads.hook';
+import { useEditEmployer } from '@/hooks/mutations/useEditEmployer.mutation';
+import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
 
-import { useToast } from '@/components/ui/info/use-toast';
+import Loader from './loaders/Loader';
+
 import { Button } from '@/components/ui/buttons/button';
+import { useToast } from '@/components/ui/info/use-toast';
 
-type UploadEmployerImageProps = {
-  isApproved: boolean;
-  image: string;
-};
+type ProfileImageUploaderProps =
+  | {
+      role: 'EMPLOYER';
+      image: string;
+      isApproved: boolean;
+    }
+  | {
+      role: 'SEEKER';
+      image: string;
+    };
 
-const UploadEmployerImage: React.FC<UploadEmployerImageProps> = ({
-  isApproved,
-  image,
-}) => {
+const ProfileImageUploader: React.FC<ProfileImageUploaderProps> = (props) => {
+  const { role, image } = props;
   const { toast } = useToast();
+  const { mutateAsync: editEmployerProfileMutate } = useEditEmployer();
+  const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
 
   const { getInputProps, getRootProps, selectedFile, restart } = useUploads({
     accept: {
@@ -29,9 +37,7 @@ const UploadEmployerImage: React.FC<UploadEmployerImageProps> = ({
     multiple: false,
   });
 
-  const { mutateAsync: editEmployerProfileMutate } = useEditEmployer();
-
-  const changeEmployerImage = async (e: React.FormEvent) => {
+  const handleImage = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!selectedFile) {
@@ -42,7 +48,10 @@ const UploadEmployerImage: React.FC<UploadEmployerImageProps> = ({
     const formData = new FormData();
     formData.append('image', selectedFile);
 
-    await editEmployerProfileMutate(formData);
+    role === 'EMPLOYER'
+      ? await editEmployerProfileMutate(formData)
+      : await editSeekerProfileMutate(formData);
+
     restart();
   };
 
@@ -52,24 +61,28 @@ const UploadEmployerImage: React.FC<UploadEmployerImageProps> = ({
       ? image
       : `${AWS_URL}/${image}`;
 
+  const showUploader =
+    role === 'SEEKER' || (role === 'EMPLOYER' && props.isApproved);
+
   return (
     <div className="flex items-center gap-7 flex-wrap">
       <div>
-        <Image
-          src={profileImageUrl}
-          alt="Employer_profile_img"
-          width={130}
-          height={130}
-          className="border border-gray-100 rounded-full w-36 h-36 object-cover dark:border-[#1b1b1b]"
-        />
+        {image ? (
+          <Image
+            src={profileImageUrl}
+            alt="profile_img"
+            width={130}
+            height={130}
+            className="border border-gray-000 rounded-full w-36 h-36 object-cover"
+          />
+        ) : (
+          <Loader type="ScaleLoader" height={10} />
+        )}
       </div>
-      {isApproved && (
+      {showUploader && (
         <div className="flex flex-col gap-3">
           <h1 className="text-initial-black">Profile Image</h1>
-          <form
-            onSubmit={changeEmployerImage}
-            className="flex items-center gap-3"
-          >
+          <form onSubmit={handleImage} className="flex items-center gap-3">
             <div
               {...getRootProps()}
               className="tag flex items-center gap-3 w-fit cursor-pointer"
@@ -97,4 +110,4 @@ const UploadEmployerImage: React.FC<UploadEmployerImageProps> = ({
   );
 };
 
-export default UploadEmployerImage;
+export default ProfileImageUploader;

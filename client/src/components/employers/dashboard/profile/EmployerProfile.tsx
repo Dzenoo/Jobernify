@@ -7,8 +7,8 @@ import { Employer } from '@/types';
 
 import EmployerData from './informations/EmployerData';
 import EditEmployerProfileForm from './informations/forms/EditEmployerProfileForm';
-import UploadEmployerImage from './UploadEmployerImage';
-import DeleteEmployerProfile from './DeleteEmployerProfile';
+import ProfileImageUploader from '@/components/shared/ProfileImageUploader';
+import DeleteProfile from '@/components/shared/DeleteProfile';
 
 import { Button } from '@/components/ui/buttons/button';
 import { Separator } from '@/components/ui/layout/separator';
@@ -31,11 +31,12 @@ const EmployerProfile: React.FC<EmployerProfileProps> = ({
       <Card>
         <CardHeader>
           <div className="flex justify-between items-start gap-5">
-            <UploadEmployerImage
-              isApproved={isApproved}
+            <ProfileImageUploader
+              role="EMPLOYER"
               image={employer?.image}
+              isApproved={isApproved}
             />
-            <DeleteEmployerProfile />
+            <DeleteProfile role="EMPLOYER" />
           </div>
         </CardHeader>
         <Separator />

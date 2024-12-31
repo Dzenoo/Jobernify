@@ -10,8 +10,8 @@ import Educations from './educations/Educations';
 import Skills from './skills/Skills';
 import Socials from './socials/Socials';
 import EditSeekerProfileForm from './informations/forms/EditSeekerProfileForm';
-import UploadSeekerImage from './UploadSeekerImage';
-import DeleteSeekerProfile from './DeleteSeekerProfile';
+import ProfileImageUploader from '@/components/shared/ProfileImageUploader';
+import DeleteProfile from '@/components/shared/DeleteProfile';
 import Experiences from './experiences/Experiences';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/layout/card';
@@ -30,8 +30,8 @@ const SeekerProfile: React.FC<SeekerProfileProps> = React.memo(({ seeker }) => {
       <Card>
         <CardHeader>
           <div className="flex justify-between items-start gap-5">
-            <UploadSeekerImage image={seeker?.image} />
-            <DeleteSeekerProfile />
+            <ProfileImageUploader role="SEEKER" image={seeker?.image} />
+            <DeleteProfile role="SEEKER" />
           </div>
         </CardHeader>
         <Separator />
