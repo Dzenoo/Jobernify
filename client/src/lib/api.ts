@@ -29,7 +29,7 @@ export const postApiHandler = <T>(
   }
 
   return axios
-    .post(`${DEFAULT_API_URL}/${url}`, data, { headers })
+    .post(`${DEFAULT_API_URL}/${url}`, data, { headers, withCredentials: true })
     .then((response) => response.data)
     .catch((error) => {
       throw error;
@@ -59,7 +59,10 @@ export const patchApiHandler = <T>(
   }
 
   return axios
-    .patch(`${DEFAULT_API_URL}/${url}`, data, { headers })
+    .patch(`${DEFAULT_API_URL}/${url}`, data, {
+      headers,
+      withCredentials: true,
+    })
     .then((response) => response.data)
     .catch((error) => {
       throw error;
@@ -85,7 +88,7 @@ export const deleteApiHandler = <T>(
   }
 
   return axios
-    .delete(`${DEFAULT_API_URL}/${url}`, { headers })
+    .delete(`${DEFAULT_API_URL}/${url}`, { headers, withCredentials: true })
     .then((response) => response.data)
     .catch((error) => {
       throw error;
@@ -108,7 +111,7 @@ export const getApiHandler = <T>(url: string, token?: string): Promise<T> => {
   }
 
   return axios
-    .get(`${DEFAULT_API_URL}/${url}`, { headers })
+    .get(`${DEFAULT_API_URL}/${url}`, { headers, withCredentials: true })
     .then((response) => response.data)
     .catch((error) => {
       throw error;

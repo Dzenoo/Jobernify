@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRouter } from 'next/navigation';
 
 import zod from 'zod';
 import { useForm } from 'react-hook-form';
@@ -25,9 +24,8 @@ import {
 import { Input } from '@/components/ui/form/input';
 
 const LoginForm: React.FC = () => {
-  const router = useRouter();
   const { toast } = useToast();
-  const { getCookieHandler, storeCookieHandler } = useAuthentication();
+  const { getCookieHandler } = useAuthentication();
   const { isAuthenticated } = getCookieHandler();
 
   const form = useForm<zod.infer<typeof LoginSchema>>({
@@ -41,11 +39,6 @@ const LoginForm: React.FC = () => {
 
   const { mutateAsync: loginToAccount } = useMutation({
     mutationFn: signIn,
-    onSuccess: (data) => {
-      form.reset();
-      storeCookieHandler(data.access_token);
-      router.replace(data?.role === 'seeker' ? '/jobs' : '/seekers');
-    },
     onError: (error: any) => {
       toast({
         title: 'Error',

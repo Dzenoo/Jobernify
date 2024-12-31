@@ -13,10 +13,10 @@ const AuthenticationSuccessful = ({
   const { storeCookieHandler } = useAuthentication();
   const router = useRouter();
 
-  useEffect(() => {
-    storeCookieHandler(searchParams?.token);
-    router.replace(searchParams?.role === 'seeker' ? '/jobs' : '/seekers');
-  }, [searchParams, storeCookieHandler, router]);
+  // useEffect(() => {
+  //   storeCookieHandler(searchParams?.token);
+  //   router.replace(searchParams?.role === 'seeker' ? '/jobs' : '/seekers');
+  // }, [searchParams, storeCookieHandler, router]);
 };
 
 export default AuthenticationSuccessful;

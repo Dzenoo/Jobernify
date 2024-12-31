@@ -15,6 +15,7 @@ import { VerificationService } from './verification.service';
 
 import { SignupSeekerDto } from 'src/models/seekers/dto/signup-seeker.dto';
 import { SignUpEmployerDto } from 'src/models/employers/dto/signup-employer.dto';
+import { getRedirectUrl } from 'src/common/utils';
 
 import * as bcrypt from 'bcrypt';
 
@@ -63,16 +64,24 @@ export class LocalAuthService {
     return null;
   }
 
-  async login(user: any) {
+  async login(user: any, res: any) {
     const payload = {
       sub: user._doc._id.toString(),
       role: user._doc.role,
     };
 
-    return {
-      access_token: await this.jwtService.signAsync(payload),
-      role: user._doc.role,
-    };
+    const access_token = await this.jwtService.signAsync(payload);
+
+    res.cookie('access_token', access_token, {
+      httpOnly: true,
+      secure: false, // In production set to true
+      sameSite: 'strict',
+      maxAge: 3600000,
+    });
+
+    const redirectUrl = getRedirectUrl(payload.role);
+
+    return res.redirect(redirectUrl);
   }
 
   async signup(

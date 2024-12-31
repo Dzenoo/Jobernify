@@ -1,5 +1,8 @@
-import helmet from 'helmet';
+import * as cookieParser from 'cookie-parser';
+// import * as csurf from 'csurf';
 import * as compression from 'compression';
+import helmet from 'helmet';
+
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 
@@ -20,9 +23,17 @@ async function initializeServer() {
   });
 
   app.use(helmet());
-
+  app.use(cookieParser());
+  // app.use(
+  //   csurf({
+  //     cookie: {
+  //       httpOnly: true,
+  //       secure: false,
+  //       sameSite: 'strict',
+  //     },
+  //   }),
+  // );
   app.use(compression());
-
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,

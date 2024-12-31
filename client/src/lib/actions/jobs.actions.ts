@@ -67,7 +67,7 @@ export const saveJob = async (
  * @returns A promise resolving to a list of jobs, total number of jobs, and popular jobs.
  */
 export const getJobs = async ({
-  token,
+  // token,
   page = 1,
   limit = 10,
   sort = '',
@@ -77,7 +77,7 @@ export const getJobs = async ({
   level = '',
   position = '',
 }: {
-  token: string;
+  // token: string;
   page?: number;
   limit?: number;
   sort?: string;
@@ -94,7 +94,7 @@ export const getJobs = async ({
 }> => {
   return await getApiHandler(
     `jobs/all?page=${page}&limit=${limit}&sort=${sort}&search=${search}&salary=${salary}&position=${position}&level=${level}&type=${type}`,
-    token,
+    // token,
   );
 };
 

@@ -2,8 +2,6 @@ import React from 'react';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 
-import { useRouter } from 'next/navigation';
-
 type AuthData = {
   isAuthenticated: boolean;
   userType: string | null;
@@ -12,19 +10,8 @@ type AuthData = {
 };
 
 const useAuthentication = () => {
-  const router = useRouter();
-
-  const storeCookieHandler = React.useCallback((token: string) => {
-    Cookies.set('token', token, { expires: 1 / 24 });
-  }, []);
-
-  const deleteCookieHandler = React.useCallback(() => {
-    Cookies.remove('token');
-    router.push('/login');
-  }, []);
-
   const getCookieHandler = React.useCallback((): AuthData => {
-    const token = Cookies.get('token');
+    const token = Cookies.get('access_token');
 
     if (!token) {
       return {
@@ -72,7 +59,7 @@ const useAuthentication = () => {
     }
   }, []);
 
-  return { deleteCookieHandler, storeCookieHandler, getCookieHandler };
+  return { getCookieHandler };
 };
 
 export { useAuthentication };

@@ -23,6 +23,7 @@ import { GoogleOAuthGuard } from '../guards/google-oauth.guard';
 
 import { SignupSeekerDto } from 'src/models/seekers/dto/signup-seeker.dto';
 import { SignUpEmployerDto } from 'src/models/employers/dto/signup-employer.dto';
+import { getRedirectUrl } from 'src/common/utils';
 
 @Controller('/auth')
 export class AuthController {
@@ -48,9 +49,16 @@ export class AuthController {
     try {
       if (state) {
         const result = await this.googleAuthService.googleSignup(req, state);
-        return res.redirect(
-          `${process.env.FRONTEND_URL}/auth/success?token=${result.access_token}&role=${result.role}`,
-        );
+
+        res.cookie('access_token', result.access_token, {
+          httpOnly: true,
+          secure: false, // In production set to true
+          sameSite: 'strict',
+          maxAge: 3600000,
+        });
+
+        const redirectUrl = getRedirectUrl(result.role);
+        return res.redirect(redirectUrl);
       } else {
         const result = await this.googleAuthService.googleLogin(req);
 
@@ -60,9 +68,15 @@ export class AuthController {
           );
         }
 
-        return res.redirect(
-          `${process.env.FRONTEND_URL}/auth/success?token=${result.access_token}&role=${result.role}`,
-        );
+        res.cookie('access_token', result.access_token, {
+          httpOnly: true,
+          secure: false, // In production set to true
+          sameSite: 'strict',
+          maxAge: 3600000,
+        });
+
+        const redirectUrl = getRedirectUrl(result.role as any);
+        return res.redirect(redirectUrl);
       }
     } catch (error) {
       const message = encodeURIComponent(error.message);
@@ -74,15 +88,15 @@ export class AuthController {
   }
 
   @Throttle({ default: { ttl: 60000, limit: 5 } })
-  @Post('/signin')
   @UseGuards(LocalAuthGuard)
-  async signIn(@Request() req) {
+  @Post('/signin')
+  async signIn(@Request() req, @Response() res) {
     const user = req.user;
 
     const { isTwoFactorAuthEnabled } = user._doc;
 
     if (!isTwoFactorAuthEnabled) {
-      return this.localAuthService.login(user);
+      return this.localAuthService.login(user, res);
     }
 
     return {
@@ -93,8 +107,10 @@ export class AuthController {
     };
   }
 
+  @Throttle({ default: { ttl: 60000, limit: 5 } })
   @Post('/2fa/login-verify')
   async verify2FALogin(
+    @Response() res,
     @Body() body: { userId: string; role: 'seeker' | 'employer'; code: string },
   ) {
     const isValid = await this.twoFactorAuthService.verifyTwoFactorAuthToken(
@@ -117,7 +133,7 @@ export class AuthController {
       throw new NotFoundException('User not found');
     }
 
-    return this.localAuthService.login(user);
+    return this.localAuthService.login(user, res);
   }
 
   @Throttle({ default: { ttl: 60000, limit: 5 } })
@@ -130,5 +146,11 @@ export class AuthController {
   @Post('/employers-signup')
   async signupEmployer(@Body() body: SignUpEmployerDto) {
     return this.localAuthService.signup(body, 'employer');
+  }
+
+  @Post('/logout')
+  async logout(@Response() res) {
+    res.clearCookie('access_token');
+    return res.json({ message: 'Logged out successfully' });
   }
 }
