@@ -35,7 +35,7 @@ const EmployerSettings: React.FC<EmployerSettingsProps> = ({
           <div>
             <h1 className="font-semibold">Security</h1>
           </div>
-          <div className="flex justify-between gap-5 items-center">
+          <div className="flex justify-between gap-5 max-sm:flex-col max-sm:w-full sm:items-center">
             <div className="max-sm:space-y-2">
               <div className="flex gap-2 max-sm:flex-wrap-reverse sm:items-center">
                 <h1>Two-factor authentication (2FA)</h1>

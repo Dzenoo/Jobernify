@@ -40,7 +40,7 @@ const SeekerSettings: React.FC<SeekerSettingsProps> = ({
           customStyles={{ div: 'gap-5', h1: 'font-semibold' }}
           title="Security"
         >
-          <div className="flex justify-between gap-5 items-center">
+          <div className="flex justify-between gap-5 items-center max-sm:flex-col max-sm:w-full sm:items-center">
             <div className="max-sm:space-y-2">
               <div className="flex gap-2 max-sm:flex-wrap-reverse sm:items-center">
                 <h1>Two-factor authentication (2FA)</h1>

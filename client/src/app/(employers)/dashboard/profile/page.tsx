@@ -26,7 +26,7 @@ const EmployerProfilePage = () => {
   if (!fetchedEmployerProfile) {
     return (
       <div className="py-6 mx-40 max-xl:mx-0">
-        <LoadingEmployerProfile />;
+        <LoadingEmployerProfile />
       </div>
     );
   }
