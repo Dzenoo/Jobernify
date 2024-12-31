@@ -9,8 +9,6 @@ import { Sparkles } from 'lucide-react';
 
 import { useUploads } from '@/hooks/core/useUploads.hook';
 import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
-
 import { ApplyToJobSchema } from '@/lib/zod/jobs.validation';
 import { applyToJob } from '@/lib/actions/applications.actions';
 
@@ -60,7 +58,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
   isDialog,
 }) => {
   const [willSeekerUploadResume, setWillSeekerUploadResume] = useState(false);
-  const { token } = useAuthentication().getCookieHandler();
+
   const { toast } = useToast();
   const { getInputProps, getRootProps, selectedFile } = useUploads({
     accept: {
@@ -88,7 +86,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
           throw new Error('Unauthorized!');
         }
 
-        return generateCoverLetter(jobId, token);
+        return generateCoverLetter(jobId);
       },
       onSuccess: (data) => {
         form.setValue('coverLetter', data.coverLetter);
@@ -100,11 +98,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
 
   const { mutateAsync: applyToJobMutate } = useMutation({
     mutationFn: (formData: FormData) => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
-      return applyToJob(jobId, token, formData);
+      return applyToJob(jobId, formData);
     },
     onSuccess: () => {
       form.reset();

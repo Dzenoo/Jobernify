@@ -4,7 +4,6 @@ import React from 'react';
 
 import { usePathname } from 'next/navigation';
 
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { useFetchProfile } from '@/hooks/queries/useFetchProfile.query';
 import { getRoleSpecificData } from '@/lib/utils';
 
@@ -17,13 +16,14 @@ type NavbarProps = {
   href?: string;
 };
 
-const Navbar: React.FC<NavbarProps> = ({ href }) => {
-  const pathname = usePathname();
-  const { deleteCookieHandler, getCookieHandler } = useAuthentication();
-  const { isAuthenticated, userType, token } = getCookieHandler();
-  const { data: profileData, isLoading } = useFetchProfile(userType, token);
-  const isSeeker = userType === 'seeker';
+const userType = 'seeker';
+const isAuthenticated = true;
 
+const Navbar: React.FC<NavbarProps> = ({ href }) => {
+  const { data: profileData, isLoading } = useFetchProfile(userType);
+  const pathname = usePathname();
+
+  const isSeeker = userType === 'seeker';
   const roleData = getRoleSpecificData(isSeeker, profileData);
 
   return (
@@ -42,7 +42,6 @@ const Navbar: React.FC<NavbarProps> = ({ href }) => {
             <NavbarActionsList
               data={roleData.actions}
               pathname={pathname}
-              logout={deleteCookieHandler}
               isSeeker={isSeeker}
             />
             <NavbarAvatar

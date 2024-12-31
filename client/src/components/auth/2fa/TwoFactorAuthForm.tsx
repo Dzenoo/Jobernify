@@ -8,7 +8,6 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import QRCode from 'qrcode';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 import {
   generate2FACode,
@@ -16,7 +15,6 @@ import {
   verify2FALogin,
 } from '@/lib/actions/auth.actions';
 import { Verify2FACodeSchema } from '@/lib/zod/auth.validation';
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import Loader from '@/components/shared/loaders/Loader';
 
@@ -42,35 +40,25 @@ import { cn } from '@/lib/utils';
 type TwoFactorAuthFormProps =
   | {
       mode: 'ENABLE';
-      userId?: never;
-      role?: never;
-      onSuccess?: () => void;
-      formClassName?: string;
     }
   | {
       mode: 'LOGIN_VERIFY';
       userId: string;
-      role: string;
-      onSuccess?: () => void;
-      formClassName?: string;
     }
   | {
       mode: 'DISABLE';
-      userId?: never;
-      role?: never;
-      onSuccess?: () => void;
-      formClassName?: string;
     };
 
-const TwoFactorAuthForm: React.FC<TwoFactorAuthFormProps> = (props) => {
+const TwoFactorAuthForm: React.FC<
+  TwoFactorAuthFormProps & {
+    onSuccess?: () => void;
+    formClassName?: string;
+  }
+> = (props) => {
   const { mode, formClassName, onSuccess } = props;
-
-  const { getCookieHandler, storeCookieHandler } = useAuthentication();
-  const { token, userType } = getCookieHandler();
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState('');
   const { toast } = useToast();
 
-  const router = useRouter();
   const form = useForm<z.infer<typeof Verify2FACodeSchema>>({
     resolver: zodResolver(Verify2FACodeSchema),
     defaultValues: {
@@ -80,8 +68,7 @@ const TwoFactorAuthForm: React.FC<TwoFactorAuthFormProps> = (props) => {
 
   const generate2FA = useMutation({
     mutationFn: async () => {
-      if (!token || !userType) throw new Error('Unauthorized!');
-      return await generate2FACode(userType, token);
+      return await generate2FACode();
     },
     onSuccess: async (data) => {
       const otpAuthUrl = data.otpauthUrl;
@@ -98,8 +85,7 @@ const TwoFactorAuthForm: React.FC<TwoFactorAuthFormProps> = (props) => {
 
   const verify2FAEnable = useMutation({
     mutationFn: async (code: string) => {
-      if (!token || !userType) throw new Error('Unauthorized!');
-      return await verify2FACode(userType, token, code);
+      return await verify2FACode(code);
     },
     onSuccess: (data) => {
       toast({
@@ -116,14 +102,7 @@ const TwoFactorAuthForm: React.FC<TwoFactorAuthFormProps> = (props) => {
   const verify2FAOther = useMutation({
     mutationFn: async (code: string) => {
       if (mode === 'LOGIN_VERIFY') {
-        return verify2FALogin(props.userId, props.role, code);
-      }
-    },
-    onSuccess: (data) => {
-      if (mode === 'LOGIN_VERIFY') {
-        form.reset();
-        storeCookieHandler(data?.access_token as string);
-        router.replace(data?.role === 'seeker' ? '/jobs' : '/seekers');
+        return verify2FALogin(props.userId, code);
       }
     },
     onError: (err: any) => {

@@ -3,8 +3,6 @@ import React from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { Briefcase, Edit, Trash } from 'lucide-react';
 
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
-
 import { queryClient } from '@/context/react-query-client';
 import { deleteExperience } from '@/lib/actions/seekers.actions';
 import { formatDate } from '@/lib/utils';
@@ -33,15 +31,11 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
   isCurrentlyWorking,
 }) => {
   const { toast } = useToast();
-  const { userType, token } = useAuthentication().getCookieHandler();
+  const { userType } = useAuthentication().getCookieHandler();
 
   const { mutateAsync: deleteExperienceMutate } = useMutation({
     mutationFn: () => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
-      return deleteExperience(_id, token);
+      return deleteExperience(_id);
     },
     onSuccess: (response) => {
       toast({ title: 'Success', description: response.message });

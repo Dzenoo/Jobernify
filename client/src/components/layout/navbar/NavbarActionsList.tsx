@@ -16,14 +16,12 @@ type NavbarActionsListProps = {
     icon: LucideIcon;
     tooltip: string;
   }[];
-  logout: () => void;
   pathname: string;
 };
 
 const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
   isSeeker,
   data,
-  logout,
   pathname,
 }) => {
   const router = useRouter();
@@ -49,7 +47,7 @@ const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
         <Themes />
       </div>
 
-      <button onClick={logout}>
+      <button>
         <LogOut />
       </button>
     </ul>

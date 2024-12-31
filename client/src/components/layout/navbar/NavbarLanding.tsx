@@ -5,13 +5,10 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
-
 import { Button } from '@/components/ui/buttons/button';
 
 const NavbarLanding: React.FC = () => {
   const [isHydrated, setIsHydrated] = useState(false);
-  const { userType } = useAuthentication().getCookieHandler();
 
   useEffect(() => {
     setIsHydrated(true);
@@ -21,6 +18,7 @@ const NavbarLanding: React.FC = () => {
     return null;
   }
 
+  const userType = 'seeker';
   const isSeeker = userType === 'seeker';
 
   return (

@@ -64,7 +64,7 @@ export class AuthController {
 
         if (result.twoFactorRequired) {
           return res.redirect(
-            `${process.env.FRONTEND_URL}/login/2fa?userId=${result.userId}&role=${result.role}`,
+            `${process.env.FRONTEND_URL}/login/2fa?userId=${result.userId}`,
           );
         }
 
@@ -111,21 +111,22 @@ export class AuthController {
   @Post('/2fa/login-verify')
   async verify2FALogin(
     @Response() res,
-    @Body() body: { userId: string; role: 'seeker' | 'employer'; code: string },
+    @Body() body: { userId: string; code: string },
   ) {
     const isValid = await this.twoFactorAuthService.verifyTwoFactorAuthToken(
       body.userId,
-      body.role,
       body.code,
     );
+
     if (!isValid) {
       throw new UnauthorizedException('Invalid 2FA code');
     }
 
     let user;
-    if (body.role === 'seeker') {
-      user = await this.seekersService.findOneById(body.userId);
-    } else {
+
+    user = await this.seekersService.findOneById(body.userId);
+
+    if (!user) {
       user = await this.employersService.findOneById(body.userId);
     }
 

@@ -18,29 +18,21 @@ export class TwoFactorAuthController {
 
   @Post('/generate')
   @UseGuards(JwtAuthGuard)
-  async generate2FA(
-    @Request() req: any,
-    @Query('role') role: 'seeker' | 'employer',
-  ) {
+  async generate2FA(@Request() req: any) {
     const userId = req.user.userId;
 
     const { secret, otpauthUrl } =
-      await this.twoFactorAuthService.generateTwoFactorAuthSecret(userId, role);
+      await this.twoFactorAuthService.generateTwoFactorAuthSecret(userId);
 
     return { secret, otpauthUrl };
   }
 
   @Post('/verify-setup')
   @UseGuards(JwtAuthGuard)
-  async verifySetup(
-    @Request() req,
-    @Query('role') role: 'seeker' | 'employer',
-    @Body() body: { code: string },
-  ) {
+  async verifySetup(@Request() req, @Body() body: { code: string }) {
     const userId = req.user.userId;
     const isValid = await this.twoFactorAuthService.verifyTwoFactorAuthToken(
       userId,
-      role,
       body.code,
     );
 
@@ -48,34 +40,25 @@ export class TwoFactorAuthController {
       throw new UnauthorizedException('Invalid authentication code');
     }
 
-    await this.twoFactorAuthService.setTwoFactorAuthEnabled(userId, role, true);
+    await this.twoFactorAuthService.setTwoFactorAuthEnabled(userId, true);
 
     return { message: 'Two-Factor Authentication enabled successfully.' };
   }
 
   @Post('/disable')
   @UseGuards(JwtAuthGuard)
-  async disable2FA(
-    @Request() req,
-    @Query('role') role: 'seeker' | 'employer',
-    @Body() body: { code: string },
-  ) {
+  async disable2FA(@Request() req, @Body() body: { code: string }) {
     const userId = req.user.userId;
 
     const isValid = await this.twoFactorAuthService.verifyTwoFactorAuthToken(
       userId,
-      role,
       body.code,
     );
     if (!isValid) {
       throw new UnauthorizedException('Invalid code, 2FA not disabled');
     }
 
-    await this.twoFactorAuthService.setTwoFactorAuthEnabled(
-      userId,
-      role,
-      false,
-    );
+    await this.twoFactorAuthService.setTwoFactorAuthEnabled(userId, false);
     return { message: 'Two-Factor Authentication disabled successfully.' };
   }
 }

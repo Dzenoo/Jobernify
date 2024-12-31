@@ -33,7 +33,6 @@ const TwoFactorAuthenticationPage = ({
         <CardContent>
           <TwoFactorAuthForm
             mode="LOGIN_VERIFY"
-            role={searchParams.role}
             formClassName="sm:w-[25em]"
             userId={searchParams.userId}
           />

@@ -4,7 +4,6 @@ import { Bookmark } from 'lucide-react';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
 
 import { saveJob } from '@/lib/actions/jobs.actions';
@@ -23,14 +22,10 @@ type SaveJobButtonProps = {
 const SaveJobButton: React.FC<SaveJobButtonProps> = ({ jobId }) => {
   const { toast } = useToast();
   const { data } = useGetSeeker();
-  const { token } = useAuthentication().getCookieHandler();
+
   const { mutateAsync: saveJobMutate, status } = useMutation({
     mutationFn: () => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
-      return saveJob(jobId, token);
+      return saveJob(jobId);
     },
     onSuccess: (response) => {
       toast({ title: 'Success', description: response.message });

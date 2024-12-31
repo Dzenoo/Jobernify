@@ -4,8 +4,6 @@ import { Calendar, Edit, GraduationCap, Trash } from 'lucide-react';
 import { useMutation } from '@tanstack/react-query';
 
 import { useToast } from '@/components/ui/info/use-toast';
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
-
 import { deleteEducation } from '@/lib/actions/seekers.actions';
 import { formatDate } from '@/lib/utils';
 import { renderIconText } from '@/helpers';
@@ -29,15 +27,11 @@ const EducationItem: React.FC<EducationItemProps> = ({
   institution,
 }) => {
   const { toast } = useToast();
-  const { userType, token } = useAuthentication().getCookieHandler();
+  const { userType } = useAuthentication().getCookieHandler();
 
   const { mutateAsync: deleteEducationMutate } = useMutation({
     mutationFn: () => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
-      return deleteEducation(_id, token);
+      return deleteEducation(_id);
     },
     onSuccess: (response) => {
       toast({ title: 'Success', description: response.message });

@@ -3,7 +3,6 @@ import React from 'react';
 import { useMutation } from '@tanstack/react-query';
 
 import { deleteJob } from '@/lib/actions/jobs.actions';
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { queryClient } from '@/context/react-query-client';
 
 import Loader from '@/components/shared/loaders/Loader';
@@ -33,14 +32,9 @@ type DeleteJobProps = {
 
 const DeleteJob: React.FC<DeleteJobProps> = ({ onClose, id, isDialog }) => {
   const { toast } = useToast();
-  const { token } = useAuthentication().getCookieHandler();
   const { mutateAsync: deleteJobMutate, status } = useMutation({
     mutationFn: () => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
-      return deleteJob(token, id);
+      return deleteJob(id);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['jobs'] });

@@ -15,20 +15,25 @@ export class TwoFactorAuthService {
 
   async generateTwoFactorAuthSecret(
     userId: string,
-    role: 'seeker' | 'employer',
   ): Promise<{ secret: string; otpauthUrl: string }> {
     const secret = speakeasy.generateSecret({
       name: 'Jobernify',
     });
 
-    if (role === 'seeker') {
+    const seeker = await this.seekersService.findOneById(userId);
+
+    if (seeker) {
       await this.seekersService.findAndUpdateOne(
         { _id: userId },
         {
           twoFactorAuthSecret: secret.base32,
         },
       );
-    } else {
+    }
+
+    const employer = await this.employersService.findOneById(userId);
+
+    if (employer) {
       await this.employersService.findOneByIdAndUpdate(userId, {
         twoFactorAuthSecret: secret.base32,
       });
@@ -42,17 +47,16 @@ export class TwoFactorAuthService {
 
   async verifyTwoFactorAuthToken(
     userId: string,
-    role: 'seeker' | 'employer',
     code: string,
   ): Promise<boolean> {
     let user: Seeker | Employer | null = null;
 
-    if (role === 'seeker') {
-      user = await this.seekersService.findOneById(
-        userId,
-        '+twoFactorAuthSecret',
-      );
-    } else {
+    user = await this.seekersService.findOneById(
+      userId,
+      '+twoFactorAuthSecret',
+    );
+
+    if (!user) {
       user = await this.employersService.findOneById(
         userId,
         '+twoFactorAuthSecret',
@@ -71,19 +75,21 @@ export class TwoFactorAuthService {
     });
   }
 
-  async setTwoFactorAuthEnabled(
-    userId: string,
-    role: 'seeker' | 'employer',
-    enabled: boolean,
-  ) {
-    if (role === 'seeker') {
+  async setTwoFactorAuthEnabled(userId: string, enabled: boolean) {
+    const seeker = await this.seekersService.findOneById(userId);
+
+    if (seeker) {
       await this.seekersService.findAndUpdateOne(
         { _id: userId },
         {
           isTwoFactorAuthEnabled: enabled,
         },
       );
-    } else {
+    }
+
+    const employer = await this.employersService.findOneById(userId);
+
+    if (employer) {
       await this.employersService.findOneByIdAndUpdate(userId, {
         isTwoFactorAuthEnabled: enabled,
       });

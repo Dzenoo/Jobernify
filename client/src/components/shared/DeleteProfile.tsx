@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Trash } from 'lucide-react';
 
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { useDeleteProfile } from '@/hooks/mutations/useDeleteProfile.mutation';
 
 import AlertDialogWrapper from '@/components/ui/info/alert-dialog-wrapper';
@@ -12,13 +11,11 @@ type DeleteProfileProps = {
 };
 
 const DeleteProfile: React.FC<DeleteProfileProps> = ({ role }) => {
-  const { deleteCookieHandler } = useAuthentication();
   const { mutateAsync: deleteProfileMutate } = useDeleteProfile(role);
 
   const onDeleteProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     await deleteProfileMutate();
-    deleteCookieHandler();
   };
 
   return (

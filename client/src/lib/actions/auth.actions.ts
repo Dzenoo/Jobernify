@@ -3,7 +3,7 @@ import { postApiHandler } from '../api';
 /**
  * Logs in a user (seeker or employer).
  * @param params - An object containing the type of account and the login data (email and password).
- * @returns A promise resolving to the user (seeker or employer) and the authentication token.
+ * @returns A message indicating the success of the login attempt
  */
 export const signIn = async ({
   loginData,
@@ -12,7 +12,7 @@ export const signIn = async ({
     email: string;
     password: string;
   };
-}): Promise<{ access_token: string; role: string }> => {
+}): Promise<{ message: string }> => {
   return await postApiHandler('auth/signin', loginData);
 };
 
@@ -49,44 +49,30 @@ export const signupEmployer = async (data: {
 /**
  * Verifies the 2FA code for a user.
  * @param userId The ID of the user to verify the 2FA code for.
- * @param role The role of the user (seeker or employer).
  * @param code The 2FA code to be verified.
- * @returns A promise resolving to the authentication token and the role of the user.
+ * @returns
  */
-export const verify2FALogin = async (
-  userId: string,
-  role: string,
-  code: string,
-): Promise<{ access_token: string; role: string }> => {
-  return await postApiHandler(`auth/2fa/login-verify`, { userId, role, code });
+export const verify2FALogin = async (userId: string, code: string) => {
+  return await postApiHandler(`auth/2fa/login-verify`, { userId, code });
 };
 
 /**
  * Generates a new 2FA code.
- * @param role The role of the user (seeker or employer).
- * @param token The authentication token.
  * @returns A promise resolving to the generated 2FA code.
  */
-export const generate2FACode = async (
-  role: string,
-  token: string,
-): Promise<{
+export const generate2FACode = async (): Promise<{
   otpauthUrl: string;
 }> => {
-  return await postApiHandler(`2fa/generate?role=${role}`, {}, token);
+  return await postApiHandler(`2fa/generate`, {});
 };
 
 /**
  * Verifies a 2FA code.
- * @param role The role of the user (seeker or employer).
- * @param token The authentication token.
  * @param code The 2FA code to be verified.
  * @returns A promise resolving to a success message.
  */
 export const verify2FACode = async (
-  role: string,
-  token: string,
   code: string,
 ): Promise<{ message: string }> => {
-  return await postApiHandler(`2fa/verify-setup?role=${role}`, { code }, token);
+  return await postApiHandler(`2fa/verify-setup`, { code });
 };

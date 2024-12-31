@@ -1,6 +1,12 @@
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import {
+  Injectable,
+  CanActivate,
+  ExecutionContext,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { verify } from 'jsonwebtoken';
 import { Socket } from 'socket.io';
+import * as cookie from 'cookie';
 
 @Injectable()
 export class WsJwtGuard implements CanActivate {
@@ -19,17 +25,24 @@ export class WsJwtGuard implements CanActivate {
   }
 
   static validateToken(client: Socket) {
-    const token = client.handshake.query.token as string;
+    const cookieHeader = client.handshake.headers.cookie;
+
+    if (!cookieHeader) {
+      throw new UnauthorizedException('No cookies found!');
+    }
+
+    const parsedCookies = cookie.parse(cookieHeader);
+    const token = parsedCookies.access_token;
 
     if (!token) {
-      throw new Error('Token missing!');
+      throw new UnauthorizedException('Token missing!');
     }
 
     try {
       const payload = verify(token, process.env.JWT_SECRET);
       return payload;
     } catch (error) {
-      throw new Error('Invalid token!');
+      throw new UnauthorizedException('Invalid token!');
     }
   }
 }

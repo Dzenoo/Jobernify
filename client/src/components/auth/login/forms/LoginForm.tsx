@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { signIn } from '@/lib/actions/auth.actions';
 import { LoginSchema } from '@/lib/zod/auth.validation';
 
@@ -25,8 +24,6 @@ import { Input } from '@/components/ui/form/input';
 
 const LoginForm: React.FC = () => {
   const { toast } = useToast();
-  const { getCookieHandler } = useAuthentication();
-  const { isAuthenticated } = getCookieHandler();
 
   const form = useForm<zod.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -88,11 +85,7 @@ const LoginForm: React.FC = () => {
           <Button
             variant="default"
             type="submit"
-            disabled={
-              !form.formState.isValid ||
-              form.formState.isSubmitting ||
-              isAuthenticated
-            }
+            disabled={!form.formState.isValid || form.formState.isSubmitting}
             className="w-full"
           >
             {form.formState.isSubmitting ? (

@@ -8,7 +8,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
 
 import { useToast } from '@/components/ui/info/use-toast';
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { jobLevels, jobPositions, jobTypes } from '@/constants';
 import { queryClient } from '@/context/react-query-client';
 import { cn, uppercaseFirstLetter } from '@/lib/utils';
@@ -80,7 +79,6 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
   isDialog,
 }) => {
   const { toast } = useToast();
-  const { token } = useAuthentication().getCookieHandler();
 
   const SchemaToInfer = isEdit ? EditExperienceSchema : AddExperienceSchema;
 
@@ -106,13 +104,9 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
 
   const { mutateAsync: handleExperienceMutate } = useMutation({
     mutationFn: (formData: any) => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
       return isEdit
-        ? editExperience(formData, token, experienceId as string)
-        : addNewExperience(formData, token);
+        ? editExperience(formData, experienceId as string)
+        : addNewExperience(formData);
     },
     onSuccess: (response) => {
       toast({ title: 'Success', description: response.message });

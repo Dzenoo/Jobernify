@@ -10,8 +10,6 @@ import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/components/ui/info/use-toast';
 
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
-
 import { queryClient } from '@/context/react-query-client';
 import { createNewJob, editJob } from '@/lib/actions/jobs.actions';
 import { UpdateJobSchema } from '@/lib/zod/jobs.validation';
@@ -43,7 +41,6 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
   const turndownService = new TurndownService();
   const router = useRouter();
   const { toast } = useToast();
-  const { token } = useAuthentication().getCookieHandler();
   const { isEdit } = props;
   const formData = isEdit ? props.formData : undefined;
   const jobId = isEdit ? props.jobId : undefined;
@@ -86,13 +83,9 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
 
   const { mutateAsync: updateJobMutate, status } = useMutation({
     mutationFn: (formData: any) => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
       return isEdit
-        ? editJob(token, jobId as string, formData)
-        : createNewJob(token, formData);
+        ? editJob(jobId as string, formData)
+        : createNewJob(formData);
     },
     onSuccess: (response) => {
       router.push(`/dashboard/jobs/?page=1`);

@@ -3,7 +3,6 @@ import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/context/react-query-client';
 
 import { updateApplicationStatus } from '@/lib/actions/applications.actions';
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 
 import { useToast } from '@/components/ui/info/use-toast';
 import {
@@ -25,15 +24,10 @@ type StatusBadgeProps = {
 
 const StatusBadge: React.FC<StatusBadgeProps> = ({ applicationId, status }) => {
   const { toast } = useToast();
-  const { token } = useAuthentication().getCookieHandler();
 
   const { mutateAsync: updateStatusMutate } = useMutation({
     mutationFn: (newStatus: string) => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
-      return updateApplicationStatus(applicationId, token, newStatus);
+      return updateApplicationStatus(applicationId, newStatus);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['applications'] });

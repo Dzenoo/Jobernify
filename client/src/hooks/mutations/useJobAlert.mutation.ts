@@ -3,21 +3,14 @@ import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/context/react-query-client';
 import { generateJobAlert } from '@/lib/actions/seekers.actions';
 
-import { useAuthentication } from '../core/useAuthentication.hook';
-
 import { useToast } from '@/components/ui/info/use-toast';
 
 const useJobAlert = () => {
   const { toast } = useToast();
-  const { token } = useAuthentication().getCookieHandler();
 
   return useMutation({
     mutationFn: (formData: FormData | any) => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
-      return generateJobAlert(formData, token);
+      return generateJobAlert(formData);
     },
     onSuccess: (response) => {
       queryClient.invalidateQueries({ queryKey: ['profile'] });

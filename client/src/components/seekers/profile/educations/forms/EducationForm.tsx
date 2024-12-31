@@ -12,7 +12,6 @@ import {
   EditEducationSchema,
 } from '@/lib/zod/seekers.validation';
 import { addNewEducation, editEducation } from '@/lib/actions/seekers.actions';
-import { useAuthentication } from '@/hooks/core/useAuthentication.hook';
 import { queryClient } from '@/context/react-query-client';
 import { cn } from '@/lib/utils';
 import { Education } from '@/types';
@@ -68,7 +67,6 @@ const EducationForm: React.FC<EducationFormProps> = ({
   isDialog,
 }) => {
   const { toast } = useToast();
-  const { token } = useAuthentication().getCookieHandler();
 
   const SchemaToInfer = isEdit ? EditEducationSchema : AddEducationSchema;
 
@@ -89,13 +87,9 @@ const EducationForm: React.FC<EducationFormProps> = ({
 
   const { mutateAsync: handleEducationMutate } = useMutation({
     mutationFn: (formData: any) => {
-      if (!token) {
-        throw new Error('Unauthorized!');
-      }
-
       return isEdit
-        ? editEducation(formData, token, educationId as string)
-        : addNewEducation(formData, token);
+        ? editEducation(formData, educationId as string)
+        : addNewEducation(formData);
     },
     onSuccess: (response) => {
       toast({ title: 'Success', description: response.message });
