@@ -42,6 +42,17 @@ export class AiService {
     threadId: string,
     userMessage: string,
   ) {
+    // Pre-process: Moderate user input
+    const isUserMessageSafe = await this.moderateContent(userMessage);
+
+    if (!isUserMessageSafe) {
+      return {
+        userMessage: null,
+        assistantMessage:
+          'Your message contains inappropriate content and cannot be processed.',
+      };
+    }
+
     const messageResponse = await this.openai.beta.threads.messages.create(
       threadId,
       {
@@ -79,6 +90,14 @@ export class AiService {
     const assistantMessage =
       assistantMessageObj?.content[0]?.text.value ||
       'No response from assistant.';
+
+    const isAssistantMessageSafe = await this.moderateContent(assistantMessage);
+    if (!isAssistantMessageSafe) {
+      // Handle flagged AI response
+      const fallbackResponse = "I'm sorry, but I can't assist with that.";
+      client.emit('assistant_message', { message: fallbackResponse });
+      return;
+    }
 
     return {
       userMessage: messageResponse,
@@ -164,6 +183,41 @@ export class AiService {
       ],
     });
 
-    return completion.choices[0].message.content;
+    const coverLetter = completion.choices[0].message.content;
+
+    // Post-process: Moderate AI response
+    const isCoverLetterSafe = await this.moderateContent(coverLetter);
+    if (!isCoverLetterSafe) {
+      // Handle flagged AI response
+      return 'Unable to generate a cover letter at this time. Please try again later.';
+    }
+
+    return coverLetter;
+  }
+
+  /**
+   * Check if the input text is safe using OpenAI's Moderation API.
+   * @param text The text to moderate.
+   * @returns {boolean} True if safe, false otherwise.
+   * @throws Error with moderation details if flagged.
+   */
+  private async moderateContent(text: string): Promise<boolean> {
+    const moderationResponse = await this.openai.moderations.create({
+      model: 'omni-moderation-latest',
+      input: text,
+    });
+
+    const moderationResults = moderationResponse.results[0];
+    console.log(moderationResults.flagged);
+
+    if (moderationResults.flagged) {
+      // You can log or handle specific categories if needed
+      console.warn(
+        'Content flagged by moderation:',
+        moderationResults.categories,
+      );
+      return false;
+    }
+    return true;
   }
 }
