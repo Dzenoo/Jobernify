@@ -1,3 +1,5 @@
+import { CookieOptions } from 'express';
+
 /**
  * Constant defining the expiration time for verification tokens.
  * Value: 24 hours (in milliseconds)
@@ -35,9 +37,9 @@ export const escapeRegExp = (string: string): string => {
  * @property {string} sameSite - The cookie will be set with the `sameSite` flag.
  * @property {number} maxAge - The maximum age of the cookie in milliseconds.
  */
-export const cookieOptions = {
+export const cookieOptions: CookieOptions = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === 'production', // Set to true in production
+  secure: false, // Set to true in production
   sameSite: 'strict',
   maxAge: 3600000,
 };

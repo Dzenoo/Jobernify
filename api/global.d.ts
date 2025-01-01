@@ -5,4 +5,10 @@ declare global {
     statusCode: HttpStatus;
     [key: string]: any;
   };
+
+  namespace Express {
+    export interface Request {
+      user?: any;
+    }
+  }
 }

@@ -35,15 +35,16 @@ export const signIn = async ({
  * Verifies the 2FA code for a user.
  * @param userId The ID of the user to verify the 2FA code for.
  * @param code The 2FA code to be verified.
- * @returns
+ * @returns A promise resolving to a response message
  */
 export const verify2FALogin = async (
   userId: string,
   code: string,
-): Promise<{
-  statusCode: number;
-  redirectUrl: string;
-}> => {
+): Promise<
+  ResponseMessageTypes & {
+    redirectUrl: string;
+  }
+> => {
   return await postApiHandler(`auth/2fa/login-verify`, { userId, code });
 };
 
@@ -82,7 +83,7 @@ export const signupEmployer = async (data: {
  * Initiates a request to the server to invalidate the user's session.
  * @returns A promise resolving to the server response.
  */
-export const logout = async (): Promise<any> => {
+export const logout = async (): Promise<ResponseMessageTypes> => {
   return await postApiHandler('auth/logout', {});
 };
 

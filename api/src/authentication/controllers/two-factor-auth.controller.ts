@@ -3,14 +3,16 @@ import {
   Post,
   Body,
   UseGuards,
-  Query,
   Request,
   UnauthorizedException,
+  HttpStatus,
 } from '@nestjs/common';
 
 import { TwoFactorAuthService } from '../services/two-factor-auth.service';
 
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
+
+import { TwoFactorCodeDto } from '../dto/two-factor.dto';
 
 @Controller('/2fa')
 export class TwoFactorAuthController {
@@ -29,7 +31,7 @@ export class TwoFactorAuthController {
 
   @Post('/verify-setup')
   @UseGuards(JwtAuthGuard)
-  async verifySetup(@Request() req, @Body() body: { code: string }) {
+  async verifySetup(@Request() req, @Body() body: TwoFactorCodeDto) {
     const userId = req.user.userId;
     const isValid = await this.twoFactorAuthService.verifyTwoFactorAuthToken(
       userId,
@@ -42,23 +44,31 @@ export class TwoFactorAuthController {
 
     await this.twoFactorAuthService.setTwoFactorAuthEnabled(userId, true);
 
-    return { message: 'Two-Factor Authentication enabled successfully.' };
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'Two-Factor Authentication enabled successfully.',
+    };
   }
 
   @Post('/disable')
   @UseGuards(JwtAuthGuard)
-  async disable2FA(@Request() req, @Body() body: { code: string }) {
+  async disable2FA(@Request() req, @Body() body: TwoFactorCodeDto) {
     const userId = req.user.userId;
 
     const isValid = await this.twoFactorAuthService.verifyTwoFactorAuthToken(
       userId,
       body.code,
     );
+
     if (!isValid) {
       throw new UnauthorizedException('Invalid code, 2FA not disabled');
     }
 
     await this.twoFactorAuthService.setTwoFactorAuthEnabled(userId, false);
-    return { message: 'Two-Factor Authentication disabled successfully.' };
+
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'Two-Factor Authentication disabled successfully.',
+    };
   }
 }

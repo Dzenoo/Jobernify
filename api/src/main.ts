@@ -22,11 +22,7 @@ async function initializeServer() {
   app.use(cookieParser());
   // app.use(
   //   csurf({
-  //     cookie: {
-  //       httpOnly: true,
-  //       secure: false,
-  //       sameSite: 'strict',
-  //     },
+  //     cookie: cookieOptions,
   //   }),
   // );
   app.use(compression());
