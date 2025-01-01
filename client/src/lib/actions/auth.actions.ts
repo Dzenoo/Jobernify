@@ -1,6 +1,16 @@
 import { getApiHandler, postApiHandler } from '../api';
 
 /**
+ * Fetches the current user's data.
+ * @returns A promise resolving to an object containing the user's role.
+ */
+export const getCurrentUser = async (): Promise<{
+  role: 'seeker' | 'employer';
+}> => {
+  return await getApiHandler('auth/me');
+};
+
+/**
  * Logs in a user (seeker or employer).
  * @param params - An object containing the type of account and the login data (email and password).
  * @returns A message indicating the success of the login attempt
@@ -19,6 +29,22 @@ export const signIn = async ({
   }
 > => {
   return await postApiHandler('auth/signin', data);
+};
+
+/**
+ * Verifies the 2FA code for a user.
+ * @param userId The ID of the user to verify the 2FA code for.
+ * @param code The 2FA code to be verified.
+ * @returns
+ */
+export const verify2FALogin = async (
+  userId: string,
+  code: string,
+): Promise<{
+  statusCode: number;
+  redirectUrl: string;
+}> => {
+  return await postApiHandler(`auth/2fa/login-verify`, { userId, code });
 };
 
 /**
@@ -52,19 +78,12 @@ export const signupEmployer = async (data: {
 };
 
 /**
- * Verifies the 2FA code for a user.
- * @param userId The ID of the user to verify the 2FA code for.
- * @param code The 2FA code to be verified.
- * @returns
+ * Logs out the current user.
+ * Initiates a request to the server to invalidate the user's session.
+ * @returns A promise resolving to the server response.
  */
-export const verify2FALogin = async (
-  userId: string,
-  code: string,
-): Promise<{
-  statusCode: number;
-  redirectUrl: string;
-}> => {
-  return await postApiHandler(`auth/2fa/login-verify`, { userId, code });
+export const logout = async (): Promise<any> => {
+  return await postApiHandler('auth/logout', {});
 };
 
 /**
@@ -86,17 +105,4 @@ export const verify2FACode = async (
   code: string,
 ): Promise<{ message: string }> => {
   return await postApiHandler(`2fa/verify-setup`, { code });
-};
-
-/**
- * Logs out the current user.
- * Initiates a request to the server to invalidate the user's session.
- * @returns A promise resolving to the server response.
- */
-export const logout = async (): Promise<any> => {
-  return await postApiHandler('auth/logout', {});
-};
-
-export const getCurrentUser = async (): Promise<{ role: string }> => {
-  return await getApiHandler('auth/me');
 };

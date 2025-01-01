@@ -1,24 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Button } from '@/components/ui/buttons/button';
 import { useCurrentUser } from '@/hooks/queries/useCurrentUser.query';
+
+import { Button } from '@/components/ui/buttons/button';
 
 const NavbarLanding: React.FC = () => {
   const { data: currentUser } = useCurrentUser();
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  useEffect(() => {
-    setIsHydrated(true);
-  }, []);
-
-  if (!isHydrated) {
-    return null;
-  }
 
   const userType = currentUser?.role;
   const isSeeker = userType === 'seeker';

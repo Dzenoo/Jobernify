@@ -82,10 +82,6 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
   const { mutateAsync: generateCoverLetterMutate, status: coverLetterStatus } =
     useMutation({
       mutationFn: () => {
-        if (!token) {
-          throw new Error('Unauthorized!');
-        }
-
         return generateCoverLetter(jobId);
       },
       onSuccess: (data) => {

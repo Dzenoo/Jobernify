@@ -16,7 +16,6 @@ import { Button } from '@/components/ui/buttons/button';
 
 type SaveJobButtonProps = {
   jobId: string;
-  token?: string;
 };
 
 const SaveJobButton: React.FC<SaveJobButtonProps> = ({ jobId }) => {
