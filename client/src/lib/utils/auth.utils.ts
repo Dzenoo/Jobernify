@@ -18,12 +18,10 @@ export function decodeToken(token: string): any {
 /**
  * Returns the role specific data.
  * @param isSeeker Boolean to check if the user is a seeker.
- * @param data Data of the user.
  * @returns The role specific data.
  */
-export const getRoleSpecificData = (isSeeker: boolean, data: any) => {
+export const getRoleSpecificData = (isSeeker: boolean) => {
   return {
-    image: isSeeker ? data?.seeker?.image : data?.employer?.image,
     link: isSeeker ? '/profile' : '/dashboard/settings',
     actions: isSeeker ? SeekersNavbarActions : EmployersNavbarActions,
     links: isSeeker ? SeekersNavbarLinks : [],

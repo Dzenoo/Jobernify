@@ -3,6 +3,8 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { LogOut, LucideIcon } from 'lucide-react';
 
+import { useAuth } from '@/hooks/core/useAuth.hook';
+
 import Ai from '@/components/shared/ai/Ai';
 import Themes from './Themes';
 
@@ -25,6 +27,7 @@ const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
   pathname,
 }) => {
   const router = useRouter();
+  const { logout } = useAuth();
 
   return (
     <ul className="flex items-center gap-4">
@@ -47,7 +50,7 @@ const NavbarActionsList: React.FC<NavbarActionsListProps> = ({
         <Themes />
       </div>
 
-      <button>
+      <button onClick={logout}>
         <LogOut />
       </button>
     </ul>

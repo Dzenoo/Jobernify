@@ -49,7 +49,7 @@ const EditEmployerProfileForm: React.FC<EditEmployerProfileFormProps> = ({
 
   const form = useForm<zod.infer<typeof EmployerProfileSchema>>({
     resolver: zodResolver(EmployerProfileSchema),
-    mode: 'all',
+    mode: 'onChange',
   });
 
   useEffect(() => {

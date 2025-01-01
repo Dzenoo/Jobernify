@@ -4,6 +4,7 @@ import zod from 'zod';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 
 import { signIn } from '@/lib/actions/auth.actions';
 import { LoginSchema } from '@/lib/zod/auth.validation';
@@ -24,6 +25,7 @@ import { Input } from '@/components/ui/form/input';
 
 const LoginForm: React.FC = () => {
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<zod.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -36,6 +38,15 @@ const LoginForm: React.FC = () => {
 
   const { mutateAsync: loginToAccount } = useMutation({
     mutationFn: signIn,
+    onSuccess: (response) => {
+      if (response.redirectUrl) {
+        router.push(response.redirectUrl);
+      }
+
+      if (response.twoFactorRequired) {
+        router.push(`/login/2fa?userId=${response.userId}`);
+      }
+    },
     onError: (error: any) => {
       toast({
         title: 'Error',
@@ -44,8 +55,8 @@ const LoginForm: React.FC = () => {
     },
   });
 
-  const onSubmit = async (loginData: zod.infer<typeof LoginSchema>) => {
-    await loginToAccount({ loginData });
+  const onSubmit = async (data: zod.infer<typeof LoginSchema>) => {
+    await loginToAccount({ data });
   };
 
   const handleGoogleSignIn = () => {
@@ -96,7 +107,7 @@ const LoginForm: React.FC = () => {
           </Button>
           <p className="text-muted-foreground">Or</p>
           <Button
-            variant="default"
+            variant="outline"
             type="button"
             onClick={() => handleGoogleSignIn()}
           >

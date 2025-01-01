@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { queryClient } from '@/context/react-query-client';
+
 import TwoFactorAuthForm from '../auth/2fa/TwoFactorAuthForm';
 
 import {
@@ -23,6 +25,7 @@ const Enable2FA: React.FC<Enable2FAProps> = () => {
 
   const handleClose2faDialog = () => {
     setIs2faDialogOpen(false);
+    queryClient.invalidateQueries({ queryKey: ['profile'] });
   };
 
   return (

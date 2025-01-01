@@ -62,7 +62,7 @@ const NewAlertForm: React.FC<NewAlertFormProps> = ({
       level: '',
       type: '',
     },
-    mode: 'all',
+    mode: 'onChange',
   });
 
   const { mutateAsync: generateJobAlertMutate } = useJobAlert();

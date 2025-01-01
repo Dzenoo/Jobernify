@@ -56,7 +56,7 @@ const AddSkillsForm: React.FC<AddSkillsProps> = ({
     defaultValues: {
       skills: skills,
     },
-    mode: 'all',
+    mode: 'onChange',
   });
 
   const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();

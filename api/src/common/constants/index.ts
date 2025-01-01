@@ -18,6 +18,26 @@ export const VERIFICATION_TOKEN_EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 24 hou
 export const PASSWORD_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
+/**
+ * Escapes special characters in a string to prepare it for use in a regular expression.
+ * @param string The string to escape.
+ * @returns The escaped string.
+ */
 export const escapeRegExp = (string: string): string => {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // Escape special characters
+  // Escape special characters
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+};
+
+/**
+ * Options for the cookie that stores the JWT.
+ * @property {boolean} httpOnly - The cookie will be set with the `httpOnly` flag.
+ * @property {boolean} secure - The cookie will be set with the `secure` flag.
+ * @property {string} sameSite - The cookie will be set with the `sameSite` flag.
+ * @property {number} maxAge - The maximum age of the cookie in milliseconds.
+ */
+export const cookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production', // Set to true in production
+  sameSite: 'strict',
+  maxAge: 3600000,
 };

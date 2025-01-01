@@ -78,7 +78,7 @@ const EducationForm: React.FC<EducationFormProps> = ({
       degree: isEdit ? education.degree : '',
       fieldOfStudy: isEdit ? education.fieldOfStudy : '',
     },
-    mode: 'all',
+    mode: 'onChange',
   });
 
   useEffect(() => {

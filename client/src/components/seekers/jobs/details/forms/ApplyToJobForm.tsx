@@ -76,7 +76,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
     defaultValues: {
       coverLetter: '',
     },
-    mode: 'all',
+    mode: 'onChange',
   });
 
   const { mutateAsync: generateCoverLetterMutate, status: coverLetterStatus } =

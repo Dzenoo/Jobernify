@@ -5,6 +5,7 @@ import { Trash } from 'lucide-react';
 import { useDeleteProfile } from '@/hooks/mutations/useDeleteProfile.mutation';
 
 import AlertDialogWrapper from '@/components/ui/info/alert-dialog-wrapper';
+import { useAuth } from '@/hooks/core/useAuth.hook';
 
 type DeleteProfileProps = {
   role: 'SEEKER' | 'EMPLOYER';
@@ -12,10 +13,12 @@ type DeleteProfileProps = {
 
 const DeleteProfile: React.FC<DeleteProfileProps> = ({ role }) => {
   const { mutateAsync: deleteProfileMutate } = useDeleteProfile(role);
+  const { logout } = useAuth();
 
   const onDeleteProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     await deleteProfileMutate();
+    logout();
   };
 
   return (

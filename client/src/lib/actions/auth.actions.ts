@@ -1,4 +1,4 @@
-import { postApiHandler } from '../api';
+import { getApiHandler, postApiHandler } from '../api';
 
 /**
  * Logs in a user (seeker or employer).
@@ -6,14 +6,19 @@ import { postApiHandler } from '../api';
  * @returns A message indicating the success of the login attempt
  */
 export const signIn = async ({
-  loginData,
+  data,
 }: {
-  loginData: {
+  data: {
     email: string;
     password: string;
   };
-}): Promise<{ message: string }> => {
-  return await postApiHandler('auth/signin', loginData);
+}): Promise<
+  { redirectUrl: string } & {
+    twoFactorRequired: boolean;
+    userId: string;
+  }
+> => {
+  return await postApiHandler('auth/signin', data);
 };
 
 /**
@@ -52,7 +57,13 @@ export const signupEmployer = async (data: {
  * @param code The 2FA code to be verified.
  * @returns
  */
-export const verify2FALogin = async (userId: string, code: string) => {
+export const verify2FALogin = async (
+  userId: string,
+  code: string,
+): Promise<{
+  statusCode: number;
+  redirectUrl: string;
+}> => {
   return await postApiHandler(`auth/2fa/login-verify`, { userId, code });
 };
 
@@ -75,4 +86,17 @@ export const verify2FACode = async (
   code: string,
 ): Promise<{ message: string }> => {
   return await postApiHandler(`2fa/verify-setup`, { code });
+};
+
+/**
+ * Logs out the current user.
+ * Initiates a request to the server to invalidate the user's session.
+ * @returns A promise resolving to the server response.
+ */
+export const logout = async (): Promise<any> => {
+  return await postApiHandler('auth/logout', {});
+};
+
+export const getCurrentUser = async (): Promise<{ role: string }> => {
+  return await getApiHandler('auth/me');
 };

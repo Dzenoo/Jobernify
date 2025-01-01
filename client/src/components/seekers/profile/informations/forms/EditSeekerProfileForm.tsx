@@ -38,7 +38,7 @@ const EditSeekerProfileForm: React.FC<EditSeekerProfileFormProps> = ({
 
   const form = useForm<zod.infer<typeof SeekerProfileSchema>>({
     resolver: zodResolver(SeekerProfileSchema),
-    mode: 'all',
+    mode: 'onChange',
   });
 
   useEffect(() => {

@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import QRCode from 'qrcode';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import {
   generate2FACode,
@@ -15,6 +16,7 @@ import {
   verify2FALogin,
 } from '@/lib/actions/auth.actions';
 import { Verify2FACodeSchema } from '@/lib/zod/auth.validation';
+import { cn } from '@/lib/utils';
 
 import Loader from '@/components/shared/loaders/Loader';
 
@@ -35,7 +37,6 @@ import {
 } from '@/components/ui/form/input-otp';
 import { Button } from '@/components/ui/buttons/button';
 import { useToast } from '@/components/ui/info/use-toast';
-import { cn } from '@/lib/utils';
 
 type TwoFactorAuthFormProps =
   | {
@@ -58,6 +59,7 @@ const TwoFactorAuthForm: React.FC<
   const { mode, formClassName, onSuccess } = props;
   const [qrCodeDataUrl, setQrCodeDataUrl] = useState('');
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof Verify2FACodeSchema>>({
     resolver: zodResolver(Verify2FACodeSchema),
@@ -104,6 +106,9 @@ const TwoFactorAuthForm: React.FC<
       if (mode === 'LOGIN_VERIFY') {
         return verify2FALogin(props.userId, code);
       }
+    },
+    onSuccess: (data) => {
+      router.push(data!.redirectUrl);
     },
     onError: (err: any) => {
       toast({

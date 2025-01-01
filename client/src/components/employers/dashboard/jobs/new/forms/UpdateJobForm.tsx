@@ -46,7 +46,7 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
   const jobId = isEdit ? props.jobId : undefined;
 
   const form = useForm<zod.infer<typeof UpdateJobSchema>>({
-    mode: 'all',
+    mode: 'onChange',
     defaultValues: {
       title: '',
       overview: '',

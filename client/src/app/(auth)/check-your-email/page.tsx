@@ -49,7 +49,11 @@ const CheckYourEmail = () => {
             We've sent a verification link to your email. Please check your
             inbox and click the link to verify your account.
           </p>
-          <Button className="w-full" variant="outline">
+          <Button
+            onClick={() => router.push('/login')}
+            className="w-full"
+            variant="outline"
+          >
             Back to Login
           </Button>
         </CardContent>

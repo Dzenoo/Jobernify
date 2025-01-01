@@ -16,7 +16,7 @@ import {
 const Login: React.FC = () => {
   return (
     <Card className="flex flex-col sm:w-[450px]">
-      <CardHeader className="space-y-5">
+      <CardHeader className="space-y-4">
         <Logo />
         <CardTitle>Login</CardTitle>
         <CardDescription>

@@ -57,7 +57,7 @@ const EditSocialsForm: React.FC<EditSocialsFormProps> = ({
       github: seeker?.github || '',
       linkedin: seeker?.linkedin || '',
     },
-    mode: 'all',
+    mode: 'onChange',
   });
 
   const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();

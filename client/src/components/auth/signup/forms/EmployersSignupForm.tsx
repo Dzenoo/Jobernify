@@ -34,7 +34,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/form/select';
-import { AlertCircle } from 'lucide-react';
 
 const EmployersSignupForm: React.FC = () => {
   const router = useRouter();
@@ -85,7 +84,6 @@ const EmployersSignupForm: React.FC = () => {
         className="max-h-[40em] overflow-y-auto space-y-8 py-2 px-5"
       >
         <div className="border p-4 rounded-xl space-y-2">
-          <AlertCircle />
           <p className="text-muted-foreground font-light text-sm">
             Your account approval is typically processed within 24 hours. Once
             approved, you will gain access to manage your jobs and profile.
@@ -94,7 +92,7 @@ const EmployersSignupForm: React.FC = () => {
           </p>
         </div>
         <Button
-          variant="default"
+          variant="outline"
           className="w-full"
           type="button"
           onClick={() => handleEmployerGoogleSignUp()}

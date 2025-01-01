@@ -38,7 +38,7 @@ const SeekersSignupForm: React.FC = () => {
       email: '',
       password: '',
     },
-    mode: 'all',
+    mode: 'onChange',
   });
 
   const { mutateAsync: signupSeekerMutation } = useMutation({
@@ -148,7 +148,7 @@ const SeekersSignupForm: React.FC = () => {
           </Button>
           <p className="text-muted-foreground">Or</p>
           <Button
-            variant="default"
+            variant="outline"
             type="button"
             onClick={() => handleSeekerGoogleSignUp()}
           >

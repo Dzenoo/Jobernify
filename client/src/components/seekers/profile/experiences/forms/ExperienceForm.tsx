@@ -95,7 +95,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
       location: isEdit ? experience?.location : '',
       isCurrentlyWorking: isEdit ? experience?.isCurrentlyWorking : false,
     },
-    mode: 'all',
+    mode: 'onChange',
   });
 
   useEffect(() => {

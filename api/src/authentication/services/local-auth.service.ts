@@ -64,7 +64,7 @@ export class LocalAuthService {
     return null;
   }
 
-  async login(user: any, res: any) {
+  async login(user: any) {
     const payload = {
       sub: user._doc._id.toString(),
       role: user._doc.role,
@@ -72,16 +72,9 @@ export class LocalAuthService {
 
     const access_token = await this.jwtService.signAsync(payload);
 
-    res.cookie('access_token', access_token, {
-      httpOnly: true,
-      secure: false, // In production set to true
-      sameSite: 'strict',
-      maxAge: 3600000,
-    });
-
     const redirectUrl = getRedirectUrl(payload.role);
 
-    return res.redirect(redirectUrl);
+    return { access_token, redirectUrl };
   }
 
   async signup(

@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  HttpStatus,
   NotFoundException,
   Post,
   Query,
@@ -24,6 +25,8 @@ import { GoogleOAuthGuard } from '../guards/google-oauth.guard';
 import { SignupSeekerDto } from 'src/models/seekers/dto/signup-seeker.dto';
 import { SignUpEmployerDto } from 'src/models/employers/dto/signup-employer.dto';
 import { getRedirectUrl } from 'src/common/utils';
+import { cookieOptions } from 'src/common/constants';
+import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 
 @Controller('/auth')
 export class AuthController {
@@ -50,12 +53,7 @@ export class AuthController {
       if (state) {
         const result = await this.googleAuthService.googleSignup(req, state);
 
-        res.cookie('access_token', result.access_token, {
-          httpOnly: true,
-          secure: false, // In production set to true
-          sameSite: 'strict',
-          maxAge: 3600000,
-        });
+        res.cookie('access_token', result.access_token, cookieOptions);
 
         const redirectUrl = getRedirectUrl(result.role);
         return res.redirect(redirectUrl);
@@ -68,12 +66,7 @@ export class AuthController {
           );
         }
 
-        res.cookie('access_token', result.access_token, {
-          httpOnly: true,
-          secure: false, // In production set to true
-          sameSite: 'strict',
-          maxAge: 3600000,
-        });
+        res.cookie('access_token', result.access_token, cookieOptions);
 
         const redirectUrl = getRedirectUrl(result.role as any);
         return res.redirect(redirectUrl);
@@ -87,24 +80,37 @@ export class AuthController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('/me')
+  async getCurrentUser(@Request() req) {
+    if (!req.user) throw new UnauthorizedException('Unauthorized!');
+    return { role: req.user.role };
+  }
+
   @Throttle({ default: { ttl: 60000, limit: 5 } })
   @UseGuards(LocalAuthGuard)
   @Post('/signin')
   async signIn(@Request() req, @Response() res) {
     const user = req.user;
 
-    const { isTwoFactorAuthEnabled } = user._doc;
+    const { _id, isTwoFactorAuthEnabled } = user._doc;
 
     if (!isTwoFactorAuthEnabled) {
-      return this.localAuthService.login(user, res);
+      const { access_token, redirectUrl } =
+        await this.localAuthService.login(user);
+
+      res.cookie('access_token', access_token, cookieOptions);
+
+      res
+        .status(HttpStatus.OK)
+        .send({ message: '2FA successful', redirectUrl });
     }
 
-    return {
+    res.status(HttpStatus.OK).send({
       message: '2FA code required',
       twoFactorRequired: true,
-      userId: user._doc._id,
-      role: user._doc.role,
-    };
+      userId: _id,
+    });
   }
 
   @Throttle({ default: { ttl: 60000, limit: 5 } })
@@ -134,7 +140,12 @@ export class AuthController {
       throw new NotFoundException('User not found');
     }
 
-    return this.localAuthService.login(user, res);
+    const { access_token, redirectUrl } =
+      await this.localAuthService.login(user);
+
+    res.cookie('access_token', access_token, cookieOptions);
+
+    res.status(HttpStatus.OK).send({ message: '2FA successful', redirectUrl });
   }
 
   @Throttle({ default: { ttl: 60000, limit: 5 } })
@@ -151,7 +162,13 @@ export class AuthController {
 
   @Post('/logout')
   async logout(@Response() res) {
-    res.clearCookie('access_token');
-    return res.json({ message: 'Logged out successfully' });
+    console.log('Logout endpoint hit');
+    res.clearCookie('access_token', {
+      httpOnly: true,
+      secure: false,
+      sameSite: 'strict',
+      path: '/',
+    });
+    res.status(HttpStatus.OK).send({ statusCode: HttpStatus.OK });
   }
 }

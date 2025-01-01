@@ -18,7 +18,7 @@ const AuthenticationError = ({
   return (
     <div className="flex justify-center items-center text-center h-screen">
       <Card>
-        <CardHeader>
+        <CardHeader className="text-left">
           <CardTitle>Authentication Error</CardTitle>
           <CardDescription className="max-w-xs">
             {searchParams?.error}

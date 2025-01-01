@@ -6,8 +6,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/buttons/button';
+import { useCurrentUser } from '@/hooks/queries/useCurrentUser.query';
 
 const NavbarLanding: React.FC = () => {
+  const { data: currentUser } = useCurrentUser();
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
@@ -18,7 +20,7 @@ const NavbarLanding: React.FC = () => {
     return null;
   }
 
-  const userType = 'seeker';
+  const userType = currentUser?.role;
   const isSeeker = userType === 'seeker';
 
   return (

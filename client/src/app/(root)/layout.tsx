@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import { GeistSans } from 'geist/font/sans';
 
+import { QueryContextProvider } from '@/context/react-query-client';
 import RootLayoutWrapper from './_RootLayoutWrapper';
 import '../globals.css';
 
@@ -36,7 +37,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={GeistSans.className}>
-        <RootLayoutWrapper>{children}</RootLayoutWrapper>
+        <QueryContextProvider>
+          <RootLayoutWrapper>{children}</RootLayoutWrapper>
+        </QueryContextProvider>
       </body>
     </html>
   );

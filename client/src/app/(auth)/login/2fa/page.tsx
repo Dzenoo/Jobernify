@@ -4,6 +4,7 @@ import React from 'react';
 
 import TwoFactorAuthForm from '@/components/auth/2fa/TwoFactorAuthForm';
 import Logo from '@/components/layout/navbar/Logo';
+import NotFound from '@/components/shared/pages/NotFound';
 
 import {
   Card,
@@ -19,6 +20,8 @@ const TwoFactorAuthenticationPage = ({
 }: {
   searchParams: { [key: string]: string };
 }) => {
+  if (!searchParams.userId) return <NotFound />;
+
   return (
     <section className="h-screen flex flex-col justify-center items-center gap-20">
       <Card>

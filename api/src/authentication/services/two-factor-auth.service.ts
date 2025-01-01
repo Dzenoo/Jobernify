@@ -2,9 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as speakeasy from 'speakeasy';
 
 import { SeekersService } from 'src/models/seekers/seekers.service';
-import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
 import { EmployersService } from 'src/models/employers/employers.service';
-import { Employer } from 'src/models/employers/schemas/employer.schema';
 
 @Injectable()
 export class TwoFactorAuthService {
@@ -49,19 +47,11 @@ export class TwoFactorAuthService {
     userId: string,
     code: string,
   ): Promise<boolean> {
-    let user: Seeker | Employer | null = null;
-
-    user = await this.seekersService.findOneById(
-      userId,
-      '+twoFactorAuthSecret',
-    );
-
-    if (!user) {
-      user = await this.employersService.findOneById(
-        userId,
-        '+twoFactorAuthSecret',
-      );
+    if (!code || typeof code !== 'string' || code.trim().length === 0) {
+      return false;
     }
+
+    const user = await this.getUserWithTwoFactorSecret(userId);
 
     if (!user || !user.twoFactorAuthSecret) {
       return false;
@@ -73,6 +63,26 @@ export class TwoFactorAuthService {
       token: code,
       window: 1,
     });
+  }
+
+  private async getUserWithTwoFactorSecret(userId: string): Promise<any> {
+    const seeker = await this.seekersService.findOneById(
+      userId,
+      '+twoFactorAuthSecret',
+    );
+    if (seeker) {
+      return seeker;
+    }
+
+    const employer = await this.employersService.findOneById(
+      userId,
+      '+twoFactorAuthSecret',
+    );
+    if (employer) {
+      return employer;
+    }
+
+    return null;
   }
 
   async setTwoFactorAuthEnabled(userId: string, enabled: boolean) {
