@@ -37,8 +37,8 @@ const HeroLanding: React.FC = () => {
         <div>
           <img
             className="m-auto rounded-2xl box-shadow-custom object-cover"
-            src="/images/landing-light.png"
-            alt="landing-light"
+            src="/images/landing-dark.png"
+            alt="landing-dark"
           />
         </div>
       </div>
