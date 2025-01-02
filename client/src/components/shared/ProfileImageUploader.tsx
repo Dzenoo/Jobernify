@@ -73,7 +73,7 @@ const ProfileImageUploader: React.FC<ProfileImageUploaderProps> = (props) => {
             alt="profile_img"
             width={130}
             height={130}
-            className="border border-gray-000 rounded-full w-36 h-36 object-cover"
+            className="border border-gray-000 rounded-full w-36 h-36 object-cover max-sm:w-28 max-sm:h-28"
           />
         ) : (
           <Loader type="ScaleLoader" height={10} />

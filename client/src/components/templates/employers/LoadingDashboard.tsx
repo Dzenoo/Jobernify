@@ -18,7 +18,7 @@ const LoadingDashboard = () => {
         <div>
           <div className="animate-pulse bg-gray-300 h-32 w-full rounded-xl"></div>
         </div>
-        <div>
+        <div className="max-lg:col-span-2 max-sm:col-span-1">
           <div className="animate-pulse bg-gray-300 h-32 w-full rounded-xl"></div>
         </div>
       </div>

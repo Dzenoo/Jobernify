@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/layout/card';
 import { Button } from '@/components/ui/buttons/button';
 import { TooltipWrapper } from '@/components/ui/info/tooltip-wrapper';
+import { Separator } from '@/components/ui/layout/separator';
 
 type SeekerItemProps = {
   seeker: Seeker;
@@ -70,6 +71,7 @@ const SeekerItem: React.FC<SeekerItemProps> = ({
           alt="seeker"
         />
       </CardHeader>
+      <Separator />
       <CardContent className="text-center flex flex-col justify-center items-center gap-3">
         <div>
           <Link

@@ -244,4 +244,58 @@ export const SkillsInformationsData = [
       },
     ],
   },
+  // **New Category: Design Tools**
+  {
+    id: '9',
+    category: 'Design Tools',
+    description:
+      'Filter seekers based on their knowledge of design tools and technologies.',
+    data: [
+      { id: '1', title: 'Figma', value: 'figma', type: 'skills' },
+      {
+        id: '2',
+        title: 'Adobe Photoshop',
+        value: 'adobe-photoshop',
+        type: 'skills',
+      },
+      {
+        id: '3',
+        title: 'Adobe Illustrator',
+        value: 'adobe-illustrator',
+        type: 'skills',
+      },
+      { id: '4', title: 'Sketch', value: 'sketch', type: 'skills' },
+      { id: '5', title: 'InVision', value: 'invision', type: 'skills' },
+      { id: '6', title: 'Adobe XD', value: 'adobe-xd', type: 'skills' },
+      {
+        id: '7',
+        title: 'Affinity Designer',
+        value: 'affinity-designer',
+        type: 'skills',
+      },
+      { id: '8', title: 'Canva', value: 'canva', type: 'skills' },
+      { id: '9', title: 'CorelDRAW', value: 'coreldraw', type: 'skills' },
+      { id: '10', title: 'Blender', value: 'blender', type: 'skills' },
+      { id: '11', title: 'Procreate', value: 'procreate', type: 'skills' },
+      { id: '12', title: 'Balsamiq', value: 'balsamiq', type: 'skills' },
+      { id: '13', title: 'Zeplin', value: 'zeplin', type: 'skills' },
+      { id: '14', title: 'Marvel', value: 'marvel', type: 'skills' },
+      { id: '15', title: 'Framer', value: 'framer', type: 'skills' },
+      { id: '16', title: 'Axure RP', value: 'axure-rp', type: 'skills' },
+      {
+        id: '17',
+        title: 'Adobe After Effects',
+        value: 'adobe-after-effects',
+        type: 'skills',
+      },
+      { id: '18', title: 'UXPin', value: 'uxpin', type: 'skills' },
+      { id: '19', title: 'Lucidchart', value: 'lucidchart', type: 'skills' },
+      {
+        id: '20',
+        title: 'Gravit Designer',
+        value: 'gravit-designer',
+        type: 'skills',
+      },
+    ],
+  },
 ];

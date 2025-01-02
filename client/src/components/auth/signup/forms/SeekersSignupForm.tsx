@@ -148,6 +148,7 @@ const SeekersSignupForm: React.FC = () => {
           </Button>
           <p className="text-muted-foreground">Or</p>
           <Button
+            disabled={form.formState.isSubmitting}
             variant="outline"
             type="button"
             onClick={() => handleSeekerGoogleSignUp()}

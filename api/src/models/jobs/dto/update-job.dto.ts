@@ -6,8 +6,8 @@ import {
   IsNumber,
   Min,
   Max,
-  IsDate,
   Length,
+  IsDateString,
 } from 'class-validator';
 import { JobLevel, JobPosition, JobType } from '@jobernify/shared';
 
@@ -51,7 +51,7 @@ export class UpdateJobDto {
   readonly salary?: number;
 
   @IsOptional()
-  @IsDate()
+  @IsDateString()
   readonly expiration_date?: Date;
 
   @IsOptional()

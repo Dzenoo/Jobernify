@@ -92,6 +92,7 @@ const EmployersSignupForm: React.FC = () => {
           </p>
         </div>
         <Button
+          disabled={form.formState.isSubmitting}
           variant="outline"
           className="w-full"
           type="button"

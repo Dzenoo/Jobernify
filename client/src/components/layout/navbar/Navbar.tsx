@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarProps> = ({ href }) => {
   const roleData = getRoleSpecificData(isSeeker);
 
   return (
-    <header className="px-5 py-3 base-margin flex justify-between items-center gap-3 border-b border-gray-100 bg-white dark:bg-[#0d0d0d] dark:border-[#1b1b1b]">
+    <header className="px-5 py-3 base-margin flex justify-between items-center gap-3 border-b border-gray-100 bg-white dark:bg-[#0d0d0d] dark:border-[#1b1b1b] overflow-hidden">
       <Logo href={href} />
 
       {isAuthenticated && !isLoading && (

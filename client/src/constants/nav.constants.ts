@@ -19,5 +19,4 @@ export const SeekersNavbarActions = [
 export const EmployersNavbarActions = [
   { id: '1', href: '/seekers', icon: Users, tooltip: 'Seekers' },
   { id: '2', href: '/dashboard', icon: LayoutDashboard, tooltip: 'Dashboard' },
-  { id: '3', href: '/dashboard/profile', icon: User, tooltip: 'Profile' },
 ];

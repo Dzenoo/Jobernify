@@ -16,7 +16,7 @@ const LoadingJobDetails = () => {
         </div>
       </div>
       <div className="w-full lg:basis-full lg:grow flex flex-col gap-6">
-        <div className="flex flex-col sm:flex-row justify-between gap-3 items-center">
+        <div className="flex flex-col sm:flex-row justify-between gap-3 sm:items-center">
           <div className="flex items-center gap-3">
             <div>
               <div className="w-16 h-16 rounded-full bg-gray-300"></div>

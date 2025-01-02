@@ -54,7 +54,7 @@ const EmployerItem: React.FC<EmployersItemProps> = ({
 
   return (
     <Card hoverable={true}>
-      <CardContent className="flex flex-col gap-5">
+      <CardContent className="space-y-5">
         <div className="flex justify-between gap-5 max-sm:flex-col">
           <div>
             <Avatar className="border border-blue-100 dark:border-[#1b1b1b] w-28 h-28 max-sm:w-20 max-sm:h-20">
@@ -68,7 +68,7 @@ const EmployerItem: React.FC<EmployersItemProps> = ({
             <FollowEmployerButton employerId={_id} />
           </div>
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="space-y-2">
           <div>
             <Link href={`/employers/${_id}?section=jobs`}>
               <h1 className="hover:text-blue-700 hover:underline text-base-black">

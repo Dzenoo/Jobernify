@@ -23,13 +23,22 @@ const SeekerDetailsPage = ({
   params: { seekerId: string };
 }) => {
   const { data: fetchedSeeker, isLoading } = useGetSeekerById(seekerId);
+  const className = 'base-margin overflow-auto flex gap-[10px] max-xl:flex-col';
+
+  if (isLoading) {
+    return (
+      <div className={className}>
+        <LoadingSeekerDetails />
+      </div>
+    );
+  }
 
   if (!isLoading && !fetchedSeeker) {
     return <NotFound href="/seekers" />;
   }
 
   return (
-    <section className="base-margin overflow-auto flex gap-[10px] max-xl:flex-col">
+    <section className={className}>
       <div className="basis-full grow flex flex-col gap-6">
         <SeekerDetailsInfo seeker={fetchedSeeker?.seeker as Seeker} />
       </div>

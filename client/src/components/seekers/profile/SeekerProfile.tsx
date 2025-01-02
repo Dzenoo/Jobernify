@@ -29,7 +29,7 @@ const SeekerProfile: React.FC<SeekerProfileProps> = React.memo(({ seeker }) => {
     <Fragment>
       <Card>
         <CardHeader>
-          <div className="flex justify-between items-start gap-5">
+          <div className="flex justify-between items-start gap-5 max-sm:gap-0">
             <ProfileImageUploader role="SEEKER" image={seeker?.image} />
             <DeleteProfile role="SEEKER" />
           </div>

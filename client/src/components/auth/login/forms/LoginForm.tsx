@@ -60,6 +60,8 @@ const LoginForm: React.FC = () => {
   };
 
   const handleGoogleSignIn = () => {
+    if (form.formState.isSubmitting) return;
+
     window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google`;
   };
 
@@ -107,6 +109,7 @@ const LoginForm: React.FC = () => {
           </Button>
           <p className="text-muted-foreground">Or</p>
           <Button
+            disabled={form.formState.isSubmitting}
             variant="outline"
             type="button"
             onClick={() => handleGoogleSignIn()}

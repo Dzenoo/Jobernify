@@ -97,7 +97,7 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
               />
             </Avatar>
           </Link>
-          <div className="flex flex-col gap-3">
+          <div className="space-y-3">
             <div>
               <Link href={`/employers/${employerId}?section=jobs`}>
                 <h1>{name}</h1>
@@ -110,7 +110,7 @@ const ApplicationsItem: React.FC<ApplicationItemProps> = ({
         </div>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-col gap-6">
+        <div className="space-y-6">
           <div>
             <Link href={`/jobs/${jobId}`}>
               <h1 className="font-semibold text-xl overflow-auto">{title}</h1>

@@ -42,9 +42,7 @@ export class AiService {
     threadId: string,
     userMessage: string,
   ) {
-    // Pre-process: Moderate user input
     const isUserMessageSafe = await this.moderateContent(userMessage);
-
     if (!isUserMessageSafe) {
       return {
         userMessage: null,
@@ -208,14 +206,8 @@ export class AiService {
     });
 
     const moderationResults = moderationResponse.results[0];
-    console.log(moderationResults.flagged);
 
     if (moderationResults.flagged) {
-      // You can log or handle specific categories if needed
-      console.warn(
-        'Content flagged by moderation:',
-        moderationResults.categories,
-      );
       return false;
     }
     return true;

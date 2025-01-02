@@ -1,14 +1,12 @@
 import React from 'react';
-import Link from 'next/link';
 
-import { Button } from '@/components/ui/buttons/button';
+import { AlertCircle } from 'lucide-react';
+
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/layout/card';
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from '@/components/ui/info/alert';
 
 const AuthenticationError = ({
   searchParams,
@@ -17,19 +15,11 @@ const AuthenticationError = ({
 }) => {
   return (
     <div className="flex justify-center items-center text-center h-screen">
-      <Card>
-        <CardHeader className="text-left">
-          <CardTitle>Authentication Error</CardTitle>
-          <CardDescription className="max-w-xs">
-            {searchParams?.error}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <Button className="w-full" asChild>
-            <Link href="/login">Login</Link>
-          </Button>
-        </CardContent>
-      </Card>
+      <Alert>
+        <AlertCircle className="h-4 w-4" />
+        <AlertTitle>Authentication Error</AlertTitle>
+        <AlertDescription>{searchParams?.error} </AlertDescription>
+      </Alert>
     </div>
   );
 };

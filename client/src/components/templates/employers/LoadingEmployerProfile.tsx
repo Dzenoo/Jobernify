@@ -2,7 +2,7 @@ const LoadingEmployerProfile: React.FC = () => {
   return (
     <div className="flex flex-col gap-10 animate-pulse bg-gray-100 p-6 rounded-xl w-full">
       <div className="flex justify-between gap-3">
-        <div className="flex gap-10 items-center">
+        <div className="flex gap-10 sm:items-center max-sm:flex-col">
           <div className="w-36 h-36 rounded-full bg-gray-300"></div>
           <div className="flex flex-col gap-3">
             <div className="h-4 bg-gray-300 rounded w-28"></div>
@@ -11,7 +11,7 @@ const LoadingEmployerProfile: React.FC = () => {
           </div>
         </div>
         <div>
-          <div className="h-10 bg-gray-300 rounded w-36"></div>
+          <div className="h-10 bg-gray-300 rounded w-36 max-sm:w-10"></div>
         </div>
       </div>
       <div className="flex flex-col gap-10">
