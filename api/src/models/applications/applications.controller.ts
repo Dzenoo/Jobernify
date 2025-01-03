@@ -13,6 +13,7 @@ import {
   FileTypeValidator,
   MaxFileSizeValidator,
   UseGuards,
+  NotFoundException,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 
@@ -29,6 +30,21 @@ import { Roles } from 'src/common/decorators/roles.decorator';
 @Controller('/applications')
 export class ApplicationsController {
   constructor(private readonly applicationsService: ApplicationsService) {}
+
+  @Get('/:applicationId/resume-url')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Employer)
+  async getPresignedResumeUrl(
+    @Param('applicationId') applicationId: string,
+  ): Promise<{ url: string }> {
+    const url =
+      await this.applicationsService.getPresignedResumeUrl(applicationId);
+    if (!url) {
+      throw new NotFoundException('Unable to generate pre-signed URL.');
+    }
+
+    return { url };
+  }
 
   @Patch('/:applicationId/status')
   @UseGuards(JwtAuthGuard, RolesGuard)

@@ -2,8 +2,13 @@ import { Injectable } from '@nestjs/common';
 
 import { ConfigService } from '@nestjs/config';
 
-import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
+import {
+  S3Client,
+  DeleteObjectCommand,
+  GetObjectCommand,
+} from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 @Injectable()
 export class S3Service {
@@ -48,5 +53,24 @@ export class S3Service {
     };
     const command = new DeleteObjectCommand(deleteParams);
     await this.s3Client.send(command);
+  }
+
+  async generatePresignedUrl(
+    key: string,
+    folder: string,
+    expiresIn = 3600,
+  ): Promise<string> {
+    const command = new GetObjectCommand({
+      Bucket: 'jobernify',
+      Key: `${folder}/${key}`,
+      ResponseContentDisposition: 'inline',
+      ResponseContentType: 'application/pdf',
+      ResponseCacheControl: 'no-cache',
+    });
+
+    const url = await getSignedUrl(this.s3Client as any, command, {
+      expiresIn,
+    });
+    return url;
   }
 }

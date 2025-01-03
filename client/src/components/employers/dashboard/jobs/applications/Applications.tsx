@@ -85,7 +85,7 @@ const Applications: React.FC<ApplicationsProps> = ({
               <a href={`mailto:${app.seeker.email}`}>{app.seeker.email}</a>
             </TableCell>
             <TableCell>
-              <Resume resume={app.resume} />
+              <Resume applicationId={app._id} />
             </TableCell>
             <TableCell>
               <CoverLetter cover_letter={app.cover_letter} />

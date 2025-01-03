@@ -3,6 +3,18 @@ import { getApiHandler, patchApiHandler, postApiHandler } from '../api';
 import { Application } from '@/types';
 
 /**
+ * Fetches a presigned AWS S3 URL for uploading a resume.
+ * This endpoint is used when a Employer is lookin at an application.
+ * @param applicationId - The ID of the application.
+ * @returns A promise resolving to a response that contains the presigned URL.
+ */
+export const getPresignedResumeUrl = async (
+  applicationId: string,
+): Promise<{ url: string }> => {
+  return await getApiHandler(`applications/${applicationId}/resume-url`);
+};
+
+/**
  * Updates the status of a specific job application.
  * @param applicationId - The ID of the application.
  * @param status - The new status of the application.

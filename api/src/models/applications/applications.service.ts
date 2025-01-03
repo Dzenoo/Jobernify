@@ -238,6 +238,19 @@ export class ApplicationsService {
     };
   }
 
+  async getPresignedResumeUrl(applicationId: string): Promise<string> {
+    const application = await this.applicationModel.findById(applicationId);
+    if (!application || !application.resume) {
+      throw new NotFoundException(
+        'Resume not found for the specified application.',
+      );
+    }
+
+    const resumeKey = application.resume.split('documents/')[1];
+
+    return await this.s3Service.generatePresignedUrl(resumeKey, 'documents');
+  }
+
   private generateApplicationEmailContent(status: string, companyName: string) {
     let content = '';
     switch (status) {
