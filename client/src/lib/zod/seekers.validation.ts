@@ -8,19 +8,19 @@ import { jobLevels, jobPositions, jobTypes } from '@/constants';
 export const SeekerProfileSchema = zod.object({
   /**
    * First name of the Seeker.
-   * Must be between 1 and 30 characters long.
+   * Must be between 2 and 30 characters long.
    */
-  first_name: zod.string().min(1).max(30),
+  first_name: zod.string().min(2).max(30),
   /**
    * Last name of the Seeker.
-   * Must be between 1 and 30 characters long.
+   * Must be between 2 and 30 characters long.
    */
-  last_name: zod.string().min(1).max(30),
+  last_name: zod.string().min(2).max(30),
   /**
    * Biography of the Seeker.
-   * Must be at most 3000 characters long.
+   * Must be at most 1000 characters long.
    */
-  biography: zod.string().max(3000),
+  biography: zod.string().max(1000),
   /**
    * Headline of the Seeker.
    * Must be at most 30 characters long.
@@ -37,9 +37,12 @@ export const SeekerSocialsSchema = zod.object({
   portfolio: zod
     .string()
     .optional()
-    .refine((value) => !value || zod.string().url().safeParse(value).success, {
-      message: 'Please enter a valid URL for the portfolio.',
-    }),
+    .refine(
+      (value) => !value || zod.string().max(255).url().safeParse(value).success,
+      {
+        message: 'Please enter a valid URL for the portfolio.',
+      },
+    ),
   /**
    * URL of the Seeker's LinkedIn profile.
    * Must be a valid URL.
@@ -48,9 +51,12 @@ export const SeekerSocialsSchema = zod.object({
   linkedin: zod
     .string()
     .optional()
-    .refine((value) => !value || zod.string().url().safeParse(value).success, {
-      message: 'Please enter a valid URL for LinkedIn.',
-    }),
+    .refine(
+      (value) => !value || zod.string().max(255).url().safeParse(value).success,
+      {
+        message: 'Please enter a valid URL for LinkedIn.',
+      },
+    ),
   /**
    * URL of the Seeker's GitHub profile.
    * Must be a valid URL.
@@ -59,9 +65,12 @@ export const SeekerSocialsSchema = zod.object({
   github: zod
     .string()
     .optional()
-    .refine((value) => !value || zod.string().url().safeParse(value).success, {
-      message: 'Please enter a valid URL for GitHub.',
-    }),
+    .refine(
+      (value) => !value || zod.string().max(255).url().safeParse(value).success,
+      {
+        message: 'Please enter a valid URL for GitHub.',
+      },
+    ),
 });
 
 export const AddEducationSchema = zod.object({

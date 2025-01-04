@@ -32,6 +32,8 @@ export class UpdateEmployerDto {
 
   @IsOptional()
   @IsString()
+  @MinLength(5)
+  @MaxLength(1000)
   readonly companyDescription?: string;
 
   @IsOptional()

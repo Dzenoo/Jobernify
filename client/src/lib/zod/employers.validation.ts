@@ -36,7 +36,7 @@ export const EmployerProfileSchema = zod.object({
   size: zod.enum(companySizes, { message: 'Please select valid size' }),
   /**
    * Company description.
-   * Must be at most 300 characters long.
+   * Must be at most 1000 characters long.
    */
-  companyDescription: zod.string().max(300),
+  companyDescription: zod.string().min(5).max(300),
 });

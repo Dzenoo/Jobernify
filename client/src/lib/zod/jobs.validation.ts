@@ -95,6 +95,7 @@ export const UpdateJobSchema = zod.object({
   salary: zod
     .number()
     .min(100, 'Salary should be at least $100.')
+    .max(500000, 'Salary cannot exceed $500,000.')
     .nonnegative('Salary must be a positive number.'),
   /**
    * Expiration date for the job posting.

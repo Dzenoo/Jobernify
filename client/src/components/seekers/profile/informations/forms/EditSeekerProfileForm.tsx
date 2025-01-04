@@ -138,7 +138,7 @@ const EditSeekerProfileForm: React.FC<EditSeekerProfileFormProps> = ({
               </FormControl>
               <FormDescription>
                 Share more detailed information about your professional journey
-                and experiences. Maximum of 3000 characters.
+                and experiences. Maximum of 1000 characters.
               </FormDescription>
               <FormMessage />
             </FormItem>
