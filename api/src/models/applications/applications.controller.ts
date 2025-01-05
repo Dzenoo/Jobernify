@@ -89,7 +89,7 @@ export class ApplicationsController {
             message: 'File is too large.',
           }),
         ],
-        fileIsRequired: true,
+        fileIsRequired: false,
       }),
     )
     resume: Express.Multer.File,

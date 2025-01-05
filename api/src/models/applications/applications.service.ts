@@ -55,6 +55,27 @@ export class ApplicationsService {
     resume: Express.Multer.File,
     coverLetter?: string,
   ): Promise<ResponseObject> {
+    const job = await this.jobsService.findOneById(jobId);
+
+    if (!job) {
+      throw new NotFoundException('Job not found.');
+    }
+
+    const existingApplication = await this.applicationModel.findOne({
+      seeker: seekerId,
+      job: jobId,
+    });
+
+    if (existingApplication) {
+      throw new UnauthorizedException(
+        'You have already submitted an application for this position.',
+      );
+    }
+
+    if (job.expiration_date < new Date()) {
+      throw new BadRequestException('This job has expired.');
+    }
+
     let resumeUrl;
 
     if (!resume) {
@@ -78,17 +99,6 @@ export class ApplicationsService {
       await this.seekersService.findAndUpdateOne(
         { _id: seekerId },
         { resume: resumeUrl },
-      );
-    }
-
-    const existingApplication = await this.applicationModel.findOne({
-      seeker: seekerId,
-      job: jobId,
-    });
-
-    if (existingApplication) {
-      throw new UnauthorizedException(
-        'You have already submitted an application for this position.',
       );
     }
 

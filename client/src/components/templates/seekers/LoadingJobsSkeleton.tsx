@@ -1,6 +1,6 @@
 const LoadingJobsSkeleton: React.FC = () => {
   return (
-    <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
+    <div className="flex flex-col gap-4">
       {Array.from({ length: 3 }).map((_job, ind) => (
         <div
           key={ind}

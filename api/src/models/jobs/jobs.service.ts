@@ -394,7 +394,9 @@ export class JobsService {
     position,
     sort,
   }: GetJobsDto): Promise<ResponseObject> {
-    const conditions: any = {};
+    const conditions: any = {
+      expiration_date: { $gte: new Date() },
+    };
 
     const popularJobs = await this.jobModel.aggregate([
       { $project: { title: 1, applicationCount: { $size: '$applications' } } },

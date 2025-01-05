@@ -21,6 +21,7 @@ import Navigator from '@/components/ui/navigation/navigator';
 
 import { renderIconText, renderSkills } from '@/helpers';
 import {
+  checkExpired,
   findIndustriesData,
   findLocationData,
   formatDate,
@@ -69,7 +70,11 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
 
     const expirationDate = formatDate(expiration_date);
     const createdTime = getTime(createdAt);
+    const isJobExpired = checkExpired(expiration_date);
     const categorizedSkills = getSkillsData(skills);
+    const isAppliedToJob = data.seeker.applications.find(
+      (application: Application) => application.job._id === _id,
+    );
 
     const EmployerInformationsData = [
       {
@@ -134,10 +139,6 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
       },
     ];
 
-    const isAppliedToJob = data.seeker.applications.find(
-      (application: Application) => application.job._id === _id,
-    );
-
     const redirectToProfileApplications = () => router.push(`/profile`);
 
     return (
@@ -182,15 +183,24 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
               <div className="flex gap-3">
                 <div className="basis-full">
                   <Button
+                    disabled={!isAppliedToJob && isJobExpired}
                     className="w-full px-6"
-                    variant={isAppliedToJob ? 'outline' : 'default'}
+                    variant={
+                      isAppliedToJob || isJobExpired ? 'outline' : 'default'
+                    }
                     onClick={
                       isAppliedToJob
                         ? redirectToProfileApplications
-                        : onApplyJob
+                        : isJobExpired
+                          ? undefined
+                          : onApplyJob
                     }
                   >
-                    {isAppliedToJob ? 'View Status' : 'Apply to Job'}
+                    {isAppliedToJob
+                      ? 'View Status'
+                      : isJobExpired
+                        ? 'Expired'
+                        : 'Apply to Job'}
                   </Button>
                 </div>
                 <SaveJobButton jobId={_id} />
