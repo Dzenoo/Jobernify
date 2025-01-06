@@ -21,7 +21,6 @@ const SocialLinks: React.FC<SocialLinksProps> = ({ links, className }) => {
         href ? (
           <a
             key={id}
-            className="text-[--blue-base-color]"
             href={formatURL(href)}
             target="_blank"
             rel="noopener noreferrer"
