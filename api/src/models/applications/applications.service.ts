@@ -87,8 +87,7 @@ export class ApplicationsService {
         );
       }
 
-      const seekerResumeKey = seeker?.resume.split('/')[1];
-      resumeUrl = `documents/resume_${seekerResumeKey}.pdf`;
+      resumeUrl = `documents/resume_${seekerId}.pdf`;
     } else {
       const resumeKey = `resume_${seekerId}.pdf`;
 

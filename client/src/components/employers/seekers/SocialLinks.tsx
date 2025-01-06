@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { formatURL } from '@/lib/utils';
+import { cn, formatURL } from '@/lib/utils';
 
 type SocialLink = {
   id: string;
@@ -11,11 +11,12 @@ type SocialLink = {
 
 type SocialLinksProps = {
   links: SocialLink[];
+  className?: string;
 };
 
-const SocialLinks: React.FC<SocialLinksProps> = ({ links }) => {
+const SocialLinks: React.FC<SocialLinksProps> = ({ links, className }) => {
   return (
-    <div className="flex flex-wrap items-center gap-10">
+    <div className={cn('flex flex-wrap items-center gap-10', className)}>
       {links.map(({ id, href, icon, label }) =>
         href ? (
           <a

@@ -1,16 +1,19 @@
 import React, { Fragment, useState } from 'react';
 
-import { Edit, Github, Image, Linkedin } from 'lucide-react';
+import { Edit, Image } from 'lucide-react';
 
 import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 import { formatURL } from '@/lib/utils';
 
 import { Seeker } from '@/types';
 
+import EditSocialsForm from './forms/EditSocialsForm';
+import GithubIcon from '@/components/shared/icons/GithubIcon';
+import LinkedinIcon from '@/components/shared/icons/LinkedinIcon';
+
 import { Button } from '@/components/ui/buttons/button';
 import { Dialog } from '@/components/ui/layout/dialog';
 import { Drawer } from '@/components/ui/layout/drawer';
-import EditSocialsForm from './forms/EditSocialsForm';
 
 type SocialsProps = {
   seeker: Seeker;
@@ -34,13 +37,13 @@ const Socials: React.FC<SocialsProps> = ({ seeker }) => {
       id: '2',
       title: 'Github',
       data: seeker?.github || '',
-      icon: <Github />,
+      icon: <GithubIcon />,
     },
     {
       id: '3',
       title: 'Linkedin',
       data: seeker?.linkedin || '',
-      icon: <Linkedin />,
+      icon: <LinkedinIcon />,
     },
   ];
 

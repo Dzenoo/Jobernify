@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-import { Github, Linkedin, LucideImage } from 'lucide-react';
+import { LucideImage } from 'lucide-react';
 
 import { getImageUrl, getSkillsData } from '@/lib/utils';
 import { renderSkills } from '@/helpers';
@@ -11,9 +11,11 @@ import { renderSkills } from '@/helpers';
 import { Seeker } from '@/types';
 
 import CardSection from './CardSection';
-import SocialLinks from './SocialLinks';
+import SocialLinks from '../SocialLinks';
 import EducationList from '@/components/seekers/profile/educations/EducationList';
 import ExperienceList from '@/components/seekers/profile/experiences/ExperienceList';
+import GithubIcon from '@/components/shared/icons/GithubIcon';
+import LinkedinIcon from '@/components/shared/icons/LinkedinIcon';
 
 import Navigator from '@/components/ui/navigation/navigator';
 import { Card, CardContent, CardHeader } from '@/components/ui/layout/card';
@@ -36,13 +38,13 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
     {
       id: '2',
       href: seeker?.github,
-      icon: <Github />,
+      icon: <GithubIcon />,
       label: 'Github',
     },
     {
       id: '3',
       href: seeker?.linkedin,
-      icon: <Linkedin />,
+      icon: <LinkedinIcon />,
       label: 'Linkedin',
     },
   ];
@@ -70,9 +72,7 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
                 <h1 className="text-base-black">
                   {seeker?.first_name} {seeker?.last_name}
                 </h1>
-                <p className="font-semibold">
-                  {seeker?.headline ?? 'No headline provided'}
-                </p>
+                <p>{seeker?.headline ?? 'No headline provided'}</p>
               </div>
             </div>
 

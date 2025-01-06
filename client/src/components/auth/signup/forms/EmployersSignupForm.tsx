@@ -91,15 +91,14 @@ const EmployersSignupForm: React.FC = () => {
             seekers until your account is approved.
           </p>
         </div>
-        <Button
+        <button
+          className="flex items-center justify-center w-full"
           disabled={form.formState.isSubmitting}
-          variant="outline"
-          className="w-full"
           type="button"
           onClick={() => handleEmployerGoogleSignUp()}
         >
-          Register With Google
-        </Button>
+          <img src="/icons/signup-google.png" alt="google-logo" />
+        </button>
         <FormField
           control={form.control}
           name="name"

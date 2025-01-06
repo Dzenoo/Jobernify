@@ -100,8 +100,9 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
       form.reset();
       toast({ title: 'Success', description: 'Successfully Applied to Job' });
       queryClient.invalidateQueries({
-        queryKey: ['job', 'profile', { jobId }],
+        queryKey: ['job', { jobId }],
       });
+      queryClient.invalidateQueries({ queryKey: ['profile'] });
       setIsApplyToJob(false);
     },
     onError: (error: any) => {

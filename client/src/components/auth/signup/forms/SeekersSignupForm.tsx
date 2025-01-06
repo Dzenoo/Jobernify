@@ -147,14 +147,14 @@ const SeekersSignupForm: React.FC = () => {
             )}
           </Button>
           <p className="text-muted-foreground">Or</p>
-          <Button
+          <button
+            className="flex items-center justify-center w-full"
             disabled={form.formState.isSubmitting}
-            variant="outline"
             type="button"
             onClick={() => handleSeekerGoogleSignUp()}
           >
-            Register With Google
-          </Button>
+            <img src="/icons/signup-google.png" alt="google-logo" />
+          </button>
         </div>
       </form>
     </Form>

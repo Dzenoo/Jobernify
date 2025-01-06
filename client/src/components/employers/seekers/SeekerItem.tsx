@@ -1,12 +1,15 @@
 import React from 'react';
 
-import Image from 'next/image';
+import { LucideImage } from 'lucide-react';
 import Link from 'next/link';
-
-import { Github, Linkedin, LucideImage } from 'lucide-react';
+import Image from 'next/image';
 
 import { Seeker } from '@/types';
-import { formatURL, getImageUrl, getSkillNames } from '@/lib/utils';
+import { getImageUrl, getSkillNames } from '@/lib/utils';
+
+import SocialLinks from './SocialLinks';
+import GithubIcon from '@/components/shared/icons/GithubIcon';
+import LinkedinIcon from '@/components/shared/icons/LinkedinIcon';
 
 import {
   Card,
@@ -15,7 +18,6 @@ import {
   CardHeader,
 } from '@/components/ui/layout/card';
 import { Button } from '@/components/ui/buttons/button';
-import { TooltipWrapper } from '@/components/ui/info/tooltip-wrapper';
 import { Separator } from '@/components/ui/layout/separator';
 
 type SeekerItemProps = {
@@ -35,24 +37,24 @@ const SeekerItem: React.FC<SeekerItemProps> = ({
     headline,
   },
 }) => {
-  const SocialsArrays = [
+  const socialLinks = [
     {
       id: '1',
       href: portfolio,
       icon: <LucideImage />,
-      tooltip: 'Portfolio',
+      label: 'Portfolio',
     },
     {
       id: '2',
       href: github,
-      icon: <Github />,
-      tooltip: 'Github',
+      icon: <GithubIcon />,
+      label: 'Github',
     },
     {
       id: '3',
       href: linkedin,
-      icon: <Linkedin />,
-      tooltip: 'Linkedin',
+      icon: <LinkedinIcon />,
+      label: 'Linkedin',
     },
   ];
 
@@ -87,28 +89,7 @@ const SeekerItem: React.FC<SeekerItemProps> = ({
           <p>{headline}</p>
         </div>
         <div className="flex items-center gap-10 pt-3">
-          {SocialsArrays.map((socials) => (
-            <TooltipWrapper key={socials.id} tooltip={socials.tooltip}>
-              {socials.href ? (
-                <a
-                  className="text-[--blue-base-color]"
-                  href={formatURL(socials.href)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  key={socials.id}
-                >
-                  {socials.icon}
-                </a>
-              ) : (
-                <div
-                  className="text-muted-foreground cursor-not-allowed"
-                  key={socials.id}
-                >
-                  {socials.icon}
-                </div>
-              )}
-            </TooltipWrapper>
-          ))}
+          <SocialLinks links={socialLinks} />
         </div>
       </CardContent>
       <CardFooter>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Search } from 'lucide-react';
+import { LucideImage, Search } from 'lucide-react';
 
 import { formatDate } from '@/lib/utils';
 
@@ -8,8 +8,11 @@ import { Application } from '@/types';
 
 import NameWithImage from './table/NameWithImage';
 import StatusBadge from './table/StatusBadge';
-import SocialLinks from './table/SocialLinks';
 import CoverLetter from './table/CoverLetter';
+import Resume from './table/Resume';
+import SocialLinks from '@/components/employers/seekers/SocialLinks';
+import GithubIcon from '@/components/shared/icons/GithubIcon';
+import LinkedinIcon from '@/components/shared/icons/LinkedinIcon';
 
 import {
   Table,
@@ -20,7 +23,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/utilities/table';
-import Resume from './table/Resume';
 
 type ApplicationsProps = {
   applications: Application[];
@@ -95,7 +97,29 @@ const Applications: React.FC<ApplicationsProps> = ({
               <StatusBadge applicationId={app._id} status={app.status} />
             </TableCell>
             <TableCell>
-              <SocialLinks seeker={app.seeker} />
+              <SocialLinks
+                className="flex-nowrap"
+                links={[
+                  {
+                    id: '1',
+                    href: app.seeker?.portfolio,
+                    icon: <LucideImage />,
+                    label: 'Portfolio',
+                  },
+                  {
+                    id: '2',
+                    href: app.seeker?.github,
+                    icon: <GithubIcon />,
+                    label: 'Github',
+                  },
+                  {
+                    id: '3',
+                    href: app.seeker?.linkedin,
+                    icon: <LinkedinIcon />,
+                    label: 'Linkedin',
+                  },
+                ]}
+              />
             </TableCell>
           </TableRow>
         ))}
