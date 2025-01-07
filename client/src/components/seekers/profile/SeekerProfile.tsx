@@ -10,7 +10,7 @@ import Educations from './educations/Educations';
 import Skills from './skills/Skills';
 import Socials from './socials/Socials';
 import EditSeekerProfileForm from './informations/forms/EditSeekerProfileForm';
-import ProfileImageUploader from '@/components/shared/utilities/ProfileImageUploader';
+import ProfileImageUploader from '@/components/shared/ui/ProfileImageUploader';
 import DeleteProfile from '@/components/shared/features/DeleteProfile';
 import Experiences from './experiences/Experiences';
 

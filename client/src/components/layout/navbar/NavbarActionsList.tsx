@@ -5,7 +5,7 @@ import { LogOut, LucideIcon } from 'lucide-react';
 
 import { useAuth } from '@/hooks/core/useAuth.hook';
 
-import Ai from '@/components/shared/ai/Ai';
+import Ai from '@/components/shared/features/ai/Ai';
 import Themes from './Themes';
 
 import { TooltipWrapper } from '@/components/ui/info/tooltip-wrapper';

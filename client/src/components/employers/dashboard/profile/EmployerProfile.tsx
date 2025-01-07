@@ -7,7 +7,7 @@ import { Employer } from '@/types';
 
 import EmployerData from './informations/EmployerData';
 import EditEmployerProfileForm from './informations/forms/EditEmployerProfileForm';
-import ProfileImageUploader from '@/components/shared/utilities/ProfileImageUploader';
+import ProfileImageUploader from '@/components/shared/ui/ProfileImageUploader';
 import DeleteProfile from '@/components/shared/features/DeleteProfile';
 
 import { Button } from '@/components/ui/buttons/button';
