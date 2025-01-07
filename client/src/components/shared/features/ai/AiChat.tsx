@@ -4,8 +4,8 @@ import { Bot, User } from 'lucide-react';
 
 import { useAiAssistant } from '@/context/ai-assistant';
 
-import MarkdownRenderer from '../markdown/MarkdownRenderer';
-import Loader from '../loaders/Loader';
+import MarkdownRenderer from '../ui/MarkdownRenderer';
+import Loader from '../ui/Loader';
 
 type AiChatProps = {
   socket: any;

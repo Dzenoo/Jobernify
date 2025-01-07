@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { queryClient } from '@/context/react-query-client';
 
-import TwoFactorAuthForm from '../auth/2fa/TwoFactorAuthForm';
+import TwoFactorAuthForm from '../../auth/2fa/TwoFactorAuthForm';
 
 import {
   Dialog,

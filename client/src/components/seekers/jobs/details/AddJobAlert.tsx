@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Loader from '@/components/shared/loaders/Loader';
+import Loader from '@/components/shared/ui/Loader';
 
 import { useJobAlert } from '@/hooks/mutations/useJobAlert.mutation';
 import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';

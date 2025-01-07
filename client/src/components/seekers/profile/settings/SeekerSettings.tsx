@@ -5,7 +5,7 @@ import React from 'react';
 import { FieldGroup } from '@/helpers';
 
 import ReceiveJobAlertsForm from '../alerts/forms/ReceiveJobAlertsForm';
-import Enable2FA from '@/components/shared/Enable2FA';
+import Enable2FA from '@/components/shared/features/Enable2FA';
 
 import { Badge } from '@/components/ui/utilities/badge';
 import { Separator } from '@/components/ui/layout/separator';

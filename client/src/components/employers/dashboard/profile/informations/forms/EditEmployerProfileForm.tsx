@@ -12,7 +12,7 @@ import { useEditEmployer } from '@/hooks/mutations/useEditEmployer.mutation';
 import { uppercaseFirstLetter } from '@/lib/utils';
 import { Employer } from '@/types';
 
-import Loader from '@/components/shared/loaders/Loader';
+import Loader from '@/components/shared/ui/Loader';
 
 import { Input } from '@/components/ui/form/input';
 import { Textarea } from '@/components/ui/form/textarea';

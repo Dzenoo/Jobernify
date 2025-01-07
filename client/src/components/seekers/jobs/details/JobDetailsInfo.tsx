@@ -15,7 +15,7 @@ import {
 
 import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
 
-import MarkdownRenderer from '@/components/shared/markdown/MarkdownRenderer';
+import MarkdownRenderer from '@/components/shared/ui/MarkdownRenderer';
 import SaveJobButton from '../SaveJobButton';
 import Navigator from '@/components/ui/navigation/navigator';
 

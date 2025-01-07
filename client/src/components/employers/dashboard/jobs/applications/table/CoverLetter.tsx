@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MarkdownRenderer from '@/components/shared/markdown/MarkdownRenderer';
+import MarkdownRenderer from '@/components/shared/ui/MarkdownRenderer';
 
 import { Button } from '@/components/ui/buttons/button';
 import {

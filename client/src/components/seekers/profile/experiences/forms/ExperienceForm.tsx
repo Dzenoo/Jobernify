@@ -21,7 +21,7 @@ import {
 } from '@/lib/actions/seekers.actions';
 import { Experience } from '@/types';
 
-import Loader from '@/components/shared/loaders/Loader';
+import Loader from '@/components/shared/ui/Loader';
 
 import { Button } from '@/components/ui/buttons/button';
 import { Calendar } from '@/components/ui/utilities/calendar';

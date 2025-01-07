@@ -8,7 +8,7 @@ import { useUploads } from '@/hooks/core/useUploads.hook';
 import { useEditEmployer } from '@/hooks/mutations/useEditEmployer.mutation';
 import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
 
-import Loader from './loaders/Loader';
+import Loader from '../ui/Loader';
 
 import { Button } from '@/components/ui/buttons/button';
 import { useToast } from '@/components/ui/info/use-toast';

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import CookiePolicyMarkdown from '@/components/shared/markdown/policies/cookie-policy.md';
-import MarkdownRenderer from '@/components/shared/markdown/MarkdownRenderer';
+import CookiePolicyMarkdown from '@/components/shared/pages/policies/cookie-policy.md';
+import MarkdownRenderer from '@/components/shared/ui/MarkdownRenderer';
 
 const CookiePolicyPage = () => {
   return (

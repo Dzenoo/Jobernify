@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
 import { SeekerSocialsSchema } from '@/lib/zod/seekers.validation';
 
-import Loader from '@/components/shared/loaders/Loader';
+import Loader from '@/components/shared/ui/Loader';
 
 import { Button } from '@/components/ui/buttons/button';
 import { Input } from '@/components/ui/form/input';

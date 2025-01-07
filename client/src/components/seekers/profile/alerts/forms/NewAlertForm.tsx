@@ -10,7 +10,7 @@ import { JobsFiltersData } from '@/constants';
 
 import { useJobAlert } from '@/hooks/mutations/useJobAlert.mutation';
 
-import Loader from '@/components/shared/loaders/Loader';
+import Loader from '@/components/shared/ui/Loader';
 
 import { Button } from '@/components/ui/buttons/button';
 import { Input } from '@/components/ui/form/input';

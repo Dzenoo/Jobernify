@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import { deleteJob } from '@/lib/actions/jobs.actions';
 import { queryClient } from '@/context/react-query-client';
 
-import Loader from '@/components/shared/loaders/Loader';
+import Loader from '@/components/shared/ui/Loader';
 
 import { useToast } from '@/components/ui/info/use-toast';
 import { Button } from '@/components/ui/buttons/button';

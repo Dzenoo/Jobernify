@@ -16,7 +16,7 @@ import { UpdateJobSchema } from '@/lib/zod/jobs.validation';
 
 import { Job } from '@/types';
 
-import Loader from '@/components/shared/loaders/Loader';
+import Loader from '@/components/shared/ui/Loader';
 import Details from '@/components/employers/dashboard/jobs/new/Details';
 import Overview from '@/components/employers/dashboard/jobs/new/Overview';
 import Scope from '@/components/employers/dashboard/jobs/new/Scope';

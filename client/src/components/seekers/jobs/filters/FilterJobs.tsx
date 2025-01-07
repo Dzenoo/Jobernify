@@ -9,7 +9,7 @@ import { JobsFiltersData } from '@/constants';
 import { injectCountsIntoFilters } from '@/lib/utils';
 import { FilterCounts } from '@/types';
 
-import FilterHandler from '@/components/shared/filters/FilterHandler';
+import FilterHandler from '@/components/shared/features/filters/FilterHandler';
 
 import { Button } from '@/components/ui/buttons/button';
 import {

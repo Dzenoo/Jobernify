@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { signIn } from '@/lib/actions/auth.actions';
 import { LoginSchema } from '@/lib/zod/auth.validation';
 
-import Loader from '@/components/shared/loaders/Loader';
+import Loader from '@/components/shared/ui/Loader';
 
 import { useToast } from '@/components/ui/info/use-toast';
 import { Button } from '@/components/ui/buttons/button';
@@ -108,14 +108,19 @@ const LoginForm: React.FC = () => {
             )}
           </Button>
           <p className="text-muted-foreground">Or</p>
-          <button
+          <Button
+            variant="outline"
             className="flex items-center justify-center w-full"
             disabled={form.formState.isSubmitting}
             type="button"
             onClick={() => handleGoogleSignIn()}
           >
-            <img src="/icons/signin-google.png" alt="google-logo" />
-          </button>
+            <img
+              src="/icons/google-icon-logo-transparent.png"
+              alt="google-logo"
+            />
+            Sign in with Google
+          </Button>
         </div>
       </form>
     </Form>

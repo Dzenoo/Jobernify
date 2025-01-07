@@ -18,7 +18,7 @@ import {
 import { Verify2FACodeSchema } from '@/lib/zod/auth.validation';
 import { cn } from '@/lib/utils';
 
-import Loader from '@/components/shared/loaders/Loader';
+import Loader from '@/components/shared/ui/Loader';
 
 import {
   Form,

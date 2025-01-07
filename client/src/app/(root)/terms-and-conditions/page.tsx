@@ -1,7 +1,7 @@
 import React from 'react';
 
-import TermsAndConditionsMarkdown from '@/components/shared/markdown/policies/terms-and-conditions.md';
-import MarkdownRenderer from '@/components/shared/markdown/MarkdownRenderer';
+import TermsAndConditionsMarkdown from '@/components/shared/pages/policies/terms-and-conditions.md';
+import MarkdownRenderer from '@/components/shared/ui/MarkdownRenderer';
 
 const TermsAndConditionsPage = () => {
   return (

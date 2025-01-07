@@ -14,7 +14,7 @@ import { applyToJob } from '@/lib/actions/applications.actions';
 
 import { Seeker } from '@/types';
 
-import Loader from '@/components/shared/loaders/Loader';
+import Loader from '@/components/shared/ui/Loader';
 
 import { useToast } from '@/components/ui/info/use-toast';
 import { Textarea } from '@/components/ui/form/textarea';

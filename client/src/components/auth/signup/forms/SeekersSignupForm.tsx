@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import Loader from '@/components/shared/loaders/Loader';
+import Loader from '@/components/shared/ui/Loader';
 
 import { SeekerRegistrationSchema } from '@/lib/zod/auth.validation';
 import { signupSeeker } from '@/lib/actions/auth.actions';
@@ -147,14 +147,19 @@ const SeekersSignupForm: React.FC = () => {
             )}
           </Button>
           <p className="text-muted-foreground">Or</p>
-          <button
+          <Button
+            variant="outline"
             className="flex items-center justify-center w-full"
             disabled={form.formState.isSubmitting}
             type="button"
             onClick={() => handleSeekerGoogleSignUp()}
           >
-            <img src="/icons/signup-google.png" alt="google-logo" />
-          </button>
+            <img
+              src="/icons/google-icon-logo-transparent.png"
+              alt="google-logo"
+            />
+            Sign up with Google
+          </Button>
         </div>
       </form>
     </Form>

@@ -8,7 +8,7 @@ import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
 import { Seeker } from '@/types';
 import { SeekerProfileSchema } from '@/lib/zod/seekers.validation';
 
-import Loader from '@/components/shared/loaders/Loader';
+import Loader from '@/components/shared/ui/Loader';
 
 import { Input } from '@/components/ui/form/input';
 import { Textarea } from '@/components/ui/form/textarea';

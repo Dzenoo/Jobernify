@@ -1,7 +1,7 @@
 import React from 'react';
 
-import PrivacyPolicyMarkdown from '@/components/shared/markdown/policies/privacy-policy.md';
-import MarkdownRenderer from '@/components/shared/markdown/MarkdownRenderer';
+import PrivacyPolicyMarkdown from '@/components/shared/pages/policies/privacy-policy.md';
+import MarkdownRenderer from '@/components/shared/ui/MarkdownRenderer';
 
 const PrivacyPolicyPage = () => {
   return (

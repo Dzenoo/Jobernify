@@ -10,8 +10,8 @@ import Educations from './educations/Educations';
 import Skills from './skills/Skills';
 import Socials from './socials/Socials';
 import EditSeekerProfileForm from './informations/forms/EditSeekerProfileForm';
-import ProfileImageUploader from '@/components/shared/ProfileImageUploader';
-import DeleteProfile from '@/components/shared/DeleteProfile';
+import ProfileImageUploader from '@/components/shared/utilities/ProfileImageUploader';
+import DeleteProfile from '@/components/shared/features/DeleteProfile';
 import Experiences from './experiences/Experiences';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/layout/card';

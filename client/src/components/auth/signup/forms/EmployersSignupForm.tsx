@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import Loader from '@/components/shared/loaders/Loader';
+import Loader from '@/components/shared/ui/Loader';
 
 import { EmployerRegistrationSchema } from '@/lib/zod/auth.validation';
 import { signupEmployer } from '@/lib/actions/auth.actions';
@@ -91,14 +91,19 @@ const EmployersSignupForm: React.FC = () => {
             seekers until your account is approved.
           </p>
         </div>
-        <button
+        <Button
+          variant="outline"
           className="flex items-center justify-center w-full"
           disabled={form.formState.isSubmitting}
           type="button"
           onClick={() => handleEmployerGoogleSignUp()}
         >
-          <img src="/icons/signup-google.png" alt="google-logo" />
-        </button>
+          <img
+            src="/icons/google-icon-logo-transparent.png"
+            alt="google-logo"
+          />
+          Sign up with Google
+        </Button>
         <FormField
           control={form.control}
           name="name"

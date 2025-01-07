@@ -12,7 +12,7 @@ import { SkillsSchema } from '@/lib/zod/seekers.validation';
 import { getSkillsData, multiselectSkills } from '@/lib/utils';
 import { renderSkills } from '@/helpers';
 
-import Loader from '@/components/shared/loaders/Loader';
+import Loader from '@/components/shared/ui/Loader';
 
 import MultiSelect from '@/components/ui/form/multiselect';
 import { Button } from '@/components/ui/buttons/button';
