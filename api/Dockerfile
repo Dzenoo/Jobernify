@@ -7,6 +7,8 @@ COPY package.json yarn.lock ./
 
 COPY api ./api
 
+COPY . .
+
 WORKDIR /app/api
 
 # Install dependencies
