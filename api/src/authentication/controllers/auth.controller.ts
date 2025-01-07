@@ -150,8 +150,9 @@ export class AuthController {
     res.clearCookie('access_token', {
       httpOnly: true,
       secure: true,
-      sameSite: 'strict',
+      sameSite: 'none',
       path: '/',
+      domain: '.jobernify.com',
     });
     return res
       .status(HttpStatus.OK)

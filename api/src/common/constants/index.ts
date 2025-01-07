@@ -42,4 +42,6 @@ export const cookieOptions: CookieOptions = {
   secure: true, // Set to true in production
   sameSite: 'strict',
   maxAge: 3600000,
+  path: '/',
+  domain: '.jobernify.com',
 };
