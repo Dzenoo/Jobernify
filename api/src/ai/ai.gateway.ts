@@ -20,7 +20,10 @@ import { SocketAuthMiddleware } from 'src/authentication/middlewares/ws.middlewa
 import { AiService } from './ai.service';
 
 @WebSocketGateway({
-  cors: { origin: 'http://localhost:3000', credentials: true },
+  cors: {
+    origin: ['http://localhost:3000', 'https://www.jobernify.com'],
+    credentials: true,
+  },
   transports: ['websocket'],
 })
 @UseGuards(WsJwtGuard)
