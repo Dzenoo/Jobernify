@@ -5,11 +5,12 @@ WORKDIR /app
 
 COPY package.json yarn.lock ./
 
+COPY api ./api
+
+WORKDIR /app/api
+
 # Install dependencies
 RUN yarn install --frozen-lockfile
-
-# Copy all files and build the NestJS app
-COPY . .
 RUN yarn build
 
 # Stage 2: Production
@@ -18,9 +19,9 @@ FROM node:lts-alpine AS runner
 WORKDIR /app
 
 # Copy build artifacts and production dependencies
-COPY --from=builder /app/dist /app/dist
-COPY --from=builder /app/package.json /app/package.json
-COPY --from=builder /app/yarn.lock /app/yarn.lock
+COPY --from=builder /app/api/dist ./dist
+COPY --from=builder /app/api/package.json ./package.json
+COPY --from=builder /app/yarn.lock ./yarn.lock
 
 # Install only production dependencies
 RUN yarn install --production --frozen-lockfile
