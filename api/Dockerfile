@@ -16,7 +16,7 @@ WORKDIR /app/api
 # as long as your root package.json has "workspaces" and "shared" is in them.
 RUN yarn install --frozen-lockfile
 
-RUN yarn build:api
+RUN yarn workspace api build
 
 # Stage 2: Production
 FROM node:lts-alpine AS runner
