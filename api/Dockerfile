@@ -25,6 +25,6 @@ COPY --from=builder /app/yarn.lock /app/yarn.lock
 # Install only production dependencies
 RUN yarn install --production --frozen-lockfile
 
-EXPOSE 4000
+EXPOSE 8080
 
 CMD ["yarn", "start:prod"]
