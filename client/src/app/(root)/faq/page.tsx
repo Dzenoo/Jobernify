@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const FaqPage = () => {
   return (
-    <section className="px-5 py-20 space-y-10 md:landing-padding">
+    <section className="py-20 space-y-10">
       <FaqLanding />
     </section>
   );

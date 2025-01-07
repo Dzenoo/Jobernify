@@ -31,11 +31,11 @@ const FaqLanding: React.FC = () => {
     activeTab === 0
       ? JobSeekerFAQs
       : activeTab === 1
-        ? EmployerFAQs
-        : GeneralPlatformFAQs;
+      ? EmployerFAQs
+      : GeneralPlatformFAQs;
 
   return (
-    <section id="faq" className="space-y-28 md:landing-padding">
+    <section id="faq" className="px-5 space-y-28 md:landing-padding">
       <div className="text-center space-y-5">
         <div>
           <BlueButton>FAQ</BlueButton>

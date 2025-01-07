@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/buttons/button';
 
 const TechRolesOnlyLanding: React.FC = () => {
   return (
-    <div className="px-5 flex justify-between gap-5 md:landing-padding max-xl:flex-col max-xl:gap-28">
+    <div className="px-5 flex justify-between gap-5 max-xl:flex-col max-xl:gap-28 md:landing-padding">
       <div className="basis-full space-y-5">
         <div>
           <BlueButton>App for Tech Roles Only</BlueButton>
@@ -40,7 +40,7 @@ const TechRolesOnlyLanding: React.FC = () => {
         <img
           src="/images/jobs.png"
           alt="jobs"
-          className="max-w-[700px] rounded-xl box-shadow-custom transform rotate-[25deg] scale-90 max-lg:max-w-[400px] max-sm:max-w-[350px]"
+          className="max-w-[700px] rounded-xl box-shadow-custom transform rotate-[25deg] scale-90 max-lg:max-w-[400px] max-sm:max-w-[300px]"
         />
       </div>
     </div>
