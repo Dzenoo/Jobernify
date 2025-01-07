@@ -39,7 +39,7 @@ export const escapeRegExp = (string: string): string => {
  */
 export const cookieOptions: CookieOptions = {
   httpOnly: true,
-  secure: false, // Set to true in production
+  secure: true, // Set to true in production
   sameSite: 'strict',
   maxAge: 3600000,
 };

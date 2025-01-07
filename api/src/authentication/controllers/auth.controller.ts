@@ -149,7 +149,7 @@ export class AuthController {
   async logout(@Res() res: Response) {
     res.clearCookie('access_token', {
       httpOnly: true,
-      secure: false,
+      secure: true,
       sameSite: 'strict',
       path: '/',
     });
