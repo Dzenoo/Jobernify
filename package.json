@@ -5,6 +5,8 @@
   "description": "This application is designed to provide a platform for users to find new jobs or new candidates It aims to connect easily Seekers and Employers.",
   "scripts": {
     "build": "yarn workspaces run build",
+    "build:client": "yarn workspace client build",
+    "build:api": "yarn workspace api build",
     "start:client": "yarn workspace client dev",
     "start:api": "yarn workspace api start:dev"
   },

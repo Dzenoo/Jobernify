@@ -1,43 +1,33 @@
-# ------------------------------
-# Stage 1: Build
-# ------------------------------
+# Stage 1: Build only the NESTJS API
 FROM node:lts-alpine AS builder
 
 WORKDIR /app
 
-# Copy the entire monorepo into /app
-COPY . .
+# Copy just what's needed for the Nest API
+# (If the API references code in `shared/`, you must also copy `shared/`)
+COPY package.json yarn.lock ./
+COPY api ./api
+COPY shared ./shared 
 
-# (Optional) confirm no .dockerignore removes 'shared/' or 'api/'
-# E.g., ensure your .dockerignore doesn't exclude these folders.
+WORKDIR /app/api
 
-# Install dependencies for ALL workspaces
-# Yarn sees the root package.json with "workspaces": ["api", "shared", ...]
+# Install dependencies for this workspace
+# If your `api/package.json` references the shared package, Yarn can handle it 
+# as long as your root package.json has "workspaces" and "shared" is in them.
 RUN yarn install --frozen-lockfile
 
-# Build all packages or build specifically what you need.
-# E.g. build shared first, then api:
-# RUN yarn workspace @jobernify/shared build
-# RUN yarn workspace api build
+RUN yarn build:api
 
-# Or just do a global monorepo build script if you have one:
-RUN yarn build
-
-# ------------------------------
 # Stage 2: Production
-# ------------------------------
 FROM node:lts-alpine AS runner
 
 WORKDIR /app
 
-# Copy only what's needed for runtime
-COPY --from=builder /app/api/dist dist
-COPY --from=builder /app/api/package.json package.json
-COPY --from=builder /app/yarn.lock yarn.lock
+COPY --from=builder /app/api/dist ./dist
+COPY --from=builder /app/api/package.json ./package.json
+COPY --from=builder /app/yarn.lock ./yarn.lock
 
-# Install only production dependencies
 RUN yarn install --production --frozen-lockfile
 
 EXPOSE 8080
-
 CMD ["yarn", "start:prod"]
