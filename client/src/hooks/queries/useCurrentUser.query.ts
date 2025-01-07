@@ -8,6 +8,7 @@ const useCurrentUser = () => {
       return await getCurrentUser();
     },
     queryKey: ['currentUser'],
+    retry: false,
   });
 };
 

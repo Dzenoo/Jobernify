@@ -10,9 +10,9 @@ import { useCurrentUser } from '@/hooks/queries/useCurrentUser.query';
 import { Button } from '@/components/ui/buttons/button';
 
 const NavbarLanding: React.FC = () => {
-  const { data: currentUser } = useCurrentUser();
+  const { data: currentUser, isError } = useCurrentUser();
 
-  const userType = currentUser?.role;
+  const userType = isError ? null : currentUser?.role;
   const isSeeker = userType === 'seeker';
 
   return (
