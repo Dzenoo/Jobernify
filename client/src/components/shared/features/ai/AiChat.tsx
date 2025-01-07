@@ -4,8 +4,8 @@ import { Bot, User } from 'lucide-react';
 
 import { useAiAssistant } from '@/context/ai-assistant';
 
-import MarkdownRenderer from '../ui/MarkdownRenderer';
-import Loader from '../ui/Loader';
+import MarkdownRenderer from '@/components/shared/ui/MarkdownRenderer';
+import Loader from '@/components/shared/ui/Loader';
 
 type AiChatProps = {
   socket: any;
@@ -60,13 +60,17 @@ const AiChat: React.FC<AiChatProps> = ({ socket }) => {
         return (
           <div
             key={index}
-            className={`flex flex-col gap-2.5 ${isUser(message.role) && 'items-end'}`}
+            className={`flex flex-col gap-2.5 ${
+              isUser(message.role) && 'items-end'
+            }`}
           >
             <div className="w-fit">
               {isUser(message.role) ? <User size={20} /> : <Bot size={20} />}
             </div>
             <div
-              className={`border border-input p-2.5 rounded-xl w-fit ${isUser(message.role) ? 'ml-5 bg-muted' : 'mr-5'}`}
+              className={`border border-input p-2.5 rounded-xl w-fit ${
+                isUser(message.role) ? 'ml-5 bg-muted' : 'mr-5'
+              }`}
             >
               <MarkdownRenderer
                 className="space-y-5 text-sm"
