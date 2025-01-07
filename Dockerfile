@@ -17,7 +17,7 @@ COPY shared ./shared
 RUN yarn install --frozen-lockfile
 
 # Build 'shared' and 'api' only (avoids building 'client')
-RUN yarn workspace shared build
+RUN yarn workspace @jobernify/shared build
 RUN yarn workspace api build
 
 # ---------------------------------------------
