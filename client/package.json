@@ -65,6 +65,8 @@
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.9.0",
+    "@mdx-js/loader": "^3.1.0",
+    "@mdx-js/react": "^3.1.0",
     "@types/dompurify": "^3.0.5",
     "@types/js-cookie": "^3.0.6",
     "@types/jsonwebtoken": "^9.0.5",
