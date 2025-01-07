@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    turbo: false,
-  },
   productionBrowserSourceMaps: false,
   webpack: (config, { isServer }) => {
     config.module.rules.push({
