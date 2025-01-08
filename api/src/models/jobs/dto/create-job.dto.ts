@@ -8,6 +8,7 @@ import {
   Max,
   Length,
   IsDateString,
+  MinLength,
 } from 'class-validator';
 import { JobLevel, JobPosition, JobType } from '@/types';
 
@@ -35,6 +36,7 @@ export class CreateJobDto {
 
   @IsArray()
   @IsString({ each: true })
+  @MinLength(1, { each: true })
   readonly skills: string[];
 
   @IsEnum(JobLevel)
