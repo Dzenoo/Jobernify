@@ -44,8 +44,8 @@ const cspHeader = `
     default-src 'self';
     script-src 'self' 'unsafe-eval' 'unsafe-inline';
     style-src 'self' 'unsafe-inline';
-    img-src 'self' blob: data:;
-    font-src 'self';
+    img-src 'self' blob: data: https://jobernify.s3.eu-north-1.amazonaws.com https://res.cloudinary.com;
+    font-src 'self' data:;
     connect-src 'self' https://api.jobernify.com wss://api.jobernify.com;
     object-src 'none';
     base-uri 'self';
