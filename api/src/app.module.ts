@@ -4,18 +4,18 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-import { MailModule } from './common/email/mail.module';
-import { AuthModule } from './authentication/auth.module';
+import { MailModule } from '@/common/email/mail.module';
+import { AuthModule } from '@/authentication/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { SeekersModule } from './models/seekers/seekers.module';
-import { EmployersModule } from './models/employers/employers.module';
-import { JobsModule } from './models/jobs/jobs.module';
-import { ApplicationsModule } from './models/applications/applications.module';
-import { AiModule } from './ai/ai.module';
+import { SeekersModule } from '@/models/seekers/seekers.module';
+import { EmployersModule } from '@/models/employers/employers.module';
+import { JobsModule } from '@/models/jobs/jobs.module';
+import { ApplicationsModule } from '@/models/applications/applications.module';
+import { AiModule } from '@/ai/ai.module';
 
 import { APP_GUARD } from '@nestjs/core';
 
-import { CleanupService } from './common/cleanup/cleanup.service';
+import { CleanupService } from '@/common/cleanup/cleanup.service';
 
 @Module({
   imports: [

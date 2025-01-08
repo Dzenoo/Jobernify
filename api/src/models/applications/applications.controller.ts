@@ -17,15 +17,15 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 
-import { ApplicationsService } from './applications.service';
+import { ApplicationsService } from '@/models/applications/applications.service';
 import { ApplicationStatus, Role } from '@/types';
 
-import { User } from 'src/common/decorators/user.decorator';
+import { User } from '@/common/decorators/user.decorator';
 
-import { JwtAuthGuard } from 'src/authentication/guards/jwt-auth.guard';
-import { RolesGuard } from 'src/authentication/guards/role-auth.guard';
+import { JwtAuthGuard } from '@/authentication/guards/jwt-auth.guard';
+import { RolesGuard } from '@/authentication/guards/role-auth.guard';
 
-import { Roles } from 'src/common/decorators/roles.decorator';
+import { Roles } from '@/common/decorators/roles.decorator';
 
 @Controller('/applications')
 export class ApplicationsController {

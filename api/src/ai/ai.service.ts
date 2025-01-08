@@ -4,8 +4,8 @@ import OpenAI from 'openai';
 import { Run } from 'openai/resources/beta/threads/runs/runs';
 import { Socket } from 'socket.io';
 
-import { SeekersService } from 'src/models/seekers/seekers.service';
-import { JobsService } from 'src/models/jobs/jobs.service';
+import { SeekersService } from '@/models/seekers/seekers.service';
+import { JobsService } from '@/models/jobs/jobs.service';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()

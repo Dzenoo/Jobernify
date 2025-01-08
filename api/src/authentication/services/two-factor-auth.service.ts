@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import * as speakeasy from 'speakeasy';
 
-import { SeekersService } from 'src/models/seekers/seekers.service';
-import { EmployersService } from 'src/models/employers/employers.service';
+import { SeekersService } from '@/models/seekers/seekers.service';
+import { EmployersService } from '@/models/employers/employers.service';
 
 @Injectable()
 export class TwoFactorAuthService {

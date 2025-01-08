@@ -9,8 +9,7 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { Seeker } from '../seekers/schemas/seeker.schema';
-import { Job, JobDocument } from './schemas/job.schema';
+import { Job, JobDocument } from '@/models/jobs/schemas/job.schema';
 
 import mongoose, {
   DeleteResult,
@@ -20,15 +19,15 @@ import mongoose, {
   UpdateWriteOpResult,
 } from 'mongoose';
 
-import { CreateJobDto } from './dto/create-job.dto';
-import { UpdateJobDto } from './dto/update-job.dto';
-import { GetJobsDto } from './dto/get-jobs.dto';
+import { CreateJobDto } from '@/models/jobs/dto/create-job.dto';
+import { UpdateJobDto } from '@/models/jobs/dto/update-job.dto';
+import { GetJobsDto } from '@/models/jobs/dto/get-jobs.dto';
 
-import { EmployersService } from '../employers/employers.service';
-import { SeekersService } from '../seekers/seekers.service';
-import { ApplicationsService } from '../applications/applications.service';
-import { MailService } from 'src/common/email/mail.service';
-import { AiService } from 'src/ai/ai.service';
+import { EmployersService } from '@/models/employers/employers.service';
+import { SeekersService } from '@/models/seekers/seekers.service';
+import { ApplicationsService } from '@/models/applications/applications.service';
+import { MailService } from '@/common/email/mail.service';
+import { AiService } from '@/ai/ai.service';
 
 @Injectable()
 export class JobsService {

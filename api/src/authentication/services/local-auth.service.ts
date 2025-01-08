@@ -8,14 +8,14 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
-import { SeekersService } from 'src/models/seekers/seekers.service';
-import { EmployersService } from 'src/models/employers/employers.service';
+import { SeekersService } from '@/models/seekers/seekers.service';
+import { EmployersService } from '@/models/employers/employers.service';
 import { JwtService } from '@nestjs/jwt';
-import { VerificationService } from './verification.service';
+import { VerificationService } from '@/authentication/services/verification.service';
 
-import { SignupSeekerDto } from 'src/models/seekers/dto/signup-seeker.dto';
-import { SignUpEmployerDto } from 'src/models/employers/dto/signup-employer.dto';
-import { getRedirectUrl } from 'src/common/utils';
+import { SignupSeekerDto } from '@/models/seekers/dto/signup-seeker.dto';
+import { SignUpEmployerDto } from '@/models/employers/dto/signup-employer.dto';
+import { getRedirectUrl } from '@/common/utils';
 
 import * as bcrypt from 'bcrypt';
 

@@ -16,23 +16,23 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 
-import { SeekersService } from './seekers.service';
-import { VerificationService } from '../../authentication/services/verification.service';
+import { SeekersService } from '@/models/seekers/seekers.service';
+import { VerificationService } from '@/authentication/services/verification.service';
 
-import { UpdateSeekerDto } from './dto/update-seeker.dto';
-import { GetSeekersDto } from './dto/get-seekers.dto';
-import { CreateEducationDto } from './dto/create-education.dto';
-import { UpdateEducationDto } from './dto/update-education.dto';
-import { CreateExperienceDto } from './dto/create-experience.dto';
-import { UpdateExperienceDto } from './dto/update-experience.dto';
-import { CreateJobAlertDto } from './dto/create-job-alert.dto';
+import { UpdateSeekerDto } from '@/models/seekers/dto/update-seeker.dto';
+import { GetSeekersDto } from '@/models/seekers/dto/get-seekers.dto';
+import { CreateEducationDto } from '@/models/seekers/dto/create-education.dto';
+import { UpdateEducationDto } from '@/models/seekers/dto/update-education.dto';
+import { CreateExperienceDto } from '@/models/seekers/dto/create-experience.dto';
+import { UpdateExperienceDto } from '@/models/seekers/dto/update-experience.dto';
+import { CreateJobAlertDto } from '@/models/seekers/dto/create-job-alert.dto';
 
-import { JwtAuthGuard } from 'src/authentication/guards/jwt-auth.guard';
-import { RolesGuard } from 'src/authentication/guards/role-auth.guard';
+import { JwtAuthGuard } from '@/authentication/guards/jwt-auth.guard';
+import { RolesGuard } from '@/authentication/guards/role-auth.guard';
 
-import { Roles } from 'src/common/decorators/roles.decorator';
+import { Roles } from '@/common/decorators/roles.decorator';
 import { Role } from '@/types';
-import { User } from 'src/common/decorators/user.decorator';
+import { User } from '@/common/decorators/user.decorator';
 
 import { FileInterceptor } from '@nestjs/platform-express';
 

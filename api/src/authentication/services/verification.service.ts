@@ -5,12 +5,12 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
-import { SeekersService } from 'src/models/seekers/seekers.service';
-import { EmployersService } from 'src/models/employers/employers.service';
-import { MailService } from 'src/common/email/mail.service';
+import { SeekersService } from '@/models/seekers/seekers.service';
+import { EmployersService } from '@/models/employers/employers.service';
+import { MailService } from '@/common/email/mail.service';
 
 import { uuidv7 } from 'uuidv7';
-import { VERIFICATION_TOKEN_EXPIRATION_TIME } from 'src/common/constants';
+import { VERIFICATION_TOKEN_EXPIRATION_TIME } from '@/common/constants';
 
 @Injectable()
 export class VerificationService {

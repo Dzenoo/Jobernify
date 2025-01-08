@@ -1,9 +1,9 @@
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { BaseUser } from 'src/models/shared/schemas/user.schema';
-import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
-import { Job } from 'src/models/jobs/schemas/job.schema';
+import { BaseUser } from '@/models/shared/schemas/user.schema';
+import { Seeker } from '@/models/seekers/schemas/seeker.schema';
+import { Job } from '@/models/jobs/schemas/job.schema';
 import { CompanySize, IndustryType, Role } from '@/types';
 
 import * as bcrypt from 'bcrypt';

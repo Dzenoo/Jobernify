@@ -1,8 +1,8 @@
 import mongoose, { HydratedDocument } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { Job } from 'src/models/jobs/schemas/job.schema';
-import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
+import { Job } from '@/models/jobs/schemas/job.schema';
+import { Seeker } from '@/models/seekers/schemas/seeker.schema';
 
 import { ApplicationStatus } from '@/types';
 

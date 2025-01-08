@@ -1,15 +1,18 @@
 import { forwardRef, Module } from '@nestjs/common';
 
 import { MongooseModule } from '@nestjs/mongoose';
-import { S3Module } from 'src/common/s3/s3.module';
-import { SeekersModule } from '../seekers/seekers.module';
-import { JobsModule } from '../jobs/jobs.module';
-import { ApplicationsModule } from '../applications/applications.module';
-import { VerificationModule } from 'src/authentication/modules/verification.module';
+import { S3Module } from '@/common/s3/s3.module';
+import { SeekersModule } from '@/models/seekers/seekers.module';
+import { JobsModule } from '@/models/jobs/jobs.module';
+import { ApplicationsModule } from '@/models/applications/applications.module';
+import { VerificationModule } from '@/authentication/modules/verification.module';
 
-import { EmployersService } from './employers.service';
-import { EmployersController } from './employers.controller';
-import { Employer, EmployerSchema } from './schemas/employer.schema';
+import { EmployersService } from '@/models/employers/employers.service';
+import { EmployersController } from '@/models/employers/employers.controller';
+import {
+  Employer,
+  EmployerSchema,
+} from '@/models/employers/schemas/employer.schema';
 
 @Module({
   imports: [

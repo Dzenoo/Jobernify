@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 
-import { VERIFICATION_TOKEN_EXPIRATION_TIME } from '../constants';
+import { VERIFICATION_TOKEN_EXPIRATION_TIME } from '@/common/constants';
 
-import { SeekersService } from 'src/models/seekers/seekers.service';
-import { EmployersService } from 'src/models/employers/employers.service';
+import { SeekersService } from '@/models/seekers/seekers.service';
+import { EmployersService } from '@/models/employers/employers.service';
 
 @Injectable()
 export class CleanupService {

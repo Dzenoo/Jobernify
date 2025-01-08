@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { Seeker } from './schemas/seeker.schema';
+import { Seeker } from '@/models/seekers/schemas/seeker.schema';
 
 import {
   DeleteResult,
@@ -18,20 +18,20 @@ import {
   UpdateWriteOpResult,
 } from 'mongoose';
 
-import { UpdateSeekerDto } from './dto/update-seeker.dto';
+import { UpdateSeekerDto } from '@/models/seekers/dto/update-seeker.dto';
 
-import { EmployersService } from '../employers/employers.service';
-import { JobsService } from '../jobs/jobs.service';
-import { ApplicationsService } from '../applications/applications.service';
-import { S3Service } from 'src/common/s3/s3.service';
-import { escapeRegExp } from 'src/common/constants';
+import { EmployersService } from '@/models/employers/employers.service';
+import { JobsService } from '@/models/jobs/jobs.service';
+import { ApplicationsService } from '@/models/applications/applications.service';
+import { S3Service } from '@/common/s3/s3.service';
+import { escapeRegExp } from '@/common/constants';
 
 import { uuidv7 } from 'uuidv7';
-import { CreateEducationDto } from './dto/create-education.dto';
-import { UpdateEducationDto } from './dto/update-education.dto';
-import { CreateExperienceDto } from './dto/create-experience.dto';
-import { UpdateExperienceDto } from './dto/update-experience.dto';
-import { CreateJobAlertDto } from './dto/create-job-alert.dto';
+import { CreateEducationDto } from '@/models/seekers/dto/create-education.dto';
+import { UpdateEducationDto } from '@/models/seekers/dto/update-education.dto';
+import { CreateExperienceDto } from '@/models/seekers/dto/create-experience.dto';
+import { UpdateExperienceDto } from '@/models/seekers/dto/update-experience.dto';
+import { CreateJobAlertDto } from '@/models/seekers/dto/create-job-alert.dto';
 
 @Injectable()
 export class SeekersService {

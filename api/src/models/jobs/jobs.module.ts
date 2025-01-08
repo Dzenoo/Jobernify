@@ -1,15 +1,15 @@
 import { forwardRef, Module } from '@nestjs/common';
 
 import { MongooseModule } from '@nestjs/mongoose';
-import { MailModule } from 'src/common/email/mail.module';
-import { AiModule } from 'src/ai/ai.module';
-import { SeekersModule } from '../seekers/seekers.module';
-import { EmployersModule } from '../employers/employers.module';
-import { ApplicationsModule } from '../applications/applications.module';
+import { MailModule } from '@/common/email/mail.module';
+import { AiModule } from '@/ai/ai.module';
+import { SeekersModule } from '@/models/seekers/seekers.module';
+import { EmployersModule } from '@/models/employers/employers.module';
+import { ApplicationsModule } from '@/models/applications/applications.module';
 
-import { JobsService } from './jobs.service';
-import { JobsController } from './jobs.controller';
-import { Job, JobSchema } from './schemas/job.schema';
+import { JobsService } from '@/models/jobs/jobs.service';
+import { JobsController } from '@/models/jobs/jobs.controller';
+import { Job, JobSchema } from '@/models/jobs/schemas/job.schema';
 
 @Module({
   imports: [

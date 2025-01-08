@@ -11,18 +11,18 @@ import {
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 
-import { JobsService } from './jobs.service';
+import { JobsService } from '@/models/jobs/jobs.service';
 
-import { CreateJobDto } from './dto/create-job.dto';
-import { UpdateJobDto } from './dto/update-job.dto';
-import { GetJobsDto } from './dto/get-jobs.dto';
+import { CreateJobDto } from '@/models/jobs/dto/create-job.dto';
+import { UpdateJobDto } from '@/models/jobs/dto/update-job.dto';
+import { GetJobsDto } from '@/models/jobs/dto/get-jobs.dto';
 
-import { JwtAuthGuard } from 'src/authentication/guards/jwt-auth.guard';
-import { RolesGuard } from 'src/authentication/guards/role-auth.guard';
+import { JwtAuthGuard } from '@/authentication/guards/jwt-auth.guard';
+import { RolesGuard } from '@/authentication/guards/role-auth.guard';
 
-import { Roles } from 'src/common/decorators/roles.decorator';
+import { Roles } from '@/common/decorators/roles.decorator';
 import { Role } from '@/types';
-import { User } from 'src/common/decorators/user.decorator';
+import { User } from '@/common/decorators/user.decorator';
 
 @Controller('/jobs')
 export class JobsController {

@@ -1,14 +1,17 @@
 import { forwardRef, Module } from '@nestjs/common';
 
-import { S3Module } from 'src/common/s3/s3.module';
-import { MailModule } from 'src/common/email/mail.module';
+import { S3Module } from '@/common/s3/s3.module';
+import { MailModule } from '@/common/email/mail.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { SeekersModule } from '../seekers/seekers.module';
-import { JobsModule } from '../jobs/jobs.module';
+import { SeekersModule } from '@/models/seekers/seekers.module';
+import { JobsModule } from '@/models/jobs/jobs.module';
 
-import { ApplicationsService } from './applications.service';
-import { ApplicationsController } from './applications.controller';
-import { Application, ApplicationSchema } from './schemas/application.schema';
+import { ApplicationsService } from '@/models/applications/applications.service';
+import { ApplicationsController } from '@/models/applications/applications.controller';
+import {
+  Application,
+  ApplicationSchema,
+} from '@/models/applications/schemas/application.schema';
 
 @Module({
   imports: [

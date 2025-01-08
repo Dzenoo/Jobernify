@@ -15,19 +15,19 @@ import {
   MaxFileSizeValidator,
 } from '@nestjs/common';
 
-import { EmployersService } from './employers.service';
+import { EmployersService } from '@/models/employers/employers.service';
 
-import { GetEmployersDto } from './dto/get-employers.dto';
-import { GetProfileDto } from './dto/get-profile.dto';
-import { UpdateEmployerDto } from './dto/update-employer.dto';
+import { GetEmployersDto } from '@/models/employers/dto/get-employers.dto';
+import { GetProfileDto } from '@/models/employers/dto/get-profile.dto';
+import { UpdateEmployerDto } from '@/models/employers/dto/update-employer.dto';
 
-import { JwtAuthGuard } from 'src/authentication/guards/jwt-auth.guard';
-import { RolesGuard } from 'src/authentication/guards/role-auth.guard';
+import { JwtAuthGuard } from '@/authentication/guards/jwt-auth.guard';
+import { RolesGuard } from '@/authentication/guards/role-auth.guard';
 
-import { Roles } from 'src/common/decorators/roles.decorator';
+import { Roles } from '@/common/decorators/roles.decorator';
 import { Role } from '@/types';
-import { User } from 'src/common/decorators/user.decorator';
-import { VerificationService } from 'src/authentication/services/verification.service';
+import { User } from '@/common/decorators/user.decorator';
+import { VerificationService } from '@/authentication/services/verification.service';
 
 import { FileInterceptor } from '@nestjs/platform-express';
 

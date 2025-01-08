@@ -1,10 +1,10 @@
 import { forwardRef, Module } from '@nestjs/common';
 
-import { JobsModule } from 'src/models/jobs/jobs.module';
-import { SeekersModule } from 'src/models/seekers/seekers.module';
+import { JobsModule } from '@/models/jobs/jobs.module';
+import { SeekersModule } from '@/models/seekers/seekers.module';
 
-import { AiService } from './ai.service';
-import { AiGateway } from './ai.gateway';
+import { AiService } from '@/ai/ai.service';
+import { AiGateway } from '@/ai/ai.gateway';
 
 @Module({
   imports: [forwardRef(() => SeekersModule), forwardRef(() => JobsModule)],

@@ -1,10 +1,10 @@
 import { forwardRef, Module } from '@nestjs/common';
 
-import { SeekersModule } from 'src/models/seekers/seekers.module';
-import { EmployersModule } from 'src/models/employers/employers.module';
-import { MailModule } from 'src/common/email/mail.module';
+import { SeekersModule } from '@/models/seekers/seekers.module';
+import { EmployersModule } from '@/models/employers/employers.module';
+import { MailModule } from '@/common/email/mail.module';
 
-import { VerificationService } from '../services/verification.service';
+import { VerificationService } from '@/authentication/services/verification.service';
 
 @Module({
   imports: [

@@ -8,11 +8,11 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 
-import { TwoFactorAuthService } from '../services/two-factor-auth.service';
+import { TwoFactorAuthService } from '@/authentication/services/two-factor-auth.service';
 
-import { JwtAuthGuard } from '../guards/jwt-auth.guard';
+import { JwtAuthGuard } from '@/authentication/guards/jwt-auth.guard';
 
-import { TwoFactorCodeDto } from '../dto/two-factor.dto';
+import { TwoFactorCodeDto } from '@/authentication/dto/two-factor.dto';
 
 @Controller('/2fa')
 export class TwoFactorAuthController {

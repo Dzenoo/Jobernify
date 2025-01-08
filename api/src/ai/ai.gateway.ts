@@ -14,10 +14,10 @@ import { Throttle } from '@nestjs/throttler';
 
 import { Server, Socket } from 'socket.io';
 
-import { WsJwtGuard } from 'src/authentication/guards/ws-jwt.guard';
-import { SocketAuthMiddleware } from 'src/authentication/middlewares/ws.middleware';
+import { WsJwtGuard } from '@/authentication/guards/ws-jwt.guard';
+import { SocketAuthMiddleware } from '@/authentication/middlewares/ws.middleware';
 
-import { AiService } from './ai.service';
+import { AiService } from '@/ai/ai.service';
 
 @WebSocketGateway({
   cors: {

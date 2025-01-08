@@ -8,8 +8,8 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { JobDocument } from '../jobs/schemas/job.schema';
-import { Employer } from './schemas/employer.schema';
+import { JobDocument } from '@/models/jobs/schemas/job.schema';
+import { Employer } from '@/models/employers/schemas/employer.schema';
 
 import {
   DeleteResult,
@@ -20,12 +20,12 @@ import {
 } from 'mongoose';
 import mongoose from 'mongoose';
 
-import { UpdateEmployerDto } from './dto/update-employer.dto';
+import { UpdateEmployerDto } from '@/models/employers/dto/update-employer.dto';
 
-import { SeekersService } from '../seekers/seekers.service';
-import { JobsService } from '../jobs/jobs.service';
-import { S3Service } from 'src/common/s3/s3.service';
-import { ApplicationsService } from '../applications/applications.service';
+import { SeekersService } from '@/models/seekers/seekers.service';
+import { JobsService } from '@/models/jobs/jobs.service';
+import { S3Service } from '@/common/s3/s3.service';
+import { ApplicationsService } from '@/models/applications/applications.service';
 
 import { uuidv7 } from 'uuidv7';
 

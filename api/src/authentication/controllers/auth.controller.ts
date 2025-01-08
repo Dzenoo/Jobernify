@@ -15,25 +15,25 @@ import { Throttle } from '@nestjs/throttler';
 
 import { Request, Response } from 'express';
 
-import { LocalAuthService } from '../services/local-auth.service';
-import { GoogleAuthService } from '../services/google-auth.service';
-import { TwoFactorAuthService } from '../services/two-factor-auth.service';
+import { LocalAuthService } from '@/authentication/services/local-auth.service';
+import { GoogleAuthService } from '@/authentication/services/google-auth.service';
+import { TwoFactorAuthService } from '@/authentication/services/two-factor-auth.service';
 
-import { LocalAuthGuard } from '../guards/local-auth.guard';
-import { GoogleOAuthGuard } from '../guards/google-oauth.guard';
-import { JwtAuthGuard } from '../guards/jwt-auth.guard';
+import { LocalAuthGuard } from '@/authentication/guards/local-auth.guard';
+import { GoogleOAuthGuard } from '@/authentication/guards/google-oauth.guard';
+import { JwtAuthGuard } from '@/authentication/guards/jwt-auth.guard';
 
-import { SeekersService } from 'src/models/seekers/seekers.service';
-import { EmployersService } from 'src/models/employers/employers.service';
-import { SignupSeekerDto } from 'src/models/seekers/dto/signup-seeker.dto';
-import { SignUpEmployerDto } from 'src/models/employers/dto/signup-employer.dto';
-import { Seeker } from 'src/models/seekers/schemas/seeker.schema';
-import { Employer } from 'src/models/employers/schemas/employer.schema';
+import { SeekersService } from '@/models/seekers/seekers.service';
+import { EmployersService } from '@/models/employers/employers.service';
+import { SignupSeekerDto } from '@/models/seekers/dto/signup-seeker.dto';
+import { SignUpEmployerDto } from '@/models/employers/dto/signup-employer.dto';
+import { Seeker } from '@/models/seekers/schemas/seeker.schema';
+import { Employer } from '@/models/employers/schemas/employer.schema';
 
-import { getRedirectUrl } from 'src/common/utils';
-import { cookieOptions } from 'src/common/constants';
+import { getRedirectUrl } from '@/common/utils';
+import { cookieOptions } from '@/common/constants';
 
-import { TwoFactorVerifyDto } from '../dto/two-factor.dto';
+import { TwoFactorVerifyDto } from '@/authentication/dto/two-factor.dto';
 
 @Controller('/auth')
 export class AuthController {

@@ -2,20 +2,20 @@ import { Module } from '@nestjs/common';
 
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { VerificationModule } from './modules/verification.module';
+import { VerificationModule } from '@/authentication/modules/verification.module';
 import { PassportModule } from '@nestjs/passport';
-import { SeekersModule } from 'src/models/seekers/seekers.module';
-import { EmployersModule } from 'src/models/employers/employers.module';
+import { SeekersModule } from '@/models/seekers/seekers.module';
+import { EmployersModule } from '@/models/employers/employers.module';
 
-import { LocalAuthService } from './services/local-auth.service';
-import { GoogleAuthService } from './services/google-auth.service';
-import { TwoFactorAuthService } from './services/two-factor-auth.service';
-import { LocalStrategy } from './strategies/local.strategy';
-import { JwtStrategy } from './strategies/jwt.strategy';
-import { GoogleStrategy } from './strategies/google.strategy';
+import { LocalAuthService } from '@/authentication/services/local-auth.service';
+import { GoogleAuthService } from '@/authentication/services/google-auth.service';
+import { TwoFactorAuthService } from '@/authentication/services/two-factor-auth.service';
+import { LocalStrategy } from '@/authentication/strategies/local.strategy';
+import { JwtStrategy } from '@/authentication/strategies/jwt.strategy';
+import { GoogleStrategy } from '@/authentication/strategies/google.strategy';
 
-import { AuthController } from './controllers/auth.controller';
-import { TwoFactorAuthController } from './controllers/two-factor-auth.controller';
+import { AuthController } from '@/authentication/controllers/auth.controller';
+import { TwoFactorAuthController } from '@/authentication/controllers/two-factor-auth.controller';
 
 @Module({
   imports: [

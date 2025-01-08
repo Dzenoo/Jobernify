@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io';
 
-import { WsJwtGuard } from '../guards/ws-jwt.guard';
+import { WsJwtGuard } from '@/authentication/guards/ws-jwt.guard';
 
 type SocketIOMiddleware = {
   (client: Socket, next: (error?: Error) => void): void;

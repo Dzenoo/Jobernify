@@ -10,15 +10,18 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { Application, ApplicationDocument } from './schemas/application.schema';
+import {
+  Application,
+  ApplicationDocument,
+} from '@/models/applications/schemas/application.schema';
 import { ApplicationStatus } from '@/types';
 
 import { DeleteResult, FilterQuery, Model } from 'mongoose';
 
-import { SeekersService } from '../seekers/seekers.service';
-import { JobsService } from '../jobs/jobs.service';
-import { S3Service } from 'src/common/s3/s3.service';
-import { MailService } from 'src/common/email/mail.service';
+import { SeekersService } from '@/models/seekers/seekers.service';
+import { JobsService } from '@/models/jobs/jobs.service';
+import { S3Service } from '@/common/s3/s3.service';
+import { MailService } from '@/common/email/mail.service';
 
 @Injectable()
 export class ApplicationsService {
