@@ -12,7 +12,7 @@ const useGetEmployer = (params?: { [key: string]: string }) => {
         type: 'jobs',
       });
     },
-    queryKey: ['profile', { params }],
+    queryKey: ['employer_profile', { params }],
   });
 };
 

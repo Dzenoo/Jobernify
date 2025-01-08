@@ -18,7 +18,7 @@ const useGetSeeker = (
     queryFn: () => {
       return getSeekerProfile(page);
     },
-    queryKey: ['profile'],
+    queryKey: ['seeker_profile'],
     staleTime: 5 * 60 * 1000,
     ...options,
   });

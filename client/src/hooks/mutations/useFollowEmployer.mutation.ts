@@ -15,7 +15,7 @@ const useFollowEmployer = (employerId: string) => {
     mutationKey: ['profile', 'employer', 'employers'],
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['profile', 'employer', 'employers'],
+        queryKey: ['seeker_profile', 'employer', 'employers'],
       });
     },
     onError: (error: any) => {

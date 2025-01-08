@@ -37,7 +37,7 @@ const DeleteJob: React.FC<DeleteJobProps> = ({ onClose, id, isDialog }) => {
       return deleteJob(id);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['jobs', 'profile'] });
+      queryClient.invalidateQueries({ queryKey: ['jobs', 'employer_profile'] });
       toast({
         title: 'Job Deleted',
         description: 'The job has been successfully deleted.',

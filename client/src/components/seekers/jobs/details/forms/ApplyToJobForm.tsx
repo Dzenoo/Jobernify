@@ -102,7 +102,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
       queryClient.invalidateQueries({
         queryKey: ['job', { jobId }],
       });
-      queryClient.invalidateQueries({ queryKey: ['profile'] });
+      queryClient.invalidateQueries({ queryKey: ['seeker_profile'] });
       setIsApplyToJob(false);
     },
     onError: (error: any) => {

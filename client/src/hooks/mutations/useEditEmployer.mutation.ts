@@ -14,7 +14,7 @@ const useEditEmployer = () => {
     },
     onSuccess: (response) => {
       toast({ title: 'Success', description: response.message });
-      queryClient.invalidateQueries({ queryKey: ['profile'] });
+      queryClient.invalidateQueries({ queryKey: ['employer_profile'] });
     },
     onError: (error: any) => {
       toast({ title: 'Error', description: error?.response?.data?.message });

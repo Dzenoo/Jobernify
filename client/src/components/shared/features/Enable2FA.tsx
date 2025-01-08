@@ -25,7 +25,9 @@ const Enable2FA: React.FC<Enable2FAProps> = () => {
 
   const handleClose2faDialog = () => {
     setIs2faDialogOpen(false);
-    queryClient.invalidateQueries({ queryKey: ['profile'] });
+    queryClient.invalidateQueries({
+      queryKey: ['seeker_profile', 'employer_profile'],
+    });
   };
 
   return (

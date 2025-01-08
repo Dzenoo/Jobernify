@@ -13,7 +13,7 @@ const useJobAlert = () => {
       return generateJobAlert(formData);
     },
     onSuccess: (response) => {
-      queryClient.invalidateQueries({ queryKey: ['profile'] });
+      queryClient.invalidateQueries({ queryKey: ['seeker_profile'] });
       toast({ title: 'Success', description: response.message });
     },
     onError: (error: any) => {

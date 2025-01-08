@@ -110,7 +110,7 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
     },
     onSuccess: (response) => {
       toast({ title: 'Success', description: response.message });
-      queryClient.invalidateQueries({ queryKey: ['profile'] });
+      queryClient.invalidateQueries({ queryKey: ['seeker_profile'] });
       closeForm();
     },
     onError: (error: any) => {

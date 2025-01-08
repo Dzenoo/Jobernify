@@ -14,7 +14,7 @@ const useEditSeeker = (showToast?: boolean) => {
     },
     onSuccess: (response) => {
       showToast && toast({ title: 'Success', description: response.message });
-      queryClient.invalidateQueries({ queryKey: ['profile'] });
+      queryClient.invalidateQueries({ queryKey: ['seeker_profile'] });
     },
     onError: (error: any) => {
       toast({ title: 'Error', description: error?.response?.data?.message });
