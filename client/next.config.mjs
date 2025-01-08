@@ -46,7 +46,7 @@ const cspHeader = `
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data:;
     font-src 'self';
-    connect-src 'self' https://api.jobernify.com;
+    connect-src 'self' https://api.jobernify.com wss://api.jobernify.com;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
