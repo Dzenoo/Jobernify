@@ -76,4 +76,15 @@ export const FooterLinks = [
       { id: '3', name: 'Cookie Policy', href: '/cookie-policy' },
     ],
   },
+  {
+    id: '5',
+    title: 'Socials',
+    links: [
+      {
+        id: '1',
+        name: 'Linkedin',
+        href: 'https://www.linkedin.com/company/jobernify',
+      },
+    ],
+  },
 ];

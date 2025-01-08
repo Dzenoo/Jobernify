@@ -7,6 +7,7 @@ import { FooterLinks } from '@/constants';
 import { cn } from '@/lib/utils';
 
 import Logo from '../navbar/Logo';
+import LinkedinIcon from '@/components/shared/icons/LinkedinIcon';
 
 type FooterProps = {
   className?: string;
@@ -32,6 +33,15 @@ const Footer: React.FC<FooterProps> = ({ className, theme }) => {
               careers, our mission is to simplify the job search process and
               empower individuals to find fulfilling employment opportunities.
             </p>
+          </div>
+          <div>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href={FooterLinks.find((link) => link.id === '5')?.links[0].href}
+            >
+              <LinkedinIcon />
+            </a>
           </div>
           <div className="text-muted-foreground text-sm">
             &copy; 2024 Copyright, Jobernify. All rights reserved
@@ -63,7 +73,9 @@ function renderFooterLinks<
     <div key={id} className="space-y-3">
       <div>
         <h1
-          className={`text-sm font-medium uppercase ${theme === 'dark' ? 'text-white' : ''}`}
+          className={`text-sm font-medium uppercase ${
+            theme === 'dark' ? 'text-white' : ''
+          }`}
         >
           {title}
         </h1>
