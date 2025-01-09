@@ -169,10 +169,17 @@ export class ApplicationsService {
       existingApplication.job.employer.name,
     );
 
+    const variables = {
+      title: 'Application Status Update',
+      currentYear: new Date().getFullYear(),
+      content: emailContent,
+    };
+
     await this.mailService.sendMail(
       existingApplication.seeker.email,
-      'Application Status Update',
-      emailContent,
+      'Jobernify - Application Status Update',
+      'application-status-update',
+      variables,
     );
 
     return {
@@ -282,27 +289,6 @@ export class ApplicationsService {
         content = `Your application status has been updated to ${status}.`;
     }
 
-    return `<html>
-      <head>
-        <style>
-          body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-          .container { max-width: 600px; margin: auto; padding: 20px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px; }
-          .header { background-color: #f0f0f0; padding: 20px; text-align: center; }
-          .header h2 { margin: 0; color: #333; }
-          .content { padding: 20px; }
-          .content p { margin-bottom: 20px; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <h2>Application Update</h2>
-          </div>
-          <div class="content">
-            <p>${content}</p>
-          </div>
-        </div>
-      </body>
-    </html>`;
+    return content;
   }
 }

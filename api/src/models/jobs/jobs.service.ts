@@ -176,7 +176,15 @@ export class JobsService {
         await this.emailService.sendMail(
           seeker.email,
           'Jobernify - New Job Alert Match',
-          this.generateJobEmailContent(newJob, 'alert'),
+          'job-alert',
+          {
+            title: this.generateJobEmailContent('alert').title,
+            content: this.generateJobEmailContent('alert').content,
+            jobTitle: newJob.title,
+            jobPosition: newJob.position,
+            jobOverview: newJob.overview,
+            jobUrl: `${process.env.FRONTEND_URL}jobs/${newJob._id}`,
+          },
         );
       }
     }
@@ -188,7 +196,15 @@ export class JobsService {
       await this.emailService.sendMail(
         followerEmail,
         'Jobernify - New Job Created by Employer',
-        this.generateJobEmailContent(newJob, 'follower'),
+        'job-alert',
+        {
+          title: this.generateJobEmailContent('alert').title,
+          content: this.generateJobEmailContent('alert').content,
+          jobTitle: newJob.title,
+          jobPosition: newJob.position,
+          jobOverview: newJob.overview,
+          jobUrl: `${process.env.FRONTEND_URL}jobs/${newJob._id}`,
+        },
       );
     }
 
@@ -199,34 +215,14 @@ export class JobsService {
     };
   }
 
-  private generateJobEmailContent(
-    job: JobDocument,
-    type: 'alert' | 'follower',
-  ): string {
-    const header =
-      type === 'alert'
-        ? `New Job Alert: ${job.title}`
-        : `New Job Created by Employer`;
-
-    const message =
-      type === 'alert'
-        ? 'We have found a new job that matches your alert criteria:'
-        : 'The employer you are following has created a new job:';
-
-    return `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
-        <h2 style="color: #333;">${header}</h2>
-        <p style="color: #555;">${message}</p>
-        <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-          <h3 style="color: #333;">${job.title}</h3>
-          <p style="color: #555;"><strong>Position:</strong> ${job.position}</p>
-          <p style="color: #555;">${job.overview}</p>
-          <a href="${process.env.FRONTEND_URL}/jobs/${job._id}" style="display: inline-block; padding: 10px 15px; background-color: #1a73e8; color: #fff; text-decoration: none; border-radius: 5px;">View Job</a>
-        </div>
-        <p style="color: #555;">If you have any questions, feel free to <a href="mailto:jobernify@gmail.com" style="color: #1a73e8;">contact us</a>.</p>
-        <p style="color: #555;">Best regards,<br>Jobernify Team</p>
-      </div>
-    `;
+  private generateJobEmailContent(type: 'alert' | 'follower') {
+    return {
+      title: type === 'alert' ? `New Job Alert` : `New Job Created by Employer`,
+      content:
+        type === 'alert'
+          ? 'We have found a new job that matches your alert criteria:'
+          : 'The employer you are following has created a new job:',
+    };
   }
 
   async editOne(
