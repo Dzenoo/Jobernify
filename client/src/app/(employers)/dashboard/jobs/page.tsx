@@ -24,22 +24,21 @@ const DashboardJobsPage = ({
   searchParams: { [key: string]: string };
 }) => {
   const { updateSearchParams } = useSearchParams();
-  const {
-    data: fetchedEmployer,
-    isFetching,
-    isRefetching,
-    isLoading,
-  } = useGetEmployer(searchParams);
+  const { data, isFetching, isRefetching, isLoading } =
+    useGetEmployer(searchParams);
+
+  const jobsData = data || {
+    employer: {
+      isApproved: false,
+      jobs: [],
+    },
+    counts: { totalJobs: 0 },
+  };
 
   const isLoadingJobs = isLoading || isFetching || isRefetching;
-
-  if (typeof window === 'undefined' || isLoadingJobs) {
-    return <LoadingDashboardJobs />;
-  }
-
-  const totalJobs = fetchedEmployer?.counts.totalJobs || 0;
-  const itemsPerPage = 10;
+  const totalJobs = jobsData.counts.totalJobs;
   const currentPage = Number(searchParams.page) || 1;
+  const itemsPerPage = 10;
 
   return (
     <section className="flex flex-col gap-6">
@@ -58,17 +57,21 @@ const DashboardJobsPage = ({
         </div>
 
         <SearchJobs
-          isApproved={fetchedEmployer?.employer?.isApproved || false}
+          isApproved={jobsData.employer.isApproved || false}
           query={searchParams.query}
           sort={searchParams.sort}
         />
       </div>
 
-      <DashboardEmployerJobs
-        jobs={fetchedEmployer?.employer.jobs || []}
-        currentPage={currentPage}
-        itemsPerPage={itemsPerPage}
-      />
+      {isLoadingJobs ? (
+        <LoadingDashboardJobs />
+      ) : (
+        <DashboardEmployerJobs
+          jobs={jobsData.employer.jobs || []}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+        />
+      )}
 
       {totalJobs > 10 && (
         <PaginatedList

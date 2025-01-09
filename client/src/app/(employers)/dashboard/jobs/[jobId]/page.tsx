@@ -48,7 +48,7 @@ const JobApplicationsPage = ({
   };
 
   const isLoadingJobApplications = isLoading || isFetching || isRefetching;
-  const totalApplications = applicationsData.totalApplications || 0;
+  const totalApplications = applicationsData.totalApplications;
   const currentPage = Number(searchParams.page) || 1;
   const itemsPerPage = 10;
 
@@ -66,40 +66,32 @@ const JobApplicationsPage = ({
         </div>
       </div>
 
-      <div>
-        <FilterApplications
-          applicants={applicationsData.totalApplications}
-          pending={applicationsData.totalPendingStatus}
-          interviews={applicationsData.totalInterviewStatus}
-          rejected={applicationsData.totalRejectedStatus}
-          accepted={applicationsData.totalAcceptedStatus}
-          status={searchParams.status}
-        />
-      </div>
+      <FilterApplications
+        applicants={applicationsData.totalApplications}
+        pending={applicationsData.totalPendingStatus}
+        interviews={applicationsData.totalInterviewStatus}
+        rejected={applicationsData.totalRejectedStatus}
+        accepted={applicationsData.totalAcceptedStatus}
+        status={searchParams.status}
+      />
 
-      <div>
-        {isLoadingJobApplications ? (
-          <LoadingJobApplications />
-        ) : (
-          <Applications
-            applications={applicationsData.applications}
-            currentPage={1}
-            itemsPerPage={10}
-          />
-        )}
-      </div>
+      {isLoadingJobApplications ? (
+        <LoadingJobApplications />
+      ) : (
+        <Applications
+          applications={applicationsData.applications}
+          currentPage={1}
+          itemsPerPage={10}
+        />
+      )}
 
       {totalApplications > 10 && (
-        <div>
-          <PaginatedList
-            onPageChange={(value) =>
-              updateSearchParams('page', value.toString())
-            }
-            totalItems={totalApplications}
-            itemsPerPage={itemsPerPage}
-            currentPage={currentPage}
-          />
-        </div>
+        <PaginatedList
+          onPageChange={(value) => updateSearchParams('page', value.toString())}
+          totalItems={totalApplications}
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+        />
       )}
     </section>
   );
