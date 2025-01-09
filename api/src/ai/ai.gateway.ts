@@ -21,7 +21,11 @@ import { AiService } from '@/ai/ai.service';
 
 @WebSocketGateway({
   cors: {
-    origin: ['http://localhost:3000', 'https://www.jobernify.com'],
+    origin: [
+      'http://localhost:3000',
+      'https://www.jobernify.com',
+      'https://jobernify.com',
+    ],
     credentials: true,
   },
   transports: ['websocket'],
