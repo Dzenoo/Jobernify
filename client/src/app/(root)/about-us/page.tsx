@@ -8,7 +8,7 @@ import BlueButton from '@/components/shared/pages/landing/BlueButton';
 import { Button } from '@/components/ui/buttons/button';
 
 export const metadata: Metadata = {
-  title: 'About Us | Jobernify',
+  title: 'About Us',
   description:
     'We are a forward-thinking, AI-powered job search platform dedicated to transforming the way job seekers and employers connect on a global scale.',
 };

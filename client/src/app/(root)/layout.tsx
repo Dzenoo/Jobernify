@@ -7,25 +7,14 @@ import RootLayoutWrapper from './_RootLayoutWrapper';
 import '../globals.css';
 
 export const metadata: Metadata = {
-  icons: {
-    icon: [
-      {
-        url: '/images/logo-icon.png',
-        href: '/images/logo-icon.png',
-      },
-    ],
+  title: {
+    default: 'Jobernify',
+    template: '%s | Jobernify',
   },
-  title: 'Jobernify',
   description:
     'Unlock your career potential with Jobernify. Explore opportunities, connect with others, and achieve your goals with our innovative platform. Begin your journey now!',
-  openGraph: {
-    title: 'Jobernify - Unlock Your Career Potential',
-    description:
-      'Unlock your career potential with Jobernify. Explore opportunities, connect with others, and achieve your goals with our innovative platform. Begin your journey now!',
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://jobernify.com',
-    siteName: 'Jobernify',
+  twitter: {
+    card: 'summary_large_image',
   },
 };
 

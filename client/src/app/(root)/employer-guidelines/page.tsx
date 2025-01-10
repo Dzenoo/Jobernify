@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import { EmployersGuidelines } from '@/constants';
 
 export const metadata: Metadata = {
-  title: 'Employer Guidelines | Jobernify',
+  title: 'Employer Guidelines',
   description: 'Follow our guidelines to optimize your hiring process.',
 };
 
