@@ -10,6 +10,7 @@ import AuthLayoutWrapper from './_AuthLayoutWrapper';
 import '../globals.css';
 
 export const metadata: Metadata = {
+  icons: 'favicon.ico',
   title: {
     default: 'Jobernify | The AI Powered Job Search Platform ',
     template: '%s | Jobernify',

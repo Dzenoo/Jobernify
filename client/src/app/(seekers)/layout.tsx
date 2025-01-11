@@ -18,6 +18,7 @@ const MobileBar = dynamic(() => import('@/components/layout/navbar/Mobile'), {
 });
 
 export const metadata: Metadata = {
+  icons: 'favicon.ico',
   title: {
     default: 'Jobernify | The AI Powered Job Search Platform ',
     template: '%s | Jobernify',
