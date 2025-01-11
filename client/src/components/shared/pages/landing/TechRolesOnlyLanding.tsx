@@ -39,7 +39,7 @@ const TechRolesOnlyLanding: React.FC = () => {
       <div className="basis-full flex justify-center items-center">
         <img
           src="/images/jobs.png"
-          alt="jobs"
+          alt="jobs_search"
           className="max-w-[700px] rounded-xl box-shadow-custom transform rotate-[25deg] scale-90 max-lg:max-w-[400px] max-sm:max-w-[300px]"
         />
       </div>

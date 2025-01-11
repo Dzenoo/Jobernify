@@ -8,11 +8,11 @@ import '../globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Jobernify',
+    default: 'Jobernify | The AI Powered Job Search Platform ',
     template: '%s | Jobernify',
   },
   description:
-    'Unlock your career potential with Jobernify. Explore opportunities, connect with others, and achieve your goals with our innovative platform. Begin your journey now!',
+    'Unlock your career potential with Jobernify. Explore opportunities, connect with others, and achieve your goals with our innovative platform.',
   twitter: {
     card: 'summary_large_image',
   },

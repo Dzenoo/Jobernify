@@ -21,8 +21,8 @@ const FeaturesLanding: React.FC = () => {
         <div className="max-w-xl">
           <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
             Explore Features That Simplify{' '}
-            <span className="text-[#0084FF]">Job Searching and Hiring</span> for
-            Everyone
+            <strong className="text-[#0084FF]">Job Searching and Hiring</strong>{' '}
+            for Everyone
           </h1>
         </div>
         <div className="max-w-lg">

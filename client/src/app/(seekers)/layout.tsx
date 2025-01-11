@@ -19,11 +19,10 @@ const MobileBar = dynamic(() => import('@/components/layout/navbar/Mobile'), {
 
 export const metadata: Metadata = {
   title: {
-    default: 'Jobernify',
+    default: 'Jobernify | The AI Powered Job Search Platform ',
     template: '%s | Jobernify',
   },
-  description:
-    'Find your dream job or perfect candidate with ease using Jobernify. Start today!',
+  description: 'Find your dream job with ease using Jobernify. Start today!',
   twitter: {
     card: 'summary_large_image',
   },

@@ -17,13 +17,13 @@ const HeroLanding: React.FC = () => {
           </div>
           <div className="max-w-2xl">
             <h1 className="text-white text-[40px] font-semibold leading-[50px] max-md:text-[30px] max-md:leading-[40px]">
-              Where Job Seekers and Employers Find the Perfect Match
+              Where Job Seekers and Employers Search & Find the Perfect Match
             </h1>
           </div>
           <div className="max-w-lg sm:m-auto">
             <p className="text-muted-foreground leading-relaxed sm:text-lg">
-              Job hunting made simple, hiring made effective. Your career
-              journey or your next hire is only a click away.
+              <strong>Job</strong> hunting made simple, hiring made effective.
+              Your career journey or your next hire is only a click away.
             </p>
           </div>
           <div>

@@ -13,11 +13,11 @@ import '../globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Jobernify',
+    default: 'Jobernify | The AI Powered Job Search Platform ',
     template: '%s | Jobernify',
   },
   description:
-    'Attract top talent with ease using Jobernify. Showcase your company culture, and reach a pool of qualified candidates. Start your hiring journey today!',
+    'Attract top talent with ease using Jobernify. Showcase your company culture, and reach a pool of qualified candidates.',
   twitter: {
     card: 'summary_large_image',
   },
