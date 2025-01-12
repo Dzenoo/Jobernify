@@ -16,7 +16,7 @@ const BenefitsLanding: React.FC = () => {
         </div>
         <div>
           <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
-            Why <span className="text-[#0084FF]">Choose</span> Our Platform?
+            Why <strong className="text-[#0084FF]">Choose</strong> Our Platform?
           </h1>
         </div>
         <div>

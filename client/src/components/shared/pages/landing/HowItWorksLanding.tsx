@@ -38,7 +38,7 @@ const HowItWorksLanding: React.FC = () => {
         </div>
         <div>
           <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
-            How It <span className="text-[#0084FF]">Works</span>
+            How It <strong className="text-[#0084FF]">Works</strong>
           </h1>
         </div>
         <div className="max-w-xl">

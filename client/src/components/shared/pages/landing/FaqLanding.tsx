@@ -43,7 +43,8 @@ const FaqLanding: React.FC = () => {
         </div>
         <div>
           <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
-            Frequently Asked <span className="text-[#0084FF]">Questions</span>
+            Frequently Asked{' '}
+            <strong className="text-[#0084FF]">Questions</strong>
           </h1>
         </div>
         <div className="max-w-2xl m-auto">

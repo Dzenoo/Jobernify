@@ -17,7 +17,7 @@ const TechRolesOnlyLanding: React.FC = () => {
         <div className="max-w-lg">
           <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
             Tailored for All Tech Roles:{' '}
-            <span className="text-[#0084FF]">Your Career Starts Here</span>
+            <strong className="text-[#0084FF]">Your Career Starts Here</strong>
           </h1>
         </div>
         <div className="max-w-xl">
