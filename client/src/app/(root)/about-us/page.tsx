@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const AboutUsPage = () => {
   return (
     <section className="px-5 py-20 flex flex-col gap-72 w-full bg-grid-small-white/[0.2] relative md:landing-padding">
-      <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_70%,black)]" />
+      <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_40%,black)]" />
       <div className="flex flex-col gap-5 justify-center sm:items-center sm:text-center">
         <div>
           <BlueButton>About Us</BlueButton>
@@ -27,7 +27,7 @@ const AboutUsPage = () => {
           </h1>
         </div>
         <div className="max-w-2xl">
-          <p className="text-muted-foreground leading-relaxed">
+          <p className="text-[#9C9C9C] leading-relaxed">
             Welcome to Jobernify, where innovation meets opportunity. We are a
             forward-thinking, AI-powered job search platform dedicated to
             transforming the way job seekers and employers connect on a global
@@ -54,7 +54,7 @@ const AboutUsPage = () => {
             </h1>
           </div>
           <div className="max-w-2xl">
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-[#9C9C9C] leading-relaxed">
               At Jobernify, our mission is simple yet impactful: to empower
               individuals and organizations by connecting them with the perfect
               opportunities, no matter where they are in the world. We believe
@@ -68,7 +68,7 @@ const AboutUsPage = () => {
             {FeaturesData.map((feature) => (
               <li key={feature.id} className="space-y-2 mb-5">
                 <h2 className="text-white font-semibold">{feature.title}</h2>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-[#9C9C9C] leading-relaxed">
                   {feature.description}
                 </p>
               </li>

@@ -18,7 +18,7 @@ const EmployerGuidelinesPage = () => {
           </h1>
         </div>
         <div>
-          <p className="text-muted-foreground font-light">
+          <p className="text-[#9C9C9C] font-light">
             Welcome to Jobernify, your AI-powered recruitment solution. Use
             these guidelines to optimize your hiring experience and find the
             best talent worldwide.
@@ -34,7 +34,7 @@ const EmployerGuidelinesPage = () => {
             <div>
               <ul className="space-y-4 list-disc">
                 {guideline.list.map((item) => (
-                  <li key={item} className="text-sm text-muted-foreground">
+                  <li key={item} className="text-sm text-[#9C9C9C]">
                     {item}
                   </li>
                 ))}

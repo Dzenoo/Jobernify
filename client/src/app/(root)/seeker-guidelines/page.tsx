@@ -18,7 +18,7 @@ const SeekerGuidelinesPage = () => {
           </h1>
         </div>
         <div>
-          <p className="text-muted-foreground font-light">
+          <p className="text-[#9C9C9C] font-light">
             Welcome to Jobernify, your partner in finding the perfect job.
             Follow these guidelines to make the most of our platform and connect
             with global opportunities.
@@ -34,7 +34,7 @@ const SeekerGuidelinesPage = () => {
             <div>
               <ul className="space-y-4 list-disc">
                 {guideline.list.map((item) => (
-                  <li key={item} className="text-sm text-muted-foreground">
+                  <li key={item} className="text-sm text-[#9C9C9C]">
                     {item}
                   </li>
                 ))}
