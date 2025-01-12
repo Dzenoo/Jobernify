@@ -5,6 +5,7 @@ import Link from 'next/link';
 import BlueButton from './BlueButton';
 
 import { Button } from '@/components/ui/buttons/button';
+import Image from 'next/image';
 
 const TechRolesOnlyLanding: React.FC = () => {
   return (
@@ -20,7 +21,7 @@ const TechRolesOnlyLanding: React.FC = () => {
           </h1>
         </div>
         <div className="max-w-xl">
-          <p className="text-muted-foreground leading-relaxed">
+          <p className="text-[#9C9C9C] leading-relaxed">
             Unlike general job boards, our platform is built specifically for
             tech professionals across a variety of roles. Whether you are a
             programmer, designer, marketing specialist, product manager, or
@@ -30,17 +31,21 @@ const TechRolesOnlyLanding: React.FC = () => {
         </div>
         <div>
           <Link href="/signup">
-            <Button variant="outline" className="px-10">
+            <Button variant="outline" className="px-10 font-medium">
               Sign Up
             </Button>
           </Link>
         </div>
       </div>
       <div className="basis-full flex justify-center items-center">
-        <img
-          src="/images/jobs.png"
+        <Image
+          src="/images/jobs.webp"
           alt="jobs_search"
-          className="max-w-[700px] rounded-xl box-shadow-custom transform rotate-[25deg] scale-90 max-lg:max-w-[400px] max-sm:max-w-[300px]"
+          width={700}
+          height={500}
+          className="rounded-xl box-shadow-custom transform rotate-[25deg] scale-90 max-lg:max-w-[400px] max-sm:max-w-[300px] filter-none"
+          quality={90}
+          loading="lazy"
         />
       </div>
     </div>

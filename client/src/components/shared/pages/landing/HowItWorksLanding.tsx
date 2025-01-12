@@ -42,7 +42,7 @@ const HowItWorksLanding: React.FC = () => {
           </h1>
         </div>
         <div className="max-w-xl">
-          <p className="text-muted-foreground leading-relaxed">{description}</p>
+          <p className="text-[#9C9C9C] leading-relaxed">{description}</p>
         </div>
       </div>
       <div>
@@ -61,7 +61,7 @@ const HowItWorksLanding: React.FC = () => {
                     </h1>
                   </div>
                   <div className="max-w-72 max-lg:max-w-full">
-                    <p className="text-muted-foreground font-light leading-relaxed">
+                    <p className="text-[#9C9C9C] font-light leading-relaxed">
                       {description}
                     </p>
                   </div>

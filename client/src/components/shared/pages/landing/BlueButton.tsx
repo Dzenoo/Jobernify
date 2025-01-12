@@ -19,7 +19,10 @@ const BlueButton: React.FC<BlueButtonProps> = ({
       {...props}
       className={cn(
         'px-5 py-3 text-sm text-[#0084FF] border border-[#0084FF] rounded-full bg-[#1d4fd817] bg-opacity-10 transition-all hover:bg-[#1d4fd82f]',
-        `${!isActive && 'border-[#1b1b1b] bg-[#1e1e1e] text-muted-foreground hover:bg-[#1e1e1e]'}`,
+        `${
+          !isActive &&
+          'border-[#1b1b1b] bg-[#1e1e1e] text-[#9C9C9C] hover:bg-[#1e1e1e]'
+        }`,
         className,
       )}
     >

@@ -20,7 +20,7 @@ const BenefitsLanding: React.FC = () => {
           </h1>
         </div>
         <div>
-          <p className="text-muted-foreground leading-relaxed">
+          <p className="text-[#9C9C9C] leading-relaxed">
             Our platform offers unique benefits to both job seekers and
             employers in the programming industry. Designed with cutting-edge
             technology and a user-centered approach.
@@ -44,7 +44,7 @@ const BenefitsLanding: React.FC = () => {
                 <h1 className="text-white font-semibold text-xl">{title}</h1>
               </div>
               <div className="max-w-xl">
-                <p className="text-muted-foreground font-light leading-relaxed">
+                <p className="text-[#9C9C9C] font-light leading-relaxed">
                   {description}
                 </p>
               </div>

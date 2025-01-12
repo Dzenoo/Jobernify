@@ -13,6 +13,7 @@ import {
   AccordionContent,
 } from '@/components/ui/navigation/accordion';
 import { Button } from '@/components/ui/buttons/button';
+import { AccordionHeader } from '@radix-ui/react-accordion';
 
 const FaqLanding: React.FC = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -46,7 +47,7 @@ const FaqLanding: React.FC = () => {
           </h1>
         </div>
         <div className="max-w-2xl m-auto">
-          <p className="text-muted-foreground leading-relaxed">
+          <p className="text-[#9C9C9C] leading-relaxed">
             Have questions about how our platform works? We have got you
             covered! Whether you are a job seeker looking for your next
             opportunity or an employer searching for top tech talent, here are
@@ -76,7 +77,7 @@ const FaqLanding: React.FC = () => {
               <AccordionTrigger className="font-semibold max-sm:text-sm text-left pb-0">
                 {title}
               </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground pb-0">
+              <AccordionContent className="text-[#9C9C9C] pb-0">
                 {description}
               </AccordionContent>
             </AccordionItem>
@@ -90,14 +91,14 @@ const FaqLanding: React.FC = () => {
           </h1>
         </div>
         <div className="max-w-lg m-auto">
-          <p className="text-muted-foreground leading-relaxed">
+          <p className="text-[#9C9C9C] leading-relaxed">
             If you have any further questions or concerns, please don't hesitate
             to reach out to us. Our dedicated support team is always ready to
             assist you with any inquiries you may have.
           </p>
         </div>
         <div>
-          <Button variant="outline">
+          <Button className="px-6 font-medium" variant="outline">
             <a href="mailto:jobernify@gmail.com">Contact Us</a>
           </Button>
         </div>

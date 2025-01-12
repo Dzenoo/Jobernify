@@ -26,7 +26,7 @@ const FeaturesLanding: React.FC = () => {
           </h1>
         </div>
         <div className="max-w-lg">
-          <p className="text-muted-foreground leading-relaxed">
+          <p className="text-[#9C9C9C] leading-relaxed">
             Explore Powerful Features Designed to Simplify Your Job Search and
             Hiring Process, Making It Easier for Job Seekers and Employers to
             Connect and Succeed.
@@ -34,7 +34,7 @@ const FeaturesLanding: React.FC = () => {
         </div>
         <div>
           <Link href="/signup">
-            <Button variant="outline" className="px-10">
+            <Button variant="outline" className="px-10 font-medium">
               Sign Up
             </Button>
           </Link>
@@ -48,7 +48,7 @@ const FeaturesLanding: React.FC = () => {
                 <h1 className="text-white font-semibold text-lg">{title}</h1>
               </div>
               <div>
-                <p className="text-muted-foreground font-light leading-relaxed">
+                <p className="text-[#9C9C9C] font-light leading-relaxed">
                   {description}
                 </p>
               </div>
