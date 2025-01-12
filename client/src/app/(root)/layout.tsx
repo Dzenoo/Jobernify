@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   icons: 'favicon.ico',
   title: {
     default: 'Jobernify | The AI Powered Job Search Platform ',
-    template: '%s | Jobernify',
+    template: '%s | Jobernify Platform For Job Seekers and Employers',
   },
   description:
     'Unlock your career potential with Jobernify. Explore opportunities, connect with others, and achieve your goals with our innovative platform.',

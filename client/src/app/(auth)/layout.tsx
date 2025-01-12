@@ -12,7 +12,7 @@ import '../globals.css';
 export const metadata: Metadata = {
   icons: 'favicon.ico',
   title: {
-    default: 'Jobernify | The AI Powered Job Search Platform ',
+    default: 'Jobernify | The AI Powered Job Search Platform',
     template: '%s | Jobernify',
   },
   description:
