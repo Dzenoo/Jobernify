@@ -17,7 +17,7 @@ export default function robots(): MetadataRoute.Robots {
         ],
         disallow: [
           '/login',
-          '/register',
+          '/signup',
           '/employers/*',
           '/seekers/*',
           '/profile/*',

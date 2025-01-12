@@ -1,15 +1,7 @@
 import React from 'react';
-import { Metadata } from 'next';
 
 import TermsAndConditionsMarkdown from '@/components/shared/pages/policies/terms-and-conditions.md';
 import MarkdownRenderer from '@/components/shared/ui/MarkdownRenderer';
-
-export const metadata: Metadata = {
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
 
 const TermsAndConditionsPage = () => {
   return (

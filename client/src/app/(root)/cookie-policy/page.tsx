@@ -1,15 +1,7 @@
 import React from 'react';
-import { Metadata } from 'next';
 
 import CookiePolicyMarkdown from '@/components/shared/pages/policies/cookie-policy.md';
 import MarkdownRenderer from '@/components/shared/ui/MarkdownRenderer';
-
-export const metadata: Metadata = {
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
 
 const CookiePolicyPage = () => {
   return (
