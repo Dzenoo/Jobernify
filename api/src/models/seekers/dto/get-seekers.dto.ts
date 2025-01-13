@@ -7,6 +7,7 @@ import {
   Min,
 } from 'class-validator';
 import { Transform } from 'class-transformer';
+import { sanitizeInput } from '@/common/utils';
 
 export class GetSeekersDto {
   @IsOptional()
@@ -24,6 +25,7 @@ export class GetSeekersDto {
 
   @IsOptional()
   @IsString()
+  @Transform(({ value }) => sanitizeInput(value))
   readonly search?: string;
 
   @IsOptional()

@@ -1,22 +1,15 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 import { Transform } from 'class-transformer';
 import { sanitizeInput } from '@/common/utils';
 
-export class TwoFactorCodeDto {
+export class SendMessageDto {
   @IsString()
   @IsNotEmpty()
   @Transform(({ value }) => sanitizeInput(value))
-  code: string;
-}
-
-export class TwoFactorVerifyDto {
-  @IsString()
-  @IsNotEmpty()
-  @Transform(({ value }) => sanitizeInput(value))
-  code: string;
+  message: string;
 
   @IsString()
   @IsNotEmpty()
   @Transform(({ value }) => sanitizeInput(value))
-  userId: string;
+  threadId: string;
 }

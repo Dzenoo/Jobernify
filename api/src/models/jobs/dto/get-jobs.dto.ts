@@ -7,6 +7,7 @@ import {
   Max,
 } from 'class-validator';
 import { Transform } from 'class-transformer';
+import { sanitizeInput } from '@/common/utils';
 
 export class GetJobsDto {
   @IsOptional()
@@ -28,6 +29,7 @@ export class GetJobsDto {
 
   @IsOptional()
   @IsString()
+  @Transform(({ value }) => sanitizeInput(value))
   readonly search?: string;
 
   @IsOptional()

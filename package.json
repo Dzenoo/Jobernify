@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:client": "npm run dev --prefix client",
-    "start:api": "npm run start --prefix api",
+    "start:api": "npm run start:dev --prefix api",
     "start:all": "npm run start:client & npm run start:api"
   },
   "repository": {

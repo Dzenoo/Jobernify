@@ -13,8 +13,8 @@ import { EmployersService } from '@/models/employers/employers.service';
 import { JwtService } from '@nestjs/jwt';
 import { VerificationService } from '@/authentication/services/verification.service';
 
-import { SignupSeekerDto } from '@/models/seekers/dto/signup-seeker.dto';
-import { SignUpEmployerDto } from '@/models/employers/dto/signup-employer.dto';
+import { SignupSeekerDto } from '@/authentication/dto/signup-seeker.dto';
+import { SignUpEmployerDto } from '@/authentication/dto/signup-employer.dto';
 import { getRedirectUrl } from '@/common/utils';
 
 import * as bcrypt from 'bcrypt';

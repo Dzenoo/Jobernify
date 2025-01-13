@@ -8,14 +8,17 @@ import {
   IsBoolean,
 } from 'class-validator';
 import { JobLevel, JobPosition, JobType } from '@/types';
+import { sanitizeInput } from '@/common/utils';
 
 export class CreateExperienceDto {
   @IsString()
   @IsNotEmpty()
+  @Transform(({ value }) => sanitizeInput(value))
   readonly jobTitle: string;
 
   @IsString()
   @IsNotEmpty()
+  @Transform(({ value }) => sanitizeInput(value))
   readonly companyName: string;
 
   @IsDateString()
@@ -34,6 +37,7 @@ export class CreateExperienceDto {
 
   @IsString()
   @IsNotEmpty()
+  @Transform(({ value }) => sanitizeInput(value))
   readonly location: string;
 
   @IsEnum(JobPosition)

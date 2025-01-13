@@ -25,8 +25,8 @@ import { JwtAuthGuard } from '@/authentication/guards/jwt-auth.guard';
 
 import { SeekersService } from '@/models/seekers/seekers.service';
 import { EmployersService } from '@/models/employers/employers.service';
-import { SignupSeekerDto } from '@/models/seekers/dto/signup-seeker.dto';
-import { SignUpEmployerDto } from '@/models/employers/dto/signup-employer.dto';
+import { SignupSeekerDto } from '@/authentication/dto/signup-seeker.dto';
+import { SignUpEmployerDto } from '@/authentication/dto/signup-employer.dto';
 import { Seeker } from '@/models/seekers/schemas/seeker.schema';
 import { Employer } from '@/models/employers/schemas/employer.schema';
 

@@ -10,11 +10,14 @@ import {
   IsDateString,
 } from 'class-validator';
 import { JobLevel, JobPosition, JobType } from '@/types';
+import { Transform } from 'class-transformer';
+import { sanitizeInput } from '@/common/utils';
 
 export class UpdateJobDto {
   @IsOptional()
   @IsString()
   @Length(3, 30)
+  @Transform(({ value }) => sanitizeInput(value))
   readonly title?: string;
 
   @IsOptional()
@@ -24,11 +27,13 @@ export class UpdateJobDto {
   @IsOptional()
   @IsString()
   @Length(3, 30)
+  @Transform(({ value }) => sanitizeInput(value))
   readonly location?: string;
 
   @IsOptional()
   @IsString()
   @Length(30, 300)
+  @Transform(({ value }) => sanitizeInput(value))
   readonly overview?: string;
 
   @IsOptional()
@@ -38,6 +43,7 @@ export class UpdateJobDto {
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
+  @Transform(({ value }) => sanitizeInput(value))
   readonly skills?: string[];
 
   @IsOptional()
@@ -57,5 +63,12 @@ export class UpdateJobDto {
   @IsOptional()
   @IsString()
   @Length(30, 2500)
+  @Transform(({ value }) =>
+    sanitizeInput(value, {
+      allowedTags: ['b', 'i', 'ul', 'li', 'ol'],
+      allowedAttributes: {},
+      disallowedTagsMode: 'discard',
+    }),
+  )
   readonly description?: string;
 }

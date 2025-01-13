@@ -18,6 +18,7 @@ import { WsJwtGuard } from '@/authentication/guards/ws-jwt.guard';
 import { SocketAuthMiddleware } from '@/authentication/middlewares/ws.middleware';
 
 import { AiService } from '@/ai/ai.service';
+import { SendMessageDto } from './dto/send-message.dto';
 
 @WebSocketGateway({
   cors: {
@@ -54,7 +55,7 @@ export class AiGateway
   @Throttle({ default: { limit: 10, ttl: 60000 } })
   @SubscribeMessage('send_message')
   async handleSendMessage(
-    @MessageBody() payload: { threadId: string; message: string },
+    @MessageBody() payload: SendMessageDto,
     @ConnectedSocket() client: Socket,
   ) {
     const { threadId, message } = payload;

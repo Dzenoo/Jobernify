@@ -26,6 +26,7 @@ import { JwtAuthGuard } from '@/authentication/guards/jwt-auth.guard';
 import { RolesGuard } from '@/authentication/guards/role-auth.guard';
 
 import { Roles } from '@/common/decorators/roles.decorator';
+import { ApplyToJobDto } from './dto/apply-to-job.dto';
 
 @Controller('/applications')
 export class ApplicationsController {
@@ -93,13 +94,13 @@ export class ApplicationsController {
       }),
     )
     resume: Express.Multer.File,
-    @Body('coverLetter') coverLetter?: string,
+    @Body() body?: ApplyToJobDto,
   ) {
     return await this.applicationsService.createOne(
       userId,
       jobId,
       resume,
-      coverLetter,
+      body.coverLetter,
     );
   }
 }
