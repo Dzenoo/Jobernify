@@ -22,11 +22,7 @@ import { SendMessageDto } from './dto/send-message.dto';
 
 @WebSocketGateway({
   cors: {
-    origin: [
-      'http://localhost:3000',
-      'https://www.jobernify.com',
-      'https://jobernify.com',
-    ],
+    origin: ['https://jobernify.com', 'http://localhost:3000'],
     credentials: true,
   },
   transports: ['websocket'],

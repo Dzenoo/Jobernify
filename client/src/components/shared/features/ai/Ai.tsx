@@ -24,7 +24,6 @@ type AiProps = {
 const Ai: React.FC<AiProps> = ({ isSeeker }) => {
   const { connect, disconnect, socket } = useWebSocket({
     url: 'wss://api.jobernify.com',
-    // url: 'ws://jobernify-production.up.railway.app',
     // url: 'ws://localhost:8080',
   });
 
