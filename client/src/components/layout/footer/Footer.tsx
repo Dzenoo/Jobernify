@@ -9,17 +9,11 @@ import { cn } from '@/lib/utils';
 import Logo from '../navbar/Logo';
 import LinkedinIcon from '@/components/shared/icons/LinkedinIcon';
 
-type FooterProps = {
-  className?: string;
-  theme?: string;
-};
-
-const Footer: React.FC<FooterProps> = ({ className, theme }) => {
+const Footer: React.FC = () => {
   return (
     <footer
       className={cn(
         'px-5 py-8 shadow-lg bg-white border-t dark:border-[#1b1b1b] border-gray-100 dark:bg-[#0d0d0d]',
-        className,
       )}
     >
       <div className="flex justify-between gap-10 items-start dark:border-[#1b1b1b] max-xl:flex-wrap">
@@ -48,9 +42,7 @@ const Footer: React.FC<FooterProps> = ({ className, theme }) => {
           </div>
         </div>
         <div className="flex items-start justify-between gap-16 max-lg:flex-wrap">
-          {FooterLinks.map((footer) =>
-            renderFooterLinks({ ...footer, theme } as const),
-          )}
+          {FooterLinks.slice(0, 4).map((links) => renderFooterLinks(links))}
         </div>
       </div>
     </footer>
@@ -59,7 +51,6 @@ const Footer: React.FC<FooterProps> = ({ className, theme }) => {
 
 function renderFooterLinks<
   T extends {
-    theme?: string;
     title: string;
     links: {
       id: string;
@@ -68,17 +59,11 @@ function renderFooterLinks<
     }[];
     id: string;
   },
->({ theme, title, links, id }: T): React.JSX.Element {
+>({ title, links, id }: T): React.JSX.Element {
   return (
     <div key={id} className="space-y-3">
       <div>
-        <h1
-          className={`text-sm font-medium uppercase ${
-            theme === 'dark' ? 'text-white' : ''
-          }`}
-        >
-          {title}
-        </h1>
+        <h1 className="text-sm font-medium uppercase">{title}</h1>
       </div>
       <div>
         <ul className="flex flex-col gap-2">
@@ -86,7 +71,7 @@ function renderFooterLinks<
             <li key={link.id}>
               <Link
                 href={link.href}
-                className={`text-muted-foreground text-sm transition-all hover:text-gray-800 dark:hover:text-white`}
+                className="text-muted-foreground text-sm transition-all hover:text-black dark:hover:text-white"
               >
                 {link.name}
               </Link>

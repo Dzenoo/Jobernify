@@ -18,7 +18,7 @@ const RootLayoutWrapper = ({ children }: { children: React.ReactNode }) => {
     >
       <NavbarLanding />
       <main className="flex-1">{children}</main>
-      <Footer className="border-t border-[#1b1b1b] bg-black" theme="dark" />
+      <Footer />
     </div>
   );
 };
