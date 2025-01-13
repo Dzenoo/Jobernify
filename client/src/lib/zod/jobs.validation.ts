@@ -2,6 +2,7 @@ import zod from 'zod';
 import DOMPurify from 'dompurify';
 
 import { jobLevels, jobPositions, jobTypes } from '@/constants';
+import { sanitizeInput } from '../utils';
 
 /**
  * Schema for applying to a job.
@@ -12,7 +13,10 @@ export const ApplyToJobSchema = zod.object({
    * Cover letter for the job application.
    * It's optional.
    */
-  coverLetter: zod.string().optional(),
+  coverLetter: zod
+    .string()
+    .optional()
+    .transform((value) => sanitizeInput(value ?? '')),
 });
 
 /**
@@ -28,7 +32,8 @@ export const UpdateJobSchema = zod.object({
     .string()
     .min(3, 'Title should have at least 3 characters.')
     .max(30, 'Title can be up to 30 characters long.')
-    .trim(),
+    .trim()
+    .transform((value) => sanitizeInput(value)),
   /**
    * Job position.
    * Must be either 'Remote', 'On-Site', or 'Hybrid'.
@@ -45,7 +50,8 @@ export const UpdateJobSchema = zod.object({
   location: zod
     .string()
     .min(3, 'Location should have at least 3 characters.')
-    .max(30, 'Location can be up to 30 characters long.'),
+    .max(30, 'Location can be up to 30 characters long.')
+    .transform((value) => sanitizeInput(value)),
   /**
    * Job overview.
    * Must be between 30 and 300 characters long.
@@ -57,7 +63,8 @@ export const UpdateJobSchema = zod.object({
       'Overview should have at least 30 characters to provide sufficient detail.',
     )
     .max(300, 'Overview can be up to 300 characters long.')
-    .trim(),
+    .trim()
+    .transform((value) => sanitizeInput(value)),
   /**
    * Job type.
    * Must be 'Internship', 'Full-Time', 'Part-Time', or 'Freelance'.
@@ -77,7 +84,8 @@ export const UpdateJobSchema = zod.object({
       .string()
       .min(1, 'Each skill must have at least 1 character.')
       .max(25, 'Each skill can be up to 25 characters long.')
-      .trim(),
+      .trim()
+      .transform((value) => sanitizeInput(value)),
   ),
   /**
    * Job level.
@@ -114,5 +122,12 @@ export const UpdateJobSchema = zod.object({
         return plainText.trim().length >= 30;
       },
       { message: 'Description should be at least 30 characters long.' },
+    )
+    .transform((value) =>
+      sanitizeInput(value, {
+        allowedTags: ['b', 'i', 'ul', 'li', 'ol'],
+        allowedAttributes: {},
+        disallowedTagsMode: 'discard',
+      }),
     ),
 });

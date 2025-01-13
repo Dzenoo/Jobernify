@@ -1,6 +1,7 @@
 import zod from 'zod';
 
 import { companySizes, industries } from '@/constants';
+import { sanitizeInput } from '../utils';
 
 /**
  * Schema for employer profile validation.
@@ -11,12 +12,20 @@ export const EmployerProfileSchema = zod.object({
    * Company name.
    * Must be between 5 and 50 characters long.
    */
-  name: zod.string().min(5).max(50),
+  name: zod
+    .string()
+    .min(5)
+    .max(50)
+    .transform((value) => sanitizeInput(value)),
   /**
    * Company address.
    * Must be between 5 and 50 characters long.
    */
-  address: zod.string().min(5).max(50),
+  address: zod
+    .string()
+    .min(5)
+    .max(50)
+    .transform((value) => sanitizeInput(value)),
   /**
    * Company industry.
    * Must be one of the valid industries in the constants file.
@@ -28,7 +37,10 @@ export const EmployerProfileSchema = zod.object({
    * Company website.
    * Must be at most 30 characters long.
    */
-  website: zod.string().max(30),
+  website: zod
+    .string()
+    .max(30)
+    .transform((value) => sanitizeInput(value)),
   /**
    * Company size.
    * Must be one of the valid company sizes in the constants file.
@@ -38,5 +50,9 @@ export const EmployerProfileSchema = zod.object({
    * Company description.
    * Must be at most 1000 characters long.
    */
-  companyDescription: zod.string().min(5).max(300),
+  companyDescription: zod
+    .string()
+    .min(5)
+    .max(300)
+    .transform((value) => sanitizeInput(value)),
 });

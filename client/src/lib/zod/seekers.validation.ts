@@ -1,6 +1,7 @@
 import zod from 'zod';
 
 import { jobLevels, jobPositions, jobTypes } from '@/constants';
+import { sanitizeInput } from '../utils';
 
 /**
  * Schemas for validating the various forms and data structures used in the Seeker section of the app.
@@ -10,22 +11,36 @@ export const SeekerProfileSchema = zod.object({
    * First name of the Seeker.
    * Must be between 2 and 30 characters long.
    */
-  first_name: zod.string().min(2).max(30),
+  first_name: zod
+    .string()
+    .min(2)
+    .max(30)
+    .transform((value) => sanitizeInput(value)),
   /**
    * Last name of the Seeker.
    * Must be between 2 and 30 characters long.
    */
-  last_name: zod.string().min(2).max(30),
+  last_name: zod
+    .string()
+    .min(2)
+    .max(30)
+    .transform((value) => sanitizeInput(value)),
   /**
    * Biography of the Seeker.
    * Must be at most 1000 characters long.
    */
-  biography: zod.string().max(1000),
+  biography: zod
+    .string()
+    .max(1000)
+    .transform((value) => sanitizeInput(value)),
   /**
    * Headline of the Seeker.
    * Must be at most 30 characters long.
    */
-  headline: zod.string().max(30),
+  headline: zod
+    .string()
+    .max(30)
+    .transform((value) => sanitizeInput(value)),
 });
 
 export const SeekerSocialsSchema = zod.object({
@@ -42,7 +57,8 @@ export const SeekerSocialsSchema = zod.object({
       {
         message: 'Please enter a valid URL for the portfolio.',
       },
-    ),
+    )
+    .transform((value) => sanitizeInput(value ?? '')),
   /**
    * URL of the Seeker's LinkedIn profile.
    * Must be a valid URL.
@@ -56,7 +72,8 @@ export const SeekerSocialsSchema = zod.object({
       {
         message: 'Please enter a valid URL for LinkedIn.',
       },
-    ),
+    )
+    .transform((value) => sanitizeInput(value ?? '')),
   /**
    * URL of the Seeker's GitHub profile.
    * Must be a valid URL.
@@ -70,7 +87,8 @@ export const SeekerSocialsSchema = zod.object({
       {
         message: 'Please enter a valid URL for GitHub.',
       },
-    ),
+    )
+    .transform((value) => sanitizeInput(value ?? '')),
 });
 
 export const AddEducationSchema = zod.object({
@@ -78,17 +96,29 @@ export const AddEducationSchema = zod.object({
    * Name of the institution where the education was obtained.
    * Must be between 3 and 300 characters long.
    */
-  institution: zod.string().min(3).max(300),
+  institution: zod
+    .string()
+    .min(3)
+    .max(300)
+    .transform((value) => sanitizeInput(value)),
   /**
    * Field of study of the education.
    * Must be between 3 and 30 characters long.
    */
-  fieldOfStudy: zod.string().min(3).max(30),
+  fieldOfStudy: zod
+    .string()
+    .min(3)
+    .max(30)
+    .transform((value) => sanitizeInput(value)),
   /**
    * Degree obtained from the education.
    * Must be between 3 and 30 characters long.
    */
-  degree: zod.string().min(3).max(30),
+  degree: zod
+    .string()
+    .min(3)
+    .max(30)
+    .transform((value) => sanitizeInput(value)),
   /**
    * Date when the education was completed.
    * Must be a valid date.
@@ -102,19 +132,36 @@ export const EditEducationSchema = zod.object({
    * Must be between 3 and 300 characters long.
    * Optional.
    */
-  institution: zod.string().min(3).max(300).optional(),
+  institution: zod
+    .string()
+    .min(3)
+    .max(300)
+    .optional()
+    .transform((value) => sanitizeInput(value ?? '')),
   /**
    * Field of study of the education.
    * Must be between 3 and 30 characters long.
    * Optional.
    */
-  fieldOfStudy: zod.string().min(3).max(30).optional(),
+  fieldOfStudy: zod
+    .string()
+    .min(3)
+    .max(30)
+    .optional()
+    .transform((value) => sanitizeInput(value ?? '')),
+
   /**
    * Degree obtained from the education.
    * Must be between 3 and 30 characters long.
    * Optional.
    */
-  degree: zod.string().min(3).max(30).optional(),
+  degree: zod
+    .string()
+    .min(3)
+    .max(30)
+    .optional()
+    .transform((value) => sanitizeInput(value ?? '')),
+
   /**
    * Date when the education was completed.
    * Must be a valid date.
@@ -128,12 +175,20 @@ export const AddExperienceSchema = zod.object({
    * Title of the job.
    * Must be between 3 and 100 characters long.
    */
-  jobTitle: zod.string().min(3).max(100),
+  jobTitle: zod
+    .string()
+    .min(3)
+    .max(100)
+    .transform((value) => sanitizeInput(value)),
   /**
    * Name of the company where the job was held.
    * Must be between 3 and 300 characters long.
    */
-  companyName: zod.string().min(3).max(300),
+  companyName: zod
+    .string()
+    .min(3)
+    .max(300)
+    .transform((value) => sanitizeInput(value)),
   /**
    * Date when the job started.
    * Must be a valid date.
@@ -168,7 +223,11 @@ export const AddExperienceSchema = zod.object({
    * Location of the job.
    * Must be between 3 and 100 characters long.
    */
-  location: zod.string().min(3).max(100),
+  location: zod
+    .string()
+    .min(3)
+    .max(100)
+    .transform((value) => sanitizeInput(value)),
   /**
    * Position of the job.
    * Must be 'Remote', 'On-Site', or 'Hybrid'.
@@ -191,13 +250,24 @@ export const EditExperienceSchema = zod.object({
    * Must be between 3 and 100 characters long.
    * Optional.
    */
-  jobTitle: zod.string().min(3).max(100).optional(),
+  jobTitle: zod
+    .string()
+    .min(3)
+    .max(100)
+    .optional()
+    .transform((value) => sanitizeInput(value ?? '')),
   /**
    * Name of the company where the job was held.
    * Must be between 3 and 300 characters long.
    * Optional.
    */
-  companyName: zod.string().min(3).max(300).optional(),
+  companyName: zod
+    .string()
+    .min(3)
+    .max(300)
+    .optional()
+    .transform((value) => sanitizeInput(value ?? '')),
+
   /**
    * Date when the job started.
    * Must be a valid date.
@@ -240,7 +310,13 @@ export const EditExperienceSchema = zod.object({
    * Must be between 3 and 100 characters long.
    * Optional.
    */
-  location: zod.string().min(3).max(100).optional(),
+  location: zod
+    .string()
+    .min(3)
+    .max(100)
+    .optional()
+    .transform((value) => sanitizeInput(value ?? '')),
+
   /**
    * Position of the job.
    * Must be 'Remote', 'On-Site', or 'Hybrid'.
@@ -265,7 +341,7 @@ export const SkillsSchema = zod.object({
    * Array of skills of the Seeker.
    * Must be an array of strings.
    */
-  skills: zod.array(zod.string()),
+  skills: zod.array(zod.string().transform((value) => sanitizeInput(value))),
 });
 
 export const JobAlertSchema = zod.object({
@@ -273,17 +349,29 @@ export const JobAlertSchema = zod.object({
    * Title of the job alert.
    * Must be between 3 and 30 characters long.
    */
-  title: zod.string().min(3).max(30),
+  title: zod
+    .string()
+    .min(3)
+    .max(30)
+    .transform((value) => sanitizeInput(value)),
   /**
    * Type of the job alert.
    * Must be between 3 and 30 characters long.
    */
-  type: zod.string().min(3).max(30),
+  type: zod
+    .string()
+    .min(3)
+    .max(30)
+    .transform((value) => sanitizeInput(value)),
   /**
    * Level of the job alert.
    * Must be between 3 and 30 characters long.
    */
-  level: zod.string().min(3).max(30),
+  level: zod
+    .string()
+    .min(3)
+    .max(30)
+    .transform((value) => sanitizeInput(value)),
 });
 
 export const ReceiveJobAlertsSchema = zod.object({

@@ -22,7 +22,9 @@ const NavbarLanding: React.FC = () => {
       </div>
       <div className="flex items-stretch">
         <Link href="/login">
-          <Button variant="outline">Login</Button>
+          <Button variant="outline" className="font-medium">
+            Login
+          </Button>
         </Link>
       </div>
     </header>

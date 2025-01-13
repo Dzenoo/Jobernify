@@ -1,12 +1,10 @@
 import { z } from 'zod';
+import { sanitizeInput } from '@/lib/utils';
 
 /**
  * Schema for validating the AI form data
  */
 export const AiFormSchema = z.object({
-  /**
-   * The question to be asked to the AI
-   */
   question: z
     .string()
     .min(3)
@@ -14,5 +12,6 @@ export const AiFormSchema = z.object({
     .trim()
     .refine((value) => value.length > 0, {
       message: 'Question must not be empty',
-    }),
+    })
+    .transform((value) => sanitizeInput(value)),
 });
