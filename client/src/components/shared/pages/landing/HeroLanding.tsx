@@ -1,11 +1,9 @@
 import React from 'react';
-
 import Link from 'next/link';
 
 import BlueButton from './BlueButton';
 
 import { Button } from '@/components/ui/buttons/button';
-import Image from 'next/image';
 
 const HeroLanding: React.FC = () => {
   return (
@@ -36,7 +34,17 @@ const HeroLanding: React.FC = () => {
           </div>
         </div>
         <div>
-          <Image
+          <video
+            controls
+            controlsList="nodownload"
+            loop
+            playsInline
+            className="w-[90em] h-auto rounded-xl box-shadow-custom object-cover"
+          >
+            <source src="/videos/demo-1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          {/* <Image
             src="/images/landing-dark.webp"
             alt="landing-dark"
             width={1920}
@@ -44,7 +52,7 @@ const HeroLanding: React.FC = () => {
             className="m-auto rounded-xl box-shadow-custom object-cover"
             quality={90}
             priority
-          />
+          /> */}
         </div>
       </div>
     </section>
