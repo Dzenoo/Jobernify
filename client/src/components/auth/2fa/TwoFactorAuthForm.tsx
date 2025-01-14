@@ -93,6 +93,7 @@ const TwoFactorAuthForm: React.FC<
       toast({
         title: 'Success',
         description: data.message,
+        variant: 'destructive',
       });
       if (onSuccess) onSuccess();
     },
@@ -107,13 +108,14 @@ const TwoFactorAuthForm: React.FC<
         return verify2FALogin(props.userId, code);
       }
     },
-    onSuccess: (data) => {
-      router.push(data!.redirectUrl);
-    },
+    // onSuccess: (data) => {
+    //   router.push(data!.redirectUrl);
+    // },
     onError: (err: any) => {
       toast({
         title: 'Error',
         description: err?.response?.data?.message,
+        variant: 'destructive',
       });
     },
   });
@@ -199,12 +201,12 @@ const TwoFactorAuthForm: React.FC<
                 ? 'Verifying...'
                 : 'Enable 2FA'
               : mode === 'LOGIN_VERIFY'
-                ? isVerifyingOther
-                  ? 'Verifying...'
-                  : 'Confirm Login'
-                : isVerifyingOther
-                  ? 'Verifying...'
-                  : 'Disable 2FA'}
+              ? isVerifyingOther
+                ? 'Verifying...'
+                : 'Confirm Login'
+              : isVerifyingOther
+              ? 'Verifying...'
+              : 'Disable 2FA'}
           </Button>
         </form>
       </Form>

@@ -28,13 +28,13 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <QueryContextProvider>
-      <html lang="en">
-        <body className={GeistSans.className}>
+    <html lang="en">
+      <body className={GeistSans.className}>
+        <QueryContextProvider>
           <AuthLayoutWrapper>{children}</AuthLayoutWrapper>
           <Toaster />
-        </body>
-      </html>
-    </QueryContextProvider>
+        </QueryContextProvider>
+      </body>
+    </html>
   );
 }

@@ -76,9 +76,7 @@ export class AuthController {
       return res.redirect(redirectUrl);
     } catch (error) {
       const message = encodeURIComponent(error.message);
-      return res.redirect(
-        `${process.env.FRONTEND_URL}/auth/error?error=${message}`,
-      );
+      return res.redirect(`${process.env.FRONTEND_URL}/login?error=${message}`);
     }
   }
 
@@ -92,25 +90,39 @@ export class AuthController {
     const { _id, isTwoFactorAuthEnabled } = user._doc;
 
     if (isTwoFactorAuthEnabled) {
-      return res.status(HttpStatus.OK).json({
-        message: '2FA code required',
-        twoFactorRequired: true,
-        userId: _id,
-      });
+      return res.redirect(
+        `${process.env.FRONTEND_URL}/login/2fa?userId=${_id}`,
+      );
+
+      // return res.status(HttpStatus.OK).json({
+      //   message: '2FA code required',
+      //   twoFactorRequired: true,
+      //   userId: _id,
+      // });
     }
 
     const { access_token, redirectUrl } =
       await this.localAuthService.login(user);
+
     res.cookie('access_token', access_token, cookieOptions);
-    return res
-      .status(HttpStatus.OK)
-      .json({ message: 'Authentication successful', redirectUrl });
+
+    return res.redirect(redirectUrl);
+
+    // return res
+    //   .status(HttpStatus.OK)
+    //   .json({ message: 'Authentication successful', redirectUrl });
   }
 
   @Throttle({ default: { ttl: 60000, limit: 5 } })
   @Post('/2fa/login-verify')
   async verify2FALogin(@Res() res: Response, @Body() body: TwoFactorVerifyDto) {
     const { userId, code } = body;
+
+    const user = await this.findUserById(userId);
+    if (!user || !user.isTwoFactorAuthEnabled) {
+      throw new UnauthorizedException();
+    }
+
     const isValid = await this.twoFactorAuthService.verifyTwoFactorAuthToken(
       userId,
       code,
@@ -120,17 +132,16 @@ export class AuthController {
       throw new UnauthorizedException('Invalid 2FA code');
     }
 
-    const user = await this.findUserById(userId);
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
-
     const { access_token, redirectUrl } =
       await this.localAuthService.login(user);
+
     res.cookie('access_token', access_token, cookieOptions);
-    return res
-      .status(HttpStatus.OK)
-      .json({ message: '2FA successful', redirectUrl });
+
+    return res.redirect(redirectUrl);
+
+    // return res
+    //   .status(HttpStatus.OK)
+    //   .json({ message: '2FA successful', redirectUrl });
   }
 
   @Throttle({ default: { ttl: 60000, limit: 5 } })

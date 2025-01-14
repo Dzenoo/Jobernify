@@ -52,6 +52,7 @@ const SeekersSignupForm: React.FC = () => {
       toast({
         title: 'Error',
         description: error?.response?.data.message,
+        variant: 'destructive',
       });
     },
   });

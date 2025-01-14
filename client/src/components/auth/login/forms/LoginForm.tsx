@@ -39,18 +39,18 @@ const LoginForm: React.FC = () => {
   const { mutateAsync: loginToAccount } = useMutation({
     mutationFn: signIn,
     onSuccess: (response) => {
-      if (response.redirectUrl) {
-        router.push(response.redirectUrl);
-      }
-
-      if (response.twoFactorRequired) {
-        router.push(`/login/2fa?userId=${response.userId}`);
-      }
+      // if (response.redirectUrl) {
+      //   router.push(response.redirectUrl);
+      // }
+      // if (response.twoFactorRequired) {
+      //   router.push(`/login/2fa?userId=${response.userId}`);
+      // }
     },
     onError: (error: any) => {
       toast({
         title: 'Error',
         description: error?.response?.data.message,
+        variant: 'destructive',
       });
     },
   });
