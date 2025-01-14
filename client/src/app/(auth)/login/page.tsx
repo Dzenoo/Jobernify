@@ -11,27 +11,24 @@ const LoginPage = ({
 }: {
   searchParams: { [key: string]: string };
 }) => {
-  const [errorMessage, setErrorMessage] = useState('');
+  const [mounted, setMounted] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
-    const error = searchParams.error;
-    if (error) {
-      setErrorMessage(error);
-    }
-  }, [searchParams]);
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    if (!mounted) return;
+
+    if (searchParams.error) {
       toast({
         title: 'Authentication Error',
         variant: 'destructive',
-        description: errorMessage,
+        description: searchParams.error,
       });
-    }, 0);
-
-    return () => clearTimeout(timeout);
-  }, [errorMessage, toast]);
+    }
+  }, [searchParams.error, toast, mounted]);
 
   return (
     <section className="h-screen flex justify-center items-center">
