@@ -1,6 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+
+import { useMounted } from '@/hooks/core/useMounted.hook';
 
 import Login from '@/components/auth/login/Login';
 
@@ -11,24 +13,18 @@ const LoginPage = ({
 }: {
   searchParams: { [key: string]: string };
 }) => {
-  const [mounted, setMounted] = useState(false);
+  const { isMounted } = useMounted();
   const { toast } = useToast();
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (!isMounted || !searchParams.error) return;
 
-  useEffect(() => {
-    if (!mounted) return;
-
-    if (searchParams.error) {
-      toast({
-        title: 'Authentication Error',
-        variant: 'destructive',
-        description: searchParams.error,
-      });
-    }
-  }, [searchParams.error, toast, mounted]);
+    toast({
+      title: 'Authentication Error',
+      variant: 'destructive',
+      description: searchParams.error,
+    });
+  }, [isMounted, searchParams.error, toast]);
 
   return (
     <section className="h-screen flex justify-center items-center">
