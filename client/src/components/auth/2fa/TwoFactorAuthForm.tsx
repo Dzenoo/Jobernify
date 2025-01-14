@@ -108,9 +108,9 @@ const TwoFactorAuthForm: React.FC<
         return verify2FALogin(props.userId, code);
       }
     },
-    // onSuccess: (data) => {
-    //   router.push(data!.redirectUrl);
-    // },
+    onSuccess: (data) => {
+      router.push(data?.redirectUrl as string);
+    },
     onError: (err: any) => {
       toast({
         title: 'Error',

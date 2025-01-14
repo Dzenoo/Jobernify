@@ -37,7 +37,7 @@ export class VerificationService {
     }
 
     if (user.verificationExpiration < new Date()) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Token expired.');
     }
 
     user.emailVerified = true;

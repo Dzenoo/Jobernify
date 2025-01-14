@@ -8,7 +8,6 @@ import {
   Res,
   HttpStatus,
   UnauthorizedException,
-  NotFoundException,
   UseGuards,
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
@@ -90,15 +89,11 @@ export class AuthController {
     const { _id, isTwoFactorAuthEnabled } = user._doc;
 
     if (isTwoFactorAuthEnabled) {
-      return res.redirect(
-        `${process.env.FRONTEND_URL}/login/2fa?userId=${_id}`,
-      );
-
-      // return res.status(HttpStatus.OK).json({
-      //   message: '2FA code required',
-      //   twoFactorRequired: true,
-      //   userId: _id,
-      // });
+      return res.status(HttpStatus.OK).json({
+        message: '2FA code required',
+        twoFactorRequired: true,
+        userId: _id,
+      });
     }
 
     const { access_token, redirectUrl } =
@@ -106,11 +101,9 @@ export class AuthController {
 
     res.cookie('access_token', access_token, cookieOptions);
 
-    return res.redirect(redirectUrl);
-
-    // return res
-    //   .status(HttpStatus.OK)
-    //   .json({ message: 'Authentication successful', redirectUrl });
+    return res
+      .status(HttpStatus.OK)
+      .json({ message: 'Authentication successful', redirectUrl });
   }
 
   @Throttle({ default: { ttl: 60000, limit: 5 } })
@@ -137,11 +130,9 @@ export class AuthController {
 
     res.cookie('access_token', access_token, cookieOptions);
 
-    return res.redirect(redirectUrl);
-
-    // return res
-    //   .status(HttpStatus.OK)
-    //   .json({ message: '2FA successful', redirectUrl });
+    return res
+      .status(HttpStatus.OK)
+      .json({ message: '2FA successful', redirectUrl });
   }
 
   @Throttle({ default: { ttl: 60000, limit: 5 } })
@@ -161,7 +152,7 @@ export class AuthController {
     res.clearCookie('access_token', {
       httpOnly: true,
       secure: true,
-      sameSite: 'none',
+      sameSite: 'strict',
       path: '/',
       domain: '.jobernify.com',
     });

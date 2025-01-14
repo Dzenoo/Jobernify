@@ -25,7 +25,9 @@ const VerifyEmail = ({
           setVerificationStatus('success');
           setTimeout(() => router.push('/login'), 2500);
         })
-        .catch((error) => {});
+        .catch((error) => {
+          setVerificationStatus('error');
+        });
     }
   }, [token, type, router]);
 
