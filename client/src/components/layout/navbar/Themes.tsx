@@ -1,18 +1,15 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { useTheme } from 'next-themes';
-
 import { Moon, Sun } from 'lucide-react';
 
-const Themes: React.FC = () => {
-  const [isMounted, setIsMounted] = useState(false);
-  const { setTheme, resolvedTheme } = useTheme();
+import { useMounted } from '@/hooks/core/useMounted.hook';
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+const Themes: React.FC = () => {
+  const { isMounted } = useMounted();
+  const { setTheme, resolvedTheme } = useTheme();
 
   if (!isMounted) return null;
 

@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useMounted } from '@/hooks/core/useMounted.hook';
 
 const Logo: React.FC<{ href?: string }> = ({ href = '/' }) => {
-  const [isMounted, setIsMounted] = useState(false);
+  const { isMounted } = useMounted();
   const { resolvedTheme } = useTheme();
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   if (!isMounted) {
     return null;
