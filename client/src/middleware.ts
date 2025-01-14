@@ -12,16 +12,8 @@ const protectedRoutes = {
   '/jobs': ['seeker'],
   '/jobs/jobId': ['seeker'],
   '/employers': ['seeker'],
-  '/profile': ['seeker'],
   '/employers/employerId': ['seeker'],
-};
-
-const optimizedProtectedRoutes = {
-  '/dashboard/:path*': ['employer'],
-  '/seekers/:path*': ['employer'],
-  '/jobs/:path*': ['seeker'],
-  '/employers/:path*': ['seeker'],
-  '/profile/:path*': ['seeker'],
+  '/profile': ['seeker'],
 };
 
 export function middleware(req: NextRequest) {
@@ -68,7 +60,7 @@ function handleProtectedRoutes(
   userType: string,
   req: NextRequest,
 ) {
-  for (const [route, roles] of Object.entries(optimizedProtectedRoutes)) {
+  for (const [route, roles] of Object.entries(protectedRoutes)) {
     if (pathname.startsWith(route) && !roles.includes(userType)) {
       const redirectUrl = userType === 'employer' ? '/seekers' : '/jobs';
       return NextResponse.redirect(new URL(redirectUrl, req.url));
