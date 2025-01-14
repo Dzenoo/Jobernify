@@ -25,7 +25,6 @@ export default function robots(): MetadataRoute.Robots {
           '/dashboard/*',
           '/verify-email',
           '/check-your-email',
-          '/auth/*',
           '/_next/*',
           '/static/*',
         ],

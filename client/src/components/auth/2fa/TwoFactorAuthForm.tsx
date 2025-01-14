@@ -93,7 +93,6 @@ const TwoFactorAuthForm: React.FC<
       toast({
         title: 'Success',
         description: data.message,
-        variant: 'destructive',
       });
       if (onSuccess) onSuccess();
     },

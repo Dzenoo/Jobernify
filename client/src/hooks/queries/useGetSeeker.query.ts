@@ -19,7 +19,6 @@ const useGetSeeker = (
       return getSeekerProfile(page);
     },
     queryKey: ['seeker_profile'],
-    staleTime: 5 * 60 * 1000,
     ...options,
   });
 };

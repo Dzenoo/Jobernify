@@ -50,9 +50,7 @@ function isAuthPage(pathname: string) {
     pathname === '/login/2fa' ||
     pathname === '/signup' ||
     pathname === '/verify-email' ||
-    pathname === '/check-your-email' ||
-    pathname === '/auth/success' ||
-    pathname === '/auth/error'
+    pathname === '/check-your-email'
   );
 }
 
@@ -81,7 +79,6 @@ export const config = {
     '/signup',
     '/verify-email',
     '/check-your-email',
-    '/auth/:path*',
     '/dashboard/:path*',
     '/seekers/:path*',
     '/profile',
