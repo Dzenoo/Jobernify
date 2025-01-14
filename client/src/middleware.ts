@@ -16,6 +16,14 @@ const protectedRoutes = {
   '/employers/employerId': ['seeker'],
 };
 
+const optimizedProtectedRoutes = {
+  '/dashboard/*': ['employer'],
+  '/seekers/*': ['employer'],
+  '/jobs/*': ['seeker'],
+  '/employers/*': ['seeker'],
+  '/profile/*': ['seeker'],
+};
+
 export function middleware(req: NextRequest) {
   const token = req.cookies.get('access_token');
 
@@ -28,10 +36,6 @@ export function middleware(req: NextRequest) {
 
   if (isAuthPage(pathname)) {
     return redirectLoggedInUser(userType, req);
-  }
-
-  if (pathname === '/' && userType === 'employer') {
-    return NextResponse.redirect(new URL('/dashboard', req.url));
   }
 
   return handleProtectedRoutes(pathname, userType, req);
@@ -64,7 +68,7 @@ function handleProtectedRoutes(
   userType: string,
   req: NextRequest,
 ) {
-  for (const [route, roles] of Object.entries(protectedRoutes)) {
+  for (const [route, roles] of Object.entries(optimizedProtectedRoutes)) {
     if (pathname.startsWith(route) && !roles.includes(userType)) {
       const redirectUrl = userType === 'employer' ? '/seekers' : '/jobs';
       return NextResponse.redirect(new URL(redirectUrl, req.url));
