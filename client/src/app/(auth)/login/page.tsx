@@ -23,13 +23,11 @@ const LoginPage = ({
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      if (errorMessage) {
-        toast({
-          title: 'Authentication Error',
-          variant: 'destructive',
-          description: errorMessage,
-        });
-      }
+      toast({
+        title: 'Authentication Error',
+        variant: 'destructive',
+        description: errorMessage,
+      });
     }, 0);
 
     return () => clearTimeout(timeout);
