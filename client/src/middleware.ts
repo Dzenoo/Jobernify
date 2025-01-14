@@ -17,11 +17,11 @@ const protectedRoutes = {
 };
 
 const optimizedProtectedRoutes = {
-  '/dashboard/*': ['employer'],
-  '/seekers/*': ['employer'],
-  '/jobs/*': ['seeker'],
-  '/employers/*': ['seeker'],
-  '/profile/*': ['seeker'],
+  '/dashboard/:path*': ['employer'],
+  '/seekers/:path*': ['employer'],
+  '/jobs/:path*': ['seeker'],
+  '/employers/:path*': ['seeker'],
+  '/profile/:path*': ['seeker'],
 };
 
 export function middleware(req: NextRequest) {
