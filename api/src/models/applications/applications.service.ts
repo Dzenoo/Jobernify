@@ -215,7 +215,7 @@ export class ApplicationsService {
       .populate({
         path: 'seeker',
         select:
-          'first_name last_name email _id linkedin github portfolio image',
+          'first_name last_name email _id linkedin github portfolio image headline',
       })
       .skip((page - 1) * limit)
       .limit(limit)

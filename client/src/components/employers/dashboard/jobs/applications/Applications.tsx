@@ -55,6 +55,7 @@ const Applications: React.FC<ApplicationsProps> = ({
   const columns = [
     'Index',
     'Name',
+    'Headline',
     'Email',
     'Resume',
     'Cover Letter',
@@ -83,6 +84,7 @@ const Applications: React.FC<ApplicationsProps> = ({
             <TableCell>
               <NameWithImage seeker={app.seeker} />
             </TableCell>
+            <TableCell>{app.seeker.headline}</TableCell>
             <TableCell>
               <a href={`mailto:${app.seeker.email}`}>{app.seeker.email}</a>
             </TableCell>
