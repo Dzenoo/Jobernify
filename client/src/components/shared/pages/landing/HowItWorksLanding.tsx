@@ -37,7 +37,7 @@ const HowItWorksLanding: React.FC = () => {
           </BlueButton>
         </div>
         <div>
-          <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
+          <h1 className="dark:text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
             How It <strong className="text-[#0084FF]">Works</strong>
           </h1>
         </div>
@@ -56,7 +56,7 @@ const HowItWorksLanding: React.FC = () => {
                 />
                 <div className="space-y-2">
                   <div>
-                    <h1 className="text-white font-semibold text-lg">
+                    <h1 className="dark:text-white font-semibold text-lg">
                       {title}
                     </h1>
                   </div>

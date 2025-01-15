@@ -12,7 +12,7 @@ const RootLayoutWrapper = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div
-      className={`bg-black flex flex-col min-h-screen ${
+      className={`bg-white dark:bg-black flex flex-col min-h-screen ${
         isZoomedOut ? 'm-auto max-w-screen-2xl' : ''
       }`}
     >

@@ -15,7 +15,7 @@ const BenefitsLanding: React.FC = () => {
           <BlueButton>Benefits</BlueButton>
         </div>
         <div>
-          <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
+          <h1 className="dark:text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
             Why <strong className="text-[#0084FF]">Choose</strong> Our Platform?
           </h1>
         </div>
@@ -32,7 +32,7 @@ const BenefitsLanding: React.FC = () => {
           {BenefitsData.map(({ id, title, description, icon, color }) => (
             <li
               key={id}
-              className="rounded-xl p-10 space-y-5 transition-all border border-[#1b1b1b]"
+              className="rounded-xl p-10 space-y-5 transition-all border border-gray-200 dark:border-[#1b1b1b]"
             >
               <div
                 style={{ backgroundColor: color }}
@@ -41,7 +41,9 @@ const BenefitsLanding: React.FC = () => {
                 {React.createElement(icon)}
               </div>
               <div>
-                <h1 className="text-white font-semibold text-xl">{title}</h1>
+                <h1 className="dark:text-white font-semibold text-xl">
+                  {title}
+                </h1>
               </div>
               <div className="max-w-xl">
                 <p className="text-[#9C9C9C] font-light leading-relaxed">

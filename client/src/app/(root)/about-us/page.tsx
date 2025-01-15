@@ -15,41 +15,43 @@ export const metadata: Metadata = {
 
 const AboutUsPage = () => {
   return (
-    <section className="px-5 py-20 flex flex-col gap-72 w-full bg-grid-small-white/[0.2] relative md:landing-padding">
-      <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_40%,black)]" />
-      <div className="flex flex-col gap-5 justify-center sm:items-center sm:text-center">
-        <div>
-          <BlueButton>About Us</BlueButton>
-        </div>
-        <div>
-          <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
-            Who We <span className="text-[#0084FF]">Are</span>
-          </h1>
-        </div>
-        <div className="max-w-2xl">
-          <p className="text-[#9C9C9C] leading-relaxed">
-            Welcome to Jobernify, where innovation meets opportunity. We are a
-            forward-thinking, AI-powered job search platform dedicated to
-            transforming the way job seekers and employers connect on a global
-            scale. By leveraging cutting-edge artificial intelligence and
-            machine learning technologies, Jobernify bridges the gap between
-            talent and opportunity, creating a seamless, efficient, and
-            personalized hiring experience.
-          </p>
-        </div>
-        <div>
-          <Link href="/login">
-            <Button variant="outline">Start Now</Button>
-          </Link>
+    <section className="md:landing-padding">
+      <div className="px-5 py-20 w-full bg-grid-small-black/[0.2] dark:bg-grid-small-white/[0.2] relative">
+        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-white dark:bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_40%,black)]" />
+        <div className="flex flex-col gap-5 justify-center sm:items-center sm:text-center">
+          <div>
+            <BlueButton>About Us</BlueButton>
+          </div>
+          <div>
+            <h1 className="dark:text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
+              Who We <span className="text-[#0084FF]">Are</span>
+            </h1>
+          </div>
+          <div className="max-w-2xl">
+            <p className="text-[#9C9C9C] leading-relaxed">
+              Welcome to Jobernify, where innovation meets opportunity. We are a
+              forward-thinking, AI-powered job search platform dedicated to
+              transforming the way job seekers and employers connect on a global
+              scale. By leveraging cutting-edge artificial intelligence and
+              machine learning technologies, Jobernify bridges the gap between
+              talent and opportunity, creating a seamless, efficient, and
+              personalized hiring experience.
+            </p>
+          </div>
+          <div>
+            <Link href="/login">
+              <Button variant="outline">Start Now</Button>
+            </Link>
+          </div>
         </div>
       </div>
-      <div className="flex gap-20 max-xl:flex-col">
+      <div className="px-5 py-20 flex gap-20 max-xl:flex-col">
         <div className="basis-1/2 space-y-5 max-xl:basis-full">
           <div>
             <BlueButton>Our Mission</BlueButton>
           </div>
           <div>
-            <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
+            <h1 className="dark:text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
               What Sets <span className="text-[#0084FF]">Us Apart</span>
             </h1>
           </div>
@@ -67,7 +69,9 @@ const AboutUsPage = () => {
           <ul className="flex flex-col gap-5">
             {FeaturesData.map((feature) => (
               <li key={feature.id} className="space-y-2 mb-5">
-                <h2 className="text-white font-semibold">{feature.title}</h2>
+                <h2 className="dark:text-white font-semibold">
+                  {feature.title}
+                </h2>
                 <p className="text-[#9C9C9C] leading-relaxed">
                   {feature.description}
                 </p>

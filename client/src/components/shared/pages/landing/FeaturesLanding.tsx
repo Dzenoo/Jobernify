@@ -19,7 +19,7 @@ const FeaturesLanding: React.FC = () => {
           <BlueButton>Features</BlueButton>
         </div>
         <div className="max-w-xl">
-          <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
+          <h1 className="dark:text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
             Explore Features That Simplify{' '}
             <strong className="text-[#0084FF]">Job Searching and Hiring</strong>{' '}
             for Everyone
@@ -45,7 +45,9 @@ const FeaturesLanding: React.FC = () => {
           {FeaturesData.map(({ id, title, description }) => (
             <li key={id} className="space-y-3">
               <div>
-                <h1 className="text-white font-semibold text-lg">{title}</h1>
+                <h1 className="dark:text-white font-semibold text-lg">
+                  {title}
+                </h1>
               </div>
               <div>
                 <p className="text-[#9C9C9C] font-light leading-relaxed">

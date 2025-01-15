@@ -42,7 +42,7 @@ const FaqLanding: React.FC = () => {
           <BlueButton>FAQ</BlueButton>
         </div>
         <div>
-          <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
+          <h1 className="dark:text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
             Frequently Asked{' '}
             <strong className="text-[#0084FF]">Questions</strong>
           </h1>
@@ -71,7 +71,7 @@ const FaqLanding: React.FC = () => {
         <Accordion type="single" collapsible>
           {AccordionData.map(({ id, title, description }) => (
             <AccordionItem
-              className="text-white space-y-3 py-7 border-b-[#1b1b1b]"
+              className="dark:text-white space-y-3 py-7 border-b-gray-200 dark:border-b-[#1b1b1b]"
               key={id}
               value={`item-${id}`}
             >
@@ -87,7 +87,7 @@ const FaqLanding: React.FC = () => {
       </div>
       <div className="pb-28 space-y-5 text-center">
         <div>
-          <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
+          <h1 className="dark:text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
             Still Have Questions?
           </h1>
         </div>

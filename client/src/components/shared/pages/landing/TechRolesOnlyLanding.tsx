@@ -15,7 +15,7 @@ const TechRolesOnlyLanding: React.FC = () => {
           <BlueButton>App for Tech Roles Only</BlueButton>
         </div>
         <div className="max-w-lg">
-          <h1 className="text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
+          <h1 className="dark:text-white text-4xl font-semibold leading-tight max-sm:text-3xl">
             Tailored for All Tech Roles:{' '}
             <strong className="text-[#0084FF]">Your Career Starts Here</strong>
           </h1>
