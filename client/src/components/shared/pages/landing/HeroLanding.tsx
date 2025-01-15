@@ -44,7 +44,6 @@ const HeroLanding: React.FC = () => {
             className="w-[90em] h-auto rounded-xl box-shadow-custom object-cover"
           >
             <source src="/videos/demo-1.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
           </video>
         </div>
       </div>
