@@ -8,6 +8,8 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
+import * as disposableDomains from 'disposable-email-domains';
+
 import { SeekersService } from '@/models/seekers/seekers.service';
 import { EmployersService } from '@/models/employers/employers.service';
 import { JwtService } from '@nestjs/jwt';
@@ -81,6 +83,14 @@ export class LocalAuthService {
     body: SignupSeekerDto | SignUpEmployerDto,
     userType: 'seeker' | 'employer',
   ) {
+    const emailDomain = body.email.split('@')[1];
+
+    if (disposableDomains.includes(emailDomain)) {
+      throw new NotAcceptableException(
+        'Please use a legitimate email address.',
+      );
+    }
+
     const emailCheckResult = await this.checkEmailExistence(body.email);
 
     if (emailCheckResult) {
