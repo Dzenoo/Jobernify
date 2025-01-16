@@ -8,12 +8,11 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
-import * as disposableDomains from 'disposable-email-domains';
-
 import { SeekersService } from '@/models/seekers/seekers.service';
 import { EmployersService } from '@/models/employers/employers.service';
 import { JwtService } from '@nestjs/jwt';
 import { VerificationService } from '@/authentication/services/verification.service';
+import { BlockedDomainsService } from '@/common/services/blocked-domains.service';
 
 import { SignupSeekerDto } from '@/authentication/dto/signup-seeker.dto';
 import { SignUpEmployerDto } from '@/authentication/dto/signup-employer.dto';
@@ -28,6 +27,7 @@ export class LocalAuthService {
     private employersService: EmployersService,
     private jwtService: JwtService,
     private verificationService: VerificationService,
+    private readonly blockedDomainsService: BlockedDomainsService,
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
@@ -83,9 +83,9 @@ export class LocalAuthService {
     body: SignupSeekerDto | SignUpEmployerDto,
     userType: 'seeker' | 'employer',
   ) {
-    const emailDomain = body.email.split('@')[1];
+    const emailDomain = body.email.split('@')[1].toLowerCase();
 
-    if (disposableDomains.includes(emailDomain)) {
+    if (this.blockedDomainsService.isDomainBlocked(emailDomain)) {
       throw new NotAcceptableException(
         'Please use a legitimate email address.',
       );

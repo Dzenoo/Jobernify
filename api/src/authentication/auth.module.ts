@@ -7,6 +7,7 @@ import { PassportModule } from '@nestjs/passport';
 import { SeekersModule } from '@/models/seekers/seekers.module';
 import { EmployersModule } from '@/models/employers/employers.module';
 
+import { BlockedDomainsService } from '@/common/services/blocked-domains.service';
 import { LocalAuthService } from '@/authentication/services/local-auth.service';
 import { GoogleAuthService } from '@/authentication/services/google-auth.service';
 import { TwoFactorAuthService } from '@/authentication/services/two-factor-auth.service';
@@ -40,6 +41,7 @@ import { TwoFactorAuthController } from '@/authentication/controllers/two-factor
     LocalStrategy,
     JwtStrategy,
     GoogleStrategy,
+    BlockedDomainsService,
   ],
   controllers: [AuthController, TwoFactorAuthController],
 })
