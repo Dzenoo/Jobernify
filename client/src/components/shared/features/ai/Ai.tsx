@@ -26,6 +26,8 @@ const Ai: React.FC<AiProps> = ({ isSeeker }) => {
     url: process.env.SOCKET_URL as string,
   });
 
+  console.log(process.env.SOCKET_URL as string);
+
   useEffect(() => {
     return () => disconnect();
   }, [disconnect]);
