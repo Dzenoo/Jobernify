@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/buttons/button';
 
 const HeroLanding: React.FC = () => {
   return (
-    <section className="w-full bg-grid-small-black/[0.2] dark:bg-grid-small-white/[0.2] relative">
+    <section className="w-full bg-grid-small-black/[0.5] dark:bg-grid-small-white/[0.2] relative">
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-white dark:bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_10%,white)] dark:[mask-image:radial-gradient(ellipse_at_center,transparent_10%,black)]" />
       <div className="relative px-5 pt-20 flex flex-col gap-28 items-center justify-center md:landing-padding">
         <div className="space-y-5 sm:text-center">
