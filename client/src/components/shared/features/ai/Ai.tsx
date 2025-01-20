@@ -23,10 +23,8 @@ type AiProps = {
 
 const Ai: React.FC<AiProps> = ({ isSeeker }) => {
   const { connect, disconnect, socket } = useWebSocket({
-    url: process.env.SOCKET_URL as string,
+    url: process.env.NEXT_PUBLIC_SOCKET_URL!,
   });
-
-  console.log(process.env.SOCKET_URL as string);
 
   useEffect(() => {
     return () => disconnect();
