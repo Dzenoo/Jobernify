@@ -24,7 +24,7 @@ import { UpdateEmployerDto } from '@/models/employers/dto/update-employer.dto';
 
 import { SeekersService } from '@/models/seekers/seekers.service';
 import { JobsService } from '@/models/jobs/jobs.service';
-import { S3Service } from '@/common/s3/s3.service';
+import { S3Service } from '@/common/modules/s3/s3.service';
 import { ApplicationsService } from '@/models/applications/applications.service';
 
 import { uuidv7 } from 'uuidv7';

@@ -26,7 +26,7 @@ import { GetJobsDto } from '@/models/jobs/dto/get-jobs.dto';
 import { EmployersService } from '@/models/employers/employers.service';
 import { SeekersService } from '@/models/seekers/seekers.service';
 import { ApplicationsService } from '@/models/applications/applications.service';
-import { MailService } from '@/common/email/mail.service';
+import { MailService } from '@/common/modules/email/mail.service';
 import { AiService } from '@/ai/ai.service';
 
 @Injectable()

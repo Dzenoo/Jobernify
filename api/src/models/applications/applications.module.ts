@@ -1,7 +1,7 @@
 import { forwardRef, Module } from '@nestjs/common';
 
-import { S3Module } from '@/common/s3/s3.module';
-import { MailModule } from '@/common/email/mail.module';
+import { S3Module } from '@/common/modules/s3/s3.module';
+import { MailModule } from '@/common/modules/email/mail.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { SeekersModule } from '@/models/seekers/seekers.module';
 import { JobsModule } from '@/models/jobs/jobs.module';

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { S3Service } from '@/common/s3/s3.service';
+import { S3Service } from '@/common/modules/s3/s3.service';
 
 @Module({
   providers: [S3Service],

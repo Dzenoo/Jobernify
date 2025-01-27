@@ -7,7 +7,7 @@ import {
 
 import { SeekersService } from '@/models/seekers/seekers.service';
 import { EmployersService } from '@/models/employers/employers.service';
-import { MailService } from '@/common/email/mail.service';
+import { MailService } from '@/common/modules/email/mail.service';
 
 import { uuidv7 } from 'uuidv7';
 import { VERIFICATION_TOKEN_EXPIRATION_TIME } from '@/common/constants';

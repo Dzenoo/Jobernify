@@ -4,7 +4,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-import { MailModule } from '@/common/email/mail.module';
+import { MailModule } from '@/common/modules/email/mail.module';
 import { AuthModule } from '@/authentication/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { SeekersModule } from '@/models/seekers/seekers.module';

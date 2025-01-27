@@ -23,7 +23,7 @@ import { UpdateSeekerDto } from '@/models/seekers/dto/update-seeker.dto';
 import { EmployersService } from '@/models/employers/employers.service';
 import { JobsService } from '@/models/jobs/jobs.service';
 import { ApplicationsService } from '@/models/applications/applications.service';
-import { S3Service } from '@/common/s3/s3.service';
+import { S3Service } from '@/common/modules/s3/s3.service';
 import { escapeRegExp } from '@/common/constants';
 
 import { uuidv7 } from 'uuidv7';

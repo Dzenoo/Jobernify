@@ -20,8 +20,8 @@ import { DeleteResult, FilterQuery, Model } from 'mongoose';
 
 import { SeekersService } from '@/models/seekers/seekers.service';
 import { JobsService } from '@/models/jobs/jobs.service';
-import { S3Service } from '@/common/s3/s3.service';
-import { MailService } from '@/common/email/mail.service';
+import { S3Service } from '@/common/modules/s3/s3.service';
+import { MailService } from '@/common/modules/email/mail.service';
 
 @Injectable()
 export class ApplicationsService {
