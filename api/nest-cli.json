@@ -3,7 +3,7 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "assets": ["common/email/templates/**/*"],
+    "assets": ["common/modules/email/templates/**/*"],
     "tsConfigPath": "tsconfig.build.json",
     "deleteOutDir": true
   }
