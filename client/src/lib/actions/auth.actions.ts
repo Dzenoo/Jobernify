@@ -4,10 +4,17 @@ import { getApiHandler, postApiHandler } from '../api';
  * Fetches the current user's data.
  * @returns A promise resolving to an object containing the user's role.
  */
-export const getCurrentUser = async (): Promise<{
+export const getCurrentUser = async (): Promise<ServerResponse<{
   role: 'seeker' | 'employer';
-}> => {
-  return await getApiHandler('auth/me');
+}> | null> => {
+  try {
+    return await getApiHandler('auth/me');
+  } catch (error: any) {
+    if (error.response?.status === 401) {
+      return null;
+    }
+    throw error;
+  }
 };
 
 /**

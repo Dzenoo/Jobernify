@@ -13,7 +13,10 @@ import {
   Timer,
 } from 'lucide-react';
 
-import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
+import {
+  SeekerQueryType,
+  useSeekerQuery,
+} from '@/hooks/queries/useSeeker.query';
 
 import MarkdownRenderer from '@/components/shared/ui/MarkdownRenderer';
 import SaveJobButton from '../SaveJobButton';
@@ -30,14 +33,14 @@ import {
   getTime,
 } from '@/lib/utils';
 
-import { Application, Job } from '@/types';
+import { IApplication, IJob } from '@/types';
 
 import { Button } from '@/components/ui/buttons/button';
 import { Avatar, AvatarImage } from '@/components/ui/utilities/avatar';
 import { Card, CardContent, CardHeader } from '@/components/ui/layout/card';
 
 type JobDetailsInfoProps = {
-  job: Job;
+  job: IJob;
   onApplyJob?: () => void;
 };
 
@@ -62,7 +65,10 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
     onApplyJob,
   }) => {
     const router = useRouter();
-    const { data } = useGetSeeker();
+    const { data } = useSeekerQuery({
+      type: SeekerQueryType.GET_SEEKER_PROFILE,
+      params: { query: {} },
+    });
 
     if (!data) {
       return;
@@ -73,7 +79,7 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
     const isJobExpired = checkExpired(expiration_date);
     const categorizedSkills = getSkillsData(skills);
     const isAppliedToJob = data.seeker.applications.find(
-      (application: Application) => application.job._id === _id,
+      (application: IApplication) => application.job._id === _id,
     );
 
     const EmployerInformationsData = [
@@ -192,15 +198,15 @@ const JobDetailsInfo: React.FC<JobDetailsInfoProps> = React.memo(
                       isAppliedToJob
                         ? redirectToProfileApplications
                         : isJobExpired
-                          ? undefined
-                          : onApplyJob
+                        ? undefined
+                        : onApplyJob
                     }
                   >
                     {isAppliedToJob
                       ? 'View Status'
                       : isJobExpired
-                        ? 'Expired'
-                        : 'Apply to Job'}
+                      ? 'Expired'
+                      : 'Apply to Job'}
                   </Button>
                 </div>
                 <SaveJobButton jobId={_id} />

@@ -5,7 +5,7 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 
 import { getRoleSpecificData } from '@/lib/utils';
-import { useCurrentUser } from '@/hooks/queries/useCurrentUser.query';
+import { useAuthStore } from '@/store/auth.store';
 
 import Logo from './Logo';
 import NavbarLinksList from './NavbarLinksList';
@@ -16,11 +16,10 @@ type NavbarProps = {
 };
 
 const Navbar: React.FC<NavbarProps> = ({ href }) => {
-  const { data: currentUser, isLoading } = useCurrentUser();
+  const { user, isAuthenticated, isLoading } = useAuthStore();
   const pathname = usePathname();
 
-  const isAuthenticated = currentUser?.role !== null;
-  const isSeeker = currentUser?.role === 'seeker';
+  const isSeeker = user === 'seeker';
   const roleData = getRoleSpecificData(isSeeker);
 
   return (

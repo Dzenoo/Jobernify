@@ -5,7 +5,10 @@ import Link from 'next/link';
 import { GraduationCap, Save } from 'lucide-react';
 
 import { getImageUrl } from '@/lib/utils';
-import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
+import {
+  SeekerQueryType,
+  useSeekerQuery,
+} from '@/hooks/queries/useSeeker.query';
 import { renderIconText } from '@/helpers';
 
 import LoadingSeekerInfo from '@/components/templates/employers/LoadingSeekerInfo';
@@ -14,7 +17,10 @@ import { Card, CardContent } from '@/components/ui/layout/card';
 import { Button } from '@/components/ui/buttons/button';
 
 const SeekerInfo: React.FC = React.memo(() => {
-  const { data: fetchedSeeker, isLoading } = useGetSeeker();
+  const { data: fetchedSeeker, isLoading } = useSeekerQuery({
+    type: SeekerQueryType.GET_SEEKER_PROFILE,
+    params: { query: {} },
+  });
 
   if (!fetchedSeeker) {
     if (isLoading) {

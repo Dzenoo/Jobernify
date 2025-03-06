@@ -8,7 +8,10 @@ import { queryClient } from '@/context/react-query-client';
 import { Sparkles } from 'lucide-react';
 
 import { useUploads } from '@/hooks/core/useUploads.hook';
-import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
+import {
+  SeekerQueryType,
+  useSeekerQuery,
+} from '@/hooks/queries/useSeeker.query';
 import { ApplyToJobSchema } from '@/lib/zod/jobs.validation';
 import { applyToJob } from '@/lib/actions/applications.actions';
 
@@ -67,7 +70,10 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
     multiple: false,
   });
 
-  const { data: fetchedSeekerProfile } = useGetSeeker();
+  const { data: fetchedSeekerProfile } = useSeekerQuery({
+    type: SeekerQueryType.GET_SEEKER_PROFILE,
+    params: { query: {} },
+  });
 
   const seekerData = fetchedSeekerProfile as { seeker: ISeeker };
 

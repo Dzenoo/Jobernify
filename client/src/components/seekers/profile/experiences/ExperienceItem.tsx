@@ -6,8 +6,8 @@ import { Briefcase, Edit, Trash } from 'lucide-react';
 import { queryClient } from '@/context/react-query-client';
 import { deleteExperience } from '@/lib/actions/seekers.actions';
 import { formatDate } from '@/lib/utils';
-import { useCurrentUser } from '@/hooks/queries/useCurrentUser.query';
 import { Experience } from '@/types';
+import { useAuthStore } from '@/store/auth.store';
 
 import AlertDialogWrapper from '@/components/ui/info/alert-dialog-wrapper';
 import { Button } from '@/components/ui/buttons/button';
@@ -31,7 +31,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
   isCurrentlyWorking,
 }) => {
   const { toast } = useToast();
-  const { data: currentUser } = useCurrentUser();
+  const { user } = useAuthStore();
 
   const { mutateAsync: deleteExperienceMutate } = useMutation({
     mutationFn: () => {
@@ -68,7 +68,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
         />
         <InfoSection location={location} position={position} level={level} />
       </div>
-      {currentUser?.role === 'seeker' && (
+      {user === 'seeker' && (
         <div>
           <Button variant="ghost" onClick={onEdit}>
             <Edit />

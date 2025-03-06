@@ -4,8 +4,8 @@ import { IApplication } from './applications.types';
 import { IEmployer } from './employers.types';
 
 export type GetSeekerProfileDto = {
-  page: number;
-  limit: number;
+  page?: number;
+  limit?: number;
 };
 
 export type GetSeekersDto = {

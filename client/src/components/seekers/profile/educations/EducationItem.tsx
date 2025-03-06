@@ -8,7 +8,7 @@ import { deleteEducation } from '@/lib/actions/seekers.actions';
 import { formatDate } from '@/lib/utils';
 import { renderIconText } from '@/helpers';
 import { queryClient } from '@/context/react-query-client';
-import { useCurrentUser } from '@/hooks/queries/useCurrentUser.query';
+import { useAuthStore } from '@/store/auth.store';
 
 import { Education } from '@/types';
 
@@ -28,7 +28,7 @@ const EducationItem: React.FC<EducationItemProps> = ({
   institution,
 }) => {
   const { toast } = useToast();
-  const { data: currentUser } = useCurrentUser();
+  const { user } = useAuthStore();
 
   const { mutateAsync: deleteEducationMutate } = useMutation({
     mutationFn: () => {
@@ -72,7 +72,7 @@ const EducationItem: React.FC<EducationItemProps> = ({
             })}
           </div>
         </div>
-        {currentUser?.role === 'seeker' && (
+        {user === 'seeker' && (
           <div>
             <Button variant="ghost" onClick={onEdit}>
               <Edit />

@@ -3,7 +3,10 @@ import React from 'react';
 import { Button } from '@/components/ui/buttons/button';
 
 import { useFollowEmployer } from '@/hooks/mutations/useFollowEmployer.mutation';
-import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
+import {
+  SeekerQueryType,
+  useSeekerQuery,
+} from '@/hooks/queries/useSeeker.query';
 
 type FollowEmployerProps = {
   employerId: string;
@@ -12,7 +15,10 @@ type FollowEmployerProps = {
 const FollowEmployerButton: React.FC<FollowEmployerProps> = ({
   employerId,
 }) => {
-  const { data: fetchedSeekerProfile, refetch } = useGetSeeker();
+  const { data: fetchedSeekerProfile, refetch } = useSeekerQuery({
+    type: SeekerQueryType.GET_SEEKER_PROFILE,
+    params: { query: {} },
+  });
   const { mutateAsync: followEmployerMutate, status } =
     useFollowEmployer(employerId);
 

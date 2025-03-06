@@ -3,7 +3,10 @@ import React from 'react';
 import Loader from '@/components/shared/ui/Loader';
 
 import { useJobAlert } from '@/hooks/mutations/useJobAlert.mutation';
-import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
+import {
+  SeekerQueryType,
+  useSeekerQuery,
+} from '@/hooks/queries/useSeeker.query';
 
 import { Button } from '@/components/ui/buttons/button';
 import {
@@ -23,7 +26,10 @@ type JobAlertProps = {
 const AddJobAlert: React.FC<JobAlertProps> = React.memo(
   ({ level, type, title }) => {
     const { mutateAsync: addJobAlertMutate, status } = useJobAlert();
-    const { data } = useGetSeeker();
+    const { data } = useSeekerQuery({
+      type: SeekerQueryType.GET_SEEKER_PROFILE,
+      params: { query: {} },
+    });
 
     if (!data) {
       return (

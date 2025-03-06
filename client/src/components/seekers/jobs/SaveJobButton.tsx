@@ -4,7 +4,10 @@ import { Bookmark } from 'lucide-react';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
+import {
+  SeekerQueryType,
+  useSeekerQuery,
+} from '@/hooks/queries/useSeeker.query';
 
 import { saveJob } from '@/lib/actions/jobs.actions';
 import { queryClient } from '@/context/react-query-client';
@@ -20,7 +23,10 @@ type SaveJobButtonProps = {
 
 const SaveJobButton: React.FC<SaveJobButtonProps> = ({ jobId }) => {
   const { toast } = useToast();
-  const { data } = useGetSeeker();
+  const { data } = useSeekerQuery({
+    type: SeekerQueryType.GET_SEEKER_PROFILE,
+    params: { query: {} },
+  });
 
   const { mutateAsync: saveJobMutate, status } = useMutation({
     mutationFn: () => {
