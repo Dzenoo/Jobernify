@@ -7,7 +7,7 @@ import {
   deleteApiHandler,
 } from '../api';
 
-import { FilterCounts, GetJobsDto, Job } from '@/types';
+import { FilterCounts, GetJobsDto, IJob } from '@/types';
 
 /**
  * Creates a new job.
@@ -57,9 +57,9 @@ export const saveJob = async (jobId: string): Promise<ServerResponse> => {
 export const getJobs = async (
   query: GetJobsDto,
 ): Promise<{
-  jobs: Job[];
+  jobs: IJob[];
   totalJobs: number;
-  popularJobs: Job[];
+  popularJobs: IJob[];
   filterCounts: FilterCounts;
 }> => {
   const queryString = qs.stringify(query, { skipNulls: true });
@@ -73,7 +73,7 @@ export const getJobs = async (
  */
 export const getJobById = async (
   jobId: string,
-): Promise<{ job: Job; jobs: Job[] }> => {
+): Promise<{ job: IJob; jobs: IJob[] }> => {
   return await getApiHandler(`jobs/${jobId}`);
 };
 

@@ -3,7 +3,7 @@ import qs from 'qs';
 import { deleteApiHandler, getApiHandler, patchApiHandler } from '../api';
 
 import {
-  Employer,
+  IEmployer,
   GetEmployerByIdDto,
   GetEmployerProfileDto,
   GetEmployersDto,
@@ -18,7 +18,7 @@ export const getEmployerProfile = async (
   query: GetEmployerProfileDto,
 ): Promise<{
   counts: { totalJobs: number };
-  employer: Employer;
+  employer: IEmployer;
 }> => {
   const queryString = qs.stringify(query, { skipNulls: true });
   return await getApiHandler(`employers/profile?${queryString}`);
@@ -72,7 +72,7 @@ export const getEmployerAnalyticsInfo = async (): Promise<{
  */
 export const getEmployers = async (
   query: GetEmployersDto,
-): Promise<{ employers: Employer[]; totalEmployers: number }> => {
+): Promise<{ employers: IEmployer[]; totalEmployers: number }> => {
   const queryString = qs.stringify(query, { skipNulls: true });
   return await getApiHandler(`employers/all?${queryString}`);
 };
@@ -88,7 +88,7 @@ export const getEmployerById = async (
   employerId: string,
   query: GetEmployerByIdDto,
 ): Promise<{
-  employer: Employer;
+  employer: IEmployer;
   totalJobs: number;
 }> => {
   const queryString = qs.stringify(query, { skipNulls: true });

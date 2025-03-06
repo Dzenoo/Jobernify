@@ -11,7 +11,7 @@ import {
   FilterCounts,
   GetSeekerProfileDto,
   GetSeekersDto,
-  Seeker,
+  ISeeker,
 } from '@/types';
 
 /**
@@ -21,7 +21,7 @@ import {
 export const getSeekerProfile = async (
   query: GetSeekerProfileDto,
 ): Promise<{
-  seeker: Seeker;
+  seeker: ISeeker;
   totalSavedJobs: number;
   totalApplications: number;
 }> => {
@@ -144,7 +144,7 @@ export const followEmployer = async (
 export const getSeekers = async (
   query: GetSeekersDto,
 ): Promise<{
-  seekers: Seeker[];
+  seekers: ISeeker[];
   totalSeekers: number;
   filterCounts: FilterCounts;
 }> => {
@@ -159,6 +159,6 @@ export const getSeekers = async (
  */
 export const getSeekerById = async (
   seekerId: string,
-): Promise<{ seeker: Seeker }> => {
+): Promise<{ seeker: ISeeker }> => {
   return await getApiHandler(`seekers/${seekerId}`);
 };
