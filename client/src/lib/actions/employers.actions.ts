@@ -31,7 +31,7 @@ export const getEmployerProfile = async (
  */
 export const editEmployerProfile = async (
   formData: FormData,
-): Promise<ResponseMessageTypes> => {
+): Promise<ServerResponse> => {
   return await patchApiHandler('employers/edit-profile', formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
@@ -41,10 +41,9 @@ export const editEmployerProfile = async (
  * Deletes the employer profile.
  * @returns A promise resolving to a response message.
  */
-export const deleteEmployerProfile =
-  async (): Promise<ResponseMessageTypes> => {
-    return await deleteApiHandler('employers/delete-profile');
-  };
+export const deleteEmployerProfile = async (): Promise<ServerResponse> => {
+  return await deleteApiHandler('employers/delete-profile');
+};
 
 /**
  * Fetches the employer's analytics data.

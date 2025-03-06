@@ -36,7 +36,7 @@ export const getSeekerProfile = async (
  */
 export const editSeekerProfile = async (
   formData: FormData,
-): Promise<ResponseMessageTypes> => {
+): Promise<ServerResponse> => {
   return await patchApiHandler(`seekers/edit-profile`, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
@@ -46,7 +46,7 @@ export const editSeekerProfile = async (
  * Deletes the seeker's profile.
  * @returns A promise resolving to a response message.
  */
-export const deleteSeekerProfile = async (): Promise<ResponseMessageTypes> => {
+export const deleteSeekerProfile = async (): Promise<ServerResponse> => {
   return await deleteApiHandler(`seekers/delete-profile`);
 };
 
@@ -55,9 +55,7 @@ export const deleteSeekerProfile = async (): Promise<ResponseMessageTypes> => {
  * @param data - The education data to add.
  * @returns A promise resolving to a response message.
  */
-export const addNewEducation = async (
-  data: any,
-): Promise<ResponseMessageTypes> => {
+export const addNewEducation = async (data: any): Promise<ServerResponse> => {
   return await patchApiHandler(`seekers/add-new-education`, data);
 };
 
@@ -69,7 +67,7 @@ export const addNewEducation = async (
 export const editEducation = async (
   data: any,
   educationId: string,
-): Promise<ResponseMessageTypes> => {
+): Promise<ServerResponse> => {
   return await patchApiHandler(`seekers/edit-education/${educationId}`, data);
 };
 
@@ -80,7 +78,7 @@ export const editEducation = async (
  */
 export const deleteEducation = async (
   educationId: string,
-): Promise<ResponseMessageTypes> => {
+): Promise<ServerResponse> => {
   return await deleteApiHandler(`seekers/delete-education/${educationId}`);
 };
 
@@ -89,9 +87,7 @@ export const deleteEducation = async (
  * @param data - The experience data to add.
  * @returns A promise resolving to a response message.
  */
-export const addNewExperience = async (
-  data: any,
-): Promise<ResponseMessageTypes> => {
+export const addNewExperience = async (data: any): Promise<ServerResponse> => {
   return await patchApiHandler(`seekers/add-new-experience`, data);
 };
 
@@ -103,7 +99,7 @@ export const addNewExperience = async (
 export const editExperience = async (
   data: any,
   experienceId: string,
-): Promise<ResponseMessageTypes> => {
+): Promise<ServerResponse> => {
   return await patchApiHandler(`seekers/edit-experience/${experienceId}`, data);
 };
 
@@ -114,7 +110,7 @@ export const editExperience = async (
  */
 export const deleteExperience = async (
   experienceId: string,
-): Promise<ResponseMessageTypes> => {
+): Promise<ServerResponse> => {
   return await deleteApiHandler(`seekers/delete-experience/${experienceId}`);
 };
 
@@ -125,7 +121,7 @@ export const deleteExperience = async (
  */
 export const generateJobAlert = async (
   formData: FormData,
-): Promise<ResponseMessageTypes> => {
+): Promise<ServerResponse> => {
   return await postApiHandler(`seekers/create-job-alert`, formData);
 };
 
@@ -136,7 +132,7 @@ export const generateJobAlert = async (
  */
 export const followEmployer = async (
   employerId: string,
-): Promise<ResponseMessageTypes> => {
+): Promise<ServerResponse> => {
   return await postApiHandler(`seekers/${employerId}/follow`, {});
 };
 

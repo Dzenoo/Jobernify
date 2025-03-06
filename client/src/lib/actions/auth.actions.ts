@@ -41,9 +41,9 @@ export const verify2FALogin = async (
   userId: string,
   code: string,
 ): Promise<
-  ResponseMessageTypes & {
+  ServerResponse<{
     redirectUrl: string;
-  }
+  }>
 > => {
   return await postApiHandler(`auth/2fa/login-verify`, { userId, code });
 };
@@ -83,7 +83,7 @@ export const signupEmployer = async (data: {
  * Initiates a request to the server to invalidate the user's session.
  * @returns A promise resolving to the server response.
  */
-export const logout = async (): Promise<ResponseMessageTypes> => {
+export const logout = async (): Promise<ServerResponse> => {
   return await postApiHandler('auth/logout', {});
 };
 

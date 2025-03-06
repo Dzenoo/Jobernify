@@ -12,7 +12,7 @@ import { Application, GetApplicationsDto } from '@/types';
  */
 export const getPresignedResumeUrl = async (
   applicationId: string,
-): Promise<{ url: string }> => {
+): Promise<ServerResponse<{ url: string }>> => {
   return await getApiHandler(`applications/${applicationId}/resume-url`);
 };
 
@@ -25,7 +25,7 @@ export const getPresignedResumeUrl = async (
 export const updateApplicationStatus = async (
   applicationId: string,
   status: string,
-): Promise<ResponseMessageTypes> => {
+): Promise<ServerResponse> => {
   return await patchApiHandler(`applications/${applicationId}/status`, {
     status,
   });
@@ -39,15 +39,17 @@ export const updateApplicationStatus = async (
 export const getApplications = async (
   jobId: string,
   query: GetApplicationsDto,
-): Promise<{
-  job: string;
-  applications: Application[];
-  totalApplications: number;
-  totalPendingStatus: number;
-  totalInterviewStatus: number;
-  totalRejectedStatus: number;
-  totalAcceptedStatus: number;
-}> => {
+): Promise<
+  ServerResponse<{
+    job: string;
+    applications: Application[];
+    totalApplications: number;
+    totalPendingStatus: number;
+    totalInterviewStatus: number;
+    totalRejectedStatus: number;
+    totalAcceptedStatus: number;
+  }>
+> => {
   const queryString = qs.stringify(query, { skipNulls: true });
   return await getApiHandler(`applications/${jobId}?${queryString}`);
 };
@@ -61,7 +63,7 @@ export const getApplications = async (
 export const applyToJob = async (
   jobId: string,
   formData: FormData,
-): Promise<ResponseMessageTypes> => {
+): Promise<ServerResponse> => {
   return await postApiHandler(`applications/${jobId}/apply`, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });

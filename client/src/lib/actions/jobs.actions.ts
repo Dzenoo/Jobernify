@@ -14,9 +14,7 @@ import { FilterCounts, GetJobsDto, Job } from '@/types';
  * @param formData - The form data containing job details.
  * @returns A promise resolving to a response message.
  */
-export const createNewJob = async (
-  formData: any,
-): Promise<ResponseMessageTypes> => {
+export const createNewJob = async (formData: any): Promise<ServerResponse> => {
   return await postApiHandler(`jobs/create-new-job`, formData);
 };
 
@@ -29,7 +27,7 @@ export const createNewJob = async (
 export const editJob = async (
   jobId: string,
   formData: any,
-): Promise<ResponseMessageTypes> => {
+): Promise<ServerResponse> => {
   return await patchApiHandler(`jobs/${jobId}/edit`, formData);
 };
 
@@ -38,9 +36,7 @@ export const editJob = async (
  * @param jobId - The ID of the job to delete.
  * @returns A promise resolving to a response message.
  */
-export const deleteJob = async (
-  jobId: string,
-): Promise<ResponseMessageTypes> => {
+export const deleteJob = async (jobId: string): Promise<ServerResponse> => {
   return await deleteApiHandler(`jobs/${jobId}/delete`);
 };
 
@@ -49,7 +45,7 @@ export const deleteJob = async (
  * @param jobId - The ID of the job to save.
  * @returns A promise resolving to a response message.
  */
-export const saveJob = async (jobId: string): Promise<ResponseMessageTypes> => {
+export const saveJob = async (jobId: string): Promise<ServerResponse> => {
   return await postApiHandler(`jobs/${jobId}/save`, {});
 };
 

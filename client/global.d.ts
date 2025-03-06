@@ -1,8 +1,7 @@
-declare type ResponseMessageTypes = {
+declare type ServerResponse<T = {}> = {
   statusCode: number;
-  message: string;
-  [key: string]: any;
-};
+  message?: string;
+} & T;
 
 declare module '*md' {
   const content: string;
