@@ -4,17 +4,17 @@ import { Employer } from '@/types';
 
 /**
  * Fetches the employer profile along with job counts.
- * @param params - An object containing  page, srt, search, and type.
+ * @param params - An object containing  page, sort, search, and type.
  * @returns A promise resolving to the employer profile and associated counts.
  */
 export const getEmployerProfile = async ({
   page = 1,
-  srt = '',
+  sort = '',
   search = '',
   type = '',
 }: {
   page?: number;
-  srt?: string;
+  sort?: string;
   search?: string;
   type?: string;
 }): Promise<{
@@ -22,7 +22,7 @@ export const getEmployerProfile = async ({
   employer: Employer;
 }> => {
   return await getApiHandler(
-    `employers/profile?type=${type}&page=${page}&sort=${srt}&search=${search}`,
+    `employers/profile?type=${type}&page=${page}&sort=${sort}&search=${search}`,
   );
 };
 
@@ -71,7 +71,7 @@ export const getEmployerAnalyticsInfo = async (): Promise<{
 /**
  * Fetches a list of employers with pagination, sorting, and search filters.
  * @param page - The page number (default: "1").
- * @param srt - The sorting parameter.
+ * @param sort - The sorting parameter.
  * @param search - The search query for filtering employers.
  * @returns A promise resolving to a list of employers and total employer count.
  */
