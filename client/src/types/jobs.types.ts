@@ -13,7 +13,7 @@ export type GetJobsDto = {
   position?: string;
 };
 
-export type Job = {
+export interface IJob {
   _id: string;
   title: string;
   position: keyof typeof JobPosition;
@@ -28,4 +28,4 @@ export type Job = {
   description: string;
   applications: IApplication[];
   createdAt: Date;
-};
+}

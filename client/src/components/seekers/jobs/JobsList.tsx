@@ -4,10 +4,10 @@ import { Search } from 'lucide-react';
 
 import JobItem from './JobItem';
 
-import { Job } from '@/types';
+import { IJob } from '@/types';
 
 type JobListProps = {
-  jobs: Job[];
+  jobs: IJob[];
   message?: string;
 };
 

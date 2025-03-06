@@ -1,5 +1,5 @@
 import { JobLevel, JobPosition, JobType, Role } from '@/types';
-import { Job } from './jobs.types';
+import { IJob } from './jobs.types';
 import { IApplication } from './applications.types';
 import { IEmployer } from './employers.types';
 
@@ -33,7 +33,7 @@ export type Seeker = {
   resume?: string;
   role: keyof typeof Role;
   receiveJobAlerts: boolean;
-  savedJobs: Job[];
+  savedJobs: IJob[];
   applications: IApplication[];
   following: IEmployer[] & string[];
   createdAt: Date;

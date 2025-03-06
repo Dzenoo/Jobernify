@@ -9,7 +9,7 @@ import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
 import { saveJob } from '@/lib/actions/jobs.actions';
 import { queryClient } from '@/context/react-query-client';
 
-import { Job } from '@/types';
+import { IJob } from '@/types';
 
 import { useToast } from '@/components/ui/info/use-toast';
 import { Button } from '@/components/ui/buttons/button';
@@ -40,7 +40,7 @@ const SaveJobButton: React.FC<SaveJobButtonProps> = ({ jobId }) => {
   const fetchedSeeker: any = data;
 
   const isJobSaved = fetchedSeeker?.seeker?.savedJobs.find(
-    (job: Job) => job._id === jobId,
+    (job: IJob) => job._id === jobId,
   );
 
   return (

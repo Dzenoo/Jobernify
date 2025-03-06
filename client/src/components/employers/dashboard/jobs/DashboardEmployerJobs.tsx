@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Job } from '@/types';
+import { IJob } from '@/types';
 import { findLocationData, formatDate } from '@/lib/utils';
 
 import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
@@ -20,7 +20,7 @@ import { Dialog } from '@/components/ui/layout/dialog';
 import { Drawer } from '@/components/ui/layout/drawer';
 
 type DashboardEmployerJobsProps = {
-  jobs: Job[];
+  jobs: IJob[];
   currentPage: number;
   itemsPerPage: number;
 };

@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 
 import LoadingJobsSkeleton from '@/components/templates/seekers/LoadingJobsSkeleton';
 
-import { Job } from '@/types';
+import { IJob } from '@/types';
 
 import {
   Card,
@@ -20,7 +20,7 @@ const JobsList = dynamic(() => import('@/components/seekers/jobs/JobsList'), {
 });
 
 type SavedJobsProps = {
-  savedJobs: Job[];
+  savedJobs: IJob[];
 };
 
 const SavedJobs: React.FC<SavedJobsProps> = ({ savedJobs }) => {

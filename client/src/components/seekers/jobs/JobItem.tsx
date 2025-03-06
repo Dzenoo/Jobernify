@@ -15,7 +15,7 @@ import {
 } from '@/lib/utils';
 import { renderIconText } from '@/helpers';
 
-import { Job } from '@/types';
+import { IJob } from '@/types';
 
 import { Avatar, AvatarImage } from '@/components/ui/utilities/avatar';
 import {
@@ -27,7 +27,7 @@ import {
 import { TooltipWrapper } from '@/components/ui/info/tooltip-wrapper';
 
 type JobItemProps = {
-  job: Job;
+  job: IJob;
   showDescription?: boolean;
 };
 

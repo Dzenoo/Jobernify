@@ -14,7 +14,7 @@ import { queryClient } from '@/context/react-query-client';
 import { createNewJob, editJob } from '@/lib/actions/jobs.actions';
 import { UpdateJobSchema } from '@/lib/zod/jobs.validation';
 
-import { Job } from '@/types';
+import { IJob } from '@/types';
 
 import Loader from '@/components/shared/ui/Loader';
 import Details from '@/components/employers/dashboard/jobs/new/Details';
@@ -33,7 +33,7 @@ type UpdateJobFormProps =
     }
   | {
       isEdit: true;
-      formData: Job;
+      formData: IJob;
       jobId: string;
     };
 
