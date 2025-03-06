@@ -1,3 +1,5 @@
+import qs from 'qs';
+
 import {
   getApiHandler,
   postApiHandler,
@@ -5,21 +7,26 @@ import {
   deleteApiHandler,
 } from '../api';
 
-import { FilterCounts, Seeker } from '@/types';
+import {
+  FilterCounts,
+  GetSeekerProfileDto,
+  GetSeekersDto,
+  Seeker,
+} from '@/types';
 
 /**
  * Fetches the seeker's profile.
  * @returns A promise resolving to the seeker profile.
  */
 export const getSeekerProfile = async (
-  page: number = 1,
-  limit: number = 10,
+  query: GetSeekerProfileDto,
 ): Promise<{
   seeker: Seeker;
   totalSavedJobs: number;
   totalApplications: number;
 }> => {
-  return await getApiHandler(`seekers/profile?page=${page}&limit=${limit}`);
+  const queryString = qs.stringify(query, { skipNulls: true });
+  return await getApiHandler(`seekers/profile?${queryString}`);
 };
 
 /**
@@ -140,22 +147,15 @@ export const followEmployer = async (
  * @param params - An object containing page, skills, and search term.
  * @returns A promise resolving to the list of seekers and total count.
  */
-export const getSeekers = async ({
-  page = 1,
-  search = '',
-  skills = '',
-}: {
-  page: number;
-  skills?: string | string[];
-  search?: string;
-}): Promise<{
+export const getSeekers = async (
+  query: GetSeekersDto,
+): Promise<{
   seekers: Seeker[];
   totalSeekers: number;
   filterCounts: FilterCounts;
 }> => {
-  return await getApiHandler(
-    `seekers/all?page=${page}&search=${search}&skills=${skills}`,
-  );
+  const queryString = qs.stringify(query, { skipNulls: true });
+  return await getApiHandler(`seekers/all?${queryString}`);
 };
 
 /**

@@ -1,5 +1,10 @@
 import { createGenericQueryHook } from './createGenericQueryHook';
 import {
+  GetEmployerByIdDto,
+  GetEmployerProfileDto,
+  GetEmployersDto,
+} from '@/types';
+import {
   getEmployerAnalyticsInfo,
   getEmployerById,
   getEmployerProfile,
@@ -7,33 +12,15 @@ import {
 } from '@/lib/actions/employers.actions';
 
 const EmployerQueryFunctions = {
-  GET_EMPLOYER_PROFILE: (params: {
-    query: {
-      page?: number;
-      sort?: string;
-      search?: string;
-      type?: string;
-    };
-  }) => getEmployerProfile({ ...params.query }),
+  GET_EMPLOYER_PROFILE: (params: { query: GetEmployerProfileDto }) =>
+    getEmployerProfile(params.query),
   GET_EMPLOYER_ANALYTICS_INFO: () => getEmployerAnalyticsInfo(),
-  GET_EMPLOYERS: (params: {
-    query: {
-      page: number;
-      sort: string;
-      search: string;
-      industry: string;
-      size: string;
-      location: string;
-    };
-  }) => getEmployers({ ...params.query }),
+  GET_EMPLOYERS: (params: { query: GetEmployersDto }) =>
+    getEmployers(params.query),
   GET_EMPLOYER_BY_ID: (params: {
     employerId: string;
-    query: {
-      type: string;
-      page: number;
-    };
-  }) =>
-    getEmployerById(params.employerId, params.query.type, params.query.page),
+    query: GetEmployerByIdDto;
+  }) => getEmployerById(params.employerId, params.query),
 } as const;
 
 enum EmployerQueryType {

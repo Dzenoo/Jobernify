@@ -1,3 +1,5 @@
+import qs from 'qs';
+
 import {
   getApiHandler,
   postApiHandler,
@@ -5,7 +7,7 @@ import {
   deleteApiHandler,
 } from '../api';
 
-import { FilterCounts, Job } from '@/types';
+import { FilterCounts, GetJobsDto, Job } from '@/types';
 
 /**
  * Creates a new job.
@@ -56,33 +58,16 @@ export const saveJob = async (jobId: string): Promise<ResponseMessageTypes> => {
  * @param params - An object containing page, sort order, search term, salary range, job type, seniority, and position.
  * @returns A promise resolving to a list of jobs, total number of jobs, and popular jobs.
  */
-export const getJobs = async ({
-  page = 1,
-  limit = 10,
-  sort = '',
-  search = '',
-  salary = '',
-  type = '',
-  level = '',
-  position = '',
-}: {
-  page?: number;
-  limit?: number;
-  sort?: string;
-  search?: string;
-  salary?: string;
-  type?: string;
-  level?: string;
-  position?: string;
-}): Promise<{
+export const getJobs = async (
+  query: GetJobsDto,
+): Promise<{
   jobs: Job[];
   totalJobs: number;
   popularJobs: Job[];
   filterCounts: FilterCounts;
 }> => {
-  return await getApiHandler(
-    `jobs/all?page=${page}&limit=${limit}&sort=${sort}&search=${search}&salary=${salary}&position=${position}&level=${level}&type=${type}`,
-  );
+  const queryString = qs.stringify(query, { skipNulls: true });
+  return await getApiHandler(`jobs/all?${queryString}`);
 };
 
 /**

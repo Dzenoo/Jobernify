@@ -1,29 +1,27 @@
+import qs from 'qs';
+
 import { deleteApiHandler, getApiHandler, patchApiHandler } from '../api';
 
-import { Employer } from '@/types';
+import {
+  Employer,
+  GetEmployerByIdDto,
+  GetEmployerProfileDto,
+  GetEmployersDto,
+} from '@/types';
 
 /**
  * Fetches the employer profile along with job counts.
  * @param params - An object containing  page, sort, search, and type.
  * @returns A promise resolving to the employer profile and associated counts.
  */
-export const getEmployerProfile = async ({
-  page = 1,
-  sort = '',
-  search = '',
-  type = '',
-}: {
-  page?: number;
-  sort?: string;
-  search?: string;
-  type?: string;
-}): Promise<{
+export const getEmployerProfile = async (
+  query: GetEmployerProfileDto,
+): Promise<{
   counts: { totalJobs: number };
   employer: Employer;
 }> => {
-  return await getApiHandler(
-    `employers/profile?type=${type}&page=${page}&sort=${sort}&search=${search}`,
-  );
+  const queryString = qs.stringify(query, { skipNulls: true });
+  return await getApiHandler(`employers/profile?${queryString}`);
 };
 
 /**
@@ -75,24 +73,11 @@ export const getEmployerAnalyticsInfo = async (): Promise<{
  * @param search - The search query for filtering employers.
  * @returns A promise resolving to a list of employers and total employer count.
  */
-export const getEmployers = async ({
-  page = 1,
-  sort = '',
-  search = '',
-  industry = '',
-  size = '',
-  location = '',
-}: {
-  page: number;
-  sort: string;
-  search: string;
-  industry: string;
-  size: string;
-  location: string;
-}): Promise<{ employers: Employer[]; totalEmployers: number }> => {
-  return await getApiHandler(
-    `employers/all?page=${page}&sort=${sort}&search=${search}&industry=${industry}&size=${size}&location=${location}`,
-  );
+export const getEmployers = async (
+  query: GetEmployersDto,
+): Promise<{ employers: Employer[]; totalEmployers: number }> => {
+  const queryString = qs.stringify(query, { skipNulls: true });
+  return await getApiHandler(`employers/all?${queryString}`);
 };
 
 /**
@@ -104,13 +89,11 @@ export const getEmployers = async ({
  */
 export const getEmployerById = async (
   employerId: string,
-  type: string = '',
-  page: number = 1,
+  query: GetEmployerByIdDto,
 ): Promise<{
   employer: Employer;
   totalJobs: number;
 }> => {
-  return await getApiHandler(
-    `employers/${employerId}?page=${page}&limit=10&type=${type}`,
-  );
+  const queryString = qs.stringify(query, { skipNulls: true });
+  return await getApiHandler(`employers/${employerId}?${queryString}`);
 };

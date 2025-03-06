@@ -1,7 +1,18 @@
-import { JobLevel, JobPosition, JobType, Role } from "@/types";
-import { Job } from "./jobs.types";
-import { Application } from "./applications.types";
-import { Employer } from "./employers.types";
+import { JobLevel, JobPosition, JobType, Role } from '@/types';
+import { Job } from './jobs.types';
+import { Application } from './applications.types';
+import { Employer } from './employers.types';
+
+export type GetSeekerProfileDto = {
+  page: number;
+  limit: number;
+};
+
+export type GetSeekersDto = {
+  page: number;
+  skills?: string | string[];
+  search?: string;
+};
 
 export type Seeker = {
   _id: string;

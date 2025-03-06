@@ -1,6 +1,27 @@
-import { CompanySize, IndustryType, Role } from "@/types";
-import { Job } from "./jobs.types";
-import { Seeker } from "./seekers.types";
+import { CompanySize, IndustryType, Role } from '@/types';
+import { Job } from './jobs.types';
+import { Seeker } from './seekers.types';
+
+export type GetEmployerProfileDto = {
+  page?: number;
+  sort?: string;
+  search?: string;
+  type?: string;
+};
+
+export type GetEmployersDto = {
+  page: number;
+  sort: string;
+  search: string;
+  industry: string;
+  size: string;
+  location: string;
+};
+
+export type GetEmployerByIdDto = {
+  type: string;
+  page: number;
+};
 
 export type Employer = {
   _id: string;

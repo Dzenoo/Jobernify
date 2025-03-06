@@ -1,6 +1,8 @@
+import qs from 'qs';
+
 import { getApiHandler, patchApiHandler, postApiHandler } from '../api';
 
-import { Application } from '@/types';
+import { Application, GetApplicationsDto } from '@/types';
 
 /**
  * Fetches a presigned AWS S3 URL for uploading a resume.
@@ -34,15 +36,10 @@ export const updateApplicationStatus = async (
  * @param params - An object containing job ID, application type, and page.
  * @returns A promise resolving to the job, applications, and their statuses.
  */
-export const getApplications = async ({
-  jobId,
-  status = '',
-  page = 1,
-}: {
-  jobId: string;
-  status: string;
-  page: number;
-}): Promise<{
+export const getApplications = async (
+  jobId: string,
+  query: GetApplicationsDto,
+): Promise<{
   job: string;
   applications: Application[];
   totalApplications: number;
@@ -51,9 +48,8 @@ export const getApplications = async ({
   totalRejectedStatus: number;
   totalAcceptedStatus: number;
 }> => {
-  return await getApiHandler(
-    `applications/${jobId}?page=${page}&limit=10&status=${status}`,
-  );
+  const queryString = qs.stringify(query, { skipNulls: true });
+  return await getApiHandler(`applications/${jobId}?${queryString}`);
 };
 
 /**

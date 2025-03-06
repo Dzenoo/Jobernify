@@ -1,6 +1,11 @@
-import { ApplicationStatus } from "@/types";
-import { Seeker } from "./seekers.types";
-import { Job } from "./jobs.types";
+import { ApplicationStatus } from '@/types';
+import { Seeker } from './seekers.types';
+import { Job } from './jobs.types';
+
+export type GetApplicationsDto = {
+  status: string;
+  page: number;
+};
 
 export type Application = {
   _id: string;
