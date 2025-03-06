@@ -19,7 +19,7 @@ import {
   addNewExperience,
   editExperience,
 } from '@/lib/actions/seekers.actions';
-import { Experience } from '@/types';
+import { IExperience } from '@/types';
 
 import Loader from '@/components/shared/ui/Loader';
 
@@ -64,7 +64,7 @@ import {
 type ExperienceFormProps = {
   isEdit: boolean;
   experienceId: string | null;
-  experience: Experience;
+  experience: IExperience;
   closeForm: () => void;
   isOpen: boolean;
   isDialog: boolean;

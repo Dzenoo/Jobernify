@@ -6,7 +6,7 @@ import { Briefcase, Edit, Trash } from 'lucide-react';
 import { queryClient } from '@/context/react-query-client';
 import { deleteExperience } from '@/lib/actions/seekers.actions';
 import { formatDate } from '@/lib/utils';
-import { Experience } from '@/types';
+import { IExperience } from '@/types';
 import { useAuthStore } from '@/store/auth.store';
 
 import AlertDialogWrapper from '@/components/ui/info/alert-dialog-wrapper';
@@ -15,7 +15,7 @@ import { useToast } from '@/components/ui/info/use-toast';
 
 type ExperienceItemProps = {
   onEdit: () => void;
-} & Experience;
+} & IExperience;
 
 const ExperienceItem: React.FC<ExperienceItemProps> = ({
   onEdit,

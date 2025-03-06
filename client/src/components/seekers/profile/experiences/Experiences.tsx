@@ -2,7 +2,7 @@
 
 import React, { Fragment, useState } from 'react';
 
-import { Experience } from '@/types';
+import { IExperience } from '@/types';
 import { Plus } from 'lucide-react';
 
 import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
@@ -14,7 +14,7 @@ import { Dialog } from '@/components/ui/layout/dialog';
 import { Drawer } from '@/components/ui/layout/drawer';
 
 type ExperiencesProps = {
-  experience: Experience[] | [];
+  experience: IExperience[] | [];
 };
 
 const Experiences: React.FC<ExperiencesProps> = ({ experience }) => {
@@ -44,7 +44,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ experience }) => {
             <ExperienceForm
               isEdit={isEdit}
               experienceId={experienceId}
-              experience={seekerExperience as Experience}
+              experience={seekerExperience as IExperience}
               isOpen={isOpen}
               closeForm={closeForm}
               isDialog={true}
@@ -58,7 +58,7 @@ const Experiences: React.FC<ExperiencesProps> = ({ experience }) => {
             <ExperienceForm
               isEdit={isEdit}
               experienceId={experienceId}
-              experience={seekerExperience as Experience}
+              experience={seekerExperience as IExperience}
               isOpen={isOpen}
               closeForm={closeForm}
               isDialog={false}

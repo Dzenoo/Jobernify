@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 
 import ExperienceItem from './ExperienceItem';
 
-import { Experience } from '@/types';
+import { IExperience } from '@/types';
 
 import { Button } from '@/components/ui/buttons/button';
 
 type ExperienceListProps = {
-  experiences: Experience[];
+  experiences: IExperience[];
   openForm: (id: string) => void;
 };
 

@@ -27,8 +27,8 @@ export interface ISeeker {
   linkedin: string;
   github: string;
   skills: string[];
-  education: Education[];
-  experience: Experience[];
+  education: IEducation[];
+  experience: IExperience[];
   alerts: JobAlerts;
   resume?: string;
   role: keyof typeof Role;
@@ -41,15 +41,15 @@ export interface ISeeker {
   isTwoFactorAuthEnabled: boolean;
 }
 
-export type Education = {
+export interface IEducation {
   _id: string;
   institution: string;
   graduationDate: Date;
   fieldOfStudy: string;
   degree: string;
-};
+}
 
-export type Experience = {
+export interface IExperience {
   _id: string;
   jobTitle: string;
   companyName: string;
@@ -60,7 +60,7 @@ export type Experience = {
   location: string;
   position: keyof typeof JobPosition;
   isCurrentlyWorking: boolean;
-};
+}
 
 export type JobAlerts = {
   title: string;

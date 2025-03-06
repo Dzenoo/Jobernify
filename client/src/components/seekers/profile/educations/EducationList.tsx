@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 
 import EducationItem from './EducationItem';
 
-import { Education } from '@/types';
+import { IEducation } from '@/types';
 
 import { Button } from '@/components/ui/buttons/button';
 
 type EducationListProps = {
-  educations?: Education[];
+  educations?: IEducation[];
   openForm: (id: string) => void;
 };
 

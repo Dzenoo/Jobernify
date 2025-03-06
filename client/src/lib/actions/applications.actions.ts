@@ -2,7 +2,7 @@ import qs from 'qs';
 
 import { getApiHandler, patchApiHandler, postApiHandler } from '../api';
 
-import { Application, GetApplicationsDto } from '@/types';
+import { IApplication, GetApplicationsDto } from '@/types';
 
 /**
  * Fetches a presigned AWS S3 URL for uploading a resume.
@@ -42,7 +42,7 @@ export const getApplications = async (
 ): Promise<
   ServerResponse<{
     job: string;
-    applications: Application[];
+    applications: IApplication[];
     totalApplications: number;
     totalPendingStatus: number;
     totalInterviewStatus: number;

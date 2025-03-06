@@ -14,7 +14,7 @@ import {
 import { addNewEducation, editEducation } from '@/lib/actions/seekers.actions';
 import { queryClient } from '@/context/react-query-client';
 import { cn } from '@/lib/utils';
-import { Education } from '@/types';
+import { IEducation } from '@/types';
 
 import Loader from '@/components/shared/ui/Loader';
 
@@ -52,7 +52,7 @@ import {
 type EducationFormProps = {
   isEdit: boolean;
   educationId: string | null;
-  education: Education;
+  education: IEducation;
   closeForm: () => void;
   isOpen: boolean;
   isDialog: boolean;

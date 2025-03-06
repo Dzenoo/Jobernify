@@ -2,7 +2,7 @@
 
 import React, { Fragment, useState } from 'react';
 
-import { Education } from '@/types';
+import { IEducation } from '@/types';
 import { Plus } from 'lucide-react';
 
 import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
@@ -14,7 +14,7 @@ import { Dialog } from '@/components/ui/layout/dialog';
 import { Drawer } from '@/components/ui/layout/drawer';
 
 type EducationsProps = {
-  education: Education[] | [];
+  education: IEducation[] | [];
 };
 
 const Educations: React.FC<EducationsProps> = ({ education }) => {
@@ -44,7 +44,7 @@ const Educations: React.FC<EducationsProps> = ({ education }) => {
             <EducationForm
               isEdit={isEdit}
               educationId={educationId}
-              education={seekerEducation as Education}
+              education={seekerEducation as IEducation}
               isOpen={isOpen}
               closeForm={closeForm}
               isDialog={true}
@@ -58,7 +58,7 @@ const Educations: React.FC<EducationsProps> = ({ education }) => {
             <EducationForm
               isEdit={isEdit}
               educationId={educationId}
-              education={seekerEducation as Education}
+              education={seekerEducation as IEducation}
               isOpen={isOpen}
               closeForm={closeForm}
               isDialog={false}

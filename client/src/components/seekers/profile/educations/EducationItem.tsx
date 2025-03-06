@@ -10,14 +10,14 @@ import { renderIconText } from '@/helpers';
 import { queryClient } from '@/context/react-query-client';
 import { useAuthStore } from '@/store/auth.store';
 
-import { Education } from '@/types';
+import { IEducation } from '@/types';
 
 import AlertDialogWrapper from '@/components/ui/info/alert-dialog-wrapper';
 import { Button } from '@/components/ui/buttons/button';
 
 export type EducationItemProps = {
   onEdit: () => void;
-} & Education;
+} & IEducation;
 
 const EducationItem: React.FC<EducationItemProps> = ({
   onEdit,
