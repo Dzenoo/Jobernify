@@ -1,6 +1,6 @@
 import { JobLevel, JobPosition, JobType } from '@/types';
 import { Employer } from './employers.types';
-import { Application } from './applications.types';
+import { IApplication } from './applications.types';
 
 export type GetJobsDto = {
   page?: number;
@@ -26,6 +26,6 @@ export type Job = {
   salary: number;
   expiration_date: string & Date;
   description: string;
-  applications: Application[];
+  applications: IApplication[];
   createdAt: Date;
 };

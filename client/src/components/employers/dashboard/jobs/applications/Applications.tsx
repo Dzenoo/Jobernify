@@ -4,7 +4,7 @@ import { LucideImage, Search } from 'lucide-react';
 
 import { formatDate } from '@/lib/utils';
 
-import { Application } from '@/types';
+import { IApplication } from '@/types';
 
 import NameWithImage from './table/NameWithImage';
 import StatusBadge from './table/StatusBadge';
@@ -25,7 +25,7 @@ import {
 } from '@/components/ui/utilities/table';
 
 type ApplicationsProps = {
-  applications: Application[];
+  applications: IApplication[];
   currentPage: number;
   itemsPerPage: number;
 };

@@ -7,7 +7,7 @@ export type GetApplicationsDto = {
   page: number;
 };
 
-export type Application = {
+export type IApplication = {
   _id: string;
   cover_letter: string;
   status: keyof typeof ApplicationStatus;

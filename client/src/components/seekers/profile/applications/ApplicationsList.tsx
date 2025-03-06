@@ -4,10 +4,10 @@ import { Search } from 'lucide-react';
 
 import ApplicationsItem from './ApplicationsItem';
 
-import { Application } from '@/types';
+import { IApplication } from '@/types';
 
 type ApplicationsListProps = {
-  applications: Application[];
+  applications: IApplication[];
 };
 
 const ApplicationsList: React.FC<ApplicationsListProps> = React.memo(

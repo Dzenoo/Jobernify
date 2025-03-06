@@ -2,7 +2,7 @@ import React from 'react';
 
 import dynamic from 'next/dynamic';
 
-import { Application } from '@/types';
+import { IApplication } from '@/types';
 
 import {
   Card,
@@ -22,7 +22,7 @@ const ApplicationsList = dynamic(
 );
 
 type ApplicationsProps = {
-  applications: Application[];
+  applications: IApplication[];
 };
 
 const Applications: React.FC<ApplicationsProps> = ({ applications }) => {
