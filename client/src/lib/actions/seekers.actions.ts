@@ -37,11 +37,9 @@ export const getSeekerProfile = async (
 export const editSeekerProfile = async (
   formData: FormData,
 ): Promise<ResponseMessageTypes> => {
-  return await patchApiHandler(
-    `seekers/edit-profile`,
-    formData,
-    'multipart/form-data',
-  );
+  return await patchApiHandler(`seekers/edit-profile`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
 };
 
 /**

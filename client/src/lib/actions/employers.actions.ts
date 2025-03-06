@@ -32,11 +32,9 @@ export const getEmployerProfile = async (
 export const editEmployerProfile = async (
   formData: FormData,
 ): Promise<ResponseMessageTypes> => {
-  return await patchApiHandler(
-    'employers/edit-profile',
-    formData,
-    'multipart/form-data',
-  );
+  return await patchApiHandler('employers/edit-profile', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
 };
 
 /**

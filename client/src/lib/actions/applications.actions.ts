@@ -62,9 +62,7 @@ export const applyToJob = async (
   jobId: string,
   formData: FormData,
 ): Promise<ResponseMessageTypes> => {
-  return await postApiHandler(
-    `applications/${jobId}/apply`,
-    formData,
-    'multipart/form-data',
-  );
+  return await postApiHandler(`applications/${jobId}/apply`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
 };

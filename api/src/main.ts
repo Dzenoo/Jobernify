@@ -1,5 +1,5 @@
 import * as cookieParser from 'cookie-parser';
-// import * as csurf from 'csurf';
+import * as csurf from 'csurf';
 import * as compression from 'compression';
 import helmet from 'helmet';
 
@@ -20,11 +20,11 @@ async function initializeServer() {
 
   app.use(helmet());
   app.use(cookieParser());
-  // app.use(
-  //   csurf({
-  //     cookie: cookieOptions,
-  //   }),
-  // );
+  app.use(
+    csurf({
+      cookie: cookieOptions,
+    }),
+  );
   app.use(compression());
   app.useGlobalPipes(
     new ValidationPipe({
