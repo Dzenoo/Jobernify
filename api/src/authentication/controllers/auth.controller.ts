@@ -169,6 +169,13 @@ export class AuthController {
     return { role: user.role };
   }
 
+  
+  @Throttle({ default: { ttl: 60000, limit: 10 } })
+  @Get('/csrf-token')
+  getCsrfToken(@Req() req: Request) {
+    return { csrfToken: req.csrfToken() };
+  }
+
   private async findUserById(
     userId: string,
   ): Promise<Seeker | Employer | null> {

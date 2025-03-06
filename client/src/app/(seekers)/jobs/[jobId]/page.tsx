@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { JobQueryType, useJobQuery } from '@/hooks/queries/useJob.query';
 import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 
 import LoadingJobDetails from '@/components/templates/seekers/LoadingJobDetails';
@@ -12,7 +13,6 @@ import SeekerInfo from '@/components/seekers/jobs/SeekerInfo';
 import JobsList from '@/components/seekers/jobs/JobsList';
 import ApplyToJobForm from '@/components/seekers/jobs/details/forms/ApplyToJobForm';
 import NotFound from '@/components/shared/pages/NotFound';
-import { useGetJobById } from '@/hooks/queries/useGetJobById.query';
 
 const JobDetailsPage = ({
   params: { jobId },
@@ -23,7 +23,10 @@ const JobDetailsPage = ({
 
   const isSmall = useMediaQuery('(min-width: 650px)');
 
-  const { data: fetchedJobs, isLoading } = useGetJobById(jobId);
+  const { data: fetchedJobs, isLoading } = useJobQuery({
+    type: JobQueryType.GET_JOB_BY_ID,
+    params: { jobId },
+  });
 
   if (isLoading) {
     return <LoadingJobDetails />;

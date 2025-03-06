@@ -3,8 +3,11 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
+import {
+  SeekerQueryType,
+  useSeekerQuery,
+} from '@/hooks/queries/useSeeker.query';
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
-import { useGetSeekers } from '@/hooks/queries/useGetSeekers.query';
 
 import SearchSeekers from '@/components/employers/seekers/search/SearchSeekers';
 import FilterSeekers from '@/components/employers/seekers/filters/FilterSeekers';
@@ -13,6 +16,7 @@ import ExploreSeekers from '@/components/employers/seekers/explore/ExploreSeeker
 import NotFound from '@/components/shared/pages/NotFound';
 
 import LoadingSeekers from '@/components/templates/employers/LoadingSeekers';
+
 const SeekersList = dynamic(
   () => import('@/components/employers/seekers/SeekersList'),
   {
@@ -26,12 +30,22 @@ const SeekersPage = ({
   searchParams: { [key: string]: string & number };
 }) => {
   const { updateSearchParams } = useSearchParams();
+
   const {
     data: fetchedSeekers,
     isLoading,
     isRefetching,
     isFetching,
-  } = useGetSeekers(searchParams);
+  } = useSeekerQuery({
+    type: SeekerQueryType.GET_SEEKERS,
+    params: {
+      query: {
+        page: searchParams.page || 1,
+        search: searchParams.search || undefined,
+        skills: searchParams.skills || undefined,
+      },
+    },
+  });
 
   if (!fetchedSeekers && !isLoading) {
     return <NotFound />;

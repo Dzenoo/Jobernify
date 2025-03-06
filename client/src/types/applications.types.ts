@@ -3,8 +3,8 @@ import { ISeeker } from './seekers.types';
 import { IJob } from './jobs.types';
 
 export type GetApplicationsDto = {
-  status: string;
-  page: number;
+  status?: string;
+  page?: number;
 };
 
 export interface IApplication {

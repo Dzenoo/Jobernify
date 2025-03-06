@@ -10,12 +10,12 @@ export type GetEmployerProfileDto = {
 };
 
 export type GetEmployersDto = {
-  page: number;
-  sort: string;
-  search: string;
-  industry: string;
-  size: string;
-  location: string;
+  page?: number;
+  sort?: string;
+  search?: string;
+  industry?: string;
+  size?: string;
+  location?: string;
 };
 
 export type GetEmployerByIdDto = {

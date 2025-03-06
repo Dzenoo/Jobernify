@@ -3,7 +3,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-import { useGetJobs } from '@/hooks/queries/useGetJobs.query';
+import { JobQueryType, useJobQuery } from '@/hooks/queries/useJob.query';
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
 import SearchJobs from '@/components/seekers/jobs/search/SearchJobs';
@@ -43,7 +43,21 @@ const Jobs = ({
     isLoading,
     isFetching,
     isRefetching,
-  } = useGetJobs(searchParams);
+  } = useJobQuery({
+    type: JobQueryType.GET_JOBS,
+    params: {
+      query: {
+        page: Number(searchParams.page) || 1,
+        limit: Math.min(Math.max(Number(searchParams.limit) || 10, 1), 100),
+        sort: searchParams.sort || undefined,
+        search: searchParams.search || undefined,
+        level: searchParams.level || undefined,
+        salary: searchParams.salary || undefined,
+        position: searchParams.position || undefined,
+        type: searchParams.type || undefined,
+      },
+    },
+  });
 
   if (!fetchedJobs && !isLoading) {
     return <NotFound />;

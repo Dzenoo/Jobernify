@@ -2,8 +2,11 @@
 
 import React, { useState } from 'react';
 
-import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
+import {
+  SeekerQueryType,
+  useSeekerQuery,
+} from '@/hooks/queries/useSeeker.query';
 
 import LoadingSeekerProfileSkeleton from '@/components/templates/seekers/LoadingSeekerProfile';
 
@@ -28,7 +31,15 @@ const SeekerProfilePage = ({
     isLoading,
     isFetching,
     isRefetching,
-  } = useGetSeeker(Number(searchParams.page || 1));
+  } = useSeekerQuery({
+    type: SeekerQueryType.GET_SEEKER_PROFILE,
+    params: {
+      query: {
+        page: Number(searchParams.page) || 1,
+        limit: Math.min(Math.max(Number(searchParams.limit) || 10, 1), 100),
+      },
+    },
+  });
 
   const isLoadingSeeker = isLoading || isFetching || isRefetching;
 

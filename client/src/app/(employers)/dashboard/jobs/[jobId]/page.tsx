@@ -3,8 +3,11 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
+import {
+  ApplicationsQueryType,
+  useApplicationsQuery,
+} from '@/hooks/queries/useApplication.query';
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
-import { useGetApplications } from '@/hooks/queries/useGetApplications.query';
 
 import FilterApplications from '@/components/employers/dashboard/jobs/applications/filter/FilterApplications';
 import LoadingJobApplications from '@/components/templates/employers/LoadingJobApplications';
@@ -28,10 +31,16 @@ const JobApplicationsPage = ({
   params: { jobId: string };
 }) => {
   const { updateSearchParams } = useSearchParams();
-  const { data, isLoading, isFetching, isRefetching } = useGetApplications(
-    params.jobId,
-    searchParams,
-  );
+  const { data, isLoading, isFetching, isRefetching } = useApplicationsQuery({
+    type: ApplicationsQueryType.GET_APPLICATIONS,
+    params: {
+      jobId: params.jobId,
+      query: {
+        page: Number(searchParams.page) || 1,
+        status: searchParams.status || undefined,
+      },
+    },
+  });
 
   if (!isLoading && !data) {
     return <NotFound href="/dashboard/jobs" />;

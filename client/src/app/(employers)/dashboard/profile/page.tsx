@@ -3,7 +3,10 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 
-import { useGetEmployer } from '@/hooks/queries/useGetEmployer.query';
+import {
+  EmployerQueryType,
+  useEmployerQuery,
+} from '@/hooks/queries/useEmployer.query';
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
 import LoadingEmployerProfile from '@/components/templates/employers/LoadingEmployerProfile';
@@ -21,7 +24,10 @@ const EmployerProfile = dynamic(
 const EmployerProfilePage = () => {
   const [currentTab, setCurrentTab] = useState<number>(0);
   const { updateSearchParams } = useSearchParams();
-  const { data: fetchedEmployerProfile } = useGetEmployer();
+  const { data: fetchedEmployerProfile } = useEmployerQuery({
+    type: EmployerQueryType.GET_EMPLOYER_PROFILE,
+    params: { query: {} },
+  });
 
   if (!fetchedEmployerProfile) {
     return (

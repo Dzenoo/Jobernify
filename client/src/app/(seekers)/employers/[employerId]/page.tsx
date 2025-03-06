@@ -3,6 +3,10 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
+import {
+  EmployerQueryType,
+  useEmployerQuery,
+} from '@/hooks/queries/useEmployer.query';
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
 import LoadingEmployerDetails from '@/components/templates/seekers/LoadingEmployerDetails';
@@ -13,7 +17,7 @@ import PaginatedList from '@/components/ui/pagination/paginate-list';
 import NotFound from '@/components/shared/pages/NotFound';
 
 import LoadingJobsSkeleton from '@/components/templates/seekers/LoadingJobsSkeleton';
-import { useGetEmployerById } from '@/hooks/queries/useGetEmployerById.query';
+
 const JobsList = dynamic(() => import('@/components/seekers/jobs/JobsList'), {
   loading: () => <LoadingJobsSkeleton />,
 });
@@ -26,10 +30,16 @@ const EmployerDetails = ({
   searchParams: { [key: string]: any };
 }) => {
   const { updateSearchParams } = useSearchParams();
-  const { data: fetchedEmployer, isLoading } = useGetEmployerById(
-    params.employerId,
-    searchParams,
-  );
+  const { data: fetchedEmployer, isLoading } = useEmployerQuery({
+    type: EmployerQueryType.GET_EMPLOYER_BY_ID,
+    params: {
+      employerId: params.employerId,
+      query: {
+        page: Number(searchParams.page) || 1,
+        type: searchParams.type || undefined,
+      },
+    },
+  });
 
   if (isLoading) {
     return <LoadingEmployerDetails />;

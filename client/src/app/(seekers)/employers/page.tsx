@@ -3,6 +3,10 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
+import {
+  EmployerQueryType,
+  useEmployerQuery,
+} from '@/hooks/queries/useEmployer.query';
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
 
 import SearchEmployers from '@/components/seekers/employers/search/SearchEmployers';
@@ -10,7 +14,7 @@ import PaginatedList from '@/components/ui/pagination/paginate-list';
 import NotFound from '@/components/shared/pages/NotFound';
 
 import LoadingEmployersSkeleton from '@/components/templates/seekers/LoadingEmployers';
-import { useGetEmployers } from '@/hooks/queries/useGetEmployers.query';
+
 const EmployersList = dynamic(
   () => import('@/components/seekers/employers/EmployersList'),
   {
@@ -29,7 +33,19 @@ const Employers = ({
     isLoading,
     isFetching,
     isRefetching,
-  } = useGetEmployers(searchParams);
+  } = useEmployerQuery({
+    type: EmployerQueryType.GET_EMPLOYERS,
+    params: {
+      query: {
+        page: Number(searchParams.page) || 1,
+        search: searchParams.search || undefined,
+        sort: searchParams.sort || undefined,
+        size: searchParams.size || undefined,
+        industry: searchParams.industry || undefined,
+        location: searchParams.location || undefined,
+      },
+    },
+  });
 
   if (!fetchedEmployers && !isLoading) {
     return <NotFound />;

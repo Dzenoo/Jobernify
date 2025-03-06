@@ -2,8 +2,11 @@
 
 import React from 'react';
 
+import {
+  EmployerQueryType,
+  useEmployerQuery,
+} from '@/hooks/queries/useEmployer.query';
 import { useSearchParams } from '@/hooks/core/useSearchParams.hook';
-import { useGetEmployer } from '@/hooks/queries/useGetEmployer.query';
 
 import dynamic from 'next/dynamic';
 import LoadingDashboardJobs from '@/components/templates/employers/LoadingDashboardJobs';
@@ -24,8 +27,10 @@ const DashboardJobsPage = ({
   searchParams: { [key: string]: string };
 }) => {
   const { updateSearchParams } = useSearchParams();
-  const { data, isFetching, isRefetching, isLoading } =
-    useGetEmployer(searchParams);
+  const { data, isFetching, isRefetching, isLoading } = useEmployerQuery({
+    type: EmployerQueryType.GET_EMPLOYER_PROFILE,
+    params: { query: {} },
+  });
 
   const jobsData = data || {
     employer: {

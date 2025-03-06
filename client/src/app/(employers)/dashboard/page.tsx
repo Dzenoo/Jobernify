@@ -2,24 +2,31 @@
 
 import React from 'react';
 
-import { useGetEmployer } from '@/hooks/queries/useGetEmployer.query';
-import { useGetEmployerAnalytics } from '@/hooks/queries/useGetEmployerAnalytics.query';
+import {
+  EmployerQueryType,
+  useEmployerQuery,
+} from '@/hooks/queries/useEmployer.query';
 
 import Followers from '@/components/employers/dashboard/overview/Followers';
 import JobsPerMonth from '@/components/employers/dashboard/overview/JobsPerMonth';
 import Statistics from '@/components/employers/dashboard/overview/Statistics';
 import Types from '@/components/employers/dashboard/overview/Types';
-
 import LoadingDashboard from '@/components/templates/employers/LoadingDashboard';
 
 const Dashboard = () => {
-  const { data: fetchedEmployer } = useGetEmployer();
+  const { data: fetchedEmployer } = useEmployerQuery({
+    type: EmployerQueryType.GET_EMPLOYER_PROFILE,
+    params: { query: {} },
+  });
+
   const {
     data: analytics,
     isLoading,
     isFetching,
     isRefetching,
-  } = useGetEmployerAnalytics();
+  } = useEmployerQuery({
+    type: EmployerQueryType.GET_EMPLOYER_ANALYTICS_INFO,
+  });
 
   const isFiltering = isLoading || isFetching || isRefetching;
 

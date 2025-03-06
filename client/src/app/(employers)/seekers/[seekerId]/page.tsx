@@ -3,7 +3,10 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-import { useGetSeekerById } from '@/hooks/queries/useGetSeekerById.query';
+import {
+  SeekerQueryType,
+  useSeekerQuery,
+} from '@/hooks/queries/useSeeker.query';
 
 import { ISeeker } from '@/types';
 
@@ -22,8 +25,12 @@ const SeekerDetailsPage = ({
 }: {
   params: { seekerId: string };
 }) => {
-  const { data: fetchedSeeker, isLoading } = useGetSeekerById(seekerId);
   const className = 'base-margin overflow-auto flex gap-[10px] max-xl:flex-col';
+
+  const { data: fetchedSeeker, isLoading } = useSeekerQuery({
+    type: SeekerQueryType.GET_SEEKER_BY_ID,
+    params: { seekerId },
+  });
 
   if (isLoading) {
     return (

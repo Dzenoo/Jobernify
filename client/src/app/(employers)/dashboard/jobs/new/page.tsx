@@ -3,7 +3,10 @@
 import React from 'react';
 import { AlertCircle } from 'lucide-react';
 
-import { useGetEmployer } from '@/hooks/queries/useGetEmployer.query';
+import {
+  EmployerQueryType,
+  useEmployerQuery,
+} from '@/hooks/queries/useEmployer.query';
 
 import UpdateJobForm from '@/components/employers/dashboard/jobs/new/forms/UpdateJobForm';
 
@@ -14,7 +17,10 @@ import {
 } from '@/components/ui/info/alert';
 
 const NewJobPage = () => {
-  const { data: fetchedEmployer } = useGetEmployer();
+  const { data: fetchedEmployer } = useEmployerQuery({
+    type: EmployerQueryType.GET_EMPLOYER_PROFILE,
+    params: { query: {} },
+  });
 
   if (!fetchedEmployer?.employer.isApproved) {
     return (
