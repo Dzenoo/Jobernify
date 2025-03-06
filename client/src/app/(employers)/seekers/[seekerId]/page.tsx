@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 
 import { useGetSeekerById } from '@/hooks/queries/useGetSeekerById.query';
 
-import { Seeker } from '@/types';
+import { ISeeker } from '@/types';
 
 import NotFound from '@/components/shared/pages/NotFound';
 
@@ -40,7 +40,7 @@ const SeekerDetailsPage = ({
   return (
     <section className={className}>
       <div className="basis-full grow flex flex-col gap-6">
-        <SeekerDetailsInfo seeker={fetchedSeeker?.seeker as Seeker} />
+        <SeekerDetailsInfo seeker={fetchedSeeker?.seeker as ISeeker} />
       </div>
     </section>
   );

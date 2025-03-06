@@ -12,7 +12,7 @@ import { useGetSeeker } from '@/hooks/queries/useGetSeeker.query';
 import { ApplyToJobSchema } from '@/lib/zod/jobs.validation';
 import { applyToJob } from '@/lib/actions/applications.actions';
 
-import { Seeker } from '@/types';
+import { ISeeker } from '@/types';
 
 import Loader from '@/components/shared/ui/Loader';
 
@@ -69,7 +69,7 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
 
   const { data: fetchedSeekerProfile } = useGetSeeker();
 
-  const seekerData = fetchedSeekerProfile as { seeker: Seeker };
+  const seekerData = fetchedSeekerProfile as { seeker: ISeeker };
 
   const form = useForm<zod.infer<typeof ApplyToJobSchema>>({
     resolver: zodResolver(ApplyToJobSchema),

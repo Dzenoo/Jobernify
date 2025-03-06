@@ -2,10 +2,10 @@ import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
 import { getSeekerProfile } from '@/lib/actions/seekers.actions';
 
-import { Seeker } from '@/types';
+import { ISeeker } from '@/types';
 
 interface SeekerProfile {
-  seeker: Seeker;
+  seeker: ISeeker;
   totalSavedJobs: number;
   totalApplications: number;
 }

@@ -5,7 +5,7 @@ import { Edit, Image } from 'lucide-react';
 import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 import { formatURL } from '@/lib/utils';
 
-import { Seeker } from '@/types';
+import { ISeeker } from '@/types';
 
 import EditSocialsForm from './forms/EditSocialsForm';
 import GithubIcon from '@/components/shared/icons/GithubIcon';
@@ -16,7 +16,7 @@ import { Dialog } from '@/components/ui/layout/dialog';
 import { Drawer } from '@/components/ui/layout/drawer';
 
 type SocialsProps = {
-  seeker: Seeker;
+  seeker: ISeeker;
 };
 
 const Socials: React.FC<SocialsProps> = ({ seeker }) => {
@@ -91,7 +91,9 @@ const Socials: React.FC<SocialsProps> = ({ seeker }) => {
           {SocialsArrays.map(({ id, title, data, icon }) => (
             <div
               key={id}
-              className={`bg-card text-card-foreground border rounded-lg px-16 py-7 flex flex-col gap-3 items-center justify-center transition-all overflow-hidden hover:border-gray-300 dark:hover:border-[#585858] ${title === 'Linkedin' && 'max-lg:col-span-2 max-sm:col-span-1'}`}
+              className={`bg-card text-card-foreground border rounded-lg px-16 py-7 flex flex-col gap-3 items-center justify-center transition-all overflow-hidden hover:border-gray-300 dark:hover:border-[#585858] ${
+                title === 'Linkedin' && 'max-lg:col-span-2 max-sm:col-span-1'
+              }`}
             >
               <div>{icon}</div>
               <div>

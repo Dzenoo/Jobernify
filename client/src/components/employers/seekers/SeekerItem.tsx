@@ -4,7 +4,7 @@ import { LucideImage } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { Seeker } from '@/types';
+import { ISeeker } from '@/types';
 import { getImageUrl, getSkillNames } from '@/lib/utils';
 
 import SocialLinks from './SocialLinks';
@@ -21,7 +21,7 @@ import { Button } from '@/components/ui/buttons/button';
 import { Separator } from '@/components/ui/layout/separator';
 
 type SeekerItemProps = {
-  seeker: Seeker;
+  seeker: ISeeker;
 };
 
 const SeekerItem: React.FC<SeekerItemProps> = ({

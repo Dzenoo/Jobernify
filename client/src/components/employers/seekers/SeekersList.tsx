@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Search } from 'lucide-react';
 
-import { Seeker } from '@/types';
+import { ISeeker } from '@/types';
 
 import SeekerItem from './SeekerItem';
 
 type SeekersListProps = {
-  seekers: Seeker[];
+  seekers: ISeeker[];
 };
 
 const SeekersList: React.FC<SeekersListProps> = ({ seekers }) => {

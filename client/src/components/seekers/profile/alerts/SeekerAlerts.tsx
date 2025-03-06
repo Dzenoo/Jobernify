@@ -4,7 +4,7 @@ import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 
 import NewAlertForm from './forms/NewAlertForm';
 
-import { Seeker } from '@/types';
+import { ISeeker } from '@/types';
 
 import {
   Card,
@@ -19,7 +19,7 @@ import { Button } from '@/components/ui/buttons/button';
 import { Separator } from '@/components/ui/layout/separator';
 
 type SeekerAlertsProps = {
-  alertsData: Pick<Seeker, 'alerts'>;
+  alertsData: Pick<ISeeker, 'alerts'>;
 };
 
 const SeekerAlerts: React.FC<SeekerAlertsProps> = React.memo(

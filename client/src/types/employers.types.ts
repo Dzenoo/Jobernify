@@ -1,6 +1,6 @@
 import { CompanySize, IndustryType, Role } from '@/types';
 import { IJob } from './jobs.types';
-import { Seeker } from './seekers.types';
+import { ISeeker } from './seekers.types';
 
 export type GetEmployerProfileDto = {
   page?: number;
@@ -35,7 +35,7 @@ export interface IEmployer {
   website: string;
   role: keyof typeof Role;
   jobs: IJob[];
-  followers: Seeker[];
+  followers: ISeeker[];
   isApproved: boolean;
   isTwoFactorAuthEnabled: boolean;
 }

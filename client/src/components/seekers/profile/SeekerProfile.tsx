@@ -3,7 +3,7 @@
 import React, { Fragment, useState } from 'react';
 import { Edit, X } from 'lucide-react';
 
-import { Seeker } from '@/types';
+import { ISeeker } from '@/types';
 
 import SeekerData from './informations/SeekerData';
 import Educations from './educations/Educations';
@@ -19,7 +19,7 @@ import { Separator } from '@/components/ui/layout/separator';
 import { Button } from '@/components/ui/buttons/button';
 
 type SeekerProfileProps = {
-  seeker: Seeker;
+  seeker: ISeeker;
 };
 
 const SeekerProfile: React.FC<SeekerProfileProps> = React.memo(({ seeker }) => {

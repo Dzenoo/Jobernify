@@ -14,7 +14,7 @@ export type GetSeekersDto = {
   search?: string;
 };
 
-export type Seeker = {
+export interface ISeeker {
   _id: string;
   email: string;
   first_name: string;
@@ -39,7 +39,7 @@ export type Seeker = {
   createdAt: Date;
   updatedAt: Date;
   isTwoFactorAuthEnabled: boolean;
-};
+}
 
 export type Education = {
   _id: string;

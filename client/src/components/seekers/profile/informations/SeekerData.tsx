@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Seeker } from '@/types';
+import { ISeeker } from '@/types';
 import { FieldGroup } from '@/helpers';
 
 type SeekerDataProps = {
-  seeker: Seeker;
+  seeker: ISeeker;
 };
 
 const SeekerData: React.FC<SeekerDataProps> = ({ seeker }) => {

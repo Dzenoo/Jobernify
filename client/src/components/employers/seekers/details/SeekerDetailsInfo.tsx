@@ -8,7 +8,7 @@ import { LucideImage } from 'lucide-react';
 import { getImageUrl, getSkillsData } from '@/lib/utils';
 import { renderSkills } from '@/helpers';
 
-import { Seeker } from '@/types';
+import { ISeeker } from '@/types';
 
 import CardSection from './CardSection';
 import SocialLinks from '../SocialLinks';
@@ -21,7 +21,7 @@ import Navigator from '@/components/ui/navigation/navigator';
 import { Card, CardContent, CardHeader } from '@/components/ui/layout/card';
 
 type SeekerDetailsInfoProps = {
-  seeker: Seeker;
+  seeker: ISeeker;
 };
 
 const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
@@ -66,7 +66,9 @@ const SeekerDetailsInfo: React.FC<SeekerDetailsInfoProps> = ({ seeker }) => {
                 width={100}
                 height={100}
                 className="w-28 h-28 rounded-full object-cover"
-                alt={`${seeker?.first_name ?? ''} ${seeker?.last_name ?? ''} profile picture`}
+                alt={`${seeker?.first_name ?? ''} ${
+                  seeker?.last_name ?? ''
+                } profile picture`}
               />
               <div className="flex flex-col gap-[3px]">
                 <h1 className="text-base-black">

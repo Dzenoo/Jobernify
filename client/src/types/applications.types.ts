@@ -1,5 +1,5 @@
 import { ApplicationStatus } from '@/types';
-import { Seeker } from './seekers.types';
+import { ISeeker } from './seekers.types';
 import { IJob } from './jobs.types';
 
 export type GetApplicationsDto = {
@@ -12,7 +12,7 @@ export interface IApplication {
   cover_letter: string;
   status: keyof typeof ApplicationStatus;
   resume: string;
-  seeker: Seeker;
+  seeker: ISeeker;
   job: IJob;
   createdAt: Date;
 }

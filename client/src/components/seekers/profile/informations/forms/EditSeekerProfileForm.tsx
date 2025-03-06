@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
 import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
-import { Seeker } from '@/types';
+import { ISeeker } from '@/types';
 import { SeekerProfileSchema } from '@/lib/zod/seekers.validation';
 
 import Loader from '@/components/shared/ui/Loader';
@@ -26,7 +26,7 @@ import {
 type EditSeekerProfileFormProps = {
   isEditMode: boolean;
   setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
-  seeker: Seeker;
+  seeker: ISeeker;
 };
 
 const EditSeekerProfileForm: React.FC<EditSeekerProfileFormProps> = ({
