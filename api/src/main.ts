@@ -7,6 +7,7 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 
 import { AppModule } from './app.module';
+import { cookieOptions } from './common/constants';
 
 async function initializeServer() {
   const app = await NestFactory.create(AppModule);
