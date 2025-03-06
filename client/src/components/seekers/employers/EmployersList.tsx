@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Search } from 'lucide-react';
 
-import { Employer } from '@/types';
+import { IEmployer } from '@/types';
 
 import EmployerItem from './EmployerItem';
 
 type EmployersListProps = {
-  employers: Employer[];
+  employers: IEmployer[];
 };
 
 const EmployersList: React.FC<EmployersListProps> = React.memo(

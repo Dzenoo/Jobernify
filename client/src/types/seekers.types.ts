@@ -1,7 +1,7 @@
 import { JobLevel, JobPosition, JobType, Role } from '@/types';
 import { Job } from './jobs.types';
 import { IApplication } from './applications.types';
-import { Employer } from './employers.types';
+import { IEmployer } from './employers.types';
 
 export type GetSeekerProfileDto = {
   page: number;
@@ -35,7 +35,7 @@ export type Seeker = {
   receiveJobAlerts: boolean;
   savedJobs: Job[];
   applications: IApplication[];
-  following: Employer[] & string[];
+  following: IEmployer[] & string[];
   createdAt: Date;
   updatedAt: Date;
   isTwoFactorAuthEnabled: boolean;

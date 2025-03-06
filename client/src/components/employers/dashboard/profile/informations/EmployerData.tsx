@@ -2,11 +2,11 @@ import React from 'react';
 
 import { findIndustriesData } from '@/lib/utils';
 
-import { Employer } from '@/types';
+import { IEmployer } from '@/types';
 import { FieldGroup } from '@/helpers';
 
 type EmployerDataProps = {
-  employer: Employer;
+  employer: IEmployer;
 };
 
 const EmployerData: React.FC<EmployerDataProps> = ({ employer }) => {

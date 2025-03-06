@@ -3,7 +3,7 @@
 import React, { Fragment, useState } from 'react';
 import { AlertCircle, Edit, X } from 'lucide-react';
 
-import { Employer } from '@/types';
+import { IEmployer } from '@/types';
 
 import EmployerData from './informations/EmployerData';
 import EditEmployerProfileForm from './informations/forms/EditEmployerProfileForm';
@@ -17,7 +17,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/layout/card';
 
 type EmployerProfileProps = {
   isApproved: boolean;
-  employer: Employer;
+  employer: IEmployer;
 };
 
 const EmployerProfile: React.FC<EmployerProfileProps> = ({

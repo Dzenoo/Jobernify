@@ -7,7 +7,7 @@ export type GetApplicationsDto = {
   page: number;
 };
 
-export type IApplication = {
+export interface IApplication {
   _id: string;
   cover_letter: string;
   status: keyof typeof ApplicationStatus;
@@ -15,4 +15,4 @@ export type IApplication = {
   seeker: Seeker;
   job: Job;
   createdAt: Date;
-};
+}

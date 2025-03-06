@@ -1,5 +1,5 @@
 import { JobLevel, JobPosition, JobType } from '@/types';
-import { Employer } from './employers.types';
+import { IEmployer } from './employers.types';
 import { IApplication } from './applications.types';
 
 export type GetJobsDto = {
@@ -22,7 +22,7 @@ export type Job = {
   type: keyof typeof JobType;
   skills: string[];
   level: keyof typeof JobLevel;
-  employer: Employer;
+  employer: IEmployer;
   salary: number;
   expiration_date: string & Date;
   description: string;

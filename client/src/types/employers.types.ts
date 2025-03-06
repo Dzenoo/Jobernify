@@ -23,7 +23,7 @@ export type GetEmployerByIdDto = {
   page: number;
 };
 
-export type Employer = {
+export interface IEmployer {
   _id: string;
   email: string;
   name: string;
@@ -38,4 +38,4 @@ export type Employer = {
   followers: Seeker[];
   isApproved: boolean;
   isTwoFactorAuthEnabled: boolean;
-};
+}

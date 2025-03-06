@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Building, Camera, LayoutTemplate } from 'lucide-react';
 
-import { Employer } from '@/types';
+import { IEmployer } from '@/types';
 import { findIndustriesData, getImageUrl } from '@/lib/utils';
 import { renderIconText } from '@/helpers';
 
@@ -19,7 +19,7 @@ import { Button } from '@/components/ui/buttons/button';
 import { Avatar, AvatarImage } from '@/components/ui/utilities/avatar';
 
 type EmployerDetailsInfoProps = {
-  employer: Employer;
+  employer: IEmployer;
 };
 
 const EmployerDetailsInfo: React.FC<EmployerDetailsInfoProps> = ({

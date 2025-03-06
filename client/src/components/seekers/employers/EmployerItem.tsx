@@ -7,7 +7,7 @@ import { Briefcase, Building, Camera } from 'lucide-react';
 import { renderIconText } from '@/helpers';
 import { findIndustriesData, getImageUrl, truncate } from '@/lib/utils';
 
-import { Employer } from '@/types';
+import { IEmployer } from '@/types';
 
 import FollowEmployerButton from './FollowEmployerButton';
 
@@ -16,7 +16,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/layout/card';
 
 type EmployersItemProps = {
   employer: Pick<
-    Employer,
+    IEmployer,
     | 'followers'
     | '_id'
     | 'image'
