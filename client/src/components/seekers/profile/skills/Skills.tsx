@@ -5,7 +5,10 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Plus } from 'lucide-react';
 
-import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
+import {
+  SeekerMutationType,
+  useSeekerMutation,
+} from '@/hooks/mutations/useSeeker.mutation';
 import { useMediaQuery } from '@/hooks/core/useMediaQuery.hook';
 
 import { SkillsSchema } from '@/lib/zod/seekers.validation';
@@ -59,10 +62,17 @@ const AddSkillsForm: React.FC<AddSkillsProps> = ({
     mode: 'onChange',
   });
 
-  const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
+  const mutation = useSeekerMutation();
 
-  const onSubmit = async (values: zod.infer<typeof SkillsSchema>) => {
-    await editSeekerProfileMutate(values);
+  const onSubmit = (values: zod.infer<typeof SkillsSchema>) => {
+    const formData = new FormData();
+    formData.append('skills', JSON.stringify(values.skills));
+
+    mutation.mutateAsync({
+      type: SeekerMutationType.EDIT_PROFILE,
+      data: formData,
+    });
+
     closeSkills();
   };
 

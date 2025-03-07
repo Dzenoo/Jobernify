@@ -8,7 +8,10 @@ import { JobAlertSchema } from '@/lib/zod/seekers.validation';
 import { JobAlerts } from '@/types';
 import { JobsFiltersData } from '@/constants';
 
-import { useJobAlert } from '@/hooks/mutations/useJobAlert.mutation';
+import {
+  SeekerMutationType,
+  useSeekerMutation,
+} from '@/hooks/mutations/useSeeker.mutation';
 
 import Loader from '@/components/shared/ui/Loader';
 
@@ -65,7 +68,7 @@ const NewAlertForm: React.FC<NewAlertFormProps> = ({
     mode: 'onChange',
   });
 
-  const { mutateAsync: generateJobAlertMutate } = useJobAlert();
+  const mutation = useSeekerMutation();
 
   useEffect(() => {
     form.setValue('title', alerts?.title || '');
@@ -73,13 +76,16 @@ const NewAlertForm: React.FC<NewAlertFormProps> = ({
     form.setValue('type', alerts?.type || '');
   }, [alerts, form]);
 
-  const onSubmit = async (values: zod.infer<typeof JobAlertSchema>) => {
+  const onSubmit = (values: zod.infer<typeof JobAlertSchema>) => {
     const formData = new FormData();
     formData.append('title', values.title || '');
     formData.append('type', values.type || '');
     formData.append('level', values.level || '');
 
-    await generateJobAlertMutate(formData);
+    mutation.mutateAsync({
+      type: SeekerMutationType.GENERATE_JOB_ALERT,
+      data: formData,
+    });
     closeAlerts();
   };
 

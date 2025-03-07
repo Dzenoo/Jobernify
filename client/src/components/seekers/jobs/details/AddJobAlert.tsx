@@ -2,7 +2,10 @@ import React from 'react';
 
 import Loader from '@/components/shared/ui/Loader';
 
-import { useJobAlert } from '@/hooks/mutations/useJobAlert.mutation';
+import {
+  SeekerMutationType,
+  useSeekerMutation,
+} from '@/hooks/mutations/useSeeker.mutation';
 import {
   SeekerQueryType,
   useSeekerQuery,
@@ -25,7 +28,7 @@ type JobAlertProps = {
 
 const AddJobAlert: React.FC<JobAlertProps> = React.memo(
   ({ level, type, title }) => {
-    const { mutateAsync: addJobAlertMutate, status } = useJobAlert();
+    const mutation = useSeekerMutation();
     const { data } = useSeekerQuery({
       type: SeekerQueryType.GET_SEEKER_PROFILE,
       params: { query: {} },
@@ -51,7 +54,7 @@ const AddJobAlert: React.FC<JobAlertProps> = React.memo(
 
     const { alerts } = data.seeker;
 
-    const isLoading = status === 'pending';
+    const isLoading = mutation.status === 'pending';
 
     const isAlreadyAlertGeneratedWithProperties =
       alerts &&
@@ -72,7 +75,17 @@ const AddJobAlert: React.FC<JobAlertProps> = React.memo(
           <Button
             variant="default"
             className="w-full"
-            onClick={() => addJobAlertMutate({ level, type, title })}
+            onClick={() => {
+              const formData = new FormData();
+              formData.append('title', title || '');
+              formData.append('type', type || '');
+              formData.append('level', level || '');
+
+              return mutation.mutateAsync({
+                type: SeekerMutationType.GENERATE_JOB_ALERT,
+                data: formData,
+              });
+            }}
             disabled={isLoading || isAlreadyAlertGeneratedWithProperties}
           >
             {isLoading ? (

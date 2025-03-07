@@ -2,7 +2,10 @@ import React from 'react';
 
 import { Button } from '@/components/ui/buttons/button';
 
-import { useFollowEmployer } from '@/hooks/mutations/useFollowEmployer.mutation';
+import {
+  SeekerMutationType,
+  useSeekerMutation,
+} from '@/hooks/mutations/useSeeker.mutation';
 import {
   SeekerQueryType,
   useSeekerQuery,
@@ -19,16 +22,18 @@ const FollowEmployerButton: React.FC<FollowEmployerProps> = ({
     type: SeekerQueryType.GET_SEEKER_PROFILE,
     params: { query: {} },
   });
-  const { mutateAsync: followEmployerMutate, status } =
-    useFollowEmployer(employerId);
+  const mutation = useSeekerMutation();
 
-  const isLoading = status === 'pending';
+  const isLoading = mutation.status === 'pending';
 
   const isEmployerFollowed =
     fetchedSeekerProfile?.seeker?.following.includes(employerId);
 
-  const handleFollowToggle = async () => {
-    await followEmployerMutate();
+  const handleFollowToggle = () => {
+    mutation.mutateAsync({
+      type: SeekerMutationType.FOLLOW_EMPLOYER,
+      employerId,
+    });
     refetch();
   };
 

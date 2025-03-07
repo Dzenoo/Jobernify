@@ -5,8 +5,14 @@ import { ImagePlusIcon } from 'lucide-react';
 
 import { AWS_URL } from '@/constants';
 import { useUploads } from '@/hooks/core/useUploads.hook';
-import { useEditEmployer } from '@/hooks/mutations/useEditEmployer.mutation';
-import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
+import {
+  EmployerMutationType,
+  useEmployerMutation,
+} from '@/hooks/mutations/useEmployer.mutation';
+import {
+  SeekerMutationType,
+  useSeekerMutation,
+} from '@/hooks/mutations/useSeeker.mutation';
 
 import Loader from '../ui/Loader';
 
@@ -27,8 +33,8 @@ type ProfileImageUploaderProps =
 const ProfileImageUploader: React.FC<ProfileImageUploaderProps> = (props) => {
   const { role, image } = props;
   const { toast } = useToast();
-  const { mutateAsync: editEmployerProfileMutate } = useEditEmployer();
-  const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
+  const employerMutation = useEmployerMutation();
+  const seekerMutation = useSeekerMutation();
 
   const { getInputProps, getRootProps, selectedFile, restart } = useUploads({
     accept: {
@@ -37,7 +43,7 @@ const ProfileImageUploader: React.FC<ProfileImageUploaderProps> = (props) => {
     multiple: false,
   });
 
-  const handleImage = async (e: React.FormEvent) => {
+  const handleImage = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!selectedFile) {
@@ -49,8 +55,14 @@ const ProfileImageUploader: React.FC<ProfileImageUploaderProps> = (props) => {
     formData.append('image', selectedFile);
 
     role === 'EMPLOYER'
-      ? await editEmployerProfileMutate(formData)
-      : await editSeekerProfileMutate(formData);
+      ? employerMutation.mutateAsync({
+          type: EmployerMutationType.EDIT_PROFILE,
+          data: formData,
+        })
+      : seekerMutation.mutateAsync({
+          type: SeekerMutationType.EDIT_PROFILE,
+          data: formData,
+        });
 
     restart();
   };
@@ -58,8 +70,8 @@ const ProfileImageUploader: React.FC<ProfileImageUploaderProps> = (props) => {
   const profileImageUrl = selectedFile
     ? URL.createObjectURL(selectedFile)
     : image?.includes('https:')
-      ? image
-      : `${AWS_URL}/${image}`;
+    ? image
+    : `${AWS_URL}/${image}`;
 
   const showUploader =
     role === 'SEEKER' || (role === 'EMPLOYER' && props.isApproved);

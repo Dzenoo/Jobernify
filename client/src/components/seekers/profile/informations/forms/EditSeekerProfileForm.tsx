@@ -4,7 +4,10 @@ import zod from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
-import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
+import {
+  SeekerMutationType,
+  useSeekerMutation,
+} from '@/hooks/mutations/useSeeker.mutation';
 import { ISeeker } from '@/types';
 import { SeekerProfileSchema } from '@/lib/zod/seekers.validation';
 
@@ -34,7 +37,7 @@ const EditSeekerProfileForm: React.FC<EditSeekerProfileFormProps> = ({
   setIsEditMode,
   seeker,
 }) => {
-  const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
+  const mutation = useSeekerMutation();
 
   const form = useForm<zod.infer<typeof SeekerProfileSchema>>({
     resolver: zodResolver(SeekerProfileSchema),
@@ -50,7 +53,7 @@ const EditSeekerProfileForm: React.FC<EditSeekerProfileFormProps> = ({
     }
   }, [isEditMode, seeker, form.setValue]);
 
-  const changeSeekerInformation = async (
+  const changeSeekerInformation = (
     values: zod.infer<typeof SeekerProfileSchema>,
   ) => {
     const formData = new FormData();
@@ -60,7 +63,10 @@ const EditSeekerProfileForm: React.FC<EditSeekerProfileFormProps> = ({
     formData.append('headline', values.headline);
     formData.append('biography', values.biography);
 
-    await editSeekerProfileMutate(formData);
+    mutation.mutateAsync({
+      type: SeekerMutationType.EDIT_PROFILE,
+      data: formData,
+    });
 
     setIsEditMode(false);
   };

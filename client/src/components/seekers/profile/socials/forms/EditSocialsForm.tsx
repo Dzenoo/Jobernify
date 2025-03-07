@@ -4,7 +4,10 @@ import zod from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { useEditSeeker } from '@/hooks/mutations/useEditSeeker.mutation';
+import {
+  SeekerMutationType,
+  useSeekerMutation,
+} from '@/hooks/mutations/useSeeker.mutation';
 import { SeekerSocialsSchema } from '@/lib/zod/seekers.validation';
 
 import Loader from '@/components/shared/ui/Loader';
@@ -60,7 +63,7 @@ const EditSocialsForm: React.FC<EditSocialsFormProps> = ({
     mode: 'onChange',
   });
 
-  const { mutateAsync: editSeekerProfileMutate } = useEditSeeker();
+  const mutation = useSeekerMutation();
 
   React.useEffect(() => {
     if (!isEditSocialsOpen)
@@ -71,14 +74,17 @@ const EditSocialsForm: React.FC<EditSocialsFormProps> = ({
       });
   }, [isEditSocialsOpen]);
 
-  const onSubmit = async (values: zod.infer<typeof SeekerSocialsSchema>) => {
+  const onSubmit = (values: zod.infer<typeof SeekerSocialsSchema>) => {
     const formData = new FormData();
 
     formData.append('portfolio', values.portfolio || '');
     formData.append('github', values.github || '');
     formData.append('linkedin', values.linkedin || '');
 
-    await editSeekerProfileMutate(formData);
+    mutation.mutateAsync({
+      type: SeekerMutationType.EDIT_PROFILE,
+      data: formData,
+    });
 
     closeEditSocials();
   };

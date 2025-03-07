@@ -7,7 +7,10 @@ import { useForm } from 'react-hook-form';
 import { companySizes, industries } from '@/constants';
 import { EmployerProfileSchema } from '@/lib/zod/employers.validation';
 
-import { useEditEmployer } from '@/hooks/mutations/useEditEmployer.mutation';
+import {
+  EmployerMutationType,
+  useEmployerMutation,
+} from '@/hooks/mutations/useEmployer.mutation';
 
 import { uppercaseFirstLetter } from '@/lib/utils';
 import { IEmployer } from '@/types';
@@ -45,7 +48,7 @@ const EditEmployerProfileForm: React.FC<EditEmployerProfileFormProps> = ({
   setIsEditMode,
   employer,
 }) => {
-  const { mutateAsync: editEmployerProfileMutate } = useEditEmployer();
+  const mutation = useEmployerMutation();
 
   const form = useForm<zod.infer<typeof EmployerProfileSchema>>({
     resolver: zodResolver(EmployerProfileSchema),
@@ -75,7 +78,10 @@ const EditEmployerProfileForm: React.FC<EditEmployerProfileFormProps> = ({
     formData.append('website', values.website);
     formData.append('size', values.size);
 
-    await editEmployerProfileMutate(formData);
+    await mutation.mutateAsync({
+      type: EmployerMutationType.EDIT_PROFILE,
+      data: formData,
+    });
 
     setIsEditMode(false);
   };
