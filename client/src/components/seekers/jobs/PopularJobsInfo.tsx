@@ -33,16 +33,19 @@ const PopularJobsInfo: React.FC<PopularsJobsInfoProps> = React.memo(
       });
     };
 
+    const hasPopularJobs = jobs && jobs.length > 0;
+
     return (
       <Card>
         <CardHeader>
           <CardTitle className="text-xl">Popular Job Titles</CardTitle>
           <CardDescription className="text-base">
-            Popular job titles are based on current market trends and seekers
-            interests.
+            {hasPopularJobs
+              ? 'Popular job titles are based on current market trends and seekers interests.'
+              : 'There is no popular jobs right now.'}
           </CardDescription>
         </CardHeader>
-        {jobs && jobs.length > 0 && (
+        {hasPopularJobs && (
           <CardContent className="pt-0">
             {jobs.map(({ _id, title }, index) => (
               <TooltipWrapper key={_id} tooltip={title}>

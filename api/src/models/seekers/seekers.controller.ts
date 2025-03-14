@@ -14,6 +14,7 @@ import {
   FileTypeValidator,
   ParseFilePipe,
   UseInterceptors,
+  DefaultValuePipe,
 } from '@nestjs/common';
 
 import { SeekersService } from '@/models/seekers/seekers.service';
@@ -48,8 +49,8 @@ export class SeekersController {
   @Roles(Role.Seeker)
   async getSeekerProfile(
     @User('userId') userId: string,
-    @Query('page', ParseIntPipe) page: number,
-    @Query('limit', ParseIntPipe) limit: number,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
   ) {
     return await this.seekersService.getOne({
       page,

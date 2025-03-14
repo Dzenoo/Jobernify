@@ -13,6 +13,7 @@ import {
   ParseFilePipe,
   FileTypeValidator,
   MaxFileSizeValidator,
+  DefaultValuePipe,
 } from '@nestjs/common';
 
 import { EmployersService } from '@/models/employers/employers.service';
@@ -121,8 +122,8 @@ export class EmployersController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Seeker)
   async getEmployerById(
-    @Query('page', ParseIntPipe) page: number = 1,
-    @Query('limit', ParseIntPipe) limit: number = 10,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('type') type: 'jobs',
     @Param('employerId') employerId: string,
   ) {
