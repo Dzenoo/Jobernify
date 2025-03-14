@@ -161,15 +161,14 @@ export class AuthController {
       .json({ message: 'Logged out successfully' });
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('/me')
+  @UseGuards(JwtAuthGuard)
   async getCurrentUser(@Req() req: Request) {
     const user = req.user;
     if (!user) throw new UnauthorizedException('Unauthorized!');
     return { role: user.role };
   }
 
-  
   @Throttle({ default: { ttl: 60000, limit: 10 } })
   @Get('/csrf-token')
   getCsrfToken(@Req() req: Request) {
