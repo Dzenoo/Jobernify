@@ -1,5 +1,6 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 
+import { queryClient } from '@/context/react-query-client';
 import {
   editEmployerProfile,
   deleteEmployerProfile,
@@ -42,6 +43,10 @@ const useEmployerMutation = (
 
   const mutation = useMutation({
     mutationFn,
+    onSuccess: (response) => {
+      queryClient.invalidateQueries({ queryKey: ['employers'] });
+      toast({ title: 'Success', description: response.message });
+    },
     onError: (error: any) => {
       toast({ title: 'Error', description: error?.response?.data?.message });
     },

@@ -1,10 +1,10 @@
 import React from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { queryClient } from '@/context/react-query-client';
 
-import { updateApplicationStatus } from '@/lib/actions/applications.actions';
+import {
+  ApplicationMutationType,
+  useApplicationMutation,
+} from '@/hooks/mutations/useApplication.mutation';
 
-import { useToast } from '@/components/ui/info/use-toast';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -23,22 +23,7 @@ type StatusBadgeProps = {
 };
 
 const StatusBadge: React.FC<StatusBadgeProps> = ({ applicationId, status }) => {
-  const { toast } = useToast();
-
-  const { mutateAsync: updateStatusMutate } = useMutation({
-    mutationFn: (newStatus: string) => {
-      return updateApplicationStatus(applicationId, newStatus);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['applications'] });
-    },
-    onError: (error: any) => {
-      toast({
-        title: 'Error',
-        description: error?.response?.data?.message || 'Something went wrong.',
-      });
-    },
-  });
+  const mutation = useApplicationMutation();
 
   const StatusOptions = [
     {
@@ -67,9 +52,13 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ applicationId, status }) => {
     },
   ];
 
-  const handleStatusChange = async (newStatus: string) => {
+  const handleStatusChange = (newStatus: string) => {
     if (newStatus !== status) {
-      await updateStatusMutate(newStatus);
+      mutation.mutateAsync({
+        type: ApplicationMutationType.UPDATE_APPLICATION_STATUS,
+        applicationId: applicationId,
+        status: status,
+      });
     }
   };
 

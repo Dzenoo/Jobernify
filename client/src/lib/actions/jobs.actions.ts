@@ -14,7 +14,9 @@ import { FilterCounts, GetJobsDto, IJob } from '@/types';
  * @param formData - The form data containing job details.
  * @returns A promise resolving to a response message.
  */
-export const createNewJob = async (formData: any): Promise<ServerResponse> => {
+export const createNewJob = async (
+  formData: FormData,
+): Promise<ServerResponse> => {
   return await postApiHandler(`jobs/create-new-job`, formData);
 };
 
@@ -26,7 +28,7 @@ export const createNewJob = async (formData: any): Promise<ServerResponse> => {
  */
 export const editJob = async (
   jobId: string,
-  formData: any,
+  formData: FormData,
 ): Promise<ServerResponse> => {
   return await patchApiHandler(`jobs/${jobId}/edit`, formData);
 };

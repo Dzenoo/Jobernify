@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { useMutation } from '@tanstack/react-query';
-
-import { deleteJob } from '@/lib/actions/jobs.actions';
+import {
+  JobMutationType,
+  useJobMutation,
+} from '@/hooks/mutations/useJob.mutation';
 import { queryClient } from '@/context/react-query-client';
 
 import Loader from '@/components/shared/ui/Loader';
 
-import { useToast } from '@/components/ui/info/use-toast';
 import { Button } from '@/components/ui/buttons/button';
 import {
   DialogContent,
@@ -31,28 +31,20 @@ type DeleteJobProps = {
 };
 
 const DeleteJob: React.FC<DeleteJobProps> = ({ onClose, id, isDialog }) => {
-  const { toast } = useToast();
-  const { mutateAsync: deleteJobMutate, status } = useMutation({
-    mutationFn: () => {
-      return deleteJob(id);
-    },
+  const mutation = useJobMutation({
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['jobs', 'employer_profile'] });
-      toast({
-        title: 'Job Deleted',
-        description: 'The job has been successfully deleted.',
-      });
+      queryClient.invalidateQueries({ queryKey: ['employers'] });
       onClose();
-    },
-    onError: (error: any) => {
-      toast({ title: 'Error', description: error?.response?.data?.message });
     },
   });
 
   const isLoading = status === 'pending';
 
-  const onDeleteJob = async () => {
-    await deleteJobMutate();
+  const onDeleteJob = () => {
+    mutation.mutateAsync({
+      type: JobMutationType.DELETE_JOB,
+      jobId: id,
+    });
   };
 
   const title = 'Delete Job';

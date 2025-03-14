@@ -3,17 +3,23 @@ import React, { useState } from 'react';
 import zod from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/context/react-query-client';
 import { Sparkles } from 'lucide-react';
 
-import { useUploads } from '@/hooks/core/useUploads.hook';
+import {
+  ApplicationMutationType,
+  useApplicationMutation,
+} from '@/hooks/mutations/useApplication.mutation';
+import {
+  JobMutationType,
+  useJobMutation,
+} from '@/hooks/mutations/useJob.mutation';
 import {
   SeekerQueryType,
   useSeekerQuery,
 } from '@/hooks/queries/useSeeker.query';
+import { useUploads } from '@/hooks/core/useUploads.hook';
 import { ApplyToJobSchema } from '@/lib/zod/jobs.validation';
-import { applyToJob } from '@/lib/actions/applications.actions';
 
 import { ISeeker } from '@/types';
 
@@ -45,7 +51,6 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/layout/drawer';
-import { generateCoverLetter } from '@/lib/actions/jobs.actions';
 
 type ApplyToJobFormProps = {
   isApplyToJob: boolean;
@@ -85,49 +90,41 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
     mode: 'onChange',
   });
 
-  const { mutateAsync: generateCoverLetterMutate, status: coverLetterStatus } =
-    useMutation({
-      mutationFn: () => {
-        return generateCoverLetter(jobId);
-      },
-      onSuccess: (data) => {
-        form.setValue('coverLetter', data.coverLetter);
-      },
-      onError: (error: any) => {
-        toast({ title: 'Error', description: error.response.data.message });
-      },
-    });
-
-  const { mutateAsync: applyToJobMutate } = useMutation({
-    mutationFn: (formData: FormData) => {
-      return applyToJob(jobId, formData);
+  const jobsMutation = useJobMutation({
+    onSuccess: (data) => {
+      form.setValue('coverLetter', data.coverLetter);
     },
+  });
+
+  const applicationsMutation = useApplicationMutation({
     onSuccess: () => {
       form.reset();
-      toast({ title: 'Success', description: 'Successfully Applied to Job' });
-      queryClient.invalidateQueries({
-        queryKey: ['job', { jobId }],
+      toast({
+        title: 'Success',
+        description: 'Successfully Applied to Job',
       });
-      queryClient.invalidateQueries({ queryKey: ['seeker_profile'] });
+      queryClient.invalidateQueries({
+        queryKey: ['jobs', 'seekers'],
+      });
       setIsApplyToJob(false);
-    },
-    onError: (error: any) => {
-      toast({ title: 'Error', description: error.response.data.message });
     },
   });
 
   const isCoverLetterGenerated =
-    coverLetterStatus === 'success' && !!form.getValues('coverLetter');
-  const isCoverLetterGenerating = coverLetterStatus === 'pending';
+    jobsMutation.status === 'success' && !!form.getValues('coverLetter');
+  const isCoverLetterGenerating = jobsMutation.status === 'pending';
   const existingResume = seekerData?.seeker?.resume;
   const resumeToSubmit = selectedFile || existingResume;
 
-  const handleGenerateCoverLetter = async () => {
+  const handleGenerateCoverLetter = () => {
     if (isCoverLetterGenerated || isCoverLetterGenerating) return;
-    await generateCoverLetterMutate();
+    jobsMutation.mutateAsync({
+      type: JobMutationType.GENERATE_COVER_LETTER,
+      jobId: jobId,
+    });
   };
 
-  const onSubmit = async (values: zod.infer<typeof ApplyToJobSchema>) => {
+  const onSubmit = (values: zod.infer<typeof ApplyToJobSchema>) => {
     if (!resumeToSubmit) {
       toast({ title: 'Error', description: 'Please select a resume file' });
       return;
@@ -136,10 +133,13 @@ const ApplyToJobForm: React.FC<ApplyToJobFormProps> = ({
     const formData = new FormData();
     if (selectedFile) formData.append('resume', selectedFile);
     else formData.set('resume', existingResume as string);
-
     if (values.coverLetter) formData.set('coverLetter', values.coverLetter);
 
-    await applyToJobMutate(formData);
+    applicationsMutation.mutateAsync({
+      type: ApplicationMutationType.APPLY_TO_JOB,
+      jobId: jobId,
+      data: formData,
+    });
   };
 
   const children = (

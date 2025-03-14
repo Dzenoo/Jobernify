@@ -6,14 +6,13 @@ import { useRouter } from 'next/navigation';
 import zod from 'zod';
 import TurndownService from 'turndown';
 import { useForm } from 'react-hook-form';
-import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useToast } from '@/components/ui/info/use-toast';
 
-import { queryClient } from '@/context/react-query-client';
-import { createNewJob, editJob } from '@/lib/actions/jobs.actions';
+import {
+  JobMutationType,
+  useJobMutation,
+} from '@/hooks/mutations/useJob.mutation';
 import { UpdateJobSchema } from '@/lib/zod/jobs.validation';
-
 import { IJob } from '@/types';
 
 import Loader from '@/components/shared/ui/Loader';
@@ -25,7 +24,6 @@ import Text from '@/components/employers/dashboard/jobs/new/Text';
 
 import { Button } from '@/components/ui/buttons/button';
 import { Form } from '@/components/ui/form/form';
-import { findLocationData } from '@/lib/utils';
 
 type UpdateJobFormProps =
   | {
@@ -40,10 +38,6 @@ type UpdateJobFormProps =
 const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
   const turndownService = new TurndownService();
   const router = useRouter();
-  const { toast } = useToast();
-  const { isEdit } = props;
-  const formData = isEdit ? props.formData : undefined;
-  const jobId = isEdit ? props.jobId : undefined;
 
   const form = useForm<zod.infer<typeof UpdateJobSchema>>({
     mode: 'onChange',
@@ -64,40 +58,30 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
 
   const { reset } = form;
 
-  useEffect(() => {
-    if (formData) {
-      reset({
-        title: formData.title,
-        overview: formData.overview,
-        location: formData.location,
-        description: formData.description,
-        expiration_date: formData.expiration_date,
-        salary: formData.salary,
-        skills: formData.skills,
-        position: formData.position,
-        level: formData.level,
-        type: formData.type,
-      });
-    }
-  }, [formData]);
-
-  const { mutateAsync: updateJobMutate, status } = useMutation({
-    mutationFn: (formData: any) => {
-      return isEdit
-        ? editJob(jobId as string, formData)
-        : createNewJob(formData);
-    },
-    onSuccess: (response) => {
+  const mutation = useJobMutation({
+    onSuccess: () => {
       router.push(`/dashboard/jobs/?page=1`);
-      queryClient.invalidateQueries({ queryKey: ['jobs'] });
-      toast({ title: 'Success', description: response.message });
-    },
-    onError: (error: any) => {
-      toast({ title: 'Error', description: error?.response?.data?.message });
     },
   });
 
-  const isLoading = status === 'pending';
+  useEffect(() => {
+    if (props.isEdit) {
+      reset({
+        title: props.formData.title,
+        overview: props.formData.overview,
+        location: props.formData.location,
+        description: props.formData.description,
+        expiration_date: props.formData.expiration_date,
+        salary: props.formData.salary,
+        skills: props.formData.skills,
+        position: props.formData.position,
+        level: props.formData.level,
+        type: props.formData.type,
+      });
+    }
+  }, [props.isEdit && props.formData]);
+
+  const isLoading = mutation.status === 'pending';
 
   const [currentJobForm, setCurrentJobForm] = useState<number>(0);
 
@@ -124,7 +108,7 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
     return components[currentJobForm];
   }
 
-  async function updateJob(values: zod.infer<typeof UpdateJobSchema>) {
+  function updateJob(values: zod.infer<typeof UpdateJobSchema>) {
     const markdownDescription = turndownService.turndown(values.description);
 
     const jobData = {
@@ -132,7 +116,27 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
       description: markdownDescription,
     };
 
-    await updateJobMutate(jobData);
+    const formData = new FormData();
+
+    Object.entries(jobData).forEach(([key, value]) =>
+      formData.append(
+        key,
+        typeof value === 'object' ? JSON.stringify(value) : String(value),
+      ),
+    );
+
+    if (props.isEdit) {
+      return mutation.mutateAsync({
+        type: JobMutationType.EDIT_JOB,
+        data: formData,
+        jobId: props.jobId,
+      });
+    }
+
+    return mutation.mutateAsync({
+      type: JobMutationType.CREATE_NEW_JOB,
+      data: formData,
+    });
   }
 
   const stepDetails = [

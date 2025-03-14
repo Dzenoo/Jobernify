@@ -59,8 +59,9 @@ const useSeekerMutation = (
 
   const mutation = useMutation({
     mutationFn,
-    onSuccess: () => {
+    onSuccess: (response) => {
       queryClient.invalidateQueries({ queryKey: ['seekers'] });
+      toast({ title: 'Success', description: response.message });
     },
     onError: (error: any) => {
       toast({ title: 'Error', description: error?.response?.data?.message });
