@@ -1,5 +1,6 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 
+import { queryClient } from '@/context/react-query-client';
 import {
   editSeekerProfile,
   deleteSeekerProfile,
@@ -58,6 +59,9 @@ const useSeekerMutation = (
 
   const mutation = useMutation({
     mutationFn,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['seekers'] });
+    },
     onError: (error: any) => {
       toast({ title: 'Error', description: error?.response?.data?.message });
     },
