@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 
 import dynamic from 'next/dynamic';
 
+import { AuthProvider } from '@/components/shared/features/AuthProvider';
 import { QueryContextProvider } from '@/context/react-query-client';
 import { AppThemeProvider } from '@/context/app-theme-provider';
 import { AiAssistantProvider } from '@/context/ai-assistant';
@@ -40,9 +41,11 @@ export default function SeekersLayout({
         <QueryContextProvider>
           <AppThemeProvider>
             <AiAssistantProvider>
-              <SeekersLayoutWrapper>{children}</SeekersLayoutWrapper>
-              <Toaster />
-              <MobileBar />
+              <AuthProvider>
+                <SeekersLayoutWrapper>{children}</SeekersLayoutWrapper>
+                <Toaster />
+                <MobileBar />
+              </AuthProvider>
             </AiAssistantProvider>
           </AppThemeProvider>
         </QueryContextProvider>

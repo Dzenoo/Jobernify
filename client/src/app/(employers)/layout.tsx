@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 
+import { AuthProvider } from '@/components/shared/features/AuthProvider';
 import { QueryContextProvider } from '@/context/react-query-client';
 import { AppThemeProvider } from '@/context/app-theme-provider';
 import { AiAssistantProvider } from '@/context/ai-assistant';
@@ -35,7 +36,9 @@ export default function EmployersLayout({
         <QueryContextProvider>
           <AppThemeProvider>
             <AiAssistantProvider>
-              <EmployerLayoutWrapper>{children}</EmployerLayoutWrapper>
+              <AuthProvider>
+                <EmployerLayoutWrapper>{children}</EmployerLayoutWrapper>
+              </AuthProvider>
             </AiAssistantProvider>
             <Toaster />
           </AppThemeProvider>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import { GeistSans } from 'geist/font/sans';
 
+import { AuthProvider } from '@/components/shared/features/AuthProvider';
 import { QueryContextProvider } from '@/context/react-query-client';
 import { AppThemeProvider } from '@/context/app-theme-provider';
 import RootLayoutWrapper from './_RootLayoutWrapper';
@@ -30,7 +31,9 @@ export default function RootLayout({
       <body className={GeistSans.className}>
         <QueryContextProvider>
           <AppThemeProvider>
-            <RootLayoutWrapper>{children}</RootLayoutWrapper>
+            <AuthProvider>
+              <RootLayoutWrapper>{children}</RootLayoutWrapper>
+            </AuthProvider>
           </AppThemeProvider>
         </QueryContextProvider>
       </body>
