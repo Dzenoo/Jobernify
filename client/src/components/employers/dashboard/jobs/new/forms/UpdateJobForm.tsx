@@ -118,12 +118,24 @@ const UpdateJobForm: React.FC<UpdateJobFormProps> = (props) => {
 
     const formData = new FormData();
 
-    Object.entries(jobData).forEach(([key, value]) =>
-      formData.append(
-        key,
-        typeof value === 'object' ? JSON.stringify(value) : String(value),
-      ),
-    );
+    // Object.entries(jobData).forEach(([key, value]) =>
+    //   formData.append(
+    //     key,
+    //     typeof value === 'object' ? JSON.stringify(value) : String(value),
+    //   ),
+    // );
+
+    Object.entries(jobData).forEach(([key, value]) => {
+      if (key === 'skills') {
+        formData.append(key, JSON.stringify(value));
+      } else if (key === 'salary') {
+        formData.append(key, String(Number(value)));
+      } else if (key === 'expiration_date') {
+        formData.append(key, new Date(value).toISOString());
+      } else {
+        formData.append(key, String(value));
+      }
+    });
 
     if (props.isEdit) {
       return mutation.mutateAsync({

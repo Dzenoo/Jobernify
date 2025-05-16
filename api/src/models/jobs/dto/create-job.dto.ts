@@ -42,6 +42,7 @@ export class CreateJobDto {
   @IsArray()
   @IsString({ each: true })
   @MinLength(1, { each: true })
+  @Transform(({ value }) => sanitizeInput(value))
   readonly skills: string[];
 
   @IsEnum(JobLevel)
@@ -52,7 +53,7 @@ export class CreateJobDto {
   @Max(500000)
   readonly salary: number;
 
-  @IsString()
+  @IsDateString()
   readonly expiration_date: Date;
 
   @IsString()
