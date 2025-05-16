@@ -1,7 +1,6 @@
 {
   "name": "jobernify",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:client": "npm run dev --prefix client",
@@ -12,12 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/Dzenoo/Jobernify.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Dzenis Gudzevic dzenisgudzevic18@gmail.com",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Dzenoo/Jobernify/issues"
   },
   "homepage": "https://github.com/Dzenoo/Jobernify#readme",
-  "description": ""
+  "description": "Job search application for seekers and employers"
 }
