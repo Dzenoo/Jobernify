@@ -39,6 +39,14 @@ export class CreateJobDto {
   @IsEnum(JobType)
   readonly type: JobType;
 
+  @Transform(({ value }) => {
+    try {
+      const parsed = JSON.parse(value);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  })
   @IsArray()
   @IsString({ each: true })
   @MinLength(1, { each: true })
@@ -48,6 +56,7 @@ export class CreateJobDto {
   @IsEnum(JobLevel)
   readonly level: JobLevel;
 
+  @Transform(({ value }) => Number(value))
   @IsNumber()
   @Min(100)
   @Max(500000)
