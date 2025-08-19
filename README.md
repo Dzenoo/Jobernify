@@ -83,7 +83,3 @@ Create account and start exploring application.
 ## Contributing
 
 Contributions are welcome! Please fork the repository, create a new branch, and submit a pull request with your proposed changes.
-
-## License
-
-This project is licensed under the MIT License.
